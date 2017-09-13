@@ -5,9 +5,11 @@ import java.util.Random;
 public abstract class Individual {
 
 	private final Gene<?>[] genes;
+	private double fitness;
 
 	public Individual(int geneCount) {
 		this.genes = new Gene[geneCount];
+		this.fitness = 0;
 	}
 
 	public final Gene<?> getGene(int index) {
@@ -27,7 +29,15 @@ public abstract class Individual {
 	}
 
 	/** return the fitness of this individual (the greater, the better) */
-	public abstract double fitness();
+	public final double fitness() {
+		return (this.fitness);
+	}
+
+	public final void updateFitness() {
+		this.fitness = this.calculateFitness();
+	}
+
+	protected abstract double calculateFitness();
 
 	/** randomize genes of this instance */
 	public abstract void randomize(Random rng);
@@ -36,6 +46,7 @@ public abstract class Individual {
 		try {
 			Individual individual = individualClass.newInstance();
 			individual.randomize(rng);
+			individual.updateFitness();
 			return (individual);
 		} catch (Exception e) {
 			System.err.println(
@@ -44,7 +55,13 @@ public abstract class Individual {
 		}
 	}
 
-	public abstract Individual reproduce(Individual female);
+	public final Individual cross(Individual... individuals) {
+		Individual child = this.crossIndividuals(individuals);
+		child.updateFitness();
+		return (child);
+	}
+
+	protected abstract Individual crossIndividuals(Individual... individuals);
 
 	public final void mutate(Random rng) {
 		this.genes[rng.nextInt(this.getGenesCount())].mutate(rng);

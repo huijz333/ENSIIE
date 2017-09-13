@@ -12,7 +12,7 @@ public class GeneBit extends Gene<Boolean> {
 
 	@Override
 	public void mutate(Random rng) {
-		super.set(super.get() ^ true);
+		super.set(!super.get());
 	}
 
 }

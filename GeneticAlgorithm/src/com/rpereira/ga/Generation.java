@@ -1,7 +1,6 @@
 package com.rpereira.ga;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Generation {
@@ -19,19 +18,17 @@ public class Generation {
 	}
 
 	public final void add(Individual individual) {
-		this.individuals.add(individual);
+		int index;
+		for (index = 0; index < this.individuals.size(); index++) {
+			if (individual.fitness() > this.individuals.get(index).fitness()) {
+				break;
+			}
+		}
+		this.individuals.add(index, individual);
 	}
 
 	public final void remove(Individual individual) {
 		this.individuals.remove(individual);
-	}
-
-	public final void replace(int index, Individual individual) {
-		if (index < 0 || index >= this.individuals.size()) {
-			System.err.println("Generation.replace(...) out of bounds.");
-			return;
-		}
-		this.individuals.set(index, individual);
 	}
 
 	public final Individual get(int index) {
@@ -46,34 +43,32 @@ public class Generation {
 		return (fitness);
 	}
 
+	public final double mediumFitness() {
+		return (this.fitness() / (double) this.individuals.size());
+	}
+
+	public final double medianFitness() {
+		return (this.individuals.get(this.individuals.size() / 2).fitness());
+	}
+
 	public final Generation nextGeneration() {
 		Generation nextGen = new Generation();
 
 		Individual male, female, child;
+		int mid = this.individuals.size() / 2;
 		int size = this.individuals.size() * 2;
 		for (int i = 0; i < size; i++) {
-			male = this.get(this.rng.nextInt(this.individuals.size()));
-			female = this.get(this.rng.nextInt(this.individuals.size()));
-			child = male.reproduce(female);
-
-			// TODO mutation
-
+			male = this.get(this.rng.nextInt(mid + 1));
+			female = this.get(this.rng.nextInt(mid + 1));
+			child = male.cross(male, female);
 			nextGen.add(child);
 		}
-
 		nextGen.half();
 		return (nextGen);
 	}
 
 	/** half the generation: the half less fit inviduals are removed */
 	private final void half() {
-		this.individuals.sort(new Comparator<Individual>() {
-			@Override
-			public int compare(Individual i1, Individual i2) {
-				return ((int) ((i2.fitness() - i1.fitness())));
-			}
-		});
-
 		int toRemove = this.individuals.size() / 2;
 		for (int i = 0; i < toRemove; i++) {
 			this.individuals.remove(this.individuals.size() - 1);
@@ -88,7 +83,7 @@ public class Generation {
 	 */
 	public final void random(Class<? extends Individual> individualClass, int number) {
 		for (int i = 0; i < number; i++) {
-			this.individuals.add(Individual.random(individualClass, this.rng));
+			this.add(Individual.random(individualClass, this.rng));
 		}
 	}
 
