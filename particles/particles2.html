@@ -1,0 +1,246 @@
+<html>
+
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript" src="particle.js"></script>
+
+
+<script id="particle-shader-fs" type="fs">
+
+    #ifdef GL_ES
+        precision highp float;
+    #endif
+
+    varying vec4 pass_color;
+
+	void main(void) {
+		gl_FragColor = pass_color;
+	}
+</script>
+
+<script id="particle-shader-vs" type="vs">
+
+	attribute vec2 position;
+	attribute float size;
+	attribute vec4 color;
+	attribute float health;
+
+    varying vec4 pass_color;
+
+	void main(void) {
+		gl_Position = vec4(position, 0.0, 1.0);
+		gl_PointSize = size;
+		pass_color = color;
+
+		if (health > 0.8) {
+			pass_color.w *= (1.0 - health) / 0.2;
+		} else if (health < 0.2) {
+			pass_color.w *= health / 0.2;
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+
+function createShader(gl, id) {
+	var shaderScript = document.getElementById(id);
+    if (!shaderScript) {
+        return (null);
+    }
+
+    var src = shaderScript.firstChild.nodeValue;
+    var shader;
+    if (shaderScript.type == "fs") {
+        shader = gl.createShader(gl.FRAGMENT_SHADER);
+    } else if (shaderScript.type == "vs") {
+        shader = gl.createShader(gl.VERTEX_SHADER);
+    } else if (shaderScript.type == "gs") {
+        shader = gl.createShader(gl.GEOMETRY_SHADER);
+    } else {
+    	alert("not a valid shader type");
+    }
+
+    gl.shaderSource(shader, src);
+    gl.compileShader(shader);
+
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        alert(gl.getShaderInfoLog(shader));
+        return (null);
+    }
+
+    return (shader);
+}
+
+function glCheckError(gl, prefix) {
+	var err = gl.getError();
+	if (err != gl.NO_ERROR) {
+		alert("GL error occured: " + prefix + " : " + err);
+	}
+}
+
+/** page loaded callback */
+function onPageLoaded() {
+
+	//the canvas
+	canvas = document.getElementById("canvasID");
+	canvas.width  = window.innerWidth;
+	canvas.height = window.innerHeight;
+
+	initGL();
+	initLoop();
+
+	requestAnimationFrame(loop);
+
+    glCheckError(gl, "post deinit");
+}
+
+function initGL() {
+	gl = canvas.getContext("experimental-webgl"); //gl context
+
+	gl.viewport(0, 0, canvas.width, canvas.height);
+	gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	gl.clear(gl.COLOR_BUFFER_BIT);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+	//create rendering program
+    vs = createShader(gl, "particle-shader-vs");
+    fs = createShader(gl, "particle-shader-fs");
+
+    program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+
+    gl.useProgram(program);
+
+
+    //create vbo
+    vbo = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);                                       
+
+    var attrPosition = gl.getAttribLocation(program, "position");
+    var attrSize = gl.getAttribLocation(program, "size");
+    var attrColor = gl.getAttribLocation(program, "color");
+    var attrHealth = gl.getAttribLocation(program, "health");
+
+    var BYTE_PER_PARTICLE = (2 + 1 + 4 + 1) * 4;
+
+    gl.vertexAttribPointer(attrPosition, 	2, gl.FLOAT, false, BYTE_PER_PARTICLE, 0);
+    gl.vertexAttribPointer(attrSize, 		1, gl.FLOAT, false, BYTE_PER_PARTICLE, 2 * 4);
+    gl.vertexAttribPointer(attrColor, 		4, gl.FLOAT, false, BYTE_PER_PARTICLE, (2 + 1) * 4);
+    gl.vertexAttribPointer(attrHealth, 		1, gl.FLOAT, false, BYTE_PER_PARTICLE, (2 + 1 + 4) * 4);
+
+    gl.enableVertexAttribArray(attrPosition);
+    gl.enableVertexAttribArray(attrSize);
+    gl.enableVertexAttribArray(attrColor);
+    gl.enableVertexAttribArray(attrHealth);
+}
+
+
+//TODO : when to call it?
+function deinitGL() {
+	//deinit
+    gl.deleteBuffer(vbo);
+    gl.deleteShader(fs);
+    gl.deleteShader(vs);
+    gl.deleteProgram(program);
+}
+
+function randomizeParticle(particle) {
+	particle.setMaxHealth(1000 + Math.random() * 4000);
+	particle.setHealth(particle.getMaxHealth());
+	particle.setX(-1.0 + Math.random() * 2.0);
+	particle.setY(-1.0 + Math.random() * 2.0);
+	particle.setSize(Math.random() * S + S / 2.0);
+	particle.setR(1.0);
+	particle.setG(1.0);
+	particle.setB(1.0);
+	particle.setA(1.0);
+}
+
+function getUrlVars() {
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		vars[key] = value;
+	});
+	return (vars);
+}
+
+function initLoop() {
+	now = Date.now();
+	then = Date.now();
+	fps = 60.0;
+	interval = 1000.0 / fps;
+	dt = 0;
+	N = getUrlVars()["N"] || 256;
+	S = getUrlVars()["S"] || 4;
+
+	source = new ParticleSource(N);
+}
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function loop() {
+	requestAnimationFrame(loop);
+
+    now = Date.now();
+    dt = now - then;
+    if (dt > interval) {
+        then = now - (dt % interval);
+        render();
+        update(dt);
+     } else {
+     	  await sleep(interval);
+     }
+}
+
+function update(dt) {
+	for (var i = 0 ; i < source.getN() ; i++) {
+		var particle = source.getParticle(i);
+		particle.update(dt);
+		if (particle.isDead()) {
+			randomizeParticle(particle);
+		}
+	}
+}
+
+function render() {
+
+	//draw render
+	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+	var particleArray = [];
+	var particleCount = 0;
+	for (var i = 0 ; i < source.getN() ; i++) {
+		var particle = source.getParticle(i);
+		particleArray.push(particle.getX());
+		particleArray.push(particle.getY());
+		particleArray.push(particle.getSize());
+		particleArray.push(particle.getR());
+		particleArray.push(particle.getG());
+		particleArray.push(particle.getB());
+		particleArray.push(particle.getA());
+		particleArray.push(particle.getHealthRatio());
+		++particleCount;
+	}
+	gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(particleArray), gl.STATIC_DRAW);
+	gl.drawArrays(gl.POINTS, 0, particleCount);
+}
+
+</script>
+
+
+
+</head>
+
+<body onload="onPageLoaded();">
+<canvas id="canvasID" style="border: none;"></canvas>
+</body>
+
+</html>
