@@ -1,0 +1,223 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>Site de PEREIRA Romain</title>
+</head>
+
+<script type="text/javascript" src="../utils/utils.js"></script>
+
+<script type="text/javascript">
+
+	var DoublePendulum = function(m1, m2, l1, l2, theta1, theta2) {
+		this.m1 = m1;
+		this.m2 = m2;
+		this.l1 = l1;
+		this.l2 = l2;
+		this.theta1 = theta1;
+		this.theta2 = theta2;
+		this.dTheta1 = 0;
+		this.dTheta2 = 0;
+		this.d2Theta1 = 0;
+		this.d2Theta2 = 0;
+		this.massVolum = 7874; //kg.m^-3, fer
+		this.updates = [];
+		this.dt = 0;
+
+		this.update = function(dt) {
+			var mu =  1 + m1 / m2;
+			var g = 9.81;
+			var dTheta = this.theta1 - this.theta2;
+			var cosTheta1 = Math.cos(this.theta1);
+			var sinTheta1 = Math.sin(this.theta1);
+			var cosTheta2 = Math.cos(this.theta2);
+			var sinTheta2 = Math.sin(this.theta2);
+			var cosDTheta = Math.cos(dTheta);
+			var cos2DTheta = Math.cos(dTheta);
+			var sinDTheta = Math.sin(dTheta);
+
+			this.dTheta1 = 0;
+			this.dTheta2 = 0;
+
+			while (this.updates.length > 0) {
+				var updateFunction = this.updates.pop();
+				updateFunction();
+			}
+
+			this.d2Theta1 += (g * (sinTheta2 * cosDTheta - mu * sinTheta1) - (this.l2 * this.dTheta2 * this.dTheta2 + this.l1 * this.dTheta1 * this.dTheta1 * cosDTheta) * sinDTheta) / (this.l1 * (mu - cos2DTheta));
+
+			this.d2Theta2 += (mu * g * (sinTheta1 * cosDTheta - sinTheta2) + (mu * this.l1 * this.dTheta1 * this.dTheta1 + this.l2 * this.dTheta2 * this.dTheta2 * cosDTheta) * sinDTheta) / (this.l2 * (mu - cos2DTheta));
+
+			
+			this.dTheta1 += this.d2Theta1 * dt;
+			this.dTheta2 += this.d2Theta2 * dt;
+			this.theta1 += this.dTheta1 * dt;
+			this.theta2 += this.dTheta2 * dt;
+
+			this.dt = dt;
+		}
+
+		function drawLine(ctx, x1, y1, x2, y2, color, lineWidth) {
+			ctx.lineWidth = lineWidth;
+			ctx.strokeStyle = color;
+			ctx.beginPath();
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.stroke();
+		}
+
+		function drawCircle(ctx, x0, y0, r, color) {
+			ctx.strokeStyle = color;
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.arc(x0, y0, r, 0, 2 * Math.PI, false);
+			ctx.fill();
+			ctx.stroke();
+		}
+
+		this.draw = function() {
+			var ctx = canvas.getContext("2d");
+	
+			x0 = canvas.width * 0.5;
+			y0 = canvas.height * 0.5;
+
+			var scale = ((canvas.height < canvas.width) ? canvas.height : canvas.width) * 0.5 / (this.l1 + this.l2) * 0.8;
+
+			x1 = this.l1 * Math.sin(this.theta1) * scale + x0;
+			y1 = this.l1 * Math.cos(this.theta1) * scale + y0;
+
+			x2 = this.l2 * Math.sin(this.theta2) * scale + x1;
+			y2 = this.l2 * Math.cos(this.theta2) * scale + y1;
+
+			r1 = Math.cbrt(this.m1 / this.massVolum / 4 / Math.PI * 3) * scale;
+			r2 = Math.cbrt(this.m2 / this.massVolum / 4 / Math.PI * 3) * scale;
+			r0 = (r1 + r2) * 0.5;
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			ctx.font = "30px Arial";
+
+			var tx = 10;
+			var ty = 10 + canvas.height * 0.1;
+			ctx.textBaseline = "top";
+			ctx.textAlign = "left";
+
+			ctx.fillText("Double Pendulum", tx, 10);
+
+			ctx.fillText("Params:", tx, ty);
+			ctx.fillText("m1 = " + this.m1.toFixed(2) + " kg", tx, ty + 70);
+			ctx.fillText("m2 = " + this.m2.toFixed(2) + " kg", tx, ty + 105);
+			ctx.fillText("l1 = " + this.l1.toFixed(2) + " m", tx, ty + 140);
+			ctx.fillText("l2 = " + this.l2.toFixed(2) + " m", tx, ty + 175);
+			ctx.fillText("theta1 = " + this.theta1.toFixed(2) + " rad", tx, ty + 210);
+			ctx.fillText("theta2 = " + this.theta2.toFixed(2) + " rad", tx, ty + 245);
+			ctx.fillText("µ = " + this.massVolum.toFixed(2) + " kg.m^-3", tx, ty + 280);
+			ctx.fillText("integration step = " + this.dt.toFixed(6) + " s.", tx, ty + 315);
+
+			ctx.textBaseline = "middle";
+			ctx.textAlign = "center";
+			ctx.fillText("Time elapsed: " + timeElapsed.toFixed(2) + " s.", canvas.width * 0.5, ty);
+
+			drawLine(ctx, x0 - r0 * 4, y0, x0 + r0 * 4, y0, "black", r0 * 0.5);
+			drawLine(ctx, x0, y0, x1, y1, "gray", r1 * 0.5);
+			drawLine(ctx, x1, y1, x2, y2, "gray", r2 * 0.5);
+
+			drawCircle(ctx, x0, y0, r1 * 0.5, "black");
+			drawCircle(ctx, x1, y1, r1, "black");
+			drawCircle(ctx, x2, y2, r2, "black");
+		}
+	}
+
+	function onPageClicked() {
+		if ((x1 - cursorX) * (x1 - cursorX) + (y1 - cursorY) * (y1 - cursorY) < 8 * r1 * r1) {
+			pendulum.updates.push(function() {
+						pendulum.d2Theta1 += Math.sign(x1 - cursorX) * precision * 128;
+					});
+		}
+
+		if ((x2 - cursorX) * (x2 - cursorX) + (y2 - cursorY) * (y2 - cursorY) < 8 * r2 * r2) {
+			pendulum.updates.push(function() {
+						pendulum.d2Theta2 += Math.sign(x2 - cursorX) * precision * 128;
+					});
+		}
+	}
+
+	function onPageLoaded() {
+		initCanvas();
+		initMouse();
+		initLoop();
+		loop();
+	}
+
+	function onCursorMove(x, y) {
+		cursorX = x;
+		cursorY = y;
+	}
+
+	function onResize() {
+		canvas.width = document.body.clientWidth; //document.width is obsolete
+		canvas.height = document.body.clientHeight; //document.height is obsolete	
+	}
+
+	function initCanvas() {
+		canvas = document.getElementById("canvasID");
+		onResize();
+	}
+
+	function initMouse() {
+		onCursorMove(canvas.width / 2.0, canvas.height / 2.0);
+		document.onmousemove = function(e) {
+			onCursorMove(e.pageX, e.pageY);
+		}
+	}
+
+	function randomPendulum() {
+
+		var m1 = (params["m1"] == undefined ? 4000 + Math.random() * 6000 : params["m1"]) / 1000; //g to kg
+		var m2 = (params["m2"] == undefined ? 4000 + Math.random() * 6000 : params["m2"]) / 1000;
+		var l1 = (params["l1"] == undefined ? 30 + Math.random() * 40 : params["l1"]) / 100; //cm to m
+		var l2 = (params["l2"] == undefined ? 30 + Math.random() * 40 : params["l2"]) / 100;
+		var theta1 = (params["theta1"] == undefined ? Math.random() * 360 : params["theta1"]) / 180.0 * Math.PI; //degrees to rad
+		var theta2 = (params["theta2"] == undefined ? Math.random() * 360 : params["theta2"]) / 180.0 * Math.PI;
+		
+		return (new DoublePendulum(m1, m2, l1, l2, theta1, theta2));
+	}
+
+	function initLoop() {
+		now = Date.now();
+		then = Date.now();
+		fps = 60.0;
+		interval = 1.0 / fps;
+		params = getUrlVars();
+		precision = params["precision"] == undefined ? 64 : params["precision"];
+		step =  interval / precision;
+		timeElapsed = 0;
+		pendulum = randomPendulum();
+		window.onresize = onResize;
+	}
+
+	async function loop() {
+		requestAnimationFrame(loop);
+
+		var now = Date.now();
+		var dt = (now - then) / 1000.0;
+		timeElapsed += dt;
+		if (dt > interval) {
+			then = now - (dt % interval);
+			var i = 0;
+			while (i * step < dt) {
+				pendulum.update(step);
+				i++;
+			}
+			pendulum.draw();
+		} else {
+			await sleep(interval);
+		}
+	}
+</script>
+
+<body onload="onPageLoaded()"; onclick="onPageClicked();">
+	<canvas id="canvasID" style="border: none;"></canvas>
+</body>
+
+</html>

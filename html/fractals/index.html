@@ -1,0 +1,125 @@
+<html>
+
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+	<script type="text/javascript" src="../utils/glh.js"></script>
+	<script type="text/javascript" src="../utils/utils.js"></script>
+
+	<script id="mandelbrot-shader-fs" type="fs">
+
+		#ifdef GL_ES
+			precision highp float;
+		#endif
+	
+		void main() {
+			gl_FragColor = vec4(1.0);
+		}
+
+	</script>
+
+	<script id="mandelbrot-shader-vs" type="vs">
+
+		attribute vec2 position;
+
+		void main(void) {
+			gl_Position = vec4(position, 0.0, 1.0);
+		}
+	</script>
+
+
+	<script type="text/javascript">
+
+
+	function onResize() {
+		canvas.width = document.body.clientWidth; //document.width is obsolete
+		canvas.height = document.body.clientHeight; //document.height is obsolete	
+	}
+
+	function initCanvas() {
+		canvas = document.getElementById("canvasID");
+		onResize();
+		window.onresize = onResize;
+	}
+
+	/** page loaded callback */
+	function onPageLoaded() {
+
+		//the canvas
+		initCanvas();
+		initGL();
+		initLoop();
+
+		requestAnimationFrame(loop);
+
+		glhCheckError(gl, "post deinit");
+	}
+
+function initGL() {
+	gl = canvas.getContext("experimental-webgl"); //gl context
+
+	gl.viewport(0, 0, canvas.width, canvas.height);
+	gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	gl.clear(gl.COLOR_BUFFER_BIT);
+
+	gl.enable(gl.BLEND);
+	gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+	//create rendering program
+	vs = glhCreateShader(gl, "mandelbrot-shader-vs");
+	fs = glhCreateShader(gl, "mandelbrot-shader-fs");
+
+	program = gl.createProgram();
+	gl.attachShader(program, vs);
+	gl.attachShader(program, fs);
+	gl.linkProgram(program);
+
+	gl.useProgram(program);
+}
+
+
+//TODO : when to call it?
+function deinitGL() {
+	//deinit
+	gl.deleteShader(fs);
+	gl.deleteShader(vs);
+	gl.deleteProgram(program);
+}
+
+function initLoop() {
+	now = Date.now();
+	then = Date.now();
+	fps = 60.0;
+	interval = 1000.0 / fps;
+	dt = 0;
+}
+
+async function loop() {
+	requestAnimationFrame(loop);
+
+	now = Date.now();
+	dt = now - then;
+	if (dt > interval) {
+		then = now - (dt % interval);
+		render();
+	} else {
+		await sleep(interval);
+	}
+}
+
+function render() {
+
+	//draw render
+	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+}
+
+</script>
+
+
+
+</head>
+
+<body onload="onPageLoaded();">
+	<canvas id="canvasID" style="border: none;"></canvas>
+</body>
+
+</html>
