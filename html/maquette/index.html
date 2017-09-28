@@ -14,44 +14,31 @@
 	<!-- Bootstrap javascript plugins -->
 	<script type="text/javascript" src="./js/jquery.min.js"></script>
 	<script type="text/javascript" src="./js/popper.js"></script>
-	<script type="text/javascript" src="./bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./bootstrap_4_0_0/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-	<div class="menubar">
+<body style="background-color:#A0948c">
+	<div class="menubar menubar-top">
 		<img src="./res/logo.png" class="menubar-img-logo"></img>
+
+		<nav class="navbar navbar-toggleable-md navbar-light bg-faded menubar-sidebar-toggler">
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+
+		<div class="menubar-title">Home</div>
+
 		<form class="menubar-form-inline">
-			<input class="form-control menubar-searchbar mr-sm-2" type="text" placeholder="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
+			<input class="form-control menubar-searchbar mr-sm-2" type="text" placeholder="Search...">
+			<button class="menubar-btn-search" type="submit">Search</button>
 		</form>
-		<a class="menubar-text-profile">pereira2017</a>
+		<div class="menubar-text-profile">pereira2017</div>
 		<img src="./res/pereira2017.png" class="menubar-img-profile"></img>
 	</div>
 
-	<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<a class="navbar-brand" href="#">Navbar</a>
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#">Link</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link disabled" href="#">Disabled</a>
-			</li>
-		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="text" placeholder="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+	<div class="menubar menubar-left">
 	</div>
-	</nav>
 
 </body>
 
