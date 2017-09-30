@@ -1,0 +1,20 @@
+.sidebar {
+        display:block;
+        height: 100%;
+        position: fixed;
+        z-index: 9;
+        background-color:#70645c;
+        color: #2c2c34;
+
+        padding-top: 1em;
+        transition: 0.25s;
+        overflow-x: hidden;
+}
+
+.sidebar-item {
+	color:#ffffff;
+	font-size: 1.2em;
+	text-align:center;
+	margin-top:1em;
+}
+

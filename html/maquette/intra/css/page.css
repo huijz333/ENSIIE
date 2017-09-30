@@ -1,0 +1,43 @@
+.page {
+        display: box;
+        display: flex;
+        box-align: center;
+        align-items: center;
+        box-orient: horizontal;
+        box-direction: normal;
+        flex-direction: row;
+        box-pack: justify;
+        justify-content: space-between;
+        box-shadow: 0px 0px 2em rgba(0, 0, 0, 1);
+
+        display: -webkit-box;
+        display: -webkit-flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -webkit-box-shadow: 0px 0px 2em rgba(0, 0, 0, 1);
+
+        display: -moz-box;
+        display: -moz-flex;
+        -moz-box-align: center;
+        -moz-align-items: center;
+        -moz-box-orient: horizontal;
+        -moz-box-direction: normal;
+        -moz-flex-direction: row;
+        -moz-box-pack: justify;
+        -moz-justify-content: space-between;
+
+        display: -ms-flexbox;
+        -ms-align-items: center;
+        -ms-flex-align: center;
+        -ms-flex-direction: row;
+        -ms-justify-content: space-between;
+        -ms-flex-pack: justify;
+
+        -o-justify-content: space-between;
+        -o-align-items: center;
+}

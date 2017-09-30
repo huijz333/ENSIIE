@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <!-- ensure proper rendering and touch zooming for all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="../css/iiens.css">
+        <link rel="stylesheet" type="text/css" href="./css/menubar.css">
+        <link rel="stylesheet" type="text/css" href="./css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="./css/page.css">
+        <link rel="stylesheet" type="text/css" href="./css/panel.css">
+
+</head>
+
+<body class="light">
+        <div class="menubar menubar-1">
+        <img src="./res/logo.png" class="menubar-img-logo"></img>
+                <div class="menubar-toggler" onclick="toggleSidebar()">&#9776;</div>
+                <div class="menubar-text-title" onclick="toggleSidebar()">Accueil</div>
+                <input class="menubar-searchbar" type="text" placeholder="Rechercher..."></input>
+                <img src="./res/search.png" class="menubar-img-search"></img>
+                <div class="menubar-text-profile">pereira2017</div>
+                <img src="./res/pereira2017.png" class="menubar-img-profile"></img>
+        </div>
+
+                <div id="mySidenav" class="sidebar">
+                  <div class="sidebar-item">Accueil</div>
+                  <div class="sidebar-item">Emploi du temps</div>
+                  <div class="sidebar-item">Cours / Interros</div>
+                  <div class="sidebar-item">Trombinoscope</div>
+                  <div class="sidebar-item">Wiki</div>
+                  <div class="sidebar-item">Services</div>
+                  <div class="sidebar-item">Stages</div>
+                </div>
+
+
+        <script>
+                sidebar = document.getElementById("mySidenav");
+                sidebarToggled = false;
+                toggleSidebar();
+
+                function toggleSidebar() {
+                         if (sidebarToggled) {
+                                sidebar.style.width = "0";
+                                sidebarToggled = false;
+                        } else {
+                                sidebar.style.width = "10em";
+                                sidebarToggled = true;
+                        }
+                }
+        </script>
+</body>
+
+</html>

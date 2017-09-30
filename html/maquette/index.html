@@ -1,45 +1,55 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-	<!-- ensure proper rendering and touch zooming for all devices -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- ensure proper rendering and touch zooming for all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap -->
-	<link rel="stylesheet" type="text/css" href="./bootstrap_4_0_0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/maquette.css">
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="./css/iiens.css">
+        <link rel="stylesheet" type="text/css" href="./css/portal.css">
 
-	<!-- Bootstrap javascript plugins -->
-	<script type="text/javascript" src="./js/jquery.min.js"></script>
-	<script type="text/javascript" src="./js/popper.js"></script>
-	<script type="text/javascript" src="./bootstrap_4_0_0/dist/js/bootstrap.min.js"></script>
 </head>
 
-<body style="background-color:#A0948c">
-	<div class="menubar menubar-top">
-		<img src="./res/logo.png" class="menubar-img-logo"></img>
+<body class="light">
+	<div class="portal">
+		<img src="./res/logo.png" id="ensiie-logo" class="portal-logo"></img>
+		<div class="portal-info">
+			Bienvenue sur le portail IIens.net.</br>Ce site vous offre une porte d'entrée vers les différents services proposés par l'école.
+		</div>
 
-		<nav class="navbar navbar-toggleable-md navbar-light bg-faded menubar-sidebar-toggler">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-		</nav>
+		<div class="portal-tab">
+		  <div class="portal-tab-item" id="student-tab">
+			<img src="./res/icon_student/512x512.png"></img>
+			<text><u>Etudiant:</u> logement, associations, intranet (cours, emploi du temps...) (ARISE)</text>
+		  </div>
+		  <div class="portal-tab-item" id="teacher-tab">
+			<img src="./res/icon_teacher/512x512.png"></img>
+			<text><u>Scolarité:</u> services de la scolarité, tenu par l'établissement (papiers officiels) (CRI)</text>
+		  </div>
+		  <div class="portal-tab-item" id="pro-tab">
+			<img src="./res/icon_pro/512x512.png"></img>
+			<text><u>Professionel:</u> Contactez nos étudiants ou notre Junion Entreprise: Dièse</text>
+		  </div>
+		</div>
 
-		<div class="menubar-title">Home</div>
+		<script>
 
-		<form class="menubar-form-inline">
-			<input class="form-control menubar-searchbar mr-sm-2" type="text" placeholder="Search...">
-			<button class="menubar-btn-search" type="submit">Search</button>
-		</form>
-		<div class="menubar-text-profile">pereira2017</div>
-		<img src="./res/pereira2017.png" class="menubar-img-profile"></img>
+			function registerHref(element, addr) {
+				document.getElementById(element).onclick = function() {
+    				window.location = addr;
+    			}
+			}
+
+			registerHref("ensiie-logo", "http://www.ensiie.fr");
+			registerHref("student-tab", "./intra/");
+			registerHref("teacher-tab", "http://scolarite.ensiie.fr");
+			registerHref("pro-tab", "./pro/");
+
+		</script>
+		</br>
 	</div>
-
-	<div class="menubar menubar-left">
-	</div>
-
 </body>
 
 </html>
