@@ -1,11 +1,14 @@
 .portal {
     width: 40vw;
+    height: cover;
     margin-left:30vw;
-    margin-top:5vh;
+    margin-top:10vh;
 
     background-color: rgba(0, 0, 0, 0.6);
     background-size: cover;
     
+    border-radius:1em;
+
     box-shadow: 0px 0px 2em rgba(0, 0, 0, 1);
 	-webkit-box-shadow: 0 2em 8em rgba(0, 0, 0, 1);
 
@@ -27,15 +30,17 @@
 .portal-info {
     border-style: solid;
 	border-color: #000000;
-	border-width: 0.1em;
+	border-width: 0.05em;
 
     width:80%;
+    height: cover;
     margin-top:1em;
     margin-left:10%;
     padding-top:0.5em;
     padding-bottom:0.5em;
+	line-height: 1.4em;
 
-    font-size:1vw;
+    font-size:0.8vw;
     text-align: center;
     color:#ffffff;
 }
@@ -54,16 +59,17 @@
 	cursor:pointer;
 	transition: all 0.15s ease-in-out;
 	width:80%;
+	height:cover;
 	margin-left:10%;
-	margin-bottom:1em;
+	margin-bottom:2vh;
 	display: flex;
 	align-items: center;
     justify-content: left;
 }
 
 .portal-tab-item img {
-	width:6vw;
-	margin-left:1em;
+	height:8vh;
+	margin-left:1vh;
 	margin-bottom:1em;
 	margin-top:1em;
 }
@@ -71,6 +77,8 @@
 .portal-tab-item text {
 	color: #ffffff;
 	font-size: 1.2vw;
-	margin-left:1em;
-	line-height: 1.4em;
+	margin-left:1vh;
+	margin-right:1vh;
+	margin-bottom:1vh;
+	margin-top:1vh;
 }

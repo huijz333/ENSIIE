@@ -8,52 +8,88 @@
         <!-- ensure proper rendering and touch zooming for all devices -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.min.css">
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/popper.js"></script>
+        <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+
         <!-- css -->
         <link rel="stylesheet" type="text/css" href="../css/iiens.css">
-        <link rel="stylesheet" type="text/css" href="./css/menubar.css">
+        <link rel="stylesheet" type="text/css" href="./css/navbar.css">
         <link rel="stylesheet" type="text/css" href="./css/sidebar.css">
         <link rel="stylesheet" type="text/css" href="./css/page.css">
-        <link rel="stylesheet" type="text/css" href="./css/panel.css">
 
 </head>
 
 <body class="light">
-        <div class="menubar menubar-1">
-        <img src="./res/logo.png" class="menubar-img-logo"></img>
-                <div class="menubar-toggler" onclick="toggleSidebar()">&#9776;</div>
-                <div class="menubar-text-title" onclick="toggleSidebar()">Accueil</div>
-                <input class="menubar-searchbar" type="text" placeholder="Rechercher..."></input>
-                <img src="./res/search.png" class="menubar-img-search"></img>
-                <div class="menubar-text-profile">pereira2017</div>
-                <img src="./res/pereira2017.png" class="menubar-img-profile"></img>
-        </div>
-
-                <div id="mySidenav" class="sidebar">
-                  <div class="sidebar-item">Accueil</div>
-                  <div class="sidebar-item">Emploi du temps</div>
-                  <div class="sidebar-item">Cours / Interros</div>
-                  <div class="sidebar-item">Trombinoscope</div>
-                  <div class="sidebar-item">Wiki</div>
-                  <div class="sidebar-item">Services</div>
-                  <div class="sidebar-item">Stages</div>
-                </div>
 
 
+    <nav class="sidebar">
         <script>
-                sidebar = document.getElementById("mySidenav");
-                sidebarToggled = false;
-                toggleSidebar();
+            var sections = [];
+            sections.push(["Étudiants", [0, "•", "Accueil", "./index.html"], [0, "•", "Votre compte"], [0, "&#128214;", "Cours / Interros"], [0, "&#128338;", "Emploi du temps"], [0, "•", "Partir à l'étranger", ["http://etranger.iiens.net/"]]]);
+            sections.push(["Associations", [0, "•", "ARISE (nous)", ["http://arise.iiens.net/"]], [1, "•", "Logement", "http://resiie.iiens.net/"]]);
+            sections.push(["Services", [0, "•", "Forum", "https://agora.iiens.net"], [0, "•", "SSH/FTP/IRC"], [0, "•", "Wiki"], [0, "•", "Webmail", "https://webmail.ensiie.fr"], [0, "•", "Pastebin", "https://paste.iiens.net/"], [0, "•", "Git", "https://git.iiens.net"]]);
+            sections.push(["Modération", [1, "•", "Base de données", "https://phpmyadmin.iiens.net"], [1, "•", "Mailing-lists", "https://listes.iiens.net/wws"], [1, "•", "Stats IRC", "https://ircstats.iiens.net/"]]);
 
-                function toggleSidebar() {
-                         if (sidebarToggled) {
-                                sidebar.style.width = "0";
-                                sidebarToggled = false;
-                        } else {
-                                sidebar.style.width = "10em";
-                                sidebarToggled = true;
-                        }
-                }
+            var lockIcon = "&#128274;";
+            var i;
+            for (i = 0 ; i < sections.length ; i++) {
+                document.write("<div class=\"sidebar-section\">");
+
+                    document.write("<div class=\"sidebar-section-title\">" + sections[i][0] + "</div>");
+                    var j;
+                    for (j = 1 ; j < sections[i].length ; j++) {
+                        document.write("<div class=\"sidebar-section-item\">" + (sections[i][j][0] ? lockIcon : sections[i][j][1]) + " " + sections[i][j][2] + "</div>");
+                    }
+
+                document.write("</div>");
+            }
+
         </script>
+    </nav>
+
+
+    <nav class="nav navbar navbar-expand-sd">
+        <!--<li class="nav-item">
+            <img src="./res/logo.png"></img>
+        </li>
+        -->
+        <li class="nav-item">
+            <div onclick="toggleSidebar()">&#9776;</div>
+        </li>
+
+        <li class="nav-item">
+            <span class="navbar-text" onclick="toggleSidebar()">Accueil</span> 
+        </li>
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher...">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">&#128269;</button>
+        </form>
+
+        <li class="nav-item form-inline">
+            <span class="navbar-text mr-sm-4">pereira2017</span> 
+            <!-- <img class = "navbar-text my-2 my-sm-0" src="./res/pereira2017.png"></img> -->
+        </li>
+    </nav>
+    
+    <div class="page">
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+        AAAAAAAAAAAA
+    </div>
+
 </body>
 
 </html>

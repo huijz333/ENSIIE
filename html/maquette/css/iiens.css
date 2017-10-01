@@ -8,7 +8,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 	background-image: url("../res/ensiie-light.png");
-
+	background-attachment: fixed;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -18,5 +18,9 @@ body.light {
 
 body.dark {
 	background-image: url("../res/ensiie-dark.png");
+}
+
+body.normal {
+	background-image: url("../res/ensiie.png");
 }
 
