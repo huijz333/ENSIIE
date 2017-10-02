@@ -1,3 +1,87 @@
 .page {
+        display: flex;
+        align-items: stretch;
+}
 
+.page-content {
+}
+
+.page-content-news {
+        background-color:rgba(255, 255, 255, 0.7);
+        border-style: solid;
+        border-width: 0.1rem;
+
+        margin-left:8rem;
+        margin-right:16rem;
+        margin-top:2rem;
+        margin-bottom:8rem;
+}
+
+.page-content-news-title {
+        background-color:rgba(114, 145, 50, 0.6);
+        font-size: 1.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 0.5rem;
+}
+
+.page-content-news-content {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 0.5rem;
+}
+
+.page-sidebar {
+        min-width: 14rem;
+        width: cover;
+        height: cover;
+        background-color:#F5F5F5;
+        box-shadow: 0.5vh 1vh 0.5vh 0.5vh rgba(0, 0, 0, 0.5);
+        transition: 0.25s;
+        overflow-x: hidden;
+}
+
+.page-sidebar-section {
+        color: #000000;
+        margin-bottom:1rem;
+        margin-top:1rem;
+        margin-left:0.5rem;
+        margin-right:0.5rem;
+        font-size: 1.0rem;
+        border-style: solid;
+        border-radius: 0.5rem;
+        border-width: 0.1rem;
+}
+
+.page-sidebar-section-title {
+        margin-left:0.5rem;
+        margin-right:1rem;
+        margin-top:0.25rem;
+        font-weight: bold;
+        text-transform: uppercase;
+}
+
+.page-sidebar-section-item {
+        font-size:1.0rem;
+        margin-left:1rem;
+        margin-right:1rem;
+        margin-bottom:0.25rem;
+        transition: all 0.1s ease-in-out;
+}
+
+.page-sidebar-section-item:hover {
+        transform: translateX(0.5rem) scale(1.2);
+}
+
+.page-sidebar-section-item a {
+        color: #000000;
+}
+
+.page-sidebar-section-item i {
+        color: rgba(0, 0, 0, 0.8);
+        min-width:1rem;
+        margin-right:0.5rem;
+        text-align: center;
 }
