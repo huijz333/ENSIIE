@@ -6,6 +6,7 @@ LIBC = $(LIBFOLDER)/C_data_structures
 LIBC_STATIC = $(LIBC)/libcstruct.a
 
 LIB_STATIC = $(LIBC_STATIC)
+LIB =
 
 SRCS = $(wildcard ./srcs/*.c)
 C_OBJ = $(SRCS:.c=.o)
@@ -20,7 +21,7 @@ $(LIB_STATIC):
 	make -C $(LIBC)
 
 $(NAME): $(C_OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(C_OBJ) $(LIB_STATIC)
+	$(CC) $(FLAGS) -o $(NAME) $(C_OBJ) $(LIB_STATIC) $(LIB)
 
 %.o: %.c ./includes/main.h
 	$(CC) $(FLAGS) -o $@ -c $< $(INC)
