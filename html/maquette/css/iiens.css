@@ -1,0 +1,26 @@
+html {
+	width:100%;
+    height:100%;
+}
+
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	background-image: url("../res/ensiie-light.png");
+	background-attachment: fixed;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body.light {
+	background-image: url("../res/ensiie-light.png");
+}
+
+body.dark {
+	background-image: url("../res/ensiie-dark.png");
+}
+
+body.normal {
+	background-image: url("../res/ensiie.png");
+}
+
