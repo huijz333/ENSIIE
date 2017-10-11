@@ -15,9 +15,6 @@
 
 .navbar img {
 	height: 100%;
-	border-color: #000000;
-	border-width:0.1rem;
-	border-style:solid;
 }
 
 .navbar i {
@@ -25,7 +22,6 @@
 
 .navbar-item {
     text-align: center;
-    margin-left:4rem;
 }
 
 .navbar-toggler {
@@ -33,11 +29,15 @@
 }
 
 .navbar-title {
-	font-size:2rem;
-	margin-right:0.5rem;
+	font-size:2.0rem;
+	margin-left:1rem;
+	margin-right:0rem;
+	margin-top:auto;
+	cursor:pointer;
+	align-self: flex-start;
 }
 
-.navbar-title.icon {
+.navbar-title-icon {
 
 }
 
@@ -45,18 +45,22 @@
 	margin-left:0.5rem;
 }
 
-.navbar-search-form {
+.navbar-item-logo {
+	margin:auto;
+}
 
+.navbar-search-form {
+	margin-left:auto;
 }
 
 .navbar-profile {
-	float:right;
 	height: 100%;
 }
 
 .navbar-profile-login {
 	font-size:1rem;
-	margin-right:0.5rem;
+	margin-right:1rem;
+	margin-left:1rem;
 }
 
 .navbar-profile-img {
