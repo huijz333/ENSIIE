@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,28 +31,17 @@
             <img src="./res/logo.png"></img>
         </li>
         -->
-
-            <div class="navbar-item navbar-title" onclick="toggleSidebar()">
-                <i class="navbar-title-icon fa fa-bars"></i>
-                <span class="navbar-text navbar-title-text">Accueil</span>
-
-                <script type="text/javascript">
-                    function toggleSidebar() {
-                    }
-                </script>
-
-            </div>
-
-            <img class="navbar-item navbar-item-logo" src="./res/banniere.jpg"></img>
+            <span class="navbar-item navbar-text navbar-title" onclick="toggleSidebar()">IIens.net (LOGO)</span> 
+            <div class="navbar-item navbar-text navbar-toggler" onclick="toggleSidebar()">&#9776; Accueil</div>
 
             <form class="navbar-item navbar-search-form form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Rechercher...">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">&#128269;</button>
             </form>
 
-            <div class="navbar-profile navbar-item">
-                <span class="navbar-text navbar-profile-login">pereira2017</span> 
-                <img class="navbar-profile-img" src="./res/pereira2017.png"></img>
+            <div class="navbar-profile">
+                <span class="navbar-text navbar-item navbar-profile-login">pereira2017</span> 
+                <img class="navbar-item navbar-profile-img" src="./res/pereira2017.png"></img>
             </div>
     </nav>
 
@@ -58,12 +49,12 @@
 
     <div class="page">
         <!-- Page sidebar -->
-        <nav class="page-sidebar" id="page-sidebar">
+        <nav class="page-sidebar">
             <script>
                 var sections = [];
                 sections.push(["Étudiants", [0, "fa fa-home", "Accueil", "./index.html"], [0, "fa fa-user", "Votre compte", "#"], [0, "fa fa-book", "Cours / Interros"], [0, "fa fa-calendar", "Emploi du temps", "#"], [0, "fa fa-plane", "Partir à l'étranger", "http://etranger.iiens.net/"]]);
-                sections.push(["Associations", [0, "fa fa-users", "Bureau des élèves", "http://bde.iiens.net/"], [0, "fa fa-futbol-o", "Bureau des sports", "#"], [0, "fa fa-truck", "ARISE (nous)", "http://arise.iiens.net/"], [0, "fa fa-calendar-o", "Événements", "#"], [0, "fa fa-hand-peace-o", "Loisirs / Créativité", "#"], [1, "•", "Logement", "http://resiie.iiens.net/"]]);
-                sections.push(["Services", [0, "fa fa-commenting", "Forum", "https://agora.iiens.net"], [0, "fa fa-terminal", "SSH/FTP/IRC", "#"], [0, "fa fa-wikipedia-w", "Wiki", "https://wiki.iiens.net"], [0, "fa fa-envelope-o", "Webmail", "https://webmail.ensiie.fr"], [0, "fa fa-clipboard", "Pastebin", "https://paste.iiens.net/"], [0, "fa fa-gitlab", "Git", "https://git.iiens.net"], [0, "fa fa-bed", "Estudines", "https://estudines.iiens.net/"]]);
+                sections.push(["Associations", [0, "fa fa-users", "Bureau des élèves", "http://bde.iiens.net/"], [0, "fa fa-futbol-o", "Bureau des sports", "#"], [0, "fa fa-truck", "ARISE (nous)", "http://arise.iiens.net/"], [0, "fa fa-calendar-o", "Événements", "#"], [0, "•", "Loisirs", "#"], [0, "•", "Culture et créativité", "#"], [1, "•", "Logement", "http://resiie.iiens.net/"]]);
+                sections.push(["Services", [0, "fa fa-commenting", "Forum", "https://agora.iiens.net"], [0, "fa fa-terminal", "SSH/FTP/IRC", "#"], [0, "fa fa-wikipedia-w", "Wiki", "#"], [0, "fa fa-envelope-o", "Webmail", "https://webmail.ensiie.fr"], [0, "fa fa-clipboard", "Pastebin", "https://paste.iiens.net/"], [0, "fa fa-gitlab", "Git", "https://git.iiens.net"], [0, "fa fa-bed", "Estudines", "https://estudines.iiens.net/"]]);
                 sections.push(["Modération", [0, "fa fa-database", "Base de données", "https://phpmyadmin.iiens.net"], [0, "fa fa-envelope", "Mailing-lists", "https://listes.iiens.net/wws"], [0, "fa fa-bar-chart", "Stats IRC", "https://ircstats.iiens.net/"]]);
 
                 var lockIcon = "fa fa-lock";
@@ -75,6 +66,7 @@
                         var j;
                         for (j = 1 ; j < sections[i].length ; j++) {
                             document.write("<div class=\"page-sidebar-section-item\">" + "<a href=" + sections[i][j][3] + "><i class=\"" + (sections[i][j][0] ? lockIcon : sections[i][j][1]) + "\"></i>" + sections[i][j][2] + "</a></div>");
+
                         }
 
                     document.write("</div>");
@@ -82,79 +74,19 @@
 
             </script>
         </nav>
-        <!-- Page Contents -->
+        <!-- Page Content -->
         <div class="page-content">
-
-            <!--
-            <div class="alert alert-danger"; style="margin-left:2%;margin-top:2%;width:96%" role="alert">
-                <h4 class="alert-heading"><strong>Oups!</strong></h4>
-                Vous devez être <strong>connecté</strong> pour accéder à cette partie du site.
-            </div>
-            -->
-
-
-            <!-- banner with timetable, surveys, todo list -->
-            <div class="page-content-item">
-                <div class="page-content-item-banner b">
-                    <div class="page-content-item-banner-item">
-
-                    </div>
-                    
-                    <div class="page-content-item-banner-item b-l">
-
-                    </div>
-
-                    <div class="page-content-item-banner-item">
-                        <div class="page-content-item-banner-item-survey b-l">
-                            <div class="page-content-item-banner-item-survey-title">
-                                Sondage
-                            </div>
-
-                            <div class="page-content-item-banner-item-survey-question">
-                                C'était bien le WEI?
-                            </div>
-
-                            <div class="page-content-item-banner-item-survey-answers">
-                                <div class="page-content-item-banner-item-survey-answer">
-                                    Oui
-                                </div>
-
-                                <div class="page-content-item-banner-item-survey-answer">
-                                    Oui
-                                </div>
-
-                                <div class="page-content-item-banner-item-survey-answer">
-                                    Oui
-                                </div>
-
-                                <div class="page-content-item-banner-item-survey-answer">
-                                    Je ne sais pas je<br>suis trop vieux
-                                </div>
-                            </div>
-
-                            <div class="page-content-item-banner-item-survey-question">
-                                <div>Voir les résultats</div>
-                                <div>Plus de sondages</div>
-                            </div>
-                        </div>
-                    </div>
-
+            <!--<script type="text/javascript">var i; for (i = 0 ; i < 1000 ; i++) { document.write("CONTENT GOES HERE "); }</script> -->
+            <div class="page-content-news">
+                <div class="page-content-news-title">
+                    Newsletter du 4 juillet
                 </div>
-            </div>
-
-            <!-- news samples -->
-            <div class="page-content-item">
-                <div class="page-content-item-news b">
-                    <div class="page-content-item-news-title">
-                        Newsletter du 4 juillet
-
-                    </div>
-                    <div class="page-content-item-news-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-                    </div>
+                <div class="page-content-news-content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
                 </div>
             </div>
         </div>
+
     </div>
 
 

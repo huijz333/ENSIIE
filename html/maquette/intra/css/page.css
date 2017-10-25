@@ -6,100 +6,18 @@
 .page-content {
 }
 
-.page-content-item {
-        min-width:40rem;
-
+.page-content-news {
         background-color:rgba(255, 255, 255, 0.7);
-
-        margin-left:8rem;
-        margin-right:8rem;
-        margin-top:2rem;
-        margin-bottom:2rem;
-}
-
-.b {
         border-style: solid;
         border-width: 0.1rem;
+
+        margin-left:8rem;
+        margin-right:16rem;
+        margin-top:2rem;
+        margin-bottom:8rem;
 }
 
-.b-l {
-        border-left:solid black 0.1rem;
-}
-
-.b-r {
-        border-right:solid black 0.1rem;
-}
-
-.b-t {
-        border-top:solid black 0.1rem;
-}
-
-.b-b {
-        border-bottom:solid black 0.1rem;
-}
-
-
-.page-content-item-banner {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-}
-
-.page-content-item-banner-item {
-        flex-grow: 1;
-        text-align: center;
-        max-width:33%;
-        min-height: 100%;
-}
-
-.page-content-item-banner-item-survey {
-
-}
-
-.page-content-item-banner-item-survey-title {
-        width:100%;
-        font-size: 1.4rem;
-        padding-top:0.5rem;
-        padding-bottom:0.5rem;
-        text-decoration: underline;
-
-}
-
-.page-content-item-banner-item-survey-question {
-        width:100%;
-        font-weight:bold;
-        padding-bottom:0.5rem;
-}
-
-.page-content-item-banner-item-survey-answers {
-        width:100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-bottom:0.5rem;
-        padding-top:0.5rem;
-}
-
-.page-content-item-banner-item-survey-answer:hover {
-        transform:scale(1.5) rotate(1turn);
-        font-weight: bold;
-}
-
-.page-content-item-banner-item-survey-answer {
-        margin:0rem 0.5rem 0.5rem 0.5rem;
-        flex-grow: 1;
-        width:cover;
-        height: cover;
-        text-align: center;
-        cursor:pointer;
-        transition: all 0.2s ease-in-out;
-}
-
-.page-content-item-news {
-
-}
-
-.page-content-item-news-title {
+.page-content-news-title {
         background-color:rgba(114, 145, 50, 0.6);
         font-size: 1.5rem;
         padding-top: 0.5rem;
@@ -108,7 +26,7 @@
         padding-right: 0.5rem;
 }
 
-.page-content-item-news-text {
+.page-content-news-content {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
         padding-left: 1rem;
@@ -116,12 +34,13 @@
 }
 
 .page-sidebar {
+        min-width: 14rem;
         width: cover;
         height: cover;
         background-color:#F5F5F5;
         box-shadow: 0.5vh 1vh 0.5vh 0.5vh rgba(0, 0, 0, 0.5);
-        white-space:nowrap;
-        transition: all 0.5s ease-in-out;
+        transition: 0.25s;
+        overflow-x: hidden;
 }
 
 .page-sidebar-section {
