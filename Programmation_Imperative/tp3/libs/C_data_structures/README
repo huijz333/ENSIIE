@@ -1,0 +1,14 @@
+This is a C data structures library
+
+It contains:
+
+    - Array lists
+    - Linked list (which can be used as Queue or Stacks without performance loss)
+    - Binary trees
+    - Hash map
+
+Strings are not ended and compiled into the library yet
+
+HOW TO COMPILE:
+>> make
+>> cc your_program.c libcstruct.a
