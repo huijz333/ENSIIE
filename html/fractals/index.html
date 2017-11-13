@@ -10,14 +10,36 @@
 		#ifdef GL_ES
 			precision highp float;
 		#endif
+
+		uniform vec2 u_resolution;
+		uniform int u_iterations;
+		uniform float u_zoom;
 	
 		void main() {
-			gl_FragColor = vec4(1.0);
+			vec2 c = vec2((2.0 * gl_FragCoord.x - u_resolution.x) / u_zoom, (2.0 * gl_FragCoord.y - u_resolution.y) / u_zoom);
+			vec2 z = vec2(0.0, 0.0);
+			int i = 0;
+			float r = 0.0;
+			for (int i = 0 ; i < 500 ; i++) {
+				if (i >= u_iterations) {
+					break ;
+				}
+				float x = (z.x * z.x) - (z.y * z.y) + c.x;
+				float y = 2.0 * z.x * z.y + c.y;
+				z.x = x;
+				z.y = y;
+				r = z.x * z.x + z.y * z.y;
+				if (r >= 4.0) {
+					gl_FragColor = vec4(mix(vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), float(i) / float(u_iterations)), 1.0);
+					return ;
+				}
+			}
+			gl_FragColor = vec4(0, 0, 0, 1.0);
 		}
 
-	</script>
+</script>
 
-	<script id="mandelbrot-shader-vs" type="vs">
+<script id="mandelbrot-shader-vs" type="vs">
 
 		attribute vec2 position;
 
@@ -31,14 +53,57 @@
 
 
 	function onResize() {
-		canvas.width = document.body.clientWidth; //document.width is obsolete
-		canvas.height = document.body.clientHeight; //document.height is obsolete	
+		var width = document.body.clientWidth * 0.98;
+		var height = document.body.clientHeight * 0.98;
+
+		canvas.width = width;
+		canvas.height = height;
+
+		canvasText.width = width;
+		canvasText.height = height;
+	}
+
+	function onWheel(e) {
+		zoomToAdd += e.wheelDelta;
+	}
+
+	function onKeyPress(e) {
+		if (e.keyCode == '+'.charCodeAt(0)) {
+			++iterations;
+		} else if (e.keyCode == '-'.charCodeAt(0)) {
+			--iterations;
+			if (iterations < 2) {
+				iterations = 2;
+			}
+		} else if (e.keyCode == 'z'.charCodeAt(0)) {
+			zoomToAdd += 20;
+		} else if (e.keyCode == 's'.charCodeAt(0)) {
+			zoomToAdd -= 20;
+		}
+	}
+
+	function updateFractal() {
+		if (zoomToAdd != 0) {
+			var sign = zoomToAdd < 0 ? -1 : 1;
+			var amount = Math.ceil(zoomToAdd * 0.2);
+			zoomToAdd -= amount;
+			zoom += amount;
+		}
 	}
 
 	function initCanvas() {
-		canvas = document.getElementById("canvasID");
+		canvas = document.getElementById("canvas");
+		canvasText = document.getElementById("canvasText");
 		onResize();
 		window.onresize = onResize;
+		window.onwheel = onWheel;
+		window.onkeypress = onKeyPress;
+	}
+
+	function initFractal() {
+		zoom = Math.ceil(canvas.width * Math.log(canvas.width) * 0.9);
+		zoomToAdd = 0;
+		iterations = 100;
 	}
 
 	/** page loaded callback */
@@ -47,6 +112,7 @@
 		//the canvas
 		initCanvas();
 		initGL();
+		initFractal();
 		initLoop();
 
 		requestAnimationFrame(loop);
@@ -54,63 +120,103 @@
 		glhCheckError(gl, "post deinit");
 	}
 
-function initGL() {
-	gl = canvas.getContext("experimental-webgl"); //gl context
+	function initGL() {
+		gl = canvas.getContext("experimental-webgl"); //gl context
 
-	gl.viewport(0, 0, canvas.width, canvas.height);
-	gl.clearColor(0.0, 0.0, 0.0, 1.0);
-	gl.clear(gl.COLOR_BUFFER_BIT);
+		gl.viewport(0, 0, canvas.width, canvas.height);
+		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		gl.clear(gl.COLOR_BUFFER_BIT);
 
-	gl.enable(gl.BLEND);
-	gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+		gl.enable(gl.BLEND);
+		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-	//create rendering program
-	vs = glhCreateShader(gl, "mandelbrot-shader-vs");
-	fs = glhCreateShader(gl, "mandelbrot-shader-fs");
+		//create rendering program
+		vs = glhCreateShader(gl, "mandelbrot-shader-vs");
+		fs = glhCreateShader(gl, "mandelbrot-shader-fs");
 
-	program = gl.createProgram();
-	gl.attachShader(program, vs);
-	gl.attachShader(program, fs);
-	gl.linkProgram(program);
+		program = gl.createProgram();
+		gl.attachShader(program, vs);
+		gl.attachShader(program, fs);
+		gl.linkProgram(program);
 
-	gl.useProgram(program);
-}
+		gl.useProgram(program);
 
+	    //create vbo
+	    vbo = gl.createBuffer();
+	    gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+	    var attrPosition = gl.getAttribLocation(program, "position");
+	    gl.vertexAttribPointer(attrPosition, 2, gl.FLOAT, false, 2 * 4, 0);
+	    gl.enableVertexAttribArray(attrPosition);
+	    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0]), gl.STATIC_DRAW);
 
-//TODO : when to call it?
-function deinitGL() {
-	//deinit
-	gl.deleteShader(fs);
-	gl.deleteShader(vs);
-	gl.deleteProgram(program);
-}
+	    //uniforms
+	    u_resolution = gl.getUniformLocation(program, "u_resolution");
+	    u_iterations = gl.getUniformLocation(program, "u_iterations");
+	    u_zoom = gl.getUniformLocation(program, "u_zoom");
 
-function initLoop() {
-	now = Date.now();
-	then = Date.now();
-	fps = 60.0;
-	interval = 1000.0 / fps;
-	dt = 0;
-}
-
-async function loop() {
-	requestAnimationFrame(loop);
-
-	now = Date.now();
-	dt = now - then;
-	if (dt > interval) {
-		then = now - (dt % interval);
-		render();
-	} else {
-		await sleep(interval);
 	}
-}
 
-function render() {
 
-	//draw render
-	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-}
+	//TODO : when to call it?
+	function deinitGL() {
+		//deinit
+		gl.deleteShader(fs);
+		gl.deleteShader(vs);
+		gl.deleteProgram(program);
+		gl.deleteBuffer(vbo);
+	}
+
+	function initLoop() {
+		now = Date.now();
+		then = Date.now();
+		fps = 60.0;
+		interval = 1000.0 / fps;
+		dt = 0;
+	}
+
+	async function loop() {
+		requestAnimationFrame(loop);
+
+		now = Date.now();
+		dt = now - then;
+		if (dt > interval) {
+			then = now - (dt % interval);
+			render();
+		} else {
+			await sleep(interval);
+		}
+	}
+
+	function render() {
+
+		updateFractal();
+
+
+		//clear screen
+		gl.clearColor(1.0, 1.0, 1.0, 1.0);
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+		//draw
+		gl.useProgram(program);
+		gl.uniform2f(u_resolution, canvas.width, canvas.height);
+		gl.uniform1i(u_iterations, iterations);
+		gl.uniform1f(u_zoom, Math.exp(zoom / canvas.width));
+		gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+		gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+		//render guis
+		renderGui();
+	}
+
+	function renderGui() {
+		var ctx = canvasText.getContext("2d");
+		ctx.clearRect(0, 0, canvasText.width, canvasText.height);
+		ctx.fillStyle = 'white';
+		ctx.font = "30px Arial";
+		ctx.fillText("Zoom level: " + Math.round(zoom * 10) / 10, 10, 40);
+		ctx.fillText("Iterations: " + iterations, 10, 80);
+		ctx.fillText("Controls: '+', '-', 'z', 's', mouse", 10, 120);
+	}
 
 </script>
 
@@ -118,8 +224,29 @@ function render() {
 
 </head>
 
+<style>
+	.body {
+	    position: relative;
+	}
+	 
+	#canvas {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 0;
+	}
+
+	#canvasText {
+	    position: absolute;
+	    left: 0px;
+	    top: 0px;
+	    z-index: 10;
+	}
+</style>
+
 <body onload="onPageLoaded();">
-	<canvas id="canvasID" style="border: none;"></canvas>
+	<canvas id="canvas"></canvas>
+	<canvas id="canvasText"></canvas>
 </body>
 
 </html>
