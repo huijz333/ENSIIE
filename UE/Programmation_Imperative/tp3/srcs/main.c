@@ -69,11 +69,11 @@ static void printReferences(int * ref, int * prices, int n, int price) {
 	printf("\n");
 }
 
-static void selectedSort(int * array, int n) {
+void selectSort(int * array, int size) {
 	int i, j, min;
-	for (i = 0 ; i < n ; i++) {
+	for (i = 0 ; i < size ; i++) {
 		min = i;
-		for (j = i + 1 ; j < n ; j++) {
+		for (j = i + 1 ; j < size ; j++) {
 			if (array[j] < array[min]) {
 				min = j;
 			}
@@ -131,14 +131,15 @@ int main() {
 	//tri
 	{
 		printf("\n");
-		int n = 8;
+		int size = 8;
 		int array1[] = {42, 1, 32, 4, 5, 8, 789, 1};
-		selectedSort(array1, n);
-		printArray1(array1, n);
-
+		selectSort(array1, size);
+		printArray1(array1, size);
+		puts("done");
+		
 		int array2[] = {42, 1, 32, 4, 5, 8, 789, 1};
-		bubbleSort(array2, n);
-		printArray1(array2, n);
+		bubbleSort(array2, size);
+		printArray1(array2, size);
 	}
 	return (0);
 }

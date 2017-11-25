@@ -1,0 +1,27 @@
+EXEC=/tmp/$$.a.out
+CC_ARG="-o $EXEC -x c -"
+
+if ! test -z $SILENCE ; then
+	CC_ARG="$CC_ARG -w"
+fi
+
+if ! test -z $DEBUG ; then
+	CC_ARG="$CC_ARG -g"
+	EXEC="gdb $EXEC"
+else
+	EXEC="$EXEC ${@:2}"
+fi
+
+sed -e 1d $1 | gcc $CC_ARG
+if test $? -ne 0 ; then
+	echo "compilation error, cannot execute"
+	exit 2
+fi
+
+$EXEC 
+
+if test $? -ne 0 ; then
+	exit 1
+fi
+
+exit 0 
