@@ -1,0 +1,65 @@
+# PROJECTIONS ET RESTRICTIONS
+
+1) SELECT nom FROM buveur ;
+2) SELECT ville FROM viticulteur GROUP BY ville ORDER BY ville ASC ;
+3) SELECT n_commande, c_qte FROM commande WHERE c_qte BETWEEN 6 AND 15;
+4) SELECT * FROM commande NATURAL JOIN livraison WHERE l_date>'2002-12-25';
+5) SELECT * FROM vin WHERE region LIKE 'BO%NE';   
+
+
+# JOINTURES ET REQUETES D'EXISTENCE OU DE COMPARAISONS
+
+La jointure porte sur les attributs "n_viticulteur" des tables "vin" et "viticulteurs"
+
+Ils sont préfixés car il y a ambiguité de l'attribut "n_viticulteur" dans les tables "vin" et "viticulteur". On obtient une table de tuple : (n_vin, cru, millesime, region, vin.n_viticulteur, vit.n_viticulteur, nom, prenom, ville). Ce schéma a été obtenu à partir de la projection de tous les attributs du produit cartésien de "vin" et "vit", avec une restriction (jointure sql 89)
+
+Le resultat est vide car le "Natural" JOIN impose un join sur toutes les colonnes communes aux deux tables. A priori il n'y a aucunes instances de "viticulteur" et de "buveur" avec les tuple (nom, prenom, ville) communes.
+
+1ere: JOIN * ON (nom, prenom, ville)
+1ere: JOIN * ON (nom, prenom)
+
+1)
+	a) SELECT DISTINCT (vit.n_viticulteur, nom) FROM viticulteur vit, vin WHERE vit.n_viticulteur=vin.n_viticulteur AND region='LOIRE' AND millesime=1993 ;
+	b) SELECT (n_viticulteur, nom) FROM viticulteur NATURAL JOIN vin WHERE region='LOIRE' AND millesime=1993 GROUP BY n_viticulteur ;
+
+2)
+	a) SELECT b.n_buveur, nom FROM buveur b, commande c, vin v WHERE b.n_buveur=c.n_buveur AND c.n_vin=v.n_vin AND cru='POMMARD';
+	b) SELECT b.n_buveur, nom FROM commande c NATURAL JOIN buveur b NATURAL JOIN vin v WHERE cru='POMMARD';
+
+3)
+	a) SELECT vit.nom FROM viticulteur vit, vin, buveur buv, commande cmd WHERE buv.nom='DUPOND' AND cmd.n_buveur=buv.n_buveur AND cmd.n_vin=vin.n_vin AND vit.n_viticulteur=vin.n_viticulteur GROUP BY vit.nom;
+4)
+	a) SELECT DISTINCT (vit.n_viticulteur, vit.nom) FROM viticulteur vit, commande cmd, buveur buv, vin WHERE vit.v_ville = buv.b_ville AND cmd.n_buveur = buv.n_buveur AND cmd.n_vin = vin.n_vin AND vin.n_viticulteur = vit.n_viticulteur;
+	b) SELECT DISTINCT (vit.n_viticulteur, vit.nom) FROM viticulteur vit NATURAL JOIN vin JOIN commande cmd ON cmd.n_vin = vin.n_vin JOIN buveur buv ON buv.n_buveur = cmd.n_buveur WHERE b_ville = v_ville
+
+5)
+	a) SELECT (buv.n_buveur, buv.nom) FROM buveur buv WHERE buv.n_buveur EXCEPT (SELECT commande.n_buveur FROM commande) 
+	b)
+	c) SELECT (buv.n_buveur, buv.nom) FROM buveur buv LEFT OUTER JOIN commande cmd ON buv.n_buveur = cmd.n_buveur WHERE n_commande IS NULL; 
+
+6) SELECT cru FROM vin NATURAL JOIN commande WHERE c_qte < 12 AND cru NOT IN (SELECT cru FROM vin NATURAL JOIN commande WHERE c_qte >= 12)
+
+7) SELECT DISTINCT n_buveur, nom FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region = 'BOURGOGNE' AND n_buveur NOT IN (SELECT n_buveur FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region != 'BOURGOGNE') ;
+SELECT n_buveur, nom FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region = 'BOURGOGNE' EXCEPT (SELECT n_buveur, nom FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region != 'BOURGOGNE');
+
+8) SELECT * FROM buveur WHERE n_buveur NOT IN (SELECT n_buveur FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region!='BOURGOGNE' AND region!='BORDEAUX') AND n_buveur IN (SELECT n_buveur FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region='BOURGOGNE') AND n_buveur IN (SELECT n_buveur FROM commande NATURAL JOIN buveur NATURAL JOIN vin WHERE region='BORDEAUX');
+
+9) (SELECT b_ville FROM buveur) UNION (SELECT v_ville FROM viticulteur);
+
+
+
+
+# FONCTIONS DE CALCULS ET AGREGATS
+
+1) SELECT COUNT(*) FROM ( SELECT cru FROM vin GROUP BY cru ) AS crus;
+2) SELECT SUM(c_qte) FROM commande WHERE c_date BETWEEN '2001-01-01' AND '2001-12-31' ; 
+3) SELECT region, COUNT(n_vin) as "nombre de vins" FROM vin GROUP BY region;
+4) SELECT vit.nom, n_viticulteur, count as "nombre de vins" FROM ( SELECT n_viticulteur, COUNT(*) as count FROM vin GROUP BY n_viticulteur ) AS Pomme NATURAL JOIN viticulteur vit ;
+5) SELECT buv.nom, n_buveur, average as "moyenne commande" FROM ( SELECT n_buveur, AVG(c_qte) as average FROM commande GROUP BY n_buveur ) AS Pomme NATURAL JOIN buveur buv WHERE b_ville='PARIS'; 
+6)
+	a) SELECT buv.nom, n_buveur, total FROM ( SELECT n_buveur, AVG(c_qte) as average, SUM(c_qte) AS total FROM commande GROUP BY n_buveur ) AS Pomme NATURAL JOIN buveur buv WHERE average >= 12;
+	b) SELECT buv.nom, n_buveur, total FROM ( SELECT n_buveur, SUM(c_qte) AS total FROM commande GROUP BY n_buveur HAVING AVG(c_qte) >= 12) AS Pomme NATURAL JOIN buveur buv;
+
+7)
+	a) SELECT vit.nom, n_viticulteur, count AS "nombre de vins produits" FROM ( SELECT n_viticulteur, COUNT(*) as count FROM vin GROUP BY n_viticulteur ) AS Pomme NATURAL JOIN viticulteur vit WHERE count >= 2;
+	b) SELECT vit.nom, n_viticulteur, count AS "nombre de vins produits" FROM ( SELECT n_viticulteur, COUNT(*) as count FROM vin GROUP BY n_viticulteur HAVING COUNT(*) >= 2) AS Pomme NATURAL JOIN viticulteur vit;

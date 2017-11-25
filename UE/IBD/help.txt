@@ -1,0 +1,3 @@
+psql -h pgsql
+create database tp_intro_loginbis;
+psql -h pgsql -d tp_intro_loginbis
