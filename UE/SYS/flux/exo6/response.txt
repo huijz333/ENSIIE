@@ -1,0 +1,5 @@
+3) non, car argv[0] devrait toujours contenir le nom de l'executable
+4) non, l'ordre des variables d'environnement dans le tableau "envv" ne devrait pas interagir sur le comportement du programme
+5) 1 seul processus (execve est bloquant)
+6) 6 programme execute
+7) 1 seule car 1 seul processus : execve remplace tout le programme en execution sur le processus actuel, par le nouveau programme

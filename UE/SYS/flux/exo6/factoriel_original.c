@@ -32,9 +32,9 @@ int main(int argc, char*argv[], char* envv[])
     envv_next[2] = ... ;
   } else if ( argc==0 ) {
     // exécutions suivantes
-    int n     = atoi(envv[0]) ;
-    int fac   = atoi(envv[1]);
-    char* cmd = env[2];
+    int n     = ... ;
+    int fac   = ... ;
+    char* cmd = ... ;
     if ( n==1 ) {
       printf("factoriel de %s = %d\n",basename(cmd),fac);
       return 0;
@@ -47,8 +47,7 @@ int main(int argc, char*argv[], char* envv[])
       fprintf(stderr,"%s:usage: %s\n", argv[0],argv[0]);
       exit(1);
   }
-  char ** argv_next = {cmd};
-  execve(cmd, argv_next, envv_next);
+  execve(...);
   fprintf(stderr,"pb execve(%s...) : %s\n",
       envv_next[2],strerror(errno));
   return 1;

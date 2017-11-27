@@ -1,11 +1,9 @@
-#include "lire.h"
+#include "/pub/ia/sys/syscall/lire.h"
 #include <unistd.h> //execlp
 
-int main()
-{
-	fprintf(stderr, "je suis la commande lire()\n");
+int main() {
 	lire();
 	lire();
-	execlp("./lire", "/pub/ia/sys/syscall/data.in");
+	execlp("./lire", "", NULL);
 	return 0 ;
 }

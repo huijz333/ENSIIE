@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(void) {
-	printf("je suis la fonction lire\n");
+	fprintf(stderr, "je suis la fonction lire\n");
 	lire();
 	return (0);
 }

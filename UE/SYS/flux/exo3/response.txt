@@ -1,0 +1,5 @@
+1)	la fonction lire lit au plus 10 octets sur l'entrée standart, et l'affiche sur la sortir standart
+	read(0, ...) 0 : file descriptor of stdin
+	write(1, ...) 1 : file description of stdout
+
+4)	les flux sont transmis au processus fils

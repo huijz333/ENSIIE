@@ -1,0 +1,2 @@
+1, 2) voir sigcatch.c, sigsend.c
+3)
