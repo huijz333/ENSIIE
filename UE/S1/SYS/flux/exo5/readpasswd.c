@@ -3,6 +3,8 @@
 #include <stdlib.h> //system
 #include <stdio.h> //printf
 
+// '\b' == 8 , mais le read lit DEL (127) quand on appuie sur la touche backspace du clavier,
+// voir http://www.linux-france.org/article/man-fr/man7/ascii-7.html
 # define BACKSPACE ((char)127)
 
 int readpasswd(char pwd[16]) {
@@ -47,7 +49,7 @@ int readpasswd(char pwd[16]) {
 int main() {
 	char buf[16];
 	if (readpasswd(buf) != -1) {
-		printf("password is: %s\n", buf);
+		printf("password entered: %s\n", buf);
 		return (0);
 	}
 	return (1);
