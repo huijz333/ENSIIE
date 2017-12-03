@@ -4,144 +4,177 @@
 # include <limits.h>
 
 
-/** DEBUT: FONCTIONS GENERIQUES SUR LES MATRICES */
-typedef struct	s_matrix {
-	unsigned int n;
-}		t_matrix;
+/** DEBUT: FONCTIONS SUR LES GRAPHES */
 
-static int * matrix_addr(t_matrix * matrix, unsigned int i, unsigned int j) {
-	int * values = (int *) (matrix + 1);
-	return (values + matrix->n * j + i);
+# define BYTE char
+# define BITS_PER_BYTE (sizeof(BYTE))
+# define MAX_EDGES (50)
+
+typedef struct	s_node {
+	unsigned int	path_len; 				/* nombre de sommets entre s et ce sommet */
+	unsigned int	path[MAX_EDGES - 1];	/* le chemin (index des sommets) */
+}				t_node;
+
+typedef struct 	s_graph {
+	unsigned int 	n; 			/* nombre de sommets */
+	t_node 			* nodes; 	/* les sommets avec leur attributs */
+	BYTE 			* arcs;		/* tableau de byte representant les arcs (un arc est codde sur un bit) */
+}				t_graph;
+
+/**
+ *	@ensure
+ *
+ *
+*/
+static int graph_has_arc(t_graph * graph, unsigned int i, unsigned int j) {
+	unsigned int bit = i * graph->n + j;
+	
+/*
+	unsigned int byteID = bit / BITS_PER_BYTE;
+	unsigned int bitID = bit % BITS_PER_BYTE;
+	BYTE * bytes = graph->arcs;
+	BYTE byte = bytes[byteID];
+	return (byte & (1 << bitID) ? 1 : 0);
+*/
+
+	return (graph->arcs[bit / BITS_PER_BYTE] & (1 << (bit % BITS_PER_BYTE)) ? 1 : 0);
 }
 
-static int matrix_get(t_matrix * matrix, unsigned int i, unsigned int j) {
-	return *(matrix_addr(matrix, i , j));
+static void graph_set_arc(t_graph * graph, unsigned int i, unsigned int j) {
+	unsigned int bit = i * graph->n + j;
+/*
+	unsigned int byteID = bit / BITS_PER_BYTE;
+	unsigned int bitID = bit % BITS_PER_BYTE;
+	BYTE * bytes = graph->arcs;
+	BYTE * byte = bytes + byteID;
+	*byte |= (1 << bitID);
+*/
+	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << bit % BITS_PER_BYTE);
+
 }
 
-static t_matrix * matrix_new(unsigned int n) {
-	t_matrix * matrix = (t_matrix *) malloc(sizeof(t_matrix) + n * n * sizeof(int));
-	if (matrix == NULL) {
+static t_graph * graph_new(unsigned int n) {
+	unsigned int nodesize = n * sizeof(t_node); /* nombre de bytes requis pour representer n structure t_node */
+
+	unsigned int bitsize = n * n;																		/* 'bitsize' : nombre de bit requis pour representer tous les arcs */
+	unsigned int arcsize = (n * n / BITS_PER_BYTE) + ((bitsize % BITS_PER_BYTE) != 0) * sizeof(BYTE);	/* 'arcsize' : nombre de bytes requit pour stocker 'bitsize' bits */
+	BYTE * memory = (BYTE *) malloc(sizeof(t_graph) + nodesize + arcsize);								/* j'alloue toute la memoire requise avec un unique malloc */
+	if (memory == NULL) {	/* si l'allocation a rate, on renvoie un graph nul */
 		return (NULL);
 	}
-	matrix->n = n;
-	memset(matrix + 1, 0, n * n * sizeof(int));
-	return (matrix);
+
+	t_graph * graph = (t_graph *) memory;
+	graph->n = n;
+	graph->nodes = (t_node *) (memory + sizeof(t_graph));
+	graph->arcs = memory + sizeof(t_graph) + nodesize;
+
+	memset(graph->arcs, 0, arcsize);
+	return (graph);
 }
 
-static t_matrix * matrix_parse(void) {
+static t_graph * graph_parse(void) {
 	unsigned int n;
 	scanf("%u", &n);
-	t_matrix * matrix = matrix_new(n);
-	if (matrix == NULL) {
+	t_graph * graph = graph_new(n);
+	if (graph == NULL) {
 		return (NULL);
 	}
 
 	unsigned int i, j;
 	for (i = 0; i < n; i++) {
-		for(j = 0; j < n; j++) {
-			scanf("%d", matrix_addr(matrix, i, j));
+		for (j = 0; j < n; j++) {
+			int arc_exists;
+			scanf("%d", &arc_exists);
+			if (arc_exists) {
+				graph_set_arc(graph, i, j);
+			}
 		}
 	}
-	return (matrix);
+	return (graph);
 }
 
-static void matrix_delete(t_matrix * matrix) {
-	free(matrix);
+static void graph_delete(t_graph * graph) {
+	free(graph);
 }
 
-/** FIN: FONCTIONS GENERIQUES SUR LES MATRICES */
+/*
+static void graph_print_arcs(t_graph * graph) {
+	unsigned int i, j;
+	for (i = 0 ; i < graph->n ; i++) {
+		for (j = 0 ; j < graph->n - 1; j++) {
+			printf("%d ", graph_has_arc(graph, i, j));
+		}
+		printf("%d\n", graph_has_arc(graph, i, j));
+	}
+
+}
+*/
+
+/** FIN: FONCTIONS SUR LES ARCS (TABLEAUX DE BITS) */
 
 
 
 
 /** DEBUT: PARCOURS EN PROFONDEUR */
-
-# define MAX_EDGES (50)
-
-typedef struct	s_node {
-	unsigned char	visited; /* 0 ou 1 si deja visite ou non */
-	unsigned int	path_len; /* distance entre s et ce sommet */
-	unsigned int	path[MAX_EDGES]; /* le chemin (index des sommets) */
-}		t_node;
-
-static void visit(t_matrix * arcs, t_node * nodes, unsigned int i) {
-	/* if this node has already been visited, stop recursivity */
-	if (nodes[i].visited) {
-		return ;
-	}
-	/* else, set this node as visited */
-	nodes[i].visited = 1;
+static void visit(t_graph * graph, unsigned int i) {
 	
 	/* for each neighboors */
 	unsigned int j;
-	for (j = 0 ; j < arcs->n ; j++) {
+	for (j = 0 ; j < graph->n ; j++) {
 		/* update distance from 's' */
-		if (matrix_get(arcs, i, j)) {
-			t_node * curr = nodes + i;
-			t_node * next = nodes + j;
+		if (graph_has_arc(graph, i, j)) {
+			t_node * curr = graph->nodes + i;
+			t_node * next = graph->nodes + j;
 			if (curr->path_len + 1 < next->path_len) {
 				next->path_len = curr->path_len + 1;
 				memcpy(next->path, curr->path, sizeof(unsigned int) * curr->path_len);
 				next->path[curr->path_len] = j;
 
 				/** reset visited from this */
-				unsigned int k;
-				for (k = 0 ; k < arcs->n ; k++) {
-					nodes[k].visited = 0;
-				}
-				visit(arcs, nodes, j);
+				visit(graph, j);
 			}
 		}
 	}
 }
 
-static void depth_breadth_search(t_matrix * arcs, unsigned int s, unsigned int t) {
-	/* allocate per-nodes attributes */
-	t_node * nodes = (t_node *)malloc(sizeof(t_node) * arcs->n);
-	if (nodes == NULL) {
-		return ;
-	}
-	
+static void depth_breadth_search(t_graph * graph, unsigned int s, unsigned int t) {
 	/* algorithm initialisation: set every distances to INFINITY */
 	unsigned int i;
-	for (i = 0 ; i < arcs->n ; i++) {
-		nodes[i].visited = 0;
-		nodes[i].path_len = MAX_EDGES;
+	for (i = 0 ; i < graph->n ; i++) {
+		graph->nodes[i].path_len = MAX_EDGES;
 	}
 	
 	/* set origin distance to 0 */
-	nodes[s].path_len = 1;
-	nodes[s].path[0] = s;
+	graph->nodes[s].path_len = 0;
 
 	/* start recursivity */
-	visit(arcs, nodes, s);
+	visit(graph, s);
 
 	/** done, print result */
-	unsigned int path_len = nodes[t].path_len;
-	unsigned int * path = nodes[t].path;
+	unsigned int path_len = graph->nodes[t].path_len;
+	unsigned int * path = graph->nodes[t].path;
 
 	if (path_len < MAX_EDGES) {
+		printf("%u\n", s + 1);
 		for (i = 0 ; i < path_len ; i++) {
 			printf("%u\n", path[i] + 1);
 		}
 	} else {
 		printf("Not connected\n");
 	}
-
-	free(nodes);
 }
 
 /** FIN: PARCOURS EN PROFONDEUR */
 
 
 int main(void) {
-	/* Matrix parsing */
-	t_matrix * arcs = matrix_parse();
-	if (arcs == NULL) {
+	/* arcs parsing */
+	t_graph * graph = graph_parse();
+	if (graph == NULL) {
 		fprintf(stderr, "Allocation or parsing failed.\n");
 		return (EXIT_FAILURE);
 	}
-	
+
 	/* argument du parcours en profondeur */
 	unsigned int s, t;
 	scanf("%u", &s);
@@ -150,10 +183,10 @@ int main(void) {
 	--t;
 
 	/* faire le parcours en profondeur */
-	depth_breadth_search(arcs, s, t);
+	depth_breadth_search(graph, s, t);
 
 	/* libere la mémoire */
-	matrix_delete(arcs);
+	graph_delete(graph);
 
 	return (EXIT_SUCCESS);
 }
