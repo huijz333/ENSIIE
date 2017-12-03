@@ -102,7 +102,7 @@ static void depth_breadth_search(t_matrix * arcs, unsigned int s, unsigned int t
 		return ;
 	}
 	
-	/* dijkstra initialisation: set every distances to INFINITY */
+	/* algorithm initialisation: set every distances to INFINITY */
 	unsigned int i;
 	for (i = 0 ; i < arcs->n ; i++) {
 		nodes[i].visited = 0;
