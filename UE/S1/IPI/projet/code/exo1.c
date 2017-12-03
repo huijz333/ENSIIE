@@ -1,21 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <limits.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <limits.h>
 
 
-/** GENERIC MATRIX FUNCTIONS */
+/** DEBUT: FONCTIONS GENERIQUES SUR LES MATRICES */
 typedef struct	s_matrix {
 	unsigned int n;
 }		t_matrix;
-
-# define MAX_EDGES (50)
-
-typedef struct	s_edge {
-	unsigned char	visited;
-	unsigned int	path_len;
-	unsigned int	path[MAX_EDGES];
-}		t_edge;
 
 static int * matrix_addr(t_matrix * matrix, unsigned int i, unsigned int j) {
 	int * values = (int *) (matrix + 1);
@@ -57,25 +49,36 @@ static void matrix_delete(t_matrix * matrix) {
 	free(matrix);
 }
 
-/**
-  EXO 1 (find minimum path between s and t
-	recurcively visit every edges, using a flood filling algoritm
-*/
-static void dijkstra_visit(t_matrix * matrix, t_edge * edges, unsigned int i) {
-	/* if this edge has already been visited, stop recursivity */
-	if (edges[i].visited) {
+/** FIN: FONCTIONS GENERIQUES SUR LES MATRICES */
+
+
+
+
+/** DEBUT: PARCOURS EN PROFONDEUR */
+
+# define MAX_EDGES (50)
+
+typedef struct	s_node {
+	unsigned char	visited; /* 0 ou 1 si deja visite ou non */
+	unsigned int	path_len; /* distance entre s et ce sommet */
+	unsigned int	path[MAX_EDGES]; /* le chemin (index des sommets) */
+}		t_node;
+
+static void visit(t_matrix * arcs, t_node * nodes, unsigned int i) {
+	/* if this node has already been visited, stop recursivity */
+	if (nodes[i].visited) {
 		return ;
 	}
-	/* else, set this edge as visited */
-	edges[i].visited = 1;
+	/* else, set this node as visited */
+	nodes[i].visited = 1;
 	
 	/* for each neighboors */
 	unsigned int j;
-	for (j = 0 ; j < matrix->n ; j++) {
+	for (j = 0 ; j < arcs->n ; j++) {
 		/* update distance from 's' */
-		if (matrix_get(matrix, i, j)) {
-			t_edge * curr = edges + i;
-			t_edge * next = edges + j;
+		if (matrix_get(arcs, i, j)) {
+			t_node * curr = nodes + i;
+			t_node * next = nodes + j;
 			if (curr->path_len + 1 < next->path_len) {
 				next->path_len = curr->path_len + 1;
 				memcpy(next->path, curr->path, sizeof(unsigned int) * curr->path_len);
@@ -83,41 +86,39 @@ static void dijkstra_visit(t_matrix * matrix, t_edge * edges, unsigned int i) {
 
 				/** reset visited from this */
 				unsigned int k;
-				for (k = 0 ; k < matrix->n ; k++) {
-					edges[k].visited = 0;
+				for (k = 0 ; k < arcs->n ; k++) {
+					nodes[k].visited = 0;
 				}
-				for (k = 0 ; k < curr->path_len ; k++) {
-					edges[curr->path[k]].visited = 1;
-				}
-				dijkstra_visit(matrix, edges, j);
+				visit(arcs, nodes, j);
 			}
 		}
 	}
 }
 
-static void dijkstra(t_matrix * matrix, unsigned int s, unsigned int t) {
-	/* allocate per-edges attributes */
-	t_edge * edges = (t_edge *)malloc(sizeof(t_edge) * matrix->n);
-	if (edges == NULL) {
+static void depth_breadth_search(t_matrix * arcs, unsigned int s, unsigned int t) {
+	/* allocate per-nodes attributes */
+	t_node * nodes = (t_node *)malloc(sizeof(t_node) * arcs->n);
+	if (nodes == NULL) {
 		return ;
 	}
 	
 	/* dijkstra initialisation: set every distances to INFINITY */
 	unsigned int i;
-	for (i = 0 ; i < matrix->n ; i++) {
-		edges[i].visited = 0;
-		edges[i].path_len = MAX_EDGES;
+	for (i = 0 ; i < arcs->n ; i++) {
+		nodes[i].visited = 0;
+		nodes[i].path_len = MAX_EDGES;
 	}
 	
 	/* set origin distance to 0 */
-	edges[s].path_len = 1;
-	edges[s].path[0] = s;
+	nodes[s].path_len = 1;
+	nodes[s].path[0] = s;
 
 	/* start recursivity */
-	dijkstra_visit(matrix, edges, s);
+	visit(arcs, nodes, s);
 
-	unsigned int path_len = edges[t].path_len;
-	unsigned int * path = edges[t].path;
+	/** done, print result */
+	unsigned int path_len = nodes[t].path_len;
+	unsigned int * path = nodes[t].path;
 
 	if (path_len < MAX_EDGES) {
 		for (i = 0 ; i < path_len ; i++) {
@@ -127,25 +128,33 @@ static void dijkstra(t_matrix * matrix, unsigned int s, unsigned int t) {
 		printf("Not connected\n");
 	}
 
-	free(edges);
+	free(nodes);
 }
 
-int main() {
-	t_matrix * matrix = matrix_parse();
-	if (matrix == NULL) {
+/** FIN: PARCOURS EN PROFONDEUR */
+
+
+int main(void) {
+	/* Matrix parsing */
+	t_matrix * arcs = matrix_parse();
+	if (arcs == NULL) {
 		fprintf(stderr, "Allocation or parsing failed.\n");
 		return (EXIT_FAILURE);
 	}
 	
+	/* argument du parcours en profondeur */
 	unsigned int s, t;
 	scanf("%u", &s);
 	scanf("%u", &t);
 	--s;
 	--t;
 
-	dijkstra(matrix, s, t);
+	/* faire le parcours en profondeur */
+	depth_breadth_search(arcs, s, t);
 
-	matrix_delete(matrix);
+	/* libere la mémoire */
+	matrix_delete(arcs);
+
 	return (EXIT_SUCCESS);
 }
 
