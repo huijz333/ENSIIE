@@ -4,8 +4,6 @@
 # include <limits.h>
 
 
-/** DEBUT: FONCTIONS SUR LES GRAPHES */
-
 /* type utilise dans le tableau de bit representant les sommets */
 # define BYTE unsigned char
 # define BITS_PER_BYTE (8 * sizeof(BYTE))
@@ -15,6 +13,9 @@
 
 /* type utilise pour representer l'index des sommets (ici, MAX_NODES vaux 50, on peut donc utiliser 1 octet */  
 # define INDEX BYTE
+
+
+/** DEBUT: FONCTIONS SUR LES GRAPHES */
 
 typedef struct	s_node {
 	INDEX	pathlen;		/* nombre de sommets entre s et ce sommet */
@@ -26,6 +27,7 @@ typedef struct 	s_graph {
 	t_node 	* nodes; 	/* les sommets avec leur attributs */
 	BYTE 	* arcs;		/* tableau de byte representant les arcs (un arc est codde sur un bit) */
 }				t_graph;
+
 
 /**
  *	@ensure
