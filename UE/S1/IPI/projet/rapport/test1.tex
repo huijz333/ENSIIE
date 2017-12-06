@@ -1,0 +1,70 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true} % à inclure si on utilise \usepackage[french]{babel}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+%title setup
+\title{Projet IPI: chemins de poids minimum}
+\author{Romain PEREIRA}
+\date{04/12/2017}
+
+% table of contents setup
+\renewcommand{\contentsname}{Sommaire}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=black
+}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \section*{Préambule}
+    Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline
+    Le but est d'implémenter des algorithmes de recherche de 'chemin le plus court', dans des graphes orientés.\newline
+    Ce document rapporte mon travail, et explique les choix techniques que j'ai pris.\newline
+
+  \newpage
+  \section{Recherche de chemin le plus court}
+    Soit (X, A) un graphe orienté. Le recherche du chemin le plus court.....
+
+  \subsection{Parcours en largeur (graphes non-pondérés)}
+    On considère ici un graphe où les arcs sont non pondérés.\newline
+    'Le chemin le plus court' entre 2 sommets corresponds donc au nombre d'arc minimums necessaire pour les relier par un chemin.\newline
+    J'ai representé le graphe par le triplet (n, X, A), avec:
+    \begin{itemize}[label=-]
+      \item n : Card(X)
+      \item X : tableau de n 'sommets'
+      \item A : tableau de n * n bits representant les arcs
+    \end{itemize}
+    
+    Le sommet 's' correspond au sommet source (choisie comme origine des distances).
+    Un sommet 't' est une structure contenant les informations propres à un sommet:
+    \begin{itemize}[label=-]
+      \item pathlen : longueur du chemin minimum reliant 't' au sommet 's'
+      \item path : tableau de taille 'pathlen' contenant les sommets du chemin
+    \end{itemize}
+    
+    Les arcs sont coddés sur une suite de bits.
+    Considérons la bijection:
+	F : [0, n - 1]^2 ->   [0, n^2]
+	  :    (i, j)    ->  i * n + j
+	
+    Le p-ième bit vaut 1 ou 0, selon qu'il existe un c
+
+  \subsection{Algorithme de Dijkstra (graphes pondérés)}
+
+    Dummy text
+
+  \newpage
+  \section{Application: resolution labyrinthe}
+
+\end{document}

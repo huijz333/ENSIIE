@@ -4,62 +4,63 @@
 # include <limits.h>
 
 
+/* type utilise dans le tableau de bit representant les sommets */
+# define BYTE unsigned char
+# define BITS_PER_BYTE (8 * sizeof(BYTE))
+
+/* nombre maximal de sommets */
+# define MAX_NODES (50)
+
+/* type utilise pour representer l'index des sommets (ici, MAX_NODES vaux 50, on peut donc utiliser 1 octet */  
+# define INDEX BYTE
+
+
 /** DEBUT: FONCTIONS SUR LES GRAPHES */
 
-# define BYTE char
-# define BITS_PER_BYTE (sizeof(BYTE))
-# define MAX_EDGES (50)
-
 typedef struct	s_node {
-	unsigned int	path_len; 				/* nombre de sommets entre s et ce sommet */
-	unsigned int	path[MAX_EDGES - 1];	/* le chemin (index des sommets) */
-}				t_node;
+	INDEX	pathlen;		/* nombre de sommets entre s et ce sommet */
+	INDEX	path[MAX_NODES - 1];	/* le chemin (index des sommets) */
+}		t_node;
 
 typedef struct 	s_graph {
-	unsigned int 	n; 			/* nombre de sommets */
-	t_node 			* nodes; 	/* les sommets avec leur attributs */
-	BYTE 			* arcs;		/* tableau de byte representant les arcs (un arc est codde sur un bit) */
+	INDEX 	n; 		/* nombre de sommets */
+	t_node 	* nodes; 	/* les sommets avec leur attributs */
+	BYTE 	* arcs;		/* tableau de byte representant les arcs (un arc est codde sur un bit) */
 }				t_graph;
+
 
 /**
  *	@ensure
- *
+ *	@require
+ 	@
  *
 */
-static int graph_has_arc(t_graph * graph, unsigned int i, unsigned int j) {
+static BYTE graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
-	
-/*
-	unsigned int byteID = bit / BITS_PER_BYTE;
-	unsigned int bitID = bit % BITS_PER_BYTE;
-	BYTE * bytes = graph->arcs;
-	BYTE byte = bytes[byteID];
-	return (byte & (1 << bitID) ? 1 : 0);
-*/
-
 	return (graph->arcs[bit / BITS_PER_BYTE] & (1 << (bit % BITS_PER_BYTE)) ? 1 : 0);
 }
 
-static void graph_set_arc(t_graph * graph, unsigned int i, unsigned int j) {
+static void graph_set_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
-/*
-	unsigned int byteID = bit / BITS_PER_BYTE;
-	unsigned int bitID = bit % BITS_PER_BYTE;
-	BYTE * bytes = graph->arcs;
-	BYTE * byte = bytes + byteID;
-	*byte |= (1 << bitID);
-*/
 	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << bit % BITS_PER_BYTE);
 
 }
 
-static t_graph * graph_new(unsigned int n) {
-	unsigned int nodesize = n * sizeof(t_node); /* nombre de bytes requis pour representer n structure t_node */
+static t_graph * graph_new(INDEX n) {
+	if (n > MAX_NODES) {
+		return (NULL);
+	}
 
-	unsigned int bitsize = n * n;																		/* 'bitsize' : nombre de bit requis pour representer tous les arcs */
-	unsigned int arcsize = (n * n / BITS_PER_BYTE) + ((bitsize % BITS_PER_BYTE) != 0) * sizeof(BYTE);	/* 'arcsize' : nombre de bytes requit pour stocker 'bitsize' bits */
-	BYTE * memory = (BYTE *) malloc(sizeof(t_graph) + nodesize + arcsize);								/* j'alloue toute la memoire requise avec un unique malloc */
-	if (memory == NULL) {	/* si l'allocation a rate, on renvoie un graph nul */
+	/* nombre de bytes requis pour representer n structure t_node */
+	unsigned int nodesize = n * sizeof(t_node);
+	;/* 'bitsize' : nombre de bit requis pour representer tous les arcs */
+	unsigned int bitsize = n * n;
+	/* 'arcsize' : nombre de bytes minimum requit pour stocker 'bitsize' bits */
+	unsigned int arcsize = (bitsize / BITS_PER_BYTE) + ((bitsize % BITS_PER_BYTE) != 0) * sizeof(BYTE);
+	/* j'alloue toute la memoire requise avec un unique malloc */
+	BYTE * memory = (BYTE *) malloc(sizeof(t_graph) + nodesize + arcsize);	
+	/* si l'allocation a rate, on renvoie un graph nul */
+	if (memory == NULL) {	
 		return (NULL);
 	}
 
@@ -73,18 +74,18 @@ static t_graph * graph_new(unsigned int n) {
 }
 
 static t_graph * graph_parse(void) {
-	unsigned int n;
-	scanf("%u", &n);
+	INDEX n;
+	scanf("%hhu", &n);
 	t_graph * graph = graph_new(n);
 	if (graph == NULL) {
 		return (NULL);
 	}
 
-	unsigned int i, j;
+	INDEX i, j;
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
-			int arc_exists;
-			scanf("%d", &arc_exists);
+			BYTE arc_exists;
+			scanf("%hhu", &arc_exists);
 			if (arc_exists) {
 				graph_set_arc(graph, i, j);
 			}
@@ -97,93 +98,83 @@ static void graph_delete(t_graph * graph) {
 	free(graph);
 }
 
-/*
-static void graph_print_arcs(t_graph * graph) {
-	unsigned int i, j;
-	for (i = 0 ; i < graph->n ; i++) {
-		for (j = 0 ; j < graph->n - 1; j++) {
-			printf("%d ", graph_has_arc(graph, i, j));
-		}
-		printf("%d\n", graph_has_arc(graph, i, j));
-	}
-
-}
-*/
-
 /** FIN: FONCTIONS SUR LES ARCS (TABLEAUX DE BITS) */
 
 
 
-
 /** DEBUT: PARCOURS EN PROFONDEUR */
-static void visit(t_graph * graph, unsigned int i) {
+static void visit(t_graph * graph, INDEX i) {
 	
-	/* for each neighboors */
-	unsigned int j;
+	/* pour chaque sommet */
+	INDEX j;
 	for (j = 0 ; j < graph->n ; j++) {
-		/* update distance from 's' */
+		/* si le sommet est voisin de i */
 		if (graph_has_arc(graph, i, j)) {
+			/* on teste voir si ce chemin est plus court */
 			t_node * curr = graph->nodes + i;
 			t_node * next = graph->nodes + j;
-			if (curr->path_len + 1 < next->path_len) {
-				next->path_len = curr->path_len + 1;
-				memcpy(next->path, curr->path, sizeof(unsigned int) * curr->path_len);
-				next->path[curr->path_len] = j;
+			/** si ce chemin est plus court ... */
+			if (curr->pathlen + 1 < next->pathlen) {
+				/** on met a jour le chemin */
+				next->pathlen = curr->pathlen + 1;
+				memcpy(next->path, curr->path, sizeof(INDEX) * curr->pathlen);
+				next->path[curr->pathlen] = j;
 
-				/** reset visited from this */
+				/** on re-itere alors sur ce voisin */
 				visit(graph, j);
 			}
 		}
 	}
 }
 
-static void depth_breadth_search(t_graph * graph, unsigned int s, unsigned int t) {
-	/* algorithm initialisation: set every distances to INFINITY */
-	unsigned int i;
+static void depth_breadth_search(t_graph * graph, unsigned int s) {
+	/* initilisation: on definie toutes les distantes à +oo, sauf pour l'origine à 0 */
+	INDEX i;
 	for (i = 0 ; i < graph->n ; i++) {
-		graph->nodes[i].path_len = MAX_EDGES;
+		graph->nodes[i].pathlen = MAX_NODES;
 	}
-	
-	/* set origin distance to 0 */
-	graph->nodes[s].path_len = 0;
+	graph->nodes[s].pathlen = 0;
 
-	/* start recursivity */
+	/* debut de recursion */
 	visit(graph, s);
-
-	/** done, print result */
-	unsigned int path_len = graph->nodes[t].path_len;
-	unsigned int * path = graph->nodes[t].path;
-
-	if (path_len < MAX_EDGES) {
-		printf("%u\n", s + 1);
-		for (i = 0 ; i < path_len ; i++) {
-			printf("%u\n", path[i] + 1);
-		}
-	} else {
-		printf("Not connected\n");
-	}
 }
 
 /** FIN: PARCOURS EN PROFONDEUR */
 
 
+static void print_result(t_graph * graph, INDEX s, INDEX t) {
+	INDEX pathlen = graph->nodes[t].pathlen;
+	INDEX * path = graph->nodes[t].path;
+
+	if (pathlen == MAX_NODES) {
+		printf("Not connected\n");
+	} else {
+		printf("%hhu\n", s + 1);
+		INDEX i;
+		for (i = 0 ; i < pathlen ; i++) {
+			printf("%hhu\n", path[i] + 1);
+		}
+	}
+}
+
 int main(void) {
 	/* arcs parsing */
 	t_graph * graph = graph_parse();
 	if (graph == NULL) {
-		fprintf(stderr, "Allocation or parsing failed.\n");
+		fprintf(stderr, "Erreur d'allocations ou de parsing. Arrêt.\n");
 		return (EXIT_FAILURE);
 	}
 
 	/* argument du parcours en profondeur */
-	unsigned int s, t;
-	scanf("%u", &s);
-	scanf("%u", &t);
+	INDEX s, t;
+	scanf("%hhu", &s);
+	scanf("%hhu", &t);
 	--s;
 	--t;
 
 	/* faire le parcours en profondeur */
-	depth_breadth_search(graph, s, t);
+	depth_breadth_search(graph, s);
+	print_result(graph, s, t);
 
 	/* libere la mémoire */
 	graph_delete(graph);
