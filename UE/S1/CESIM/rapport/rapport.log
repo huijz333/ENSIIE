@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  9 DEC 2017 16:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  9 DEC 2017 20:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -631,25 +631,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout4 = `rapport.toc'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--44
+Underfull \hbox (badness 10000) in paragraph at lines 36--43
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--44
+Underfull \hbox (badness 10000) in paragraph at lines 36--43
 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 49.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 48.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 48.
  [2]
 
 ! Package inputenc Error: Unicode char € (U+20AC)
@@ -659,7 +659,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.75 ...r une politique de prix élevés (~ 140€
+l.74 ...r une politique de prix élevés (~ 140€
                                                   ), en esperant que l'offre...
 
 Your command was ignored.
@@ -667,112 +667,117 @@ Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--85
+Underfull \hbox (badness 10000) in paragraph at lines 63--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--85
+Underfull \hbox (badness 10000) in paragraph at lines 63--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--85
+Underfull \hbox (badness 10000) in paragraph at lines 63--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--94
+Underfull \hbox (badness 10000) in paragraph at lines 85--93
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 101--103
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
-<./images/remplissage_hotel.png, id=79, 582.175pt x 336.25626pt>
+<./images/remplissage_hotel.png, id=79, 423.83344pt x 246.1697pt>
 File: ./images/remplissage_hotel.png Graphic file (type png)
 
 <use ./images/remplissage_hotel.png>
-Package pdftex.def Info: ./images/remplissage_hotel.png used on input line 106.
+Package pdftex.def Info: ./images/remplissage_hotel.png used on input line 105.
 
-(pdftex.def)             Requested size: 344.83054pt x 199.16928pt.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
-<./images/frais_marketting.png, id=81, 582.175pt x 336.25626pt>
+<./images/frais_marketting.png, id=80, 423.83344pt x 246.1697pt>
 File: ./images/frais_marketting.png Graphic file (type png)
 
 <use ./images/frais_marketting.png>
-Package pdftex.def Info: ./images/frais_marketting.png used on input line 113.
-(pdftex.def)             Requested size: 344.83054pt x 199.16928pt.
+Package pdftex.def Info: ./images/frais_marketting.png used on input line 112.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
-<./images/marketting_part_marche.png, id=82, 582.175pt x 331.2375pt>
+<./images/marketting_part_marche.png, id=81, 423.83344pt x 246.1697pt>
 File: ./images/marketting_part_marche.png Graphic file (type png)
 
 <use ./images/marketting_part_marche.png>
 Package pdftex.def Info: ./images/marketting_part_marche.png used on input line
- 120.
-(pdftex.def)             Requested size: 350.0539pt x 199.16928pt.
+ 119.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
-Overfull \hbox (5.0539pt too wide) in paragraph at lines 120--121
- [] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./images/rapport_qualite_prix.png, id=83, 582.175pt x 336.25626pt>
+<./images/rapport_qualite_prix.png, id=82, 423.83344pt x 246.1697pt>
 File: ./images/rapport_qualite_prix.png Graphic file (type png)
 
 <use ./images/rapport_qualite_prix.png>
 Package pdftex.def Info: ./images/rapport_qualite_prix.png used on input line 1
-27.
-(pdftex.def)             Requested size: 344.83054pt x 199.16928pt.
+26.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<./images/cout_administration_et_maintenance.png, id=84, 582.175pt x 336.25626p
-t>
+<./images/cout_administration_et_maintenance.png, id=83, 423.83344pt x 246.1697
+pt>
 File: ./images/cout_administration_et_maintenance.png Graphic file (type png)
  <use ./images/cout_administration_et_maintenance.png>
 Package pdftex.def Info: ./images/cout_administration_et_maintenance.png used o
-n input line 134.
-(pdftex.def)             Requested size: 344.83054pt x 199.16928pt.
+n input line 133.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./images/effort_reduction_couts.png, id=85, 582.175pt x 336.25626pt>
+<./images/effort_reduction_couts.png, id=84, 423.83344pt x 246.1697pt>
 File: ./images/effort_reduction_couts.png Graphic file (type png)
 
 <use ./images/effort_reduction_couts.png>
 Package pdftex.def Info: ./images/effort_reduction_couts.png used on input line
- 142.
-(pdftex.def)             Requested size: 344.83054pt x 199.16928pt.
+ 141.
+(pdftex.def)             Requested size: 342.92809pt x 199.16928pt.
 
+<./images/action.png, id=85, 565.11125pt x 328.22626pt>
+File: ./images/action.png Graphic file (type png)
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+<use ./images/action.png>
+Package pdftex.def Info: ./images/action.png used on input line 148.
+(pdftex.def)             Requested size: 342.91518pt x 199.16928pt.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 147.
-[5 <./images/remplissage_hotel.png> <./images/frais_marketting.png>] [6 <./imag
-es/marketting_part_marche.png> <./images/rapport_qualite_prix.png>] [7 <./image
-s/cout_administration_et_maintenance.png> <./images/effort_reduction_couts.png>
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 147.
+<./images/dettes_capitaux.png, id=87, 565.11125pt x 331.2375pt>
+File: ./images/dettes_capitaux.png Graphic file (type png)
+
+<use ./images/dettes_capitaux.png>
+Package pdftex.def Info: ./images/dettes_capitaux.png used on input line 155.
+(pdftex.def)             Requested size: 339.79369pt x 199.16928pt.
+
+<./images/bilan_t8.png, id=88, 301.125pt x 1355.0625pt>
+File: ./images/bilan_t8.png Graphic file (type png)
+
+<use ./images/bilan_t8.png>
+Package pdftex.def Info: ./images/bilan_t8.png used on input line 162.
+(pdftex.def)             Requested size: 88.51865pt x 398.33858pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 167.
+ [5 <./images/remplissage_hotel.png (PNG copy)> <./images/frais_marketting.png 
+(PNG copy)>] [6 <./images/marketting_part_marche.png (PNG copy)> <./images/rapp
+ort_qualite_prix.png (PNG copy)>] [7 <./images/cout_administration_et_maintenan
+ce.png (PNG copy)> <./images/effort_reduction_couts.png (PNG copy)>] [8 <./imag
+es/action.png> <./images/dettes_capitaux.png>]
+[9 <./images/bilan_t8.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 167.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 147.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 147.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 167.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 167.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 4A1704F03D1AAB9F7607735E3762686A;655.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 147.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 167.
  ) 
 Here is how much of TeX's memory you used:
- 7288 strings out of 494924
- 104475 string characters out of 6179708
+ 7308 strings out of 494924
+ 104881 string characters out of 6179708
  188685 words of memory out of 5000000
- 10458 multiletter control sequences out of 15000+600000
+ 10470 multiletter control sequences out of 15000+600000
  16733 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  29i,6n,30p,253b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -785,10 +790,10 @@ jfour/jknappen/ec/ecbx1440.600pk> </home/rpereira/.texmf-var/fonts/pk/ljfour/jk
 nappen/ec/ecrm1200.600pk> </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/e
 c/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy10.pfb>
-Output written on rapport.pdf (7 pages, 225691 bytes).
+Output written on rapport.pdf (9 pages, 331287 bytes).
 PDF statistics:
- 388 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
- 111 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 404 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 
