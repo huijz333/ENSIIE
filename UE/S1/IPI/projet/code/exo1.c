@@ -25,27 +25,36 @@ typedef struct	s_node {
 typedef struct 	s_graph {
 	INDEX 	n; 		/* nombre de sommets */
 	t_node 	* nodes; 	/* les sommets avec leur attributs */
-	BYTE 	* arcs;		/* tableau de byte representant les arcs (un arc est codde sur un bit) */
+	BYTE 	* arcs;		/* tableau representant les arcs (un arc est codde sur un bit) */
 }				t_graph;
 
 
 /**
- *	@ensure
- *	@require
- 	@
- *
+ *	@require : un t_graph * 'graph', deux indices 'i' et 'j'
+ *	@ensure  : renvoie 1 si l'arc de 'i' à 'j' existe dans le t_graph 'graph'
+ *	@assign  : ---
 */
 static BYTE graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
 	return (graph->arcs[bit / BITS_PER_BYTE] & (1 << (bit % BITS_PER_BYTE)) ? 1 : 0);
 }
 
+/**
+ *	@require : un t_graph * 'graph', deux indices 'i' et 'j'
+ *	@ensure  : cree un arc en 'i' et 'j'
+ *	@assign  : inseres un arc ('i', 'j') dans 'graph'
+*/
 static void graph_set_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
-	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << bit % BITS_PER_BYTE);
-
+	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << (bit % BITS_PER_BYTE));
 }
 
+/**
+ *	@require : 'n' : le nombre de sommets du graphe
+ *	@ensure  : renvoie un nouveau graphe pouvant accueillir au plus 'n' sommets,
+ *		   ou NULL si l'allocation a echoue
+ *	@assign  : le graphe est initialement vide
+*/
 static t_graph * graph_new(INDEX n) {
 	if (n > MAX_NODES) {
 		return (NULL);
@@ -67,12 +76,28 @@ static t_graph * graph_new(INDEX n) {
 	t_graph * graph = (t_graph *) memory;
 	graph->n = n;
 	graph->nodes = (t_node *) (memory + sizeof(t_graph));
-	graph->arcs = memory + sizeof(t_graph) + nodesize;
+	graph->arcs = (BYTE *) (memory + sizeof(t_graph) + nodesize);
 
+	memset(graph->nodes, 0, nodesize);
 	memset(graph->arcs, 0, arcsize);
 	return (graph);
 }
 
+/**
+ *	@require : ---
+ *	@ensure  : lit une matrice carre sur l'entree standart. Le 1er entier lu est la dimension 'n',
+ *			suivi de n * n valeurs, où la k-ieme valeur correspond
+ *			a la ligne 'k / n' et a la colonne 'k % n'
+ *
+ *			 0    1   ...   k   ...   n
+ *			n+1  n+2  ...  k+n  ...  2n-1
+ *			          ........
+ *			          ........
+ *		        	  ........
+ *			n(n-1)    ........	 n.n
+ *
+ *	@assign  : le graphe est initialement vide
+*/
 static t_graph * graph_parse(void) {
 	INDEX n;
 	scanf("%hhu", &n);
