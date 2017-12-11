@@ -1,0 +1,38 @@
+Si P1 et P2 écrivent f à la même position, la donnée de f à
+cette position sera celle de la P1
+
+Si P1 et P2 lisent f à la même position, les données lues
+seront les mêmes si il n’y a pas eu .... dans f à
+cette position entre les ....
+
+Si P1 fait une lecture et P2 une écriture de f à la position
+l, P1 reçoit la donnée écrite par P2 si:
+La lecture est faite apres l’écriture.
+Il n’y a pas eu d’autres redirections entre la lecture et
+l’écriture.
+
+
+
+
+Une lecture sur f est bloquante, si f est vide et qu’il
+existe encore un ecrivain
+
+De même, une écriture sur f est bloquante, si f est pleine
+et qu’il existe encore un lecteur
+
+Une écriture sur une f, si f n'est pas ouverte en lecture, génère l’émission du signal
+SIGPIPE. Si ce signal n’est ni attrapé, ni ignoré, ceci
+entraine la fin du processus. Si ce signal
+est attrapé ou ignoré, l’écriture renvoie une . . . . . . avec
+. . . . . positionné à EPIPE.
+
+Si P1 et P2 lisent f, ils ne peuvent pas lire la même. don-
+née
+
+Si P1 fait une lecture de f et P2 une écriture dans f, P1
+reçoit la donnée écrite par P2 si:
+La fifo est 
+Il n’y a pas d’autres . . . . . . . . entre la lecture et
+l’écriture.
+Il n’y a pas d’autres . . . . . . entre la lecture et l’écriture.
+

@@ -7,7 +7,11 @@
 #include <sys/stat.h> //fstat
 #include <stdlib.h> //malloc
 
+const char * CONSTANTE = "hello world\n";
+
 int main(int argc, char ** argv) {
+
+	printf(CONSTANTE);
 
 	//check arguments
 	if (argc != 2) {
