@@ -7,8 +7,7 @@
 # include <sys/wait.h> //waitpid()
 # include <sys/stat.h> //stat()
 
-# define N_PROCESS (512)
-
+# define N_PROCESS (4)
 /**
 	cette fonction calcul le nombre de ligne du fichier 'filepath',
 	de taille total 'sz',
@@ -70,11 +69,13 @@ int main(int argc, char ** argv) {
 	/**
 		on va creer autant de pipe qu'il y a de processus.
 	*/
-	int fd[N_PROCESS][2];
+	int fds[2];
+	if (pipe(fds) == -1) {
+		exit(EXIT_FAILURE);
+	}
 	unsigned int i;
 	for (i = 0 ; i < N_PROCESS ; i++) {
 		/** on cree le pipe */
-		pipe(fd[i]);
 		/** on cree le processus */
 		pid_t pid = fork();
 		if (pid == -1) {
@@ -86,9 +87,7 @@ int main(int argc, char ** argv) {
 			/** on compte le nombre de ligne */
 			unsigned int count = countLines(filepath, sz, i);
 			/** on l'ecrit dans le pipe */
-			write(fd[i][1], &count, sizeof(unsigned int));
-			/** plus besoin de ce pipe en ecriture , on le ferme */
-			close(fd[i][1]);
+			write(fds[1], &count, sizeof(unsigned int));
 			/** on stop le child */
 			exit(EXIT_SUCCESS);
 		}
@@ -102,11 +101,10 @@ int main(int argc, char ** argv) {
 	unsigned int total = 0;
 	for (i = 0 ; i < N_PROCESS ; i++) {
 		unsigned int count;
-		read(fd[i][0], &count, sizeof(unsigned int));
-		close(fd[i][0]);
+		read(fds[0], &count, sizeof(unsigned int));
 		total += count;
 	}
-
+	close(fds[0]);
 	/** on affiche le resultat */
 	printf("runned with %d processes\n", N_PROCESS);
 	printf("total line: %d\n", total);
