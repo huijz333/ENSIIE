@@ -1,5 +1,5 @@
 # include <stdio.h> // printf
-# include <unistd.h> //fork()
+# include <unistd.h> //fork(), pipe()
 # include <stdlib.h> //exit()
 # include <errno.h>
 # include <string.h>
@@ -7,39 +7,51 @@
 # include <sys/wait.h> //waitpid()
 # include <sys/stat.h> //stat()
 
-# define N_PROCESS (4)
+# define N_PROCESS (512)
 
-static size_t countLines(char * filepath, size_t sz, int i) {
+/**
+	cette fonction calcul le nombre de ligne du fichier 'filepath',
+	de taille total 'sz',
+	et lis les octets de [i * sz / N_PROCESS, (i + 1) * sz / N_PROCESS)]
+*/
+static unsigned int countLines(char * filepath, size_t sz, unsigned int i) {
+	/** on ouvre le fichier */
 	FILE * f = fopen(filepath, "r");
 	if (f == NULL) {
 		return (-1);
 	}
+	/** calcul des dimensions */
 	size_t begin = sz / N_PROCESS * i;
 	size_t end = sz / N_PROCESS * (i + 1);
-	size_t len = end - begin;
-	char * buffer = (char *)malloc(len * sizeof(char));
+	size_t len = (end - begin) * sizeof(char);
+	char * buffer = (char *)malloc(len);
 	if (buffer == NULL) {
 		fclose(f);
 		return (-1);
 	}
+	/** on bouge le curseur du fichier au debut */
 	fseek(f, begin, SEEK_SET);
-	printf("cursor is at: %lu\n", ftell(f));
-	size_t r = fread(buffer, len, sizeof(char), f);
-	free(buffer);
-	fclose(f);
-	if (r != len) {
-		printf("read %lu instead of %lu exepected bytes\n", r, len);
+	/** on lit les octets */
+	if (fread(buffer, len, 1, f) != 1) {
+		free(buffer);
+		fclose(f);
+		fprintf(stderr, "error on fread()\n");	
 		return (-1);
 	}
+	/** plus besoin du fichier , on le ferme */
+	fclose(f);
 
-	size_t occ = 0;
-	size_t j;
-	for (j = begin ; j < end; j++) {
+	/** on compte les occurences du caracteres dans les octets lus */
+	unsigned int occ = 0;
+	unsigned int j;
+	for (j = 0 ; j < len; j++) {
 		if (buffer[j] == '\n') {
 			++occ;
 		}
 	}
-
+	/** on n'oublie pas de free le buffer */
+	free(buffer);
+	/** done */
 	return (occ);
 }
 
@@ -49,18 +61,54 @@ int main(int argc, char ** argv) {
 		return (EXIT_FAILURE);
 	}
 
+	/** on recupere taille du fichier */
 	char * filepath = argv[1];
-
 	struct stat st;
 	stat(filepath, &st);
 	size_t sz = st.st_size;
-	printf("filesize: %lu\n", sz);
 
-	int i;
+	/**
+		on va creer autant de pipe qu'il y a de processus.
+	*/
+	int fd[N_PROCESS][2];
+	unsigned int i;
 	for (i = 0 ; i < N_PROCESS ; i++) {
-		size_t occ = countLines(filepath, sz, i);
-		printf("%lu\n", occ);
+		/** on cree le pipe */
+		pipe(fd[i]);
+		/** on cree le processus */
+		pid_t pid = fork();
+		if (pid == -1) {
+			fprintf(stderr, "too much processes! %d\n", i);
+			exit(EXIT_FAILURE);
+		}
+		/** si on est dans le child */
+		if (pid == 0) {
+			/** on compte le nombre de ligne */
+			unsigned int count = countLines(filepath, sz, i);
+			/** on l'ecrit dans le pipe */
+			write(fd[i][1], &count, sizeof(unsigned int));
+			/** plus besoin de ce pipe en ecriture , on le ferme */
+			close(fd[i][1]);
+			/** on stop le child */
+			exit(EXIT_SUCCESS);
+		}
 	}
-	
-	return (0);
+
+	/** seul le parent arrive ici: on attends tous les childs */
+	int wstatut;
+	while (wait(&wstatut) > 0);
+
+	/** on lit chaque pipe, et on somme */
+	unsigned int total = 0;
+	for (i = 0 ; i < N_PROCESS ; i++) {
+		unsigned int count;
+		read(fd[i][0], &count, sizeof(unsigned int));
+		close(fd[i][0]);
+		total += count;
+	}
+
+	/** on affiche le resultat */
+	printf("runned with %d processes\n", N_PROCESS);
+	printf("total line: %d\n", total);
+	return (EXIT_SUCCESS);
 }

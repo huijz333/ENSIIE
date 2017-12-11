@@ -1,0 +1,9 @@
+il crée 2 pipes fils et 2 processus fils. Il lit des entiers sur le flux standart
+- si l'entier lu est supérieur ou égal à 0, il l'envoie à son fils P via le pipe 1
+- si l'entier lu est inférieur ou égal à 0, il l'envoie à son fils N via le pipe neg
+- si l'entier lu est 0, il attends la fin d'execution de ses fils
+
+Les fils quand à eux lisent des entiers sur leurs pipes respectifs,
+les affichent, et se terminent quandl'entier lu est 0
+
+Le père affiche ses messages sur le flux standart 

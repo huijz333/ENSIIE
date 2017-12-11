@@ -1,0 +1,68 @@
+runned with 1 processes
+total line: 947227
+real    0m0.416s
+user    0m0.328s
+sys     0m0.080s
+-------------------------------
+runned with 2 processes
+total line: 947227
+real    0m0.223s
+user    0m0.332s
+sys     0m0.100s
+-------------------------------
+runned with 3 processes
+total line: 947227
+real    0m0.162s
+user    0m0.336s
+sys     0m0.132s
+-------------------------------
+runned with 4 processes
+total line: 947227
+real    0m0.149s
+user    0m0.352s
+sys     0m0.132s
+-------------------------------
+runned with 5 processes
+total line: 947227
+real    0m0.149s
+user    0m0.360s
+sys     0m0.124s
+-------------------------------
+runned with 8 processes
+total line: 947227
+real    0m0.149s
+user    0m0.368s
+sys     0m0.136s
+-------------------------------
+runned with 16 processes
+total line: 947227
+real    0m0.130s
+user    0m0.364s
+sys     0m0.096s
+-------------------------------
+runned with 32 processes
+total line: 947227
+real    0m0.132s
+user    0m0.336s
+sys     0m0.076s
+-------------------------------
+runned with 64 processes
+total line: 947227
+real    0m0.133s
+user    0m0.340s
+sys     0m0.028s
+-------------------------------
+runned with 128 processes
+total line: 947227
+real    0m0.127s
+user    0m0.012s
+sys     0m0.008s
+-------------------------------
+runned with 256 processes
+total line: 947227
+real    0m0.125s
+user    0m0.012s
+sys     0m0.012s
+-------------------------------
+too much processes! 417
+[...]
