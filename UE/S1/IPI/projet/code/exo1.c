@@ -1,40 +1,11 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <limits.h>
-
-
-/* type utilise dans le tableau de bit representant les sommets */
-# define BYTE unsigned char
-# define BITS_PER_BYTE (8 * sizeof(BYTE))
-
-/* nombre maximal de sommets */
-# define MAX_NODES (50)
-
-/* type utilise pour representer l'index des sommets (ici, MAX_NODES vaux 50, on peut donc utiliser 1 octet */  
-# define INDEX BYTE
-
-
-/** DEBUT: FONCTIONS SUR LES GRAPHES */
-
-typedef struct	s_node {
-	INDEX	pathlen;		/* nombre de sommets entre s et ce sommet */
-	INDEX	path[MAX_NODES - 1];	/* le chemin (index des sommets) */
-}		t_node;
-
-typedef struct 	s_graph {
-	INDEX 	n; 		/* nombre de sommets */
-	t_node 	* nodes; 	/* les sommets avec leur attributs */
-	BYTE 	* arcs;		/* tableau representant les arcs (un arc est codde sur un bit) */
-}				t_graph;
-
+# include "exo1.h"
 
 /**
  *	@require : un t_graph * 'graph', deux indices 'i' et 'j'
  *	@ensure  : renvoie 1 si l'arc de 'i' à 'j' existe dans le t_graph 'graph'
  *	@assign  : ---
 */
-static BYTE graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
+static BIT graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
 	return (graph->arcs[bit / BITS_PER_BYTE] & (1 << (bit % BITS_PER_BYTE)) ? 1 : 0);
 }
@@ -46,6 +17,12 @@ static BYTE graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
 */
 static void graph_set_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
+	/**
+	 *	nb :
+	 *	on a ici une division, ce qui ralenti l'acces en lecture au donnee
+	 *	cependant, c'est BITS_PER_BYTE est une puissance de 2, donc
+	 *	le compilateur saura optimiser cette division par un decalage de bit
+	 */
 	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << (bit % BITS_PER_BYTE));
 }
 
@@ -119,16 +96,21 @@ static t_graph * graph_parse(void) {
 	return (graph);
 }
 
+/**
+ *	@require : un graphe préallablement alloué via graph_new()
+ *	@ensure  : libere la mémoire alloué => graphe supprimé de la mémoire
+ *	@assign  : ---
+ */
 static void graph_delete(t_graph * graph) {
 	free(graph);
 }
 
-/** FIN: FONCTIONS SUR LES ARCS (TABLEAUX DE BITS) */
-
-
-
-/** DEBUT: PARCOURS EN PROFONDEUR */
-static void visit(t_graph * graph, INDEX i) {
+/**
+ *	@require : un graphe, et un indice de sommet
+ *	@ensure  : visite ce sommet, puis se propage recursivement sur les voisins
+ *	@assign  : modifie le chemin entre le sommet 'i' et le sommet 's'
+ */
+static void graph_visit(t_graph * graph, INDEX i) {
 	
 	/* pour chaque sommet */
 	INDEX j;
@@ -141,49 +123,58 @@ static void visit(t_graph * graph, INDEX i) {
 			/** si ce chemin est plus court ... */
 			if (curr->pathlen + 1 < next->pathlen) {
 				/** on met a jour le chemin */
-				next->pathlen = curr->pathlen + 1;
 				memcpy(next->path, curr->path, sizeof(INDEX) * curr->pathlen);
-				next->path[curr->pathlen] = j;
+				next->pathlen = curr->pathlen + 1;
+				next->path[curr->pathlen] = i;
 
 				/** on re-itere alors sur ce voisin */
-				visit(graph, j);
+				graph_visit(graph, j);
 			}
 		}
 	}
 }
 
-static void depth_breadth_search(t_graph * graph, unsigned int s) {
+/**
+ *	@require : un graphe, et un indice de sommet source
+ *	@ensure  : parcours le graphe en largeur, et trouve le chemin le plus court
+ *		   entre chaque sommet et le sommet source
+ *	@assign  : modifie les chemins des 't_node' du graphe
+ */
+static void graph_depth_breadth_search(t_graph * graph, unsigned int s) {
 	/* initilisation: on definie toutes les distantes à +oo, sauf pour l'origine à 0 */
 	INDEX i;
 	for (i = 0 ; i < graph->n ; i++) {
 		graph->nodes[i].pathlen = MAX_NODES;
 	}
 	graph->nodes[s].pathlen = 0;
+	graph->nodes[s].path[0] = 1;
 
 	/* debut de recursion */
-	visit(graph, s);
+	graph_visit(graph, s);
 }
 
-/** FIN: PARCOURS EN PROFONDEUR */
-
-
-static void print_result(t_graph * graph, INDEX s, INDEX t) {
+/**
+ *	@require : un graphe, et un indice de somm
+ *	@ensure  : visite ce sommet, puis se propage recursivement sur les voisins
+ *	@assign  : modifie le chemin entre le sommet 'i' et le sommet 's'
+ */
+static void print_result(t_graph * graph, INDEX t) {
 	INDEX pathlen = graph->nodes[t].pathlen;
 	INDEX * path = graph->nodes[t].path;
 
 	if (pathlen == MAX_NODES) {
 		printf("Not connected\n");
 	} else {
-		printf("%hhu\n", s + 1);
 		INDEX i;
 		for (i = 0 ; i < pathlen ; i++) {
 			printf("%hhu\n", path[i] + 1);
 		}
+		printf("%hhu\n", t + 1);
 	}
 }
 
 int main(void) {
-	/* arcs parsing */
+	/* parsing de la matrice */
 	t_graph * graph = graph_parse();
 	if (graph == NULL) {
 		fprintf(stderr, "Erreur d'allocations ou de parsing. Arrêt.\n");
@@ -198,8 +189,8 @@ int main(void) {
 	--t;
 
 	/* faire le parcours en profondeur */
-	depth_breadth_search(graph, s);
-	print_result(graph, s, t);
+	graph_depth_breadth_search(graph, s);
+	print_result(graph, t);
 
 	/* libere la mémoire */
 	graph_delete(graph);

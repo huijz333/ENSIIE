@@ -1,7 +1,4 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <limits.h>
+# include "exo2.h"
 
 /** DEBUT: FONCTIONS GENERIQUES SUR LES MATRICES */
 typedef struct	s_matrix {
@@ -49,17 +46,7 @@ static void matrix_delete(t_matrix * matrix) {
 }
 
 /** FIN: FONCTIONS GENERIQUES SUR LES MATRICES */
-
-
 /** DEBUT: DIJKSTRA */
-# define MAX_NODES (50)
-
-typedef struct	s_node {
-	char		visited;
-	unsigned int	d;
-	unsigned int path[MAX_NODES];
-	unsigned int path_len;
-}		t_node;
 
 static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
 	t_node * nodes = (t_node *) malloc(ws->n * sizeof(t_node));
@@ -78,6 +65,7 @@ static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
 	nodes[s].path[0] = s;
 
 	while (1) {
+		/** on cherche un noeud 'u' non visite minimisant d(u) */
 		unsigned int u = MAX_NODES;
 		unsigned int v;
 		for (v = 0 ; v < ws->n ; v++) {
@@ -86,7 +74,7 @@ static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
 			}
 		}
 
-		/* si aucun noeud u non visite et minimisant d(u) n'a ete trouve, OU s'il n'y a pas de chemin */
+		/* si 'u' n'a pas ete trouve, OU s'il n'y a pas de chemin */
 		if (u == MAX_NODES || nodes[u].path_len == 0) {
 			printf("Not connected\n");
 			break ;
@@ -94,19 +82,20 @@ static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
 
 		/* si on a atteint t */
 		if (u == t) {
+			/** on affiche le resultat */
 			for (v = 0 ; v < nodes[t].path_len ; v++) {
 				printf("%u\n", nodes[t].path[v] + 1);
 			}
 			break ;
 		}
 
-		/* on visite u */
+		/* on definit 'u' comme visite */
 		nodes[u].visited = 1;
 		
 		/* pour chaque sommet */
 		for (v = 0 ; v < ws->n ; v++) {
+			/* s'il est voisin de 'u' ET si ce nouveau chemin est plus court */
 			int duv = matrix_get(ws, u, v);
-			/* s'il est voisin de u ET si ce nouveau chemin est plus court */
 			if (duv >= 0 && nodes[u].d + duv < nodes[v].d) {
 				/* on cree le nouveau chemin */
 				nodes[v].d = nodes[u].d + duv;
