@@ -86,7 +86,7 @@ static int shell(char * cmd) {
 
 				if (nextOut != NULL) {
 					int fd = open(nextOut, O_WRONLY | O_CREAT, 0644);
-					if (fd == -1 || dup2(fd, stdout) == -1) {
+					if (fd == -1 || dup2(fd, STDOUT_FD) == -1) {
 						printf("couldn't redirect stdout.\n");
 						exit(EXIT_FAILURE);
 					}
@@ -99,7 +99,7 @@ static int shell(char * cmd) {
 				exit(EXIT_SUCCESS);
 			}
 			wait(&last_status);
-			return (CMD_SUCCESS);
+			return (i == 0 ? CMD_EXIT : CMD_SUCCESS);
 		}
 	}
 	return (CMD_UNKNOWN);
@@ -122,6 +122,8 @@ int main(void) {
 			}
 		} else if (r == CMD_ERROR) {
 			printf("an error occured\n");
+		} else if (r == CMD_EXIT) {
+			break ;
 		}
 	}
 	printf("\n");

@@ -12,6 +12,10 @@ int pid_pos,pid_neg;
 int pos[2];
 int neg[2];
 
+static void sig_ignore(int signum) {
+
+}
+
 static void sig_usr1(int signum) {
 	fprintf(stderr, "fils:%d: fin due à la reception du signal SIGUSR1\n", getpid());
 	exit(EXIT_FAILURE);
@@ -19,6 +23,7 @@ static void sig_usr1(int signum) {
 
 void fils(char* nickname, int in)
 {
+	signal(SIGINT, sig_ignore);
 	signal(SIGUSR1, sig_usr1);
 	int x;
 	int len=sizeof x;
@@ -31,10 +36,11 @@ void fils(char* nickname, int in)
 }
 
 static void sig_int(int signum) {
+	fprintf(stderr, "\n");
 	kill(pid_pos, SIGUSR1);
 	kill(pid_neg, SIGUSR1);
 	int r;
-	wait(&r);
+	while (wait(&r) > 0);
 	printf("pere:%d: mes fils sont morts (fin)\n", getpid());
 	exit(0);
 
@@ -70,18 +76,10 @@ int main(int argc, char*argv[])
 		exit (1);
 	}
 	if ( (pid_pos=fork())==0 ) { 
-		close(pos[1]);
-		close(neg[1]);
-		close(neg[0]);
 		fils("filsP",pos[0]);
 	} else if ( (pid_neg=fork())==0 ) {
-		close(pos[1]);
-		close(neg[1]);
-		close(pos[0]);
 		fils("filsN",neg[0]);
 	} else {
-		close(pos[0]);
-		close(neg[0]);
 		pere("pere",pos,neg);
 	}
 
