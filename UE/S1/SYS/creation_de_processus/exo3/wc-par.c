@@ -97,7 +97,7 @@ int main(int argc, char ** argv) {
 	int wstatut;
 	while (wait(&wstatut) > 0);
 
-	/** on lit chaque pipe, et on somme */
+	/** on lit chaque donnée ecrit dans le pipe, et on somme */
 	unsigned int total = 0;
 	for (i = 0 ; i < N_PROCESS ; i++) {
 		unsigned int count;
