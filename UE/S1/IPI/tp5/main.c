@@ -24,8 +24,8 @@ int list_contains(t_list * lst, double v);
 int list_remove(t_list * lst, double v);
 int list_remove_all(t_list * lst, double v);
 double list_pop(t_list * lst);
-t_list * list_sort(t_list * lst);
-
+t_list * list_dupsort(t_list * lst);
+void list_sort(t_list * lst);
 
 /** allocate a new list on the heap */
 t_list * list_new(void) {
@@ -192,7 +192,7 @@ double list_pop(t_list * lst) {
 }
 
 /** dupplicate the list and sort it */
-t_list * list_sort(t_list * lst) {
+t_list * list_dupsort(t_list * lst) {
 	t_list * new = list_new();
 	if (new == NULL) {
 		return (NULL);
@@ -223,16 +223,66 @@ t_list * list_sort(t_list * lst) {
 	return (new);
 }
 
+/* sorts the linked list by changing next pointers (not data) */
+void list_sort(t_list * lst) {
+	/* if zero or one node, nothing to be done */
+	if (lst->head == NULL || lst->head->next == NULL) {
+		return ;
+	}
+	
+	int sorted = 0;
+	while (!sorted) {
+		sorted = 1;
+
+		/* handle head case */
+		if (lst->head->next->v < lst->head->v) {
+			/* swap head and next */
+			t_node * prevhead = lst->head;
+			t_node * newhead = lst->head->next;
+
+			prevhead->next = newhead->next;
+			newhead->next = prevhead;
+
+			lst->head = newhead;
+		}
+		
+		/* sort rest of the list */
+		t_node * jnext	= lst->head->next->next;
+		t_node * j	= lst->head->next;
+		t_node * jprev	= lst->head;
+		while (jnext != NULL) {
+			if (jnext->v < j->v) {
+				/* swap j and jnext */
+				jprev->next	= jnext;
+				j->next		= jnext->next;
+				jnext->next	= j;
+				sorted = 0;
+			}
+			jprev = j;
+			j = jnext;
+			jnext = j->next;
+		}
+	}
+
+}
+
 int main() {
 	t_list * lst = list_new();
-	list_addfront(lst, 1.0);
+	list_addfront(lst, -1.0);
+	list_addfront(lst, 4.0);
+	list_addfront(lst, -4.0);
 	list_addfront(lst, 2.0);
-	list_addfront(lst, 3.0);
+	list_addfront(lst, 16.0);
+	list_addfront(lst, 42.0);
 	list_print(lst);
 	
-	t_list * sorted = list_sort(lst);
+	t_list * sorted = list_dupsort(lst);
 	list_print(sorted);
 	free(sorted);
+
+	list_print(lst);
+	list_sort(lst);
+	list_print(lst);
 
 	list_delete(lst);
 	return (0);

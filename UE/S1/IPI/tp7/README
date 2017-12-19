@@ -1,0 +1,7 @@
+commandes de tests:
+
+make
+make clean
+./mat
+make fclean
+

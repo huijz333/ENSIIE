@@ -1,11 +1,10 @@
-NAME = libcstruct.a
+NAME = libcmaths.a
 
 SRCS = $(wildcard ./srcs/*.c)
 
 OBJ	= $(SRCS:.c=.o)
 INC	= -I ./includes
-FLAGS	= -Wall -Werror -Wextra -Ofast
-#FLAGS	= -Wall -Werror -Wextra -g
+FLAGS	= -Wall -Werror -Wextra -Wconversion -Ofast -fno-strict-aliasing
 
 all: $(NAME)
 

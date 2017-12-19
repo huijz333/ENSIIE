@@ -11,9 +11,18 @@
 # define COMMON_H
 
 # include <sys/time.h>
+# include <time.h>
 # include <stdlib.h>
 # include <string.h>
 # include <stdio.h>
+
+# ifndef BYTE
+# 	define BYTE unsigned char
+# endif
+
+# ifndef BIT
+# 	define BIT BYTE
+# endif
 
 typedef void (*t_function)();
 typedef int	(*t_cmp_function) (void const * a, void const * b);
