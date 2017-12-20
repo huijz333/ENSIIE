@@ -14,7 +14,11 @@ typedef BYTE 		BIT;
 /* nombre maximal de sommets */
 # define MAX_NODES (50)
 
-/* type utilise pour representer l'indice des sommets (ici MAX_NODES == 50 => un BYTE suffit) */
+/** type utilise pour representer l'indice des sommets
+ *	(ici MAX_NODES == 50 => un BYTE suffit)
+ *	avec son identifier pour 'printf()'
+ */
 typedef BYTE		INDEX;
+# define INDEX_IDENTIFIER "%hhu"
 
 # endif

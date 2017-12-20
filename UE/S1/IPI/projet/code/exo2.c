@@ -1,20 +1,18 @@
 # include "exo2.h"
 
 /** DEBUT: FONCTIONS GENERIQUES SUR LES MATRICES */
+
+/* matrice carre n*n */
 typedef struct	s_matrix {
-	unsigned int n;
+	INDEX	n;
 }		t_matrix;
 
-static int * matrix_addr(t_matrix * matrix, unsigned int i, unsigned int j) {
-	int * values = (int *) (matrix + 1);
-	return (values + matrix->n * j + i);
-}
-
-static int matrix_get(t_matrix * matrix, unsigned int i, unsigned int j) {
-	return *(matrix_addr(matrix, i , j));
-}
-
-static t_matrix * matrix_new(unsigned int n) {
+/**
+ *	@require : la taille de la matrice 'n'
+ *	@ensure  : alloue une nouvelle matrice sur le tas, et la renvoie
+ *	@assign  : la matrice est initialisé à 0
+ */
+static t_matrix * matrix_new(INDEX n) {
 	t_matrix * matrix = (t_matrix *) malloc(sizeof(t_matrix) + n * n * sizeof(int));
 	if (matrix == NULL) {
 		return (NULL);
@@ -24,68 +22,161 @@ static t_matrix * matrix_new(unsigned int n) {
 	return (matrix);
 }
 
+/**
+ *	@require : une matrice 'matrix', deux index (i, j)
+ *	@ensure  : renvoie l'addresse de l'element (i, j) dans la matrice
+ *	@assign  : ---
+ */
+static int * matrix_addr(t_matrix * matrix, INDEX i, INDEX j) {
+	int * values = (int *) (matrix + 1);
+	return (values + matrix->n * j + i);
+}
+
+/**
+ *	@require : une matrice 'matrix', deux index (i, j)
+ *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
+ *	@assign  : ---
+ */
+static int matrix_get(t_matrix * matrix, INDEX i, INDEX j) {
+	return *(matrix_addr(matrix, i, j));
+}
+
+/**
+ *	@require : ---
+ *	@ensure  : lit une matrice carre sur l'entree standart.
+ *			Le 1er entier lu est la dimension 'n',
+ *			suivi de n * n valeurs, où la k-ieme valeur correspond
+ *			a la ligne 'k / n' et a la colonne 'k % n'
+ *
+ *			 0    1   ...   k   ...   n
+ *			n+1  n+2  ...  k+n  ...  2n-1
+ *			          ........
+ *			          ........
+ *		        	  ........
+ *			n(n-1)    ........	 n.n
+ *
+ *	@assign  : le graphe est initialement vide
+*/
 static t_matrix * matrix_parse(void) {
-	unsigned int n;
-	scanf("%u", &n);
+	INDEX n;
+	scanf(INDEX_IDENTIFIER, &n);
 	t_matrix * matrix = matrix_new(n);
 	if (matrix == NULL) {
 		return (NULL);
 	}
 
-	unsigned int i, j;
+	INDEX i, j;
 	for (i = 0; i < n; i++) {
-		for(j = 0; j < n; j++) {
+		for (j = 0; j < n; j++) {
 			scanf("%d", matrix_addr(matrix, i, j));
 		}
 	}
 	return (matrix);
 }
 
+/**
+ *	@require : une matrice préallablement alloué via 'matrix_new()'
+ *	@ensure  : libere la memoire utilise par la matrice du tas
+ *	@assign  : ------
+ */
 static void matrix_delete(t_matrix * matrix) {
 	free(matrix);
 }
 
 /** FIN: FONCTIONS GENERIQUES SUR LES MATRICES */
+
+
 /** DEBUT: DIJKSTRA */
 
-static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
+/**
+ *	@require : une matrice representant les arcs et leur poids, et les sommets
+ *	@ensure  : renvoie l'index du sommet non visité avec le chemin de poids minimum
+ *			si le chemin n'existe pas, MAX_NODES est renvoyé
+ *	@assign  : ------
+ */
+static INDEX dijkstra_minimum(t_matrix * ws, t_node * nodes) {
+	INDEX u = MAX_NODES;
+	INDEX v;
+	for (v = 0 ; v < ws->n ; v++) {
+		if (!nodes[v].visited && (u == MAX_NODES
+					|| nodes[v].pathw < nodes[u].pathw)) {
+			u = v;
+		}
+	}
+
+	/* si 'u' n'a pas ete trouve, OU s'il n'y a pas de chemin */
+	if (u == MAX_NODES || nodes[u].pathlen == 0) {
+		return (MAX_NODES) ;
+	}
+	return (u);
+}
+
+/**
+ *	@require : une matrice representant les arcs et leur poids, deux indices s et t
+ *	@ensure  : affiche le plus court chemin trouve entre 's' et 't'
+ *	@assign  : ------
+ */
+static void dijkstra_result(t_node * nodes, INDEX s, INDEX t) {
+	/* la pile contenant le chemin */
+	INDEX pathlen = nodes[t].pathlen;
+	INDEX * path = (INDEX *) malloc(sizeof(INDEX) * pathlen);
+	if (path == NULL) {
+		fprintf(stderr, "not enough memory\n");
+		return ;
+	}
+	/* on remplit la pile par la fin */
+	INDEX i = pathlen;
+	/* on construit le chemin */
+	INDEX j = t;
+	path[--i] = t;
+	while (j != s) {
+		t_node node = nodes[j];
+		j = node.prev;
+		path[--i] = j;
+	}
+	/* on affiche le resultat */
+	for (i = 0 ; i < pathlen ; i++) {
+		printf(INDEX_IDENTIFIER, path[i] + 1);
+		printf("\n");
+	}
+	free(path);
+}
+
+/**
+ *	@require : une matrice representant les arcs et leur poids, deux indices s et t
+ *	@ensure  : resout les plus courts chemin dans le graphe
+ *	@assign  : ------
+ */
+static void dijkstra(t_matrix * ws, INDEX s, INDEX t) {
+	/* les sommets */
 	t_node * nodes = (t_node *) malloc(ws->n * sizeof(t_node));
 	if (nodes == NULL) {
 		return ;
 	}
 
-	unsigned int v;
+	/* initialisation */
+	INDEX v;
 	for (v = 0 ; v < ws->n ; v++) {
 		nodes[v].visited = 0;
-		nodes[v].d = UINT_MAX;
-		nodes[v].path_len = 0;
+		nodes[v].pathw = UINT_MAX;
+		nodes[v].pathlen = 0;
 	}
-	nodes[s].d = 0;
-	nodes[s].path_len = 1;
-	nodes[s].path[0] = s;
+	nodes[s].pathlen = 1;
+	nodes[s].pathw = 0;
+	nodes[s].prev = s;
 
+	/* boucle dijsktra */
 	while (1) {
 		/** on cherche un noeud 'u' non visite minimisant d(u) */
-		unsigned int u = MAX_NODES;
-		unsigned int v;
-		for (v = 0 ; v < ws->n ; v++) {
-			if (!nodes[v].visited && (u == MAX_NODES || nodes[v].d < nodes[u].d)) {
-				u = v;
-			}
-		}
-
-		/* si 'u' n'a pas ete trouve, OU s'il n'y a pas de chemin */
-		if (u == MAX_NODES || nodes[u].path_len == 0) {
+		INDEX u = dijkstra_minimum(ws, nodes);
+		if (u == MAX_NODES) {
 			printf("Not connected\n");
 			break ;
 		}
 
-		/* si on a atteint t */
+		/* si on a atteint t, on affiche le resultat */
 		if (u == t) {
-			/** on affiche le resultat */
-			for (v = 0 ; v < nodes[t].path_len ; v++) {
-				printf("%u\n", nodes[t].path[v] + 1);
-			}
+			dijkstra_result(nodes, s, t);
 			break ;
 		}
 
@@ -95,16 +186,16 @@ static void dijkstra(t_matrix * ws, unsigned int s, unsigned int t) {
 		/* pour chaque sommet */
 		for (v = 0 ; v < ws->n ; v++) {
 			/* s'il est voisin de 'u' ET si ce nouveau chemin est plus court */
-			int duv = matrix_get(ws, u, v);
-			if (duv >= 0 && nodes[u].d + duv < nodes[v].d) {
+			int wuv = matrix_get(ws, u, v);
+			if (wuv >= 0 && nodes[u].pathw + wuv < nodes[v].pathw) {
 				/* on cree le nouveau chemin */
-				nodes[v].d = nodes[u].d + duv;
-				memcpy(nodes[v].path, nodes[u].path, nodes[u].path_len * sizeof(unsigned int));
-				nodes[v].path[nodes[u].path_len]= v;
-				nodes[v].path_len = nodes[u].path_len + 1;
+				nodes[v].pathw = nodes[u].pathw + wuv;
+				nodes[v].prev = u;
+				nodes[v].pathlen = nodes[u].pathlen + 1;
 			}
 		}
 	}
+	/* libere la mémoire */
 	free(nodes);
 }
 /** FIN  : DIJKSTRA */
@@ -118,9 +209,9 @@ int main(void) {
 	}
 	
 	/* argument du parcours en profondeur */
-	unsigned int s, t;
-	scanf("%u", &s);
-	scanf("%u", &t);
+	INDEX s, t;
+	scanf(INDEX_IDENTIFIER, &s);
+	scanf(INDEX_IDENTIFIER, &t);
 	--s;
 	--t;
 

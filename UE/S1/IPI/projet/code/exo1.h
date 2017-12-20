@@ -4,8 +4,8 @@
 # include "ipi.h"
 
 typedef struct	s_node {
-	INDEX	pathlen;		/* nombre de sommets entre s et ce sommet */
-	INDEX	path[MAX_NODES - 1];	/* le chemin (index des sommets) */
+	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
+	INDEX	prev;	/* element precedant le chemin (index du sommet) */
 }		t_node;
 
 typedef struct 	s_graph {
