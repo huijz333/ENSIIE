@@ -6,6 +6,20 @@
  *	@assign  : ---
 */
 static BIT graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
+	/**
+	 * NB1:	on a ici une division, ce qui ralentirait théoriquement l'acces
+	 *	en lecture et en ecriture aux donnees.
+	 *	Cependant, BITS_PER_BYTE est une puissance de 2, donc
+	 *	le compilateur saura optimiser cette division par un decalage de bit.
+	 *	(BITS_PER_BYTE vaux 8, diviser par 8 est équivalent a un decalage
+	 *	de 3 bits vers la droite...)
+	 *
+	 * NB2:	De plus, utilisé moins de mémoire permet de rendre le programme
+	 *	'cache-friendly', à savoir, que la mémoire du tas est copié
+	 *	dans la mémoire cache du processeur, la rendant très rapide d'accès.
+	 *	En réduisant la mémoire, on s'évite ainsi de nombreux aller/retour
+	 *	dans la mémoire.
+	 */
 	unsigned int bit = i * graph->n + j;
 	return (graph->arcs[bit / BITS_PER_BYTE] & (1 << (bit % BITS_PER_BYTE)) ? 1 : 0);
 }
@@ -17,12 +31,6 @@ static BIT graph_has_arc(t_graph * graph, INDEX i, INDEX j) {
 */
 static void graph_set_arc(t_graph * graph, INDEX i, INDEX j) {
 	unsigned int bit = i * graph->n + j;
-	/**
-	 *	nb :
-	 *	on a ici une division, ce qui ralenti l'acces en lecture au donnee
-	 *	cependant, c'est BITS_PER_BYTE est une puissance de 2, donc
-	 *	le compilateur saura optimiser cette division par un decalage de bit
-	 */
 	*(graph->arcs + bit / BITS_PER_BYTE) |= (1 << (bit % BITS_PER_BYTE));
 }
 
