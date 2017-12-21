@@ -65,11 +65,19 @@ if [ ! -f $DIR/tests/exo2/$i/output ]; then
 fi
 done
 # Compile le code
-gcc -Wall -Wextra -Werror -ansi $DIR/exo2.c -o $DIR/exo2
+prt "Compilation"
+if ! $QUIET
+then
+  make -C $DIR -f $DIR/Makefile exo2
+else
+  make -C $DIR -f $DIR/Makefile -s exo2
+fi
 
 # Si la compilation ne passe pas, fin
 if [ $?  != 0 ]
 then
+  echo "Problème de compilation"
+  make -C $DIR -f $DIR/Makefile -s clean
   exit 1
 fi
 
@@ -129,16 +137,20 @@ do
     then
       if [[ "$#" -ne 1 ]] # S'il n'y a qu'un test, on affiche toujours si le test est réussi. Sinon on affiche que si -q n'est pas activé.
       then 
+        prt
         prt "TEST REUSSI"
       else
+        echo
         echo "TEST REUSSI"
       fi
       ((ok++))
     else
       if [[ "$#" -ne 1 ]] # S'il n'y a qu'un test, on affiche toujours si le test a échoué. Sinon on affiche que si -q n'est pas activé.
       then 
+        prt
         prt "TEST ÉCHOUÉ. "
       else
+        echo
         echo "TEST ÉCHOUÉ"
       fi
       # On affiche le résultat attendu
@@ -165,4 +177,5 @@ then
     echo "TESTS ECHOUES : ${notsucceed[*]}"
   fi
 fi
+make -C $DIR -f $DIR/Makefile -s clean
 exit 0

@@ -1,4 +1,4 @@
-# include "exo1.h"
+# include "customlibs/exo1.h"
 
 /**
  *	@require : un t_graph * 'graph', deux indices 'i' et 'j'
@@ -45,26 +45,27 @@ static t_graph * graph_new(INDEX n) {
 		return (NULL);
 	}
 
-	/* nombre de bytes requis pour representer n structure t_node */
-	unsigned int nodesize = n * sizeof(t_node);
-	;/* 'bitsize' : nombre de bit requis pour representer tous les arcs */
-	unsigned int bitsize = n * n;
-	/* 'arcsize' : nombre de bytes minimum requit pour stocker 'bitsize' bits */
-	unsigned int arcsize = (bitsize / BITS_PER_BYTE)
-		+ ((bitsize % BITS_PER_BYTE) != 0) * sizeof(BYTE);
-	/* j'alloue toute la memoire requise avec un unique malloc */
-	BYTE * memory = (BYTE *) malloc(sizeof(t_graph) + nodesize + arcsize);	
-	/* si l'allocation a rate, on renvoie un graph nul */
-	if (memory == NULL) {	
+	/* allocation du graphe, si elle echoue, on renvoie un graph nul */
+	t_graph * graph = (t_graph *) malloc(sizeof(t_graph));
+	if (graph == NULL) {	
 		return (NULL);
 	}
 
-	t_graph * graph = (t_graph *) memory;
+	/* alocation des sommets */
+	graph->nodes = (t_node *) malloc(n * sizeof(t_node));
+	if (graph->nodes == NULL) {
+		free(graph);
+		return (NULL);
+	}
 	graph->n = n;
-	graph->nodes = (t_node *) (memory + sizeof(t_graph));
-	graph->arcs = (BYTE *) (memory + sizeof(t_graph) + nodesize);
+	memset(graph->nodes, 0, n * sizeof(t_node));
 
-	memset(graph->nodes, 0, nodesize);
+	/* allocation des arcs */
+	/* 'bitsize' : nombre de bit requis pour representer tous les arcs */
+	unsigned int bitsize = n * n;
+	/* 'arcsize' : nombre de bytes minimum requit pour stocker 'bitsize' bits */
+	unsigned int arcsize = (bitsize / BITS_PER_BYTE) + ((bitsize % BITS_PER_BYTE) != 0);
+	graph->arcs = (BYTE *) malloc(arcsize * sizeof(BYTE));
 	memset(graph->arcs, 0, arcsize);
 	return (graph);
 }
@@ -166,36 +167,37 @@ static void graph_depth_breadth_search(t_graph * graph, unsigned int s) {
  *	@ensure  : visite ce sommet, puis se propage recursivement sur les voisins
  *	@assign  : modifie le chemin entre le sommet 'i' et le sommet 's'
  */
-static void print_result(t_graph * graph, INDEX s, INDEX t) {
+static void graph_print_path(t_graph * graph, INDEX s, INDEX t) {
 	INDEX pathlen = graph->nodes[t].pathlen;
 
 	if (pathlen == MAX_NODES) {
 		printf("Not connected\n");
-	} else {
-		/* la pile contenant le chemin */
-		INDEX * path = (INDEX *) malloc(sizeof(INDEX) * pathlen);
-		if (path == NULL) {
-			fprintf(stderr, "not enough memory\n");
-			return ;
-		}
-		/* on remplit la pile par la fin */
-		INDEX i = pathlen;
-		/* on construit le chemin */
-		INDEX j = t;
-		while (j != s) {
-			t_node * node = graph->nodes + j;
-			j = node->prev;
-			path[--i] = node->prev;
-		}
-		/* on affiche le resultat */
-		for (i = 0 ; i < pathlen ; i++) {
-			printf(INDEX_IDENTIFIER, path[i] + 1);
-			printf("\n");
-		}
-		free(path);
-		printf(INDEX_IDENTIFIER, t + 1);
-		printf("\n");
+		return ;
 	}
+	/* la file contenant le chemin */
+	t_array * array = array_new(pathlen);
+	if (array == NULL) {
+		fprintf(stderr, "not enough memory\n");
+		return ;
+	}
+
+	/* on construit le chemin */
+	INDEX i = pathlen - 1;
+	INDEX j = t;
+	while (j != s) {
+		j = graph->nodes[j].prev;
+		array_set(array, i, j + 1);
+		--i;
+	}
+
+	/* on affiche le chemin */
+	for (i = 0 ; i < pathlen ; i++) {
+		printf("%d\n", array_get(array, i));
+	}
+	printf("%d\n", t + 1);
+
+	/* libere la mémoire */
+	array_delete(array);
 }
 
 int main(void) {
@@ -215,7 +217,7 @@ int main(void) {
 
 	/* faire le parcours en profondeur */
 	graph_depth_breadth_search(graph, s);
-	print_result(graph, s, t);
+	graph_print_path(graph, s, t);
 
 	/* libere la mémoire */
 	graph_delete(graph);

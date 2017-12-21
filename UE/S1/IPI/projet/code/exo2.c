@@ -1,92 +1,4 @@
-# include "exo2.h"
-
-/** DEBUT: FONCTIONS GENERIQUES SUR LES MATRICES */
-
-/* matrice carre n*n */
-typedef struct	s_matrix {
-	INDEX	n;
-}		t_matrix;
-
-/**
- *	@require : la taille de la matrice 'n'
- *	@ensure  : alloue une nouvelle matrice sur le tas, et la renvoie
- *	@assign  : la matrice est initialisé à 0
- */
-static t_matrix * matrix_new(INDEX n) {
-	t_matrix * matrix = (t_matrix *) malloc(sizeof(t_matrix) + n * n * sizeof(int));
-	if (matrix == NULL) {
-		return (NULL);
-	}
-	matrix->n = n;
-	memset(matrix + 1, 0, n * n * sizeof(int));
-	return (matrix);
-}
-
-/**
- *	@require : une matrice 'matrix', deux index (i, j)
- *	@ensure  : renvoie l'addresse de l'element (i, j) dans la matrice
- *	@assign  : ---
- */
-static int * matrix_addr(t_matrix * matrix, INDEX i, INDEX j) {
-	int * values = (int *) (matrix + 1);
-	return (values + matrix->n * j + i);
-}
-
-/**
- *	@require : une matrice 'matrix', deux index (i, j)
- *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
- *	@assign  : ---
- */
-static int matrix_get(t_matrix * matrix, INDEX i, INDEX j) {
-	return *(matrix_addr(matrix, i, j));
-}
-
-/**
- *	@require : ---
- *	@ensure  : lit une matrice carre sur l'entree standart.
- *			Le 1er entier lu est la dimension 'n',
- *			suivi de n * n valeurs, où la k-ieme valeur correspond
- *			a la ligne 'k / n' et a la colonne 'k % n'
- *
- *			 0    1   ...   k   ...   n
- *			n+1  n+2  ...  k+n  ...  2n-1
- *			          ........
- *			          ........
- *		        	  ........
- *			n(n-1)    ........	 n.n
- *
- *	@assign  : le graphe est initialement vide
-*/
-static t_matrix * matrix_parse(void) {
-	INDEX n;
-	scanf(INDEX_IDENTIFIER, &n);
-	t_matrix * matrix = matrix_new(n);
-	if (matrix == NULL) {
-		return (NULL);
-	}
-
-	INDEX i, j;
-	for (i = 0; i < n; i++) {
-		for (j = 0; j < n; j++) {
-			scanf("%d", matrix_addr(matrix, i, j));
-		}
-	}
-	return (matrix);
-}
-
-/**
- *	@require : une matrice préallablement alloué via 'matrix_new()'
- *	@ensure  : libere la memoire utilise par la matrice du tas
- *	@assign  : ------
- */
-static void matrix_delete(t_matrix * matrix) {
-	free(matrix);
-}
-
-/** FIN: FONCTIONS GENERIQUES SUR LES MATRICES */
-
-
-/** DEBUT: DIJKSTRA */
+# include "customlibs/exo2.h"
 
 /**
  *	@require : une matrice representant les arcs et leur poids, et les sommets
@@ -94,17 +6,28 @@ static void matrix_delete(t_matrix * matrix) {
  *			si le chemin n'existe pas, MAX_NODES est renvoyé
  *	@assign  : ------
  */
-static INDEX dijkstra_minimum(t_matrix * ws, t_node * nodes) {
+static INDEX dijkstra_next_node(t_matrix * ws, t_node * nodes) {
 	INDEX u = MAX_NODES;
 	INDEX v;
+	/* pour chaque sommet ... */
 	for (v = 0 ; v < ws->n ; v++) {
+		/*
+		 * si l'on trouve un 1er sommet non visité,
+		 *   OU
+		 * si on trouve un sommet non visité de poids plus faible
+		 */
 		if (!nodes[v].visited && (u == MAX_NODES
 					|| nodes[v].pathw < nodes[u].pathw)) {
 			u = v;
 		}
 	}
 
-	/* si 'u' n'a pas ete trouve, OU s'il n'y a pas de chemin */
+	/* si 'u' == MAX_NODES, alors tous les sommets sont déjà visité.
+	 *	OU
+	 * si 'u' n'est pas dans la meme partie connexe que 's'
+	 *	ALORS
+	 * erreur, non connecté
+	 */
 	if (u == MAX_NODES || nodes[u].pathlen == 0) {
 		return (MAX_NODES) ;
 	}
@@ -119,27 +42,26 @@ static INDEX dijkstra_minimum(t_matrix * ws, t_node * nodes) {
 static void dijkstra_result(t_node * nodes, INDEX s, INDEX t) {
 	/* la pile contenant le chemin */
 	INDEX pathlen = nodes[t].pathlen;
-	INDEX * path = (INDEX *) malloc(sizeof(INDEX) * pathlen);
+	t_array * path = array_new(pathlen);
 	if (path == NULL) {
-		fprintf(stderr, "not enough memory\n");
+		fprintf(stderr, "Pas assez de mémoire\n");
 		return ;
 	}
-	/* on remplit la pile par la fin */
-	INDEX i = pathlen;
+	
 	/* on construit le chemin */
+	INDEX i = pathlen - 1;
 	INDEX j = t;
-	path[--i] = t;
+	array_set(path, i, t + 1);
 	while (j != s) {
-		t_node node = nodes[j];
-		j = node.prev;
-		path[--i] = j;
+		j = nodes[j].prev;
+		array_set(path, --i, j + 1);
 	}
-	/* on affiche le resultat */
+
+	/* on affiche le chemin */
 	for (i = 0 ; i < pathlen ; i++) {
-		printf(INDEX_IDENTIFIER, path[i] + 1);
-		printf("\n");
+		printf("%d\n", array_get(path, i));
 	}
-	free(path);
+	array_delete(path);
 }
 
 /**
@@ -148,13 +70,11 @@ static void dijkstra_result(t_node * nodes, INDEX s, INDEX t) {
  *	@assign  : ------
  */
 static void dijkstra(t_matrix * ws, INDEX s, INDEX t) {
-	/* les sommets */
+	/* initialisation des sommets */
 	t_node * nodes = (t_node *) malloc(ws->n * sizeof(t_node));
 	if (nodes == NULL) {
 		return ;
 	}
-
-	/* initialisation */
 	INDEX v;
 	for (v = 0 ; v < ws->n ; v++) {
 		nodes[v].visited = 0;
@@ -163,12 +83,12 @@ static void dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 	}
 	nodes[s].pathlen = 1;
 	nodes[s].pathw = 0;
-	nodes[s].prev = s;
+	nodes[s].prev =  s;
 
 	/* boucle dijsktra */
 	while (1) {
 		/** on cherche un noeud 'u' non visite minimisant d(u) */
-		INDEX u = dijkstra_minimum(ws, nodes);
+		INDEX u = dijkstra_next_node(ws, nodes);
 		if (u == MAX_NODES) {
 			printf("Not connected\n");
 			break ;
@@ -198,7 +118,6 @@ static void dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 	/* libere la mémoire */
 	free(nodes);
 }
-/** FIN  : DIJKSTRA */
 
 int main(void) {
 	/* Matrix parsing */

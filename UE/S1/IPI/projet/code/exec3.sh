@@ -68,10 +68,18 @@ fi
 done
 
 # Compile le code
-gcc -Wall -Wextra -ansi exo3.c -o exo3
+prt "Compilation"
+if ! $QUIET
+then
+  make -C $DIR -f $DIR/Makefile exo3
+else
+  make -C $DIR -f $DIR/Makefile -s exo3
+fi
 # Si la compilation ne passe pas, fin
 if [ $?  != 0 ]
 then
+  echo "Problème de compilation"
+  make -C $DIR -f $DIR/Makefile -s clean
   exit 1
 fi
 
@@ -103,10 +111,10 @@ do
   if $QUIET
   then
     # Mode -q : Lance le code exo3, s'arrête au bout de 3s max et tout ce qui est envoyé dans stdout est transmis à la variable $solution.
-    solution=$(timeout 3s ./exo3 < $instancefile)
+    solution=$(timeout 3s $DIR/exo3 < $instancefile)
   else
     # Lance le code exo3, s'arrête au bout de 3s max et tout ce qui est envoyé dans stdout est à la fois transmis à la console et dans la variable $solution.
-    solution=$(timeout 3s ./exo3 < $instancefile | tee /dev/tty)
+    solution=$(timeout 3s $DIR/exo3 < $instancefile | tee /dev/tty)
   fi
   
   # Code de retour
@@ -129,7 +137,7 @@ do
     if $QUIET
     then
       # On vérifie la solution silencieusment
-      echo "$solution" | python3 check_solution.py -q $instancefile
+      echo "$solution" | python3 $DIR/check_solution.py -q $instancefile
       res=$? # Code de retour de la vérification
     else
       # On vérifie l solution silencieusmenet si l'utilisateur le demande.
@@ -138,11 +146,11 @@ do
       if [[ $REPLY == [yY] ]] || [[ $REPLY == '' ]]
       then
         # On vérifie la solution non silencieusement
-        echo "$solution" | python3 check_solution.py $instancefile
+        echo "$solution" | python3 $DIR/check_solution.py $instancefile
         res=$? # Code de retour de la vérification
       else
       # On vérifie la solution silencieusment
-        echo "$solution" | python3 check_solution.py -q $instancefile
+        echo "$solution" | python3 $DIR/check_solution.py -q $instancefile
         res=$? # Code de retour de la vérification
       fi
     fi
@@ -154,16 +162,20 @@ do
       
       if [[ "$#" -ne 1 ]] # S'il n'y a qu'un test, on affiche toujours si le test est réussi. Sinon on affiche que si -q n'est pas activé.
       then 
+        prt
         prt "TEST REUSSI"
       else
+        echo
         echo "TEST REUSSI"
       fi
     else
       notsucceed+=($i)
       if [[ "$#" -ne 1 ]] # S'il n'y a qu'un test, on affiche toujours si le test a échoué. Sinon on affiche que si -q n'est pas activé.
       then 
+        prt
         prt "TEST ÉCHOUÉ"
       else
+        echo
         echo "TEST ÉCHOUÉ"
       fi
     fi 
@@ -184,4 +196,5 @@ then
     echo "TESTS ECHOUES : ${notsucceed[*]}"
   fi
 fi
+make -C $DIR -f $DIR/Makefile -s clean
 exit 0
