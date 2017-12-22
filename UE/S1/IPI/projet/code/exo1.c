@@ -175,27 +175,29 @@ static void graph_print_path(t_graph * graph, INDEX s, INDEX t) {
 		return ;
 	}
 	/* la file contenant le chemin */
-	t_array * array = array_new(pathlen);
+	t_array * array = array_new(pathlen, sizeof(INDEX));
 	if (array == NULL) {
 		fprintf(stderr, "not enough memory\n");
 		return ;
 	}
 
 	/* on construit le chemin */
-	INDEX i = pathlen - 1;
-	INDEX j = t;
-	while (j != s) {
-		j = graph->nodes[j].prev;
-		array_set(array, i, j + 1);
-		--i;
+	INDEX i = t;
+	while (i != s) {
+		i = graph->nodes[i].prev;
+		INDEX value = i + 1;
+		array_add(array, &value);
 	}
 
 	/* on affiche le chemin */
-	for (i = 0 ; i < pathlen ; i++) {
-		printf("%d\n", array_get(array, i));
+	int j;
+	for (j = array->size - 1; j >= 0 ; j--) {
+		printf(INDEX_IDENTIFIER, *((INDEX *)array_get(array, j)));
+		printf("\n");
 	}
-	printf("%d\n", t + 1);
-
+	printf(INDEX_IDENTIFIER, t + 1);
+	printf("\n");
+	
 	/* libere la mémoire */
 	array_delete(array);
 }

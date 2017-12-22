@@ -42,25 +42,29 @@ static INDEX dijkstra_next_node(t_matrix * ws, t_node * nodes) {
 static void dijkstra_result(t_node * nodes, INDEX s, INDEX t) {
 	/* la pile contenant le chemin */
 	INDEX pathlen = nodes[t].pathlen;
-	t_array * path = array_new(pathlen);
+	t_array * path = array_new(pathlen, sizeof(INDEX));
 	if (path == NULL) {
 		fprintf(stderr, "Pas assez de mémoire\n");
 		return ;
 	}
 	
 	/* on construit le chemin */
-	INDEX i = pathlen - 1;
-	INDEX j = t;
-	array_set(path, i, t + 1);
-	while (j != s) {
-		j = nodes[j].prev;
-		array_set(path, --i, j + 1);
+	INDEX i = t;
+	while (i != s) {
+		i = nodes[i].prev;
+		INDEX node = i + 1;
+		array_add(path, &node);
 	}
 
 	/* on affiche le chemin */
-	for (i = 0 ; i < pathlen ; i++) {
-		printf("%d\n", array_get(path, i));
+	int j; /* besoin d'un int pour tester la positivité */
+	for (j = path->size - 1 ; j >= 0 ; j--) {
+		printf(INDEX_IDENTIFIER, *((INDEX *)array_get(path, j)));
+		printf("\n");
 	}
+	printf(INDEX_IDENTIFIER, t + 1);
+	printf("\n");
+
 	array_delete(path);
 }
 
