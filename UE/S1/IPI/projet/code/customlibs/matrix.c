@@ -5,7 +5,7 @@
  *	@ensure  : alloue une nouvelle matrice sur le tas, et la renvoie
  *	@assign  : la matrice est initialisé à 0
  */
-t_matrix * matrix_new(INDEX n) {
+t_matrix * matrix_new(size_t n) {
 	t_matrix * matrix = (t_matrix *) malloc(sizeof(t_matrix) + n * n * sizeof(int));
 	if (matrix == NULL) {
 		return (NULL);
@@ -20,7 +20,7 @@ t_matrix * matrix_new(INDEX n) {
  *	@ensure  : renvoie l'addresse de l'element (i, j) dans la matrice
  *	@assign  : ---
  */
-int * matrix_addr(t_matrix * matrix, INDEX i, INDEX j) {
+int * matrix_addr(t_matrix * matrix, size_t i, size_t j) {
 	int * values = (int *) (matrix + 1);
 	return (values + matrix->n * j + i);
 }
@@ -30,7 +30,7 @@ int * matrix_addr(t_matrix * matrix, INDEX i, INDEX j) {
  *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
  *	@assign  : ---
  */
-int matrix_get(t_matrix * matrix, INDEX i, INDEX j) {
+int matrix_get(t_matrix * matrix, size_t i, size_t j) {
 	return *(matrix_addr(matrix, i, j));
 }
 
@@ -51,14 +51,14 @@ int matrix_get(t_matrix * matrix, INDEX i, INDEX j) {
  *	@assign  : le graphe est initialement vide
 */
 t_matrix * matrix_parse(void) {
-	INDEX n;
-	scanf(INDEX_IDENTIFIER, &n);
+	size_t n;
+	scanf("%lu", &n);
 	t_matrix * matrix = matrix_new(n);
 	if (matrix == NULL) {
 		return (NULL);
 	}
 
-	INDEX i, j;
+	size_t i, j;
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
 			scanf("%d", matrix_addr(matrix, i, j));

@@ -11,7 +11,7 @@ t_array * array_new(unsigned int defaultCapacity, unsigned int elemSize) {
 		/* pas assez de mémoire */
 		return (NULL);
 	}
-	array->values = calloc(defaultCapacity, elemSize);
+	array->values = (BYTE *) malloc(defaultCapacity * elemSize);
 	if (array->values == NULL) {
 		/* pas assez de mémoire */
 		free(array);
@@ -82,7 +82,7 @@ int array_set(t_array * array, unsigned int index, void * value) {
 			return (-1);
 		}
 	}
-	memcpy(array->values + index, value, array->elemSize);
+	memcpy(array->values + index * array->elemSize, value, array->elemSize);
 	if (index >= array->size) {
 		array->size = index + 1;
 	}

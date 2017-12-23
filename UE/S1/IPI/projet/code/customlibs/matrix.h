@@ -4,7 +4,7 @@
 # include "ipi.h"
 
 typedef struct	s_matrix {
-	INDEX	n; /* matrices carré n * n */
+	size_t	n; /* matrices carré n * n */
 	/* les valeurs sont alloués dans un 'tableau 1D' juste apres la structure */
 }		t_matrix;
 
@@ -13,28 +13,28 @@ typedef struct	s_matrix {
  *	@ensure  : alloue une nouvelle matrice sur le tas, et la renvoie
  *	@assign  : la matrice est initialisé à 0
  */
-t_matrix * matrix_new(INDEX n);
+t_matrix * matrix_new(size_t n);
 
 /**
  *	@require : une matrice 'matrix', deux index (i, j)
  *	@ensure  : renvoie l'addresse de l'element (i, j) dans la matrice
  *	@assign  : ---
  */
-int * matrix_addr(t_matrix * matrix, INDEX i, INDEX j);
+int * matrix_addr(t_matrix * matrix, size_t i, size_t j);
 
 /**
  *	@require : une matrice 'matrix', deux index (i, j)
  *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
  *	@assign  : ---
  */
-int matrix_get(t_matrix * matrix, INDEX i, INDEX j);
+int matrix_get(t_matrix * matrix, size_t i, size_t j);
 
 /**
  *	@require : une matrice 'matrix', deux index (i, j)
  *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
  *	@assign  : ---
  */
-int matrix_get(t_matrix * matrix, INDEX i, INDEX j);
+int matrix_get(t_matrix * matrix, size_t i, size_t j);
 
 /**
  *	@require : ---

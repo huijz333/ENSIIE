@@ -5,6 +5,15 @@
 # include "array.h"	/* file pour générer le chemin */
 
 /**
+ *	MAX_NODES	: nombre maximal de sommets.
+ *	INDEX		: type a utilisé pour stocker un indice d'un sommet
+ *	INDEX_IDENTIFIER: printf(), scanf() identifier pour le type INDEX
+ */
+# define MAX_NODES 		(50)
+# define INDEX			BYTE
+# define INDEX_IDENTIFIER 	"%hhu"
+
+/**
  *	Represente un sommet du graphe
  */
 typedef struct	s_node {

@@ -142,7 +142,7 @@ void array_sort(t_array * array, int (*cmpf)(const void * left, const void * rig
 	{\
 		size_t I = 0;\
 		while (I < (A)->size) {\
-			T X = ((T)(L)->values) + I;
+			T X = ((T)(A)->values) + I;
 # define ARRAY_ITERATE_STOP(A, T, X, I)\
 			++I;\
 		}\

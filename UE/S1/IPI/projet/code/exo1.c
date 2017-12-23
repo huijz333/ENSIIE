@@ -98,7 +98,7 @@ static t_graph * graph_parse(void) {
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
 			BYTE arc_exists;
-			scanf(INDEX_IDENTIFIER, &arc_exists);
+			scanf("%hhu", &arc_exists);
 			if (arc_exists) {
 				graph_set_arc(graph, i, j);
 			}
@@ -192,7 +192,8 @@ static void graph_print_path(t_graph * graph, INDEX s, INDEX t) {
 	/* on affiche le chemin */
 	int j;
 	for (j = array->size - 1; j >= 0 ; j--) {
-		printf(INDEX_IDENTIFIER, *((INDEX *)array_get(array, j)));
+		INDEX * value = (INDEX *)array_get(array, j);
+		printf(INDEX_IDENTIFIER, *value);
 		printf("\n");
 	}
 	printf(INDEX_IDENTIFIER, t + 1);
