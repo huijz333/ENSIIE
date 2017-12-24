@@ -18,8 +18,8 @@ typedef struct	s_door {
 
 /** represente le labyrinthe */
 typedef struct	s_lab {
-	INDEX	n;
-	char	** map;
+	INDEX	l;
+	char	* map;
 	t_hmap	* teleporters;
 	t_hmap	* doors;
 }		t_lab;
@@ -47,5 +47,7 @@ void lab_delete(t_lab * lab);
  *	@assign  :	-------
  */
 t_lab * lab_parse(FILE * stream);
+
+void lab_solve(t_lab * lab, unsigned int timer);
 
 #endif

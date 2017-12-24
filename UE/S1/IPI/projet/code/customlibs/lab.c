@@ -8,12 +8,12 @@
  *	@ensure	 :	crée un nouveau labyrinthe de taille 'n'
  *	@assign  :	-------
  */
-t_lab * lab_new(INDEX n) {
+t_lab * lab_new(INDEX l) {
 	t_lab * lab = (t_lab *) malloc(sizeof(t_lab));
 	if (lab == NULL) {
 		return (NULL);
 	}
-	lab->n = n;
+	lab->l = l;
 	lab->teleporters = hmap_new(16, (t_hashf)inthash, (t_cmpf)intcmp);
 	if (lab->teleporters == NULL) {
 		free(lab);
@@ -25,7 +25,7 @@ t_lab * lab_new(INDEX n) {
 		free(lab);
 		return (NULL);
 	}
-	lab->map = (char **) malloc(sizeof(char *) * n);
+	lab->map = (char *) malloc((l * l + 1) * sizeof(char));
 	if (lab->map == NULL) {
 		hmap_delete(lab->doors);
 		hmap_delete(lab->teleporters);
@@ -33,21 +33,7 @@ t_lab * lab_new(INDEX n) {
 		return (NULL);
 	}
 
-	INDEX i;
-	for (i = 0 ; i < lab->n ; i++) {
-		lab->map[i] = (char *) malloc(sizeof(char) * (lab->n + 1));
-		if (lab->map[i] == NULL) {
-			INDEX j;
-			for (j = 0 ; j < i ; j++) {
-				hmap_delete(lab->teleporters);
-				hmap_delete(lab->doors);
-				free(lab->map[j]);
-				free(lab->map);
-				free(lab);
-			}
-			return (NULL);
-		}
-	}
+	lab->map[l * l] = 0;
 	return (lab);
 }
 
@@ -57,10 +43,6 @@ t_lab * lab_new(INDEX n) {
  *	@assign  :	-------
  */
 void lab_delete(t_lab * lab) {
-	INDEX i;
-	for (i = 0 ; i < lab->n ; i++) {
-		free(lab->map[i]);
-	}
 	free(lab->map);
 	hmap_delete(lab->teleporters); /*TODO : free keys and values */
 	hmap_delete(lab->doors);
@@ -68,22 +50,64 @@ void lab_delete(t_lab * lab) {
 }
 
 /**
- *	@require :	un flux
+ *	@require :	un flux, contenant des données supposées bien formatté
  *	@ensure	 :	alloue et lit un nouveau labyrinthe sur le flux donnée
  *	@assign  :	-------
  */
 t_lab * lab_parse(FILE * stream) {
-	INDEX n;
-	fscanf(stream, INDEX_IDENTIFIER "\n", &n);
-	t_lab * lab = lab_new(n);
+	INDEX l;
+	fscanf(stream, INDEX_IDENTIFIER "\n", &l);
+	t_lab * lab = lab_new(l);
 	if (lab == NULL) {
 		return (NULL);
 	}
 
 	INDEX i;
-	for (i = 0 ; i < n ; i++) {
-		fscanf(stream, "%s\n", lab->map[i]);
+	for (i = 0 ; i < l ; i++) {
+		fscanf(stream, "%s\n", lab->map + i * l);
 	}
 	return (lab);
 }
 
+/**
+ *	@require :	un labyrinthe et les coordonnées d'une case
+ *	@ensure	 :	renvoie la lettre dans la case
+ *	@assign  :	--------------------
+ */
+char lab_char_at(t_lab * lab, INDEX x, INDEX y) {
+	return (lab->map[y * lab->l + x]);
+}
+
+void lab_solve(t_lab * lab, unsigned int timer) {
+ 
+	/**
+
+	Algorithme:
+
+	- On cherche le plus court chemin en supposant que l'on possède déjà toutes les clefs
+	- On enregistre les portes que l'on a du traverser
+		1 clef, 2 clef... x clefs.
+		=> on crée une bitmap et on résout à l'aide de l'exo 1
+		=> s'il existe et s'il est suffisement court, fin
+
+	- Sinon, on
+	*/
+
+
+	typedef struct	s_direction {
+		char const	* name;
+		int		offx;
+		int		offy;
+	}		t_direction;
+
+	static t_direction directions[4] = {
+		{"DROITE",	 1,  0},
+		{"GAUCHE",	-1,  0},
+		{"HAUT",	 0,  1},
+		{"BAS",		 0, -1}
+	};
+
+
+	(void)lab;
+	(void)timer;
+}

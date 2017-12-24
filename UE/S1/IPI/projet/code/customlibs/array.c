@@ -29,6 +29,10 @@ t_array * array_new(unsigned int defaultCapacity, unsigned int elemSize) {
  *	@assign  : ------------------
  */
 void array_delete(t_array * array) {
+	if (array == NULL) {
+		return ;
+	}
+	free(array->values);
 	free(array);
 }
 
@@ -65,7 +69,6 @@ int array_grow(t_array * array, unsigned int capacity) {
 	return (0);
 }
 
-
 /**
  *	@require : un tableau 'array', un index, et une valeur 'value'
  *	@ensure  : ajoutes la valeur 'value' a l'index donnée dans le tableau
@@ -97,6 +100,28 @@ int array_set(t_array * array, unsigned int index, void * value) {
  */
 int array_add(t_array * array, void * value) {
 	return (array_set(array, array->size, value));
+}
+
+/**
+ *	@require : un tableau 'array' une valeur 'value', et un entier 'n'
+ *	@ensure  : ajoutes n fois la valeur 'value' en bout de tableau 'array'
+ *			return -1 si erreur, 0 sinon
+ *	@assign  : modifie les valeurs du tableau
+ */
+int array_addn(t_array * array, void * value, unsigned int n) {
+	if (array->size + n >= array->capacity) {
+		if (array_grow(array, array->size + n + 1) == -1) {
+			return (-1);
+		}
+	}
+	unsigned int i;
+	for (i = 0 ; i < n ; i++) {
+		BYTE * addr = array->values + (array->size + i) * array->elemSize;
+		memcpy(addr, value, array->elemSize);
+	}
+	int idx = array->size;
+	array->size += n;
+	return (idx);
 }
 
 /**

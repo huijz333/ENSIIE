@@ -46,14 +46,8 @@ t_array * depth_breadth_search(t_bitmap * arcs, INDEX s) {
 	t_node init;
 	init.pathlen = MAX_NODES;
 	init.prev = -1;
-
-	/* ajoute n node vide à la liste */
-	INDEX i;
-	for (i = 0 ; i < arcs->n ; i++) {
-		array_add(nodes, &init);
-	}
-	/* source à 0 */
-	((t_node *)array_get(nodes, s))->pathlen = 0;
+	array_addn(nodes, &init, arcs->n); /* ajoutes 'n' sommets vide */
+	((t_node *)array_get(nodes, s))->pathlen = 0; /* source à 0*/
 
 	/* debut de recursion */
 	visit(arcs, nodes, s);

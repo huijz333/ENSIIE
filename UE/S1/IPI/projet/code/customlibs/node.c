@@ -18,6 +18,10 @@ void node_write_path(t_array * path, FILE * stream) {
  *	@assign  : ---------------------------------
  */
 t_array * node_build_path(t_array * nodes, INDEX s, INDEX t) {
+	if (nodes == NULL) {
+		return (NULL);
+	}
+
 	INDEX pathlen = ((t_node *)array_get(nodes, t))->pathlen;
 
 	if (pathlen == MAX_NODES) {
@@ -54,8 +58,8 @@ void node_solve_path(t_array * nodes, INDEX s, INDEX t, FILE * stream) {
 	t_array * path = node_build_path(nodes, s, t);
 	if (path == NULL) {
 		printf("Not connected\n");
-	} else {
-		node_write_path(path, stream);
+		return ;
 	}
+	node_write_path(path, stream);
 	array_delete(path);
 }

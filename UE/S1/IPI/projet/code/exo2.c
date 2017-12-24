@@ -1,24 +1,28 @@
 # include "customlibs/exo2.h"
 
 /**
- *	@require : une matrice representant les arcs et leur poids, et les sommets
- *	@ensure  : renvoie l'index du sommet non visité avec le chemin de poids minimum
+ *	@require : une matrice representant les arcs et leur poids, et les sommets du graphe
+ *	@ensure  : renvoie l'index du sommet non visité avec le nouveau chemin de poids minimum.
  *			si le chemin n'existe pas, MAX_NODES est renvoyé
+ *				=> 't' et 's' ne sont pas sur la meme partie connexe
  *	@assign  : ------
  */
-static INDEX dijkstra_next_nodew(t_matrix * ws, t_nodew * nodes) {
+static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes) {
 	INDEX u = MAX_NODES;
-	INDEX v;
+	INDEX i;
 	/* pour chaque sommet ... */
-	for (v = 0 ; v < ws->n ; v++) {
+	for (i = 0 ; i < ws->n ; i++) {
+		t_nodew * node = (t_nodew *) array_get(nodes, i);
+		if (node->visited) {
+			continue ;
+		}
 		/*
 		 * si l'on trouve un 1er sommet non visité,
 		 *   OU
 		 * si on trouve un sommet non visité de poids plus faible
 		 */
-		if (!nodes[v].visited && (u == MAX_NODES
-					|| nodes[v].pathw < nodes[u].pathw)) {
-			u = v;
+		if (u == MAX_NODES || node->pathw < ((t_nodew *) array_get(nodes, u))->pathw) {
+			u = i;
 		}
 	}
 
@@ -28,98 +32,90 @@ static INDEX dijkstra_next_nodew(t_matrix * ws, t_nodew * nodes) {
 	 *	ALORS
 	 * erreur, non connecté
 	 */
-	if (u == MAX_NODES || nodes[u].super.pathlen == 0) {
+	if (u == MAX_NODES || ((t_nodew *) array_get(nodes, u))->super.pathlen == 0) {
 		return (MAX_NODES);
 	}
 	return (u);
 }
 
 /**
- *	@require : une matrice representant les arcs et leur poids, deux indices s et t
- *	@ensure  : affiche le plus court chemin trouve entre 's' et 't'
- *	@assign  : ------
+ *	@require : le nombre de sommet 'n' et le sommet source 's'
+ *	@ensure  : initialise et renvoie un tableau de 't_nodew' prêt à être
+ *			utilisé dans l'algorithme de dijkstra
+ *	@assign  : --------------
  */
-static void dijkstra_result(t_nodew * nodes, INDEX s, INDEX t) {
-	/* la pile contenant le chemin */
-	INDEX pathlen = nodes[t].super.pathlen;
-	t_array * path = array_new(pathlen, sizeof(INDEX));
-	if (path == NULL) {
-		fprintf(stderr, "Pas assez de mémoire\n");
-		return ;
+static t_array * dijkstra_init(INDEX n, INDEX s) {
+	/* initialisation des sommets */
+	t_array * nodes = array_new(n, sizeof(t_nodew));
+	if (nodes == NULL) {
+		return (NULL);
 	}
 	
-	/* on construit le chemin */
-	INDEX i = t;
-	while (i != s) {
-		i = nodes[i].super.prev;
-		INDEX node = i + 1;
-		array_add(path, &node);
-	}
+	/* on ajoute 'n' sommet 'vide' (<=> non visité) */
+	t_nodew empty;
+	empty.visited = 0;
+	empty.pathw = UINT_MAX;
+	empty.super.pathlen = 0;
+	array_addn(nodes, &empty, n);
 
-	/* on affiche le chemin */
-	int j; /* besoin d'un int pour tester la positivité */
-	for (j = path->size - 1 ; j >= 0 ; j--) {
-		printf(INDEX_IDENTIFIER "\n", *((INDEX *)array_get(path, j)));
-	}
-	printf(INDEX_IDENTIFIER "\n", t + 1);
+	/* on initialise le sommet 'source' */
+	t_nodew * source = (t_nodew *) array_get(nodes, s);
+	source->super.pathlen = 1;
+	source->super.prev =  s;
+	source->pathw = 0;
 
-	array_delete(path);
+	return (nodes);
 }
 
 /**
  *	@require : une matrice representant les arcs et leur poids, deux indices s et t
  *	@ensure  : resout les plus courts chemin dans le graphe, et renvoie
  *			les sommets résolus dans un tableau de 't_nodew'
- *	@assign  : ------
+ *	@assign  : --------------
  */
-static void dijkstra(t_matrix * ws, INDEX s, INDEX t) {
+static t_array * dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 	/* initialisation des sommets */
-	t_nodew * nodes = (t_nodew *) malloc(ws->n * sizeof(t_nodew));
+	t_array * nodes = dijkstra_init(ws->n, s);
 	if (nodes == NULL) {
-		return ;
+		return (NULL);
 	}
-	INDEX v;
-	for (v = 0 ; v < ws->n ; v++) {
-		nodes[v].visited = 0;
-		nodes[v].pathw = UINT_MAX;
-		nodes[v].super.pathlen = 0;
-	}
-	nodes[s].super.pathlen = 1;
-	nodes[s].super.prev =  s;
-	nodes[s].pathw = 0;
 
-	/* boucle dijsktra */
+	/* boucle algorithm dijsktra */
 	while (1) {
 		/** on cherche un noeud 'u' non visite minimisant d(u) */
 		INDEX u = dijkstra_next_nodew(ws, nodes);
 		if (u == MAX_NODES) {
-			printf("Not connected\n");
-			break ;
+			array_delete(nodes);
+			return (NULL);
 		}
 
 		/* si on a atteint t, on affiche le resultat */
 		if (u == t) {
-			dijkstra_result(nodes, s, t);
-			break ;
+			return (nodes);
 		}
 
 		/* on definit 'u' comme visite */
-		nodes[u].visited = 1;
+		t_nodew * node = (t_nodew *) array_get(nodes, u);
+		node->visited = 1;
 		
 		/* pour chaque sommet */
+		INDEX v;
 		for (v = 0 ; v < ws->n ; v++) {
-			/* s'il est voisin de 'u' ET si ce nouveau chemin est plus court */
+			/** s'il est voisin de 'u' ET si ce nouveau
+			 *  chemin passant par 'u' est plus court */
 			int wuv = matrix_get(ws, u, v);
-			if (wuv >= 0 && nodes[u].pathw + wuv < nodes[v].pathw) {
+			t_nodew * neighbor = (t_nodew *) array_get(nodes, v);
+			if (wuv >= 0 && node->pathw + wuv < neighbor->pathw) {
 				/* on cree le nouveau chemin */
-				nodes[v].pathw = nodes[u].pathw + wuv;
-				nodes[v].super.prev = u;
-				nodes[v].super.pathlen = nodes[u].super.pathlen + 1;
+				neighbor->pathw = node->pathw + wuv;
+				neighbor->super.prev = u;
+				neighbor->super.pathlen = node->super.pathlen + 1;
 			}
 		}
 	}
-	/* libere la mémoire */
-	free(nodes);
+	/* on n'arrive théoriquement jamais ici */
+	array_delete(nodes);
+	return (NULL);
 }
 
 int main(void) {
@@ -138,7 +134,9 @@ int main(void) {
 	--t;
 
 	/* faire le parcours en profondeur */
-	dijkstra(ws, s, t);
+	t_array * nodes = dijkstra(ws, s, t);
+	node_solve_path(nodes, s, t, stdout);
+	array_delete(nodes);
 
 	/* libere la mémoire */
 	matrix_delete(ws);

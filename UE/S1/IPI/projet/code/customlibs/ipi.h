@@ -22,15 +22,16 @@
 # ifndef MAX_NODES
 	/**
 	 *	si aucunes tailles n'est precisé, utilisé la taille maximal
-	 *	des exos 1, 2 et 3, à savoir, dans l'exo 3, 1000
+	 *	des exos 1, 2 et 3, à savoir, dans l'exo 3, 1000 * 1000
+	 *	si on considère chaque case comme un sommet
 	 *
 	 *	NB: gcc [FLAGS] -D MAX_NODES=50
 	 */
-#	define MAX_NODES (1000)
-#	pragma message("\nValue par défaut utilisée pour MAX_NODES (= 1000)\n"\
+#	define MAX_NODES (1000 * 1000)
+#	pragma message("\nValue par défaut utilisée pour MAX_NODES (= 1000 * 1000)\n"\
 			"Vous pouvez definir une valeur plus basse pour optimiser "\
 			"l'usage mémoire\nou plus grande si l'entrée contient "\
-			"plus de 1000 sommets.\ne.g: gcc [FLAGS] -D MAX_NODES=42")
+			"plus de 1000 * 1000 sommets.\ne.g: gcc [FLAGS] -D MAX_NODES=50")
 # endif
 
 # if MAX_NODES < UCHAR_MAX

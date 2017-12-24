@@ -21,7 +21,7 @@ int main(void) {
 	
 	/* construit et affiche le chemin entre les 's' et 't' */
 	node_solve_path(nodes, s, t, stdout);
-	free(nodes);
+	array_delete(nodes);
 	return (EXIT_SUCCESS);
 }
 

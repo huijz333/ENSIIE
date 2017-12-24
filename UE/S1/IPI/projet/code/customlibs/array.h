@@ -75,6 +75,14 @@ int array_grow(t_array * array, unsigned int capacity);
 int array_add(t_array * array, void * value);
 
 /**
+ *	@require : un tableau 'array' une valeur 'value', et un entier 'n'
+ *	@ensure  : ajoutes n fois la valeur 'value' en bout de tableau 'array'
+ *			return -1 si erreur, 0 sinon
+ *	@assign  : modifie les valeurs du tableau
+ */
+int array_addn(t_array * array, void * value, unsigned int n);
+
+/**
  *	@require : un tableau 'array', un tableau de valeur 'values',
  *			et la taille de 'values'
  *	@ensure  : ajoutes les valeurs 'values' en bout de tableau 'array'
