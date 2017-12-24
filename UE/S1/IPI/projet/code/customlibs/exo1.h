@@ -5,5 +5,6 @@
 # include "array.h"	/* file pour générer le chemin */
 # include "bitmap.h"	/* tableau de bit representant les arcs */
 # include "depth_breadth_search.h" /* parcours en largeur */
+# include "node.h"
 
 #endif

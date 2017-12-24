@@ -11,7 +11,6 @@ EXO = exo1 exo2 exo3
 
 all: $(EXO)
 
-
 $(EXO) : % : %.o $(CUSTOMOBJ)
 	$(CC) -o $@ $^
 

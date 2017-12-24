@@ -3,15 +3,7 @@
 
 # include "ipi.h"
 # include "bitmap.h"
-
-/**
- *	Represente un sommet du graphe
- */
-typedef struct	s_node {
-	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
-	INDEX	prev;	/* element precedant le chemin (index du sommet) */
-}		t_node;
-
+# include "node.h"
 
 /**
  *	@require : une bitmap representant les arcs, et un indice de sommet source
@@ -20,6 +12,6 @@ typedef struct	s_node {
  *		   un tableau de sommet correspondant au resultat
  *	@assign  : ---------------------------------
  */
-t_node * depth_breadth_search(t_bitmap * arcs, INDEX s);
+t_array * depth_breadth_search(t_bitmap * arcs, INDEX s);
 
 #endif
