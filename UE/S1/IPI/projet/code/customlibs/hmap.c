@@ -194,8 +194,13 @@ void * hmap_key_of(t_hmap * hmap, void const * value) {
 
 /**
  *	quelques fonctions de hachage pré-implémentées
- *
  *	(voir http://www.cse.yorku.ca/~oz/hash.html)
+ */
+
+/**
+ *	@require : une chaine de caractère
+ *	@ensure	 : renvoie un hash de la chaine
+ *	@assign	 : -----------
  */
 size_t strhash(char const * str) {
 	if (str == NULL) {
@@ -208,7 +213,56 @@ size_t strhash(char const * str) {
 	return (hash);
 }
 
-size_t inthash(int const value) {
-	return ((size_t)value);
+/**
+ *	@require : un pointeur vers un entier
+ *	@ensure	 : renvoie un hash de l'entier
+ *	@assign	 : -----------
+ */
+size_t inthash(int const * value) {
+	return ((size_t)(*value));
 }
 
+/**
+ *	@require : deux entiers
+ *	@ensure	 : les compare sur le modele de 'strcmp()' et renvoie la différence
+ *	@assign	 : -----------
+ */
+int intcmp(int const * left, int const * right) {
+	if (left == NULL && right == NULL) {
+		return (0);
+	}
+	if (left == NULL) {
+		return (-(*right));
+	}
+	if (right == NULL) {
+		return (-(*left));
+	}
+	return (*left - *right);
+}
+
+/**
+ *	@require : un pointeur vers un char
+ *	@ensure	 : renvoie un hash du char
+ *	@assign	 : -----------
+ */
+size_t charhash(char const * value) {
+	return ((size_t)(*value));
+}
+
+/**
+ *	@require : deux chars
+ *	@ensure	 : les compare sur le modele de 'strcmp()' et renvoie la différence
+ *	@assign	 : -----------
+ */
+int charcmp(char const * left, char const * right) {
+	if (left == NULL && right == NULL) {
+		return (0);
+	}
+	if (left == NULL) {
+		return (-(*right));
+	}
+	if (right == NULL) {
+		return (-(*left));
+	}
+	return (*left - *right);
+}

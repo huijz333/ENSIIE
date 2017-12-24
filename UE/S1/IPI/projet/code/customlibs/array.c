@@ -168,3 +168,25 @@ void array_remove(t_array * array, unsigned int index) {
 void array_sort(t_array * array, int (*cmpf)(const void * left, const void * right)) {
 	qsort(array->values, array->size, array->elemSize, cmpf);
 }
+
+/**
+ *	@require : un tableau 'array'
+ *	@ensure  : inverse l'ordre des elements du tableau
+ *	@assign  : -------------------------
+ */
+void array_reverse(t_array * array) {
+	BYTE * buffer = (BYTE *) malloc(array->elemSize);
+	if (buffer == NULL) {
+		return ;
+	}
+	size_t elemSize = array->elemSize;
+	size_t i;
+	for (i = 0 ; i < array->size / 2 ; i++) {
+		size_t j = array->size - 1 - i;
+		memcpy(buffer,				array->values + i * elemSize, 	elemSize);
+		memcpy(array->values + i * elemSize,	array->values + j * elemSize, 	elemSize);
+		memcpy(array->values + j * elemSize,	buffer,				elemSize);
+	}
+	free(buffer);
+}
+

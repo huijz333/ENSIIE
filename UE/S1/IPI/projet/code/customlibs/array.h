@@ -113,6 +113,13 @@ void array_remove(t_array * array, unsigned int index);
 void array_sort(t_array * array, int (*cmpf)(const void * left, const void * right));
 
 /**
+ *	@require : un tableau 'array'
+ *	@ensure  : inverse l'ordre des elements du tableau
+ *	@assign  : -------------------------
+ */
+void array_reverse(t_array * array);
+
+/**
  *	Macro pour iterer de manière efficace dans le tableau dynamique
  *
  *		A : un tableau

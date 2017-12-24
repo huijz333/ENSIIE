@@ -1,17 +1,32 @@
 # include "customlibs/exo3.h"
 
-int main(void){
-  int n;
-  scanf("%d",&n);fgetc(stdin);
-  
-  char matrix[1000][1002] = { "" };
-  int i;
-  for(i = 0; i < n; i++){
-    fgets(matrix[i], 1002, stdin);
-  }
+void lab_solve(t_lab * lab, unsigned int timer) {
+	(void)lab;
+	(void)timer;
+	/**
 
-  int timer;
-  scanf("%d", &timer);fgetc(stdin);
+Algorithme:
 
-  return 0;
+	- On cherche le plus court chemin qui n'a besoin d'aucunes clefs
+		=> on crée une bitmap et on résout à l'aide de l'exo 1
+		=> s'il existe et s'il est suffisement court, fin
+
+	- Sinon, on
+	*/
+}
+
+int main(void) {
+	t_lab * lab = lab_parse(stdin);
+	if (lab == NULL) {
+		return (EXIT_FAILURE);
+	}
+
+	unsigned int timer;
+	scanf("%u\n", &timer);
+
+	lab_solve(lab, timer);
+	
+	lab_delete(lab);
+
+	return (0);
 }

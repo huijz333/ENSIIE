@@ -117,7 +117,40 @@ void * hmap_key_of(t_hmap * hmap, void const * value);
  *
  *	(voir http://www.cse.yorku.ca/~oz/hash.html)
  */
+
+/**
+ *	@require : une chaine de caractère
+ *	@ensure	 : renvoie un hash de la chaine
+ *	@assign	 : -----------
+ */
 size_t strhash(char const * str);
-size_t inthash(int const value);
+
+/**
+ *	@require : un pointeur vers un entier
+ *	@ensure	 : renvoie un hash de l'entier
+ *	@assign	 : -----------
+ */
+size_t inthash(int const * value);
+
+/**
+ *	@require : deux entiers
+ *	@ensure	 : les compare sur le modele de 'strcmp()' et renvoie la différence
+ *	@assign	 : -----------
+ */
+int intcmp(int const * left, int const * right);
+
+/**
+ *	@require : un pointeur vers un char
+ *	@ensure	 : renvoie un hash du char
+ *	@assign	 : -----------
+ */
+size_t charhash(char const * value);
+
+/**
+ *	@require : deux chars
+ *	@ensure	 : les compare sur le modele de 'strcmp()' et renvoie la différence
+ *	@assign	 : -----------
+ */
+int charcmp(char const * left, char const * right);
 
 #endif
