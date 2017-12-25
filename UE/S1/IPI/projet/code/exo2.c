@@ -1,19 +1,20 @@
 # include "customlibs/exo2.h"
 
 /**
- *	@require : une matrice representant les arcs et leur poids, et les sommets du graphe
+ *	@require : une matrice representant les arcs et leur poids, les sommets du graphe,
+ *			et le tableau des sommets déjà visité
  *	@ensure  : renvoie l'index du sommet non visité avec le nouveau chemin de poids minimum.
  *			si le chemin n'existe pas, MAX_NODES est renvoyé
  *				=> 't' et 's' ne sont pas sur la meme partie connexe
  *	@assign  : ------
  */
-static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes) {
+static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes, t_bitmap * visited) {
+	INDEX n = nodes->size;
 	INDEX u = MAX_NODES;
-	INDEX i;
+	INDEX v;
 	/* pour chaque sommet ... */
-	for (i = 0 ; i < ws->n ; i++) {
-		t_nodew * node = (t_nodew *) array_get(nodes, i);
-		if (node->super.visited) {
+	for (v = 0 ; v < n ; v++) {
+		if (bitmap_get(visited, v)) {
 			continue ;
 		}
 		/*
@@ -21,8 +22,10 @@ static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes) {
 		 *   OU
 		 * si on trouve un sommet non visité de poids plus faible
 		 */
-		if (u == MAX_NODES || node->pathw < ((t_nodew *) array_get(nodes, u))->pathw) {
-			u = i;
+		t_nodew * un = (t_nodew *) array_get(nodes, u);
+		t_nodew * vn = (t_nodew *) array_get(nodes, v);
+		if (u == MAX_NODES || vn->pathw < un->pathw) {
+			u = v;
 		}
 	}
 
@@ -32,7 +35,8 @@ static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes) {
 	 *	ALORS
 	 * erreur, non connecté
 	 */
-	if (u == MAX_NODES || ((t_nodew *) array_get(nodes, u))->super.pathlen == 0) {
+	t_node * un = (t_node *) array_get(nodes, u);
+	if (u == MAX_NODES || un->pathlen == 0) {
 		return (MAX_NODES);
 	}
 	return (u);
@@ -54,7 +58,6 @@ static t_array * dijkstra_init(INDEX n, INDEX s) {
 	/* on ajoute 'n' sommet 'vide' (<=> non visité) */
 	t_nodew empty;
 	empty.super.pathlen = 0;
-	empty.super.visited = 0;
 	empty.pathw = UINT_MAX;
 	array_addn(nodes, &empty, n);
 
@@ -75,15 +78,22 @@ static t_array * dijkstra_init(INDEX n, INDEX s) {
  */
 static t_array * dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 	/* initialisation des sommets */
-	t_array * nodes = dijkstra_init(ws->n, s);
+	INDEX n = ws->n;
+	t_array * nodes = dijkstra_init(n, s);
 	if (nodes == NULL) {
+		return (NULL);
+	}
+
+	t_bitmap * visited = bitmap_new(n);
+	if (visited == NULL) {
+		array_delete(nodes);
 		return (NULL);
 	}
 
 	/* boucle algorithm dijsktra */
 	while (1) {
 		/** on cherche un noeud 'u' non visite minimisant d(u) */
-		INDEX u = dijkstra_next_nodew(ws, nodes);
+		INDEX u = dijkstra_next_nodew(ws, nodes, visited);
 		if (u == MAX_NODES) {
 			array_delete(nodes);
 			return (NULL);
@@ -95,21 +105,21 @@ static t_array * dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 		}
 
 		/* on definit 'u' comme visite */
-		t_nodew * node = (t_nodew *) array_get(nodes, u);
-		node->super.visited = 1;
+		bitmap_set(visited, u);
 		
 		/* pour chaque sommet */
+		t_nodew * un = (t_nodew *) array_get(nodes, u);
 		INDEX v;
 		for (v = 0 ; v < ws->n ; v++) {
 			/** s'il est voisin de 'u' ET si ce nouveau
 			 *  chemin passant par 'u' est plus court */
 			int wuv = matrix_get(ws, u, v);
-			t_nodew * neighbor = (t_nodew *) array_get(nodes, v);
-			if (wuv >= 0 && node->pathw + wuv < neighbor->pathw) {
+			t_nodew * vn = (t_nodew *) array_get(nodes, v);
+			if (wuv >= 0 && un->pathw + wuv < vn->pathw) {
 				/* on cree le nouveau chemin */
-				neighbor->pathw = node->pathw + wuv;
-				neighbor->super.prev = u;
-				neighbor->super.pathlen = node->super.pathlen + 1;
+				vn->pathw = un->pathw + wuv;
+				vn->super.prev = u;
+				vn->super.pathlen = un->super.pathlen + 1;
 			}
 		}
 	}

@@ -25,7 +25,7 @@ static t_bitmap * parse_arcs(INDEX n) {
 }
 
 int main(void) {
-	/* parsing de la matrice */
+	/* lecture de la matrice */
 	INDEX n;
 	scanf(INDEX_IDENTIFIER, &n);
 	t_bitmap * arcs = parse_arcs(n); 
@@ -34,14 +34,14 @@ int main(void) {
 		return (EXIT_FAILURE);
 	}
 	
-	/* argument du parcours en profondeur */
+	/* argument du parcours en largeur */
 	INDEX s, t;
 	scanf(INDEX_IDENTIFIER, &s);
 	scanf(INDEX_IDENTIFIER, &t);
 	--s;
 	--t;
 
-	/* faire le parcours en profondeur. */
+	/* faire le parcours en largeur. */
 	t_array * nodes = nodes_new(n, sizeof(t_node));
 	breadth_search(nodes, arcs, s, t); /* parcours en largeur */
 	bitmap_delete(arcs); /* plus besoin des arcs, on libere la mémoire */

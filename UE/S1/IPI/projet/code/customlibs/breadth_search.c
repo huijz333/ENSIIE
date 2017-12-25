@@ -20,7 +20,6 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 		t_node * node = (t_node *) array_get(nodes, i);
 		node->pathlen = MAX_NODES;
 		node->prev = -1;
-		node->visited = 0;
 	}
 	((t_node *)array_get(nodes, s))->pathlen = 0; /* source à 0 */
 
@@ -31,6 +30,8 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 	}
 	/** on ajoute la source a la file */
 	list_add(queue, &s, sizeof(INDEX));
+
+	t_bitmap * visited = bitmap_new(n);
 
 	/** tant que la file n'est pas vide */
 	while (queue->size > 0) {
@@ -46,10 +47,10 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 			if (bitmap_get2(arcs, currindex, v, n)) {
 				/** alors 'v' est voisin de 'node' */
 				t_node * neighbor = (t_node *) array_get(nodes, v);
-				if (neighbor->visited) {
+				if (bitmap_get(visited, v)) {
 					continue ;
 				}
-				neighbor->visited = 1;
+				bitmap_set(visited, v);
 				neighbor->prev = currindex;
 				neighbor->pathlen = currnode->pathlen + 1;
 				if (v == t) {
@@ -59,5 +60,6 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 			}
 		}
 	}
+	bitmap_delete(visited);
 	list_delete(queue);
 }

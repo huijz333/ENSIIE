@@ -10,7 +10,6 @@
 typedef struct	s_node {
 	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
 	INDEX	prev;	/* element precedant le chemin (index du sommet) */
-	BIT	visited;/* vrai ou faux selon que le sommet a été visité */
 }		t_node;
 
 /**
