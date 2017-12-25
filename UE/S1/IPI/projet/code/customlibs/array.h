@@ -65,6 +65,14 @@ int array_set(t_array * array, unsigned int index, void * value);
  *	@assign  : 'array->values' peut être modifié par 'realloc()'
  */
 int array_grow(t_array * array, unsigned int capacity);
+
+/**
+ *	@require : un tableau 'array' et une capacité 'capacity'
+ *	@ensure  : assure que le tableau puisse accueillir au moins 'capacity' entrée
+ *			renvoie -1 si erreur, 0 sinon
+ *	@assign  : @see array_grow()
+ */
+int array_ensure_capacity(t_array * array, unsigned int capacity);
 	
 /**
  *	@require : un tableau 'array' et une valeur 'value'
@@ -81,6 +89,14 @@ int array_add(t_array * array, void * value);
  *	@assign  : modifie les valeurs du tableau
  */
 int array_addn(t_array * array, void * value, unsigned int n);
+
+/**
+ *	@require : un tableau 'array', et un entier 'n'
+ *	@ensure  : ajoutes n valeur non initialisé dans le tableau (allocation)
+ *			return -1 si erreur, 0 sinon
+ *	@assign  : modifie array->size
+ */
+int array_addempty(t_array * array, unsigned int n);
 
 /**
  *	@require : un tableau 'array', un tableau de valeur 'values',

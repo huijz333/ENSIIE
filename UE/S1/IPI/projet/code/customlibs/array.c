@@ -70,6 +70,22 @@ int array_grow(t_array * array, unsigned int capacity) {
 }
 
 /**
+ *	@require : un tableau 'array' et une capacité 'capacity'
+ *	@ensure  : assure que le tableau puisse accueillir au moins 'capacity' entrée
+ *			renvoie -1 si erreur, 0 sinon
+ *	@assign  : @see array_grow()
+ */
+int array_ensure_capacity(t_array * array, unsigned int capacity) {
+	if (array->capacity >= capacity) {
+		return (0);
+	}
+	if (array_grow(array, capacity) == -1) {
+		return (-1);
+	}
+	return (0);
+}
+
+/**
  *	@require : un tableau 'array', un index, et une valeur 'value'
  *	@ensure  : ajoutes la valeur 'value' a l'index donnée dans le tableau
  *			renvoie -1 en cas d'erreur, sinon l'index où l'élément a été inséré
@@ -79,11 +95,8 @@ int array_set(t_array * array, unsigned int index, void * value) {
 	if (index > array->size) {
 		index = array->size;
 	}
-	if (index >= array->capacity) {
-		if (array_grow(array, index + 1) == -1) {
-			/* pas assez de mémoire */
-			return (-1);
-		}
+	if (array_ensure_capacity(array, index) == -1) {
+		return (-1);
 	}
 	memcpy(array->values + index * array->elemSize, value, array->elemSize);
 	if (index >= array->size) {
@@ -109,15 +122,28 @@ int array_add(t_array * array, void * value) {
  *	@assign  : modifie les valeurs du tableau
  */
 int array_addn(t_array * array, void * value, unsigned int n) {
-	if (array->size + n >= array->capacity) {
-		if (array_grow(array, array->size + n + 1) == -1) {
-			return (-1);
-		}
+	if (array_ensure_capacity(array, array->size + n) == -1) {
+		return (-1);
 	}
 	unsigned int i;
 	for (i = 0 ; i < n ; i++) {
 		BYTE * addr = array->values + (array->size + i) * array->elemSize;
 		memcpy(addr, value, array->elemSize);
+	}
+	int idx = array->size;
+	array->size += n;
+	return (idx);
+}
+
+/**
+ *	@require : un tableau 'array', et un entier 'n'
+ *	@ensure  : ajoutes n valeur non initialisé dans le tableau (allocation)
+ *			return -1 si erreur, 0 sinon
+ *	@assign  : modifie array->size
+ */
+int array_addempty(t_array * array, unsigned int n) {
+	if (array_ensure_capacity(array, array->size + n) == -1) {
+		return (-1);
 	}
 	int idx = array->size;
 	array->size += n;

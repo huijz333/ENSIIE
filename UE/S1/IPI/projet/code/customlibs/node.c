@@ -63,3 +63,18 @@ void node_solve_path(t_array * nodes, INDEX s, INDEX t, FILE * stream) {
 	node_write_path(path, stream);
 	array_delete(path);
 }
+
+/**
+ *	@require : 	'n'		: un nombre de sommets
+ *		   	'nodeSize'	: taille d'un sommet en mémoire
+ *	@ensure	 : génère et renvoie un tableau de 'n' sommet non initialisé
+ *	@assign	 : ----------------
+ */
+t_array * nodes_new(INDEX n, size_t nodeSize) {
+	t_array * nodes = array_new(n, nodeSize);
+	if (nodes == NULL) {
+		return (NULL);
+	}
+	array_addempty(nodes, n); /* on ajoute 'n' sommets vides */
+	return (nodes);
+}

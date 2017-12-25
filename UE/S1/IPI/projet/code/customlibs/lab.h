@@ -3,6 +3,11 @@
 
 # include "ipi.h"
 # include "hmap.h"
+# include "bitmap.h"
+# include "breadth_search.h"
+
+# define LAB_CHAR_EMPTY	('.')
+# define LAB_CHAR_WALL	('X')
 
 /** represente un téléporteur, avec ces 2 points */
 typedef struct	s_teleporter {
@@ -18,8 +23,8 @@ typedef struct	s_door {
 
 /** represente le labyrinthe */
 typedef struct	s_lab {
-	INDEX	l;
-	char	* map;
+	INDEX	l;	/* largeur == longueur du labyrinthe */
+	char	* map;	/* les cases du labyrinthe */
 	t_hmap	* teleporters;
 	t_hmap	* doors;
 }		t_lab;

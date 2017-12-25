@@ -5,21 +5,30 @@
 # include "array.h"
 
 /**
- *	Represente un sommet du graphe
+ *	Represente un sommet du graphe (exo 1)
  */
 typedef struct	s_node {
 	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
 	INDEX	prev;	/* element precedant le chemin (index du sommet) */
+	BIT	visited;/* vrai ou faux selon que le sommet a été visité */
 }		t_node;
 
 /**
- *	Represente un sommet du graphe, avec un chemin pondéré
+ *	Represente un sommet du graphe, avec un chemin pondéré (exo 2)
  */
 typedef struct	s_nodew {
 	t_node	super;	/* héritage 'à la C' */	
 	size_t	pathw;	/* le poids total du chemin */
-	BIT	visited;
 }		t_nodew;
+
+/**
+ *	Represente un sommet du graphe du labyrinthe (exo 3)
+ */
+typedef struct	s_nodel {
+	t_node	super;	/* héritage 'à la C' */
+	INDEX	x;
+	INDEX	y;
+}		t_nodel;
 
 /**
  *	@require : 'path'  : un tableau renvoyé par "node_build_path()"
@@ -49,4 +58,12 @@ t_array * node_build_path(t_array * nodes, INDEX s, INDEX t);
  */
 void node_solve_path(t_array * nodes, INDEX s, INDEX t, FILE * stream);
 
+/**
+ *	@require : 	'n'		: un nombre de sommets
+ *		   	'nodeSize'	: taille d'un sommet en mémoire
+ *	@ensure	 : génère et renvoie un tableau de 'n' sommet non initialisé
+ *	@assign	 : ----------------
+ */
+t_array * nodes_new(INDEX n, size_t nodeSize);
+	
 #endif

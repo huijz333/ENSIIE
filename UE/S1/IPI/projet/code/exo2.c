@@ -13,7 +13,7 @@ static INDEX dijkstra_next_nodew(t_matrix * ws, t_array * nodes) {
 	/* pour chaque sommet ... */
 	for (i = 0 ; i < ws->n ; i++) {
 		t_nodew * node = (t_nodew *) array_get(nodes, i);
-		if (node->visited) {
+		if (node->super.visited) {
 			continue ;
 		}
 		/*
@@ -53,9 +53,9 @@ static t_array * dijkstra_init(INDEX n, INDEX s) {
 	
 	/* on ajoute 'n' sommet 'vide' (<=> non visité) */
 	t_nodew empty;
-	empty.visited = 0;
-	empty.pathw = UINT_MAX;
 	empty.super.pathlen = 0;
+	empty.super.visited = 0;
+	empty.pathw = UINT_MAX;
 	array_addn(nodes, &empty, n);
 
 	/* on initialise le sommet 'source' */
@@ -96,7 +96,7 @@ static t_array * dijkstra(t_matrix * ws, INDEX s, INDEX t) {
 
 		/* on definit 'u' comme visite */
 		t_nodew * node = (t_nodew *) array_get(nodes, u);
-		node->visited = 1;
+		node->super.visited = 1;
 		
 		/* pour chaque sommet */
 		INDEX v;
