@@ -30,11 +30,11 @@ int * matrix_addr(t_matrix * matrix, size_t i, size_t j);
 int matrix_get(t_matrix * matrix, size_t i, size_t j);
 
 /**
- *	@require : une matrice 'matrix', deux index (i, j)
- *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
- *	@assign  : ---
+ *	@require : une matrice 'matrix', deux index (i, j), une valeur 'value'
+ *	@ensure  : modifie la valeur matrix[i, j] à 'value'
+ *	@assign  : ---------------
  */
-int matrix_get(t_matrix * matrix, size_t i, size_t j);
+void matrix_set(t_matrix * matrix, size_t i, size_t j, int value);
 
 /**
  *	@require : ---

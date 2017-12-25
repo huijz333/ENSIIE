@@ -5,6 +5,7 @@
 # include "hmap.h"
 # include "bitmap.h"
 # include "breadth_search.h"
+# include "dijkstra.h"
 
 # define LAB_CHAR_EMPTY	('.')
 # define LAB_CHAR_WALL	('X')

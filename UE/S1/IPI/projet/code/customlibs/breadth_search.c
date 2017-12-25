@@ -25,20 +25,24 @@ int breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 	((t_node *)array_get(nodes, s))->pathlen = 0; /* source à 0 */
 
 	/** on crée une file */
-	t_list * queue = list_new();
-	if (queue == NULL) {
+	t_list * visitQueue = list_new();
+	if (visitQueue == NULL) {
 		return (0);
 	}
-	/** on ajoute la source a la file */
-	list_add(queue, &s, sizeof(INDEX));
-
 	t_bitmap * visited = bitmap_new(n);
+	if (visited == NULL) {
+		list_delete(visitQueue);
+		return (0);
+	}
+
+	/** on ajoute la source a la file */
+	list_add(visitQueue, &s, sizeof(INDEX));
 
 	/** tant que la file n'est pas vide */
-	while (queue->size > 0) {
+	while (visitQueue->size > 0) {
 		/** on pop la tête de file */
-		INDEX currindex = *((INDEX *) list_head(queue));
-		list_remove_head(queue);
+		INDEX currindex = *((INDEX *) list_head(visitQueue));
+		list_remove_head(visitQueue);
 			
 		/** on recupere le sommet correspondant */
 		t_node * currnode = (t_node *) array_get(nodes, currindex);
@@ -57,15 +61,15 @@ int breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 				/* si on a atteint 't', on a trouvé le chemin */
 				if (v == t) {
 					bitmap_delete(visited);
-					list_delete(queue);
+					list_delete(visitQueue);
 					return (1);
 				}
-				list_add(queue, &v, sizeof(INDEX));
+				list_add(visitQueue, &v, sizeof(INDEX));
 			}
 		}
 	}
 	/** sinon, 's' et 't' sont dans des parties connexes distinctes */
 	bitmap_delete(visited);
-	list_delete(queue);
+	list_delete(visitQueue);
 	return (0);
 }

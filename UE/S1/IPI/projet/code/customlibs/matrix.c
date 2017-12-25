@@ -28,14 +28,23 @@ int * matrix_addr(t_matrix * matrix, size_t i, size_t j) {
 /**
  *	@require : une matrice 'matrix', deux index (i, j)
  *	@ensure  : renvoie la valeur de l'element (i, j) dans la matrice
- *	@assign  : ---
+ *	@assign  : --------------
  */
 int matrix_get(t_matrix * matrix, size_t i, size_t j) {
 	return *(matrix_addr(matrix, i, j));
 }
 
 /**
- *	@require : ---
+ *	@require : une matrice 'matrix', deux index (i, j), une valeur 'value'
+ *	@ensure  : modifie la valeur matrix[i, j] à 'value'
+ *	@assign  : ---------------
+ */
+void matrix_set(t_matrix * matrix, size_t i, size_t j, int value) {
+	*(matrix_addr(matrix, i, j)) = value;
+}
+
+/**
+ *	@require : --------------
  *	@ensure  : lit une matrice carre sur l'entree standart.
  *			Le 1er entier lu est la dimension 'n',
  *			suivi de n * n valeurs, où la k-ieme valeur correspond
