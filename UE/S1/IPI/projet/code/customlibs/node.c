@@ -18,10 +18,6 @@ void node_write_path(t_array * path, FILE * stream) {
  *	@assign  : ---------------------------------
  */
 t_array * node_build_path(t_array * nodes, INDEX s, INDEX t) {
-	if (nodes == NULL) {
-		return (NULL);
-	}
-
 	INDEX pathlen = ((t_node *)array_get(nodes, t))->pathlen;
 
 	if (pathlen == MAX_NODES) {

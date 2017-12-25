@@ -7,10 +7,11 @@
  *			't' : indice de sommet destination
  *	@ensure  : parcours le graphe en largeur, et trouve le chemin le plus court
  *		   entre chaque sommet et le sommet source
+ *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : modifies le tableau 'nodes' en lui appliquant un algorithme
  *		   de parcours en largeur sur ses sommets
  */
-void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
+int breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 
 	/* initilisation: on definie toutes les distantes à +oo (MAX_NODES suffit),
 	   sauf pour l'origine à 0 */
@@ -26,7 +27,7 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 	/** on crée une file */
 	t_list * queue = list_new();
 	if (queue == NULL) {
-		return ;
+		return (0);
 	}
 	/** on ajoute la source a la file */
 	list_add(queue, &s, sizeof(INDEX));
@@ -53,13 +54,18 @@ void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t) {
 				bitmap_set(visited, v);
 				neighbor->prev = currindex;
 				neighbor->pathlen = currnode->pathlen + 1;
+				/* si on a atteint 't', on a trouvé le chemin */
 				if (v == t) {
-					break ;
+					bitmap_delete(visited);
+					list_delete(queue);
+					return (1);
 				}
 				list_add(queue, &v, sizeof(INDEX));
 			}
 		}
 	}
+	/** sinon, 's' et 't' sont dans des parties connexes distinctes */
 	bitmap_delete(visited);
 	list_delete(queue);
+	return (0);
 }

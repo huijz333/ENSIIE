@@ -13,9 +13,10 @@
  *			't' : indice de sommet destination
  *	@ensure  : parcours le graphe en largeur, et trouve le chemin le plus court
  *		   entre chaque sommet et le sommet source
+ *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : modifies le tableau 'nodes' en lui appliquant un algorithme
  *		   de parcours en largeur sur ses sommets
  */
-void breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t);
+int breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t);
 
 #endif

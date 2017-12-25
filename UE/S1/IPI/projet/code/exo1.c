@@ -43,6 +43,10 @@ int main(void) {
 
 	/* faire le parcours en largeur. */
 	t_array * nodes = nodes_new(n, sizeof(t_node));
+	if (nodes == NULL) {
+		fprintf(stderr, "Pas assez de mémoire.\n");
+		return (EXIT_FAILURE);
+	}
 	breadth_search(nodes, arcs, s, t); /* parcours en largeur */
 	bitmap_delete(arcs); /* plus besoin des arcs, on libere la mémoire */
 	
