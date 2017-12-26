@@ -3,5 +3,6 @@
 
 # include "ipi.h"	/* constantes */
 # include "dijkstra.h"
+# include "astar.h"
 
 #endif

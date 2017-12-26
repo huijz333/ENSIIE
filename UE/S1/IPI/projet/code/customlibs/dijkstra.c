@@ -1,10 +1,14 @@
 # include "dijkstra.h"
 
 /**
- *	@require : le nombre de sommet 'n' et le sommet source 's'
- *	@ensure  : initialise et renvoie un tableau de 't_nodew' prêt à être
- *			utilisé dans l'algorithme de dijkstra
- *	@assign  : --------------
+ *	@require : 	'nodes' :    	- le tableau des sommets
+ *			'unvisited': 	- le tableau des sommets non visités
+ *			'pathws':    	- le tableau des poids totaux des chemins
+ *				    	de 's' vers les sommets
+ *			's':		- le sommet source
+ *	@ensure  : initialise les arguments pour préparer l'algorithme de dijkstra
+ *	@assign  : 	'unvisited' est rempli de tous les sommets
+ *			'pathws' voit tous ses poids mis à '+oo'
  */
 static void dijkstra_init(t_array * nodes, t_array * unvisited, WEIGHT * pathws, INDEX s) {
 	/** pour chaque sommet */
@@ -23,15 +27,14 @@ static void dijkstra_init(t_array * nodes, t_array * unvisited, WEIGHT * pathws,
 	}
 	
 	/* on initialise le sommet 'source' */
-	t_nodew * source = (t_nodew *) array_get(nodes, s);
-	source->super.pathlen = 1;
-	source->super.prev =  s;
 	pathws[s] = 0;
 }
 
 /**
- *	@require : les sommets du graphe, et le tableau des sommets déjà visité
- *	@ensure  : renvoie l'index du prochain sommet a visité.
+ *	@require :	'unvisited': 	- le tableau des sommets non visités
+ *			'pathws':    	- le tableau des poids totaux des chemins
+ *	@ensure  : renvoie l'indice dans le tableau 'unvisited' du
+ /		   du prochain sommet à visiter
  *	@assign  : ----------------------------------------------------
  */
 static INDEX dijkstra_next_node(t_array * unvisited, WEIGHT * pathws) {
@@ -53,9 +56,14 @@ static INDEX dijkstra_next_node(t_array * unvisited, WEIGHT * pathws) {
 }
 
 /**
- *	@require : les sommets du graphe, les arcs et leur poids, et un indice du graphe
- *	@ensure  : construits des chemins plus court entre 's' et les voisins de 'u'
- *	@assign  : ----------------------------------------------------
+ *	
+ *	@require :	'nodes': 	- le tableau des sommets du graphe
+ *			'pathws':    	- le tableau des poids totaux des chemins
+ *			'uID':		- le numéro du sommet que l'on visite
+ *	@ensure  : applique un algorithme de propagation sur le sommet 'uID':
+ *			pour chacun de ses successeurs, on essaye de construire
+ *			un chemin plus court venant de 'u'
+ *	@assign  : 'pathws' peut être modifié au index des successeurs de 'u'
  */
 static void dijkstra_flood_fill(t_array * nodes, WEIGHT * pathws, INDEX uID) {
 	t_nodew * u = (t_nodew *) array_get(nodes, uID);
@@ -82,10 +90,12 @@ static void dijkstra_flood_fill(t_array * nodes, WEIGHT * pathws, INDEX uID) {
 }
 
 /**
- *	@require : une matrice representant les arcs et leur poids, deux indices s et t
+ *	@require : 	'nodes':	un tableau de sommet
+ *			's':		un indice sommet source
+ *			't':		un indice de sommet de destination
  *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
  *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
- *	@assign  : --------------
+ *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
 int dijkstra(t_array * nodes, INDEX s, INDEX t) {
 	
@@ -123,8 +133,9 @@ int dijkstra(t_array * nodes, INDEX s, INDEX t) {
 			 *  sinon, on a trouvé un chemin
 			 */
 			array_delete(unvisited);
+			WEIGHT pathw = pathws[uID];
 			free(pathws);
-			return (pathws[uID] == INF_WEIGHT ? 0 : 1);
+			return (pathw == INF_WEIGHT ? 0 : 1);
 		}
 
 		/* on minimise les chemins des voisins de 'un' */

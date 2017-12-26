@@ -5,6 +5,7 @@
 # include <stdlib.h>	/* free, malloc */
 # include <string.h>	/* memcpy, memset... */
 # include <limits.h>	/* UCHAR_MAX ... */
+# include <float.h>	/* DBL_MAX ... */
 
 /* typedef pratique ... */
 # ifndef BYTE
@@ -51,7 +52,7 @@
 /**
  *	Le type a utilisé pour modélisé les poids sur les arcs
  */
-# define WEIGHT size_t
-# define INF_WEIGHT ULONG_MAX
+# define WEIGHT double
+# define INF_WEIGHT DBL_MAX
 
 #endif	/* ifndef IPI_H */

@@ -1,9 +1,18 @@
 # include "lab.h"
 
 /**
- *	NB : ce constructeur est relativement long, car on s'assure
- *		qu'il n'y ait pas de fuite mémoire en cas d'erreur
- *
+ *	@require :	lab : un labyrinthe alloué via 'lab_new()'
+ *	@ensure	 :	supprime le labyrinthe du tas
+ *	@assign  :	-------
+ */
+void lab_delete(t_lab * lab) {
+	free(lab->map);
+	hmap_delete(lab->teleporters); /*TODO : free keys and values */
+	hmap_delete(lab->doors);
+	free(lab);
+}
+
+/**
  *	@require :	n : longueur (== largeur) du labyrinthe
  *	@ensure	 :	crée un nouveau labyrinthe de taille 'n'
  *	@assign  :	-------
@@ -15,38 +24,14 @@ t_lab * lab_new(INDEX l) {
 	}
 	lab->l = l;
 	lab->teleporters = hmap_new(16, (t_hashf)inthash, (t_cmpf)intcmp);
-	if (lab->teleporters == NULL) {
-		free(lab);
-		return (NULL);
-	}
 	lab->doors = hmap_new('z' - 'a' + 1, (t_hashf)inthash, (t_cmpf)intcmp);
-	if (lab->doors == NULL) {
-		hmap_delete(lab->doors);
-		free(lab);
-		return (NULL);
-	}
 	lab->map = (char *) malloc((l * l + 1) * sizeof(char));
-	if (lab->map == NULL) {
-		hmap_delete(lab->doors);
-		hmap_delete(lab->teleporters);
-		free(lab);
+	if (lab->teleporters == NULL || lab->doors == NULL || lab->map == NULL) {
+		lab_delete(lab);
 		return (NULL);
 	}
-
 	lab->map[l * l] = 0;
 	return (lab);
-}
-
-/**
- *	@require :	lab : un labyrinthe alloué via 'lab_new()'
- *	@ensure	 :	supprime le labyrinthe du tas
- *	@assign  :	-------
- */
-void lab_delete(t_lab * lab) {
-	free(lab->map);
-	hmap_delete(lab->teleporters); /*TODO : free keys and values */
-	hmap_delete(lab->doors);
-	free(lab);
 }
 
 /**
@@ -78,6 +63,12 @@ char lab_char_at(t_lab * lab, INDEX x, INDEX y) {
 	return (lab->map[y * lab->l + x]);
 }
 
+WEIGHT h(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	
+
+	return 0;//-(dx * dx + dy * dy);
+}
+
 void lab_solve(t_lab * lab, unsigned int timer) {
 
 	/** une direction possible de deplacement */
@@ -102,7 +93,6 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 	}
 
 	/** pour chaque case */
-	puts("generating nodes");
 	INDEX maxNodeID = lab->l * lab->l;
 	INDEX * nodesID = (INDEX *) malloc(sizeof(INDEX) * maxNodeID);
 	INDEX x, y;
@@ -124,8 +114,6 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 	}
 	/** on a 'n' sommets non-mur */
 	INDEX n = nodes->size;
-	
-	puts("generating node paths");
 	/** pour chaque sommets */
 	INDEX uNodeID;
 	for (uNodeID = 0 ; uNodeID < n ; uNodeID++) {
@@ -160,11 +148,10 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 	}
 
 	free(nodesID);
-	dijkstra(nodes, 0, n - 1);
+	int r = astar(nodes, h, 0, n - 1);
 	t_array * path = node_build_path(nodes, 0, n - 1);
 	if (path == NULL) {
 		array_delete(nodes);
-		/*matrix_delete(arcs);*/
 		return ;
 	}
 
@@ -197,6 +184,5 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 		array_delete(node->super.successors);
 	}
 	array_delete(nodes);
-	/*matrix_delete(arcs);*/
 	(void)timer;
 }

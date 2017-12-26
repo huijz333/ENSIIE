@@ -65,7 +65,8 @@ int main(void) {
 
 	/* faire l'algorithme de dijkstra */
 	int r = dijkstra(nodes, s, t);
-/*	int r = astar(nodes, s, t);*/
+	/* ce qui est équivalent à faire, avec 'zero' une fonction qui renvoie 0 */
+	/* int r = astar(nodes, zero, s, t); */
 	if (r) {
 		node_solve_path(nodes, s, t, stdout);
 	} else {

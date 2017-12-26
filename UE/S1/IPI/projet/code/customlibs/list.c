@@ -60,11 +60,14 @@ void * list_push(t_list * lst, void const * content, unsigned int content_size) 
 	}
 	memcpy(node + 1, content, content_size);
 
-	t_list_node *tmp = lst->head->next;
+	/** head <-> tmp <-> ... */
+	t_list_node * tmp = lst->head->next;
 
+	/** head -> node <- tmp <-> ... */
 	lst->head->next = node;
 	tmp->prev = node;
 
+	/** head <-> node <-> tmp <-> ... */
 	node->prev = lst->head;
 	node->next = tmp;
 
@@ -96,6 +99,7 @@ void * list_tail(t_list * lst) {
 	}
 	return ((void *) (lst->head->prev + 1));
 }
+
 /**
  *	Fonction interne pour supprimé un sommet de la liste
  *
@@ -103,7 +107,7 @@ void * list_tail(t_list * lst) {
  *	@ensure : supprime le sommet de la liste
  *	@assign : ---------------------
  */
-static void list_remove_node(t_list * lst, t_list_node * node) {
+void list_remove_node(t_list * lst, t_list_node * node) {
 	if (node->prev != NULL) {
 		node->prev->next = node->next;
 	}
@@ -143,6 +147,19 @@ int list_remove_tail(t_list * lst) {
 	}
 	list_remove_node(lst, lst->head->prev);
 	return (1);
+}
+
+/**
+ *	@require: une liste, une fonction
+ *	@ensure : applique la fonction à toutes les valeurs de la liste
+ *	@assign : ---------------------
+ */
+void list_iterate(t_list * lst, void (*f)(void const * value)) {
+	t_list_node * node = lst->head->next;
+	while (node != lst->head) {
+		f(node + 1);
+		node = node->next;
+	}
 }
 
 /**

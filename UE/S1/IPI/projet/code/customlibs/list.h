@@ -72,6 +72,22 @@ int list_remove_head(t_list * lst);
 int list_remove_tail(t_list * lst);
 
 /**
+ *	Fonction interne pour supprimé un sommet de la liste
+ *
+ *	@require: une liste, un sommet
+ *	@ensure : supprime le sommet de la liste
+ *	@assign : ---------------------
+ */
+void list_remove_node(t_list * lst, t_list_node * node);
+	
+/**
+ *	@require: une liste, une fonction
+ *	@ensure : applique la fonction à toutes les valeurs de la liste
+ *	@assign : ---------------------
+ */
+void list_iterate(t_list * lst, void (*f)(void const * value));
+
+/**
  *	@require: une liste
  *	@ensure : supprime toutes les données de la liste
  *			renvoie 1 si une donnée a été supprimé, 0 sinon
@@ -85,5 +101,17 @@ void list_clear(t_list * lst);
  *	@assign : ---------------------
  */
 void list_delete(t_list * lst);
+
+/**
+ *	macro pratique pour itérer à travers la liste
+ */
+# define LIST_ITERATE_START(L, T, V)\
+	t_list_node * __node = L->head->next;\
+	while (__node != L->head) {\
+		T V = (T)(__node + 1);
+# define LIST_ITERATE_STOP(L, T, V)\
+		__node = __node->next;\
+	}
+
 
 #endif
