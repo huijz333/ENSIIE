@@ -1,5 +1,23 @@
 # include "astar.h"
 
+/** 2 fonctions d'heuristique pré-implémenté */
+WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	(void)nodes;
+	(void)uID;
+	(void)vID;
+	(void)sID;
+	(void)tID;
+	return (0);
+}
+
+WEIGHT heuristic_euclidian(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	(void)vID;
+	(void)tID;
+	t_nodel * v = (t_nodel *) array_get(nodes, vID);
+	t_nodel * t = (t_nodel *) array_get(nodes, tID);
+	return (t->x - v->x + t->y - v->y);
+}
+
 /**
  *	@require : 	'nodes' :    	- le tableau des sommets
  *			'unvisited': 	- le tableau des sommets non visités

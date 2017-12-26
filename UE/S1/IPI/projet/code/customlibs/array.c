@@ -159,11 +159,9 @@ int array_addempty(t_array * array, unsigned int n) {
  *	@assign  : modifie les valeurs du tableau
  */
 int array_add_all(t_array * array, void * values, unsigned int count) {
-	if (array->size + count > array->capacity) {
-		if (array_grow(array, array->size + count) == -1) {
-			/* pas assez de mémoire */
-			return (-1);
-		}
+	if (array_ensure_capacity(array, array->size + count) == -1) {
+		/* pas assez de mémoire */
+		return (-1);
 	}
 	memcpy(array->values + array->size, values, count * array->elemSize);
 	unsigned int index = array->size;

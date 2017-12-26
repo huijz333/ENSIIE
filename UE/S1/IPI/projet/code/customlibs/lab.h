@@ -7,6 +7,9 @@
 
 # define LAB_CHAR_EMPTY	('.')
 # define LAB_CHAR_WALL	('X')
+# define LAB_CHARSET_KEYS  ("abcdefghijklmnopqrstuvwxyz")
+# define LAB_CHARSET_DOORS ("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+# define LAB_CHARSET_TELEPORTERS ("*%$#&+-@^£!")
 
 /** represente le labyrinthe */
 typedef struct	s_lab {

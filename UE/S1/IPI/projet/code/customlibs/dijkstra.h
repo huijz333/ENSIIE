@@ -4,6 +4,7 @@
 # include "ipi.h"
 # include "array.h"
 # include "node.h"
+# include "astar.h"
 
 /**
  *	@require : une matrice representant les arcs et leur poids, deux indices s et t

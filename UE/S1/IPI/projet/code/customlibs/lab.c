@@ -54,20 +54,7 @@ t_lab * lab_parse(FILE * stream) {
 	return (lab);
 }
 
-/**
- *	@require :	un labyrinthe et les coordonnées d'une case
- *	@ensure	 :	renvoie la lettre dans la case
- *	@assign  :	--------------------
- */
-char lab_char_at(t_lab * lab, INDEX x, INDEX y) {
-	return (lab->map[y * lab->l + x]);
-}
 
-WEIGHT h(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	
-
-	return 0;//-(dx * dx + dy * dy);
-}
 
 void lab_solve(t_lab * lab, unsigned int timer) {
 
@@ -138,17 +125,19 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 
 			/** sinon, 'v' est voisin 'u' */
 			if (u->super.ws == NULL) {
-				u->super.ws = array_new(4, sizeof(unsigned int));
+				u->super.ws = array_new(4, sizeof(WEIGHT));
 				u->super.super.successors = array_new(4, sizeof(INDEX));
 			}
-			unsigned int w = 1;
+			WEIGHT w = n;
 			array_add(u->super.ws, &w);
 			array_add(u->super.super.successors, &vNodeID);
 		}
 	}
 
 	free(nodesID);
-	int r = astar(nodes, h, 0, n - 1);
+
+	astar(nodes, heuristic_euclidian, 0, n - 1);
+	
 	t_array * path = node_build_path(nodes, 0, n - 1);
 	if (path == NULL) {
 		array_delete(nodes);
@@ -171,7 +160,7 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 		} else if (dy == -1) {
 			puts("HAUT");
 		} else {
-			printf("wtf: %d:%d ; %d:%d ; %d:%d\n", next->x, next->y, prev->x, prev->y, dx, dy);
+			puts("TP");
 		}
 		prev = next;
 	}
