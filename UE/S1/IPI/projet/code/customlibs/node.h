@@ -8,8 +8,10 @@
  *	Represente un sommet du graphe (exo 1)
  */
 typedef struct	s_node {
+	t_array	* successors; /* les successeurs de ce sommet */
 	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
 	INDEX	prev;	/* element precedant le chemin (index du sommet) */
+
 }		t_node;
 
 /**
@@ -17,16 +19,15 @@ typedef struct	s_node {
  */
 typedef struct	s_nodew {
 	t_node	super;	/* héritage 'à la C' */	
-	size_t	pathw;	/* le poids total du chemin */
+	t_array	* ws;	/* poids des arcs (<=> index des successeurs) */
 }		t_nodew;
 
 /**
  *	Represente un sommet du graphe du labyrinthe (exo 3)
  */
 typedef struct	s_nodel {
-	t_node	super;	/* héritage 'à la C' */
-	INDEX	x;
-	INDEX	y;
+	t_nodew	super;	/* héritage 'à la C' */
+	INDEX	x, y;	/* position x, y dans le labyrinthe */
 }		t_nodel;
 
 /**
@@ -57,12 +58,4 @@ t_array * node_build_path(t_array * nodes, INDEX s, INDEX t);
  */
 void node_solve_path(t_array * nodes, INDEX s, INDEX t, FILE * stream);
 
-/**
- *	@require : 	'n'		: un nombre de sommets
- *		   	'nodeSize'	: taille d'un sommet en mémoire
- *	@ensure	 : génère et renvoie un tableau de 'n' sommet non initialisé
- *	@assign	 : ----------------
- */
-t_array * nodes_new(INDEX n, size_t nodeSize);
-	
 #endif

@@ -17,6 +17,6 @@
  *	@assign  : modifies le tableau 'nodes' en lui appliquant un algorithme
  *		   de parcours en largeur sur ses sommets
  */
-int breadth_search(t_array * nodes, t_bitmap * arcs, INDEX s, INDEX t);
+int breadth_search(t_array * nodes, INDEX s, INDEX t);
 
 #endif

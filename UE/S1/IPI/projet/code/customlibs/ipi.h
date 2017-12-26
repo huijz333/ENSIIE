@@ -48,4 +48,10 @@
 #	define INDEX_IDENTIFIER	"%lu"
 # endif
 
+/**
+ *	Le type a utilisé pour modélisé les poids sur les arcs
+ */
+# define WEIGHT size_t
+# define INF_WEIGHT ULONG_MAX
+
 #endif	/* ifndef IPI_H */

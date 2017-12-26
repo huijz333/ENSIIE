@@ -94,13 +94,15 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 		{"BAS",		 0, -1}
 	};
 
-	/** on crée un sommet pour chaque case non-mur du labyrinthe */
+	/** on crée un sommet pour chaque case non-mur du labyrinthe.
+	 On a donc au plus 'l * l' case maximum, on reduira le taille du tableau après*/
 	t_array * nodes = array_new(lab->l * lab->l, sizeof(t_nodel));
 	if (nodes == NULL) {
 		return ;
 	}
 
 	/** pour chaque case */
+	puts("generating nodes");
 	INDEX maxNodeID = lab->l * lab->l;
 	INDEX * nodesID = (INDEX *) malloc(sizeof(INDEX) * maxNodeID);
 	INDEX x, y;
@@ -110,63 +112,64 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 			INDEX caseID = y * lab->l + x;
 			if (lab->map[caseID] == LAB_CHAR_WALL) {
 				nodesID[caseID] = maxNodeID;
-				continue ;
+			} else {
+				t_nodel node;
+				node.x = x;
+				node.y = y;
+				node.super.ws = NULL;
+				node.super.super.successors = NULL;
+				nodesID[caseID] = array_add(nodes, &node);
 			}
-			t_nodel node;
-			node.x = x;
-			node.y = y;
-			nodesID[caseID] = array_add(nodes, &node);
 		}
 	}
 	/** on a 'n' sommets non-mur */
 	INDEX n = nodes->size;
 	
-	/** on crée les arcs entre ces sommets */
-	t_bitmap * arcs = bitmap_new2(n, n);
-	if (arcs == NULL) {
-		array_delete(nodes);
-		return ;
-	}
-
+	puts("generating node paths");
 	/** pour chaque sommets */
-	ARRAY_ITERATE_START(nodes, t_nodel *, node, nodeID) {
-		/** pour chaque voisins */
-		INDEX x = node->x;
-		INDEX y = node->y;
+	INDEX uNodeID;
+	for (uNodeID = 0 ; uNodeID < n ; uNodeID++) {
+		t_nodel * u = (t_nodel *) array_get(nodes, uNodeID);
+		/** pour chaque cases voisines */
 		BYTE i;
 		for (i = 0 ; i < 4 ; i++) {
 			int dx = directions[i].dx;
 			int dy = directions[i].dy;
-			int nx = (int)x + dx;
-			int ny = (int)y + dy;
+			int nx = (int)u->x + dx;
+			int ny = (int)u->y + dy;
+			/** si on est hors de la carte, on continue */
 			if (nx < 0 || ny < 0 || nx >= (int)lab->l || ny >= (int)lab->l) {
 				continue ;
 			}
-			INDEX neighborCaseID = ny * lab->l + nx;
-			INDEX neighborNodeID = nodesID[neighborCaseID];
-			if (neighborNodeID == maxNodeID) {
+			/** si on est dans un mur, on continue */
+			INDEX vCaseID = ny * lab->l + nx;
+			INDEX vNodeID = nodesID[vCaseID];
+			if (vNodeID == maxNodeID) {
 				continue ;
 			}
-			/** sinon, on définit des arcs */
-			bitmap_set2(arcs, nodeID, neighborNodeID, n);
-			bitmap_set2(arcs, neighborNodeID, nodeID, n);
-		}
-	};
-	ARRAY_ITERATE_STOP(nodes, t_nodel *, node, nodeID);
 
+			/** sinon, 'v' est voisin 'u' */
+			if (u->super.ws == NULL) {
+				u->super.ws = array_new(4, sizeof(unsigned int));
+				u->super.super.successors = array_new(4, sizeof(INDEX));
+			}
+			unsigned int w = 1;
+			array_add(u->super.ws, &w);
+			array_add(u->super.super.successors, &vNodeID);
+		}
+	}
 
 	free(nodesID);
-
-	breadth_search(nodes, arcs, 0, n - 1);
+	dijkstra(nodes, 0, n - 1);
 	t_array * path = node_build_path(nodes, 0, n - 1);
 	if (path == NULL) {
 		array_delete(nodes);
-		bitmap_delete(arcs);
+		/*matrix_delete(arcs);*/
 		return ;
 	}
 
-	t_nodel * prev = array_get(nodes, *((INDEX *) array_get(path, 0)));
 	INDEX i;
+	t_nodel * prev = array_get(nodes, *((INDEX *) array_get(path, 0)));
 	for (i = 1 ; i < path->size ; i++) {
 		INDEX nextID = *((INDEX *) array_get(path, i));
 		t_nodel * next = (t_nodel *) array_get(nodes, nextID);
@@ -178,13 +181,22 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 			puts("GAUCHE");
 		} else if (dy == 1) {
 			puts("BAS");
-		} else {
+		} else if (dy == -1) {
 			puts("HAUT");
+		} else {
+			printf("wtf: %d:%d ; %d:%d ; %d:%d\n", next->x, next->y, prev->x, prev->y, dx, dy);
 		}
 		prev = next;
 	}
+
+	/* libere la mémoire */
 	array_delete(path);
+	for (i = 0 ; i < nodes->size ; i++) {
+		t_nodew * node = (t_nodew *) array_get(nodes, i);
+		array_delete(node->ws);
+		array_delete(node->super.successors);
+	}
 	array_delete(nodes);
-	bitmap_delete(arcs);
+	/*matrix_delete(arcs);*/
 	(void)timer;
 }

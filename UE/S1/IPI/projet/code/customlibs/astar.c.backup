@@ -1,0 +1,150 @@
+# include "astar.h"
+
+/**
+ *	@require : le nombre de sommet 'n' et le sommet source 's'
+ *	@ensure  : initialise et renvoie un tableau de 't_nodew' prêt à être
+ *			utilisé dans l'algorithme de astar
+ *	@assign  : --------------
+ */
+static void astar_init(t_array * nodes, t_array * costs, t_array * unvisited, INDEX s) {
+	/** on definit toutes les distances de 's' sur '+oo' */
+	INDEX n = nodes->size;
+	INDEX i;
+	for (i = 0 ; i < n ; i++) {
+		/** pas de chemin encore calculés */
+		t_nodew * node = (t_nodew *) array_get(nodes, i);
+		node->super.pathlen = 0;
+		node->super.prev = MAX_NODES;
+
+		/* tous les sommets sont à une distance 'infinie' */
+		WEIGHT infinity = INF_WEIGHT;
+		array_add(costs, &infinity);
+		
+		/* tous les sommets sont non-visités */
+		array_add(unvisited, &i);
+	}
+	
+	/* on initialise le sommet 'source' */
+	WEIGHT zero = 0;
+	array_set(costs, s, &zero);
+}
+
+/**
+ *	@require : les sommets du graphe, et le tableau des sommets déjà visité
+ *	@ensure  : renvoie l'index du prochain sommet a visité.
+ *	@assign  : ----------------------------------------------------
+ */
+static INDEX astar_next_node(t_array * costs, t_array * unvisited) {
+	/* on prends le 1er sommet non visité */
+	INDEX i = 0;
+	INDEX uID = *((INDEX *) array_get(unvisited, i));
+	WEIGHT ucost = *((WEIGHT *) array_get(costs, uID));
+
+	/* pour chaque autre sommets non visités */
+	INDEX j;
+	for (j = 1 ; j < unvisited->size ; j++) {
+		INDEX vID = *((INDEX *) array_get(unvisited, j));
+		WEIGHT vcost = *((WEIGHT *) array_get(costs, vID));
+
+		/** si ce sommet est de cout plus faible */
+		if (vcost < ucost) {
+			/** c'est le prochaine que l'on visitera */
+			uID = vID;
+			ucost = vcost;
+			i = j;
+		}
+	}
+	return (i);
+}
+
+/**
+ *	@require : les sommets du graphe, les arcs et leur poids, et un indice du graphe
+ *	@ensure  : construits des chemins plus court entre 's' et les voisins de 'u'
+ *	@assign  : ----------------------------------------------------
+ */
+static void astar_flood_fill(t_array * nodes, t_array * costs, INDEX uID) {
+	/* pour chaque successeurs 'v' de 'u' */
+	t_nodew * u = (t_nodew *) array_get(nodes, uID);
+	if (u->super.successors == NULL) {
+		return ;
+	}
+	INDEX i;
+	for (i = 0 ; i < u->super.successors->size ; i++) {
+		/** on recupere le sommet 'v' */
+		INDEX vID = *((INDEX *) array_get(u->super.successors, i));
+		t_nodew * v = (t_nodew *) array_get(nodes, vID);
+		/** poids pour aller de 'u' à 'v' par l'arc */
+		WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
+		/** heuristic */
+		WEIGHT h = 0;
+		/** cout total pour aller de'u' à 'v' */
+		WEIGHT cost = w + h;
+		/** on recupere le cout precedent */
+		WEIGHT ucost = *((WEIGHT *)array_get(costs, uID));
+		WEIGHT vcost = *((WEIGHT *)array_get(costs, vID));
+		WEIGHT newcost = ucost + cost;
+
+		if (newcost < vcost) {
+			/* on ecrase le chemin precedant par le nouveau chemin */
+			array_set(costs, vID, &newcost);
+			v->super.prev = uID;
+			v->super.pathlen = u->super.pathlen + 1;
+		}
+	}
+}
+
+/**
+ *	@require : une matrice representant les arcs et leur poids, deux indices s et t
+ *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
+ *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
+ *	@assign  : --------------
+ */
+int astar(t_array * nodes, INDEX s, INDEX t) {
+	/** allocation */
+	INDEX n = nodes->size;
+
+	/** coût total (poids des arcs + heuristique) */
+	t_array * costs = array_new(n, sizeof(WEIGHT));
+	if (costs == NULL) {
+		return (0);
+	}
+
+	/* tableau enregistrant les sommets non visités */
+	t_array * unvisited = array_new(n, sizeof(INDEX));
+	if (unvisited == NULL) {
+		array_delete(costs);
+		return (0);
+	}
+
+	/** initialisation */
+	astar_init(nodes, costs, unvisited, s);
+
+	/* tant qu'il y a des sommets non-visité */
+	while (unvisited->size > 0) {
+		/** on cherche un noeud 'u' non visite minimisant le cout */
+		INDEX i = astar_next_node(costs, unvisited);
+		INDEX uID = *((INDEX *) array_get(unvisited, i));
+		array_remove(unvisited, i);
+		/* sinon, si on a atteint 't' */
+		if (uID == t) {
+			/**
+			 *  deux posibilités: si le poids du chemin vaux '+oo',
+			 *  c'est que le ne l'a pas atteint via l'algorithme de
+			 *  propagation, et donc, il n'est pas dans la meme
+			 *  partie connexe que 's'.
+			 *  sinon, on a trouvé un chemin.
+			 */
+			array_delete(unvisited);
+			array_delete(costs);
+			WEIGHT cost = *((WEIGHT *) array_get(costs, t));
+			return (cost == INF_WEIGHT ? 0 : 1);
+		}
+
+		/* on minimise les chemins des voisins de 'u' */
+		astar_flood_fill(nodes, costs, uID);
+	}
+	/** tous les sommets ont été visité sans atteindre 't' */
+	array_delete(unvisited);
+	array_delete(costs);
+	return (0);
+}
