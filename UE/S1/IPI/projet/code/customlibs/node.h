@@ -20,6 +20,7 @@ typedef struct	s_node {
 typedef struct	s_nodew {
 	t_node	super;	/* héritage 'à la C' */	
 	t_array	* ws;	/* poids des arcs (<=> index des successeurs) */
+	WEIGHT	pathw;	/* poids du chemin de 's' vers ce sommet */
 }		t_nodew;
 
 /**

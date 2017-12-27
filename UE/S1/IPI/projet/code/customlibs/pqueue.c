@@ -3,103 +3,11 @@
 /**
  *	Structure de donnée: 'File de priorité' , ou 'Priority Queue'
  *
- *	Très peu documenté en Français... voir la page wikipédia anglaise
- *	qui est vraiment complète
- *
- *	https://en.wikipedia.org/wiki/Priority_queue
+ *	https://www.geeksforgeeks.org/binary-heap/
  */
 
 /**
- *	@require : l'adresse d'une clef, l'adresse d'une valeur
- *	@ensure  : renvoie un nouveau sommet contenant la clef et la valeur
- *			- les données ne sont pas copiés, seules les adresses le sont.
- *	@assign  : initialise le sommet pour l'insérer dans la file
- */
-t_pqueue_node * pqueue_node_new(void const * key, void const * value) {
-	t_pqueue_node * node = (t_pqueue_node *) malloc(sizeof(t_pqueue_node));
-	if (node == NULL) {
-		return (NULL);
-	}
-	
-	node->key = key;
-	node->value = value;
-	node->degree = 0;
-	node->flag = 0;
-
-	node->prev	= node;
-	node->next	= node;
-	node->parent 	= NULL;
-	node->child	= NULL;
-	return (node);
-}
-
-/**
- *
- *	@require : un sommet
- *	@ensure	 : supprime le sommet de la mémoire
- *			- ATTENTION : si ce sommet est encore dans la file,
- *			peut causer des erreurs!
- *	@assign  : --------
- */
-void pqueue_node_delete(t_pqueue_node * node) {
-	free(node);
-}
-
-/** fonction interne pour insérer un sommet dans son arbre */
-static void pqueue_node_insert(t_pqueue_node * parent, t_pqueue_node * node) {
-	if (node == NULL) {
-		return ;
-	}
-
-	parent->next->prev = node->prev;
-	node->prev->next = parent->next;
-	parent->next = node;
-	node->prev = parent;
-}
-
-/** fonction interne pour supprime un sommet de son arbre */
-static void pqueue_node_remove(t_pqueue_node * node) {
-	node->prev->next = node->next;
-	node->next->prev = node->prev;
-
-	node->next	= node;
-	node->prev	= node;
-}
-
-/** fonction interne pour ajouter un sommet à son arbre */
-static void pqueue_node_addchild(t_pqueue_node * parent, t_pqueue_node * child) {
-	if (parent->child == NULL) {
-		parent->child = child;
-	} else {
-		pqueue_node_insert(parent->child, child);
-	}
-	child->parent = parent;
-	child->flag = 0;
-	++parent->degree;
-}
-
-/** fonction interne pour savoir si une feuille est seule dans son arbre */
-static int pqueue_node_issingle(t_pqueue_node * node) {
-	return (node->next == node);
-}
-
-/** fonction interne pour supprime un sommet */
-static void pqueue_node_removechild(t_pqueue_node * parent, t_pqueue_node * node) {
-	if (pqueue_node_issingle(node)) {
-		parent->child = NULL;
-	} else {
-		if (parent->child == node) {
-			parent->child = node->next;
-		}
-		pqueue_node_remove(node);
-	}
-	node->parent = NULL;
-	node->flag = 0;
-	parent->degree -= 1;
-}
-
-/**
- *	@require	'cmpf': fonction comparant les clefs (voir 'strcmp()')
+ *	@require: 'cmpf': fonction comparant les clefs (voir 'strcmp()')
  *	@ensure : renvoie une nouvelle file de priorité
  *	@assign : ---------------------	
  */
@@ -108,11 +16,12 @@ t_pqueue * pqueue_new(t_cmpf cmpf) {
 	if (pqueue == NULL) {
 		return (NULL);
 	}
-	pqueue->min = NULL;
+	pqueue->nodes = array_new(16, sizeof(t_pqueue_node *));
+	if (pqueue->nodes == NULL) {
+		free(pqueue->nodes);
+		return (NULL);
+	}
 	pqueue->cmpf = cmpf;
-	pqueue->size = 0;
-	pqueue->maxdegree = 0;
-
 	return (pqueue);
 }
 
@@ -122,6 +31,11 @@ t_pqueue * pqueue_new(t_cmpf cmpf) {
  *	@assign : ---------------------
  */
 void pqueue_delete(t_pqueue * pqueue) {
+	ARRAY_ITERATE_START(pqueue->nodes, t_pqueue_node **, nodeRef, i) {
+		free(*nodeRef);
+	}
+	ARRAY_ITERATE_STOP(pqueue->nodes, t_pqueue_node **, nodeRef, i);
+	array_delete(pqueue->nodes);
 	free(pqueue);
 }
 
@@ -131,89 +45,78 @@ void pqueue_delete(t_pqueue * pqueue) {
  *	@assign : ---------------------	
  */
 int pqueue_is_empty(t_pqueue * pqueue) {
-	return (pqueue->size == 0);
+	return (pqueue->nodes->size == 0);
 }
 
-/** fonction interne pour insérer un sommet dans la file */
-static void pqueue_insert_node(t_pqueue * pqueue, t_pqueue_node * node) {
-	if (pqueue->min == NULL) {
-		pqueue->min = node;
-	} else {
-		pqueue_node_insert(pqueue->min, node);
-		if (pqueue->cmpf(node->key, pqueue->min->key) < 0) {
-			pqueue->min = node;
-		}
-	}
+/** fonction interne pour recuperer une node */
+static t_pqueue_node * pqueue_get_node(t_pqueue * pqueue, unsigned int i) {
+	return (*((t_pqueue_node **)array_get(pqueue->nodes, i)));
+}
+
+/** fonction interne pour echanger deux sommets de la file */
+static void pqueue_swap_nodes(t_pqueue * pqueue, unsigned int i, unsigned int j) {
+	t_pqueue_node * inode = pqueue_get_node(pqueue, i);
+	t_pqueue_node * jnode = pqueue_get_node(pqueue, j);
+	array_set(pqueue->nodes, i, &jnode);
+	array_set(pqueue->nodes, j, &inode);
+	inode->index = j;
+	jnode->index = i;
 }
 
 /**
  *	@require: une file de priorité, une clef, et une valeur
- *			renvoie le sommet insérer, ou NULL si erreur
+ *			renvoie 1 si l'élément a pu etre inseré, 0 sinon
  *	@ensure : ajoutes l'élément dans la file.
- *		  si la clef doit être modifié, appelé 'pqueue_decrease()'
+ *			- il y a copie des adresses, pas des valeurs!
+ *		  	- si la clef doit être modifié, appelé 'pqueue_decrease()'
  *	@assign : --------------------------
  */
 t_pqueue_node * pqueue_insert(t_pqueue * pqueue, void const * key, void const * value) {
-	t_pqueue_node * node = pqueue_node_new(key, value);
+	// First insert the new key at the end
+	t_pqueue_node * node = (t_pqueue_node *) malloc(sizeof(t_pqueue_node));
 	if (node == NULL) {
-		return (0);
+		return (NULL);
 	}
-	pqueue_insert_node(pqueue, node);
-	++pqueue->size;
+	/** initialise le sommet de la file */
+	node->key	= key;
+	node->value	= value;
+	node->index	= array_add(pqueue->nodes, &node);
+
+	// Fix the min heap property if it is violated
+	unsigned int i = pqueue->nodes->size - 1;
+	while (i != 0) {
+		/** parent of 'i' */
+		unsigned int pi = (i - 1) / 2;
+		t_pqueue_node * i_node	= pqueue_get_node(pqueue, i);
+		t_pqueue_node * pi_node	= pqueue_get_node(pqueue, pi);
+		if (pqueue->cmpf(i_node->key, pi_node->key) > 0) {
+			i = pi;
+			continue ;
+		}
+		pqueue_swap_nodes(pqueue, i, pi);
+		i = pi;
+	}
 	return (node);
 }
 
 /**
- *	@require: une file de priorité, une clef, et une valeur
- *	@ensure : modifie la clef d'une valeur (baisse de clef <=> augmente sa priorité)
+ *	@require: une file de priorité, un sommet, et une nouvelle clef plus faible
+ *		  que la precedente pour ce sommet
+ *	@ensure : diminue la clef d'une valeur (<=> augmente sa priorité)
  *	@assign : ----------------------
  */
 void pqueue_decrease(t_pqueue * pqueue, t_pqueue_node * node, void const * newkey) {
-	int diff = pqueue->cmpf(newkey, node->key);
-	if (diff > 0) {
-		puts("Tried to increase a priority! only decrease allowed");
-		return ;
-	}
-	/** si les clefs sont identiques... pas besoin de modifier les arbres */
-	if (diff == 0) {
-		return ;
-	}
-	
 	node->key = newkey;
-	t_pqueue_node * parent = node->parent;
-	/** si l'on a mis a jour une racine d'un des arbres */
-	if (parent == NULL) {
-		/** on vérifie voir si cette racine devient le nouveau minimum */
-		if (pqueue->cmpf(newkey, pqueue->min->key) < 0) {
-			pqueue->min = node;
-		}
-		return ;
-	}
-	
-	/** si on a mis à jour une feuille, mais que cette modification
-	  n'a pas changé la hierarchie de priorité, on s'arrête */
-	if (pqueue->cmpf(parent->key, newkey) <= 0) {
-		return ;
-	}
-
-	/** sinon, on remonte la feuille */
-	while (1) {
-		pqueue_node_removechild(parent, node);
-		pqueue_insert_node(pqueue, node);
-		if (parent->parent == NULL) {
+	unsigned int i = node->index;
+	while (i != 0) {
+		unsigned int pi = (i - 1) / 2;
+		t_pqueue_node * i_node	= pqueue_get_node(pqueue, i);
+		t_pqueue_node * pi_node	= pqueue_get_node(pqueue, pi);
+		if (pqueue->cmpf(pi_node->key, i_node->key) < 0) {
 			break ;
 		}
-
-		if (parent->parent == NULL) {
-			break ;
-		}
-		
-		if (!parent->flag) {
-			parent->flag = 1;
-			break ;
-		} 
-		node = parent;
-		parent = parent->parent;
+		pqueue_swap_nodes(pqueue, i, pi);
+		i = pi;
 	}
 }
 
@@ -223,7 +126,39 @@ void pqueue_decrease(t_pqueue * pqueue, t_pqueue_node * node, void const * newke
  *	@assign: --------------------------
  */
 t_pqueue_node * pqueue_minimum(t_pqueue * pqueue) {
-	return (pqueue->min);
+	return (pqueue_get_node(pqueue, 0));
+}
+
+/**
+ *	fonction interne qui assure l'intégrité de la structure de manière recursive,
+ *  	en partant de l'index 'i'
+ */
+static void pqueue_heapify(t_pqueue * pqueue, unsigned int i) {
+	t_array * nodes = pqueue->nodes;
+	unsigned int l = 2 * i + 1;
+	unsigned int r = 2 * i + 2;
+	unsigned int s = i; /** plus petite clef entre 'i', 'l', et 'r' */
+	t_pqueue_node * inode = pqueue_get_node(pqueue, i);
+
+	if (l < nodes->size) {
+		t_pqueue_node * lnode = pqueue_get_node(pqueue, l);
+		if (pqueue->cmpf(lnode->key, inode->key) < 0) {
+			s = l;
+		}
+	}
+
+	if (r < nodes->size) {
+		t_pqueue_node * rnode = pqueue_get_node(pqueue, r);
+		t_pqueue_node * snode = pqueue_get_node(pqueue, s);
+		if (pqueue->cmpf(rnode->key, snode->key) < 0) {
+			s = r;
+		}
+	}
+
+	if (s != i) {
+		pqueue_swap_nodes(pqueue, i, s);
+		pqueue_heapify(pqueue, s);
+	}
 }
 
 /**
@@ -232,98 +167,66 @@ t_pqueue_node * pqueue_minimum(t_pqueue * pqueue) {
  *		 la clef la plus basse (<=> la plus haute priorité)
  *	@assign: --------------------------
  */
-t_pqueue_node * pqueue_pop(t_pqueue * pqueue) {
-	if (pqueue_is_empty(pqueue)) {
-		return (NULL);
-	}
-	t_pqueue_node * removed_node = pqueue->min;
-	--pqueue->size;
-
-	/* Assign all old root children as new roots */
-	if (pqueue->min->child != NULL) {
-		t_pqueue_node * c = pqueue->min->child;
-		while (1) {
-			c->parent = NULL;
-			c = c->next;
-			if (c == pqueue->min->child) {
-				break ;
-			}
-		}
-		pqueue->min->child = NULL;
-		pqueue_node_insert(pqueue->min, c);
+t_pqueue_node pqueue_pop(t_pqueue * pqueue) {
+	if (pqueue->nodes->size == 0) {
+		t_pqueue_node node;
+		node.key = NULL;
+		node.value = NULL;
+		return (node);
 	}
 
-	/* 2.1: If we have removed the last key */
-	if (pqueue->min->next == pqueue->min) {
-		if (pqueue->size != 0) {
-			puts("Error pqueue_pop(1)! pointers were lost as"\
-					"pqueue->size != 0 and pqueue->min == 0");
-		}
-		pqueue->min = NULL;
-		return (removed_node);
+	/** sauvegarde le minimum */
+	t_pqueue_node * min = pqueue_minimum(pqueue);
+
+	t_array * nodes = pqueue->nodes;
+	if (nodes->size == 1) {
+		array_remove(nodes, 0);
+	} else {
+		pqueue_swap_nodes(pqueue, 0, nodes->size - 1);
+		array_removelast(nodes);
+		pqueue_heapify(pqueue, 0);
 	}
 
-	/* 2.2: Merge any roots with the same degree */
-	BYTE logsize = 100;
-	size_t memsize = logsize * sizeof(t_pqueue_node *);
-	t_pqueue_node ** degreeroots = (t_pqueue_node **) malloc(memsize);
-	memset(degreeroots, 0, memsize);
-
-	pqueue->maxdegree = 0;
-	t_pqueue_node * currentpointer = pqueue->min->next;
-
-	while (1) {
-		size_t currentdegree = currentpointer->degree;
-		t_pqueue_node * current = currentpointer;
-		currentpointer = currentpointer->next;
-		while (degreeroots[currentdegree] != NULL) {
-			t_pqueue_node * other = degreeroots[currentdegree];
-			/* Swap if required */
-			if (pqueue->cmpf(current->key, other->key) > 0) {
-				t_pqueue_node * tmp = other;
-				other = current;
-				current = tmp;
-			}
-			pqueue_node_remove(other);
-			pqueue_node_addchild(current, other);
-			degreeroots[currentdegree] = NULL;
-			currentdegree += 1;
-		}
-
-		degreeroots[currentdegree] = current;
-		if (currentpointer == pqueue->min) {
-			break;
-		}
-	}
-
-	/* 3: Remove current root and find new->min */
-	pqueue->min = NULL;
-	size_t newmaxdegree = 0;
-	BYTE d;
-	for (d = 0 ; d < logsize ; d++) {
-		if (degreeroots[d] != NULL) {
-			degreeroots[d]->next = degreeroots[d];
-			degreeroots[d]->prev = degreeroots[d];
-			pqueue_insert_node(pqueue, degreeroots[d]);
-			if (d > newmaxdegree) {
-				newmaxdegree = d;
-			}
-		}
-	}
-	free(degreeroots);
-
-	pqueue->maxdegree = newmaxdegree;
-	return (removed_node);
+	/** renvoie une copie sur la stack */
+	t_pqueue_node minCopy = *min;
+	free(min);
+	return (minCopy);
 }
 
-int cmpint(int * left, int * right) {
-	return (*left - *right);
+static int dblcmp(double * a, double * b) {
+	if (*a < *b) {
+		return (-1);
+	}
+	if (*a > *b) {
+		return (1);
+	}
+	return (0);
 }
 
 /*
 	TESTS et exemple d'utilisation
+*/
+/*
+int main() {
 
+	t_pqueue * pqueue = pqueue_new((t_cmpf)dblcmp);
 
+	double zero = 0;
+	double one = 1;
+	double two = 2;
+
+	pqueue_insert(pqueue, &one, &one);
+	pqueue_insert(pqueue, &zero, &one);
+	pqueue_insert(pqueue, &two, &one);
+
+	t_pqueue_node node = pqueue_pop(pqueue);
+	double v = *((double *)node.key);
+	printf("%lf\n", v);
+
+	pqueue_delete(pqueue);
+}
+*/
+/*
 #include <stdlib.h>
 #include <time.h>
 int main() {
@@ -333,7 +236,7 @@ int main() {
 	rand();
 
 	int n = 4096;
-	t_pqueue_node ** nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node*) * n);
+	t_pqueue_node ** nodes = (t_pqueue_node **)malloc(sizeof(t_pqueue_node *) * n);
 	int i;
 	for (i = 0 ; i < n ; i++) {
 		int * key = (int *)malloc(sizeof(int));
@@ -356,13 +259,12 @@ int main() {
 	}
 
 	for (i = 0 ; i < n ; i++) {
-		t_pqueue_node * node = pqueue_pop(pqueue);
-		int * key = (int *)node->key;
-		int * value = (int *)node->value;
+		t_pqueue_node node = pqueue_pop(pqueue);
+		int * key = (int *)node.key;
+		int * value = (int *)node.value;
 		printf("%d\n", *key);
 		free(key);
 		free(value);
-		pqueue_node_delete(node);
 	}
 	free(nodes);
 	pqueue_delete(pqueue);

@@ -29,16 +29,19 @@ typedef int (*t_cmpf)(void const * leftKey, void const * rightKey);
 
 /** sommet de la file */
 typedef struct	s_pqueue_node {
-	void const	* key;
-	void const	* value;
-	unsigned int	index; /* index dans le tableau 'nodes' */
+	void const		* key;
+	void const		* value;
+	struct s_pqueue_node	* leftChild;
+	struct s_pqueue_node	* nextSibling;
+	struct s_pqueue_node	* prev;
 
 }		t_pqueue_node;
 
 /** la file de priorité */
 typedef struct	s_pqueue {
-	t_array	* nodes;
-	t_cmpf	cmpf;
+	t_pqueue_node	* root;
+	t_cmpf		cmpf;
+	size_t		size;
 }		t_pqueue;
 
 /**
@@ -92,6 +95,6 @@ t_pqueue_node * pqueue_minimum(t_pqueue * pqueue);
  *		 la clef la plus basse (<=> la plus haute priorité)
  *	@assign: --------------------------
  */
-t_pqueue_node pqueue_pop(t_pqueue * pqueue);
+t_pqueue_node * pqueue_pop(t_pqueue * pqueue);
 
 #endif

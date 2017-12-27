@@ -1,20 +1,22 @@
-#ifndef PQUEUE_H
-# define PQUEUE_H
+#ifndef PQUEUE_FIBONACCI_H
+# define PQUEUE_FIBONACCI_H
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include "array.h"
 
 /**
  *	Structure de donnée: 'File de priorité' , ou 'Priority Queue'
  *
  *	Très peu documenté en Français... voir la page wikipédia anglaise
  *	qui est vraiment complète
- *	
- *	https://en.wikipedia.org/wiki/Pairing_heap
- *	https://users.cs.fiu.edu/~weiss/dsaajava2/code/PairingHeap.java
+ *
+ *	https://en.wikipedia.org/wiki/Priority_queue
+ *
+ *	Implémentation basé sur le travail de:
+ *
+ *	https://github.com/mikepound/mazesolving/blob/master/FibonacciHeap.py
  */
 
 # ifndef BYTE
@@ -27,18 +29,43 @@
 /** typedef pratiqe pour les fonctions de comparaisons */
 typedef int (*t_cmpf)(void const * leftKey, void const * rightKey);
 
-/** sommet de la file */
+/** sommet (== feuilles ou racine) de la liste */
 typedef struct	s_pqueue_node {
-	void const	* key;
-	void const	* value;
-	unsigned int	index; /* index dans le tableau 'nodes' */
-
+	void const		* key;
+	void const 		* value;
+	size_t			degree;
+	BIT			flag;
+	struct s_pqueue_node	* next;
+	struct s_pqueue_node	* prev;
+	struct s_pqueue_node	* child;
+	struct s_pqueue_node	* parent;
 }		t_pqueue_node;
+
+/**
+ *	@require : l'adresse d'une clef, l'adresse d'une valeur
+ *	@ensure  : renvoie un nouveau sommet contenant la clef et la valeur
+ *			- les données ne sont pas copiés, seules les adresses le sont.
+ *	@assign  : initialise le sommet pour l'insérer dans la file
+ */
+t_pqueue_node * pqueue_node_new(void const * key, void const * value);
+
+/**
+ *
+ *	@require : un sommet
+ *	@ensure  : supprime le sommet de la mémoire
+ *			- ATTENTION : si ce sommet est encore dans la file,
+ *			le supprimer de la file avant
+ *	@assign  : --------
+ */
+void pqueue_node_delete(t_pqueue_node * node);
+
 
 /** la file de priorité */
 typedef struct	s_pqueue {
-	t_array	* nodes;
-	t_cmpf	cmpf;
+	t_pqueue_node	* min;
+	t_cmpf		cmpf;
+	size_t		size;
+	size_t		maxdegree;
 }		t_pqueue;
 
 /**
@@ -92,6 +119,6 @@ t_pqueue_node * pqueue_minimum(t_pqueue * pqueue);
  *		 la clef la plus basse (<=> la plus haute priorité)
  *	@assign: --------------------------
  */
-t_pqueue_node pqueue_pop(t_pqueue * pqueue);
+t_pqueue_node * pqueue_pop(t_pqueue * pqueue);
 
 #endif

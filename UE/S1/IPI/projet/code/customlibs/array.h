@@ -130,6 +130,13 @@ void array_trim(t_array * array);
 void array_remove(t_array * array, unsigned int index);
 
 /**
+ *	@require : un tableau 'array'
+ *	@ensure  : supprime le dernier élément du tableau
+ *	@assign  : ----
+ */
+void array_removelast(t_array * array);
+
+/**
  *	@require : un tableau 'array' et une fonction de comparaison (voir strcmp())
  *	@ensure  : tri le tableau dans l'ordre croissant de la fonction de comparaison
  *	@assign  : modifie les index des elements du tableau (en triant les elements)
@@ -171,11 +178,10 @@ void array_reverse(t_array * array);
  */
 # define ARRAY_ITERATE_START(A, T, X, I)\
 	{\
-		size_t I = 0;\
-		while (I < (A)->size) {\
+		size_t I;\
+		for (I = 0 ; I < (A)->size ; I++) {\
 			T X = ((T)(A)->values) + I;
 # define ARRAY_ITERATE_STOP(A, T, X, I)\
-			++I;\
 		}\
 	}
 

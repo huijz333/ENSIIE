@@ -5,6 +5,7 @@
 # include "array.h"
 # include "node.h"
 # include "bitmap.h"
+# include "pqueue.h"
 
 /**
  *	fonction d'heuristique: renvoie un poids heuristique lorsque

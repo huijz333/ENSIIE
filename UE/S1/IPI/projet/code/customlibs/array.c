@@ -80,7 +80,8 @@ int array_ensure_capacity(t_array * array, unsigned int capacity) {
 	if (array->capacity > capacity) {
 		return (0);
 	}
-	if (array_grow(array, capacity + 1) == -1) {
+	unsigned int c = (capacity + 1) / 2 * 3;
+	if (array_grow(array, c) == -1) {
 		return (-1);
 	}
 	return (0);
@@ -210,6 +211,18 @@ void array_remove(t_array * array, unsigned int index) {
 	--array->size;
 }
 
+/**
+ *	@require : un tableau 'array'
+ *	@ensure  : supprime le dernier élément du tableau
+ *	@assign  : ----
+ */
+void array_removelast(t_array * array) {
+	if (array->size == 0) {
+		return ;
+	}
+	--array->size;
+}
+	
 /**
  *	@require : un tableau 'array' et une fonction de comparaison (voir strcmp())
  *	@ensure  : tri le tableau dans l'ordre croissant de la fonction de comparaison
