@@ -12,13 +12,13 @@
  */
 
 typedef struct  s_list_node {
-    struct s_list_node * next;
-    struct s_list_node * prev;
+	struct s_list_node * next;
+	struct s_list_node * prev;
 }               t_list_node;
 
 typedef struct  s_list {
-    t_list_node         * head;
-    unsigned long int   size;
+	t_list_node         * head;
+	unsigned long int   size;
 }               t_list;
 
 /**
@@ -27,7 +27,7 @@ typedef struct  s_list {
  *	@assign : ---------------------
  */
 t_list * list_new(void);
- 
+
 /**
  *	@require: une liste, une donnée, et la taille de la donnée
  *	@ensure : ajoute une copie de la donnée en debut de liste
@@ -79,13 +79,6 @@ int list_remove_tail(t_list * lst);
  *	@assign : ---------------------
  */
 void list_remove_node(t_list * lst, t_list_node * node);
-	
-/**
- *	@require: une liste, une fonction
- *	@ensure : applique la fonction à toutes les valeurs de la liste
- *	@assign : ---------------------
- */
-void list_iterate(t_list * lst, void (*f)(void const * value));
 
 /**
  *	@require: une liste
@@ -107,11 +100,11 @@ void list_delete(t_list * lst);
  */
 # define LIST_ITERATE_START(L, T, V)\
 	t_list_node * __node = L->head->next;\
-	while (__node != L->head) {\
-		T V = (T)(__node + 1);
+while (__node != L->head) {\
+	T V = (T)(__node + 1);
 # define LIST_ITERATE_STOP(L, T, V)\
-		__node = __node->next;\
-	}
+	__node = __node->next;\
+}
 
 
 #endif

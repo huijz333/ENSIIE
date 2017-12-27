@@ -14,7 +14,7 @@
 /** represente le labyrinthe */
 typedef struct	s_lab {
 	INDEX	l;	/* largeur == longueur du labyrinthe */
-	char	* map;	/* les cases du labyrinthe */
+	t_array	* nodes;/* le graphe */
 	t_hmap	* teleporters;
 	t_hmap	* doors;
 }		t_lab;

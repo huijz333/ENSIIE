@@ -5,7 +5,7 @@
  
 CUSTOMSRC = $(wildcard customlibs/*.c)
 CUSTOMOBJ = $(patsubst %c,%o,$(CUSTOMSRC))
-CC = gcc -Wall -Wextra -ansi -std=c99 -lm
+CC = gcc -Wall -Wextra -ansi -std=c99 -lm -g
 
 EXO = exo1 exo2 exo3
 

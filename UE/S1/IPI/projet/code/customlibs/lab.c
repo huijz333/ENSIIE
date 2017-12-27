@@ -1,12 +1,34 @@
 # include "lab.h"
 
+/** une direction possible de deplacement */
+typedef struct	s_direction {
+	char const	* name;
+	int		dx;
+	int		dy;
+}		t_direction;
+
+static t_direction directions[4] = {
+	{"DROITE",	 1,  0},
+	{"GAUCHE",	-1,  0},
+	{"HAUT",	 0,  1},
+	{"BAS",		 0, -1}
+};
+
+
+
 /**
  *	@require :	lab : un labyrinthe alloué via 'lab_new()'
  *	@ensure	 :	supprime le labyrinthe du tas
  *	@assign  :	-------
  */
 void lab_delete(t_lab * lab) {
-	free(lab->map);
+	INDEX i;
+	for (i = 0 ; i < lab->nodes->size ; i++) {
+		t_nodew * node = (t_nodew *) array_get(lab->nodes, i);
+		array_delete(node->ws);
+		array_delete(node->super.successors);
+	}
+	array_delete(lab->nodes);
 	hmap_delete(lab->teleporters); /*TODO : free keys and values */
 	hmap_delete(lab->doors);
 	free(lab);
@@ -25,12 +47,11 @@ t_lab * lab_new(INDEX l) {
 	lab->l = l;
 	lab->teleporters = hmap_new(16, (t_hashf)inthash, (t_cmpf)intcmp);
 	lab->doors = hmap_new('z' - 'a' + 1, (t_hashf)inthash, (t_cmpf)intcmp);
-	lab->map = (char *) malloc((l * l + 1) * sizeof(char));
-	if (lab->teleporters == NULL || lab->doors == NULL || lab->map == NULL) {
+	lab->nodes = array_new(lab->l * lab->l, sizeof(t_nodel));
+	if (lab->teleporters == NULL || lab->doors == NULL || lab->nodes == NULL) {
 		lab_delete(lab);
 		return (NULL);
 	}
-	lab->map[l * l] = 0;
 	return (lab);
 }
 
@@ -47,38 +68,15 @@ t_lab * lab_parse(FILE * stream) {
 		return (NULL);
 	}
 
+	/** on lit toute la carte du labyrinthe */
+	char * map = (char *) malloc((l * l + 1) * sizeof(char));
 	INDEX i;
 	for (i = 0 ; i < l ; i++) {
-		fscanf(stream, "%s\n", lab->map + i * l);
-	}
-	return (lab);
-}
-
-
-
-void lab_solve(t_lab * lab, unsigned int timer) {
-
-	/** une direction possible de deplacement */
-	typedef struct	s_direction {
-		char const	* name;
-		int		dx;
-		int		dy;
-	}		t_direction;
-
-	static t_direction directions[4] = {
-		{"DROITE",	 1,  0},
-		{"GAUCHE",	-1,  0},
-		{"HAUT",	 0,  1},
-		{"BAS",		 0, -1}
-	};
-
-	/** on crée un sommet pour chaque case non-mur du labyrinthe.
-	 On a donc au plus 'l * l' case maximum, on reduira le taille du tableau après*/
-	t_array * nodes = array_new(lab->l * lab->l, sizeof(t_nodel));
-	if (nodes == NULL) {
-		return ;
+		fscanf(stream, "%s\n", map + i * l);
 	}
 
+	t_array * nodes = lab->nodes;
+	
 	/** pour chaque case */
 	INDEX maxNodeID = lab->l * lab->l;
 	INDEX * nodesID = (INDEX *) malloc(sizeof(INDEX) * maxNodeID);
@@ -87,7 +85,7 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 		for (x = 0 ; x < lab->l ; x++) {
 			/** on recupere le sommet qui correspond */
 			INDEX caseID = y * lab->l + x;
-			if (lab->map[caseID] == LAB_CHAR_WALL) {
+			if (map[caseID] == LAB_CHAR_WALL) {
 				nodesID[caseID] = maxNodeID;
 			} else {
 				t_nodel node;
@@ -135,12 +133,18 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 	}
 
 	free(nodesID);
+	free(map);
+	return (lab);
+}
+
+void lab_solve(t_lab * lab, unsigned int timer) {
+	t_array * nodes = lab->nodes;
+	INDEX n = nodes->size;
 
 	astar(nodes, heuristic_euclidian, 0, n - 1);
 	
 	t_array * path = node_build_path(nodes, 0, n - 1);
 	if (path == NULL) {
-		array_delete(nodes);
 		return ;
 	}
 
@@ -167,11 +171,5 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 
 	/* libere la mémoire */
 	array_delete(path);
-	for (i = 0 ; i < nodes->size ; i++) {
-		t_nodew * node = (t_nodew *) array_get(nodes, i);
-		array_delete(node->ws);
-		array_delete(node->super.successors);
-	}
-	array_delete(nodes);
 	(void)timer;
 }
