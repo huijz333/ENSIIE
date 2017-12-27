@@ -75,31 +75,63 @@ t_lab * lab_parse(FILE * stream) {
 		fscanf(stream, "%s\n", map + i * l);
 	}
 
+	/** les sommets du graphe */
 	t_array * nodes = lab->nodes;
 	
-	/** pour chaque case */
+	/** tableau faisant le lien entre index(x, y) dans la carte
+	    et index dans le graphe du sommet */
 	INDEX maxNodeID = lab->l * lab->l;
 	INDEX * nodesID = (INDEX *) malloc(sizeof(INDEX) * maxNodeID);
+	size_t max_tp = strlen(LAB_CHARSET_TELEPORTERS);
+	INDEX teleporters[max_tp][2];
+	for (i = 0 ; i < max_tp ; i++) {
+		teleporters[i][0] = maxNodeID;
+		teleporters[i][1] = maxNodeID;
+	}
+
+	/** pour chaque case */
 	INDEX x, y;
 	for (y = 0 ; y < lab->l ; y++) {
 		for (x = 0 ; x < lab->l ; x++) {
-			/** on recupere le sommet qui correspond */
+			/** on crée un nouveau sommet */
+			t_nodel node;
+			node.x = x;
+			node.y = y;
+			node.super.ws = NULL;
+			node.super.super.successors = NULL;
+
+			/** on recupere la case de la carte qui correspond */
 			INDEX caseID = y * lab->l + x;
-			if (map[caseID] == LAB_CHAR_WALL) {
+			char c = map[caseID];
+			/** si on est sur un mur, pas de sommets a ajouté dans le graphe */
+			if (c == LAB_CHAR_WALL) {
 				nodesID[caseID] = maxNodeID;
-			} else {
-				t_nodel node;
-				node.x = x;
-				node.y = y;
-				node.super.ws = NULL;
-				node.super.super.successors = NULL;
+			} else if (c == LAB_CHAR_EMPTY || c == LAB_CHAR_ENTRY
+					|| c == LAB_CHAR_EXIT) {
+			/** sinon si on est sur une case vide , on ajoute le sommet */
 				nodesID[caseID] = array_add(nodes, &node);
+			} else {
+			/** sinon, on regarde si on est sur un teleporteur */
+				char * tp = strchr(LAB_CHARSET_TELEPORTERS, c);
+				/** si oui */
+				if (tp != NULL) {
+					/** on l'ajoute aux teleporteurs trouvés */
+					/* et on ajoute un sommet */
+					nodesID[caseID] = array_add(nodes, &node);
+					int tpID = (int)(tp - LAB_CHARSET_TELEPORTERS);
+					if (teleporters[tpID][0] == maxNodeID) {
+						teleporters[tpID][0] = nodesID[caseID];
+					} else {
+						teleporters[tpID][1] = nodesID[caseID];
+					}
+				}
+
 			}
 		}
 	}
 	/** on a 'n' sommets non-mur */
 	INDEX n = nodes->size;
-	/** pour chaque sommets */
+	/** pour chaque sommets, on crée des arcs avec les cases voisines vides */
 	INDEX uNodeID;
 	for (uNodeID = 0 ; uNodeID < n ; uNodeID++) {
 		t_nodel * u = (t_nodel *) array_get(nodes, uNodeID);
@@ -126,10 +158,38 @@ t_lab * lab_parse(FILE * stream) {
 				u->super.ws = array_new(4, sizeof(WEIGHT));
 				u->super.super.successors = array_new(4, sizeof(INDEX));
 			}
-			WEIGHT w = n;
+			WEIGHT w = 1;
 			array_add(u->super.ws, &w);
 			array_add(u->super.super.successors, &vNodeID);
 		}
+	}
+
+	/** pour chaque teleporteurs */
+	for (i = 0 ; i < max_tp ; i++) {
+		INDEX tp1ID = teleporters[i][0];
+		INDEX tp2ID = teleporters[i][1];
+		if (tp1ID == maxNodeID || tp2ID == maxNodeID) {
+			continue ;
+		}
+		t_nodew * tp1 = (t_nodew *) array_get(nodes, tp1ID);
+		t_nodew * tp2 = (t_nodew *) array_get(nodes, tp2ID);
+
+		if (tp1->ws == NULL) {
+			tp1->ws = array_new(4, sizeof(WEIGHT));
+			tp1->super.successors = array_new(4, sizeof(INDEX));
+		}
+
+		if (tp2->ws == NULL) {
+			tp2->ws = array_new(4, sizeof(WEIGHT));
+			tp2->super.successors = array_new(4, sizeof(INDEX));
+		}
+
+		WEIGHT w = 1;
+		array_add(tp1->ws, &w);
+		array_add(tp1->super.successors, &tp2ID);
+
+		array_add(tp2->ws, &w);
+		array_add(tp2->super.successors, &tp1ID);
 	}
 
 	free(nodesID);
@@ -140,10 +200,17 @@ t_lab * lab_parse(FILE * stream) {
 void lab_solve(t_lab * lab, unsigned int timer) {
 	t_array * nodes = lab->nodes;
 	INDEX n = nodes->size;
+	INDEX s = 0;
+	INDEX t = n - 1;
 
-	astar(nodes, heuristic_euclidian, 0, n - 1);
+	int r = astar(nodes, heuristic_euclidian, s, t);
+/*	int r = astar(nodes, heuristic_zero, s, t); */
+	if (r == 0) {
+		puts("Not connected");
+		return ;
+	}
 	
-	t_array * path = node_build_path(nodes, 0, n - 1);
+	t_array * path = node_build_path(nodes, s, t);
 	if (path == NULL) {
 		return ;
 	}
@@ -155,13 +222,13 @@ void lab_solve(t_lab * lab, unsigned int timer) {
 		t_nodel * next = (t_nodel *) array_get(nodes, nextID);
 		int dx = (int)next->x - (int)prev->x;
 		int dy = (int)next->y - (int)prev->y;
-		if (dx == 1) {
+		if (dx == 1 && dy == 0) {
 			puts("DROITE");
-		} else if (dx == -1) {
+		} else if (dx == -1 && dy == 0) {
 			puts("GAUCHE");
-		} else if (dy == 1) {
+		} else if (dx == 0 && dy == 1) {
 			puts("BAS");
-		} else if (dy == -1) {
+		} else if (dx == 0 && dy == -1) {
 			puts("HAUT");
 		} else {
 			puts("TP");

@@ -89,11 +89,9 @@ t_pqueue_node * pqueue_insert(t_pqueue * pqueue, void const * key, void const * 
 		unsigned int pi = (i - 1) / 2;
 		t_pqueue_node * i_node	= pqueue_get_node(pqueue, i);
 		t_pqueue_node * pi_node	= pqueue_get_node(pqueue, pi);
-		if (pqueue->cmpf(i_node->key, pi_node->key) > 0) {
-			i = pi;
-			continue ;
+		if (pqueue->cmpf(i_node->key, pi_node->key) < 0) {
+			pqueue_swap_nodes(pqueue, i, pi);
 		}
-		pqueue_swap_nodes(pqueue, i, pi);
 		i = pi;
 	}
 	return (node);
@@ -192,7 +190,7 @@ t_pqueue_node pqueue_pop(t_pqueue * pqueue) {
 	free(min);
 	return (minCopy);
 }
-
+/*
 static int dblcmp(double * a, double * b) {
 	if (*a < *b) {
 		return (-1);
@@ -202,7 +200,7 @@ static int dblcmp(double * a, double * b) {
 	}
 	return (0);
 }
-
+*/
 /*
 	TESTS et exemple d'utilisation
 */

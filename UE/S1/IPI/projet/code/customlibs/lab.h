@@ -6,6 +6,8 @@
 # include "astar.h"
 
 # define LAB_CHAR_EMPTY	('.')
+# define LAB_CHAR_ENTRY	('E')
+# define LAB_CHAR_EXIT	('S')
 # define LAB_CHAR_WALL	('X')
 # define LAB_CHARSET_KEYS  ("abcdefghijklmnopqrstuvwxyz")
 # define LAB_CHARSET_DOORS ("ABCDEFGHIJKLMNOPQRSTUVWXYZ")

@@ -1,12 +1,12 @@
-# include "astar.h"
+# include "dijkstra.h"
 
 /**
  *	@require : le nombre de sommet 'n' et le sommet source 's'
  *	@ensure  : initialise et renvoie un tableau de 't_nodew' prêt à être
- *			utilisé dans l'algorithme de astar
+ *			utilisé dans l'algorithme de dijkstra
  *	@assign  : --------------
  */
-static void astar_init(t_array * nodes, t_array * costs, t_array * unvisited, INDEX s) {
+static void dijkstra_init(t_array * nodes, t_array * costs, t_array * unvisited, INDEX s) {
 	/** on definit toutes les distances de 's' sur '+oo' */
 	INDEX n = nodes->size;
 	INDEX i;
@@ -34,7 +34,7 @@ static void astar_init(t_array * nodes, t_array * costs, t_array * unvisited, IN
  *	@ensure  : renvoie l'index du prochain sommet a visité.
  *	@assign  : ----------------------------------------------------
  */
-static INDEX astar_next_node(t_array * costs, t_array * unvisited) {
+static INDEX dijkstra_next_node(t_array * costs, t_array * unvisited) {
 	/* on prends le 1er sommet non visité */
 	INDEX i = 0;
 	INDEX uID = *((INDEX *) array_get(unvisited, i));
@@ -62,7 +62,7 @@ static INDEX astar_next_node(t_array * costs, t_array * unvisited) {
  *	@ensure  : construits des chemins plus court entre 's' et les voisins de 'u'
  *	@assign  : ----------------------------------------------------
  */
-static void astar_flood_fill(t_array * nodes, t_array * costs, INDEX uID) {
+static void dijkstra_flood_fill(t_array * nodes, t_array * costs, INDEX uID) {
 	/* pour chaque successeurs 'v' de 'u' */
 	t_nodew * u = (t_nodew *) array_get(nodes, uID);
 	if (u->super.successors == NULL) {
@@ -99,7 +99,7 @@ static void astar_flood_fill(t_array * nodes, t_array * costs, INDEX uID) {
  *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : --------------
  */
-int astar(t_array * nodes, INDEX s, INDEX t) {
+int dijkstra(t_array * nodes, INDEX s, INDEX t) {
 	/** allocation */
 	INDEX n = nodes->size;
 
@@ -117,12 +117,12 @@ int astar(t_array * nodes, INDEX s, INDEX t) {
 	}
 
 	/** initialisation */
-	astar_init(nodes, costs, unvisited, s);
+	dijkstra_init(nodes, costs, unvisited, s);
 
 	/* tant qu'il y a des sommets non-visité */
 	while (unvisited->size > 0) {
 		/** on cherche un noeud 'u' non visite minimisant le cout */
-		INDEX i = astar_next_node(costs, unvisited);
+		INDEX i = dijkstra_next_node(costs, unvisited);
 		INDEX uID = *((INDEX *) array_get(unvisited, i));
 		array_remove(unvisited, i);
 		/* sinon, si on a atteint 't' */
@@ -141,7 +141,7 @@ int astar(t_array * nodes, INDEX s, INDEX t) {
 		}
 
 		/* on minimise les chemins des voisins de 'u' */
-		astar_flood_fill(nodes, costs, uID);
+		dijkstra_flood_fill(nodes, costs, uID);
 	}
 	/** tous les sommets ont été visité sans atteindre 't' */
 	array_delete(unvisited);
