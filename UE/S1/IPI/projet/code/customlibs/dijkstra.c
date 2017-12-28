@@ -1,5 +1,15 @@
 # include "dijkstra.h"
 
+/** fonctions d'heuristique nulle */
+static WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	(void)nodes;
+	(void)uID;
+	(void)vID;
+	(void)sID;
+	(void)tID;
+	return (0);
+}
+
 /**
  *	@require : 	'nodes':	un tableau de sommet
  *			's':		un indice sommet source

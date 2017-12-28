@@ -14,10 +14,6 @@
  */
 typedef WEIGHT (*t_heuristic)(t_array * nodes, INDEX u, INDEX v, INDEX s, INDEX t);
 
-
-/** 2 fonctions d'heuristique pré-implémenté */
-WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID);
-
 /**
  *	@require : 	'nodes':	un tableau de sommet
  *			'heuristic':	la fonction d'heuristique

@@ -53,16 +53,6 @@ static t_pqueue_node * pqueue_get_node(t_pqueue * pqueue, unsigned int i) {
 	return (*((t_pqueue_node **)array_get(pqueue->nodes, i)));
 }
 
-/** fonction interne pour echanger deux sommets de la file */
-static void pqueue_swap_nodes(t_pqueue * pqueue, unsigned int i, unsigned int j) {
-	t_pqueue_node * inode = pqueue_get_node(pqueue, i);
-	t_pqueue_node * jnode = pqueue_get_node(pqueue, j);
-	array_set(pqueue->nodes, i, &jnode);
-	array_set(pqueue->nodes, j, &inode);
-	inode->index = j;
-	jnode->index = i;
-}
-
 /**
  *	@require: une file de priorité, une clef, et une valeur
  *			renvoie 1 si l'élément a pu etre inseré, 0 sinon
@@ -90,7 +80,11 @@ t_pqueue_node * pqueue_insert(t_pqueue * pqueue, void const * key, void const * 
 		t_pqueue_node * i_node	= pqueue_get_node(pqueue, i);
 		t_pqueue_node * pi_node	= pqueue_get_node(pqueue, pi);
 		if (pqueue->cmpf(i_node->key, pi_node->key) < 0) {
-			pqueue_swap_nodes(pqueue, i, pi);
+			array_set(pqueue->nodes, i, &pi_node);
+			array_set(pqueue->nodes, pi, &i_node);
+			i_node->index = pi;
+			pi_node->index = i;
+
 		}
 		i = pi;
 	}
@@ -113,7 +107,10 @@ void pqueue_decrease(t_pqueue * pqueue, t_pqueue_node * node, void const * newke
 		if (pqueue->cmpf(pi_node->key, i_node->key) < 0) {
 			break ;
 		}
-		pqueue_swap_nodes(pqueue, i, pi);
+		array_set(pqueue->nodes, i, &pi_node);
+		array_set(pqueue->nodes, pi, &i_node);
+		i_node->index = pi;
+		pi_node->index = i;
 		i = pi;
 	}
 }
@@ -154,7 +151,12 @@ static void pqueue_heapify(t_pqueue * pqueue, unsigned int i) {
 	}
 
 	if (s != i) {
-		pqueue_swap_nodes(pqueue, i, s);
+		t_pqueue_node * snode = pqueue_get_node(pqueue, s);
+
+		array_set(pqueue->nodes, i, &snode);
+		array_set(pqueue->nodes, s, &inode);
+		inode->index = s;
+		snode->index = i;
 		pqueue_heapify(pqueue, s);
 	}
 }
@@ -180,7 +182,9 @@ t_pqueue_node pqueue_pop(t_pqueue * pqueue) {
 	if (nodes->size == 1) {
 		array_remove(nodes, 0);
 	} else {
-		pqueue_swap_nodes(pqueue, 0, nodes->size - 1);
+		t_pqueue_node * last = pqueue_get_node(pqueue, nodes->size - 1);
+		last->index = 0;
+		array_set(pqueue->nodes, 0, &last);
 		array_removelast(nodes);
 		pqueue_heapify(pqueue, 0);
 	}

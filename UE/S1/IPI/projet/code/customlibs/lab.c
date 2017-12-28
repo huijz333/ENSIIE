@@ -265,6 +265,7 @@ static void lab_print_path(t_array * nodes, t_array * path) {
 static int lab_try_solve(t_array * nodes, INDEX s, INDEX t, unsigned int timer) {
 	/** on essaye de résoudre avec A* et une heuristique de distance */
 	int r = astar(nodes, heuristic_manhattan, s, t);
+	/*int r = dijkstra(nodes, s, t);*/
 	/** si la resolution a echoué, on essaye de resoudre avec djikstra */
 	if (r == 0) {
 		r = dijkstra(nodes, s, t);

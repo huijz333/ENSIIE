@@ -1,0 +1,361 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 11.44      0.08     0.08 67570728     0.00     0.00  pqueue_get_node
+ 11.44      0.16     0.08 26605043     0.00     0.00  array_set
+ 11.44      0.24     0.08 24769003     0.00     0.00  weightcmp
+ 10.01      0.31     0.07   999998     0.00     0.00  pqueue_heapify
+ 10.01      0.38     0.07        1    70.04   571.57  astar
+  9.29      0.45     0.07 77570726     0.00     0.00  array_get
+  8.58      0.51     0.06 26605043     0.00     0.00  array_ensure_capacity
+  7.15      0.56     0.05  8305522     0.00     0.00  pqueue_swap_nodes
+  5.72      0.60     0.04        1    40.02   122.98  lab_parse
+  2.86      0.62     0.02  9993999     0.00     0.00  array_add
+  2.86      0.64     0.02       11     1.82     1.82  array_grow
+  1.43      0.65     0.01  3995998     0.00     0.00  bitmap_get
+  1.43      0.66     0.01  2000003     0.00     0.00  array_new
+  1.43      0.67     0.01  1000000     0.00     0.00  pqueue_insert
+  1.43      0.68     0.01  1000000     0.00     0.00  pqueue_is_empty
+  1.43      0.69     0.01  1000000     0.00     0.00  pqueue_pop
+  1.43      0.70     0.01        1    10.01    10.01  pqueue_delete
+  0.71      0.70     0.01  2000003     0.00     0.00  array_delete
+  0.00      0.70     0.00  1000000     0.00     0.00  heuristic_zero
+  0.00      0.70     0.00  1000000     0.00     0.00  pqueue_minimum
+  0.00      0.70     0.00   999999     0.00     0.00  bitmap_set
+  0.00      0.70     0.00   999998     0.00     0.00  array_removelast
+  0.00      0.70     0.00        2     0.00     0.00  array_remove
+  0.00      0.70     0.00        1     0.00     0.00  array_reverse
+  0.00      0.70     0.00        1     0.00     0.00  bitmap_delete
+  0.00      0.70     0.00        1     0.00     0.00  bitmap_new
+  0.00      0.70     0.00        1     0.00   571.57  dijkstra
+  0.00      0.70     0.00        1     0.00     5.84  lab_delete
+  0.00      0.70     0.00        1     0.00     0.00  lab_new
+  0.00      0.70     0.00        1     0.00     0.00  lab_print_path
+  0.00      0.70     0.00        1     0.00   571.59  lab_solve
+  0.00      0.70     0.00        1     0.00   571.59  lab_try_solve
+  0.00      0.70     0.00        1     0.00     0.02  node_build_path
+  0.00      0.70     0.00        1     0.00     0.00  pqueue_new
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 1.43% of 0.70 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.00    0.70                 main [1]
+                0.00    0.57       1/1           lab_solve [2]
+                0.04    0.08       1/1           lab_parse [11]
+                0.00    0.01       1/1           lab_delete [22]
+-----------------------------------------------
+                0.00    0.57       1/1           main [1]
+[2]     81.6    0.00    0.57       1         lab_solve [2]
+                0.00    0.57       1/1           lab_try_solve [3]
+-----------------------------------------------
+                0.00    0.57       1/1           lab_solve [2]
+[3]     81.6    0.00    0.57       1         lab_try_solve [3]
+                0.00    0.57       1/1           dijkstra [5]
+                0.00    0.00       1/1           node_build_path [25]
+                0.00    0.00       1/1           lab_print_path [26]
+                0.00    0.00       1/2000003     array_delete [23]
+                0.00    0.00       1/77570726     array_get [16]
+-----------------------------------------------
+                0.07    0.50       1/1           dijkstra [5]
+[4]     81.6    0.07    0.50       1         astar [4]
+                0.01    0.37 1000000/1000000     pqueue_pop [6]
+                0.01    0.07 1000000/1000000     pqueue_insert [12]
+                0.01    0.00       1/1           pqueue_delete [18]
+                0.01    0.00 3995998/3995998     bitmap_get [19]
+                0.01    0.00 1000000/1000000     pqueue_is_empty [21]
+                0.01    0.00 7994000/77570726     array_get [16]
+                0.00    0.00       1/1           pqueue_new [28]
+                0.00    0.00 1000000/1000000     heuristic_zero [29]
+                0.00    0.00  999999/999999      bitmap_set [30]
+                0.00    0.00       1/1           bitmap_new [35]
+                0.00    0.00       1/1           bitmap_delete [34]
+-----------------------------------------------
+                0.00    0.57       1/1           lab_try_solve [3]
+[5]     81.6    0.00    0.57       1         dijkstra [5]
+                0.07    0.50       1/1           astar [4]
+-----------------------------------------------
+                0.01    0.37 1000000/1000000     astar [4]
+[6]     54.4    0.01    0.37 1000000         pqueue_pop [6]
+                0.07    0.28  999998/999998      pqueue_heapify [7]
+                0.01    0.02  999998/8305522     pqueue_swap_nodes [8]
+                0.00    0.00 1000000/1000000     pqueue_minimum [24]
+                0.00    0.00  999998/999998      array_removelast [31]
+                0.00    0.00       2/2           array_remove [32]
+-----------------------------------------------
+                             7305524             pqueue_heapify [7]
+                0.07    0.28  999998/999998      pqueue_pop [6]
+[7]     49.6    0.07    0.28  999998+7305524 pqueue_heapify [7]
+                0.04    0.12 7305524/8305522     pqueue_swap_nodes [8]
+                0.04    0.03 31955542/67570728     pqueue_get_node [10]
+                0.05    0.00 15766932/24769003     weightcmp [15]
+                             7305524             pqueue_heapify [7]
+-----------------------------------------------
+                0.01    0.02  999998/8305522     pqueue_pop [6]
+                0.04    0.12 7305524/8305522     pqueue_heapify [7]
+[8]     26.2    0.05    0.13 8305522         pqueue_swap_nodes [8]
+                0.05    0.05 16611044/26605043     array_set [9]
+                0.02    0.01 16611044/67570728     pqueue_get_node [10]
+-----------------------------------------------
+                0.03    0.03 9993999/26605043     array_add [13]
+                0.05    0.05 16611044/26605043     pqueue_swap_nodes [8]
+[9]     22.9    0.08    0.08 26605043         array_set [9]
+                0.06    0.02 26605043/26605043     array_ensure_capacity [14]
+-----------------------------------------------
+                0.00    0.00 1000000/67570728     pqueue_minimum [24]
+                0.02    0.01 16611044/67570728     pqueue_swap_nodes [8]
+                0.02    0.02 18004142/67570728     pqueue_insert [12]
+                0.04    0.03 31955542/67570728     pqueue_heapify [7]
+[10]    19.5    0.08    0.06 67570728         pqueue_get_node [10]
+                0.06    0.00 67570728/77570726     array_get [16]
+-----------------------------------------------
+                0.04    0.08       1/1           main [1]
+[11]    17.6    0.04    0.08       1         lab_parse [11]
+                0.02    0.05 8992000/9993999     array_add [13]
+                0.01    0.00 2000000/2000003     array_new [20]
+                0.00    0.00 1000000/77570726     array_get [16]
+                0.00    0.00       1/1           lab_new [27]
+-----------------------------------------------
+                0.01    0.07 1000000/1000000     astar [4]
+[12]    11.9    0.01    0.07 1000000         pqueue_insert [12]
+                0.02    0.02 18004142/67570728     pqueue_get_node [10]
+                0.03    0.00 9002071/24769003     weightcmp [15]
+                0.00    0.01 1000000/9993999     array_add [13]
+-----------------------------------------------
+                0.00    0.00    1999/9993999     node_build_path [25]
+                0.00    0.01 1000000/9993999     pqueue_insert [12]
+                0.02    0.05 8992000/9993999     lab_parse [11]
+[13]    11.4    0.02    0.06 9993999         array_add [13]
+                0.03    0.03 9993999/26605043     array_set [9]
+-----------------------------------------------
+                0.06    0.02 26605043/26605043     array_set [9]
+[14]    11.4    0.06    0.02 26605043         array_ensure_capacity [14]
+                0.02    0.00      11/11          array_grow [17]
+-----------------------------------------------
+                0.03    0.00 9002071/24769003     pqueue_insert [12]
+                0.05    0.00 15766932/24769003     pqueue_heapify [7]
+[15]    11.4    0.08    0.00 24769003         weightcmp [15]
+-----------------------------------------------
+                0.00    0.00       1/77570726     lab_try_solve [3]
+                0.00    0.00    1999/77570726     node_build_path [25]
+                0.00    0.00    3998/77570726     lab_print_path [26]
+                0.00    0.00 1000000/77570726     lab_delete [22]
+                0.00    0.00 1000000/77570726     lab_parse [11]
+                0.01    0.00 7994000/77570726     astar [4]
+                0.06    0.00 67570728/77570726     pqueue_get_node [10]
+[16]     9.3    0.07    0.00 77570726         array_get [16]
+-----------------------------------------------
+                0.02    0.00      11/11          array_ensure_capacity [14]
+[17]     2.9    0.02    0.00      11         array_grow [17]
+-----------------------------------------------
+                0.01    0.00       1/1           astar [4]
+[18]     1.4    0.01    0.00       1         pqueue_delete [18]
+                0.00    0.00       1/2000003     array_delete [23]
+-----------------------------------------------
+                0.01    0.00 3995998/3995998     astar [4]
+[19]     1.4    0.01    0.00 3995998         bitmap_get [19]
+-----------------------------------------------
+                0.00    0.00       1/2000003     node_build_path [25]
+                0.00    0.00       1/2000003     pqueue_new [28]
+                0.00    0.00       1/2000003     lab_new [27]
+                0.01    0.00 2000000/2000003     lab_parse [11]
+[20]     1.4    0.01    0.00 2000003         array_new [20]
+-----------------------------------------------
+                0.01    0.00 1000000/1000000     astar [4]
+[21]     1.4    0.01    0.00 1000000         pqueue_is_empty [21]
+-----------------------------------------------
+                0.00    0.01       1/1           main [1]
+[22]     0.8    0.00    0.01       1         lab_delete [22]
+                0.01    0.00 2000001/2000003     array_delete [23]
+                0.00    0.00 1000000/77570726     array_get [16]
+-----------------------------------------------
+                0.00    0.00       1/2000003     pqueue_delete [18]
+                0.00    0.00       1/2000003     lab_try_solve [3]
+                0.01    0.00 2000001/2000003     lab_delete [22]
+[23]     0.7    0.01    0.00 2000003         array_delete [23]
+-----------------------------------------------
+                0.00    0.00 1000000/1000000     pqueue_pop [6]
+[24]     0.3    0.00    0.00 1000000         pqueue_minimum [24]
+                0.00    0.00 1000000/67570728     pqueue_get_node [10]
+-----------------------------------------------
+                0.00    0.00       1/1           lab_try_solve [3]
+[25]     0.0    0.00    0.00       1         node_build_path [25]
+                0.00    0.00    1999/9993999     array_add [13]
+                0.00    0.00    1999/77570726     array_get [16]
+                0.00    0.00       1/2000003     array_new [20]
+                0.00    0.00       1/1           array_reverse [33]
+-----------------------------------------------
+                0.00    0.00       1/1           lab_try_solve [3]
+[26]     0.0    0.00    0.00       1         lab_print_path [26]
+                0.00    0.00    3998/77570726     array_get [16]
+-----------------------------------------------
+                0.00    0.00       1/1           lab_parse [11]
+[27]     0.0    0.00    0.00       1         lab_new [27]
+                0.00    0.00       1/2000003     array_new [20]
+-----------------------------------------------
+                0.00    0.00       1/1           astar [4]
+[28]     0.0    0.00    0.00       1         pqueue_new [28]
+                0.00    0.00       1/2000003     array_new [20]
+-----------------------------------------------
+                0.00    0.00 1000000/1000000     astar [4]
+[29]     0.0    0.00    0.00 1000000         heuristic_zero [29]
+-----------------------------------------------
+                0.00    0.00  999999/999999      astar [4]
+[30]     0.0    0.00    0.00  999999         bitmap_set [30]
+-----------------------------------------------
+                0.00    0.00  999998/999998      pqueue_pop [6]
+[31]     0.0    0.00    0.00  999998         array_removelast [31]
+-----------------------------------------------
+                0.00    0.00       2/2           pqueue_pop [6]
+[32]     0.0    0.00    0.00       2         array_remove [32]
+-----------------------------------------------
+                0.00    0.00       1/1           node_build_path [25]
+[33]     0.0    0.00    0.00       1         array_reverse [33]
+-----------------------------------------------
+                0.00    0.00       1/1           astar [4]
+[34]     0.0    0.00    0.00       1         bitmap_delete [34]
+-----------------------------------------------
+                0.00    0.00       1/1           astar [4]
+[35]     0.0    0.00    0.00       1         bitmap_new [35]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [13] array_add              [19] bitmap_get             [18] pqueue_delete
+  [23] array_delete           [35] bitmap_new             [10] pqueue_get_node
+  [14] array_ensure_capacity  [30] bitmap_set              [7] pqueue_heapify
+  [16] array_get               [5] dijkstra               [12] pqueue_insert
+  [17] array_grow             [29] heuristic_zero         [21] pqueue_is_empty
+  [20] array_new              [22] lab_delete             [24] pqueue_minimum
+  [32] array_remove           [27] lab_new                [28] pqueue_new
+  [31] array_removelast       [11] lab_parse               [6] pqueue_pop
+  [33] array_reverse          [26] lab_print_path          [8] pqueue_swap_nodes
+   [9] array_set               [2] lab_solve              [15] weightcmp
+   [4] astar                   [3] lab_try_solve
+  [34] bitmap_delete          [25] node_build_path

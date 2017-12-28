@@ -51,8 +51,8 @@
     \end{itemize}
     Cette information est un booléen, et peut donc être coddée sur un bit.
     J'économise ainsi beaucoup de mémoire. (8 fois plus que si l'arc était coddé sur un octet),
-    en representant mes arcs comme un tableau de bit.\newline\newline
-    Soit 'b' l'indice d'un bit dans le tableau.
+    en representant mes arcs sur un tableau de bit.\newline\newline
+    Soit 'b' l'indice d'un bit dans un tableau d'octet.
     Pour y accéder, il faut récuperer l'indice $\textrm{b}_\textrm{o}$ de l'octet correspondant dans le tableau,
     et l'indice $\textrm{b}_\textrm{b}$ du bit sur cet octet.\newline
     
@@ -61,36 +61,41 @@
       \item $\textrm{b}_\textrm{o}$ = b / 8 (quotient de la division euclidienne de 'b' par 8)
       \item $\textrm{b}_\textrm{b}$ = b \% 8 (reste de la division euclidienne de 'b' par 8)
     \end{itemize}
-    on s'assure de la bijectivité,
+    on s'assure de l'unicité,
     \begin{itemize}[label=-]
       \item b = 8 $\textrm{b}_\textrm{o}$ + $\textrm{b}_\textrm{b}$
     \end{itemize}
-    De plus, on peut également faire une bijection entre 2 coordonées ('u', 'v') et le bit 'b'.
-    Dans notre programme, on souhaite que le bit ('u', 'v') soit sur 1 s'il y a un arc entre 'u' et 'v', sur 0 sinon.
+    De plus, on peut également faire une transformation entre 2 coordonnées ('u', 'v') et le bit 'b'.
+    On souhaite que le bit 'b' soit à 1 s'il y a un arc entre 'u' et 'v', sur 0 sinon.
     Pour cela, j'utilise la bijection:
     \begin{itemize}[label=-]
-      \item b = v * n + u (Rappel: 'n' est le nombre de sommet dans le graphe)
       \item u = b \% n
       \item v = b / n
+      \item b = n * v + u (Rappel: 'n' est le nombre de sommet dans le graphe)
     \end{itemize}
     Je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
-    de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits.\newline
-    (diviser par 8 <=> décaler les bits de 3 vers la droite)\newline
+    de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits (diviser par 8 <=> décaler
+    les bits de 3 vers la droite)\newline\newline
     De plus, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
-    Le processeur écrit des blocs de mémoire du programme dans sa mémoire cache: plus les données sont compactes,
-    moins il aura à faire des allés/retours entre mémoire 'vive' et mémoire cache.\newline
+    Le processeur écrit des blocs mémoire du programme dans sa mémoire cache: plus les données sont compactes,
+    moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline\newline
     Le reste de l'implémentation du parcours en largeur suit l'algorithme traditionelle.
-    J'utilise une file FIFO (1er entré, 1er sorti), afin d'enregistrer les sommets à visiter.\newline
+    J'utilise une file FIFO (1er entré, 1er sorti), afin d'enregistrer les sommets à visiter en fonction de leur profondeur dans le graphe.\newline
     (VOIR STRUCTURE DE DONNEES 'list') 
     
   \newpage
   \subsection{Algorithme de Dijkstra (graphes pondérés positivement)}
     On considère ici un graphe où les arcs sont pondérés avec des poids positifs.\newline
     'Le chemin le plus court' entre 2 sommets corresponds au chemin avec la somme des poids de ses arcs minimum.\newline
-     L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si tous les poids sont identiques,
+     L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si le poids de tous les arcs sont identiques,
      on retrouve l'algorithme de parcours en largeur.\newline
     \subsubsection{1ère approche}
-      Je l'implemente comme Dijkstra mais en comparant le poids des chemins plutot que leur longueur.
+      Ma 1ère implementation (voir 'dijkstra.c.bkp') reprends le squelette du parcours en largeur.
+      La seule différence réside dans le choix du prochain sommet à visiter.\newline
+      Dans le parcours en largeur, les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
+      Trouver le prochain sommet à visiter est d'une complexité \textbf{O(1)}.\newline\newline
+      Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
+      Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet à visiter devient en complexité \textbf{O(m)}
     \subsubsection{File de priorité ('Pairing Priority Queue')}
       Je me rends compte que l'operation 'trouvé sommet 'u' suivant minimisant 'd(u)' est pré-dominante dans le temps d'execution => j'optimiser
   \newpage

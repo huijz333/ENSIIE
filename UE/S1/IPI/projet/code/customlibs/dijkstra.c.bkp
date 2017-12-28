@@ -1,50 +1,45 @@
 # include "dijkstra.h"
 
 /**
- *	@require : le nombre de sommet 'n' et le sommet source 's'
- *	@ensure  : initialise et renvoie un tableau de 't_nodew' prêt à être
- *			utilisé dans l'algorithme de dijkstra
+ *	@require : le tableau des sommets, le tableau des poids, la file de visite,
+ *			et le sommet 's'
+ *	@ensure  : initialise les données pour l'algorithme de dijkstra
  *	@assign  : --------------
  */
-static void dijkstra_init(t_array * nodes, t_array * costs, t_array * unvisited, INDEX s) {
+static void dijkstra_init(t_array * nodes, WEIGHT * costs, t_array * unvisited, INDEX sID) {
 	/** on definit toutes les distances de 's' sur '+oo' */
 	INDEX n = nodes->size;
 	INDEX i;
 	for (i = 0 ; i < n ; i++) {
-		/** pas de chemin encore calculés */
-		t_nodew * node = (t_nodew *) array_get(nodes, i);
-		node->super.pathlen = 0;
-		node->super.prev = MAX_NODES;
-
 		/* tous les sommets sont à une distance 'infinie' */
-		WEIGHT infinity = INF_WEIGHT;
-		array_add(costs, &infinity);
-		
-		/* tous les sommets sont non-visités */
-		array_add(unvisited, &i);
+		t_nodew * node = (t_nodew *) array_get(nodes, i);
+		node->super.pathlen = MAX_NODES;
+		node->super.prev = MAX_NODES;
+		costs[i] = INF_WEIGHT;
 	}
 	
 	/* on initialise le sommet 'source' */
-	WEIGHT zero = 0;
-	array_set(costs, s, &zero);
+	t_nodew * s = (t_nodew *) array_get(nodes, sID);
+	s->super.pathlen = 0;
+	costs[sID] = 0;
+	array_add(unvisited, &sID);
 }
 
 /**
- *	@require : les sommets du graphe, et le tableau des sommets déjà visité
- *	@ensure  : renvoie l'index du prochain sommet a visité.
+ *	@require : les poids et la file
+ *	@ensure  : renvoie l'index dans la file du prochain sommet à visiter
  *	@assign  : ----------------------------------------------------
  */
-static INDEX dijkstra_next_node(t_array * costs, t_array * unvisited) {
+static INDEX dijkstra_next_node(WEIGHT * costs, t_array * unvisited) {
 	/* on prends le 1er sommet non visité */
 	INDEX i = 0;
 	INDEX uID = *((INDEX *) array_get(unvisited, i));
-	WEIGHT ucost = *((WEIGHT *) array_get(costs, uID));
+	WEIGHT ucost = costs[uID];
 
 	/* pour chaque autre sommets non visités */
-	INDEX j;
-	for (j = 1 ; j < unvisited->size ; j++) {
-		INDEX vID = *((INDEX *) array_get(unvisited, j));
-		WEIGHT vcost = *((WEIGHT *) array_get(costs, vID));
+	ARRAY_ITERATE_START(unvisited, INDEX *, vIDref, j) {
+		INDEX vID = *vIDref;
+		WEIGHT vcost = costs[vID];
 
 		/** si ce sommet est de cout plus faible */
 		if (vcost < ucost) {
@@ -54,43 +49,8 @@ static INDEX dijkstra_next_node(t_array * costs, t_array * unvisited) {
 			i = j;
 		}
 	}
+	ARRAY_ITERATE_STOP(unvisited, INDEX *, vIDref, j);
 	return (i);
-}
-
-/**
- *	@require : les sommets du graphe, les arcs et leur poids, et un indice du graphe
- *	@ensure  : construits des chemins plus court entre 's' et les voisins de 'u'
- *	@assign  : ----------------------------------------------------
- */
-static void dijkstra_flood_fill(t_array * nodes, t_array * costs, INDEX uID) {
-	/* pour chaque successeurs 'v' de 'u' */
-	t_nodew * u = (t_nodew *) array_get(nodes, uID);
-	if (u->super.successors == NULL) {
-		return ;
-	}
-	INDEX i;
-	for (i = 0 ; i < u->super.successors->size ; i++) {
-		/** on recupere le sommet 'v' */
-		INDEX vID = *((INDEX *) array_get(u->super.successors, i));
-		t_nodew * v = (t_nodew *) array_get(nodes, vID);
-		/** poids pour aller de 'u' à 'v' par l'arc */
-		WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
-		/** heuristic */
-		WEIGHT h = 0;
-		/** cout total pour aller de'u' à 'v' */
-		WEIGHT cost = w + h;
-		/** on recupere le cout precedent */
-		WEIGHT ucost = *((WEIGHT *)array_get(costs, uID));
-		WEIGHT vcost = *((WEIGHT *)array_get(costs, vID));
-		WEIGHT newcost = ucost + cost;
-
-		if (newcost < vcost) {
-			/* on ecrase le chemin precedant par le nouveau chemin */
-			array_set(costs, vID, &newcost);
-			v->super.prev = uID;
-			v->super.pathlen = u->super.pathlen + 1;
-		}
-	}
 }
 
 /**
@@ -103,16 +63,19 @@ int dijkstra(t_array * nodes, INDEX s, INDEX t) {
 	/** allocation */
 	INDEX n = nodes->size;
 
-	/** coût total (poids des arcs + heuristique) */
-	t_array * costs = array_new(n, sizeof(WEIGHT));
-	if (costs == NULL) {
-		return (0);
-	}
-
+	/** coût total (poids des arcs) */
+	WEIGHT * costs = (WEIGHT *) malloc(n * sizeof(WEIGHT));
 	/* tableau enregistrant les sommets non visités */
 	t_array * unvisited = array_new(n, sizeof(INDEX));
-	if (unvisited == NULL) {
-		array_delete(costs);
+	/* bitmap enregistrant les sommets visités */
+	t_bitmap * visited = bitmap_new(n);
+	/** bitmap enregistrant les sommets qui sont déjà dans la file */
+	t_bitmap * inQueue = bitmap_new(n);
+	if (costs == NULL || unvisited == NULL || visited == NULL || inQueue == NULL) {
+		free(costs);
+		array_delete(unvisited);
+		bitmap_delete(visited);
+		bitmap_delete(inQueue);
 		return (0);
 	}
 
@@ -125,26 +88,67 @@ int dijkstra(t_array * nodes, INDEX s, INDEX t) {
 		INDEX i = dijkstra_next_node(costs, unvisited);
 		INDEX uID = *((INDEX *) array_get(unvisited, i));
 		array_remove(unvisited, i);
-		/* sinon, si on a atteint 't' */
-		if (uID == t) {
-			/**
-			 *  deux posibilités: si le poids du chemin vaux '+oo',
-			 *  c'est que le ne l'a pas atteint via l'algorithme de
-			 *  propagation, et donc, il n'est pas dans la meme
-			 *  partie connexe que 's'.
-			 *  sinon, on a trouvé un chemin.
-			 */
-			array_delete(unvisited);
-			array_delete(costs);
-			WEIGHT cost = *((WEIGHT *) array_get(costs, t));
-			return (cost == INF_WEIGHT ? 0 : 1);
+		bitmap_set(visited, uID);
+
+		/* sinon, si on a atteint 't' ou une autre partie connexe, on s'arrete */
+		if (uID == t || costs[uID] == INF_WEIGHT) {
+			break ;
 		}
 
 		/* on minimise les chemins des voisins de 'u' */
-		dijkstra_flood_fill(nodes, costs, uID);
+		
+		/* si 'u' n'a pas de successeurs, on s'arrete */
+		t_nodew * u = (t_nodew *) array_get(nodes, uID);
+		if (u->super.successors == NULL) {
+			continue ;
+		}
+
+		/** pour chaque successeurs 'v' de 'u' */
+		ARRAY_ITERATE_START(u->super.successors, INDEX *, vIDref, i) {
+			/** on recupere le sommet 'v' */
+			INDEX vID = *vIDref;
+			/** si le sommet voisin a déjà été visité, on passe au suivant */
+			if (bitmap_get(visited, vID)) {
+				continue ;
+			}
+			t_nodew * v = (t_nodew *) array_get(nodes, vID);
+			/** poids pour aller de 'u' à 'v' par l'arc */
+			WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
+			/** on recupere le cout precedent */
+			WEIGHT ucost = costs[uID];
+			WEIGHT newcost = ucost + w;
+
+			if (newcost < costs[vID]) {
+				/* on ecrase le chemin precedant par le nouveau chemin */
+				costs[vID] = newcost;
+				v->super.prev = uID;
+				v->super.pathlen = u->super.pathlen + 1;
+				/** si le voisin n'est pas dans la file de visite */
+				if (!bitmap_get(inQueue, vID)) {
+					/* on l'ajoute */
+					array_add(unvisited, vIDref);
+					bitmap_set(inQueue, vID);
+				}
+			}
+		}
+		ARRAY_ITERATE_STOP(u->super.successors, INDEX *, vIDref, i);
+
 	}
-	/** tous les sommets ont été visité sans atteindre 't' */
+
+	/** libere la mémoire */
 	array_delete(unvisited);
-	array_delete(costs);
-	return (0);
+	bitmap_delete(visited);
+	bitmap_delete(inQueue);
+	WEIGHT cost = costs[t];
+	free(costs);
+
+	/**
+	 *  deux posibilités: si le poids du chemin vaux '+oo',
+	 *  c'est que le ne l'a pas atteint via l'algorithme de
+	 *  propagation, et donc, il n'est pas dans la meme
+	 *  partie connexe que 's'.
+	 *  sinon, on a trouvé un chemin.
+	 */
+
+	return (cost == INF_WEIGHT ? 0 : 1);
 }

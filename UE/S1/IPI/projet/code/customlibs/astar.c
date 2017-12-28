@@ -1,15 +1,5 @@
 # include "astar.h"
 
-/** 2 fonctions d'heuristique pré-implémenté */
-WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	(void)nodes;
-	(void)uID;
-	(void)vID;
-	(void)sID;
-	(void)tID;
-	return (0);
-}
-
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
 	if (*a < *b) {
