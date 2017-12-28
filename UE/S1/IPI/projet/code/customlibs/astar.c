@@ -53,16 +53,19 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 	for (i = 0 ; i < n ; i++) {
 		/** on definit sa distance de 's' à '+oo' */
 		t_nodew * node = (t_nodew *) array_get(nodes, i);
-		node->super.pathlen = 0;
-		node->pathw = INF_WEIGHT;
+		node->super.pathlen = MAX_NODES;
+		node->pathw= INF_WEIGHT;
+		node->pathwh = INF_WEIGHT;
 		/** pas de position dans la file */
 		pqueue_nodes[i] = NULL;
 	}
 
 	/** on initialise le sommet source */
 	t_nodew * s = (t_nodew *) array_get(nodes, sID);
-	s->pathw = heuristic(nodes, sID, sID, sID, tID);
-	pqueue_nodes[sID] = pqueue_insert(unvisited, &(s->pathw), &sID);
+	s->pathw = 0; /* poids réel */
+	s->pathwh = heuristic(nodes, sID, sID, sID, tID); /* poids heuristique */
+	s->super.pathlen = 0;
+	pqueue_nodes[sID] = pqueue_insert(unvisited, &(s->pathwh), &sID);
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant qu'il y a des sommets a visité, on les visite */
@@ -74,7 +77,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 		t_nodew	* u = (t_nodew *) array_get(nodes, uID);
 		
 		/** si on a atteint 't', ou si on est dans une autre partie connexe ... */
-		if (uID == tID || u->pathw == INF_WEIGHT) {
+		if (uID == tID || u->pathwh == INF_WEIGHT) {
 			break ;
 		}
 
@@ -101,20 +104,25 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 			/** poids de l'arc allant de 'u' à 'v' */
 			WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
 			/** nouveau cout final */
-			WEIGHT cost = u->pathw + w;
+			WEIGHT cost = u->pathwh + w;
 			/** si ce nouveau chemin est de cout plus faible */
-			if (cost < v->pathw) {
+			if (cost < v->pathwh) {
 				/** poids de la fonction d'heuristique */
 				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
 				/* on ecrase le chemin precedant par le nouveau chemin */
-				v->pathw = cost + h;
+				v->pathw = u->pathw + w;
+				v->pathwh = cost + h;
 				v->super.prev = uID;
 				v->super.pathlen = u->super.pathlen + 1;
 				/** on enregistre les sommets dans la file de priorité */
 				if (pqueue_nodes[vID] == NULL) {
-					pqueue_nodes[vID] = pqueue_insert(unvisited, &(v->pathw), vIDref);
+					pqueue_nodes[vID] = pqueue_insert(unvisited,
+									&(v->pathwh),
+									vIDref);
 				} else {
-					pqueue_decrease(unvisited, pqueue_nodes[vID], &(v->pathw));
+					pqueue_decrease(unvisited,
+							pqueue_nodes[vID],
+							&(v->pathwh));
 				}
 			}
 		}
@@ -128,5 +136,5 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 	pqueue_delete(unvisited);
 	free(pqueue_nodes);
 	t_nodew * t = (t_nodew *) array_get(nodes, tID);
-	return (t->pathw == INF_WEIGHT ? 0 : 1);
+	return (t->pathwh == INF_WEIGHT ? 0 : 1);
 }

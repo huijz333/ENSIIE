@@ -57,7 +57,7 @@
 /**
  *	Le type a utilisé pour modélisé les poids sur les arcs
  */
-# define WEIGHT double
-# define INF_WEIGHT DBL_MAX
+# define WEIGHT unsigned int
+# define INF_WEIGHT UINT_MAX
 
 #endif	/* ifndef IPI_H */
