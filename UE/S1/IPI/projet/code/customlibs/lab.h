@@ -4,27 +4,10 @@
 # include "ipi.h"
 # include "hmap.h"
 # include "astar.h"
-
-# define LAB_CHAR_EMPTY	('.')
-# define LAB_CHAR_ENTRY	('E')
-# define LAB_CHAR_EXIT	('S')
-# define LAB_CHAR_WALL	('X')
-# define LAB_CHARSET_KEYS  ("abcdefghijklmnopqrstuvwxyz")
-# define LAB_CHARSET_DOORS ("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-# define LAB_CHARSET_TELEPORTERS ("*%$#&+-@^£!")
-
-/** represente le labyrinthe */
-typedef struct	s_lab {
-	INDEX	l;	/* largeur == longueur du labyrinthe */
-	t_array	* nodes;/* le graphe */
-	t_hmap	* teleporters;
-	t_hmap	* doors;
-}		t_lab;
+# include "lab_def.h"
+# include "lab_node.h"
 
 /**
- *	NB : ce constructeur est relativement long, car on s'assure
- *		qu'il n'y ait pas de fuite mémoire en cas d'erreur
- *
  *	@require :	n : longueur (== largeur) du labyrinthe
  *	@ensure	 :	crée un nouveau labyrinthe de taille 'n'
  *	@assign  :	-------

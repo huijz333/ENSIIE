@@ -1,21 +1,5 @@
 # include "lab.h"
 
-/** une direction possible de deplacement */
-typedef struct	s_direction {
-	char const	* name;
-	int		dx;
-	int		dy;
-}		t_direction;
-
-static t_direction directions[4] = {
-	{"DROITE",	 1,  0},
-	{"GAUCHE",	-1,  0},
-	{"HAUT",	 0,  1},
-	{"BAS",		 0, -1}
-};
-
-
-
 /**
  *	@require :	lab : un labyrinthe alloué via 'lab_new()'
  *	@ensure	 :	supprime le labyrinthe du tas
@@ -29,8 +13,6 @@ void lab_delete(t_lab * lab) {
 		array_delete(node->super.successors);
 	}
 	array_delete(lab->nodes);
-	hmap_delete(lab->teleporters); /*TODO : free keys and values */
-	hmap_delete(lab->doors);
 	free(lab);
 }
 
@@ -45,10 +27,8 @@ t_lab * lab_new(INDEX l) {
 		return (NULL);
 	}
 	lab->l = l;
-	lab->teleporters = hmap_new(16, (t_hashf)inthash, (t_cmpf)intcmp);
-	lab->doors = hmap_new('z' - 'a' + 1, (t_hashf)inthash, (t_cmpf)intcmp);
 	lab->nodes = array_new(lab->l * lab->l, sizeof(t_nodel));
-	if (lab->teleporters == NULL || lab->doors == NULL || lab->nodes == NULL) {
+	if (lab->nodes == NULL) {
 		lab_delete(lab);
 		return (NULL);
 	}
@@ -61,6 +41,7 @@ t_lab * lab_new(INDEX l) {
  *	@assign  :	-------
  */
 t_lab * lab_parse(FILE * stream) {
+
 	INDEX l;
 	fscanf(stream, INDEX_IDENTIFIER "\n", &l);
 	t_lab * lab = lab_new(l);
@@ -197,14 +178,23 @@ t_lab * lab_parse(FILE * stream) {
 	return (lab);
 }
 
+
+WEIGHT heuristic_manhattan(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	(void)uID;
+	(void)sID;
+	t_nodel * v = (t_nodel *) array_get(nodes, vID);
+	t_nodel * t = (t_nodel *) array_get(nodes, tID);	
+	return (t->x - v->x + t->y - v->y);
+}
+
 void lab_solve(t_lab * lab, unsigned int timer) {
 	t_array * nodes = lab->nodes;
 	INDEX n = nodes->size;
 	INDEX s = 0;
 	INDEX t = n - 1;
 
-	int r = astar(nodes, heuristic_euclidian, s, t);
-/*	int r = astar(nodes, heuristic_zero, s, t); */
+	int r = astar(nodes, heuristic_manhattan, s, t);
+/*	int r = astar(nodes, heuristic_zero, s, t);*/
 	if (r == 0) {
 		puts("Not connected");
 		return ;

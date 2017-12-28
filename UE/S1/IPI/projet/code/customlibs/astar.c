@@ -10,14 +10,6 @@ WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tI
 	return (0);
 }
 
-WEIGHT heuristic_euclidian(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	(void)vID;
-	(void)tID;
-	t_nodel * v = (t_nodel *) array_get(nodes, vID);
-	t_nodel * t = (t_nodel *) array_get(nodes, tID);
-	return (t->x - v->x + t->y - v->y);
-}
-
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
 	if (*a < *b) {
@@ -69,7 +61,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 
 	/** on initialise le sommet source */
 	t_nodew * s = (t_nodew *) array_get(nodes, sID);
-	s->pathw = 0;
+	s->pathw = heuristic(nodes, sID, sID, sID, tID);
 	pqueue_nodes[sID] = pqueue_insert(unvisited, &(s->pathw), &sID);
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
@@ -108,14 +100,14 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 			    est plus court que le chemin precedant enregistré passant par 'v' */
 			/** poids de l'arc allant de 'u' à 'v' */
 			WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
-			/** poids de la fonction d'heuristique */
-			WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
 			/** nouveau cout final */
-			WEIGHT cost = u->pathw + w + h;
+			WEIGHT cost = u->pathw + w;
 			/** si ce nouveau chemin est de cout plus faible */
 			if (cost < v->pathw) {
+				/** poids de la fonction d'heuristique */
+				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
 				/* on ecrase le chemin precedant par le nouveau chemin */
-				v->pathw = cost;
+				v->pathw = cost + h;
 				v->super.prev = uID;
 				v->super.pathlen = u->super.pathlen + 1;
 				/** on enregistre les sommets dans la file de priorité */

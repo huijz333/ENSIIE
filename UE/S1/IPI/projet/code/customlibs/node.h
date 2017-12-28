@@ -24,14 +24,6 @@ typedef struct	s_nodew {
 }		t_nodew;
 
 /**
- *	Represente un sommet du graphe du labyrinthe (exo 3)
- */
-typedef struct	s_nodel {
-	t_nodew	super;	/* héritage 'à la C' */
-	INDEX	x, y;	/* position x, y dans le labyrinthe */
-}		t_nodel;
-
-/**
  *	@require : 'path'  : un tableau renvoyé par "node_build_path()"
  *		   'stream': un flux
  *	@ensure  : affiche le chemin du tableau sur le flux

@@ -15,6 +15,10 @@
 #	define BIT	BYTE
 # endif
 
+# ifndef ABS
+#	define ABS(X) ((X) < 0 ? -(X) : (X))
+# endif
+
 /**
  *	MAX_NODES	: nombre maximal de sommets.
  *	INDEX		: type a utilisé pour stocker un indice d'un sommet

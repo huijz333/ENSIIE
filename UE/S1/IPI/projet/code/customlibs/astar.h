@@ -17,7 +17,7 @@ typedef WEIGHT (*t_heuristic)(t_array * nodes, INDEX u, INDEX v, INDEX s, INDEX 
 
 /** 2 fonctions d'heuristique pré-implémenté */
 WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID);
-WEIGHT heuristic_euclidian(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID);
+WEIGHT heuristic_manhattan(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID);
 
 /**
  *	@require : 	'nodes':	un tableau de sommet
