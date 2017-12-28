@@ -2,7 +2,6 @@
 # define LAB_H
 
 # include "ipi.h"
-# include "hmap.h"
 # include "astar.h"
 # include "dijkstra.h"
 

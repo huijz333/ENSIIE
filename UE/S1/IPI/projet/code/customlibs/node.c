@@ -25,6 +25,9 @@ t_array * node_build_path(t_array * nodes, INDEX s, INDEX t) {
 	}
 
 	/* le tableau contenant le chemin */
+	/* on l'initialise avec 'pathlen + 1' de sorte
+	   à ce que tous les sommets puissent être
+	   ajouter sans reallocation mémoire */
 	t_array * array = array_new(pathlen + 1, sizeof(INDEX));
 	if (array == NULL) {
 		return (NULL);

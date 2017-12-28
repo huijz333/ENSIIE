@@ -1,5 +1,13 @@
 # include "customlibs/exo1.h"
 
+/**
+ *	Fonction interne
+ *
+ *	@require : ----------
+ *	@ensure  : crée et renvoie un tableau de sommet, initialisé en
+ *		   lisant une matrice sur l'entrée standart.
+ *	@assign  : ----------
+ */
 static t_array * nodes_new(void) {
 	/* lecture des données */
 	INDEX n;
@@ -34,6 +42,13 @@ static t_array * nodes_new(void) {
 	return (nodes);
 }
 
+/**
+ *	Fonction interne
+ *
+ *	@require : un tableau de sommet alloué via 'nodes_new()'
+ *	@ensure  : libère la mémoire et supprime le tableau
+ *	@assign  : ---------------
+ */
 static void nodes_delete(t_array * nodes) {
 	INDEX i;
 	for (i = 0 ; i < nodes->size ; i++) {

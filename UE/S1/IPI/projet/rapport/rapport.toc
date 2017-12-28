@@ -4,7 +4,7 @@
 \contentsline {subsection}{\numberline {1.2}Algorithme de Dijkstra (graphes pond\IeC {\'e}r\IeC {\'e}s positivement)}{3}{subsection.1.2}
 \contentsline {subsubsection}{\numberline {1.2.1}1\IeC {\`e}re approche}{3}{subsubsection.1.2.1}
 \contentsline {subsubsection}{\numberline {1.2.2}File de priorit\IeC {\'e} ('Pairing Priority Queue')}{3}{subsubsection.1.2.2}
-\contentsline {subsection}{\numberline {1.3}Algorithme A* (graphes pond\IeC {\'e}r\IeC {\'e}s et fonctions heuristiques)}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.3}Algorithme A* (graphes pond\IeC {\'e}r\IeC {\'e}s et fonctions heuristiques)}{3}{subsection.1.3}
 \contentsline {section}{\numberline {2}Application: resolution labyrinthe}{5}{section.2}
 \contentsline {section}{\numberline {3}A propos de l'impl\IeC {\'e}mentation}{6}{section.3}
 \contentsline {subsection}{\numberline {3.1}Structures de donn\IeC {\'e}es}{6}{subsection.3.1}

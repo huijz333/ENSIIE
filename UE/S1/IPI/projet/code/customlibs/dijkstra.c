@@ -19,5 +19,12 @@ static WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, I
  *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
 int dijkstra(t_array * nodes, INDEX s, INDEX t) {
+	/**
+	 *
+	 *	Pour avoir une implementation indépendante
+	 *	de A*, regarder le fichier 'dijkstra.c.bkp'
+	 *
+	 */
+
 	return (astar(nodes, heuristic_zero, s, t));
 }

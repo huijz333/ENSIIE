@@ -10,11 +10,7 @@
 /**
  *	Structure de donnée: 'File de priorité' , ou 'Priority Queue'
  *
- *	Très peu documenté en Français... voir la page wikipédia anglaise
- *	qui est vraiment complète
- *	
- *	https://en.wikipedia.org/wiki/Pairing_heap
- *	https://users.cs.fiu.edu/~weiss/dsaajava2/code/PairingHeap.java
+ *	https://fr.wikipedia.org/wiki/Tas_binaire
  */
 
 # ifndef BYTE

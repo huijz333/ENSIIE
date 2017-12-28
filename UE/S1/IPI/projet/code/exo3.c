@@ -11,7 +11,7 @@ int main(void) {
 	unsigned int timer;
 	scanf("%u\n", &timer);
 
-	/** tentative de resolution */
+	/** resolution du graphe */
 	lab_solve(lab, timer);
 	
 	/** on vide la mémoire */
