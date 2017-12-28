@@ -44,24 +44,103 @@
   \section{Recherche de chemin le plus court}
   \subsection{Parcours en largeur (graphes non-pondérés)}
     On considère ici un graphe où les arcs sont non pondérés.\newline
-    'Le chemin le plus court' entre 2 sommets corresponds au chemin avec un nombre d'arc minimum.\newline
-    Le sommet 's' correspond au sommet source (choisie comme origine des distances).
-    Un sommet 't' est une structure contenant les informations propres à un sommet:
+    'Le chemin le plus court' entre 2 sommets corresponds au chemin à une famille d'arc de cardinal minimum.\newline
+    On souhaite codder l'information
     \begin{itemize}[label=-]
-      \item pathlen : longueur du chemin minimum reliant 't' au sommet 's'
-      \item path : tableau de taille 'pathlen' contenant les sommets du chemin
+      \item il y a existence d'un arc entre le sommet 'u' et le sommet 'v' `
     \end{itemize}
+    Cette information est un booléen, et peut donc être coddée sur un bit.
+    J'économise ainsi beaucoup de mémoire. (8 fois plus que si l'arc était coddé sur un octet),
+    en representant mes arcs comme un tableau de bit.\newline\newline
+    Soit 'b' l'indice d'un bit dans le tableau.
+    Pour y accéder, il faut récuperer l'indice $\textrm{b}_\textrm{o}$ de l'octet correspondant dans le tableau,
+    et l'indice $\textrm{b}_\textrm{b}$ du bit sur cet octet.\newline
     
-    Les arcs sont coddés sur une suite de bits.
-
-	
-    Le p-ième bit vaut 1 ou 0, selon qu'il existe un c
-
+    En posant:
+    \begin{itemize}[label=-]
+      \item $\textrm{b}_\textrm{o}$ = b / 8 (quotient de la division euclidienne de 'b' par 8)
+      \item $\textrm{b}_\textrm{b}$ = b \% 8 (reste de la division euclidienne de 'b' par 8)
+    \end{itemize}
+    on s'assure de la bijectivité,
+    \begin{itemize}[label=-]
+      \item b = 8 $\textrm{b}_\textrm{o}$ + $\textrm{b}_\textrm{b}$
+    \end{itemize}
+    De plus, on peut également faire une bijection entre 2 coordonées ('u', 'v') et le bit 'b'.
+    Dans notre programme, on souhaite que le bit ('u', 'v') soit sur 1 s'il y a un arc entre 'u' et 'v', sur 0 sinon.
+    Pour cela, j'utilise la bijection:
+    \begin{itemize}[label=-]
+      \item b = v * n + u (Rappel: 'n' est le nombre de sommet dans le graphe)
+      \item u = b \% n
+      \item v = b / n
+    \end{itemize}
+    Je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
+    de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits.\newline
+    (diviser par 8 <=> décaler les bits de 3 vers la droite)\newline
+    De plus, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
+    Le processeur écrit des blocs de mémoire du programme dans sa mémoire cache: plus les données sont compactes,
+    moins il aura à faire des allés/retours entre mémoire 'vive' et mémoire cache.\newline
+    Le reste de l'implémentation du parcours en largeur suit l'algorithme traditionelle.
+    J'utilise une file FIFO (1er entré, 1er sorti), afin d'enregistrer les sommets à visiter.\newline
+    (VOIR STRUCTURE DE DONNEES 'list') 
+    
+  \newpage
   \subsection{Algorithme de Dijkstra (graphes pondérés positivement)}
-
-    Dummy text
-
+    On considère ici un graphe où les arcs sont pondérés avec des poids positifs.\newline
+    'Le chemin le plus court' entre 2 sommets corresponds au chemin avec la somme des poids de ses arcs minimum.\newline
+    Si tous les poids sont identiques, on retrouve l'algorithme de parcours en largeur expliqué précèdemment.
+    \subsubsection{1ère approche}
+    
+    \subsubsection{File de priorité ('Pairing Priority Queue')}
+  
+  \subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
+    L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
+    Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
+    Avec A*, on ajoute une heuristique aux poids des arcs.\newline
+    `Une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable,
+    pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile.`\newline
+    %( REF WIKIPEDIA https://fr.wikipedia.org/wiki/Heuristique_(mathématiques) )
+    Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommmets seront visités dans le graphe.
+    Bien quel fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la recherche plus rapide.
+    (et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal)\newline\newline
+    
+    Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'), on obtient très exactement l'algorithme de Dijkstra.
+    C'est d'ailleurs comme celà que je l'ai re-implementé une fois l'algorithme A* implementé et optimisé.\newline
+    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')
   \newpage
   \section{Application: resolution labyrinthe}
+  
+  \section{A propos de l'implémentation}
+    Ci joint, vous trouverez mon implémentation en language 'C'.
+    \subsection{Structures de données}
+      J'ai implémenté plusieurs structures de données, afin d'optimiser les algorithmes. Je les ai conçu de manière générique,
+      afin de pouvoir m'en reservir plus tard dans d'autre projet. Si vous souhaitez plus de détail, je vous
+      conseille de regarder les fichiers '.h' correspondants.
+      \begin{itemize}[label=-]
+	\item 'list'   : liste doublement chainée. Elle sont plus efficace que des listes simplement chainées (insertion et deletion).
+			Elles me servent file FIFO et LIFO.
+	\item 'array'  : tableau dynamique générique. Le tableau grossit automatiquement si besoin lors de l'insertion.
+	\item 'bitmap' : tableau d'octet. Cette structure facilite les opérations sur les bits.
+	\item 'pqueue' : une file de priorité ('Pairing Priority Queue' ci-dessus)
+	\item 'node'   : sommet d'un graphe. Cette representation m'a permis de créer un système d'héritage,
+			rendant mon code plus modulaire. (n'importe quel structure héritant de 'node'
+			est compatible avec tous les algorithmes implémentés.)
+	\item graphes  : pas de structure explicit implémenté. Mes graphes sont representés sous forme de tableau de sommet.
+      \end{itemize}
+      
+      \subsection{Qualité logiciel}
+	Mes programmes passent les tests fournis.\newline\newline
+	De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
+	Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
+	(tester sur le set de test fourni).\newline\newline
+	J'ai également utilisé l'outil 'gprof' afin d'optimiser mes algorithmes. C'est nottement ce qui m'a fait implémenter des files de priorités,
+	car en utilisant une file standart, mon programme passait la majeur partie de son temps d'execution à chercher le sommet optimal à visiter
+	AVANT:
+	//TODO
+	APRES:
+	//TODO
+
+  \section{Sources}
+
+    
 
 \end{document}
