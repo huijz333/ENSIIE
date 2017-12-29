@@ -126,7 +126,12 @@
     
     Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'), on obtient très exactement l'algorithme de Dijkstra.
     C'est d'ailleurs comme cela que je l'ai re-implementé Dijkstra, une fois l'algorithme A* implementé et optimisé.\newline
-    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')
+    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')\newline\newline
+    
+    
+    
+    
+    
   \newpage
   \section{Application: resolution labyrinthe}
   
@@ -142,7 +147,7 @@
 			Elles me servent file FIFO et LIFO.
 	\item 'array'  : tableau dynamique générique. Le tableau grossit automatiquement si besoin lors de l'insertion.
 	\item 'bitmap' : tableau d'octet. Cette structure facilite les opérations sur les bits.
-	\item 'pqueue' : une file de priorité ('Pairing Priority Queue' ci-dessus)
+	\item 'pqueue' : une file de priorité ('Binary Priority Queue' ci-dessus)
 	\item 'node'   : sommet d'un graphe. Cette representation m'a permis de créer un système d'héritage,
 			rendant mon code plus modulaire. (n'importe quel structure héritant de 'node'
 			est compatible avec tous les algorithmes implémentés.)
