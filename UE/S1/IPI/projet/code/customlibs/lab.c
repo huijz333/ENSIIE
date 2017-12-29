@@ -95,19 +95,22 @@ static void lab_parse_map(t_lab * lab, t_array * nodes,
 	for (y = 0 ; y < lab->l ; y++) {
 		scanf("%s\n", line);
 		for (x = 0 ; x < lab->l ; x++) {
+			/** on recupere la case de la carte qui correspond */
+			int caseID = y * lab->l + x;
+			char c = line[x];
+
 			/** on crée un nouveau sommet */
 			t_nodel node;
 			node.x = x;
 			node.y = y;
 			node.super.ws = NULL;
 			node.super.super.successors = NULL;
+			node.id = c;
 
-			/** on recupere la case de la carte qui correspond */
-			int caseID = y * lab->l + x;
-			char c = line[x];
 			switch(c) { 
 				/** si on est sur une case vide, on ajoute le sommet */
 				case LAB_EMPTY:
+					node.id = NODE_ID_EMPTY;
 					nodesID[caseID] = array_add(nodes, &node);
 					continue ;
 				/** si on est sur un mur, pas de sommet */
@@ -116,23 +119,27 @@ static void lab_parse_map(t_lab * lab, t_array * nodes,
 					continue ;
 				/** si on est sur l'entrée, on définit l'entrée 's' */
 				case LAB_ENTRY:
+					node.id = NODE_ID_ENTRY;
 					nodesID[caseID] = array_add(nodes, &node);
 					lab->entry = nodesID[caseID];
 					//TODO
 					continue ;
 				/** si on est sur la sortie, on définit la sortie 't' */
 				case LAB_EXIT:
+					node.id = NODE_ID_EXIT;
 					nodesID[caseID] = array_add(nodes, &node);
 					lab->exit = nodesID[caseID];
 					//TODO
 					continue ;
 				/** si on est sur la clef, on l'enregistre */
 				case LAB_KEY:
+					node.id = NODE_ID_KEY;
 					nodesID[caseID] = array_add(nodes, &node);
 					lab->key = nodesID[caseID];
 					continue ;
 				/** si on est sur la porte, on l'enregistre */
 				case LAB_DOOR:
+					node.id = NODE_ID_DOOR;
 					nodesID[caseID] = array_add(nodes, &node);
 					lab->door = nodesID[caseID];
 					continue ;
@@ -143,6 +150,7 @@ static void lab_parse_map(t_lab * lab, t_array * nodes,
 			/** si on est sur un teleporteur */
 			char * tp = strchr(LAB_TP, c);
 			if (tp != NULL) {
+				node.id = NODE_ID_TP;
 				nodesID[caseID] = array_add(nodes, &node);
 				int tpID = (int)(tp - LAB_TP);
 				if (tps[tpID][0] == MAX_NODES) {
@@ -319,29 +327,29 @@ t_lab * lab_parse(void) {
 
 /**
  *	@require : le labyrinthe, et un chemin
- *	@ensure  : affiche les directions successives du chemin
- *	@assign  : --------------
+ *	@ensure  : affiche sur la sortie standart les directions
+ *			successives à prendre pour réaliser le chemin
+ *	@assign  : -------------------------
  */
 static void lab_print_path(t_array * nodes, t_array * path) {
-	INDEX i;
 	t_nodel * prev = array_get(nodes, *((INDEX *) array_get(path, 0)));
+	INDEX i;
 	for (i = 1 ; i < path->size ; i++) {
-		BYTE found = 0;
 		INDEX nextID = *((INDEX *) array_get(path, i));
 		t_nodel * next = (t_nodel *) array_get(nodes, nextID);
-		int dx = (int)next->x - (int)prev->x;
-		int dy = (int)next->y - (int)prev->y;
-		int j;
-		for (j = 0 ; j < MAX_DIRECTIONS ; j++) {
-			t_direction d = DIRECTIONS[j];
-			if (dx == d.x && dy == d.y) {
-				printf("%s\n", d.name);
-				found = 1;
-				break ;
-			}
-		}
-		if (!found) {
+		if (prev->id == NODE_ID_TP && next->id == NODE_ID_TP) {
 			printf("TP\n");
+		} else {
+			int dx = (int)next->x - (int)prev->x;
+			int dy = (int)next->y - (int)prev->y;
+			BYTE j;
+			for (j = 0 ; j < MAX_DIRECTIONS ; j++) {
+				t_direction d = DIRECTIONS[j];
+				if (dx == d.x && dy == d.y) {
+					printf("%s\n", d.name);
+					break ;
+				}
+			}
 		}
 		prev = next;
 	}
@@ -382,6 +390,40 @@ static int lab_try_solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer) {
 }
 
 /**
+ *	@require : le labyrinthe
+ *	@ensure  : crée les arcs entre la porte et ses voisins
+ *	@assign  : ---------
+ */
+static void lab_open_door(t_lab * lab) {
+	t_array * nodes = lab->nodes;
+	t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
+	BYTE i;
+	for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
+		/** si le voisin est dans le graphe */
+		INDEX vID = lab->vdoor[i];
+		if (vID != MAX_NODES) {
+			/** on crée les arcs avec ce voisin */
+			t_nodew * v = (t_nodew *) array_get(nodes, vID);
+			if (v->ws == NULL) {
+				v->ws = array_new(1, sizeof(WEIGHT));
+				v->super.successors = array_new(1, sizeof(INDEX));
+			}
+			WEIGHT w = 1;
+			array_add(v->ws, &w);
+			array_add(v->super.successors, &(lab->door));
+
+			/** et reciproquement*/
+			if (door->ws == NULL) {
+				door->ws = array_new(1, sizeof(WEIGHT));
+				door->super.successors = array_new(1, sizeof(INDEX));
+			}
+			array_add(door->ws, &w);
+			array_add(door->super.successors, &vID);
+		}
+	}
+}
+
+/**
  *	@require : un labyrinthe valide (renvoyé via 'lab_parse()'), et un temps 'timer'
  *	@ensure  : tente de resoudre le labyrinthe en moins de 'timer' opérations.
  *			Renvoie 1 en cas de succes, 0 sinon
@@ -402,36 +444,11 @@ int lab_solve(t_lab * lab, WEIGHT timer) {
 	if (lab->key != MAX_NODES && lab->door != MAX_NODES) {
 		/* on essaye de resoudre en allant chercher la clef d'abord */
 		if (lab_try_solve(nodes, lab->entry, lab->key, &timer)) {
-			/** si on a reussit a recuperer la clef,
-			  on essaye d'aller à la sortie à partir de la clef */
+			/** si on a reussit a recuperer la clef */
 			/** on crée les arcs entre la porte et ses voisins */
-			t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
-			BYTE i;
-			for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
-				/** si le voisin est dans le graphe */
-				INDEX vID = lab->vdoor[i];
-				if (vID != MAX_NODES) {
-					/** on crée les arcs avec ce voisin */
-					t_nodew * v = (t_nodew *) array_get(nodes, vID);
-					if (v->ws == NULL) {
-						v->ws = array_new(1, sizeof(WEIGHT));
-						v->super.successors = array_new(1, sizeof(INDEX));
-					}
-					WEIGHT w = 1;
-					array_add(v->ws, &w);
-					array_add(v->super.successors, &(lab->door));
+			lab_open_door(lab);
 
-					/** et reciproquement*/
-					if (door->ws == NULL) {
-						door->ws = array_new(1, sizeof(WEIGHT));
-						door->super.successors = array_new(1, sizeof(INDEX));
-					}
-					array_add(door->ws, &w);
-					array_add(door->super.successors, &vID);
-				}
-			}
-
-			/** on résout */
+			/** on essaye d'aller à la sortie à partir de la clef */
 			if (lab_try_solve(nodes, lab->key, lab->exit, &timer)) {
 				/** si succès, on renvoie 1 */
 				return (1);
