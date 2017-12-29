@@ -20,6 +20,13 @@
 # endif
 
 /**
+ *	Le type a utilisé pour modélisé les poids sur les arcs
+ */
+# define WEIGHT unsigned int
+# define INF_WEIGHT UINT_MAX
+# define WEIGHT_IDENTIFIER "%u"
+
+/**
  *	MAX_NODES	: nombre maximal de sommets.
  *	INDEX		: type a utilisé pour stocker un indice d'un sommet
  *	INDEX_IDENTIFIER: printf(), scanf() identifier pour le type INDEX
@@ -54,10 +61,5 @@
 #	define INDEX_IDENTIFIER	"%lu"
 # endif
 
-/**
- *	Le type a utilisé pour modélisé les poids sur les arcs
- */
-# define WEIGHT unsigned int
-# define INF_WEIGHT UINT_MAX
 
 #endif	/* ifndef IPI_H */

@@ -2,9 +2,9 @@ import argparse
 import sys
 import os
 
-parser = argparse.ArgumentParser(description='Verifie la solution d\'un labyrinthe.')
+parser = argparse.ArgumentParser(description='Vérifie la solution d\'un labyrinthe.')
 
-parser.add_argument('file', help='Fichier dans lequel le labyrinthe est decrit.')
+parser.add_argument('file', help='Fichier dans lequel le labyrinthe est décrit.')
 parser.add_argument('-q', '--quiet', help='N\'affiche rien.', action='store_true')
 
 args = parser.parse_args()
@@ -46,7 +46,7 @@ sleeptime = max(1/(timer/5), 0.005)
 HOV = 40
 
 def print_lab(action):
-  print(chr(27) + "[2J")
+  print(chr(27) + "[2J") # Clear screen
   print("Timer : ", timer)
   print("Action : ", action)
   print()
@@ -86,11 +86,11 @@ def move(di, dj):
   global curline, curcol, timer
   i, j = curline + di, curcol + dj
   if not 0 <= i < n or not 0 <= j < n:
-    die('Vous etes tombe du labyrinthe, vous etes mort.')
+    die('Vous êtes tombé du labyrinthe, vous êtes mort.')
   if lab[i][j] == wallsym:
-    die('Vous avez tente de traverser un mur, il etait plus dur que votre tete. Vous etes mort.')
+    die('Vous avez tenté de traverser un mur, il était plus dur que votre tête. Vous êtes mort.')
   if lab[i][j] == doorsym and not key:
-    die('Vous ne pouvez pas passer une porte sans la clef. Vous etes mort (de faim probablement).')
+    die('Vous ne pouvez pas passer une porte sans la clef. Vous êtes mort (de faim probablement).')
 
   curline, curcol = i, j
   timer -= 1
@@ -99,7 +99,7 @@ def teleport():
   global curline, curcol
   sym = lab[curline][curcol]
   if not sym in tpsyms:
-    die('Vous avez tente de vous teleporter alors que vous n\'etes pas sur un teleporteur. Vous etes donc devenu fou et vous etes mort.')
+    die('Vous avez tenté de vous téléporter alors que vous n\'êtes pas sur un téléporteur. Vous êtes donc devenu fou et vous êtes mort.')
   for i,j in tps:
     if (i != curline or j != curcol) and lab[i][j] == sym:
       curline, curcol = i, j
@@ -129,15 +129,15 @@ for action in sys.stdin.readlines():
   elif action == actiontp:
     teleport()
   else:
-    die('Votre discours est incoherent, on ne comprend que HAUT, BAS, GAUCHE, DROITE et TP. Du coup personne ne veux vous aider. Vous etes mort.')
+    die('Votre discours est incohérent, on ne comprend que HAUT, BAS, GAUCHE, DROITE et TP. Du coup personne ne veux vous aider. Vous êtes mort.')
 
   if lab[curline][curcol] == 'S':
     if not args.quiet:
-      print('Bravo, vous etes sorti du terrible labyrinthe a temps. Quels autres defis palpitants vous attendent dehors?')
+      print('Bravo, vous êtes sorti du terrible labyrinthe à temps. Quels autres défis palpitants vous attendent dehors?')
     sys.exit(0)
 
   if timer == 0:
-    die('La labyrinthe s\'ecroule sur vous. Vous etes mort.')
+    die('La labyrinthe s\'écroule sur vous. Vous êtes mort.')
     
-die('Votre chemin ne mene pas a la sortie. Vous errez sans fin et sans but. Vous etes mort.')
+die('Votre chemin ne mène pas à la sortie. Vous errez sans fin et sans but. Vous êtes mort.')
 

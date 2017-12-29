@@ -2,14 +2,14 @@
 
 int main(void) {
 	/** lit le labyrinthe sur l'entrée standart */
-	t_lab * lab = lab_parse(stdin);
+	t_lab * lab = lab_parse();
 	if (lab == NULL) {
 		return (EXIT_FAILURE);
 	}
 
 	/** lit le timeout */
-	unsigned int timer;
-	scanf("%u\n", &timer);
+	WEIGHT timer;
+	scanf(WEIGHT_IDENTIFIER "\n", &timer);
 
 	/** resolution du graphe */
 	lab_solve(lab, timer);

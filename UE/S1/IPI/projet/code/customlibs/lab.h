@@ -23,8 +23,8 @@ typedef struct	s_direction {
 	int		y;
 }		t_direction;
 
-# define DIRECTIONS_COUNT (4)
-extern t_direction DIRECTIONS[DIRECTIONS_COUNT];
+# define MAX_DIRECTIONS (4)
+extern t_direction DIRECTIONS[MAX_DIRECTIONS];
 
 /** represente un sommet dans le graphe representant le labyrinthe */
 typedef struct	s_nodel {
@@ -38,6 +38,7 @@ typedef struct	s_lab {
 	INDEX	l;		/* largeur == longueur du labyrinthe */
 	INDEX	entry, exit;	/* indice d'entrée 's', et de sortie 't' du labyrinthe */
 	INDEX	key, door;	/* indice dans le graphe de la clef et de la porte */
+	INDEX	vdoor[MAX_DIRECTIONS]; /* index des voisins de la porte */
 }		t_lab;
 
 /**
@@ -59,8 +60,8 @@ void lab_delete(t_lab * lab);
  *	@ensure	 :	lit un labyrinthe sur l'entrée standart
  *	@assign  :	-------
  */
-t_lab * lab_parse(FILE * stream);
+t_lab * lab_parse(void);
 
-int lab_solve(t_lab * lab, unsigned int timer);
+int lab_solve(t_lab * lab, WEIGHT timer);
 
 #endif
