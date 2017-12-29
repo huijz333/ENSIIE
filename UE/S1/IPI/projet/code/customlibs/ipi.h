@@ -19,6 +19,10 @@
 #	define ABS(X) ((X) < 0 ? -(X) : (X))
 # endif
 
+# ifndef SIGNUM
+#	define SIGNUM(X) (((X) < 0) ? -1 : ((X) > 0) ? 1 : 0)
+# endif
+
 /**
  *	Le type a utilisé pour modélisé les poids sur les arcs
  */

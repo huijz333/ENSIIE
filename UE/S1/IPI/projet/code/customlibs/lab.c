@@ -332,25 +332,31 @@ t_lab * lab_parse(void) {
  *	@assign  : -------------------------
  */
 static void lab_print_path(t_array * nodes, t_array * path) {
+	/** recupere le 1er sommet */
 	t_nodel * prev = array_get(nodes, *((INDEX *) array_get(path, 0)));
 	INDEX i;
 	for (i = 1 ; i < path->size ; i++) {
+		/** on recupere le 2eme sommet */
 		INDEX nextID = *((INDEX *) array_get(path, i));
 		t_nodel * next = (t_nodel *) array_get(nodes, nextID);
+		/** si les 2 sommets sont des téléporteurs */
 		if (prev->id == NODE_ID_TP && next->id == NODE_ID_TP) {
 			printf("TP\n");
 		} else {
+		/** sinon, on recupere la direction du déplacement */
 			int dx = (int)next->x - (int)prev->x;
 			int dy = (int)next->y - (int)prev->y;
 			BYTE j;
 			for (j = 0 ; j < MAX_DIRECTIONS ; j++) {
 				t_direction d = DIRECTIONS[j];
 				if (dx == d.x && dy == d.y) {
+					/** on l'affiche */
 					printf("%s\n", d.name);
 					break ;
 				}
 			}
 		}
+		/** on passe à l'arc suivant */
 		prev = next;
 	}
 }
@@ -359,7 +365,7 @@ static void lab_print_path(t_array * nodes, t_array * path) {
  *	@require : le graphe (tableau de sommets), l'indice de départ,
  *		   l'indice d'arrivé, et un pointeur sur un timer.
  *	@ensure  : tente de trouver un chemin entre 's' et 't' avec un poids < timer.
- *		   Renvoie 0 si aucun chemin n'a été trouvé, 1 sinon.
+ *		   Renvoie 1 si un chemin a été trouvé, 0 sinon
  *	@assign  : les sommets des graphes sont modifiés par l'algorithme A*
  *		   si un chemin est trouvé, le 'timer' est diminué par le poids du chemin.
  */

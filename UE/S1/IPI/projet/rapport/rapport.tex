@@ -115,31 +115,43 @@
       
     \subsubsection{File de priorité ('Priority Queue')}
       Après avoir implementé Dijkstra avec cette 1ère approche, j'ai étudier le temps d'execution du programme.\newline
-     \begin{figure}[!h]
+     \begin{figure}
 	\begin{center}
 	  \includegraphics[width=8cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
 	\end{center}
 	\caption{\textit{résultat de 'gprof' sur 'tests/exo3/06'}}
       \end{figure}
-      Il s'est avéré que mon programme passe plus de 90\% de son temps d'execution, a cherché un sommet à visité.
-      (`trouver un sommet 'u' non visité minimisant 'd(u)`)
+      Il s'est avéré que mon programme passe, en moyenne, plus de 70\% de son temps d'execution à chercher le prochain sommet à visiter.
+      (l'opération `trouver un sommet 'u' non visité minimisant 'd(u)`).\newline\newline
+      Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaire'.
+      Cette structure de donnée est une file, permettant de définir des priorités parmis les éléments,
+      et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'élément dans la file):
+      
+      \begin{itemize}[label=-]
+	\item 'insérer un élément' : \textbf{O(log m)}
+	\item 'extraire l'élément ayant la plus grande priorité' : \textbf{O(log m)}
+	\item 'tester si la file de priorité est vide' : \textbf{O(1)}
+	\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \textbf{O(log m)}
+      \end{itemize}
+      
+      les détails techniques peuvent être trouvé en annexe \cite{binary_heap}, ou directement dans mon implementation. \textit{(voir queue.[c,h])}
 
       \subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
     L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
     Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
-    Avec A*, on effectue la même opération, mais on ajoute une heuristique aux poids des arcs.\newline
-    `Une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable,
-    pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile.`\newline
-    %( REF WIKIPEDIA https://fr.wikipedia.org/wiki/Heuristique_(mathématiques) )
+    Avec A*, on effectue la même opération, mais on ajoute une heuristique aux poids des arcs.
+    \textit{`Une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable,
+    pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile.} \cite{heuristique}\newline
+    
     Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommmets seront visités dans le graphe.
     Bien quel fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la recherche plus rapide.
-    (et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal)\newline\newline
+    (et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal)\newline
     
     Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'), on obtient très exactement l'algorithme de Dijkstra.
-    C'est d'ailleurs comme cela que je l'ai re-implementé Dijkstra, une fois l'algorithme A* implementé et optimisé.\newline
-    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')\newline\newline
+    C'est d'ailleurs comme cela que je l'ai re-implementé Dijkstra, une fois l'algorithme A* implementé et optimisé.
+    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijkstra.c.bkp')
     
-    \begin{figure}[!h]
+    \begin{figure}
       \begin{center}
 	\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/performances.png}
       \end{center}
@@ -177,19 +189,11 @@
       \end{itemize}
       
       \subsection{Qualité logiciel}
-	Mes programmes passent les tests fournis.\newline\newline
-	J'ai également généré des labyrinthes aléatoires, afin d'obtenir ces courbes:
-	\begin{figure}[!h]
-	  \begin{center}
-	    \includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
-	  \end{center}
-	  \caption{\textit{Temps de résolution de labyrinthe avec Dijkstra (A* heuristique nulle)}}
-	\end{figure}
-    
+	Mes programmes passent les tests fournis.\newline    
 	De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
 	Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
-	(tester sur le set de test fourni).\newline\newline
-	\begin{figure}[!h]
+	(tester sur le set de test fourni).
+	\begin{figure}
 	  \begin{center}
 	    \includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
 	  \end{center}
@@ -197,13 +201,41 @@
 	\end{figure}
 	
 	
-	J'ai également utilisé l'outil 'gprof' afin d'optimiser mon programme.
+	J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
 	D'où par exemple, l'utilisation du 'define' ARRAY\_ITERATE implementé dans le fichier 'array.h'.
-	Ce 'define' me permet d'itérer rapidement sur les tableaux, en utilisant l'arithmetique des pointeurs.
+	Ce 'define' me permet d'itérer rapidement sur les tableaux, en utilisant l'arithmetique des pointeurs.\newline
+	
+	J'ai généré des labyrinthes aléatoires, afin d'obtenir ces courbes:
+	\begin{figure}
+	  \begin{center}
+	    \includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
+	  \end{center}
+	  \caption{\textit{Temps de résolution de labyrinthe avec Dijkstra (A* heuristique nulle)}}
+	\end{figure}
+	Dans le cas exterme à 0\% d'obstacles, on a l * l sommets (case vide du labyrinthe) dans le graphe,
+	d'où l'allure quadratique de la courbe.
 
   \newpage
   \section{Sources}
-
+    \begin{thebibliography}{9}
+      \bibitem{computerphile}
+      	Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
+	Maze Solving - Computerphile,\newline
+      	\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}.
+	
+      \bibitem{heuristique}
+	Wikipédia, Heuristique, 31 Octobre 2017,\newline
+	\textit{https://fr.wikipedia.org/wiki/Heuristique\_(mathématiques)}.
+	
+      \bibitem{binary_heap}
+	Wikipédia, Binary Heap, 15 Décembre 2017,\newline
+	\textit{https://en.wikipedia.org/wiki/Binary\_heap}.
+	
+      \bibitem{priority_queues}
+	Mary K. VERNON, Priority Queues, 3 Septembre 2016,\newline
+	\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}.
+	
+  \end{thebibliography}
     
 
 \end{document}

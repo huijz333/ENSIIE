@@ -5,6 +5,11 @@
 \frenchbsetup{StandardLists=true} % à inclure si on utilise \usepackage[french]{babel}
 \usepackage{enumitem}
 \usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lipsum}  % generates filler text
+
 
 %title setup
 \title{Projet IPI: chemins de poids minimum}
@@ -44,10 +49,10 @@
   \section{Recherche de chemin le plus court}
   \subsection{Parcours en largeur (graphes non-pondérés)}
     On considère ici un graphe où les arcs sont non pondérés.\newline
-    'Le chemin le plus court' entre 2 sommets corresponds au chemin à une famille d'arc de cardinal minimum.\newline
+    'Le chemin le plus court' entre 2 sommets corresponds à une famille d'arcs, dont le cardinal minimum.\newline
     On souhaite codder l'information
     \begin{itemize}[label=-]
-      \item il y a existence d'un arc entre le sommet 'u' et le sommet 'v' `
+      \item `il existe un arc entre le sommet 'u' et le sommet 'v' `
     \end{itemize}
     Cette information est un booléen, et peut donc être coddée sur un bit.
     J'économise ainsi beaucoup de mémoire. (8 fois plus que si l'arc était coddé sur un octet),
@@ -90,12 +95,10 @@
     Une fois l'algorithme de parcours terminé, cet attribut pointe vers le prédécesseur de 'u',
     dans le chemin le plus court allant de 's' à 't', et passant par 'u'.
     Pour reconstruire le chemin, il suffit de regarder recursivement les prédécesseurs, en partant du sommet 't' jusqu'à ce que l'on ait atteint 's'.
-    La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin. Cette modélisation permet d'optimiser les coûts de stockage,
-    et est négligeable devant le temps d'execution de l'algorithme.
+    La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin.\newline\newline
     (SCHEMA DE LA REMONTE)\newline\newline
-    
-    Cette modélisation permet d'optimiser les coûts de stockage, et est négligeable devant le temps
-    d'execution de l'algorithme. Elle sera réutiliser dans Dijkstra et A*.
+    Cette modélisation permet d'optimiser les coûts de stockage, et la remonté est d'un coût négligeable devant le temps
+    de résolution du chemin. Elle sera réutiliser dans Dijkstra et A*
     
   \subsection{Algorithme de Dijkstra (graphes pondérés positivement)}
     On considère ici un graphe où les arcs sont pondérés avec des poids positifs.\newline
@@ -109,11 +112,19 @@
       Trouver le prochain sommet à visiter est d'une complexité \textbf{O(1)}.\newline\newline
       Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
       Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet à visiter devient en complexité \textbf{O(m)}
+      
     \subsubsection{File de priorité ('Priority Queue')}
-      Je me rends compte que l'operation 'trouvé sommet 'u' suivant minimisant 'd(u)' est pré-dominante dans le temps d'execution => j'optimiser
-      'Binary heap'
+      Après avoir implementé Dijkstra avec cette 1ère approche, j'ai étudier le temps d'execution du programme.\newline
+     \begin{figure}
+	\begin{center}
+	  \includegraphics[width=8cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
+	\end{center}
+	\caption{\textit{résultat de 'gprof' sur 'tests/exo3/06'}}
+      \end{figure}
+      Il s'est avéré que mon programme passe plus de 90\% de son temps d'execution, a cherché un sommet à visité.
+      (`trouver un sommet 'u' non visité minimisant 'd(u)`)
 
-  \subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
+      \subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
     L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
     Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
     Avec A*, on effectue la même opération, mais on ajoute une heuristique aux poids des arcs.\newline
@@ -126,10 +137,26 @@
     
     Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'), on obtient très exactement l'algorithme de Dijkstra.
     C'est d'ailleurs comme cela que je l'ai re-implementé Dijkstra, une fois l'algorithme A* implementé et optimisé.\newline
-    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')
+    (une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijstra.c.bkp')\newline\newline
+    
+    \begin{figure}
+      \begin{center}
+	\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/performances.png}
+      \end{center}
+      \caption{\textit{Temps d'execution des algorithmes}}
+    \end{figure}
+    Ces résultats sont ceux appliqués au test exo3/06\newline
+    (graphe de 1 000 000 de sommets, on cherche le plus court chemin entre les 2 sommets les plus distants)
+    \begin{itemize}[label=-]
+      \item 1 : Dijkstra sans file de priorité
+      \item 2 : Dijkstra avec file de priorité
+      \item 3 : A* avec file de priorité, et fonction heuristique (distance de Manhattan)
+    \end{itemize}
+    
   \newpage
   \section{Application: resolution labyrinthe}
-  
+    Dans l'exercice 3, on nous propose de résoudre des labyrinthes. Nous allons bien evidemment nous servir des fonctions algorithmes
+    préalablement implementé.
   \newpage
   \section{A propos de l'implémentation}
     Ci joint, vous trouverez mon implémentation en language 'C'.
@@ -142,7 +169,7 @@
 			Elles me servent file FIFO et LIFO.
 	\item 'array'  : tableau dynamique générique. Le tableau grossit automatiquement si besoin lors de l'insertion.
 	\item 'bitmap' : tableau d'octet. Cette structure facilite les opérations sur les bits.
-	\item 'pqueue' : une file de priorité ('Pairing Priority Queue' ci-dessus)
+	\item 'pqueue' : une file de priorité ('Binary Priority Queue' ci-dessus)
 	\item 'node'   : sommet d'un graphe. Cette representation m'a permis de créer un système d'héritage,
 			rendant mon code plus modulaire. (n'importe quel structure héritant de 'node'
 			est compatible avec tous les algorithmes implémentés.)
@@ -150,20 +177,47 @@
       \end{itemize}
       
       \subsection{Qualité logiciel}
-	Mes programmes passent les tests fournis.\newline\newline
+	Mes programmes passent les tests fournis.\newline    
 	De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
 	Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
-	(tester sur le set de test fourni).\newline\newline
-	J'ai également utilisé l'outil 'gprof' afin d'optimiser mes algorithmes. C'est nottement ce qui m'a fait implémenter des files de priorités,
-	car en utilisant une file standart, mon programme passait la majeur partie de son temps d'execution à chercher le sommet optimal à visiter
-	AVANT:
-	//TODO
-	APRES:
-	//TODO
+	(tester sur le set de test fourni).
+	\begin{figure}
+	  \begin{center}
+	    \includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
+	  \end{center}
+	  \caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
+	\end{figure}
+	
+	
+	J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
+	D'où par exemple, l'utilisation du 'define' ARRAY\_ITERATE implementé dans le fichier 'array.h'.
+	Ce 'define' me permet d'itérer rapidement sur les tableaux, en utilisant l'arithmetique des pointeurs.\newline
+	
+	J'ai généré des labyrinthes aléatoires, afin d'obtenir ces courbes:
+	\begin{figure}
+	  \begin{center}
+	    \includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
+	  \end{center}
+	  \caption{\textit{Temps de résolution de labyrinthe avec Dijkstra (A* heuristique nulle)}}
+	\end{figure}
 
   \newpage
   \section{Sources}
-
+    \begin{thebibliography}{9}
+      \bibitem{computerphile}
+      	Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
+	Maze Solving - Computerphile,\newline
+      	\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}.
+	
+      \bibitem{binary_heap}
+	Wikipédia, Binary Heap, 15 Décembre 2017,\newline
+	\textit{https://en.wikipedia.org/wiki/Binary\_heap}.
+	
+      \bibitem{binary_heap}
+	Mary K. VERNON, Priority Queues, 3 Septembre 2016,\newline
+	\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}.
+	
+  \end{thebibliography}
     
 
 \end{document}
