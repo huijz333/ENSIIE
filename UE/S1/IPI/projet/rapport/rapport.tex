@@ -18,6 +18,8 @@
 
 % table of contents setup
 \renewcommand{\contentsname}{Sommaire}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -63,32 +65,31 @@
     
     En posant:
     \begin{itemize}[label=-]
-      \item $\textrm{b}_\textrm{o}$ = b / 8 (quotient de la division euclidienne de 'b' par 8)
-      \item $\textrm{b}_\textrm{b}$ = b \% 8 (reste de la division euclidienne de 'b' par 8)
+      \item \(b_o = b / 8\) (quotient de la division euclidienne de 'b' par 8
+      \item \(b_b = b \% 8\) (reste de la division euclidienne de 'b' par 8
     \end{itemize}
     on s'assure de l'unicité,
     \begin{itemize}[label=-]
-      \item b = 8 $\textrm{b}_\textrm{o}$ + $\textrm{b}_\textrm{b}$
+      \item \(b = 8*b_o+b_b\)
     \end{itemize}
-    
-    (SCHEMA)\newline\newline
-    
-    
-    De plus, on peut également faire une transformation entre 2 coordonnées ('u', 'v') et le bit 'b'.
-    On souhaite que le bit 'b' soit à 1 s'il y a un arc entre 'u' et 'v', sur 0 sinon.
-    Pour cela, j'utilise la bijection:
+    {SCHEMA}
+    On peut aussi faire une transformation entre 2 coordonnées ('u', 'v') vers un bit 'b'.
     \begin{itemize}[label=-]
-      \item u = b \% n
-      \item v = b / n
-      \item b = n * v + u (Rappel: 'n' est le nombre de sommet dans le graphe)
+      \item \(u = b \% n\)
+      \item \(v = b / n\)
+      \item \(b = n * v + u\) (Rappel: 'n' est le nombre de sommet dans le graphe)
     \end{itemize}
-    Je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
+    Le bit 'b' vaux 1 s'il existe un arc entre 'u' et 'v', 0 sinon.
+    On a besoin de \(n^2\) bits, et donc de \(n^2 / 8 + 1\) octets.
+    On gagne donc 8 fois plus de mémoire que si l'information était stocké sur un octet.
+    De plus, je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
     de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits (diviser par 8 <=> décaler
-    les bits de 3 vers la droite)\newline\newline
-    De plus, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
+    les bits de 3 vers la droite)\newline
+    
+    Egalement, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
     Le processeur écrit des blocs mémoire du programme dans sa mémoire cache: plus les données sont compactes,
     moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline\newline
-    POur enregistrer les sommets en fonction de leur profondeur dans le graphe, et ainsi les visiter dans l'ordre de leur profondeur,
+    Pour enregistrer les sommets en fonction de leur profondeur dans le graphe, et ainsi les visiter dans l'ordre de leur profondeur,
     j'utilise une file FIFO (1er entré, 1er sorti).\newline
     (VOIR STRUCTURE DE DONNEES 'list')\newline\newline
     Chaque sommet 'u' de mon graphe possède un attribut pointant vers un autre sommet du graphe.
@@ -214,27 +215,25 @@
 	\end{figure}
 	Dans le cas exterme à 0\% d'obstacles, on a l * l sommets (case vide du labyrinthe) dans le graphe,
 	d'où l'allure quadratique de la courbe.
-
-  \newpage
-  \section{Sources}
-    \begin{thebibliography}{9}
+  \section{Références}
+    \begin{thebibliography}{}
       \bibitem{computerphile}
       	Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
-	Maze Solving - Computerphile,\newline
-      	\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}.
+      	Maze Solving - Computerphile,\newline
+	\href{https://www.youtube.com/watch?v=rop0W4QDOUI}{\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}}.
 	
       \bibitem{heuristique}
 	Wikipédia, Heuristique, 31 Octobre 2017,\newline
-	\textit{https://fr.wikipedia.org/wiki/Heuristique\_(mathématiques)}.
+	\href{https://fr.wikipedia.org/wiki/Heuristique_(mathématiques)}{\textit{https://fr.wikipedia.org/wiki/Heuristique\_(mathématiques)}}.
 	
       \bibitem{binary_heap}
 	Wikipédia, Binary Heap, 15 Décembre 2017,\newline
-	\textit{https://en.wikipedia.org/wiki/Binary\_heap}.
-	
+	\href{https://en.wikipedia.org/wiki/Binary\_heap}{\textit{https://en.wikipedia.org/wiki/Binary\_heap}}.
+
       \bibitem{priority_queues}
 	Mary K. VERNON, Priority Queues, 3 Septembre 2016,\newline
-	\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}.
-	
+	\href{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}{\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}}.
+
   \end{thebibliography}
     
 

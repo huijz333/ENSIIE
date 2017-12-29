@@ -9,4 +9,4 @@
 \contentsline {section}{\numberline {3}A propos de l'impl\IeC {\'e}mentation}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Structures de donn\IeC {\'e}es}{7}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Qualit\IeC {\'e} logiciel}{7}{subsection.3.2}
-\contentsline {section}{\numberline {4}Sources}{9}{section.4}
+\contentsline {section}{\numberline {4}R\IeC {\'e}f\IeC {\'e}rences}{8}{section.4}
