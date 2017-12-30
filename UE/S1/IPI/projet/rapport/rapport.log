@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  30 DEC 2017 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  30 DEC 2017 20:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -532,19 +532,11 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 \WF@everypar=\toks20
 Package: wrapfig 2003/01/31  v 3.6
 )
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count108
-\float@exts=\toks21
-\float@box=\box30
-\@float@everytoks=\toks22
-\@floatcapt=\box31
-)
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count109
-\Gm@cntv=\count110
-\c@Gm@tempcnt=\count111
+\Gm@cnth=\count108
+\Gm@cntv=\count109
+\c@Gm@tempcnt=\count110
 \Gm@bindingoffset=\dimen116
 \Gm@wd@mp=\dimen117
 \Gm@odd@mp=\dimen118
@@ -553,11 +545,61 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutheight=\dimen121
 \Gm@layouthoffset=\dimen122
 \Gm@layoutvoffset=\dimen123
-\Gm@dimlist=\toks23
+\Gm@dimlist=\toks21
+)
+(/usr/share/texlive/texmf-dist/tex/latex/floatrow/floatrow.sty
+Package: floatrow 2008/08/02 v0.3b floatrow: float package extension
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen124
+\captionmargin@=\dimen125
+\captionwidth=\dimen126
+\caption@tempdima=\dimen127
+\caption@indent=\dimen128
+\caption@parindent=\dimen129
+\caption@hangindent=\dimen130
+)
+\c@float@type=\count111
+\float@exts=\toks22
+\float@box=\box30
+\@floatcapt=\box31
+Package floatrow Info: Modified float package code loaded on input line 455.
+Package floatrow Info: Modified rotfloat package code loaded on input line 473.
+
+\FR@everyfloat=\toks23
+\flrow@foot=\insert199
+\FB@wd=\dimen131
+\FBo@wd=\dimen132
+\FBc@wd=\dimen133
+\FBo@ht=\skip45
+\FBc@ht=\skip46
+\FBf@ht=\skip47
+\FBo@max=\skip48
+\FBc@max=\skip49
+\FBf@max=\skip50
+\c@FBl@b=\count112
+\floatbox@depth=\count113
+\c@FRobj=\count114
+\c@FRsobj=\count115
+\Xhsize=\skip51
+\sXhsize=\skip52
+\Zhsize=\skip53
+\sZhsize=\skip54
+\flrow@rowbox=\box32
+\FR@Zunitlength=\dimen134
+\c@FBcnt=\count116
+\FPOScnt=\count117
+\LTleft=\skip55
+\LTright=\skip56
+\LTleft=\skip57
+\LTright=\skip58
+\flrow@types=\toks24
 )
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count112
+\etb@tempcnta=\count118
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 30.
  (./rapport.aux)
@@ -577,7 +619,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
 LaTeX Font Info:    ... okay on input line 32.
-\AtBeginShipoutBox=\box32
+\AtBeginShipoutBox=\box33
 Package hyperref Info: Link coloring ON on input line 32.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -585,7 +627,7 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count113
+\c@section@level=\count119
 )
 LaTeX Info: Redefining \ref on input line 32.
 LaTeX Info: Redefining \pageref on input line 32.
@@ -598,17 +640,17 @@ LaTeX Info: Redefining \nameref on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count114
-\scratchdimen=\dimen124
-\scratchbox=\box33
-\nofMPsegments=\count115
-\nofMParguments=\count116
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count117
-\MPscratchDim=\dimen125
-\MPnumerator=\count118
-\makeMPintoPDFobject=\count119
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count120
+\scratchdimen=\dimen135
+\scratchbox=\box34
+\nofMPsegments=\count121
+\nofMParguments=\count122
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count123
+\MPscratchDim=\dimen136
+\MPnumerator=\count124
+\makeMPintoPDFobject=\count125
+\everyMPtoPDFconversion=\toks26
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -624,7 +666,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count120
+\c@lstlisting=\count126
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -660,6 +702,8 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 34.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -675,152 +719,154 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
- <./images/graph.png, id=59, 301.125pt x 331.2375pt>
+ <./images/graph.png, id=64, 301.125pt x 331.2375pt>
 File: ./images/graph.png Graphic file (type png)
 
 <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 39.
-(pdftex.def)             Requested size: 113.81102pt x 125.19427pt.
-
-Overfull \hbox (56.90552pt too wide) in paragraph at lines 39--40
-[][] 
- []
+Package pdftex.def Info: ./images/graph.png used on input line 55.
+(pdftex.def)             Requested size: 51.72815pt x 56.9055pt.
+File: ./images/graph.png Graphic file (type png)
+ <use ./images/graph.png>
+Package pdftex.def Info: ./images/graph.png used on input line 55.
+(pdftex.def)             Requested size: 51.72815pt x 56.9055pt.
+File: ./images/graph.png Graphic file (type png)
+ <use ./images/graph.png>
+Package pdftex.def Info: ./images/graph.png used on input line 55.
+(pdftex.def)             Requested size: 51.72815pt x 56.9055pt.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/graph.png (PNG co
 py)>]
-Underfull \hbox (badness 10000) in paragraph at lines 64--71
+Underfull \hbox (badness 10000) in paragraph at lines 96--99
+
+ []
+
+<./images/remonte.png, id=79, 662.475pt x 330.23375pt>
+File: ./images/remonte.png Graphic file (type png)
+
+<use ./images/remonte.png>
+Package pdftex.def Info: ./images/remonte.png used on input line 102.
+(pdftex.def)             Requested size: 142.26378pt x 70.9132pt.
+
+Overfull \hbox (28.45276pt too wide) in paragraph at lines 102--103
+ [][] 
+ []
+
+
+Underfull \hbox (badness 2799) in paragraph at lines 105--111
+\T1/cmr/m/n/10 vers un autre som-met du graphe. Une fois l'algorithme de
+ []
+
+
+Underfull \hbox (badness 3769) in paragraph at lines 105--111
+\T1/cmr/m/n/10 par-cours ter-miné, cet at-tribut pointe vers le prédécesseur de
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--92
-
+Underfull \hbox (badness 1803) in paragraph at lines 105--111
+\T1/cmr/m/n/10 'u', dans le chemin le plus court al-lant de 's' à 't', et pas-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--108
-
+Underfull \hbox (badness 3428) in paragraph at lines 105--111
+\T1/cmr/m/n/10 sant par 'u'. Pour re-con-stru-ire le chemin, il suf-fit de re-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--108
-
+Underfull \hbox (badness 3168) in paragraph at lines 105--111
+\T1/cmr/m/n/10 garder re-cur-sive-ment les prédécesseurs, en par-tant du som-me
+t
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--108
-
+Underfull \hbox (badness 4899) in paragraph at lines 105--111
+\T1/cmr/m/n/10 't' jusqu'à ce que l'on ait at-teint 's'. La com-plex-ité de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--108
+Underfull \hbox (badness 5274) in paragraph at lines 105--111
+\T1/cmr/m/n/10 la re-con-struc-tion est en O(m), où 'm' est la longueur du
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--111
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 115--122
+[2 <./images/remonte.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 123--129
 
  []
 
-<./images/no_pqueue.png, id=82, 371.3875pt x 210.7875pt>
+<./images/no_pqueue.png, id=92, 371.3875pt x 210.7875pt>
 File: ./images/no_pqueue.png Graphic file (type png)
 
 <use ./images/no_pqueue.png>
-Package pdftex.def Info: ./images/no_pqueue.png used on input line 126.
+Package pdftex.def Info: ./images/no_pqueue.png used on input line 148.
 (pdftex.def)             Requested size: 170.72131pt x 96.89587pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--136
+Underfull \hbox (badness 10000) in paragraph at lines 152--155
 
  []
 
-[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.141 				\end{itemize}
-                        <./images/no_pqueue.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 155--160
+[3 <./images/no_pqueue.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 169--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 161--164
+Underfull \hbox (badness 10000) in paragraph at lines 175--178
 
  []
 
-<./images/performances.png, id=93, 596.2275pt x 328.22626pt>
+<./images/performances.png, id=101, 596.2275pt x 328.22626pt>
 File: ./images/performances.png Graphic file (type png)
 
 <use ./images/performances.png>
-Package pdftex.def Info: ./images/performances.png used on input line 172.
+Package pdftex.def Info: ./images/performances.png used on input line 186.
 (pdftex.def)             Requested size: 341.4362pt x 187.96236pt.
- [4pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.186 	\newpage
-                <./images/performances.png>] [5]
-<./images/lab.png, id=106, 572.1375pt x 570.13pt>
+ [4 <./images/performances.png>] [5]
+<./images/lab.png, id=114, 572.1375pt x 570.13pt>
 File: ./images/lab.png Graphic file (type png)
  <use ./images/lab.png>
-Package pdftex.def Info: ./images/lab.png used on input line 192.
+Package pdftex.def Info: ./images/lab.png used on input line 206.
 (pdftex.def)             Requested size: 341.43436pt x 340.23636pt.
 
-<./images/courbe_temps.png, id=107, 484.05844pt x 300.3722pt>
+<./images/courbe_temps.png, id=115, 484.05844pt x 300.3722pt>
 File: ./images/courbe_temps.png Graphic file (type png)
 
 <use ./images/courbe_temps.png>
-Package pdftex.def Info: ./images/courbe_temps.png used on input line 199.
+Package pdftex.def Info: ./images/courbe_temps.png used on input line 213.
 (pdftex.def)             Requested size: 341.44589pt x 211.877pt.
- [6pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.203 
-       <./images/lab.png (PNG copy)>] [7pdfTeX warning (ext4): destination with
- the same identifier (name{figure.4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.204 	\newpage
-                <./images/courbe_temps.png (PNG copy)>]
-<./images/valgrind.png, id=119, 742.775pt x 230.8625pt>
+ [6 <./images/lab.png (PNG copy)>] [7 <./images/courbe_temps.png (PNG copy)>]
+<./images/valgrind.png, id=127, 742.775pt x 230.8625pt>
 File: ./images/valgrind.png Graphic file (type png)
 
 <use ./images/valgrind.png>
-Package pdftex.def Info: ./images/valgrind.png used on input line 219.
+Package pdftex.def Info: ./images/valgrind.png used on input line 233.
 (pdftex.def)             Requested size: 341.44263pt x 106.12405pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
- [8pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.250 \end{document}
-                     <./images/valgrind.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 264.
+ [8 <./images/valgrind.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 264.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 264.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 264.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 56430FA559E24D225C184A27A5B70BCB;896.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
+(rerunfilecheck)             Checksum: E2BC932F82D03FA5969DB0E36853182D;972.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 264.
  ) 
 Here is how much of TeX's memory you used:
- 8117 strings out of 494924
- 115581 string characters out of 6179708
- 210190 words of memory out of 5000000
- 11301 multiletter control sequences out of 15000+600000
+ 9195 strings out of 494924
+ 133874 string characters out of 6179708
+ 230336 words of memory out of 5000000
+ 12371 multiletter control sequences out of 15000+600000
  12452 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,7n,32p,942b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </hom
-e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/rperei
+ 37i,8n,38p,942b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </hom
+e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/rperei
 ra/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/rpereira/.texm
 f-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/rpereira/.texmf-var/fo
 nts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/rpereira/.texmf-var/fonts/pk/l
@@ -830,10 +876,10 @@ onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (8 pages, 256852 bytes).
+Output written on rapport.pdf (8 pages, 274272 bytes).
 PDF statistics:
- 465 PDF objects out of 1000 (max. 8388607)
- 155 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 119 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 474 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
+ 33 named destinations out of 1000 (max. 500000)
+ 132 words of extra memory for PDF output out of 10000 (max. 10000000)
 

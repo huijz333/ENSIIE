@@ -8,7 +8,8 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{wrapfig}
-\usepackage{float}
+\usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
+\usepackage{floatrow}
 
 %title setup
 \title{Projet IPI: chemins de poids minimum}
@@ -27,43 +28,45 @@
     linkcolor=blue,
     urlcolor=red
 }
-
+			
 \begin{document}
 	\maketitle
 	\tableofcontents
 
 	\section*{Préambule}
-	
-		\begin{wrapfigure}[8]{r}{2cm}
-			\includegraphics[width=4cm]{./images/graph.png}
-		\end{wrapfigure}
 
-		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline
-		Le but est d'implémenter des algorithmes de recherche de 'chemin le plus court', dans des graphes orientés.\newline
+		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline Le but est d'implémenter des
+		algorithmes de recherche de 'chemin le plus court', dans des graphes orientés.
 		Ce document rapporte mon travail, et explique les choix techniques qui ont été pris.
-		Soit (X, A) un graphe. On note
+		Soit (X, A) un graphe. On note:
 		\begin{itemize}[label=-]
+			\setlength\itemsep{0.1em}
 			\item X : sommets du graphe
 			\item A : arcs du graphe
 			\item n : Card(X)
 			\item s : sommet 'source', celui à partir duquelle les chemins sont construits
 			\item t : sommet 'target', celui vers lequel on souhaite construire un chemin
 		\end{itemize}
-		
-		
+
+		\begin{figure}
+			\floatbox[{\capbeside\thisfloatsetup{capbesideposition={right,top},capbesidewidth=6cm}}]{figure}[\FBwidth]
+			{\caption{\textit{\newline graphe G n=7, \newline X=\{1, 2, ... 7\}, \newline A=\{(1, 4), (4, 6), ... (6, 7)\}}}
+			\label{fig:test}}
+			{\includegraphics[height=2cm]{./images/graph.png}}
+		\end{figure}
+
 	\newpage
 	\section{Recherche de chemin le plus court}
 		\subsection{Parcours en largeur (graphes non-pondérés)}
-			On considère ici un graphe où les arcs sont non pondérés.\newline
-			'Le chemin le plus court' entre 2 sommets corresponds à une famille d'arcs, dont le cardinal minimum.\newline
-			On souhaite codder l'information
+			On considère ici un graphe où les arcs sont non pondérés. 'Le chemin le plus court'
+			entre 2 sommets corresponds à une famille d'arcs, dont le cardinal est minimum.
+			On souhaite codder l'information:
 			\begin{itemize}[label=-]
 				\item `il existe un arc entre le sommet 'u' et le sommet 'v' `
 			\end{itemize}
 			Cette information est un booléen, et peut donc être coddée sur un bit.
 			J'économise ainsi beaucoup de mémoire. (8 fois plus que si l'arc était coddé sur un octet),
-			en representant mes arcs sur un tableau de bit.\newline\newline
-			Soit 'b' l'indice d'un bit dans un tableau d'octet.
+			en representant mes arcs sur un tableau de bit. Soit 'b' l'indice d'un bit dans un tableau d'octet.
 			Pour y accéder, il faut récuperer l'indice $\textrm{b}_\textrm{o}$ de l'octet correspondant dans le tableau,
 			et l'indice $\textrm{b}_\textrm{b}$ du bit sur cet octet.\newline
 			En posant:
@@ -75,35 +78,39 @@
 			\begin{itemize}[label=-]
 				\item \(b = 8*b_o+b_b\)
 			\end{itemize}
-			{SCHEMA}
-			On peut aussi faire une transformation entre 2 coordonnées ('u', 'v') vers un bit 'b'.
+			On peut aussi faire une transformation entre 2 sommets ('u', 'v') vers un bit 'b'.
+
 			\begin{itemize}[label=-]
 				\item \(u = b \% n\)
 				\item \(v = b / n\)
-				\item \(b = n * v + u\) (Rappel: 'n' est le nombre de sommet dans le graphe)
+				\item \(b = n * v + u\)
 			\end{itemize}
+			
 			Le bit 'b' vaux 1 s'il existe un arc entre 'u' et 'v', 0 sinon.
 			On a besoin de \(n^2\) bits, et donc de \(n^2 / 8 + 1\) octets.
 			On gagne donc 8 fois plus de mémoire que si l'information était stocké sur un octet.
 			De plus, je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
 			de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits (diviser par 8 <=> décaler
-			les bits de 3 vers la droite)\newline
+			les bits de 3 vers la droite)
 			
 			Egalement, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
 			Le processeur écrit des blocs mémoire du programme dans sa mémoire cache: plus les données sont compactes,
-			moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline\newline
-			Pour enregistrer les sommets en fonction de leur profondeur dans le graphe, et ainsi les visiter dans l'ordre de leur profondeur,
-			j'utilise une file FIFO (1er entré, 1er sorti).\newline
-			(VOIR STRUCTURE DE DONNEES 'list')\newline\newline
+			moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline
+							
+
+			\begin{wrapfigure}{R}{4cm}
+				\includegraphics[width=5cm]{./images/remonte.png}
+			\end{wrapfigure}
+
 			Chaque sommet 'u' de mon graphe possède un attribut pointant vers un autre sommet du graphe.
 			Une fois l'algorithme de parcours terminé, cet attribut pointe vers le prédécesseur de 'u',
 			dans le chemin le plus court allant de 's' à 't', et passant par 'u'.
 			Pour reconstruire le chemin, il suffit de regarder recursivement les prédécesseurs, en partant du sommet
 			't' jusqu'à ce que l'on ait atteint 's'.
-			La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin.\newline\newline
-			(SCHEMA DE LA REMONTE)\newline\newline
-			Cette modélisation permet d'optimiser les coûts de stockage, et la remonté est d'un coût négligeable devant le temps
-			de résolution du chemin. Elle sera réutiliser dans Dijkstra et A*.
+			La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin.\newline
+			
+			Cette modélisation permet de réduire les coûts de stockage, et la remonté est d'un coût
+			négligeable devant le temps de résolution du chemin. Elle sera réutiliser dans Dijkstra et A*.
 			
 		\subsection{Algorithme de Dijkstra (graphes pondérés positivement)}
 			On considère ici un graphe où les arcs sont pondérés avec des poids positifs.\newline
@@ -111,14 +118,27 @@
 			L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si le poids de tous les arcs sont identiques,
 			on retrouve l'algorithme de parcours en largeur.
 			\subsubsection{1ère approche}
-				Ma 1ère implementation (voir 'dijkstra.c.bkp') reprends le squelette du parcours en largeur.
-				La seule différence réside dans le choix du prochain sommet à visiter.\newline
-				Dans le parcours en largeur, les sommets sont visités dans leur ordre d'apparation
-				dans la liste (1er entré, 1er sorti).
-				Trouver le prochain sommet à visiter est d'une complexité \textbf{O(1)}.\newline\newline
+				Ma 1ère implementation reprends le squelette du parcours en largeur.
+				
+				Cependant, une différence réside dans le choix du prochain sommet à visiter. Dans le parcours en largeur,
+				les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
+				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.\newline\newline
 				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
 				Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet
-				à visiter devient en complexité \textbf{O(m)}
+				à visiter devient en complexité \(O(m)\)
+				
+				De plus, je remplace le tableau de bit par une matrice d'entier (4 octets),
+				afin de stocker le poids des arcs.
+				
+			\subsubsection{2ème approche}
+											
+				En utilisant une matrice, la complexité (spatial) de stockage des arcs est donc en \(O(n^2)\).
+				Plus précisement, si le poids est stocké sur 4 octet, pour \(n=100000\),
+				l'espace mémoire nécessaire est de \(40Go\)... J'ai donc décidé de changer de structures de données.
+				J'ajoute à chaque sommet un attribut liste, qui contient l'indice de ses sommets voisins.
+				La complexité spatial devient passe donc en \(m * O(n)\), où 'm' est
+				le nombre maximal de voisins par sommet. (NB : pour \(m = n\), on retrouve \(O(n^2)\)
+				
 			\subsubsection{File de priorité ('Priority Queue')}
 				Après avoir implementé Dijkstra avec cette 1ère approche, j'ai étudier le temps d'execution du programme.
 				\begin{figure}[H]
@@ -134,13 +154,13 @@
 				Cette structure de donnée est une file, permettant de définir des priorités parmis les éléments,
 				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'élément dans la file):
 				\begin{itemize}[label=-]
-					\item 'insérer un élément' : \textbf{O(log m)}
-					\item 'extraire l'élément ayant la plus grande priorité' : \textbf{O(log m)}
-					\item 'tester si la file de priorité est vide' : \textbf{O(1)}
-					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \textbf{O(log m)}
+					\item 'insérer un élément' : \(O(log m)\)
+					\item 'extraire l'élément ayant la plus grande priorité' : \({O(log m)}\)
+					\item 'tester si la file de priorité est vide' : \(O(1)\)
+					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log m)\)
 				\end{itemize}
 				les détails techniques peuvent être trouvé en annexe \cite{binary_heap},
-				ou directement dans mon implementation. \textit{(voir queue.[c,h])}
+				ou directement dans mon implementation. \textit{(voir queue.[c,h])}			
 
 		\subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
 			L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
@@ -198,41 +218,21 @@
 		\subsection{Structures de données}
 		J'ai implémenté plusieurs structures de données, afin d'optimiser les algorithmes. Je les ai conçu de manière générique,
 		afin de pouvoir m'en reservir plus tard dans d'autre projet. Si vous souhaitez plus de détail, je vous
-		conseille de regarder les fichiers '.h' correspondants.
-		\begin{itemize}[label=-]
-
-			\item 'list'   : liste doublement chainée. Elle sont plus efficaces que des listes simplement chainées,
-			et me servent de file FIFO et LIFO.
-			
-			\item 'array'  : tableau de taille dynamique générique. Le tableau grossit automatiquement de 50\%
-			si besoin lors de l'insertion.
-			
-			\item 'bitmap' : tableau d'octet. Cette structure facilite les opérations sur les bits.
-			
-			\item 'pqueue' : une file de priorité ('Binary Priority Queue' ci-dessus)
-			
-			\item 'node'   : sommet d'un graphe. Cette representation m'a permis de créer un système d'héritage, rendant
-			mon code plus modulaire. (n'importe quel structure héritant de 'node' est compatible avec tous les algorithmes implémentés.)
-			
-			\item graphes  : pas de structure explicit implémenté. Mes graphes sont
-			representés sous forme de tableau de sommet.
-			
-		\end{itemize}
+		conseille vivement de regarder les fichiers '.c' et '.h', qui sont très largement commenté.
 		
 		\subsection{Qualité logiciel}
-		Mes programmes passent les tests fournis.\newline    
-		De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
-		Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
-		(tester sur le set de test fourni).
-		\begin{figure}[H]
-			\begin{center}
-				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
-			\end{center}
-			\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
-		\end{figure}
-		J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
-		D'où par exemple, l'utilisation du 'define' ARRAY\_ITERATE implementé dans le fichier 'array.h'.
-		Ce 'define' me permet d'itérer rapidement sur les tableaux, en utilisant l'arithmetique des pointeurs.\newline
+			Mes programmes passent les tests fournis.\newline    
+			De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
+			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
+			(tester sur le set de test fourni).
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
+				\end{center}
+				\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
+			\end{figure}
+			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
+			D'où par exemple, l'impleme,tation du 'define' ARRAY\_ITERATE ('array.h')
 	
 	\section{Références}
 		\begin{thebibliography}{}

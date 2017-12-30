@@ -13,9 +13,20 @@
  */
 int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 
-	/* initilisation: on definie toutes les distantes à +oo (MAX_NODES suffit),
-	   sauf pour l'origine à 0 */
+	/** 1 : INITIALISATION */
+	/** 1.1 : on crée la file de visite */
 	INDEX n = nodes->size;
+	t_list * unvisited = list_new();
+	t_bitmap * visited = bitmap_new(n);
+	if (unvisited == NULL || visited == NULL) {
+		bitmap_delete(visited);
+		list_delete(unvisited);
+		return (0);
+	}
+
+	/** 1.2 : initilisation: on definie toutes
+	   les distantes à +oo (MAX_NODES suffit),
+	   sauf pour l'origine à 0 */
 	INDEX i;
 	for (i = 0 ; i < n ; i++) {
 		t_node * node = (t_node *) array_get(nodes, i);
@@ -24,30 +35,22 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 	}
 	((t_node *)array_get(nodes, s))->pathlen = 0; /* source à 0 */
 
-	/** on crée une file */
-	t_list * visitQueue = list_new();
-	if (visitQueue == NULL) {
-		return (0);
-	}
-	t_bitmap * visited = bitmap_new(n);
-	if (visited == NULL) {
-		list_delete(visitQueue);
-		return (0);
-	}
-
 	/** on ajoute la source a la file */
-	list_add(visitQueue, &s, sizeof(INDEX));
+	list_add(unvisited, &s, sizeof(INDEX));
 
-	/** tant que la file n'est pas vide */
-	while (visitQueue->size > 0) {
-		/** on pop la tête de file */
-		INDEX uID = *((INDEX *) list_head(visitQueue));
-		list_remove_head(visitQueue);
-			
+	/** 2 : tant que la file n'est pas vide */
+	while (unvisited->size > 0) {
+		/** 2.1 : on pop la tête de file */
+		INDEX uID = *((INDEX *) list_head(unvisited));
+		list_remove_head(unvisited);	
+		/** on definit ce sommet comme 'visité' */
+
 		/** on recupere le sommet correspondant */
 		t_node * u = (t_node *) array_get(nodes, uID);
 
-		/** s'il n'a pas de successeurs, on continue */
+		/** 2.2 : pour chaque successeurs de 'u' */
+
+		/** s'il n'a pas de successeurs, on continue de vider la file */
 		if (u->successors == NULL) {
 			continue ;
 		}
@@ -58,7 +61,7 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 			/** 'v' est successeurs de 'u' */
 			INDEX vID = *((INDEX *) array_get(u->successors, i));
 			
-			/* si on a déjà visité 'v', on continue */
+			/* si on a déjà visité 'v', on passe au voisin suivant */
 			if (bitmap_get(visited, vID)) {
 				continue ;
 			}
@@ -72,14 +75,14 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 			/* si on a atteint 't', on a trouvé le chemin */
 			if (vID == t) {
 				bitmap_delete(visited);
-				list_delete(visitQueue);
+				list_delete(unvisited);
 				return (1);
 			}
-			list_add(visitQueue, &vID, sizeof(INDEX));
+			list_add(unvisited, &vID, sizeof(INDEX));
 		}
 	}
 	/** sinon, 's' et 't' sont dans des parties connexes distinctes */
 	bitmap_delete(visited);
-	list_delete(visitQueue);
+	list_delete(unvisited);
 	return (0);
 }
