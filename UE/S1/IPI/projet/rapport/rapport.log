@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  30 DEC 2017 13:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  30 DEC 2017 17:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,17 +349,6 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@inbox=\box26
 \enitdp@description=\count87
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks18
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
@@ -410,7 +399,7 @@ Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks19
+\KV@toks@=\toks18
 )
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
@@ -513,7 +502,7 @@ Package color Info: Driver file: pdftex.def on input line 143.
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count99
 \lst@gtempboxa=\box27
-\lst@token=\toks20
+\lst@token=\toks19
 \lst@length=\count100
 \lst@currlwidth=\dimen110
 \lst@column=\count101
@@ -535,41 +524,72 @@ File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen114
+\WF@size=\dimen115
+\c@WF@wrappedlines=\count107
+\WF@box=\box29
+\WF@everypar=\toks20
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count108
+\float@exts=\toks21
+\float@box=\box30
+\@float@everytoks=\toks22
+\@floatcapt=\box31
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+\Gm@cnth=\count109
+\Gm@cntv=\count110
+\c@Gm@tempcnt=\count111
+\Gm@bindingoffset=\dimen116
+\Gm@wd@mp=\dimen117
+\Gm@odd@mp=\dimen118
+\Gm@even@mp=\dimen119
+\Gm@layoutwidth=\dimen120
+\Gm@layoutheight=\dimen121
+\Gm@layouthoffset=\dimen122
+\Gm@layoutvoffset=\dimen123
+\Gm@dimlist=\toks23
+)
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count107
+\etb@tempcnta=\count112
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+Package hyperref Info: Option `colorlinks' set `true' on input line 30.
  (./rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-\AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring ON on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+\AtBeginShipoutBox=\box32
+Package hyperref Info: Link coloring ON on input line 32.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count108
+\c@section@level=\count113
 )
-LaTeX Info: Redefining \ref on input line 31.
-LaTeX Info: Redefining \pageref on input line 31.
-LaTeX Info: Redefining \nameref on input line 31.
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
 
 (./rapport.out) (./rapport.out)
 \@outlinefile=\write3
@@ -578,17 +598,17 @@ LaTeX Info: Redefining \nameref on input line 31.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen114
-\scratchbox=\box30
-\nofMPsegments=\count110
-\nofMParguments=\count111
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen115
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count114
+\scratchdimen=\dimen124
+\scratchbox=\box33
+\nofMPsegments=\count115
+\nofMParguments=\count116
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count117
+\MPscratchDim=\dimen125
+\MPnumerator=\count118
+\makeMPintoPDFobject=\count119
+\everyMPtoPDFconversion=\toks25
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -604,154 +624,201 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count115
-LaTeX Font Info:    Try loading font information for U+msa on input line 33.
+\c@lstlisting=\count120
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(90.3375pt, 433.62001pt, 90.3375pt)
+* v-part:(T,H,B)=(90.3375pt, 614.295pt, 90.3375pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=433.62001pt
+* \textheight=614.295pt
+* \oddsidemargin=18.0675pt
+* \evensidemargin=18.0675pt
+* \topmargin=-18.9325pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 34.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 34.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 34.
+(./rapport.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 33.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./rapport.toc)
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
+ <./images/graph.png, id=59, 301.125pt x 331.2375pt>
+File: ./images/graph.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--40
+<use ./images/graph.png>
+Package pdftex.def Info: ./images/graph.png used on input line 39.
+(pdftex.def)             Requested size: 113.81102pt x 125.19427pt.
 
+Overfull \hbox (56.90552pt too wide) in paragraph at lines 39--40
+[][] 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (6.5438pt too wide) in paragraph at lines 57--64
-\T1/cmr/m/n/10 Cette in-for-ma-tion est un booléen, et peut donc être cod-dée s
-ur un bit. J'économise
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 57--64
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/graph.png (PNG co
+py)>]
+Underfull \hbox (badness 10000) in paragraph at lines 64--71
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--85
+Underfull \hbox (badness 10000) in paragraph at lines 86--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--101
+Underfull \hbox (badness 10000) in paragraph at lines 93--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--101
+Underfull \hbox (badness 10000) in paragraph at lines 93--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--101
+Underfull \hbox (badness 10000) in paragraph at lines 93--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--101
+Underfull \hbox (badness 10000) in paragraph at lines 93--108
 
  []
 
 [2]
-Overfull \hbox (1.27655pt too wide) in paragraph at lines 108--116
-\T1/cmr/m/n/10 Dans le par-cours en largeur, les som-mets sont vis-ités dans le
-ur or-dre d'apparation
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 108--116
+Underfull \hbox (badness 10000) in paragraph at lines 115--122
 
  []
 
-<./images/no_pqueue.png, id=81, 371.3875pt x 210.7875pt>
+<./images/no_pqueue.png, id=82, 371.3875pt x 210.7875pt>
 File: ./images/no_pqueue.png Graphic file (type png)
 
 <use ./images/no_pqueue.png>
-Package pdftex.def Info: ./images/no_pqueue.png used on input line 120.
-(pdftex.def)             Requested size: 227.62842pt x 129.1945pt.
+Package pdftex.def Info: ./images/no_pqueue.png used on input line 126.
+(pdftex.def)             Requested size: 170.72131pt x 96.89587pt.
 
-Overfull \hbox (2.62808pt too wide) in paragraph at lines 117--130
-\T1/cmr/m/n/10 d'execution du pro-gramme. Il s'est avéré que mon pro-gramme pas
-se, en moyenne,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--136
 
  []
 
+[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 140--145
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 146--149
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.141 				\end{itemize}
+                        <./images/no_pqueue.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 155--160
 
  []
 
-[4 <./images/no_pqueue.png>]
-<./images/performances.png, id=98, 596.2275pt x 328.22626pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
+
+ []
+
+<./images/performances.png, id=93, 596.2275pt x 328.22626pt>
 File: ./images/performances.png Graphic file (type png)
 
 <use ./images/performances.png>
-Package pdftex.def Info: ./images/performances.png used on input line 157.
+Package pdftex.def Info: ./images/performances.png used on input line 172.
 (pdftex.def)             Requested size: 341.4362pt x 187.96236pt.
- [5 <./images/performances.png>]
-<./images/lab.png, id=105, 572.1375pt x 570.13pt>
+ [4pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.186 	\newpage
+                <./images/performances.png>] [5]
+<./images/lab.png, id=106, 572.1375pt x 570.13pt>
 File: ./images/lab.png Graphic file (type png)
  <use ./images/lab.png>
-Package pdftex.def Info: ./images/lab.png used on input line 177.
+Package pdftex.def Info: ./images/lab.png used on input line 192.
 (pdftex.def)             Requested size: 341.43436pt x 340.23636pt.
 
-<./images/courbe_temps.png, id=106, 484.05844pt x 300.3722pt>
+<./images/courbe_temps.png, id=107, 484.05844pt x 300.3722pt>
 File: ./images/courbe_temps.png Graphic file (type png)
 
 <use ./images/courbe_temps.png>
-Package pdftex.def Info: ./images/courbe_temps.png used on input line 184.
+Package pdftex.def Info: ./images/courbe_temps.png used on input line 199.
 (pdftex.def)             Requested size: 341.44589pt x 211.877pt.
- [6 <./images/lab.png (PNG copy)>] [7 <./images/courbe_temps.png (PNG copy)>]
-<./images/valgrind.png, id=118, 742.775pt x 230.8625pt>
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.203 
+       <./images/lab.png (PNG copy)>] [7pdfTeX warning (ext4): destination with
+ the same identifier (name{figure.4}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.204 	\newpage
+                <./images/courbe_temps.png (PNG copy)>]
+<./images/valgrind.png, id=119, 742.775pt x 230.8625pt>
 File: ./images/valgrind.png Graphic file (type png)
 
 <use ./images/valgrind.png>
-Package pdftex.def Info: ./images/valgrind.png used on input line 222.
+Package pdftex.def Info: ./images/valgrind.png used on input line 219.
 (pdftex.def)             Requested size: 341.44263pt x 106.12405pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
+ [8pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
+ has been already used, duplicate ignored
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--231
-
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 257.
-[8 <./images/valgrind.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 257.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.250 \end{document}
+                     <./images/valgrind.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 257.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 257.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 56430FA559E24D225C184A27A5B70BCB;896.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 257.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
  ) 
 Here is how much of TeX's memory you used:
- 7860 strings out of 494924
- 110988 string characters out of 6179708
- 193974 words of memory out of 5000000
- 11036 multiletter control sequences out of 15000+600000
- 16060 words of font info for 48 fonts, out of 8000000 for 9000
+ 8117 strings out of 494924
+ 115581 string characters out of 6179708
+ 210190 words of memory out of 5000000
+ 11301 multiletter control sequences out of 15000+600000
+ 12452 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,7n,32p,942b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,7n,32p,942b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </hom
 e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/rperei
 ra/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/rpereira/.texm
@@ -763,10 +830,10 @@ onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (8 pages, 240489 bytes).
+Output written on rapport.pdf (8 pages, 256852 bytes).
 PDF statistics:
- 463 PDF objects out of 1000 (max. 8388607)
+ 465 PDF objects out of 1000 (max. 8388607)
  155 compressed objects within 2 object streams
  31 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 119 words of extra memory for PDF output out of 10000 (max. 10000000)
 

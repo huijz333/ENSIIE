@@ -4,6 +4,7 @@ int main(void) {
 	/** lit le labyrinthe sur l'entrée standart */
 	t_lab * lab = lab_parse();
 	if (lab == NULL) {
+		fprintf(stderr, "Error on lab parsing\n");
 		return (EXIT_FAILURE);
 	}
 

@@ -3,11 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
-\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{listings}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
 
 %title setup
 \title{Projet IPI: chemins de poids minimum}
@@ -32,17 +34,23 @@
 	\tableofcontents
 
 	\section*{Préambule}
+	
+		\begin{wrapfigure}[8]{r}{2cm}
+			\includegraphics[width=4cm]{./images/graph.png}
+		\end{wrapfigure}
+
 		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline
 		Le but est d'implémenter des algorithmes de recherche de 'chemin le plus court', dans des graphes orientés.\newline
-		Ce document rapporte mon travail, et explique les choix techniques que j'ai pris.\newline\newline
-		On considère (X, A) un graphe.
+		Ce document rapporte mon travail, et explique les choix techniques qui ont été pris.
+		Soit (X, A) un graphe. On note
 		\begin{itemize}[label=-]
-			\item n : Card(X)
 			\item X : sommets du graphe
 			\item A : arcs du graphe
+			\item n : Card(X)
 			\item s : sommet 'source', celui à partir duquelle les chemins sont construits
 			\item t : sommet 'target', celui vers lequel on souhaite construire un chemin
 		\end{itemize}
+		
 		
 	\newpage
 	\section{Recherche de chemin le plus court}
@@ -105,18 +113,17 @@
 			on retrouve l'algorithme de parcours en largeur.
 			\subsubsection{1ère approche}
 				Ma 1ère implementation (voir 'dijkstra.c.bkp') reprends le squelette du parcours en largeur.
-				La seule différence réside dans le choix du prochain sommet à visiter.\newline
-				Dans le parcours en largeur, les sommets sont visités dans leur ordre d'apparation
-				dans la liste (1er entré, 1er sorti).
+				La seule différence réside dans le choix du prochain sommet à visiter. Dans le parcours en largeur,
+				les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
 				Trouver le prochain sommet à visiter est d'une complexité \textbf{O(1)}.\newline\newline
 				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
 				Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet
 				à visiter devient en complexité \textbf{O(m)}
 			\subsubsection{File de priorité ('Priority Queue')}
 				Après avoir implementé Dijkstra avec cette 1ère approche, j'ai étudier le temps d'execution du programme.
-				\begin{figure}[!h]
+				\begin{figure}[H]
 					\begin{center}
-						\includegraphics[width=8cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
+						\includegraphics[width=6cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
 					\end{center}
 				    \caption{\textit{résultat de 'gprof' sur 'tests/exo3/06'}}
 				\end{figure}
@@ -135,6 +142,15 @@
 				les détails techniques peuvent être trouvé en annexe \cite{binary_heap},
 				ou directement dans mon implementation. \textit{(voir queue.[c,h])}
 
+/**
+ *	Derivee la fonction 'f' au point 'x0'
+ *
+ *	En cas de succès, la valeur est stocké dans 'y0', et 0 est renvoyé
+ *	Sinon, 'y0' est inchangé, et renvoie '-1'
+ */
+int derivee(function f, float x0, float * y0);
+				
+				
 		\subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
 			L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
 			Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
@@ -151,7 +167,7 @@
 			Dijkstra, une fois l'algorithme A* implementé et optimisé.
 			(une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijkstra.c.bkp')
 	
-			\begin{figure}
+			\begin{figure}[H]
 				\begin{center}
 					\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/performances.png}
 				\end{center}
@@ -171,14 +187,14 @@
 	\section{Application: resolution labyrinthe}
 		Dans l'exercice 3, on nous propose de résoudre des labyrinthes.
 		Voici la modélisation
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{center}
 				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/lab.png}
 			\end{center}
 			\caption{\textit{Representation du labyrinthe sous forme de graphe}}
 		\end{figure}
 		Voici les résultats 
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{center}
 				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
 			\end{center}
@@ -191,40 +207,21 @@
 		\subsection{Structures de données}
 		J'ai implémenté plusieurs structures de données, afin d'optimiser les algorithmes. Je les ai conçu de manière générique,
 		afin de pouvoir m'en reservir plus tard dans d'autre projet. Si vous souhaitez plus de détail, je vous
-		conseille de regarder les fichiers '.h' correspondants.
-		\begin{itemize}[label=-]
-
-			\item 'list'   : liste doublement chainée. Elle sont plus efficace que des listes simplement chainées
-			(insertion et deletion). Elles me servent file FIFO et LIFO.
-			
-			\item 'array'  : tableau dynamique générique. Le tableau grossit automatiquement si besoin lors de l'insertion.
-			
-			\item 'bitmap' : tableau d'octet. Cette structure facilite les opérations sur les bits.
-			
-			\item 'pqueue' : une file de priorité ('Binary Priority Queue' ci-dessus)
-			
-			\item 'node'   : sommet d'un graphe. Cette representation m'a permis de créer un système d'héritage, rendant
-			mon code plus modulaire. (n'importe quel structure héritant de 'node' est compatible avec tous les algorithmes implémentés.)
-			
-			\item graphes  : pas de structure explicit implémenté. Mes graphes sont
-			representés sous forme de tableau de sommet.
-			
-		\end{itemize}
+		conseille vivement de regarder les fichiers '.c' et '.h', qui sont très largement commenté.
 		
 		\subsection{Qualité logiciel}
-		Mes programmes passent les tests fournis.\newline    
-		De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
-		Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
-		(tester sur le set de test fourni).
-		\begin{figure}
-		\begin{center}
-			\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
-		\end{center}
-		\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
-		\end{figure}
-		J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
-		D'où par exemple, l'utilisation du 'define' ARRAY\_ITERATE implementé dans le fichier 'array.h'.
-		Ce 'define' me permet d'itérer rapidement sur les tableaux, en utilisant l'arithmetique des pointeurs.\newline
+			Mes programmes passent les tests fournis.\newline    
+			De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
+			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
+			(tester sur le set de test fourni).
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
+				\end{center}
+				\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
+			\end{figure}
+			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
+			D'où par exemple, l'impleme,tation du 'define' ARRAY\_ITERATE ('array.h')
 	
 	\section{Références}
 		\begin{thebibliography}{}

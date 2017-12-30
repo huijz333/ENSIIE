@@ -93,7 +93,10 @@ static void lab_parse_map(t_lab * lab, t_array * nodes,
 	/** pour chaque case de la carte */
 	INDEX x, y;
 	for (y = 0 ; y < lab->l ; y++) {
-		scanf("%s\n", line);
+		if (!scanf("%s\n", line)) {
+			fprintf(stderr, "Error reading map l:"INDEX_IDENTIFIER"\n", y);
+			exit(EXIT_FAILURE);
+		}
 		for (x = 0 ; x < lab->l ; x++) {
 			/** on recupere la case de la carte qui correspond */
 			int caseID = y * lab->l + x;
@@ -294,12 +297,13 @@ t_lab * lab_parse(void) {
 
 	/** on alloue en mémoire le labyrinthe */
 	INDEX l;
-	scanf(INDEX_IDENTIFIER "\n", &l);
+	if (!scanf(INDEX_IDENTIFIER "\n", &l)) {
+		return (NULL);
+	}
 	t_lab * lab = lab_new(l);
 	if (lab == NULL) {
 		return (NULL);
 	}
-
 	/** les sommets du graphe que l'on va construire */
 	t_array * nodes = lab->nodes;
 	
@@ -316,7 +320,7 @@ t_lab * lab_parse(void) {
 	
 	/** on lit la carte et on crée les sommets du graphe */
 	lab_parse_map(lab, nodes, nodesID, tps);
-
+	
 	/** on lit les sommets par des arcs */
 	lab_link_nodes(lab, nodes, nodesID, tps);
 
