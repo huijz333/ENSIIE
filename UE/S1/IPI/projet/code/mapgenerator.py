@@ -1,9 +1,10 @@
 import random
 import sys
 
-ratio = 0.5
+ratio = 0.2
 l = int(sys.argv[1])
-blocks = []
+print(l)
+empty = 2
 for i in range(l):
 	line = ""
 	for j in range(l):
@@ -14,13 +15,8 @@ for i in range(l):
 		elif random.randint(0, 100) * 0.01 < ratio:
 			c = 'X'
 		else:
+			empty = empty + 1
 			c = '.'
 		line = line + c
-	blocks.append(line)
-
-
-
-print(l)
-for line in blocks:
 	print(line)
-print(l * l)
+print(empty)

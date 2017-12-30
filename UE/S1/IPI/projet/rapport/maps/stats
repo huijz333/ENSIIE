@@ -1,0 +1,71 @@
+4
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,00s user 0,00s system 0% cpu 0,001 total
+8335
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,02s user 0,00s system 86% cpu 0,023 total
+32821
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,04s user 0,00s system 97% cpu 0,041 total
+73381
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,07s user 0,01s system 98% cpu 0,077 total
+129678
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,13s user 0,00s system 97% cpu 0,139 total
+202162
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,21s user 0,01s system 98% cpu 0,222 total
+290353
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,31s user 0,01s system 99% cpu 0,323 total
+395440
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,41s user 0,01s system 99% cpu 0,417 total
+516263
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,52s user 0,03s system 99% cpu 0,549 total
+652234
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,67s user 0,02s system 99% cpu 0,695 total
+805501
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,84s user 0,03s system 99% cpu 0,870 total
+973693
+./exo3 < ../rapport/maps/map_$i > /dev/null  1,03s user 0,03s system 99% cpu 1,059 total
+1158476
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,34s user 0,03s system 99% cpu 0,378 total
+1359849
+./exo3 < ../rapport/maps/map_$i > /dev/null  1,50s user 0,03s system 99% cpu 1,539 total
+1575849
+./exo3 < ../rapport/maps/map_$i > /dev/null  1,82s user 0,06s system 99% cpu 1,878 total
+1809257
+./exo3 < ../rapport/maps/map_$i > /dev/null  1,98s user 0,06s system 99% cpu 2,046 total
+2058920
+./exo3 < ../rapport/maps/map_$i > /dev/null  2,30s user 0,08s system 99% cpu 2,378 total
+2322180
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,67s user 0,08s system 99% cpu 0,758 total
+2603593
+./exo3 < ../rapport/maps/map_$i > /dev/null  2,99s user 0,10s system 99% cpu 3,095 total
+2900980
+./exo3 < ../rapport/maps/map_$i > /dev/null  3,58s user 0,09s system 99% cpu 3,680 total
+3214660
+./exo3 < ../rapport/maps/map_$i > /dev/null  3,74s user 0,11s system 99% cpu 3,851 total
+3544048
+./exo3 < ../rapport/maps/map_$i > /dev/null  4,09s user 0,13s system 99% cpu 4,221 total
+3889214
+./exo3 < ../rapport/maps/map_$i > /dev/null  4,60s user 0,13s system 99% cpu 4,731 total
+4248930
+./exo3 < ../rapport/maps/map_$i > /dev/null  5,00s user 0,14s system 99% cpu 5,148 total
+4626723
+./exo3 < ../rapport/maps/map_$i > /dev/null  5,54s user 0,16s system 99% cpu 5,710 total
+5022227
+./exo3 < ../rapport/maps/map_$i > /dev/null  6,08s user 0,19s system 99% cpu 6,272 total
+5430358
+./exo3 < ../rapport/maps/map_$i > /dev/null  6,84s user 0,18s system 99% cpu 7,031 total
+5854146
+./exo3 < ../rapport/maps/map_$i > /dev/null  7,38s user 0,16s system 99% cpu 7,538 total
+6296941
+./exo3 < ../rapport/maps/map_$i > /dev/null  7,85s user 0,24s system 99% cpu 8,096 total
+6752420
+./exo3 < ../rapport/maps/map_$i > /dev/null  8,63s user 0,24s system 99% cpu 8,919 total
+7228454
+./exo3 < ../rapport/maps/map_$i > /dev/null  9,15s user 0,31s system 99% cpu 9,485 total
+7717000
+./exo3 < ../rapport/maps/map_$i > /dev/null  9,92s user 0,31s system 99% cpu 10,281 total
+8223334
+./exo3 < ../rapport/maps/map_$i > /dev/null  10,69s user 0,28s system 99% cpu 11,006 total
+8745329
+./exo3 < ../rapport/maps/map_$i > /dev/null  11,54s user 0,31s system 99% cpu 11,901 total
+9281715
+./exo3 < ../rapport/maps/map_$i > /dev/null  12,26s user 0,28s system 99% cpu 12,591 total
+./exo3 < ../rapport/maps/map_$i > /dev/null  0,00s user 0,00s system 0% cpu 0,001 total
