@@ -21,7 +21,7 @@ static int weightcmp(WEIGHT * a, WEIGHT * b) {
  */
 int dijkstra(t_array * nodes, INDEX sID, INDEX tID) {
 	INDEX n = nodes->size;
-	
+
 	/** tableau enregistrant les sommets qui ont déjà eu un predecesseur visité */
 	t_pqueue * unvisited = pqueue_new((t_cmpf)weightcmp);
 	/** bitmap enregistrant les sommets visités */

@@ -97,9 +97,9 @@
 			Le processeur écrit des blocs mémoire du programme dans sa mémoire cache: plus les données sont compactes,
 			moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline
 							
-
-			\begin{wrapfigure}{R}{4cm}
+			\begin{wrapfigure}{R}{5cm}
 				\includegraphics[width=5cm]{./images/remonte.png}
+				\caption{\textit{Schéma de l'algorithme de remonté}}
 			\end{wrapfigure}
 
 			Chaque sommet 'u' de mon graphe possède un attribut pointant vers un autre sommet du graphe.
@@ -118,31 +118,28 @@
 			L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si le poids de tous les arcs sont identiques,
 			on retrouve l'algorithme de parcours en largeur.
 			\subsubsection{1ère approche}
-				Ma 1ère implementation reprends le squelette du parcours en largeur.
-				
+				Ma 1ère implementation reprends le squelette du parcours en largeur.\newline\newline
+				On remplace le tableau de bit par une matrice d'entier (4 octets), stockant le poids des arcs.\newline\newline
 				Cependant, une différence réside dans le choix du prochain sommet à visiter. Dans le parcours en largeur,
 				les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
-				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.\newline\newline
+				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.
 				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
 				Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet
 				à visiter devient en complexité \(O(m)\)
-				
-				De plus, je remplace le tableau de bit par une matrice d'entier (4 octets),
-				afin de stocker le poids des arcs.
-				
-			\subsubsection{2ème approche}
-											
-				En utilisant une matrice, la complexité (spatial) de stockage des arcs est donc en \(O(n^2)\).
-				Plus précisement, si le poids est stocké sur 4 octet, pour \(n=10^6\),
-				l'espace mémoire nécessaire est de \(400Go\)... J'ai donc décidé de changer de structures de données.
-				J'ajoute à chaque sommet un attribut liste 'successors', qui contient l'indice de ses sommets successeurs.
-				La complexité spatial devient devient donc (au plus) en \(m * O(n)\), où 'm' est
-				le nombre maximal de successeurs par sommet. (Remaruqe : pour \(m = n\), on retrouve \(O(n^2)\))
-				Par exemple, dans ma résolution des labyrinthes, j'ai \(m <= 5\). Pour \(n=10^6\),
+
+			\subsubsection{2ème approche}								
+				En utilisant une matrice, la complexité ('spatial') de stockage des arcs est donc en \(O(n^2)\).
+				Plus précisement, si le poids est stocké sur 4 octet, pour \(n=10^6\) (cas labyrinthe exo3/tests/06),
+				l'espace mémoire nécessaire est de \(400Go\)... On va donc changer de structures de données.
+				En ajoutant un attribut liste à chaque sommet, qui contient l'indice de ses sommets voisins,
+				la complexité spatial devient devient donc (au plus) en \(m * O(n)\), où 'm' est
+				le nombre maximal de successeurs par sommet. (Remarque : pour \(m = n\), on retrouve \(O(n^2)\))
+				Il en résulte que dans la résolution de labyrinthe (exo3/tests/06), on a \(m <= 5\), donc pour \(n=10^6\),
 				on passe donc de \(400Go\) à \(5 Mo\).
 				
 			\subsubsection{File de priorité ('Priority Queue')}
-				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'execution
+			
+				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'execution.
 				\begin{figure}[H]
 					\begin{center}
 						\includegraphics[width=6cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
@@ -163,38 +160,40 @@
 					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log(m))\)
 				\end{itemize}
 				les détails techniques peuvent être trouvé en annexe \cite{binary_heap},
-				ou directement dans mon implementation. \textit{(voir queue.[c,h])}			
+				ou directement dans mon implementation. \textit{(voir pqueue.[c,h])}
 
 		\subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
-			L'algorithme A* est une extension de l'algorithme de Dijkstra.\newline
-			Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
-			Avec A*, on effectue la même opération, mais on ajoute une heuristique aux poids des arcs.
-			\textit{`Une heuristique est une méthode de calcul qui fournit rapidement une solution réalisable,
-			pas nécessairement optimale ou exacte, pour un problème d'optimisation difficile.} \cite{heuristique}\newline
+			L'algorithme A* est une extension de l'algorithme de Dijkstra. Avec l'algorithme de Dijkstra, on parcourt
+			le graphe en largeur selon le poids de ses arcs. Avec A*, on effectue la même opération,
+			mais on ajoute une heuristique \cite{heuristique} aux poids des arcs.\newline
 			
 			Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommmets seront visités dans le graphe.
-			Bien quel fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la recherche plus rapide.
-			(et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal)\newline
+			Bien quel fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la convergence vers
+			le sommet de destination plus rapide.
+			(et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal).
+			Par exemple, dans la résolution de labyrinthe, une heuristique intéressante est la distance de manhattan \cite{manhattan},
+			ou encore l'heuristique 'diagonal' (on oriente la recherche sur la diagonal du labyrinthe)
 			
 			Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'),
-			on obtient très exactement l'algorithme de Dijkstra. C'est d'ailleurs comme cela que je l'ai re-implementé
-			Dijkstra, une fois l'algorithme A* implementé et optimisé.
-			(une version de l'algorithme de Dijkstra 'stand-alone' est toujours disponible dans le fichier 'dijkstra.c.bkp')
+			on obtient très exactement l'algorithme de Dijkstra. (voir 'dijkstra.c.astar').
+			Pour des raisons d'optimisations j'ai cependant préféré garder 2 implementations complètes distinctes.
+			(avec une heuristique nulle, on peut economiser son stockage mémoire et queqlues additions)
 	
 			\begin{figure}[H]
 				\begin{center}
-					\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/performances.png}
+					\includegraphics[width=11cm,height=\textheight,keepaspectratio]{./images/performances.png}
 				\end{center}
 				\caption{\textit{Temps d'execution des algorithmes}}
 			\end{figure}
 			
-			Ces résultats sont ceux appliqués au test exo3/06\newline
-			(graphe de 1 000 000 de sommets, on cherche le plus court chemin entre les 2 sommets les plus distants)
+			Ces résultats sont ceux appliqués au test exo3/06. (graphe de 1 000 000 de sommets,
+			on cherche le plus court chemin entre les 2 sommets les plus distants)
 			
 			\begin{itemize}[label=-]
+				\setlength\itemsep{0.1em}
 				\item 1 : Dijkstra sans file de priorité
 				\item 2 : Dijkstra avec file de priorité
-				\item 3 : A* avec file de priorité, et fonction heuristique (distance de Manhattan)
+				\item 3 : A* avec file de priorité, et fonction heuristique ('rester sur la diagonal du labyrinthe')
 			\end{itemize}
 			
 	\newpage
@@ -212,7 +211,7 @@
 			\begin{center}
 				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
 			\end{center}
-			\caption{\textit{Temps de résolution de labyrinthe avec Dijkstra (A* heuristique nulle)}}
+			\caption{\textit{Temps de résolution de labyrinthe avec Dijkstra, allure en \(O(n * log(n))\)}}
 		\end{figure}
 
 	\newpage
@@ -221,13 +220,13 @@
 		\subsection{Structures de données}
 		J'ai implémenté plusieurs structures de données, afin d'optimiser les algorithmes. Je les ai conçu de manière générique,
 		afin de pouvoir m'en reservir plus tard dans d'autre projet. Si vous souhaitez plus de détail, je vous
-		conseille vivement de regarder les fichiers '.c' et '.h', qui sont très largement commenté.
+		conseille vivement de regarder les fichiers '.c' et '.h', qui sont commentés.
 		
 		\subsection{Qualité logiciel}
 			Mes programmes passent les tests fournis.\newline    
 			De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
 			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
-			(tester sur le set de test fourni).
+			(tester sur le set de test fourni, avec des fichiers bien formattés).
 			\begin{figure}[H]
 				\begin{center}
 					\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/valgrind.png}
@@ -235,20 +234,11 @@
 				\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
 			\end{figure}
 			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
-			D'où par exemple, l'impleme,tation du 'define' ARRAY\_ITERATE ('array.h')
+			D'où par exemple, l'implementation des tas binaires, ou du 'define' ARRAY\_ITERATE ('array.h')
 	
 	\section{Références}
 		\begin{thebibliography}{}
-			\bibitem{computerphile}
-				Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
-				Maze Solving - Computerphile,\newline
-				\href{https://www.youtube.com/watch?v=rop0W4QDOUI}{\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}}.
-			  
-			\bibitem{heuristique}
-				Wikipédia, Heuristique, 31 Octobre 2017,\newline
-				\href{https://fr.wikipedia.org/wiki/Heuristique_(mathématiques)}
-				      {\textit{https://fr.wikipedia.org/wiki/Heuristique\_(mathématiques)}}.
-			  
+
 			\bibitem{binary_heap}
 				Wikipédia, Binary Heap, 15 Décembre 2017,\newline
 				\href{https://en.wikipedia.org/wiki/Binary\_heap}
@@ -258,6 +248,21 @@
 				Mary K. VERNON, Priority Queues, 3 Septembre 2016,\newline
 				\href{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}
 					{\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}}.
+		
+			\bibitem{computerphile}
+				Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
+				Maze Solving - Computerphile,\newline
+				\href{https://www.youtube.com/watch?v=rop0W4QDOUI}{\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}}.
+			  
+			\bibitem{heuristique}
+				Wikipédia, Heuristique, 31 Octobre 2017,\newline
+				\href{https://fr.wikipedia.org/wiki/Heuristique_(mathématiques)}
+				      {\textit{https://fr.wikipedia.org/wiki/Heuristique\_(mathématiques)}}.
+				      
+			\bibitem{manhattan}
+				Wikipédia, Distance de Manhattan, 31 Octobre 2017,\newline
+				\href{https://fr.wikipedia.org/wiki/Distance_de_Manhattan}
+				      {\textit{https://fr.wikipedia.org/wiki/Distance\_de\_Manhattan}}.
 
   \end{thebibliography}
 

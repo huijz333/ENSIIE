@@ -26,20 +26,11 @@ typedef struct	s_direction {
 # define MAX_DIRECTIONS (4)
 extern t_direction DIRECTIONS[MAX_DIRECTIONS];
 
-enum e_node_ids {
-	NODE_ID_ENTRY,
-	NODE_ID_EXIT,
-	NODE_ID_EMPTY,
-	NODE_ID_KEY,
-	NODE_ID_DOOR,
-	NODE_ID_TP
-};
-
 /** represente un sommet dans le graphe representant le labyrinthe */
 typedef struct	s_nodel {
-	t_nodew	super;	/* héritage 'à la C' */
-	INDEX	x, y;	/* position x, y dans le labyrinthe */
-	BYTE	id;
+	t_nodew	super;	/** héritage 'à la C' */
+	INDEX	x, y;	/** position x, y dans le labyrinthe */
+	BYTE	id;	/** id du sommet (character dans la map) */
 }		t_nodel;
 
 /** represente le labyrinthe */

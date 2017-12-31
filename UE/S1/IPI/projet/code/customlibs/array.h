@@ -1,10 +1,3 @@
-/**
- *  This file is part of https://github.com/rpereira-dev/C_data_structures
- *
- *  It is under a GNU GENERAL PUBLIC LICENSE
- *
- *  PEREIRA Romain
- */
 #ifndef ARRAY_H
 # define ARRAY_H
 
