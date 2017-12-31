@@ -1,6 +1,10 @@
 \documentclass[10pt]{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{floatrow}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -9,7 +13,6 @@
 \usepackage{listings}
 \usepackage{wrapfig}
 \usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
-\usepackage{floatrow}
 
 %title setup
 \title{Projet IPI: chemins de poids minimum}
@@ -178,35 +181,76 @@
 			on obtient très exactement l'algorithme de Dijkstra. (voir 'dijkstra.c.astar').
 			Pour des raisons d'optimisations j'ai cependant préféré garder 2 implementations complètes distinctes.
 			(avec une heuristique nulle, on peut economiser son stockage mémoire et queqlues additions)
-	
-			\begin{figure}[H]
-				\begin{center}
-					\includegraphics[width=11cm,height=\textheight,keepaspectratio]{./images/performances.png}
-				\end{center}
-				\caption{\textit{Temps d'execution des algorithmes}}
-			\end{figure}
-			
-			Ces résultats sont ceux appliqués au test exo3/06. (graphe de 1 000 000 de sommets,
-			on cherche le plus court chemin entre les 2 sommets les plus distants)
-			
-			\begin{itemize}[label=-]
-				\setlength\itemsep{0.1em}
-				\item 1 : Dijkstra sans file de priorité
-				\item 2 : Dijkstra avec file de priorité
-				\item 3 : A* avec file de priorité, et fonction heuristique ('rester sur la diagonal du labyrinthe')
-			\end{itemize}
-			
+
 	\newpage
-	\section{Application: resolution labyrinthe}
-		Dans l'exercice 3, on nous propose de résoudre des labyrinthes.
-		Voici la modélisation
+	\section{Application: résolution labyrinthe}
+	
+		\begin{wrapfigure}{R}{8cm}
+			\includegraphics[width=5cm]{./images/lab.png}
+			\caption{\textit{Modélisation du labyrinthe}}
+		\end{wrapfigure}
+		
+		Dans l'exercice 3, on nous propose de résoudre des labyrinthes.\newline
+		
+		Intuitivement, le labyrinthe peut être modéliser par ce type de graphe. (voir figure)
+		On crée un sommet pour chaque case 'non-mur' (cases vides, teleporteurs, porte, clef).
+		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-mur'.\newline
+		
+		Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes préalablement implementés.\newline
+		
+		\begin{algorithm}
+			\caption{Résolution labyrinthe}
+			\begin{algorithmic}
+				\ENSURE Résout le labyrinthe.
+				\REQUIRE $G = (X, A) ; A, S, C, P \in X ; t \in \Re$
+						$E$ l'entrée, $E$ la sortie, $E$ la clef, $E$ la porte,
+						$t$ le nombre d'action.
+						$Dijkstra(X, E, S)$ une fonction de résolution de chemin le plus court allant de $E$ à $S$,
+						renvoyant le nombre d'actions requit.\newline
+				
+				\textbf{Begin}
+				
+				\STATE Supprimer arcs de/vers la porte. (On considère la porte comme un mur)
+				\IF {$Dijkstra(G, E, S) \leq t$}
+					\STATE On a trouvé un chemin qui convient, sans passer par la porte. Fin.
+				\ENDIF
+				
+				\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
+				\IF{$t_1 > t$}
+					\STATE La clef est trop loin, pas de chemin. Fin.
+				\ENDIF
+				
+				\STATE Créer arcs de/vers la porte. (On considère la porte comme une case vide)
+				\STATE $t_2 \leftarrow t - t_1$
+				\IF{$Dijkstra(G, C, S) < t_2$}
+					\PRINT Un chemin de $E$ à $S$ passant par $C$ puis $D$ existe.
+				\ELSE
+					\PRINT Pas de chemin de $C$ à $S$ en moins de $t_2$ actions.
+					\PRINT Donc, pas de chemin de $E$ à $S$ en moins de $t$ actions.
+				\ENDIF
+			\end{algorithmic}
+		\end{algorithm}
+
+		\newpage
+		Voici les résultats de cet algorithme, appliqué au test exo3/06. (graphe de 1 000 000 de sommets,
+		on cherche le plus court chemin entre les 2 sommets les plus distants)
+	
 		\begin{figure}[H]
 			\begin{center}
-				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/lab.png}
+				\includegraphics[width=11cm,height=\textheight,keepaspectratio]{./images/performances.png}
 			\end{center}
-			\caption{\textit{Representation du labyrinthe sous forme de graphe}}
+			\caption{\textit{Temps d'execution des algorithmes}}
 		\end{figure}
-		Voici les résultats 
+		
+		Les algorithmes de résolution utilisé sont:
+		
+		\begin{itemize}[label=-]
+			\setlength\itemsep{0.1em}
+			\item 1 : Dijkstra sans file de priorité
+			\item 2 : Dijkstra avec file de priorité
+				\item 3 : A* avec file de priorité, et fonction heuristique ('rester sur la diagonal du labyrinthe')
+		\end{itemize}
+			
 		\begin{figure}[H]
 			\begin{center}
 				\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
@@ -235,7 +279,8 @@
 			\end{figure}
 			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
 			D'où par exemple, l'implementation des tas binaires, ou du 'define' ARRAY\_ITERATE ('array.h')
-	
+
+	\newpage
 	\section{Références}
 		\begin{thebibliography}{}
 
