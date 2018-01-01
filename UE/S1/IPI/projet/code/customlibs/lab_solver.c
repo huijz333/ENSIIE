@@ -36,7 +36,9 @@ static void lab_print_path(t_array * nodes, t_array * path) {
 	}
 }
 
-/** deux fonctions heuristiques d'exemple */
+/** 3 fonctions heuristiques d'exemple */
+
+/** fonction heuristique orientant la recherche sur la diagonale */
 WEIGHT heuristic_diagonal(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
 	(void)uID;
 	t_nodel * v = (t_nodel *) array_get(nodes, vID);
@@ -45,6 +47,7 @@ WEIGHT heuristic_diagonal(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDE
 	return (v->x - v->y);
 }
 
+/** fonction heuristique orienté la recherche en fonction de la proximité du sommet 't' */
 WEIGHT heuristic_manhattan(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
 	(void)uID;
 	t_nodel * v = (t_nodel *) array_get(nodes, vID);
@@ -53,24 +56,40 @@ WEIGHT heuristic_manhattan(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, IND
 	return (t->x - v->x + t->y - v->y);
 }
 
+/** fonction heuristique nulle (<=> dijkstra) */
+WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
+	(void)nodes;
+	(void)uID;
+	(void)vID;
+	(void)sID;
+	(void)tID;
+	return (0);
+}
+
+/** wrapper pour appelé 'astar' avec l'heuristique de manhattan */
+static int astar_manhattan(t_array * nodes, INDEX s, INDEX t) {
+	return (astar(nodes, heuristic_manhattan, s, t));
+}
+
+
 /**
  *	@require : le graphe (tableau de sommets), l'indice de départ,
- *		   l'indice d'arrivé, et un pointeur sur un timer.
+ *		   l'indice d'arrivé, un pointeur sur un timer,
+ *		   et une fonction de résolution de plus court chemin
  *	@ensure  : tente de trouver un chemin entre 's' et 't' avec un poids < timer.
  *		   Renvoie 1 si un chemin a été trouvé, 0 sinon
  *	@assign  : les sommets des graphes sont modifiés par 'dijkstra()'
  *		   si un chemin est trouvé, le 'timer' est diminué par le poids du chemin.
  */
-static int lab_try_solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer) {
+static int solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer,
+				int (*solve)(t_array *, INDEX, INDEX)) {
 	/** on résout avec dijkstra */
-/*	int r = astar(nodes, heuristic_diagonal, s, t);*/
-/*	int r = astar(nodes, heuristic_manhattan, s, t);*/
-	int r = dijkstra(nodes, s, t);
+	int r = solve(nodes, s, t);
 	WEIGHT pathtime = ((t_nodew *)array_get(nodes, t))->pathw;
 
 	/** si la resolution a echoué, ou prends trop de temps */
 	if (r == 0 || pathtime > *timer) {
-		/** on renvoie 0 */
+		/** on essaye de resoudre avec dijkstra */
 		return (0);
 	}
 
@@ -95,7 +114,7 @@ static int lab_try_solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer) {
  *	@ensure  : crée les arcs entre la porte et ses voisins
  *	@assign  : ---------
  */
-static void lab_open_door(t_lab * lab) {
+static int lab_open_door(t_lab * lab) {
 	t_array * nodes = lab->nodes;
 	t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
 	BYTE i;
@@ -122,7 +141,19 @@ static void lab_open_door(t_lab * lab) {
 			array_add(door->super.successors, &vID);
 		}
 	}
+	return (1);
 }
+
+static int lab_close_door(t_lab * lab) {
+	t_array * nodes = lab->nodes;
+	t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
+	array_delete(door->ws);
+	array_delete(door->super.successors);
+	door->ws = NULL;
+	door->super.successors = NULL;
+	return (1);
+}
+
 
 /**
  *	@require : un labyrinthe valide (renvoyé via 'lab_parse()'), et un temps 'timer'
@@ -135,27 +166,43 @@ int lab_solve(t_lab * lab, WEIGHT timer) {
 	/** les sommets du graphe du labyrinthe */
 	t_array * nodes = lab->nodes;
 	INDEX n = lab->nodes->size;
+	INDEX s = lab->entry;	/** entrée = start */
+	INDEX t = lab->exit;	/** sortie = target */
+	INDEX k = lab->key;	/** clef   = key */
+	INDEX d = lab->door;	/** porte  = door */
+
 	if (lab->entry >= n || lab->exit >= n) {
 		fprintf(stderr, "Entry or exit nodes are invalid\n");
 		return (0);
 	}
-	/** on essaye de le resoudre en considerant les portes comme des murs */
-	if (lab_try_solve(nodes, lab->entry, lab->exit, &timer)) {
+
+	/** 1. on essaye de le resoudre en considerant les portes comme des murs */
+	/** en utilisant A* avecl'heuristique distance de manhatthan,
+	    si la solution trouvé n'est pas suffisement courte, on résout
+	    avec dijkstra */
+	if (solve(nodes, s, t, &timer, astar_manhattan)
+			|| solve(nodes, s, t, &timer, dijkstra)) {
 		/** si succès fin */
 		return (1);
 	}
 
-	/** sinon, s'il y a une clef et une porte */
-	if (lab->key != MAX_NODES && lab->door != MAX_NODES) {
-		/* on essaye de resoudre en allant chercher la clef d'abord */
-		if (lab_try_solve(nodes, lab->entry, lab->key, &timer)) {
-			/** si on a reussit a recuperer la clef */
-			/** on crée les arcs entre la porte et ses voisins */
+	/** 2. sinon, s'il y a une clef et une porte */
+	if (k != MAX_NODES && d != MAX_NODES) {
+		/* 2.1 on résout en allant cherche la clef d'abord
+		   en croisant les algorithmes de dijkstra et A* */
+		if (solve(nodes, s, k, &timer, astar_manhattan)) {
 			lab_open_door(lab);
+			if (solve(nodes, k, t, &timer, astar_manhattan)
+					|| solve(nodes, k, t, &timer, dijkstra)) {
+				return (1);
+			}
+			lab_close_door(lab);
+		}
 
-			/** on essaye d'aller à la sortie à partir de la clef */
-			if (lab_try_solve(nodes, lab->key, lab->exit, &timer)) {
-				/** si succès, on renvoie 1 */
+		if (solve(nodes, s, k, &timer, dijkstra)) {
+			lab_open_door(lab);
+			if (solve(nodes, k, t, &timer, astar_manhattan)
+					|| solve(nodes, k, t, &timer, dijkstra)) {
 				return (1);
 			}
 		}

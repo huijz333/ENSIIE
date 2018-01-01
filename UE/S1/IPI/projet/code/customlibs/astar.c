@@ -55,7 +55,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 
 	/** on initialise le sommet source */
 	t_nodew * s = (t_nodew *) array_get(nodes, sID);
-	s->pathw = 0; /* poids réel */
+	s->pathw = 0; /* poids réel du chemin */
 	pathwh[sID] = heuristic(nodes, sID, sID, sID, tID); /* poids heuristique */
 	s->super.pathlen = 0;
 	pqueue_nodes[sID] = pqueue_insert(unvisited, pathwh + sID, &sID);
@@ -98,15 +98,15 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 
 			/** poids de l'arc allant de 'u' à 'v' */
 			WEIGHT w = *((WEIGHT *)array_get(u->ws, i));
-			/** nouveau cout final */
-			WEIGHT cost = pathwh[uID] + w;
+			
 			/** si ce nouveau chemin est de cout plus faible */
-			if (cost < pathwh[vID]) {
-				/** poids de la fonction d'heuristique */
-				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
+			if (u->pathw + w < v->pathw) {
 				/* on ecrase le chemin precedant par le nouveau chemin */
 				v->pathw = u->pathw + w;
-				pathwh[vID] = cost + h;
+
+				/** poids de la fonction d'heuristique */
+				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
+				pathwh[vID] = u->pathw + w + h;
 				v->super.prev = uID;
 				v->super.pathlen = u->super.pathlen + 1;
 				/** on enregistre les sommets dans la file de priorité */

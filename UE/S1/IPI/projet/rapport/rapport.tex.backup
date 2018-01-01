@@ -127,10 +127,10 @@
 				les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
 				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.
 				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
-				Ainsi, si la file de visite contient 'm' sommets, trouver le prochain sommet
-				à visiter devient en complexité \(O(m)\)
+				Ainsi, il faut parcours toute la file pour trouver le prochain sommet à visiter:
+				si la file contient 'm' sommets, la complexité de cette opération est en \(O(m)\).
 
-			\subsubsection{2ème approche}								
+			\subsubsection{2ème approche}
 				En utilisant une matrice, la complexité ('spatial') de stockage des arcs est donc en \(O(n^2)\).
 				Plus précisement, si le poids est stocké sur 4 octet, pour \(n=10^6\) (cas labyrinthe exo3/tests/06),
 				l'espace mémoire nécessaire est de \(400Go\)... On va donc changer de structures de données.
@@ -151,9 +151,10 @@
 				\end{figure}
 				Il s'est avéré que mon programme passe (en moyenne) plus de 70\% de
 				son temps d'execution à chercher le prochain sommet à visiter.
-				(l'opération `trouver un sommet 'u' non visité minimisant 'd(u)` dans l'algorithme fourni).\newline
+				(l'opération `trouver un sommet 'u' non visité minimisant d(u)` dans l'algorithme fourni).\newline
 				
-				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaire'.
+				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaire', afin
+				d'optimiser cette partie du programme.
 				Cette structure de donnée est une file, permettant de définir des priorités parmis les éléments,
 				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'élément dans la file):
 				\begin{itemize}[label=-]
@@ -183,7 +184,7 @@
 			(avec une heuristique nulle, on peut economiser son stockage mémoire et queqlues additions)
 
 	\newpage
-	\section{Application: resolution labyrinthe}
+	\section{Application: résolution labyrinthe}
 	
 		\begin{wrapfigure}{R}{8cm}
 			\includegraphics[width=5cm]{./images/lab.png}
@@ -204,41 +205,34 @@
 				\ENSURE Résout le labyrinthe.
 				\REQUIRE $G = (X, A) ; A, S, C, P \in X ; t \in \Re$
 						$E$ l'entrée, $E$ la sortie, $E$ la clef, $E$ la porte,
-						$t$ le nombre d'action.
+						$t$ le nombre d'action. On suppose que les fonctions 'Dijkstra' et 'A*' renvoit le nombre
+						d'action necessaire pour accomplir le chemin trouvé
+				
+				\STATE \textbf{Begin}
+				
 				\STATE Supprimer arcs de/vers la porte. (On considère la porte comme un mur)
-				\IF {$Dijkstra(G, E, S) \leq t$}
-					\STATE On a trouvé un chemin qui convient, sans passer par la porte. Fin.
+				
+				\IF {$A*(G, E, S) \leq t$ \OR $Dijkstra(G, E, S) \leq t$}
+					\PRINT il existe un chemin qui convient, sans passer par la porte. Fin.
+				\ENDIF
+				
+				\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
+				\IF{$t_1 > t$}
+					\STATE La clef est trop loin, pas de chemin. Fin.
+				\ENDIF
+				
+				\STATE Créer arcs de/vers la porte. (On considère la porte comme une case vide)
+				\STATE $t_2 \leftarrow t - t_1$
+				\IF{$Resolve(G, C, S) < t_2$}
+					\PRINT Un chemin de $E$ à $S$ passant par $C$ puis $D$ existe.
 				\ELSE
-					\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
-					\IF{$t_1 > t$}
-						\STATE La clef est trop loin, pas de chemin. Fin.
-					\ELSE
-						\STATE Créer arcs de/vers la porte. (On considère la porte comme une case vide)
-						\STATE $t_2 \leftarrow t - t_1$
-						\IF{$Dijkstra(G, C, S) < t_2$}
-							\PRINT Un chemin de $E$ à $S$ passant par $C$ puis $D$ existe.
-						\ELSE
-							\PRINT Pas de chemin de $C$ à $S$ en moins de $t_2$ actions.
-							\PRINT Donc, pas de chemin de $E$ à $S$ en moins de $t$ actions.
-						\ENDIF
-					\ENDIF
+					\PRINT Pas de chemin de $C$ à $S$ en moins de $t_2$ actions.
+					\PRINT Donc, pas de chemin de $E$ à $S$ en moins de $t$ actions.
 				\ENDIF
 			\end{algorithmic}
 		\end{algorithm}
-
-
-		\begin{itemize}
-
-			\item 3) sinon, si la résolution réussit en \(t_1 < t\) actions, on pose \(t_2 = t - t_1\). 
-			On crée les arcs entre 'P' et ses voisins. On cherche le plus court chemin allant de 'C' à 'S'.
-			
-			\item 3.1) Si la résolution échoue, ou que ce chemin prends plus de \(t_2\) actions,
-			c'est qu'il n'y a pas de chemins en moins de \(t\) actions allant de \(E\) à \(S\). Fin de l'algorithme
-			
-			\item 3.2) Sinon, il suffit de concaténer les chemins \(E -> C\), et \(C -> S\) pour obtenir un chemin valide.
-			Fin de l'algorithme.
-		\end{itemize}
-
+		
+		\newpage
 		Voici les résultats de cet algorithme, appliqué au test exo3/06. (graphe de 1 000 000 de sommets,
 		on cherche le plus court chemin entre les 2 sommets les plus distants)
 	
@@ -286,7 +280,8 @@
 			\end{figure}
 			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
 			D'où par exemple, l'implementation des tas binaires, ou du 'define' ARRAY\_ITERATE ('array.h')
-	
+
+	\newpage
 	\section{Références}
 		\begin{thebibliography}{}
 
