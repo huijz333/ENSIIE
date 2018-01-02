@@ -1,20 +1,5 @@
 # include "lab.h"
 
-/** definition des téléporteurs */
-char LAB_TP[MAX_TP] = "*%$#&+-@^!£";
-
-/** définition des directions possibles de deplacement. */
-t_direction DIRECTIONS[MAX_DIRECTIONS] = {
-	{"DROITE",	 1,  0},
-	{"GAUCHE",	-1,  0},
-	{"HAUT",	 0, -1},
-	{"BAS",		 0,  1}
-/*	{"BAS/GAUCHE",	-1,  1},
-	{"BAS/DROITE",	 1,  1},
-	{"HAUT/GAUCHE",	-1, -1},
-	{"HAUT/DROITE",	 1, -1}*/
-};
-
 /**
  *	@require :	lab : un labyrinthe alloué via 'lab_new()'
  *	@ensure	 :	supprime le labyrinthe du tas

@@ -173,7 +173,6 @@ static void lab_link_nodes(t_lab * lab, t_array * nodes,
 		}
 	}
 
-
 	/** on enregistre les sommets voisins de la porte */
 	/** s'il y a une porte */
 	if (lab->door != MAX_NODES) {

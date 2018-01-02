@@ -8,10 +8,9 @@
  *	Represente un sommet du graphe (exo 1)
  */
 typedef struct	s_node {
-	t_array	* successors; /* les successeurs de ce sommet */
 	INDEX	pathlen;/* nombre de sommets entre s et ce sommet */
 	INDEX	prev;	/* element precedant le chemin (index du sommet) */
-
+	t_array	* successors; /* les successeurs de ce sommet */
 }		t_node;
 
 /**

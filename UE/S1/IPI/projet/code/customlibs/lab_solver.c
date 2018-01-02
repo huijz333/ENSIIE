@@ -1,5 +1,20 @@
 # include "lab.h"
 
+/** definition des téléporteurs */
+char LAB_TP[MAX_TP] = "*%$#&+-@^!£";
+
+/** définition des directions possibles de deplacement. */
+t_direction DIRECTIONS[MAX_DIRECTIONS] = {
+	{"DROITE",	 1,  0},
+	{"GAUCHE",	-1,  0},
+	{"HAUT",	 0, -1},
+	{"BAS",		 0,  1}
+/*	{"BAS/GAUCHE",	-1,  1},
+	{"BAS/DROITE",	 1,  1},
+	{"HAUT/GAUCHE",	-1, -1},
+	{"HAUT/DROITE",	 1, -1}*/
+};
+
 /**
  *	@require : le labyrinthe, et un chemin
  *	@ensure  : affiche sur la sortie standart les directions
@@ -89,20 +104,10 @@ static int solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer,
 
 	/** si la resolution a echoué, ou prends trop de temps */
 	if (r == 0 || pathtime > *timer) {
-		/** on essaye de resoudre avec dijkstra */
 		return (0);
 	}
 
-	/** sinon, on construit le chemin */
-	t_array * path = node_build_path(nodes, s, t);
-	if (path == NULL) {
-		array_delete(path);
-		return (0);
-	}
-	
-	lab_print_path(nodes, path);
-	array_delete(path);
-
+	/** sinon, on diminue le temps */
 	*timer -= pathtime;
 
 	return (1);
@@ -183,26 +188,52 @@ int lab_solve(t_lab * lab, WEIGHT timer) {
 	if (solve(nodes, s, t, &timer, astar_manhattan)
 			|| solve(nodes, s, t, &timer, dijkstra)) {
 		/** si succès fin */
+		t_array * s_to_t = node_build_path(nodes, s, t);
+		lab_print_path(nodes, s_to_t);
+		array_delete(s_to_t);
 		return (1);
 	}
-
+	
 	/** 2. sinon, s'il y a une clef et une porte */
 	if (k != MAX_NODES && d != MAX_NODES) {
-		/* 2.1 on résout en allant cherche la clef d'abord
+		/* 2.1 on résout en allant cherche la clef d'abord,
 		   en croisant les algorithmes de dijkstra et A* */
+		
+		/** on enregistre le timer pour le remettre à 0 si une resolution échoue */
+		WEIGHT resetTimer = timer;
+
+		/** clef avec A* , puis porte avec A* ou Dijksra */
 		if (solve(nodes, s, k, &timer, astar_manhattan)) {
+			t_array * s_to_k = node_build_path(nodes, s, k);
 			lab_open_door(lab);
 			if (solve(nodes, k, t, &timer, astar_manhattan)
 					|| solve(nodes, k, t, &timer, dijkstra)) {
+
+				lab_print_path(nodes, s_to_k);
+				array_delete(s_to_k);
+
+				t_array * k_to_t = node_build_path(nodes, k, t);
+				lab_print_path(nodes, k_to_t);
+				array_delete(k_to_t);
 				return (1);
 			}
 			lab_close_door(lab);
+			timer = resetTimer;
 		}
 
+		/** clef avec Dijkstra, puis porte A* ou Dijkstra */
 		if (solve(nodes, s, k, &timer, dijkstra)) {
+			t_array * s_to_k = node_build_path(nodes, s, k);
 			lab_open_door(lab);
 			if (solve(nodes, k, t, &timer, astar_manhattan)
 					|| solve(nodes, k, t, &timer, dijkstra)) {
+
+				lab_print_path(nodes, s_to_k);
+				array_delete(s_to_k);
+
+				t_array * k_to_t = node_build_path(nodes, k, t);
+				lab_print_path(nodes, k_to_t);
+				array_delete(k_to_t);
 				return (1);
 			}
 		}

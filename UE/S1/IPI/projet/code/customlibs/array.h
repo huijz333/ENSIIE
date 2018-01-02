@@ -171,10 +171,12 @@ void array_reverse(t_array * array);
  */
 # define ARRAY_ITERATE_START(A, T, X, I)\
 	{\
-		size_t I;\
-		for (I = 0 ; I < (A)->size ; I++) {\
-			T X = ((T)(A)->values) + I;
+		if (A != NULL) {\
+			size_t I;\
+			for (I = 0 ; I < (A)->size ; I++) {\
+				T X = ((T)(A)->values) + I;
 # define ARRAY_ITERATE_STOP(A, T, X, I)\
+			}\
 		}\
 	}
 

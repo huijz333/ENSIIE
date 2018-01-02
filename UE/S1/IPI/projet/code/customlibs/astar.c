@@ -59,15 +59,19 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 	pathwh[sID] = heuristic(nodes, sID, sID, sID, tID); /* poids heuristique */
 	s->super.pathlen = 0;
 	pqueue_nodes[sID] = pqueue_insert(unvisited, pathwh + sID, &sID);
-
+	int count = 0;
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant qu'il y a des sommets a visité, on les visite */
 	while (!pqueue_is_empty(unvisited)) {
+		++count;
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
 		t_pqueue_node node = pqueue_pop(unvisited);
 		INDEX	uID = *((INDEX *) node.value);
 		t_nodew	* u = (t_nodew *) array_get(nodes, uID);
+		
+		/** on definit 'u' comme visité */
+		bitmap_set(visited, uID);
 		
 		/** si on a atteint 't', ou si on est dans une autre partie connexe ... */
 		if (uID == tID || u->pathw == INF_WEIGHT) {
@@ -75,13 +79,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 		}
 
 		/** 2.2 : on minimise les chemins voisins de 'u' */
-
-		/* si 'u' n'a pas de voisins, on continue de vider la file */
-		if (u->super.successors == NULL) {
-			continue ;
-		}
-
-		/* sinon, pour chaque successeur de 'u' */
+		/* pour chaque successeur de 'u' */
 		ARRAY_ITERATE_START(u->super.successors, INDEX *, vIDref, i) {
 			/** successeur 'v' de 'u' */
 			INDEX	vID = *vIDref;
@@ -106,7 +104,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 
 				/** poids de la fonction d'heuristique */
 				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
-				pathwh[vID] = u->pathw + w + h;
+				pathwh[vID] = h;
 				v->super.prev = uID;
 				v->super.pathlen = u->super.pathlen + 1;
 				/** on enregistre les sommets dans la file de priorité */
@@ -122,9 +120,6 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 			}
 		}
 		ARRAY_ITERATE_STOP(u->super.successors, INDEX *, vIDref, i);
-
-		/** on definit 'u' comme visité */
-		bitmap_set(visited, uID);
 	}
 
 	bitmap_delete(visited);
