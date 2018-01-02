@@ -43,13 +43,11 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 		/** 2.1 : on pop la tête de file */
 		INDEX uID = *((INDEX *) list_head(unvisited));
 		list_remove_head(unvisited);	
-		/** on definit ce sommet comme 'visité' */
 
 		/** on recupere le sommet correspondant */
 		t_node * u = (t_node *) array_get(nodes, uID);
 
-		/** 2.2 : pour chaque successeurs de 'u' */
-
+		/** 2.2 : on visite chaque successeurs 'v' de 'u' */
 		/** s'il n'a pas de successeurs, on continue de vider la file */
 		if (u->successors == NULL) {
 			continue ;
@@ -58,7 +56,7 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 		/** sinon, pour chaque successeur */
 		INDEX i;
 		for (i = 0 ; i < u->successors->size ; i++) {
-			/** 'v' est successeurs de 'u' */
+			/** 'v' est successeur de 'u' */
 			INDEX vID = *((INDEX *) array_get(u->successors, i));
 			
 			/* si on a déjà visité 'v', on passe au voisin suivant */
@@ -78,6 +76,7 @@ int breadth_search(t_array * nodes, INDEX s, INDEX t) {
 				list_delete(unvisited);
 				return (1);
 			}
+			/* sinon, on ajoute 'v' à la file */
 			list_add(unvisited, &vID, sizeof(INDEX));
 		}
 	}
