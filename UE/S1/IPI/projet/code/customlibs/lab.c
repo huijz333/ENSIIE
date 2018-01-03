@@ -15,6 +15,13 @@ t_direction DIRECTIONS[MAX_DIRECTIONS] = {
 	{"HAUT/DROITE",	 1, -1}*/
 };
 
+/**
+ *	@require : un caractère 'c' de la chaine 'LAB_TP'
+ *	@ensure  : renvoie l'id 'i' dans le tableau t_lab.tps[i] correspondant
+ *		   au teleporteur du caractère 'c', ou 'MAX_TP' si le teleporteur
+ *		   n'existe pas.
+ *	@assign  : --------------
+ */
 BYTE lab_get_tpID(wchar_t c) {
 	switch (c) {
 		case '*':

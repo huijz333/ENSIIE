@@ -23,6 +23,7 @@
 # define LAB_KEY	('a')
 # define LAB_DOOR	('A')
 
+/** chaine de caracteres contenant les teleporteurs */
 # define MAX_TP (11)
 extern wchar_t LAB_TP[MAX_TP];
 
@@ -32,10 +33,10 @@ typedef struct	s_direction {
 	int		x;
 	int		y;
 }		t_direction;
-
 # define MAX_DIRECTIONS (4)
 extern t_direction DIRECTIONS[MAX_DIRECTIONS];
 
+/** represente une position dans la grille */
 typedef struct	s_pos {
 	INDEX	x, y;
 }		t_pos;
@@ -59,6 +60,13 @@ typedef struct	s_lab {
 	t_pos	tps[MAX_TP][2];	/* position teleporteurs */
 }		t_lab;
 
+/** represente un paquet de donnée à écrire/lire dans les pipes
+    lors de la parallélisation */
+typedef struct	s_packet {
+	BYTE	childID;/** l'indice de l'enfant qui écrit */
+	size_t	timer;	/** le timer du chemin actuellement calculé dans l'enfant */	
+}		t_packet;
+
 /**
  *	@require :	l : longueur (== largeur) du labyrinthe
  *	@ensure	 :	crée un nouveau labyrinthe de taille 'l'
@@ -80,7 +88,26 @@ void lab_delete(t_lab * lab);
  */
 t_lab * lab_parse(void);
 
-int lab_solve(t_lab * lab, size_t timer);
+/**
+ *	@require : 	'lab':		le labyrinthe
+ *			'sPos':		la position de départ
+ *			'tPos':		la position d'arrivé
+ *			'timer':	le temps maximal de résolution voulu
+ *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
+ *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
+ *	@assign  : --------------------------------------------
+ */
+t_list * astar(t_lab * lab, t_pos sPos, t_pos tPos, size_t timer);
+
+/**
+ *	@require : un caractère 'c' de la chaine 'LAB_TP'
+ *	@ensure  : renvoie l'id 'i' dans le tableau t_lab.tps[i] correspondant
+ *		   au teleporteur du caractère 'c', ou 'MAX_TP' si le teleporteur
+ *		   n'existe pas.
+ *	@assign  : --------------
+ */
 BYTE lab_get_tpID(wchar_t c);
+
+void lab_solve(t_lab * lab, size_t timer);
 
 #endif
