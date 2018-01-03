@@ -14,8 +14,7 @@ int main(void) {
 
 	/** resolution du graphe */
 	lab_solve(lab, timer);
-	
-	/** on vide la mémoire */
+	/** libere la mémoire */
 	lab_delete(lab);
 
 	return (0);

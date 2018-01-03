@@ -1,247 +1,300 @@
 # include "lab.h"
 
-/** definition des téléporteurs */
-char LAB_TP[MAX_TP] = "*%$#&+-@^!£";
+/** fonction interne qui compare 2 doubles (utile à la file de priorité) */
+static int weightcmp(size_t * a, size_t * b) {
+	if (*a < *b) {
+		return (-1);
+	}
+	if (*a > *b) {
+		return (1);
+	}
+	return (0);
+}
 
-/** définition des directions possibles de deplacement. */
-t_direction DIRECTIONS[MAX_DIRECTIONS] = {
-	{"DROITE",	 1,  0},
-	{"GAUCHE",	-1,  0},
-	{"HAUT",	 0, -1},
-	{"BAS",		 0,  1}
-/*	{"BAS/GAUCHE",	-1,  1},
-	{"BAS/DROITE",	 1,  1},
-	{"HAUT/GAUCHE",	-1, -1},
-	{"HAUT/DROITE",	 1, -1}*/
-};
+# ifndef ABS
+#	define ABS(X) ((X) < 0 ? -(X) : (X))
+# endif
+
+
+/** heuristique de manhattan */
+static size_t heuristic(t_pos v, t_pos t) {
+	int vx = (int)v.x;
+	int vy = (int)v.y;
+	int tx = (int)t.x;
+	int ty = (int)t.y;
+	return (ABS(tx - vx) + ABS(ty - vy));
+}
 
 /**
- *	@require : le labyrinthe, et un chemin
- *	@ensure  : affiche sur la sortie standart les directions
- *			successives à prendre pour réaliser le chemin
- *	@assign  : -------------------------
+ *	@require : 	'nodes':	un tableau de sommet
+ *			'heuristic':	la fonction d'heuristique
+ *			's':		un indice sommet source
+ *			't':		un indice de sommet de destination
+ *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
+ *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
+ *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
-static void lab_print_path(t_array * nodes, t_array * path) {
-	/** recupere le 1er sommet */
-	t_nodel * prev = array_get(nodes, *((INDEX *) array_get(path, 0)));
-	INDEX i;
-	for (i = 1 ; i < path->size ; i++) {
-		/** on recupere le 2eme sommet */
-		INDEX nextID = *((INDEX *) array_get(path, i));
-		t_nodel * next = (t_nodel *) array_get(nodes, nextID);
-		/** si les 2 sommets sont des téléporteurs */
-		if (prev->id == next->id && prev->id != LAB_EMPTY) {
+static t_list * lab_astar(t_lab * lab, t_pos sPos, t_pos tPos, size_t timer) {
+	INDEX n = lab->width * lab->height;
+	
+	/** file de priorité pour déterminer le prochain sommet à visiter */
+	t_pqueue * unvisited = pqueue_new((t_cmpf)weightcmp);
+	t_pqueue_node ** pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node) * n);
+	t_node * nodes = (t_node *) malloc(sizeof(t_node) * n);
+	if (unvisited == NULL || nodes == NULL) {
+		pqueue_delete(unvisited);
+		free(nodes);
+		fprintf(stderr, "Not enough memory\n");
+		return (NULL);
+	}
+	INDEX sID = sPos.y * lab->width + sPos.x;
+	INDEX tID = tPos.y * lab->width + tPos.x;
+
+	
+	/** 1. INITIALISATION DE L'ALGORITHME */
+	/** pour chaque sommets */
+	INDEX x, y;
+	INDEX i = 0;
+	for (y = 0 ; y < lab->height; y++) {
+		for (x = 0 ; x < lab->width ; x++) {
+			/** on recupere le sommet (x, y) */
+			t_node * node = nodes + i;
+			node->pos.x = x;
+			node->pos.y = y;
+			node->index = i;
+			/** pas de predecesseurs */
+			node->prev = NULL;
+			/** on definit sa distance de 's' à '+oo' */
+			node->f_cost = INF_WEIGHT;
+			node->g_cost = INF_WEIGHT;
+			node->index = i;
+			
+			/** prepare la file de priorité */
+			pqueue_nodes[i] = NULL;
+
+			++i;
+		}
+	}
+
+	/** on initialise le sommet source */
+	t_node * s = nodes + sID;
+	s->f_cost = 0; /* poids réel du chemin */
+	s->g_cost = heuristic(sPos, tPos);
+	pqueue_nodes[sID] = pqueue_insert(unvisited, &(s->g_cost), &(s->index));
+
+	t_node * t = nodes + tID;
+
+	/** 2. BOUCLE DE L'ALGORITHME A* */
+	/** Tant qu'il y a des sommets a visité, on les visite */
+	while (!pqueue_is_empty(unvisited)) {
+		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
+		  ceci est optimisé à l'aide d'une file de priorité */
+		t_pqueue_node node = pqueue_pop(unvisited);
+		/** l'indice de 'u' */
+		INDEX uID = *((INDEX *)node.value);
+		t_node * u = nodes + uID;
+
+		/** le sommet n'est plus dans la file */
+		pqueue_nodes[uID] = NULL;
+
+		/** si on a atteint 't' avec un cout suffisant,
+		    ou si on a atteint une autre partie connexe ... */
+		if (t->f_cost < timer || u->f_cost == INF_WEIGHT) {
+			break ;
+		}
+
+		/** 2.2 : on minimise les chemins voisins de 'u' */
+		/* pour chaque voisin de 'u' */
+		BYTE i;
+		for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
+			/** position de v */
+			t_direction d = DIRECTIONS[i];
+			/** si on sort de la carte */
+			BYTE underx = (u->pos.x == 0)               && (d.x < 0);
+			BYTE overx  = (u->pos.x == lab->width - 1)  && (d.x > 0);
+			BYTE undery = (u->pos.y == 0)               && (d.y < 0);
+			BYTE overy  = (u->pos.y == lab->height - 1) && (d.y > 0);
+			if (underx || overx || undery || overy) {
+				/** on passe à la direction suivante */
+				continue ;
+			}
+
+			INDEX vx = u->pos.x + d.x;
+			INDEX vy = u->pos.y + d.y;
+			BYTE inWall = lab->map[vy][vx] == LAB_WALL;
+			/** si on est dans un mur */
+			if (inWall) {
+				/** on passe à la direction suivante */
+				continue ;
+			}
+
+			/** index de 'v' */
+			INDEX vID = vy * lab->width + vx;
+			t_node * v = nodes + vID;
+			
+			/** si ce nouveau chemin est de cout plus faible */
+			if (u->f_cost + 1 < v->f_cost) {
+				/* on ecrase le chemin precedant par le nouveau chemin */
+				v->f_cost = u->f_cost + 1;
+
+				/** poids de la fonction d'heuristique */
+				v->g_cost = heuristic(v->pos, t->pos);
+				v->prev = u;
+				/** on enregistre les sommets dans la file de priorité */
+				if (pqueue_nodes[vID] == NULL) {
+					pqueue_nodes[vID] = pqueue_insert(unvisited,
+									&(v->g_cost),
+									&(v->index));
+				} else {
+					pqueue_decrease(unvisited,
+							pqueue_nodes[vID],
+							&(v->g_cost));
+				}
+			}
+		}
+		/** si c'est un teleporteur, alors crée un chemin vers l'autre teleporteur */
+		BYTE tpID = lab_get_tpID(lab->map[u->pos.y][u->pos.x]);
+		if (tpID != MAX_TP) {
+			/** on recupere les 2 cases du teleporteurs */
+			t_pos * tp = lab->tps[tpID];
+			INDEX tp0ID = tp[0].y * lab->width + tp[0].x;
+			INDEX tp1ID = tp[1].y * lab->width + tp[1].x;
+			INDEX vID;
+			/** si 'u' correspond à la 1ere case */
+			if (uID == tp0ID) {
+				/** alors 'v' est la 2ème */
+				vID = tp1ID;
+			} else {
+			/** sinon, 'u' est la 2ème et 'v' la 1ère */
+				vID = tp0ID;
+			}
+
+			t_node * v = nodes + vID;
+			/** si ce nouveau chemin est de cout plus faible */
+			if (u->f_cost < v->f_cost) {
+				/* on ecrase le chemin precedant par le nouveau chemin */
+				v->f_cost = u->f_cost;
+
+				/** poids de la fonction d'heuristique */
+				v->g_cost = heuristic(v->pos, t->pos);
+				v->prev = u;
+				/** on enregistre les sommets dans la file de priorité */
+				if (pqueue_nodes[vID] == NULL) {
+					pqueue_nodes[vID] = pqueue_insert(unvisited,
+									&(v->g_cost),
+									&(v->index));
+				} else {
+					pqueue_decrease(unvisited,
+							pqueue_nodes[vID],
+							&(v->g_cost));
+				}
+			}
+		}
+
+	}
+
+	/** plus besoin de la file de priorité: on libere la mémoire */
+	pqueue_delete(unvisited);
+	free(pqueue_nodes);
+
+	/** on crée le chemin allant de 's' à 't' */
+	t_list * path;
+	if (t->f_cost > timer) {
+		path = NULL;
+	} else {
+		path = list_new();
+		while (t != s) {
+			list_push(path, &(t->pos), sizeof(t_pos));
+			t = t->prev;
+		}
+		list_push(path, &sPos, sizeof(t_pos));
+	}
+	/** libère la mémoire */
+	free(nodes);
+	return (path);
+}
+
+static void lab_print_path(t_lab * lab, t_list * path) {
+	t_list_node * first = path->head->next;
+	t_list_node * second = path->head->next->next;
+	while (second != path->head) {
+		t_pos * u = (t_pos *)(first + 1);
+		t_pos * v = (t_pos *)(second + 1);
+		if (lab->map[u->y][u->x] == lab->map[v->y][v->x]
+				&& lab->map[u->y][u->x] != LAB_EMPTY) {
 			printf("TP\n");
 		} else {
-		/** sinon, on recupere la direction du déplacement */
-			int dx = (int)next->x - (int)prev->x;
-			int dy = (int)next->y - (int)prev->y;
-			BYTE j;
-			for (j = 0 ; j < MAX_DIRECTIONS ; j++) {
-				t_direction d = DIRECTIONS[j];
+			BYTE i;
+			int dx = (int)v->x - (int)u->x;
+			int dy = (int)v->y - (int)u->y;
+			for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
+				t_direction d = DIRECTIONS[i];
 				if (dx == d.x && dy == d.y) {
-					/** on l'affiche */
 					printf("%s\n", d.name);
 					break ;
 				}
 			}
 		}
-		/** on passe à l'arc suivant */
-		prev = next;
+		first = first->next;
+		second = second->next;
 	}
 }
 
-/** 3 fonctions heuristiques d'exemple */
 
-/** fonction heuristique orientant la recherche sur la diagonale */
-WEIGHT heuristic_diagonal(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	(void)uID;
-	t_nodel * v = (t_nodel *) array_get(nodes, vID);
-	(void)sID;
-	(void)tID;
-	return (v->x - v->y);
-}
+# define PATH_DIRECT	(0)
+# define PATH_KEY	(1)
+# define PATH_DOOR	(2)
 
-/** fonction heuristique orienté la recherche en fonction de la proximité du sommet 't' */
-WEIGHT heuristic_manhattan(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	(void)uID;
-	t_nodel * v = (t_nodel *) array_get(nodes, vID);
-	(void)sID;
-	t_nodel * t = (t_nodel *) array_get(nodes, tID);
-	return (t->x - v->x + t->y - v->y);
-}
+int lab_solve(t_lab * lab, size_t timer) {
 
-/** fonction heuristique nulle (<=> dijkstra) */
-WEIGHT heuristic_zero(t_array * nodes, INDEX uID, INDEX vID, INDEX sID, INDEX tID) {
-	(void)nodes;
-	(void)uID;
-	(void)vID;
-	(void)sID;
-	(void)tID;
-	return (0);
-}
-
-/** wrapper pour appelé 'astar' avec l'heuristique de manhattan */
-static int astar_manhattan(t_array * nodes, INDEX s, INDEX t) {
-	return (astar(nodes, heuristic_manhattan, s, t));
-}
-
-
-/**
- *	@require : le graphe (tableau de sommets), l'indice de départ,
- *		   l'indice d'arrivé, un pointeur sur un timer,
- *		   et une fonction de résolution de plus court chemin
- *	@ensure  : tente de trouver un chemin entre 's' et 't' avec un poids < timer.
- *		   Renvoie 1 si un chemin a été trouvé, 0 sinon
- *	@assign  : les sommets des graphes sont modifiés par 'dijkstra()'
- *		   si un chemin est trouvé, le 'timer' est diminué par le poids du chemin.
- */
-static int solve(t_array * nodes, INDEX s, INDEX t, WEIGHT * timer,
-				int (*solve)(t_array *, INDEX, INDEX)) {
-	/** on résout avec dijkstra */
-	int r = solve(nodes, s, t);
-	WEIGHT pathtime = ((t_nodew *)array_get(nodes, t))->pathw;
-
-	/** si la resolution a echoué, ou prends trop de temps */
-	if (r == 0 || pathtime > *timer) {
-		return (0);
-	}
-
-	/** sinon, on diminue le temps */
-	*timer -= pathtime;
-
-	return (1);
-}
-
-
-/**
- *	@require : le labyrinthe
- *	@ensure  : crée les arcs entre la porte et ses voisins
- *	@assign  : ---------
- */
-static int lab_open_door(t_lab * lab) {
-	t_array * nodes = lab->nodes;
-	t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
-	BYTE i;
-	for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
-		/** si le voisin est dans le graphe */
-		INDEX vID = lab->vdoor[i];
-		if (vID != MAX_NODES) {
-			/** on crée les arcs avec ce voisin */
-			t_nodew * v = (t_nodew *) array_get(nodes, vID);
-			if (v->ws == NULL) {
-				v->ws = array_new(1, sizeof(WEIGHT));
-				v->super.successors = array_new(1, sizeof(INDEX));
-			}
-			WEIGHT w = 1;
-			array_add(v->ws, &w);
-			array_add(v->super.successors, &(lab->door));
-
-			/** et reciproquement*/
-			if (door->ws == NULL) {
-				door->ws = array_new(1, sizeof(WEIGHT));
-				door->super.successors = array_new(1, sizeof(INDEX));
-			}
-			array_add(door->ws, &w);
-			array_add(door->super.successors, &vID);
+	/** s'il n'y a pas de portes */
+	if (lab->door.x == MAX_NODES) {
+		/** on résout */
+		t_list * path = lab_astar(lab, lab->entry, lab->exit, timer);
+		if (path == NULL) {
+			printf("Not connected\n");
+			return (0);
 		}
-	}
-	return (1);
-}
-
-static int lab_close_door(t_lab * lab) {
-	t_array * nodes = lab->nodes;
-	t_nodew * door = (t_nodew *) array_get(nodes, lab->door);
-	array_delete(door->ws);
-	array_delete(door->super.successors);
-	door->ws = NULL;
-	door->super.successors = NULL;
-	return (1);
-}
-
-
-/**
- *	@require : un labyrinthe valide (renvoyé via 'lab_parse()'), et un temps 'timer'
- *	@ensure  : tente de resoudre le labyrinthe en moins de 'timer' opérations.
- *			Renvoie 1 en cas de succes, 0 sinon
- *	@assign  : les sommets du graphe representant le labyrinthe peuvent
- *			être modifié par l'algorithme a*
- */
-int lab_solve(t_lab * lab, WEIGHT timer) {
-	/** les sommets du graphe du labyrinthe */
-	t_array * nodes = lab->nodes;
-	INDEX n = lab->nodes->size;
-	INDEX s = lab->entry;	/** entrée = start */
-	INDEX t = lab->exit;	/** sortie = target */
-	INDEX k = lab->key;	/** clef   = key */
-	INDEX d = lab->door;	/** porte  = door */
-
-	if (lab->entry >= n || lab->exit >= n) {
-		fprintf(stderr, "Entry or exit nodes are invalid\n");
-		return (0);
-	}
-
-	/** 1. on essaye de le resoudre en considerant les portes comme des murs */
-	/** en utilisant A* avecl'heuristique distance de manhatthan,
-	    si la solution trouvé n'est pas suffisement courte, on résout
-	    avec dijkstra */
-	if (solve(nodes, s, t, &timer, astar_manhattan)
-			|| solve(nodes, s, t, &timer, dijkstra)) {
-		/** si succès fin */
-		t_array * s_to_t = node_build_path(nodes, s, t);
-		lab_print_path(nodes, s_to_t);
-		array_delete(s_to_t);
+		lab_print_path(lab, path);
+		list_delete(path);
 		return (1);
 	}
-	
-	/** 2. sinon, s'il y a une clef et une porte */
-	if (k != MAX_NODES && d != MAX_NODES) {
-		/* 2.1 on résout en allant cherche la clef d'abord,
-		   en croisant les algorithmes de dijkstra et A* */
-		
-		/** on enregistre le timer pour le remettre à 0 si une resolution échoue */
-		WEIGHT resetTimer = timer;
 
-		/** clef avec A* , puis porte avec A* ou Dijksra */
-		if (solve(nodes, s, k, &timer, astar_manhattan)) {
-			t_array * s_to_k = node_build_path(nodes, s, k);
-			lab_open_door(lab);
-			if (solve(nodes, k, t, &timer, astar_manhattan)
-					|| solve(nodes, k, t, &timer, dijkstra)) {
 
-				lab_print_path(nodes, s_to_k);
-				array_delete(s_to_k);
+	/** sinon, on essaye de résoudre en parallèle sans passer par la porte,
+	    et en passant par la porte */
+	int pipeDirect[2], pipeKey[2], pipeDoor[2];
+	pipe(pipeDirect);
+	pipe(pipeKey);
+	pipe(pipeDoor);
 
-				t_array * k_to_t = node_build_path(nodes, k, t);
-				lab_print_path(nodes, k_to_t);
-				array_delete(k_to_t);
-				return (1);
-			}
-			lab_close_door(lab);
-			timer = resetTimer;
+	pid_t childPID = fork();
+	if (childPID) {
+		/** check path */
+		/** on résout */
+		t_list * path = lab_astar(lab, lab->entry, lab->exit, timer);
+		if (path != NULL) {
+			/* TODO : stop others */
+			kill(childPID, SIGKILL);
+			puts("killed from parent");
+			lab_print_path(lab, path);
+			list_delete(path);
 		}
-
-		/** clef avec Dijkstra, puis porte A* ou Dijkstra */
-		if (solve(nodes, s, k, &timer, dijkstra)) {
-			t_array * s_to_k = node_build_path(nodes, s, k);
-			lab_open_door(lab);
-			if (solve(nodes, k, t, &timer, astar_manhattan)
-					|| solve(nodes, k, t, &timer, dijkstra)) {
-
-				lab_print_path(nodes, s_to_k);
-				array_delete(s_to_k);
-
-				t_array * k_to_t = node_build_path(nodes, k, t);
-				lab_print_path(nodes, k_to_t);
-				array_delete(k_to_t);
-				return (1);
-			}
+	} else {
+		/** s'il y a une porte, on essaye de résoudre en passant par la porte */
+		pid_t key = fork();
+		if (key) {
+			lab_delete(lab);
+			exit(EXIT_SUCCESS);
+		} else {
+			lab_delete(lab);
+			exit(EXIT_SUCCESS);
 		}
 	}
+
+	/* TODO : wait key and door, if failed, then no 'Not connected'*/
 	
-	/** sinon, s'il n'y a pas de portes, ou si meme en allant chercher
-	    les clefs, la resolution a echoué c'est que la sortie est
-	    innaccessible avec avec le 'timer' donné */
-	printf("Not connected\n");
-	return (0);
+	return (1);
 }
+
+

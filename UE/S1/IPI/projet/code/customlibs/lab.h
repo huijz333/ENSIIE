@@ -1,9 +1,19 @@
 #ifndef LAB_H
 # define LAB_H
 
+# include <stdio.h>	/* printf, scanf */
+# include <stdlib.h>	/* free, malloc */
+# include <string.h>	/* memcpy, memset... */
+# include <unistd.h>	/* fork */
+# include <sys/types.h>	/* pid_t*/
+# include <signal.h>	/* pid_t */
+# include <sys/mman.h>	/*mmap */
+# include <limits.h>	/* ULONG_MAX ... */
+# include <wchar.h>
+
 # include "ipi.h"
-# include "astar.h"
-# include "dijkstra.h"
+# include "pqueue.h"
+# include "list.h"
 
 /** definitions des cases du labyrinthe */
 # define LAB_EMPTY	('.')
@@ -13,8 +23,8 @@
 # define LAB_KEY	('a')
 # define LAB_DOOR	('A')
 
-# define MAX_TP (12)
-extern char LAB_TP[MAX_TP];
+# define MAX_TP (11)
+extern wchar_t LAB_TP[MAX_TP];
 
 /** les directions possible de deplacement. */
 typedef struct	s_direction {
@@ -26,28 +36,35 @@ typedef struct	s_direction {
 # define MAX_DIRECTIONS (4)
 extern t_direction DIRECTIONS[MAX_DIRECTIONS];
 
-/** represente un sommet dans le graphe representant le labyrinthe */
-typedef struct	s_nodel {
-	t_nodew	super;	/** héritage 'à la C' */
-	INDEX	x, y;	/** position x, y dans le labyrinthe */
-	BYTE	id;	/** id du sommet (character dans la map) */
-}		t_nodel;
+typedef struct	s_pos {
+	INDEX	x, y;
+}		t_pos;
+
+/** represente un sommet du labyrinthe */
+typedef struct	s_node {
+	t_pos		pos;		/* la position sur la carte */
+	INDEX		index;		/* index sur la carte */
+	WEIGHT		f_cost;		/* poids == temps du chemin */
+	WEIGHT		g_cost;		/* heuristique du chemin */
+	struct s_node	* prev;		/* predecesseur pour la remontée */
+}		t_node;
+
 
 /** represente le labyrinthe */
 typedef struct	s_lab {
-	t_array	* nodes;	/* le graphe */
-	INDEX	l;		/* largeur == longueur du labyrinthe */
-	INDEX	entry, exit;	/* indice d'entrée 's', et de sortie 't' du labyrinthe */
-	INDEX	key, door;	/* indice dans le graphe de la clef et de la porte */
-	INDEX	vdoor[MAX_DIRECTIONS]; /* index des voisins de la porte */
+	wchar_t	** map;		/* wide char car '£' est un teleporteur */
+	INDEX	width, height;	/* largeur et hauteur du labyrinthe */
+	t_pos	entry, exit;	/* position entrée et sortie */
+	t_pos	key, door;	/* position de la clef et de la porte */
+	t_pos	tps[MAX_TP][2];	/* position teleporteurs */
 }		t_lab;
 
 /**
- *	@require :	n : longueur (== largeur) du labyrinthe
- *	@ensure	 :	crée un nouveau labyrinthe de taille 'n'
+ *	@require :	l : longueur (== largeur) du labyrinthe
+ *	@ensure	 :	crée un nouveau labyrinthe de taille 'l'
  *	@assign  :	-------
  */
-t_lab * lab_new(INDEX n);
+t_lab * lab_new(int l);
 
 /**
  *	@require :	lab : un labyrinthe alloué via 'lab_new()'
@@ -63,6 +80,7 @@ void lab_delete(t_lab * lab);
  */
 t_lab * lab_parse(void);
 
-int lab_solve(t_lab * lab, WEIGHT timer);
+int lab_solve(t_lab * lab, size_t timer);
+BYTE lab_get_tpID(wchar_t c);
 
 #endif

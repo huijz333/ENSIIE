@@ -14,28 +14,26 @@ static int weightcmp(WEIGHT * a, WEIGHT * b) {
 /**
  *	@require : 	'nodes':	un tableau de sommet
  *			'heuristic':	la fonction d'heuristique
+ *			'minw':		poids minimal souhaité
  *			's':		un indice sommet source
  *			't':		un indice de sommet de destination
  *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
  *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
-int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
+int astar(t_array * nodes, t_heuristic heuristic, WEIGHT minw, INDEX sID, INDEX tID) {
 	INDEX n = nodes->size;
 	
 	/** tableau enregistrant les sommets qui ont déjà eu un predecesseur visité */
 	t_pqueue * unvisited = pqueue_new((t_cmpf)weightcmp);
-	/** bitmap enregistrant les sommets visités */
-	t_bitmap * visited = bitmap_new(n);
 	/** tableau enregistrant les sommets de la file */
 	t_pqueue_node ** pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node *) * n);
 	/** tableau enregistrant le poids avec l'heuristique appliqué */
-	WEIGHT * pathwh = (WEIGHT *) malloc(sizeof(WEIGHT) * n);
-	if (unvisited == NULL || visited == NULL || pqueue_nodes == NULL || pathwh == NULL) {
+	WEIGHT * h_cost = (WEIGHT *) malloc(sizeof(WEIGHT) * n);
+	if (unvisited == NULL || pqueue_nodes == NULL || h_cost == NULL) {
 		pqueue_delete(unvisited);
-		bitmap_delete(visited);
 		free(pqueue_nodes);
-		free(pathwh);
+		free(h_cost);
 		return (0);
 	}
 
@@ -48,7 +46,7 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 		t_nodew * node = (t_nodew *) array_get(nodes, i);
 		node->super.pathlen = MAX_NODES;
 		node->pathw= INF_WEIGHT;
-		pathwh[i] = INF_WEIGHT;
+		h_cost[i] = INF_WEIGHT;
 		/** pas de position dans la file */
 		pqueue_nodes[i] = NULL;
 	}
@@ -56,25 +54,24 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 	/** on initialise le sommet source */
 	t_nodew * s = (t_nodew *) array_get(nodes, sID);
 	s->pathw = 0; /* poids réel du chemin */
-	pathwh[sID] = heuristic(nodes, sID, sID, sID, tID); /* poids heuristique */
 	s->super.pathlen = 0;
-	pqueue_nodes[sID] = pqueue_insert(unvisited, pathwh + sID, &sID);
-	int count = 0;
+	h_cost[sID] = heuristic(nodes, sID, sID, sID, tID); /* poids heuristique */
+	pqueue_nodes[sID] = pqueue_insert(unvisited, h_cost + sID, &sID);
+	
+	t_nodew * t = (t_nodew *) array_get(nodes, tID);
+	
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant qu'il y a des sommets a visité, on les visite */
 	while (!pqueue_is_empty(unvisited)) {
-		++count;
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
 		t_pqueue_node node = pqueue_pop(unvisited);
 		INDEX	uID = *((INDEX *) node.value);
+		pqueue_nodes[uID] = NULL;
 		t_nodew	* u = (t_nodew *) array_get(nodes, uID);
-		
-		/** on definit 'u' comme visité */
-		bitmap_set(visited, uID);
-		
+
 		/** si on a atteint 't', ou si on est dans une autre partie connexe ... */
-		if (uID == tID || u->pathw == INF_WEIGHT) {
+		if (t->pathw <= minw || u->pathw == INF_WEIGHT) {
 			break ;
 		}
 
@@ -84,11 +81,6 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 			/** successeur 'v' de 'u' */
 			INDEX	vID = *vIDref;
 			t_nodew	* v = (t_nodew *) array_get(nodes, vID);
-
-			/** si le sommet a déjà été visité, on passe au suivant */
-			if (bitmap_get(visited, vID)) {
-				continue ;
-			}
 
 			/** on teste voir si le chemin de 's' à 't' passant
 			    par 'u' et 'v' est plus court que le chemin
@@ -104,29 +96,27 @@ int astar(t_array * nodes, t_heuristic heuristic, INDEX sID, INDEX tID) {
 
 				/** poids de la fonction d'heuristique */
 				WEIGHT h = heuristic(nodes, uID, vID, sID, tID);
-				pathwh[vID] = h;
+				h_cost[vID] = h;
 				v->super.prev = uID;
 				v->super.pathlen = u->super.pathlen + 1;
 				/** on enregistre les sommets dans la file de priorité */
 				if (pqueue_nodes[vID] == NULL) {
 					pqueue_nodes[vID] = pqueue_insert(unvisited,
-									pathwh + vID,
+									h_cost + vID,
 									vIDref);
 				} else {
 					pqueue_decrease(unvisited,
 							pqueue_nodes[vID],
-							pathwh + vID);
+							h_cost + vID);
 				}
 			}
 		}
 		ARRAY_ITERATE_STOP(u->super.successors, INDEX *, vIDref, i);
 	}
 
-	bitmap_delete(visited);
 	pqueue_delete(unvisited);
 	free(pqueue_nodes);
-	free(pathwh);
+	free(h_cost);
 
-	t_nodew * t = (t_nodew *) array_get(nodes, tID);
-	return (t->pathw == INF_WEIGHT ? 0 : 1);
+	return (t->pathw <= minw);
 }

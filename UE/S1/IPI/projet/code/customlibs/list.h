@@ -99,12 +99,14 @@ void list_delete(t_list * lst);
  *	macro pratique pour itérer à travers la liste
  */
 # define LIST_ITERATE_START(L, T, V)\
-	t_list_node * __node = L->head->next;\
-while (__node != L->head) {\
-	T V = (T)(__node + 1);
+	if (L != NULL) {\
+		t_list_node * __node = L->head->next;\
+		while (__node != L->head) {\
+			T V = (T)(__node + 1);
 # define LIST_ITERATE_STOP(L, T, V)\
-	__node = __node->next;\
-}
+		__node = __node->next;\
+		}\
+	}
 
 
 #endif

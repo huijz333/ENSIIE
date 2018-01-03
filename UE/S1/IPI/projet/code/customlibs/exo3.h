@@ -3,6 +3,5 @@
 
 # include "ipi.h"
 # include "lab.h"
-# include "bitmap.h"
 
 #endif

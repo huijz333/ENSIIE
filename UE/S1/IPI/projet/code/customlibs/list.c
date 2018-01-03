@@ -183,6 +183,9 @@ void list_clear(t_list * lst) {
  *	@assign : ---------------------
  */
 void list_delete(t_list * lst) {
+	if (lst == NULL) {
+		return ;
+	}
 	if (lst->size > 0) {
 		list_clear(lst);
 	}
