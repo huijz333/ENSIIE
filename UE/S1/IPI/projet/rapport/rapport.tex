@@ -39,7 +39,7 @@
 	\section*{Préambule}
 
 		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline Le but est d'implémenter des
-		algorithmes de recherche de 'chemin le plus court', dans des graphes orientés.
+		algorithmes de recherche de 'chemin le plus court' dans des graphes orientés.
 		Ce document rapporte mon travail, et explique les choix techniques qui ont été pris.
 		Soit (X, A) un graphe. On note:
 		\begin{itemize}[label=-]
@@ -62,15 +62,15 @@
 	\section{Recherche de chemin le plus court}
 		\subsection{Parcours en largeur (graphes non-pondérés)}
 			On considère ici un graphe où les arcs sont non pondérés. 'Le chemin le plus court'
-			entre 2 sommets corresponds à une famille d'arcs, dont le cardinal est minimum.
-			On souhaite codder l'information:
+			entre 2 sommets correspond à une famille d'arcs, dont le cardinal est minimum.
+			On souhaite coder l'information:
 			\begin{itemize}[label=-]
 				\item `il existe un arc entre le sommet 'u' et le sommet 'v' `
 			\end{itemize}
 			
 			\subsubsection{1ère approche}
 
-				Cette information est un booléen, et peut donc être coddée sur un bit.
+				Cette information est un booléen, et peut donc être codée sur un bit.
 				Soit 'b' l'indice d'un bit dans un tableau d'octet.
 				Pour y accéder, il faut récuperer l'indice $\textrm{b}_\textrm{o}$ de l'octet correspondant dans le tableau,
 				et l'indice $\textrm{b}_\textrm{b}$ du bit sur cet octet.\newline
@@ -93,62 +93,62 @@
 				\begin{itemize}[label=-]
 					\item \(b = n * v + u\)
 				\end{itemize}
-				on peut cartographier les arcs sur le tableau de bit. Le bit vaut alors 1 s'il existe un arc entre 'u' et 'v', 0 sinon.
+				on peut cartographier les arcs sur le tableau de bits. Le bit vaut alors 1 s'il existe un arc entre 'u' et 'v', 0 sinon.
 				On a besoin de \(n^2\) bits, et donc de \(n^2 / 8 + 1\) octets.
-				On utilise donc 8 fois moins de mémoire que si l'information était stocké sur un octet.
-				De plus, je ne perd pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
-				de coordonnées ne necessite que 1 multiplication, 1 addition, et quelques operations sur les bits (diviser par 8 <=> décaler
+				On utilise donc 8 fois moins de mémoire que si l'information était stockée sur un octet.
+				De plus, je ne perds pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
+				de coordonnées ne nécessite que 1 multiplication, 1 addition, et quelques opérations sur les bits (diviser par 8 <=> décaler
 				les bits de 3 vers la droite)
 				
-				Egalement, en réduisant la mémoire utilisé, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
-				Le processeur écrit des blocs mémoire du programme dans sa mémoire cache: plus les données sont compactes,
+				Egalement, en réduisant la mémoire utilisée, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
+				Le processeur écrit des blocs de mémoire du programme dans sa mémoire cache: plus les données sont compactes,
 				moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline
 				
 			\subsubsection{2ème approche}
-				La complexité ('spatial') de stockage des arcs est donc en \(1/8*O(n^2)\).
+				La complexité ('spatiale') de stockage des arcs est donc en \(1/8*O(n^2)\).
 				Plus précisement, pour \(n=10^6\) (cas labyrinthe exo3/tests/06),
-				l'espace mémoire nécessaire est de \(125Go\)... On va donc changer de structures de données.
+				l'espace mémoire nécessaire est de \(125Go\)... On va donc changer de structure de données.
 				En ajoutant un attribut liste à chaque sommet, qui contient l'indice de ses sommets voisins,
-				la complexité spatial devient devient donc (au plus) en \(m * O(n)\), où 'm' est
+				la complexité spatiale devient donc (au plus) en \(m * O(n)\), où 'm' est
 				le nombre maximal de successeurs par sommet. (Remarque : pour \(m = n\), on retrouve \(O(n^2)\))
 				Il en résulte que dans la résolution de labyrinthe (exo3/tests/06), on a \(m <= 5\), donc pour \(n=10^6\),
-				on passe donc de \(125Go\) à \(5 Mo\). Les transformations sur les 'bits' précèdentes vont cependant être ré-utilisé
+				on passe donc de \(125Go\) à \(5 Mo\). Les transformations précèdentes vont cependant être ré-utilisées
 				dans Dijkstra et A*.
 				
-			\subsubsection{Algorithme de remonté}
+			\subsubsection{Algorithme de remontée}
 
 				\begin{wrapfigure}{R}{5cm}
 					\includegraphics[width=5cm]{./images/remonte.png}
-					\caption{\textit{Schéma de l'algorithme de remonté (voir Figure \ref{graphe})}}
+					\caption{\textit{Schéma de l'algorithme de remontée (voir Figure \ref{graphe})}}
 				\end{wrapfigure}
 
 				Chaque sommet 'u' de mon graphe possède un attribut pointant vers un autre sommet du graphe.
 				Une fois l'algorithme de parcours terminé, cet attribut pointe vers le prédécesseur de 'u',
 				dans le chemin le plus court allant de 's' à 't', et passant par 'u'.
-				Pour reconstruire le chemin, il suffit de regarder recursivement les prédécesseurs, en partant du sommet
+				Pour reconstruire le chemin, il suffit de regarder récursivement les prédécesseurs, en partant du sommet
 				't' jusqu'à ce que l'on ait atteint 's'.
 				La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin.\newline
 				
-				Cette modélisation permet de réduire les coûts de stockage, et la remonté est d'un coût
-				négligeable devant le temps de résolution du chemin. Elle sera réutiliser dans Dijkstra et A*.
+				Cette modélisation permet de réduire les coûts de stockage, et la remontée est d'un coût
+				négligeable devant le temps de résolution du chemin. Elle sera réutilisée dans Dijkstra et A*.
 			
 		\subsection{Algorithme de Dijkstra (graphes pondérés positivement)}
 			On considère ici un graphe où les arcs sont pondérés avec des poids positifs.\newline
-			'Le chemin le plus court' entre 2 sommets corresponds au chemin avec la somme des poids de ses arcs minimum.\newline
+			'Le chemin le plus court' entre 2 sommets correspond au chemin avec la somme des poids de ses arcs minimum.\newline
 			L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si le poids de tous les arcs sont identiques,
 			on retrouve l'algorithme de parcours en largeur.
 			\subsubsection{1ère approche}
-				Mon implémentation reprends le squelette du parcours en largeur.
+				Mon implémentation reprend le squelette du parcours en largeur.
 				Cependant, une différence réside dans le choix du prochain sommet à visiter. Dans le parcours en largeur,
-				les sommets sont visités dans leur ordre d'apparation dans la liste (1er entré, 1er sorti).
+				les sommets sont visités dans leur ordre d'apparition dans la liste (1er entré, 1er sorti).
 				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.
 				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
-				Ainsi, il faut parcours toute la file pour trouver le prochain sommet à visiter:
+				Ainsi, il faut parcourir toute la file pour trouver le prochain sommet à visiter:
 				si la file contient 'm' sommets, la complexité de cette opération est en \(O(m)\).
 
 			\subsubsection{File de priorité ('Priority Queue')}
 			
-				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'execution.
+				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'éxecution.
 				\begin{figure}[H]
 					\begin{center}
 						\includegraphics[width=6cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
@@ -156,27 +156,26 @@
 				    \caption{\textit{résultat de 'gprof' sur 'tests/exo3/06'}}
 				\end{figure}
 				Il s'est avéré que mon programme passe (en moyenne) plus de 70\% de
-				son temps d'execution à chercher le prochain sommet à visiter.
+				son temps d'éxecution à chercher le prochain sommet à visiter.
 				(l'opération `trouver un sommet 'u' non visité minimisant d(u)` dans l'algorithme fourni).\newline
 				
-				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaire', afin
+				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaires', afin
 				d'optimiser cette partie du programme.
-				Cette structure de donnée est une file, permettant de définir des priorités parmis les éléments,
-				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'élément dans la file):
+				Cette structure de données est une file, permettant de définir des priorités parmis les éléments,
+				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'éléments dans la file):
 				\begin{itemize}[label=-]
 					\item 'insérer un élément' : \(O(log(m))\)
 					\item 'extraire l'élément ayant la plus grande priorité' : \({O(log(m))}\)
 					\item 'tester si la file de priorité est vide' : \(O(1)\)
 					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log(m))\)
 				\end{itemize}
-				les détails techniques peuvent être trouvé en annexe \cite{binary_heap},
-				ou directement dans mon implementation. \textit{(voir pqueue.[c,h])}
+				les détails techniques peuvent être trouvés en annexe \cite{binary_heap},
 				
 				\begin{figure}[H]
 					\begin{center}
 						\includegraphics[width=11cm,height=\textheight,keepaspectratio]{./images/performances.png}
 					\end{center}
-					\caption{\textit{Temps d'execution avec et sans une file de priorité, sur le test exo3/06}}
+					\caption{\textit{Temps d'éxecution avec et sans une file de priorité, sur le test exo3/06}}
 				\end{figure}
 								
 				\begin{itemize}[label=-]
@@ -185,10 +184,10 @@
 					\item 2 : Dijkstra avec file de priorité
 				\end{itemize}
 
-				Voici une courbe d'étude sur les performances de l'implémentation de Dijkstra (file de priorité)
+				Voici une courbe d'étude sur les performances de Dijkstra (avec file de priorité)
 				\begin{figure}[H]
 					\begin{center}
-						\includegraphics[width=12cm,height=\textheight,keepaspectratio]{./images/courbe_temps.png}
+						\includegraphics[height=6cm,keepaspectratio]{./images/courbe_temps.png}
 					\end{center}
 					\caption{\textit{Temps de résolution de labyrinthe avec Dijkstra, allure en \(O(n * log(m))\)}}
 					\label{courbe_temps}
@@ -199,116 +198,108 @@
 			le graphe en largeur selon le poids de ses arcs. Avec A*, on effectue la même opération,
 			mais on ajoute une heuristique \cite{heuristique} aux poids des arcs.\newline
 			
-			Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommmets seront visités dans le graphe.
-			Bien quel fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la convergence vers
+			Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommets seront visités dans le graphe.
+			Bien qu'elle fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la convergence vers
 			le sommet de destination plus rapide.
 			(et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal).
-			Par exemple, dans la résolution de labyrinthe, une heuristique intéressante est la distance de manhattan \cite{manhattan}			
+			Par exemple, dans la résolution de labyrinthe, une heuristique intéressante est la distance de Manhattan. \cite{manhattan}			
 			Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'),
-			on obtient très exactement l'algorithme de Dijkstra. (voir 'dijkstra.c.astar').
-			Pour des raisons d'optimisations j'ai cependant préféré garder 2 implementations complètes distinctes.
-			(avec une heuristique nulle, on peut economiser du stockage mémoire et queqlues additions)
+			on obtient très exactement l'algorithme de Dijkstra.
 
 	\section{Application: résolution labyrinthe}
 	
 		\begin{wrapfigure}{R}{7cm}
 			\includegraphics[height=4.0cm]{./images/lab.png}
 			\caption{\textit{Modélisation du labyrinthe}}
+			\label{modelisationlab}
 		\end{wrapfigure}
 		
 		Dans l'exercice 3, on nous propose de résoudre des labyrinthes.\newline
 		
-		Intuitivement, le labyrinthe peut être modéliser par ce type de graphe. (voir figure)
-		On crée un sommet pour chaque case 'non-mur' (cases vides, teleporteurs, porte, clef).
-		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-mur'.\newline
-		
-		Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes a implementés.\newline
-		
-		L'idée est dans un premier temps, de tenter de résoudre avec A* ('Distance de Manhattan').			
-		\begin{itemize}[label=-]
-			\setlength\itemsep{0.1em}
-			\item Si la solution convient, alors on a (probablement) gagné du temps en utilisant A*	
-			plutot que Dijkstra. C'est le cas dans le test exo3/06.
+		Intuitivement, le labyrinthe peut être modélisé par ce type de graphe (voir Figure \ref{modelisationlab}).
+		On crée un sommet pour chaque case 'non-mur' (cases vides, téléporteurs, porte, clef).
+		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-murs'.\newline
+
+		\subsection{1ère approche}
+			Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes préalablment implementés.\newline
 			
-			\begin{figure}[H]
-				\begin{center}
-					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
-				\end{center}
-				\caption{\textit{performances sur 'tests/exo3/06'}}
-			\end{figure}
+			Cependant, cette approche n'est pas optimal..............
+
+		\subsection{2ème approche}
+			Travaillant sur la carte directement.
+			
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item 1: avec A* et la distance de Manhattan. (on obtient alors une solution optimal)
-				\item 2: avec Dijkstra seulement.
-			\end{itemize}
+				\item Si la solution convient, alors on a (probablement) gagné du temps en utilisant A*
+				plutôt que Dijkstra. C'est le cas dans le test exo3/06.
+				
+				\begin{figure}[H]
+					\begin{center}
+						\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
+					\end{center}
+					\caption{\textit{performances sur 'tests/exo3/06'}}
+				\end{figure}
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item 1: avec Dijkstra : Le programme passe 70\% de son temps à générer le graphe, 30\% à résoudre.
+					\item 2: (1ère approche) avec A* et la distance de Manhattan. : Le programme passe 90\%
+					de son temps à générer le graphe, 10\% à résoudre.
+					\item 3: (2ème approche) avec A* et la distance de Manhattan : le programme ne génère pas de graphes et résout
+					en travaillant sur la grille directement.
+				\end{itemize}
 
-			\item Si la solution ne convient pas, on résout avec Dijkstra. (on a alors perdu du temps,
-			car la résolution avec A* a été 'inutile'). C'est le cas dans exo3/18. Si Dijkstra échoue, il n'a pas de solutions.
-			
-			\begin{figure}[H]
-				\begin{center}
-					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances2.png}
-				\end{center}
-				\caption{\textit{performances sur 'tests/exo3/18'}}
-			\end{figure}
-			\begin{itemize}[label=-]
-				\setlength\itemsep{0.1em}
-				\item 1: avec A* et la distance de Manhattan. (on n'obtient pas une solution valide), puis Dijkstra.
-				\item 2: avec Dijkstra directement. (Remarque: A* prends donc environ 0.61 secondes à s'executer sur ce test)
+				
 			\end{itemize}
-			
-		\end{itemize}
-		Voici l'algorithme de résolution:
-		\begin{algorithm}
-			\caption{Résolution labyrinthe}
-			\begin{algorithmic}
-				\ENSURE Résout le labyrinthe.
-				\REQUIRE $G = (X, A) ; E, S, C, P \in X ; t \in \Re$ ;
-						$E$ l'entrée, $S$ la sortie, $C$ la clef, $P$ la porte,
-						$t$ le nombre d'action. On suppose que les fonctions 'Dijkstra' et 'A*' renvoit le nombre
-						d'action necessaire pour accomplir le chemin trouvé
-				
-				\STATE \textbf{Begin}
-				
-				\STATE Fermer porte.
-				
-				\IF {$A^*(G, E, S) \leq t$ \OR $Dijkstra(G, E, S) \leq t$}
-					\PRINT Il existe un chemin valide sans passer par la porte. \textbf{Renvoyer Vrai}
-				\ENDIF
-				\PRINT Il n'existe pas de chemin valide sans passer par la porte.
-				\STATE $t_1 \leftarrow A^*(G, E, C)$
-				\IF{$t_1 < t$}
-					\STATE Ouvrir porte , $t_2 \leftarrow t - t_1$
-					\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
-						\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
+			Voici l'algorithme de résolution:
+			\begin{algorithm}
+				\caption{Résolution labyrinthe}
+				\begin{algorithmic}
+					\ENSURE Résout le labyrinthe.
+					\REQUIRE $G = (X, A) ; E, S, C, P \in X ; t \in \Re$ ;
+							$E$ l'entrée, $S$ la sortie, $C$ la clef, $P$ la porte,
+							$t$ le nombre d'actions. On suppose que les fonctions 'Dijkstra' et 'A*' renvoit le nombre
+							d'actions nécessaires pour accomplir le chemin trouvé.
+					
+					\STATE \textbf{Begin}
+					
+					\STATE Fermer porte.
+					
+					\IF {$A^*(G, E, S) \leq t$ \OR $Dijkstra(G, E, S) \leq t$}
+						\PRINT Il existe un chemin valide sans passer par la porte. \textbf{Renvoyer Vrai}
 					\ENDIF
-					\STATE Fermer porte
-				\ENDIF
-				
-				\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
-				\IF{$t_1 < t$}
-					\STATE Ouvrir porte , $t_2 \leftarrow t - t_1$
-					\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
-						\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
+					\PRINT Il n'existe pas de chemin valide sans passer par la porte.
+					\STATE $t_1 \leftarrow A^*(G, E, C)$
+					\IF{$t_1 < t$}
+						\STATE Ouvrir porte, $t_2 \leftarrow t - t_1$
+						\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
+							\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
+						\ENDIF
+						\STATE Fermer porte.
 					\ENDIF
-				\ENDIF
-				\PRINT Il n'existe pas de chemin valide pour aller chercher la clef. \textbf{Renvoyer Faux}
+					
+					\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
+					\IF{$t_1 < t$}
+						\STATE Ouvrir porte, $t_2 \leftarrow t - t_1$
+						\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
+							\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
+						\ENDIF
+					\ENDIF
+					\PRINT Il n'existe pas de chemin valide pour aller chercher la clef. \textbf{Renvoyer Faux}
 
-			\end{algorithmic}
-		\end{algorithm}
+				\end{algorithmic}
+			\end{algorithm}
 
 	\section{A propos de l'implémentation}
-		Ci joint, vous trouverez mon implémentation en language 'C'.
+		Ci-joint, vous trouverez mon implémentation en language 'C'.
 		\subsection{Structures de données}
-		J'ai conçu mes structures de données de manière générique, afin de pouvoir m'en reservir plus tard dans d'autre projet.
-		(cela ajoute un peu 'd'overhead' à mon programme, il peut donc encore être optimisé)
-		Si vous souhaitez plus de détail, voir les fichiers '.c' et '.h', qui sont commentés.
+		J'ai conçu mes structures de données de manière générique, afin de pouvoir les réutiliser plus tard dans d'autres projets
+		(cela ajoute quelques opération à mon programme, mais le code est plus clair) (voir les fichiers '.c' et '.h', qui sont commentés).
 
 		\subsection{Qualité logiciel}
 			Mes programmes passent les tests fournis. J'ai également créé quelques tests supplémentaires pour mettre en défaut mon programme.
-			(nottement pour l'illustration \ref{courbe_temps})\newline
-			De plus, j'ai debuggé l'integralité du code à l'aide de l'outil 'valgrind'.
-			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisé.
+			(notamment pour l'illustration \ref{courbe_temps})\newline
+			De plus, j'ai débuggé l'intégralité du code à l'aide de l'outil 'valgrind'.
+			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisée.
 			(avec des fichiers bien formattés du moins).
 			\begin{figure}[H]
 				\begin{center}
@@ -316,8 +307,9 @@
 				\end{center}
 				\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
 			\end{figure}
-			J'ai optimisé mon programme à l'aide de l'outil 'gprof'. C'est ce qui m'a dirigé vers l'implementation de tas binaires par exemple,
-			ou du 'define' ARRAY\_ITERATE ('array.h') utilisant l'arithmetique des pointeurs.
+			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
+			C'est ce qui m'a dirigé vers l'implémentation de tas binaires par exemple,
+			ou encore dans la 2ème approche de la résolution du labyrinthe.
 
 	\newpage
 	\section{Références}
