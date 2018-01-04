@@ -70,6 +70,8 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	}
 	INDEX sID = sPos.y * lab->width + sPos.x;
 	INDEX tID = tPos.y * lab->width + tPos.x;
+	t_node * s = nodes + sID;
+	t_node * t = nodes + tID;
 
 	
 	/** 1. INITIALISATION DE L'ALGORITHME */
@@ -98,12 +100,9 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	}
 
 	/** on initialise le sommet source */
-	t_node * s = nodes + sID;
 	s->f_cost = 0; /* poids réel du chemin */
 	s->cost = heuristic(sPos, tPos);
 	pqueue_nodes[sID] = pqueue_insert(visit_queue, &(s->cost), &(s->index));
-
-	t_node * t = nodes + tID;
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant qu'il y a des sommets a visité, on les visite */

@@ -123,6 +123,7 @@ do
   if [ "$rc" = 124 ] # Timeout
   then
     prt "TIMEOUT : votre fonction prend trop de temps."
+    notsucceed+=($i)
   elif [ "$rc" = 139 ] # Segfault
   then
     prt "Erreur de segmentation"

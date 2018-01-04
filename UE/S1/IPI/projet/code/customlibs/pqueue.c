@@ -64,7 +64,6 @@ static t_pqueue_node * pqueue_get_node(t_pqueue * pqueue, unsigned int i) {
  *	@assign : --------------------------
  */
 t_pqueue_node * pqueue_insert(t_pqueue * pqueue, void const * key, void const * value) {
-	// First insert the new key at the end
 	t_pqueue_node * node = (t_pqueue_node *) malloc(sizeof(t_pqueue_node));
 	if (node == NULL) {
 		return (NULL);

@@ -1,13 +1,16 @@
 #ifndef LAB_H
 # define LAB_H
 
-# include <stdio.h>	/* printf, scanf */
-# include <stdlib.h>	/* free, malloc */
-# include <string.h>	/* memcpy, memset... */
-# include <unistd.h>	/* fork */
+# define _BSD_SOURCE
+# include <unistd.h>	/* fork  */
 # include <sys/types.h>	/* wait, kill */
 # include <sys/wait.h>	/* wait */
 # include <signal.h>	/* kill */
+
+
+# include <stdio.h>	/* printf, scanf */
+# include <stdlib.h>	/* free, malloc */
+# include <string.h>	/* memcpy, memset... */
 # include <limits.h>	/* ULONG_MAX ... */
 # include <wchar.h>
 
@@ -59,13 +62,6 @@ typedef struct	s_lab {
 	t_pos	key, door;	/* position de la clef et de la porte */
 	t_pos	tps[MAX_TP][2];	/* position teleporteurs */
 }		t_lab;
-
-/** represente un paquet de donnée à écrire/lire dans les pipes
-    lors de la parallélisation */
-typedef struct	s_packet {
-	pid_t	pid;	/** pid de l'enfant qui écrit */
-	WEIGHT	timer;	/** le timer du chemin actuellement calculé dans l'enfant */	
-}		t_packet;
 
 /**
  *	@require :	l : longueur (== largeur) du labyrinthe

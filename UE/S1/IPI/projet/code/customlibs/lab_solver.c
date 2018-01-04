@@ -54,7 +54,7 @@ void lab_print_path(t_lab * lab, t_node * s, t_node * t) {
 /**
  *	@require : le labyrinthe, et le timeout
  *	@ensure  : tente de résoudre le labyrinthe dans le temps imparti.
- *		   	1) s'il n'y a pas de portes, on résout avec A*
+ *		   	1) s'il n'y a pas de portes, on résout avec A*.
  *			2) sinon, on résout en parallèle les 4 problemes de
  *			chemin suivant, avec A*:
  *				1.1) chemin ne passant pas par la porte
@@ -64,21 +64,19 @@ void lab_print_path(t_lab * lab, t_node * s, t_node * t) {
  *			La parallélisation s'arrête si 1) convient,
  *			ou si la concaténation de 2), 3) et 4) convient.
  *
- *			Si un chemin convient, le signal 'SIG_SUCCESS' est
+ *			Si un chemin convient, le signal 'SIG_PRINT' est
  *			envoyé à l'enfant, qui affiche son chemin.
- *
- *			et alors, le signal 'SIGKILL' est envoyé aux autres.
  *
  *		Renvoie 1 si un chemin a été trouvé et affiché,
  *		sinon, 0 est renvoyé et "Not connected" est affiché
  *	@assign  : -----------------------------------------
  */
-int lab_solve(t_lab * lab, WEIGHT timer) {
+int lab_solve(t_lab * lab, WEIGHT maxTime) {
 
 	/** s'il n'y a pas de portes */
 	if (lab->door.x == MAX_NODES) {
 		/** on résout directement, pas de parallélisation*/
-		return (astar(lab, lab->entry, lab->exit, timer));
+		return (astar(lab, lab->entry, lab->exit, maxTime));
 	}
 
 
@@ -88,80 +86,132 @@ int lab_solve(t_lab * lab, WEIGHT timer) {
 	int p[2];
 	pipe(p);
 
-	/** creation de 1.1 */
-	pid_t pid1 = astar_worker(lab, lab->entry, lab->exit, p, 0);
-	/** creation de 1.2, 1.3, 1.4 */
-	pid_t pid2 = astar_worker(lab, lab->entry, lab->key,  p, 0);
-	pid_t pid3 = astar_worker(lab, lab->key,   lab->door, p, 1);
-	pid_t pid4 = astar_worker(lab, lab->door,  lab->exit, p, 1);
-
-	if (pid1 == -1 || pid2 == -1 || pid3 == -1 || pid4 == -1) {
-		fprintf(stderr, "Couldn't fork\n");
-		return (0);
+	/** creation de 1.1, 1.2, 1.3, 1.4 */
+	t_worker workers[MAX_WORKERS];
+	workers[WORKER_E_S] = astar_worker(lab, lab->entry, lab->exit, p, WORKER_E_S);
+	workers[WORKER_E_a] = astar_worker(lab, lab->entry, lab->key,  p, WORKER_E_a);
+	workers[WORKER_a_A] = astar_worker(lab, lab->key,   lab->door, p, WORKER_a_A);
+	workers[WORKER_A_S] = astar_worker(lab, lab->door,  lab->exit, p, WORKER_A_S);
+	BYTE i;
+	for (i = 0 ; i < MAX_WORKERS ;  i++) {
+		if (workers[i].pid == -1) {
+			fprintf(stderr, "A fork failed.\n");
+			return (0);
+		}
 	}
 
 	/** sinon, on est dans le père */ 
 	/** le père n'écrit pas, il ne fait que lire */
 	close(p[1]);
 
-	/* on lit les résultats des fils */
+	/* on lit les réponses des fils */
+	int status; /** status des processsus apres avoir été kill */
+	BYTE ended = 0; /** nombre de processus en attente d'affichage ou de terminaison */
 	t_packet packet;
-	WEIGHT s_to_k = INF_WEIGHT;
-	WEIGHT k_to_d = INF_WEIGHT;
-	WEIGHT d_to_t = INF_WEIGHT;
 	while (read(p[0], &packet, sizeof(t_packet)) > 0) {
-		if (packet.pid == pid1 && packet.timer <= timer) {
-			/** si un chemin sans passer par la porte existe */
-			kill(pid1, SIG_SUCCESS);
-			kill(pid2, SIGKILL);
-			kill(pid3, SIGKILL);
-			kill(pid4, SIGKILL);
-			return (1);
-		} else {
-			if (packet.pid == pid2) {
-				/** si un chemin plus court (entrée, clef) existe */
-				s_to_k = MIN(packet.timer, s_to_k);
-			} else if (packet.pid == pid3) {
-				/** si un chemin plus court (clef, porte) existe */
-				k_to_d = MIN(packet.timer, k_to_d);
-			} else if (packet.pid == pid4) {
-				/** si un chemin plus court (porte, sortie) existe */
-				d_to_t = MIN(packet.timer, d_to_t);
-			}
+		BYTE wID = packet.workerID;
+		switch (packet.id) {
+			/** si c'est un paquet de mis à jour */
+			case PACKET_ID_PATHTIME:
+				/** on enregistre le temps pour cet enfant */
+				workers[wID].time = packet.time;
 
-			/** si la concatenation des chemins convient */
-			if (	s_to_k != INF_WEIGHT &&
-				k_to_d != INF_WEIGHT &&
-				d_to_t != INF_WEIGHT &&
-				s_to_k + k_to_d + d_to_t <= timer) {
-				/** on tue le processus qui cherche un chemin
-				    sans passer par la porte */
-				kill(pid1, SIGKILL);
-				
-				/** on affiche le chemin (entrée, clef) */
-				kill(pid2, SIG_SUCCESS);
-				int status;
-				waitpid(pid2, &status, 0);
+				/** on lit le paquet */
+				switch (wID) {
+					/** si c'est le cas 1.1 */
+					case WORKER_E_S:
+						/** si le chemin est assez court */
+						if (workers[WORKER_E_S].time <= maxTime) {
+							/** on l'affiche */
+							kill(workers[WORKER_E_S].pid, SIG_PRINT);
+							/** et on tue les enfants */
+							for (i = 0 ; i < MAX_WORKERS ; i++) {
+								if (i != WORKER_E_S) {
+									kill(workers[i].pid, SIGKILL);
+								}
+							}
+							int status;
+							while (wait(&status) > 0);
+							return (1);
+						}
+						break ;
+						/** sinon, si c'est 1.2, 1.3 ou 1.4 */
+					default:
+						/** si la concatenation des
+						  chemins convient */
+						if (	workers[WORKER_E_a].time != INF_WEIGHT &&
+								workers[WORKER_a_A].time != INF_WEIGHT &&
+								workers[WORKER_A_S].time != INF_WEIGHT &&
 
-				/** on affiche le chemin (clef, porte) */
-				kill(pid3, SIG_SUCCESS);
-				waitpid(pid3, &status, 0);
+								workers[WORKER_E_a].time
+								+ workers[WORKER_a_A].time
+								+ workers[WORKER_A_S].time <= maxTime) {
+							/** on tue le processus qui cherche un chemin
+							  sans passer par la porte */
+							kill(workers[WORKER_E_S].pid, SIGKILL);
 
-				/** on affiche le chemin (porte, sortie) */
-				kill(pid4, SIG_SUCCESS);
-				waitpid(pid4, &status, 0);
+							/** on affiche le chemin (entrée, clef) */
+							kill(workers[WORKER_E_a].pid, SIG_PRINT);
+							waitpid(workers[WORKER_E_a].pid, &status, 0);
 
-				/** succès */
-				return (1);
-			}
+							/** on affiche le chemin (clef, porte) */
+							kill(workers[WORKER_a_A].pid, SIG_PRINT);
+							waitpid(workers[WORKER_a_A].pid, &status, 0);
 
+							/** on affiche le chemin (porte, sortie) */
+							kill(workers[WORKER_A_S].pid, SIG_PRINT);
+							waitpid(workers[WORKER_A_S].pid, &status, 0);
+							/** succès */
+							return (1);
+						}
+						break ;
+				}
+				break ;
 
+			/** si c'est un paquet de terminaison d'un enfant*/
+			case PACKET_ID_ENDED:
+				workers[wID].state = WORKER_STATE_ENDED;
+
+				/** si ce processus a terminé,
+				    c'est qu'il n'y a pas de chemins assez
+				    court sans passer par la porte, on le tue */
+				if (wID == WORKER_E_S) {
+					/** on tue le processus */
+					kill(workers[WORKER_E_S].pid, SIGKILL);
+				}
+				/** si l'un des chemins:
+				    de l'entrée à la clef,
+				    de la clef à la porte,
+				    ou de la porte à la sortie,
+				    n'existe pas,
+				 
+				    ou si tous les programmes ont finis, mais du coup
+				    que leur concatenation reste trop longue...
+				 */
+				if ((workers[wID].time == INF_WEIGHT && wID != WORKER_E_S)
+						|| ++ended == MAX_WORKERS) {
+					/** alors, ca ne sert à rien que
+					    les autres continuent de chercher,
+					    il n'y a pas de solutions */
+					kill(workers[WORKER_E_a].pid, SIGKILL);
+					kill(workers[WORKER_a_A].pid, SIGKILL);
+					kill(workers[WORKER_A_S].pid, SIGKILL);
+				}
+				break ;
+
+			/** sinon, c'est un packet inconnu.. PROBLEME */
+			default:
+				fprintf(stderr, "Unknown packet (%u) received from %u\n",
+						packet.id, wID);
+				break ;
 		}
 	}
 
-	/** si tous les pipes ont été fermé (<=> tous les enfants sont morts)
-	    sans trouver de chemin valide... */
-	printf("Not connected\n");
+	/** si read renvoit 0 ou -1,
+	  	<=> tous les pipes ont été fermé 
+	  	<=> tous les enfants sont morts
+		<=> pas de chemin trouvé */
+	fprintf(stderr, "Pas de chemins valides!\n");
 	return (0);
 }
 

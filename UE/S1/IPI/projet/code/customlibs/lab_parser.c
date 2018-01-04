@@ -62,8 +62,9 @@ t_lab * lab_parse(void) {
 						}
 					} else {
 						/** si on est sur une case inconnue */
-						fprintf(stderr,	"unknown character : %c,"\
-								"assumed '.'\n", c);
+						fprintf(stderr,	"unknown character (%c),"\
+								"(ascii:%d)"\
+								"assumed '.'\n", c, (int)c);
 						line[pos.x] = '.';
 					}
 					break ;

@@ -1,11 +1,39 @@
 # include "astar_worker.h"
 
 /** l'état du processus */
-BYTE state;
+t_worker worker;
 
-/** callback pour le signal indiquant au processus de se stopper */
-static void sigcatch(int signum) {
-	state = (signum == SIG_SUCCESS) ? WORKER_STATE_SUCCESS : WORKER_STATE_FAIL;
+/** strucutres utile à la recherche */
+/** variable globale pour pouvoir être free dans le callback du signal */
+t_lab		* lab;
+t_pqueue	* visit_queue;
+t_pqueue_node	** pqueue_nodes;
+t_node		* nodes;
+t_node		* s;
+t_node		* t;
+
+/** entrée du pipe */
+int fd;
+
+/**
+ *	@require : un ID de packet, et un temps
+ *	@ensure  : envoie le packet au père
+ *	@assign  : --------------------
+ */
+static void sendPacket(BYTE packetID, WEIGHT time) {
+	t_packet packet;
+	memset(&packet, 0, sizeof(t_packet));
+	packet.id = packetID;
+	packet.workerID = worker.id;
+	packet.time = time;
+	write(fd, &packet, sizeof(t_packet));
+}
+
+/** callback pour le signal indiquant au processus d'afficher
+    son résultat et de se stopper */
+static void sig_print(int signum) {
+	(void)signum;
+	worker.state = WORKER_STATE_PRINT;
 }
 
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
@@ -28,42 +56,36 @@ static WEIGHT heuristic(t_pos v, t_pos t) {
 	return (ABS(tx - vx) + ABS(ty - vy));
 }
 
-static void astar_test_path(t_pqueue * visit_queue, t_pqueue_node ** pqueue_nodes,
-		t_node * u, t_node * v, t_node * t, WEIGHT w, int fd) {
+static void astar_test_path(t_node * u, t_node * v, t_node * t, WEIGHT w) {
 	/** si ce nouveau chemin est de cout plus faible */
 	if (u->f_cost + w < v->f_cost) {
 		/* on ecrase le chemin precedant par le nouveau */
 		v->f_cost = u->f_cost + w;
-		/* si on a mis 't' à jour, on notifie le pere */
-		if (v == t) {
-			t_packet packet;
-			packet.pid   = getpid();
-			packet.timer = t->f_cost;
-			write(fd, &packet, sizeof(t_packet));
-		}
+
 		/** poids de la fonction d'heuristique */
 		v->cost = v->f_cost + heuristic(v->pos, t->pos);
 		v->prev = u;
+
+		/* si on a mis 't' à jour, on notifie le pere */
+		if (v == t) {
+			/** on crée et on envoit le packet */
+			sendPacket(PACKET_ID_PATHTIME, t->f_cost);
+		}
 		/** on enregistre les sommets dans la file */
 		if (pqueue_nodes[v->index] == NULL) {
-			pqueue_nodes[v->index] = pqueue_insert(visit_queue,
-								&(v->cost),
-								&(v->index));
+			pqueue_nodes[v->index] = pqueue_insert(visit_queue, &(v->cost), &(v->index));
 		} else {
-			pqueue_decrease(visit_queue,
-					pqueue_nodes[v->index],
-					&(v->cost));
+			pqueue_decrease(visit_queue, pqueue_nodes[v->index], &(v->cost));
 		}
 	}
 }
-
 
 /**
  *	@require : 	'lab':	le labyrinthe
  *			'sPos':	la position de départ
  *			'tPos':	la position d'arrivé
- *			'p':	le pipe dans lequel communiquer
- *			'hasKey': un boolean pour savoir si on peut passer par la porte
+ *			'p':	le pipe dans lequel écrire les packets
+ *			'workerID': l'id de l'enfant (voir WORKER_* (astar_worker.h))
  *	@ensure  : crée un nouveau processus qui cherche un chemin entre 's' et 't',
  *                 dans le labyrinthe, et qui écrit la longueur du chemin
  *		   dans le pipe 'p',
@@ -71,38 +93,51 @@ static void astar_test_path(t_pqueue * visit_queue, t_pqueue_node ** pqueue_node
  *		   le processus se suicide à la fin de la recherche
  *	@assign  : --------------------------------------------
  */
-pid_t astar_worker(t_lab * lab, t_pos sPos, t_pos tPos, int p[2], BYTE hasKey) {
+t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE workerID) {
 	/** creation du processus fils */
-	pid_t pid = fork();
-	if (pid) {
-		/** le pere ne travaille pas */
-		return (pid);
+	worker.pid	= fork();
+	worker.id	= workerID;
+	worker.time	= INF_WEIGHT;
+	worker.state	= WORKER_STATE_RUNNING;
+	/** si on est dans le père, on renvoit le worker */
+	if (worker.pid) {
+		return (worker);
 	}
 
+	/** sinon, l'enfant tente de résoudre */
 	/** prepare la communication inter-processus */
-	state = WORKER_STATE_RUNNING;
-	signal(SIG_SUCCESS, sigcatch);
-	signal(SIG_FAIL, sigcatch);
+	signal(SIG_PRINT, sig_print);
 	close(p[0]);
+	fd = p[1];
+
+	/** si on va de la clef à la porte, ou de la porte à la sortie
+	    on considère que l'on a la clef en poche */
+	BYTE hasKey = (workerID == WORKER_a_A) || (workerID == WORKER_A_S);
 
 	/** nombre de case dans le labyrinthe */
+	lab = theLab;
 	INDEX n = lab->width * lab->height;
 	
 	/** file de priorité pour déterminer le prochain sommet à visiter */
-	t_pqueue * visit_queue = pqueue_new((t_cmpf)weightcmp);
-	t_pqueue_node ** pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node) * n);
-	t_node * nodes = (t_node *) malloc(sizeof(t_node) * n);
-	if (visit_queue == NULL || nodes == NULL) {
-		pqueue_delete(visit_queue);
-		free(nodes);
+	visit_queue = pqueue_new((t_cmpf)weightcmp);
+	pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node) * n);
+	nodes = (t_node *) malloc(sizeof(t_node) * n);
+	if (visit_queue == NULL || pqueue_nodes == NULL || nodes == NULL) {
 		fprintf(stderr, "Not enough memory (%d)\n", getpid());
+		pqueue_delete(visit_queue);
+		free(pqueue_nodes);
+		free(nodes);
 		lab_delete(lab);
 		exit(EXIT_FAILURE);
 	}
+
+	/** id dans le tableau 'nodes' des sommets 's' et 't' */
 	INDEX sID = sPos.y * lab->width + sPos.x;
 	INDEX tID = tPos.y * lab->width + tPos.x;
-
+	s = nodes + sID;
+	t = nodes + tID;
 	
+	/** prepare la communication inter-processus */
 	/** 1. INITIALISATION DE L'ALGORITHME */
 	/** pour chaque sommets */
 	INDEX x, y;
@@ -129,17 +164,14 @@ pid_t astar_worker(t_lab * lab, t_pos sPos, t_pos tPos, int p[2], BYTE hasKey) {
 	}
 
 	/** on initialise le sommet source */
-	t_node * s = nodes + sID;
 	s->f_cost = 0; /* poids réel du chemin */
 	s->cost = heuristic(sPos, tPos);
 	pqueue_nodes[sID] = pqueue_insert(visit_queue, &(s->cost), &(s->index));
 
-	t_node * t = nodes + tID;
-
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant que la recherche doit s'affiner,
 	    et qu'il y a des sommets a visité, on les visite */
-	while (state == WORKER_STATE_RUNNING && !pqueue_is_empty(visit_queue)) {
+	while (worker.state == WORKER_STATE_RUNNING && !pqueue_is_empty(visit_queue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
 		t_pqueue_node node = pqueue_pop(visit_queue);
@@ -187,7 +219,7 @@ pid_t astar_worker(t_lab * lab, t_pos sPos, t_pos tPos, int p[2], BYTE hasKey) {
 			INDEX vID = vy * lab->width + vx;
 			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 1, p[1]);
+			astar_test_path(u, v, t, 1);
 		}
 		/** si c'est un teleporteur, alors on essaye le chemin
 		    vers l'autre teleporteur */
@@ -208,27 +240,37 @@ pid_t astar_worker(t_lab * lab, t_pos sPos, t_pos tPos, int p[2], BYTE hasKey) {
 			}
 			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 0, p[1]);
+			astar_test_path(u, v, t, 0);
 		}
 	}
-
-	/** plus besoin de la file de priorité: on libere la mémoire */
+	
+	/** libere la mémoire */
 	pqueue_delete(visit_queue);
 	free(pqueue_nodes);
-	/** si aucun chemin n'a été trouvé. Fin du processus */
-	/** on attends la reponse du père. */
-	while (state == WORKER_STATE_RUNNING) {
-		usleep(2);
-	}
 
-	/** Si le père envoie 'SIGUSR1', succès, on affiche le résultat */
-	if (state == WORKER_STATE_SUCCESS) {
-		lab_print_path(lab, s, t);
-	}
 
-	/** libere la mémoire et fin du processus */
+	/** on notifie le pere qu'on a fini */
+	sendPacket(PACKET_ID_ENDED, INF_WEIGHT);
+
+	/** si le processus a calculé tous les chemins */
+	if (worker.state == WORKER_STATE_RUNNING) {
+	/** sinon, c'est qu'on ne pourra pas trouvé un chemin
+	    plus court, on attends la réponse du père */
+		worker.state = WORKER_STATE_ENDED;
+
+		/** on attends un signal du père,
+		  savoir si le chemin doit être affiché ou non */
+		/** NB: ceci pourrait être remplacé par un autre
+		    pipe, où le fils lit une réponse du pere.
+		    J'ai preféré le faire sous forme de signal */
+		while (worker.state == WORKER_STATE_ENDED);
+	}
+	/** affiche le resultat */
+	lab_print_path(lab, s, t);
+	/**  libère la mémoire */
 	free(nodes);
 	lab_delete(lab);
+	/** fin du processus */
 	exit(EXIT_SUCCESS);
-	return (0);
+	return (worker);
 }
