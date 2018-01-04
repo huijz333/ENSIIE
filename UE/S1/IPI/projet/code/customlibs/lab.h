@@ -5,9 +5,9 @@
 # include <stdlib.h>	/* free, malloc */
 # include <string.h>	/* memcpy, memset... */
 # include <unistd.h>	/* fork */
-# include <sys/types.h>	/* pid_t*/
-# include <signal.h>	/* pid_t */
-# include <sys/mman.h>	/*mmap */
+# include <sys/types.h>	/* wait, kill */
+# include <sys/wait.h>	/* wait */
+# include <signal.h>	/* kill */
 # include <limits.h>	/* ULONG_MAX ... */
 # include <wchar.h>
 
@@ -46,7 +46,7 @@ typedef struct	s_node {
 	t_pos		pos;		/* la position sur la carte */
 	INDEX		index;		/* index sur la carte */
 	WEIGHT		f_cost;		/* poids == temps du chemin */
-	WEIGHT		g_cost;		/* heuristique du chemin */
+	WEIGHT		cost;		/* poids + heuristique du chemin */
 	struct s_node	* prev;		/* predecesseur pour la remontée */
 }		t_node;
 
@@ -63,8 +63,8 @@ typedef struct	s_lab {
 /** represente un paquet de donnée à écrire/lire dans les pipes
     lors de la parallélisation */
 typedef struct	s_packet {
-	BYTE	childID;/** l'indice de l'enfant qui écrit */
-	size_t	timer;	/** le timer du chemin actuellement calculé dans l'enfant */	
+	pid_t	pid;	/** pid de l'enfant qui écrit */
+	WEIGHT	timer;	/** le timer du chemin actuellement calculé dans l'enfant */	
 }		t_packet;
 
 /**
@@ -89,17 +89,6 @@ void lab_delete(t_lab * lab);
 t_lab * lab_parse(void);
 
 /**
- *	@require : 	'lab':		le labyrinthe
- *			'sPos':		la position de départ
- *			'tPos':		la position d'arrivé
- *			'timer':	le temps maximal de résolution voulu
- *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
- *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
- *	@assign  : --------------------------------------------
- */
-t_list * astar(t_lab * lab, t_pos sPos, t_pos tPos, size_t timer);
-
-/**
  *	@require : un caractère 'c' de la chaine 'LAB_TP'
  *	@ensure  : renvoie l'id 'i' dans le tableau t_lab.tps[i] correspondant
  *		   au teleporteur du caractère 'c', ou 'MAX_TP' si le teleporteur
@@ -108,6 +97,43 @@ t_list * astar(t_lab * lab, t_pos sPos, t_pos tPos, size_t timer);
  */
 BYTE lab_get_tpID(wchar_t c);
 
-void lab_solve(t_lab * lab, size_t timer);
+/**
+ *	@require : le labyrinthe, et le timeout
+ *	@ensure  : tente de résoudre le labyrinthe dans le temps imparti.
+ *		   	1) s'il n'y a pas de portes, on résout avec A*
+ *			2) sinon, on résout en parallèle les 4 problemes de
+ *			chemin suivant, avec A*:
+ *				1.1) chemin ne passant pas par la porte
+ *				1.2) chemin allant du départ à la clé
+ *				1.3) chemin allant de la clé à la porte
+ *				1.4) chemin allant de la porte à la clef
+ *			La parallélisation s'arrête si 1) convient,
+ *			ou si la concaténation de 2), 3) et 4) convient.
+ *
+ *			Si un chemin convient, le signal 'SIG_SUCCESS' est
+ *			envoyé à l'enfant, qui affiche son chemin.
+ *
+ *			et alors, le signal 'SIGKILL' est envoyé aux autres.
+ *
+ *		Renvoie 1 si un chemin a été trouvé et affiché,
+ *		sinon, 0 est renvoyé et "Not connected" est affiché
+ *	@assign  : -----------------------------------------
+ */
+int lab_solve(t_lab * lab, WEIGHT timer);
+
+
+/**
+ *	@require : le labyrinthe, un sommet de départ 's', et un
+ *		   sommet d'arrivée 't'.
+ *	@ensure  : effectue l'algorithme de remontée de 's' à 't',
+ *		   et affiche les directions successives à prendre
+ *		   pour realiser le chemin.
+ *	@assign  : ------------------
+ */
+void lab_print_path(t_lab * lab, t_node * s, t_node * t);
+
+/** inclut à la fin, car requiet les définitions précèdentes */
+# include "astar.h"
+# include "astar_worker.h"
 
 #endif

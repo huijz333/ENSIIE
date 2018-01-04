@@ -1,4 +1,12 @@
-# include "lab.h"
+# include "astar_worker.h"
+
+/** l'état du processus */
+BYTE state;
+
+/** callback pour le signal indiquant au processus de se stopper */
+static void sigcatch(int signum) {
+	state = (signum == SIG_SUCCESS) ? WORKER_STATE_SUCCESS : WORKER_STATE_FAIL;
+}
 
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
@@ -21,12 +29,18 @@ static WEIGHT heuristic(t_pos v, t_pos t) {
 }
 
 static void astar_test_path(t_pqueue * visit_queue, t_pqueue_node ** pqueue_nodes,
-		t_node * u, t_node * v, t_node * t, WEIGHT w) {
+		t_node * u, t_node * v, t_node * t, WEIGHT w, int fd) {
 	/** si ce nouveau chemin est de cout plus faible */
 	if (u->f_cost + w < v->f_cost) {
 		/* on ecrase le chemin precedant par le nouveau */
 		v->f_cost = u->f_cost + w;
-
+		/* si on a mis 't' à jour, on notifie le pere */
+		if (v == t) {
+			t_packet packet;
+			packet.pid   = getpid();
+			packet.timer = t->f_cost;
+			write(fd, &packet, sizeof(t_packet));
+		}
 		/** poids de la fonction d'heuristique */
 		v->cost = v->f_cost + heuristic(v->pos, t->pos);
 		v->prev = u;
@@ -41,20 +55,36 @@ static void astar_test_path(t_pqueue * visit_queue, t_pqueue_node ** pqueue_node
 					&(v->cost));
 		}
 	}
-
 }
 
+
 /**
- *	@require : 	'lab':		le labyrinthe
- *			'sPos':		la position de départ
- *			'tPos':		la position d'arrivé
- *			'timer':	le temps maximal de résolution voulu
- *	@ensure  : resout le plus court chemin dans le graphe entre 's' et 't'.
- *		   Renvoie 1 et affiche le chemin, si un chemin suffisement
- *		   court a été trouvé, sinon renvoie 0 et 'Not connected' est affiché
+ *	@require : 	'lab':	le labyrinthe
+ *			'sPos':	la position de départ
+ *			'tPos':	la position d'arrivé
+ *			'p':	le pipe dans lequel communiquer
+ *			'hasKey': un boolean pour savoir si on peut passer par la porte
+ *	@ensure  : crée un nouveau processus qui cherche un chemin entre 's' et 't',
+ *                 dans le labyrinthe, et qui écrit la longueur du chemin
+ *		   dans le pipe 'p',
+ *		   renvoie le pid du processus fils créé.
+ *		   le processus se suicide à la fin de la recherche
  *	@assign  : --------------------------------------------
  */
-int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
+pid_t astar_worker(t_lab * lab, t_pos sPos, t_pos tPos, int p[2], BYTE hasKey) {
+	/** creation du processus fils */
+	pid_t pid = fork();
+	if (pid) {
+		/** le pere ne travaille pas */
+		return (pid);
+	}
+
+	/** prepare la communication inter-processus */
+	state = WORKER_STATE_RUNNING;
+	signal(SIG_SUCCESS, sigcatch);
+	signal(SIG_FAIL, sigcatch);
+	close(p[0]);
+
 	/** nombre de case dans le labyrinthe */
 	INDEX n = lab->width * lab->height;
 	
@@ -65,8 +95,9 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	if (visit_queue == NULL || nodes == NULL) {
 		pqueue_delete(visit_queue);
 		free(nodes);
-		fprintf(stderr, "Not enough memory\n");
-		return (0);
+		fprintf(stderr, "Not enough memory (%d)\n", getpid());
+		lab_delete(lab);
+		exit(EXIT_FAILURE);
 	}
 	INDEX sID = sPos.y * lab->width + sPos.x;
 	INDEX tID = tPos.y * lab->width + tPos.x;
@@ -106,8 +137,9 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	t_node * t = nodes + tID;
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
-	/** Tant qu'il y a des sommets a visité, on les visite */
-	while (!pqueue_is_empty(visit_queue)) {
+	/** Tant que la recherche doit s'affiner,
+	    et qu'il y a des sommets a visité, on les visite */
+	while (state == WORKER_STATE_RUNNING && !pqueue_is_empty(visit_queue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
 		t_pqueue_node node = pqueue_pop(visit_queue);
@@ -118,9 +150,8 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 		/** le sommet n'est plus dans la file */
 		pqueue_nodes[uID] = NULL;
 
-		/** si on a atteint 't' avec un cout suffisant,
-		  ou si on a atteint une autre partie connexe ... */
-		if (t->f_cost <= timer || u->f_cost == INF_WEIGHT) {
+		/** si on a atteint une autre partie connexe ... */
+		if (u->f_cost == INF_WEIGHT) {
 			break ;
 		}
 
@@ -144,19 +175,19 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			INDEX vy = u->pos.y + d.y;
 			/** on regarde la case que l'on souhaite visiter */
 			wchar_t c = lab->map[vy][vx];
-			/** si c'est un mur, ou une porte (que l'on considère fermée) */
-			if (c == LAB_WALL || c == LAB_DOOR) {
+			/** si c'est un mur, ou une porte fermée */
+			if (c == LAB_WALL || (c == LAB_DOOR && !hasKey)) {
 				/** on passe à la case suivante */
 				continue ;
 			}
 		
 			/** sinon, on est sur une case vide, ou sur la clef */
-
+			
 			/** index de 'v' */
 			INDEX vID = vy * lab->width + vx;
 			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 1);
+			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 1, p[1]);
 		}
 		/** si c'est un teleporteur, alors on essaye le chemin
 		    vers l'autre teleporteur */
@@ -177,22 +208,27 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			}
 			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 0);
+			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 0, p[1]);
 		}
 	}
 
 	/** plus besoin de la file de priorité: on libere la mémoire */
 	pqueue_delete(visit_queue);
 	free(pqueue_nodes);
-
-	/** on crée le chemin allant de 's' à 't' */
-	if (t->f_cost <= timer) {
-		lab_print_path(lab, s, t);
-		free(nodes);
-		return (1);
+	/** si aucun chemin n'a été trouvé. Fin du processus */
+	/** on attends la reponse du père. */
+	while (state == WORKER_STATE_RUNNING) {
+		usleep(2);
 	}
-	/** libère la mémoire */
-	printf("Not connected\n");
+
+	/** Si le père envoie 'SIGUSR1', succès, on affiche le résultat */
+	if (state == WORKER_STATE_SUCCESS) {
+		lab_print_path(lab, s, t);
+	}
+
+	/** libere la mémoire et fin du processus */
 	free(nodes);
+	lab_delete(lab);
+	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -23,6 +23,14 @@
 #	define SIGNUM(X) (((X) < 0) ? -1 : ((X) > 0) ? 1 : 0)
 # endif
 
+# ifndef MIN
+#	define MIN(X, Y) ((X) <= (Y) ? (X) : (Y))
+# endif
+
+# ifndef MAX
+#	define MAX(X, Y) ((X) >= (Y) ? (X) : (Y))
+# endif
+
 /**
  *	Le type a utilisé pour modélisé les poids sur les arcs
  */
