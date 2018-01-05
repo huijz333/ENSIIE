@@ -130,6 +130,7 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 									kill(workers[i].pid, SIGKILL);
 								}
 							}
+							/** on attends que tous les enfants aient fini */
 							int status;
 							while (wait(&status) > 0);
 							return (1);
@@ -170,7 +171,6 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 
 			/** si c'est un paquet de terminaison d'un enfant*/
 			case PACKET_ID_ENDED:
-				workers[wID].state = WORKER_STATE_ENDED;
 
 				/** si ce processus a terminé,
 				    c'est qu'il n'y a pas de chemins assez
@@ -185,7 +185,7 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 				    ou de la porte à la sortie,
 				    n'existe pas,
 				 
-				    ou si tous les programmes ont finis, mais du coup
+				    ou si tous les programmes ont finis,
 				    que leur concatenation reste trop longue...
 				 */
 				if ((workers[wID].time == INF_WEIGHT && wID != WORKER_E_S)
@@ -196,6 +196,7 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 					kill(workers[WORKER_E_a].pid, SIGKILL);
 					kill(workers[WORKER_a_A].pid, SIGKILL);
 					kill(workers[WORKER_A_S].pid, SIGKILL);
+					fprintf(stderr, "Key, door, or exit couldn't be reached.\n");
 				}
 				break ;
 

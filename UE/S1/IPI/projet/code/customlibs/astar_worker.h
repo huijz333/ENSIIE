@@ -6,13 +6,6 @@
 /** les signaux a utiliser */
 # define SIG_PRINT	SIGUSR1
 
-/** les états possibles de l'enfant */
-enum e_worker_state {
-	WORKER_STATE_RUNNING,
-	WORKER_STATE_PRINT,
-	WORKER_STATE_ENDED
-};
-
 /** enfant qui cherche de l'entrée à la sortie directement */
 enum e_worker {
 	WORKER_E_S,	/** enfant qui cherche la sortie sans passer par la porte */
@@ -27,7 +20,6 @@ typedef struct	s_worker {
 	BYTE	id;	/** voir WORKER_S_T, WORKER_ [...] */
 	pid_t	pid;	/** processus ID */
 	WEIGHT	time;	/** le temps calculé par le processus */
-	BYTE	state;	/** vrai ou faux selon que le processus ait fini */
 }		t_worker;
 
 

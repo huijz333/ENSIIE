@@ -12,6 +12,9 @@ t_node		* nodes;
 t_node		* s;
 t_node		* t;
 
+/** un boolean qui vaux 1 si l'enfant doit écrire son résultat */
+BYTE shouldPrint = 0;
+
 /** entrée du pipe */
 int fd;
 
@@ -33,7 +36,7 @@ static void sendPacket(BYTE packetID, WEIGHT time) {
     son résultat et de se stopper */
 static void sig_print(int signum) {
 	(void)signum;
-	worker.state = WORKER_STATE_PRINT;
+	shouldPrint = 1;
 }
 
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
@@ -98,7 +101,6 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	worker.pid	= fork();
 	worker.id	= workerID;
 	worker.time	= INF_WEIGHT;
-	worker.state	= WORKER_STATE_RUNNING;
 	/** si on est dans le père, on renvoit le worker */
 	if (worker.pid) {
 		return (worker);
@@ -171,7 +173,7 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant que la recherche doit s'affiner,
 	    et qu'il y a des sommets a visité, on les visite */
-	while (worker.state == WORKER_STATE_RUNNING && !pqueue_is_empty(visit_queue)) {
+	while (!shouldPrint && !pqueue_is_empty(visit_queue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
 		t_pqueue_node node = pqueue_pop(visit_queue);
@@ -248,25 +250,19 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	pqueue_delete(visit_queue);
 	free(pqueue_nodes);
 
-
 	/** on notifie le pere qu'on a fini */
 	sendPacket(PACKET_ID_ENDED, INF_WEIGHT);
 
-	/** si le processus a calculé tous les chemins */
-	if (worker.state == WORKER_STATE_RUNNING) {
-	/** sinon, c'est qu'on ne pourra pas trouvé un chemin
-	    plus court, on attends la réponse du père */
-		worker.state = WORKER_STATE_ENDED;
-
-		/** on attends un signal du père,
-		  savoir si le chemin doit être affiché ou non */
-		/** NB: ceci pourrait être remplacé par un autre
-		    pipe, où le fils lit une réponse du pere.
-		    J'ai preféré le faire sous forme de signal */
-		while (worker.state == WORKER_STATE_ENDED);
-	}
+	/** si le processus a calculé tous les chemins,
+	    mais n'a pas recu de demande d'affichage, alors
+	    on attends un signal du père,
+	    savoir si le chemin doit être affiché ou non */
+	while (!shouldPrint);
+	
 	/** affiche le resultat */
-	lab_print_path(lab, s, t);
+	if (shouldPrint) {
+		lab_print_path(lab, s, t);
+	}
 	/**  libère la mémoire */
 	free(nodes);
 	lab_delete(lab);
