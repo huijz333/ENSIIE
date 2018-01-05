@@ -89,9 +89,9 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 	/** creation de 1.1, 1.2, 1.3, 1.4 */
 	t_worker workers[MAX_WORKERS];
 	workers[WORKER_E_S] = astar_worker(lab, lab->entry, lab->exit, p, WORKER_E_S);
-	workers[WORKER_E_a] = astar_worker(lab, lab->entry, lab->key,  p, WORKER_E_a);
-	workers[WORKER_a_A] = astar_worker(lab, lab->key,   lab->door, p, WORKER_a_A);
-	workers[WORKER_A_S] = astar_worker(lab, lab->door,  lab->exit, p, WORKER_A_S);
+	workers[WORKER_E_C] = astar_worker(lab, lab->entry, lab->key,  p, WORKER_E_C);
+	workers[WORKER_C_P] = astar_worker(lab, lab->key,   lab->door, p, WORKER_C_P);
+	workers[WORKER_P_S] = astar_worker(lab, lab->door,  lab->exit, p, WORKER_P_S);
 	BYTE i;
 	for (i = 0 ; i < MAX_WORKERS ;  i++) {
 		if (workers[i].pid == -1) {
@@ -140,28 +140,28 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 					default:
 						/** si la concatenation des
 						  chemins convient */
-						if (	workers[WORKER_E_a].time != INF_WEIGHT &&
-								workers[WORKER_a_A].time != INF_WEIGHT &&
-								workers[WORKER_A_S].time != INF_WEIGHT &&
+						if (	workers[WORKER_E_C].time != INF_WEIGHT &&
+								workers[WORKER_C_P].time != INF_WEIGHT &&
+								workers[WORKER_P_S].time != INF_WEIGHT &&
 
-								workers[WORKER_E_a].time
-								+ workers[WORKER_a_A].time
-								+ workers[WORKER_A_S].time <= maxTime) {
+								workers[WORKER_E_C].time
+								+ workers[WORKER_C_P].time
+								+ workers[WORKER_P_S].time <= maxTime) {
 							/** on tue le processus qui cherche un chemin
 							  sans passer par la porte */
 							kill(workers[WORKER_E_S].pid, SIGKILL);
 
 							/** on affiche le chemin (entrée, clef) */
-							kill(workers[WORKER_E_a].pid, SIG_PRINT);
-							waitpid(workers[WORKER_E_a].pid, &status, 0);
+							kill(workers[WORKER_E_C].pid, SIG_PRINT);
+							waitpid(workers[WORKER_E_C].pid, &status, 0);
 
 							/** on affiche le chemin (clef, porte) */
-							kill(workers[WORKER_a_A].pid, SIG_PRINT);
-							waitpid(workers[WORKER_a_A].pid, &status, 0);
+							kill(workers[WORKER_C_P].pid, SIG_PRINT);
+							waitpid(workers[WORKER_C_P].pid, &status, 0);
 
 							/** on affiche le chemin (porte, sortie) */
-							kill(workers[WORKER_A_S].pid, SIG_PRINT);
-							waitpid(workers[WORKER_A_S].pid, &status, 0);
+							kill(workers[WORKER_P_S].pid, SIG_PRINT);
+							waitpid(workers[WORKER_P_S].pid, &status, 0);
 							/** succès */
 							return (1);
 						}
@@ -193,9 +193,9 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 					/** alors, ca ne sert à rien que
 					    les autres continuent de chercher,
 					    il n'y a pas de solutions */
-					kill(workers[WORKER_E_a].pid, SIGKILL);
-					kill(workers[WORKER_a_A].pid, SIGKILL);
-					kill(workers[WORKER_A_S].pid, SIGKILL);
+					kill(workers[WORKER_E_C].pid, SIGKILL);
+					kill(workers[WORKER_C_P].pid, SIGKILL);
+					kill(workers[WORKER_P_S].pid, SIGKILL);
 					fprintf(stderr, "Key, door, or exit couldn't be reached.\n");
 				}
 				break ;

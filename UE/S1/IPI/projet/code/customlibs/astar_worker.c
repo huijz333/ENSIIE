@@ -114,7 +114,7 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 
 	/** si on va de la clef à la porte, ou de la porte à la sortie
 	    on considère que l'on a la clef en poche */
-	BYTE hasKey = (workerID == WORKER_a_A) || (workerID == WORKER_A_S);
+	BYTE hasKey = (workerID == WORKER_C_P) || (workerID == WORKER_P_S);
 
 	/** nombre de case dans le labyrinthe */
 	lab = theLab;

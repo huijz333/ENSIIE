@@ -9,9 +9,9 @@
 /** enfant qui cherche de l'entrée à la sortie directement */
 enum e_worker {
 	WORKER_E_S,	/** enfant qui cherche la sortie sans passer par la porte */
-	WORKER_E_a,	/** enfant qui cherche de l'entrée à la clef */
-	WORKER_a_A,	/** enfant qui cherche de la clef à la porte */
-	WORKER_A_S,	/** enfant qui cherche de la porte à la sortie */
+	WORKER_E_C,	/** enfant qui cherche de l'entrée à la clef */
+	WORKER_C_P,	/** enfant qui cherche de la clef à la porte */
+	WORKER_P_S,	/** enfant qui cherche de la porte à la sortie */
 	MAX_WORKERS	/** nombre maximum d'enfant */
 };
 

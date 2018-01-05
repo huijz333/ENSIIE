@@ -46,41 +46,43 @@ static int weightcmp(WEIGHT * a, WEIGHT * b) {
  *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
-int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
+static int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
 	/** file de priorité, enregistrant les sommets a visité dans l'ordre */
-	t_pqueue * unvisited = pqueue_new((t_cmpf)weightcmp);
-	/** tableau enregistrant les sommets de la file */
+	t_pqueue * visitQueue = pqueue_new((t_cmpf)weightcmp);
+	/** tableau enregistrant les sommets de la file (pour les repositionner) */
 	t_pqueue_node ** pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node *) * n);
-	if (unvisited == NULL || pqueue_nodes == NULL) {
-		pqueue_delete(unvisited);
+	if (visitQueue == NULL || pqueue_nodes == NULL) {
+		pqueue_delete(visitQueue);
 		free(pqueue_nodes);
+		fprintf(stderr, "Not enough memory.\n");
 		return (0);
 	}
 
 	/** 1. INITIALISATION DE L'ALGORITHME */
+	t_node * s = nodes + sID;
 	/** pour chaque sommets */
 	INDEX i;
 	for (i = 0 ; i < n ; i++) {
-		/** on definit sa distance de 's' à '+oo' */
 		t_node * node = nodes + i;
+		/** on definit sa distance de 's' à '+oo' */
 		node->cost = INF_WEIGHT;
 		/** le sommet n'est pas dans la file: pas de position dans la file */
 		pqueue_nodes[i] = NULL;
 	}
-	t_node * s = nodes + sID;
 	s->cost = 0;
-	pqueue_nodes[sID] = pqueue_insert(unvisited, &(s->cost), &sID);
+	pqueue_nodes[sID] = pqueue_insert(visitQueue, &(s->cost), &sID);
+
 	/** 2. BOUCLE DE L'ALGORITHME DIJKSTRA */
 	/** Tant qu'il y a des sommets a visité, on les visite */
-	while (!pqueue_is_empty(unvisited)) {
+	while (!pqueue_is_empty(visitQueue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité, l'opération
 		  est donc ici trivial */
-		t_pqueue_node node = pqueue_pop(unvisited);
+		t_pqueue_node node = pqueue_pop(visitQueue);
 		INDEX	uID = *((INDEX *) node.value);
-		t_node * u = nodes + uID;
 		/** le sommet n'est plus dans la file */
 		pqueue_nodes[uID] = NULL;
+		t_node * u = nodes + uID;
 
 		/** si on a atteint 't', ou si on est dans une autre partie connexe ... */
 		if (uID == tID || u->cost == INF_WEIGHT) {
@@ -102,11 +104,11 @@ int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
 				v->prev = uID;
 				/** on enregistre les sommets dans la file de priorité */
 				if (pqueue_nodes[vID] == NULL) {
-					pqueue_nodes[vID] = pqueue_insert(unvisited,
+					pqueue_nodes[vID] = pqueue_insert(visitQueue,
 							&(v->cost),
 							&(arc->to));
 				} else {
-					pqueue_decrease(unvisited,
+					pqueue_decrease(visitQueue,
 							pqueue_nodes[vID],
 							&(v->cost));
 				}
@@ -115,7 +117,7 @@ int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
 		LIST_ITERATE_STOP(u->arcs, t_arc *, arc);
 	}
 
-	pqueue_delete(unvisited);
+	pqueue_delete(visitQueue);
 	free(pqueue_nodes);
 	return (nodes[tID].cost != INF_WEIGHT);
 }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  3 JAN 2018 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  5 JAN 2018 13:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -740,31 +740,31 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 File: ./images/graph.png Graphic file (type png)
 
 <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 58.
+Package pdftex.def Info: ./images/graph.png used on input line 59.
 (pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
 File: ./images/graph.png Graphic file (type png)
  <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 58.
+Package pdftex.def Info: ./images/graph.png used on input line 59.
 (pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
 File: ./images/graph.png Graphic file (type png)
  <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 58.
+Package pdftex.def Info: ./images/graph.png used on input line 59.
 (pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 73--77
+Underfull \hbox (badness 10000) in paragraph at lines 74--78
 
  []
 
 <./images/bits.png, id=97, 542.025pt x 120.45pt>
 File: ./images/bits.png Graphic file (type png)
  <use ./images/bits.png>
-Package pdftex.def Info: ./images/bits.png used on input line 79.
+Package pdftex.def Info: ./images/bits.png used on input line 80.
 (pdftex.def)             Requested size: 142.26378pt x 31.614pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--106
+Underfull \hbox (badness 10000) in paragraph at lines 104--107
 
  []
 
@@ -773,55 +773,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--106
 File: ./images/remonte.png Graphic file (type png)
 
 <use ./images/remonte.png>
-Package pdftex.def Info: ./images/remonte.png used on input line 121.
+Package pdftex.def Info: ./images/remonte.png used on input line 122.
 (pdftex.def)             Requested size: 142.26378pt x 70.9132pt.
 
-Underfull \hbox (badness 2600) in paragraph at lines 125--131
+Underfull \hbox (badness 2600) in paragraph at lines 126--132
 []\T1/cmr/m/n/10 Chaque som-met 'u' de mon graphe pos-sède un at-tribut
  []
 
 
-Underfull \hbox (badness 3769) in paragraph at lines 125--131
+Underfull \hbox (badness 3769) in paragraph at lines 126--132
 \T1/cmr/m/n/10 pointant vers un autre som-met du graphe. Une fois
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 125--131
+Underfull \hbox (badness 1616) in paragraph at lines 126--132
 \T1/cmr/m/n/10 l'algorithme de par-cours ter-miné, cet at-tribut pointe vers
  []
 
 
-Underfull \hbox (badness 5802) in paragraph at lines 125--131
+Underfull \hbox (badness 5802) in paragraph at lines 126--132
 \T1/cmr/m/n/10 le prédécesseur de 'u', dans le chemin le plus court
  []
 
 
-Underfull \hbox (badness 6842) in paragraph at lines 125--131
+Underfull \hbox (badness 6842) in paragraph at lines 126--132
 \T1/cmr/m/n/10 al-lant de 's' à 't', et pas-sant par 'u'. Pour re-
  []
 
 
-Underfull \hbox (badness 3612) in paragraph at lines 125--131
+Underfull \hbox (badness 3612) in paragraph at lines 126--132
 \T1/cmr/m/n/10 con-stru-ire le chemin, il suf-fit de re-garder récur-sive-ment
  []
 
 
-Underfull \hbox (badness 3536) in paragraph at lines 125--131
+Underfull \hbox (badness 3536) in paragraph at lines 126--132
 \T1/cmr/m/n/10 les prédécesseurs, en par-tant du som-met 't' jusqu'à ce
  []
 
 
-Underfull \hbox (badness 7722) in paragraph at lines 125--131
+Underfull \hbox (badness 7722) in paragraph at lines 126--132
 \T1/cmr/m/n/10 que l'on ait at-teint 's'. La com-plex-ité de la re-
  []
 
 
-Underfull \hbox (badness 4556) in paragraph at lines 125--131
+Underfull \hbox (badness 4556) in paragraph at lines 126--132
 \T1/cmr/m/n/10 con-struc-tion est en O(m), où 'm' est la longueur du
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--131
+Underfull \hbox (badness 10000) in paragraph at lines 126--132
 
  []
 
@@ -829,10 +829,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--131
 File: ./images/no_pqueue.png Graphic file (type png)
 
 <use ./images/no_pqueue.png>
-Package pdftex.def Info: ./images/no_pqueue.png used on input line 154.
+Package pdftex.def Info: ./images/no_pqueue.png used on input line 155.
 (pdftex.def)             Requested size: 170.72131pt x 96.89587pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--161
+Underfull \hbox (badness 10000) in paragraph at lines 159--162
 
  []
 
@@ -841,17 +841,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 158--161
 File: ./images/performances.png Graphic file (type png)
 
 <use ./images/performances.png>
-Package pdftex.def Info: ./images/performances.png used on input line 176.
+Package pdftex.def Info: ./images/performances.png used on input line 177.
 (pdftex.def)             Requested size: 312.97864pt x 115.918pt.
 
 <./images/courbe_temps.png, id=127, 484.05844pt x 300.3722pt>
 File: ./images/courbe_temps.png Graphic file (type png)
 
 <use ./images/courbe_temps.png>
-Package pdftex.def Info: ./images/courbe_temps.png used on input line 190.
+Package pdftex.def Info: ./images/courbe_temps.png used on input line 191.
 (pdftex.def)             Requested size: 275.11847pt x 170.71652pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--200
+Underfull \hbox (badness 10000) in paragraph at lines 198--201
 
  []
 
@@ -859,66 +859,143 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--200
 <./images/lab.png, id=138, 572.1375pt x 570.13pt>
 File: ./images/lab.png Graphic file (type png)
  <use ./images/lab.png>
-Package pdftex.def Info: ./images/lab.png used on input line 212.
-(pdftex.def)             Requested size: 114.20721pt x 113.81102pt.
+Package pdftex.def Info: ./images/lab.png used on input line 213.
+(pdftex.def)             Requested size: 170.71652pt x 170.11818pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 1210) in paragraph at lines 218--219
+[]\T1/cmr/m/n/10 Dans l'exercice 3, on nous pro-pose de ré-soudre des
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--219
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 219--222
+Underfull \hbox (badness 5832) in paragraph at lines 220--223
+[]\T1/cmr/m/n/10 Intuitivement, le labyrinthe peut être mod-élisé
+ []
+
+
+Underfull \hbox (badness 7203) in paragraph at lines 220--223
+\T1/cmr/m/n/10 par ce type de graphe (voir Fig-ure [][]7[][]). On
+ []
+
+
+Underfull \hbox (badness 1867) in paragraph at lines 220--223
+\T1/cmr/m/n/10 crée un som-met pour chaque case 'non-mur' (cases
+ []
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 220--223
+\T1/cmr/m/n/10 vides, télé-por-teurs, porte, clef). Pour chaque som-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--223
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Underfull \hbox (badness 10000) in paragraph at lines 225--226
 
  []
 
-<./images/manhattan_performances.png, id=140, 587.19376pt x 205.76875pt>
+[5 <./images/lab.png (PNG copy)>]
+<./images/exo3.png, id=147, 903.375pt x 903.375pt>
+File: ./images/exo3.png Graphic file (type png)
+ <use ./images/exo3.png>
+Package pdftex.def Info: ./images/exo3.png used on input line 233.
+(pdftex.def)             Requested size: 227.62204pt x 227.62138pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--243
+
+ []
+
+
+Underfull \hbox (badness 1286) in paragraph at lines 244--247
+\T1/cmr/m/n/10 qu'un chemin (ou un chemin plus court
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--247
+
+ []
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 248--251
+\T1/cmr/m/n/10 que lire les chemins des clients, et es-
+ []
+
+
+Underfull \hbox (badness 5403) in paragraph at lines 248--251
+\T1/cmr/m/n/10 saye de trou-ver une so-lu-tion en con-
+ []
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 248--251
+\T1/cmr/m/n/10 caté-nant les chemins. Si une so-lu-tion
+ []
+
+
+Underfull \hbox (badness 3118) in paragraph at lines 248--251
+\T1/cmr/m/n/10 con-vient, il no-ti-fie ces clients (via des
+ []
+
+
+Underfull \hbox (badness 3428) in paragraph at lines 248--251
+\T1/cmr/m/n/10 'sig-naux') d'afficher leur chemin, et de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--251
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--255
+
+ []
+
+<./images/manhattan_performances.png, id=148, 587.19376pt x 205.76875pt>
 File: ./images/manhattan_performances.png Graphic file (type png)
 
 <use ./images/manhattan_performances.png>
 Package pdftex.def Info: ./images/manhattan_performances.png used on input line
- 238.
+ 262.
 (pdftex.def)             Requested size: 284.5288pt x 99.70667pt.
- [5 <./images/lab.png (PNG copy)>]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 255.
-
-[6 <./images/manhattan_performances.png>]
-<./images/valgrind.png, id=180, 742.775pt x 230.8625pt>
+ [6 <./images/exo3.png (PNG copy)> <./images/manhattan_performances.png>]
+<./images/valgrind.png, id=157, 702.625pt x 461.725pt>
 File: ./images/valgrind.png Graphic file (type png)
 
 <use ./images/valgrind.png>
-Package pdftex.def Info: ./images/valgrind.png used on input line 306.
-(pdftex.def)             Requested size: 341.44263pt x 106.12405pt.
+Package pdftex.def Info: ./images/valgrind.png used on input line 290.
+(pdftex.def)             Requested size: 341.43742pt x 224.37317pt.
 
-Overfull \hbox (9.07185pt too wide) in paragraph at lines 310--313
+Overfull \hbox (9.07185pt too wide) in paragraph at lines 294--297
 []\T1/cmr/m/n/10 J'ai op-ti-misé mon pro-gramme à l'aide de l'outil 'gprof'. C'
 est ce qui m'a dirigé vers l'implémentation
  []
 
 [7 <./images/valgrind.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
  [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: D456F18F65E96CE098E60DABE0A37D29;1268.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 329.
  ) 
 Here is how much of TeX's memory you used:
- 9470 strings out of 494924
- 137465 string characters out of 6179708
- 236084 words of memory out of 5000000
- 12603 multiletter control sequences out of 15000+600000
+ 9412 strings out of 494924
+ 136871 string characters out of 6179708
+ 234131 words of memory out of 5000000
+ 12566 multiletter control sequences out of 15000+600000
  12452 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,8n,38p,942b,673s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,8n,38p,942b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </hom
 e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/rperei
 ra/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/rpereira/.texm
@@ -929,12 +1006,11 @@ nappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on rapport.pdf (8 pages, 344239 bytes).
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rapport.pdf (8 pages, 368728 bytes).
 PDF statistics:
- 552 PDF objects out of 1000 (max. 8388607)
- 223 compressed objects within 3 object streams
- 64 named destinations out of 1000 (max. 500000)
- 174 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 515 PDF objects out of 1000 (max. 8388607)
+ 194 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

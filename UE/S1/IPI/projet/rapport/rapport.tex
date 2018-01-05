@@ -38,10 +38,11 @@
 
 	\section*{Préambule}
 
-		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE.\newline Le but est d'implémenter des
+		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE. Le but est d'implémenter des
 		algorithmes de recherche de 'chemin le plus court' dans des graphes orientés.
 		Ce document rapporte mon travail, et explique les choix techniques qui ont été pris.
 		Soit (X, A) un graphe. On note:
+				
 		\begin{itemize}[label=-]
 			\setlength\itemsep{0.1em}
 			\item X : sommets du graphe
@@ -208,8 +209,8 @@
 
 	\section{Application: résolution labyrinthe}
 	
-		\begin{wrapfigure}{R}{7cm}
-			\includegraphics[height=4.0cm]{./images/lab.png}
+		\begin{wrapfigure}{R}{6cm}
+			\includegraphics[width=6.0cm]{./images/lab.png}
 			\caption{\textit{Modélisation du labyrinthe}}
 			\label{modelisationlab}
 		\end{wrapfigure}
@@ -219,75 +220,58 @@
 		Intuitivement, le labyrinthe peut être modélisé par ce type de graphe (voir Figure \ref{modelisationlab}).
 		On crée un sommet pour chaque case 'non-mur' (cases vides, téléporteurs, porte, clef).
 		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-murs'.\newline
-
+			
 		\subsection{1ère approche}
 			Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes préalablment implementés.\newline
 			
-			Cependant, cette approche n'est pas optimal..............
-
-		\subsection{2ème approche}
-			Travaillant sur la carte directement.
+			Cependant, cette approche demande de générer un graphe dans le bon format, et il s'est avéré que générer un telle graphe est très lourd
+			en mémoire et en temps (requiet beaucoup de mémoires avec cette modélisation).
+			De plus, le problème étant parallélisable, une nouvelle implémentation spécifique au problème est nécessaire.
 			
+		\newpage
+		\begin{wrapfigure}{R}{8cm}
+			\includegraphics[width=8.0cm]{./images/exo3.png}
+			\caption{\textit{Modèle client/serveur}}
+			\label{exo3}
+		\end{wrapfigure}
+			
+			
+		\subsection{2ème approche}
+		
+			Cette 2ème approche se base sur un modèle 'client/serveur'.
+			Le processus père est le 'serveur', et les processus fils sont les 'clients'.\newline
+
+			Coté client, chaque processus calcule des chemins à l'aide de l'algorithme A*. Dés qu'un chemin
+			(ou un chemin plus court que le précèdent) est trouvé, il notifie le serveur en lui envoyant
+			des données via un 'pipe'.\newline
+			
+			Coté serveur, le processus père ne fait que lire les chemins des clients, et essaye de trouver une
+			solution en concaténant les chemins. Si une solution convient, il notifie ces clients (via des 'signaux')
+			d'afficher leur chemin, et de s'arrêter.\newline
+			
+			Ce modèle n'est pas optimal. Par exemple, si un chemin est trivial, et que le client
+			le trouve rapidement, il passera le reste du temps à attendre que les autres aient fini
+			pour savoir s'il doit afficher son chemin ou non.\newline
+			
+			On aurait pu imaginer que dés qu'un processus ait fini, il aide un autre client à résoudre une autre partie du chemin
+			(avec une autre heuristique par exemple, ou bien encore en divisant le chemin en 2 à l'aide d'un point subsidiaire à 'mi-chemin').
+			Mais pour des raisons de simplicité, on reste sur ce modèle qui offre déjà de belles performances:
+
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
+				\end{center}
+				\caption{\textit{performances sur 'tests/exo3/06'}}
+			\end{figure}
+
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item Si la solution convient, alors on a (probablement) gagné du temps en utilisant A*
-				plutôt que Dijkstra. C'est le cas dans le test exo3/06.
-				
-				\begin{figure}[H]
-					\begin{center}
-						\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
-					\end{center}
-					\caption{\textit{performances sur 'tests/exo3/06'}}
-				\end{figure}
-				\begin{itemize}[label=-]
-					\setlength\itemsep{0.1em}
-					\item 1: avec Dijkstra : Le programme passe 70\% de son temps à générer le graphe, 30\% à résoudre.
-					\item 2: (1ère approche) avec A* et la distance de Manhattan. : Le programme passe 90\%
-					de son temps à générer le graphe, 10\% à résoudre.
-					\item 3: (2ème approche) avec A* et la distance de Manhattan : le programme ne génère pas de graphes et résout
-					en travaillant sur la grille directement.
-				\end{itemize}
-
-				
+				\item 1: avec Dijkstra : Le programme passe 35\% (~ 0.4sec.) de son temps à générer le graphe, 65\% (~0.7sec) à résoudre.
+				\item 2: (1ère approche) avec A* et la distance de Manhattan. : Le programme passe 90 (~ 0.4sec)\%
+				de son temps à générer le graphe, 10\% (~0.05 sec) à résoudre.
+				\item 3: (2ème approche) avec A* et la distance de Manhattan : le programme ne génère pas de graphes, il résout
+				en travaillant sur la grille directement, et divise la recherche dans des processus fils.
 			\end{itemize}
-			Voici l'algorithme de résolution:
-			\begin{algorithm}
-				\caption{Résolution labyrinthe}
-				\begin{algorithmic}
-					\ENSURE Résout le labyrinthe.
-					\REQUIRE $G = (X, A) ; E, S, C, P \in X ; t \in \Re$ ;
-							$E$ l'entrée, $S$ la sortie, $C$ la clef, $P$ la porte,
-							$t$ le nombre d'actions. On suppose que les fonctions 'Dijkstra' et 'A*' renvoit le nombre
-							d'actions nécessaires pour accomplir le chemin trouvé.
-					
-					\STATE \textbf{Begin}
-					
-					\STATE Fermer porte.
-					
-					\IF {$A^*(G, E, S) \leq t$ \OR $Dijkstra(G, E, S) \leq t$}
-						\PRINT Il existe un chemin valide sans passer par la porte. \textbf{Renvoyer Vrai}
-					\ENDIF
-					\PRINT Il n'existe pas de chemin valide sans passer par la porte.
-					\STATE $t_1 \leftarrow A^*(G, E, C)$
-					\IF{$t_1 < t$}
-						\STATE Ouvrir porte, $t_2 \leftarrow t - t_1$
-						\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
-							\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
-						\ENDIF
-						\STATE Fermer porte.
-					\ENDIF
-					
-					\STATE $t_1 \leftarrow Dijkstra(G, E, C)$
-					\IF{$t_1 < t$}
-						\STATE Ouvrir porte, $t_2 \leftarrow t - t_1$
-						\IF{$A^*(G, C, S) < t_2$ \OR $Dijkstra(G, C, S) \leq t2$}
-							\PRINT Il existe un chemin valide passant la porte. \textbf{Renvoyer Vrai}
-						\ENDIF
-					\ENDIF
-					\PRINT Il n'existe pas de chemin valide pour aller chercher la clef. \textbf{Renvoyer Faux}
-
-				\end{algorithmic}
-			\end{algorithm}
 
 	\section{A propos de l'implémentation}
 		Ci-joint, vous trouverez mon implémentation en language 'C'.
