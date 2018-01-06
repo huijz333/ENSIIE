@@ -5,7 +5,7 @@ test:
 
 build: clean
 	cp ./rapport/rapport.pdf code
-	cd ./code ; tar -cvzf pereira-romain.tar.gz *.c customlibs rapport.pdf .bkp/*.c .bkp/customlibs
+	cd ./code ; tar -cvzf pereira-romain.tar.gz *.c customlibs rapport.pdf .bkp/*.c .bkp/customlibs README
 	rm -rf code/rapport.pdf
 
 extract:
