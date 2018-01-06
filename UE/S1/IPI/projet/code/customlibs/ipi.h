@@ -51,12 +51,7 @@
 	 *
 	 *	NB: gcc [FLAGS] -D MAX_NODES=50
 	 */
-#	define MAX_NODES (1000 * 1000)
-/*#	pragma message("\nValue par défaut utilisée pour MAX_NODES (= 1000 * 1000)\n"\
-			"Vous pouvez definir une valeur plus basse pour optimiser "\
-			"l'usage mémoire\nou plus grande si l'entrée contient "\
-			"plus de 1000 * 1000 sommets.\ne.g: gcc [FLAGS] -D MAX_NODES=50")
-*/
+#	define MAX_NODES (4000 * 4000)
 # endif
 
 # if MAX_NODES < UCHAR_MAX

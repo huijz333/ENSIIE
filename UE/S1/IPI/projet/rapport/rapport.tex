@@ -97,14 +97,13 @@
 				on peut cartographier les arcs sur le tableau de bits. Le bit vaut alors 1 s'il existe un arc entre 'u' et 'v', 0 sinon.
 				On a besoin de \(n^2\) bits, et donc de \(n^2 / 8 + 1\) octets.
 				On utilise donc 8 fois moins de mémoire que si l'information était stockée sur un octet.
-				De plus, je ne perds pas de temps en lecture / écriture dans le tableau des arcs, car ces changements
+				De plus, on ne perds pas (ou très peu) de temps en lecture / écriture, car ces changements
 				de coordonnées ne nécessite que 1 multiplication, 1 addition, et quelques opérations sur les bits (diviser par 8 <=> décaler
 				les bits de 3 vers la droite)
 				
-				Egalement, en réduisant la mémoire utilisée, je rends mon programme plus `cache-friendly`, le rendant plus rapide.
-				Le processeur écrit des blocs de mémoire du programme dans sa mémoire cache: plus les données sont compactes,
-				moins il aura à faire des allés/retours entre la mémoire du programme et sa mémoire cache.\newline
-				
+				Egalement, en réduisant la mémoire utilisée, le programme est rendu plus `cache-friendly` \cite{cache_friendly},
+				lorsque l'on teste le voisinnage entre 2 arcs en parcourant la matrice.\newline
+				 
 			\subsubsection{2ème approche}
 				La complexité ('spatiale') de stockage des arcs est donc en \(1/8*O(n^2)\).
 				Plus précisement, pour \(n=10^6\) (cas labyrinthe exo3/tests/06),
@@ -123,9 +122,9 @@
 					\caption{\textit{Schéma de l'algorithme de remontée (voir Figure \ref{graphe})}}
 				\end{wrapfigure}
 
-				Chaque sommet 'u' de mon graphe possède un attribut pointant vers un autre sommet du graphe.
+				Chaque sommet 'u' du graphe possède un attribut pointant vers un autre sommet du graphe.
 				Une fois l'algorithme de parcours terminé, cet attribut pointe vers le prédécesseur de 'u',
-				dans le chemin le plus court allant de 's' à 't', et passant par 'u'.
+				dans le chemin le plus court allant de 's' à 'u'.
 				Pour reconstruire le chemin, il suffit de regarder récursivement les prédécesseurs, en partant du sommet
 				't' jusqu'à ce que l'on ait atteint 's'.
 				La complexité de la reconstruction est en O(m), où 'm' est la longueur du chemin.\newline
@@ -139,16 +138,14 @@
 			L'algorithme de Dijkstra nous est fourni dans le sujet. Remarquons que si le poids de tous les arcs sont identiques,
 			on retrouve l'algorithme de parcours en largeur.
 			\subsubsection{1ère approche}
-				Mon implémentation reprend le squelette du parcours en largeur.
-				Cependant, une différence réside dans le choix du prochain sommet à visiter. Dans le parcours en largeur,
-				les sommets sont visités dans leur ordre d'apparition dans la liste (1er entré, 1er sorti).
-				Trouver le prochain sommet à visiter est d'une complexité \textbf{\(O(1)\)}.
-				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin à 's'.
-				Ainsi, il faut parcourir toute la file pour trouver le prochain sommet à visiter:
-				si la file contient 'm' sommets, la complexité de cette opération est en \(O(m)\).
-
-			\subsubsection{File de priorité ('Priority Queue')}
-			
+				L'implémentation reprend le squelette du parcours en largeur.
+				Cependant, une différence fondamentale réside dans le choix du prochain sommet à visiter.
+				Dans le parcours en largeur, les sommets sont visités dans leur ordre d'apparition dans la liste (1er entré, 1er sorti).
+				Trouver le prochain sommet à visiter est d'une complexité \(O(1)\).
+				Dans l'algorithme de Dijkstra, les sommets sont visités par ordre du poids de leur chemin de 's'.
+				Ainsi, on pourrait parcourir tous les sommets non-visités, et en extraire un minimum (dans le sens de sa distance à 's')
+				Si la file contient 'm' sommets non visité, la complexité de cette opération est en \(O(m)\).
+				
 				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'éxecution.
 				\begin{figure}[H]
 					\begin{center}
@@ -159,26 +156,29 @@
 				Il s'est avéré que mon programme passe (en moyenne) plus de 70\% de
 				son temps d'éxecution à chercher le prochain sommet à visiter.
 				(l'opération `trouver un sommet 'u' non visité minimisant d(u)` dans l'algorithme fourni).\newline
-				
-				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des 'tas binaires', afin
-				d'optimiser cette partie du programme.
+
+			\subsubsection{File de priorité ('Priority Queue')}
+
+				Ainsi, j'ai decidé d'implémenter des 'files de priorités', et plus précisement des
+				'tas binaires' \cite{binary_heap}, afin d'optimiser cette partie du programme.
 				Cette structure de données est une file, permettant de définir des priorités parmis les éléments,
-				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'éléments dans la file):
+				et d'effectuer les 4 opérations élémentaires suivantes (avec 'm' le nombre d'éléments de la file):
 				\begin{itemize}[label=-]
 					\item 'insérer un élément' : \(O(log(m))\)
 					\item 'extraire l'élément ayant la plus grande priorité' : \({O(log(m))}\)
 					\item 'tester si la file de priorité est vide' : \(O(1)\)
 					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log(m))\)
 				\end{itemize}
-				les détails techniques peuvent être trouvés en annexe \cite{binary_heap},
-				
+				les détails techniques de cette structure peuvent être trouvés en annexe \cite{binary_heap},
+				et son implementation dans les fichiers \textit{pqueue.[c,h]}
+
 				\begin{figure}[H]
 					\begin{center}
 						\includegraphics[width=11cm,height=\textheight,keepaspectratio]{./images/performances.png}
 					\end{center}
 					\caption{\textit{Temps d'éxecution avec et sans une file de priorité, sur le test exo3/06}}
 				\end{figure}
-								
+				
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
 					\item 1 : Dijkstra sans file de priorité
@@ -190,27 +190,27 @@
 					\begin{center}
 						\includegraphics[height=6cm,keepaspectratio]{./images/courbe_temps.png}
 					\end{center}
-					\caption{\textit{Temps de résolution de labyrinthe avec Dijkstra, allure en \(O(n * log(m))\)}}
+					\caption{\textit{Temps de résolution (en sec.) de labyrinthe avec Dijkstra, allure en \(O(n * m * log(n))\)}}
 					\label{courbe_temps}
 				\end{figure}
 
 		\subsection{Algorithme A* (graphes pondérés et fonctions heuristiques)}
-			L'algorithme A* est une extension de l'algorithme de Dijkstra. Avec l'algorithme de Dijkstra, on parcourt
-			le graphe en largeur selon le poids de ses arcs. Avec A*, on effectue la même opération,
-			mais on ajoute une heuristique \cite{heuristique} aux poids des arcs.\newline
+			L'algorithme A* est une extension de l'algorithme de Dijkstra \cite{computerphile_maze} \cite{computerphile_astar}.
+			Avec l'algorithme de Dijkstra, on parcourt le graphe en largeur selon le poids de ses arcs.
+			Avec A*, on effectue la même opération, mais on ajoute une heuristique \cite{heuristique} aux poids des arcs.\newline
 			
 			Cette heuristique permet de modifier l'ordre de priorité dans lequel les sommets seront visités dans le graphe.
 			Bien qu'elle fait perdre l'optimalité, elle permet d'orienter la recherche dans le graphe, rendant la convergence vers
-			le sommet de destination plus rapide.
-			(et avec une heuristique bien conçu au problème, on s'assure tout de même une solution proche de l'optimal).
+			un chemin plus rapide. (et avec une heuristique bien conçu au problème, on s'assure d'une solution acceptable).
+			De plus, on peut très bien décider de laisser la recherche s'affiner, 
 			Par exemple, dans la résolution de labyrinthe, une heuristique intéressante est la distance de Manhattan. \cite{manhattan}			
 			Remarquons également qu'en utilisant une heuristique nulle (qui renvoie toujours '0'),
 			on obtient très exactement l'algorithme de Dijkstra.
 
 	\section{Application: résolution labyrinthe}
 	
-		\begin{wrapfigure}{R}{6cm}
-			\includegraphics[width=6.0cm]{./images/lab.png}
+		\begin{wrapfigure}{R}{4.5cm}
+			\includegraphics[width=4.5cm]{./images/lab.png}
 			\caption{\textit{Modélisation du labyrinthe}}
 			\label{modelisationlab}
 		\end{wrapfigure}
@@ -219,31 +219,46 @@
 		
 		Intuitivement, le labyrinthe peut être modélisé par ce type de graphe (voir Figure \ref{modelisationlab}).
 		On crée un sommet pour chaque case 'non-mur' (cases vides, téléporteurs, porte, clef).
-		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-murs'.\newline
+		Pour chaque sommet, on crée des arcs entre lui et ses voisins.\newline
 			
-		\subsection{1ère approche}
+		\subsection{1ère approche} \label{first_approach}
 			Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes préalablment implementés.\newline
 			
-			Cependant, cette approche demande de générer un graphe dans le bon format, et il s'est avéré que générer un telle graphe est très lourd
+			Cependant, cette approche demande de générer un graphe dans le bon format, et il s'est avéré que générer un telle
 			en mémoire et en temps (requiet beaucoup de mémoires avec cette modélisation).
-			De plus, le problème étant parallélisable, une nouvelle implémentation spécifique au problème est nécessaire.
-			
-		\newpage
+
 		\begin{wrapfigure}{R}{8cm}
 			\includegraphics[width=8.0cm]{./images/exo3.png}
 			\caption{\textit{Modèle client/serveur}}
 			\label{exo3}
 		\end{wrapfigure}
-			
-			
-		\subsection{2ème approche}
-		
-			Cette 2ème approche se base sur un modèle 'client/serveur'.
+
+		\subsection{Optimisation} \label{ssec:optimisation}
+			Voici un comparatif des performances de résolution, après avoir ré-implementer A* specifiquement au problème,
+			en travaillant directement sur la grille.
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
+				\end{center}
+				\caption{\textit{performances sur 'tests/exo3/06'}}
+			\end{figure}
+
+			\begin{itemize}[label=-]
+				\setlength\itemsep{0.1em}
+				\item 1: (\ref{first_approach}) avec A* et la distance de Manhattan. : Le programme passe 90 (~ 0.4sec)\%
+				de son temps à générer le graphe, 10\% (~0.05 sec) à résoudre.
+				\item 2: (\ref{ssec:optimisation}) avec A* et la distance de Manhattan : le programme ne génère pas de graphes, il résout
+				en travaillant sur la grille directement. (on utilise également 4 fois moins de mémoire qu'avec la 1ère approche).
+			\end{itemize}
+
+		\subsection{Parallélisation}
+			Pour paralléliser la recherche, on crée un modèle 'client/serveur'.
 			Le processus père est le 'serveur', et les processus fils sont les 'clients'.\newline
 
-			Coté client, chaque processus calcule des chemins à l'aide de l'algorithme A*. Dés qu'un chemin
-			(ou un chemin plus court que le précèdent) est trouvé, il notifie le serveur en lui envoyant
-			des données via un 'pipe'.\newline
+			Coté client, chaque processus calcule une partie du chemin à l'aide de l'algorithme A*
+			une partie du chemin ((entrée, clef), (clef, porte), (porte, sortie))
+			Dés qu'un chemin (ou un chemin plus court que le précèdent) est trouvé, il notifie le serveur
+			en lui envoyant des données via un 'pipe'.\newline
 			
 			Coté serveur, le processus père ne fait que lire les chemins des clients, et essaye de trouver une
 			solution en concaténant les chemins. Si une solution convient, il notifie ces clients (via des 'signaux')
@@ -257,27 +272,13 @@
 			(avec une autre heuristique par exemple, ou bien encore en divisant le chemin en 2 à l'aide d'un point subsidiaire à 'mi-chemin').
 			Mais pour des raisons de simplicité, on reste sur ce modèle qui offre déjà de belles performances:
 
-			\begin{figure}[H]
-				\begin{center}
-					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
-				\end{center}
-				\caption{\textit{performances sur 'tests/exo3/06'}}
-			\end{figure}
-
-			\begin{itemize}[label=-]
-				\setlength\itemsep{0.1em}
-				\item 1: avec Dijkstra : Le programme passe 35\% (~ 0.4sec.) de son temps à générer le graphe, 65\% (~0.7sec) à résoudre.
-				\item 2: (1ère approche) avec A* et la distance de Manhattan. : Le programme passe 90 (~ 0.4sec)\%
-				de son temps à générer le graphe, 10\% (~0.05 sec) à résoudre.
-				\item 3: (2ème approche) avec A* et la distance de Manhattan : le programme ne génère pas de graphes, il résout
-				en travaillant sur la grille directement, et divise la recherche dans des processus fils.
-			\end{itemize}
-
+	\newpage
 	\section{A propos de l'implémentation}
 		Ci-joint, vous trouverez mon implémentation en language 'C'.
-		\subsection{Structures de données}
-		J'ai conçu mes structures de données de manière générique, afin de pouvoir les réutiliser plus tard dans d'autres projets
-		(cela ajoute quelques opération à mon programme, mais le code est plus clair) (voir les fichiers '.c' et '.h', qui sont commentés).
+		\subsection{Types / Structures de données}
+		
+		Les structures de données de manière générique, afin de pouvoir être ré-utilisé.
+		(voir les fichiers '.c' et '.h', qui sont commentés). 
 
 		\subsection{Qualité logiciel}
 			Mes programmes passent les tests fournis. J'ai également créé quelques tests supplémentaires pour mettre en défaut mon programme.
@@ -291,14 +292,19 @@
 				\end{center}
 				\caption{\textit{résultat de 'valgrind' sur 'tests/exo3/06')}}
 			\end{figure}
-			J'ai optimisé mon programme à l'aide de l'outil 'gprof'.
-			C'est ce qui m'a dirigé vers l'implémentation de tas binaires par exemple,
-			ou encore dans la 2ème approche de la résolution du labyrinthe.
+			Les performances du programme ont été étudié à l'aide de l'outil 'gprof'.
+			C'est notamment ce qui m'a dirigé vers l'implémentation de tas binaires par exemple,
+			ou encore de la 2ème approche dans la résolution du labyrinthe.
 
 	\newpage
 	\section{Références}
 		\begin{thebibliography}{}
-
+		
+			\bibitem{cache_friendly}
+				'Writting Cache-Friendly code', Gerson Robboy, Portland State University\newline
+				\href{http://web.cecs.pdx.edu/~jrb/cs201/lectures/cache.friendly.code.pdf}
+				      {\textit{http://web.cecs.pdx.edu/~jrb/cs201/lectures/cache.friendly.code.pdf}}.
+				      
 			\bibitem{binary_heap}
 				Wikipédia, Binary Heap, 15 Décembre 2017,\newline
 				\href{https://en.wikipedia.org/wiki/Binary\_heap}
@@ -309,11 +315,16 @@
 				\href{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}
 					{\textit{http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html}}.
 		
-			\bibitem{computerphile}
+			\bibitem{computerphile_maze}
 				Dr. Mike POUND, Sean RILEY, 24 Février 2017,\newline
 				Maze Solving - Computerphile,\newline
 				\href{https://www.youtube.com/watch?v=rop0W4QDOUI}{\textit{https://www.youtube.com/watch?v=rop0W4QDOUI}}.
-			  
+				
+			\bibitem{computerphile_astar}
+				Dr. Mike POUND, Sean RILEY, 15 Février 2017,\newline
+				A* (A Star) Search Algorithm - Computerphile,\newline
+				\href{https://www.youtube.com/watch?v=ySN5Wnu88nE}{\textit{https://www.youtube.com/watch?v=ySN5Wnu88nE}}.
+
 			\bibitem{heuristique}
 				Wikipédia, Heuristique, 31 Octobre 2017,\newline
 				\href{https://fr.wikipedia.org/wiki/Heuristique_(mathématiques)}
