@@ -2,43 +2,30 @@
 
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
-	if (*a < *b) {
-		return (-1);
-	}
-	if (*a > *b) {
-		return (1);
-	}
-	return (0);
+	return ((*a < *b) ? -1 : (*a > *b) ? 1 : 0);
 }
 
 /** heuristique : distance de manhattan */
 static WEIGHT heuristic(t_pos v, t_pos t) {
-	int vx = (int)v.x;
-	int vy = (int)v.y;
-	int tx = (int)t.x;
-	int ty = (int)t.y;
-	return (ABS(tx - vx) + ABS(ty - vy));
+	return (ABS((int)t.x - (int)v.x) + ABS((int)t.y - (int)v.y));
 }
 
-static void astar_test_path(t_pqueue * visit_queue, t_pqueue_node ** pqueue_nodes,
-		t_node * u, t_node * v, t_node * t, WEIGHT w) {
+static void astar_test_path(t_pqueue * visitQueue, t_node * nodes,
+			    t_pqueue_node ** pqueue_nodes, WEIGHT w
+			    t_node * u, t_node * v, t_node * t) {
 	/** si ce nouveau chemin est de cout plus faible */
-	if (u->f_cost + w < v->f_cost) {
+	if (nodes[u].f_cost + w < nodes[v].f_cost) {
 		/* on ecrase le chemin precedant par le nouveau */
-		v->f_cost = u->f_cost + w;
+		nodes[v].f_cost = nodes[u].f_cost + w;
 
 		/** poids de la fonction d'heuristique */
-		v->cost = v->f_cost + heuristic(v->pos, t->pos);
-		v->prev = u;
+		nodes[v].cost = nodes[v].f_cost + heuristic(nodes[v].pos, nodes[t].pos);
+		nodes[v].prev = u;
 		/** on enregistre les sommets dans la file */
-		if (pqueue_nodes[v->index] == NULL) {
-			pqueue_nodes[v->index] = pqueue_insert(visit_queue,
-								&(v->cost),
-								&(v->index));
+		if (pqueue_nodes[v] == NULL) {
+			pqueue_nodes[v] = pqueue_insert(visitQueue, &(nodes[v].cost), &(nodes[v].index));
 		} else {
-			pqueue_decrease(visit_queue,
-					pqueue_nodes[v->index],
-					&(v->cost));
+			pqueue_decrease(visitQueue, pqueue_nodes[v], &(nodes[v].cost));
 		}
 	}
 
@@ -59,21 +46,19 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	INDEX n = lab->width * lab->height;
 	
 	/** file de priorité pour déterminer le prochain sommet à visiter */
-	t_pqueue * visit_queue = pqueue_new((t_cmpf)weightcmp);
+	t_pqueue * visitQueue = pqueue_new((t_cmpf)weightcmp);
 	t_pqueue_node ** pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node) * n);
 	t_node * nodes = (t_node *) malloc(sizeof(t_node) * n);
-	if (visit_queue == NULL || nodes == NULL) {
-		pqueue_delete(visit_queue);
+	if (visitQueue == NULL || nodes == NULL) {
+		pqueue_delete(visitQueue);
 		free(nodes);
 		fprintf(stderr, "Not enough memory\n");
 		return (0);
 	}
-	INDEX sID = sPos.y * lab->width + sPos.x;
-	INDEX tID = tPos.y * lab->width + tPos.x;
-	t_node * s = nodes + sID;
-	t_node * t = nodes + tID;
+	/** indice de 's' et 't' dans le tableau 'nodes' */
+	INDEX s = sPos.y * lab->width + sPos.x;
+	INDEX t = tPos.y * lab->width + tPos.x;
 
-	
 	/** 1. INITIALISATION DE L'ALGORITHME */
 	/** pour chaque sommets */
 	INDEX x, y;
@@ -81,16 +66,15 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	for (y = 0 ; y < lab->height; y++) {
 		for (x = 0 ; x < lab->width ; x++) {
 			/** on recupere le sommet (x, y) */
-			t_node * node = nodes + i;
-			node->pos.x = x;
-			node->pos.y = y;
-			node->index = i;
+			nodes[i].pos.x = x;
+			nodes[i].pos.y = y;
+			nodes[i].index = i; /** on a besoin de stocker l'index pour la file de priorité */
 			/** pas de predecesseurs */
-			node->prev = NULL;
+			nodes[i].prev = NULL;
 			/** on definit sa distance de 's' à '+oo' */
-			node->f_cost = INF_WEIGHT;
-			node->cost = INF_WEIGHT;
-			node->index = i;
+			nodes[i].f_cost = INF_WEIGHT;
+			nodes[i].cost = INF_WEIGHT;
+			nodes[i].index = i;
 
 			/** prepare la file de priorité */
 			pqueue_nodes[i] = NULL;
@@ -100,26 +84,24 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	}
 
 	/** on initialise le sommet source */
-	s->f_cost = 0; /* poids réel du chemin */
-	s->cost = heuristic(sPos, tPos);
-	pqueue_nodes[sID] = pqueue_insert(visit_queue, &(s->cost), &(s->index));
+	nodes[s].f_cost = 0; /* poids réel du chemin */
+	nodes[s].cost = heuristic(sPos, tPos);
+	pqueue_nodes[s] = pqueue_insert(visitQueue, &(nodes[s].cost), &(nodes[s].index));
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant qu'il y a des sommets a visité, on les visite */
-	while (!pqueue_is_empty(visit_queue)) {
+	while (!pqueue_is_empty(visitQueue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
-		t_pqueue_node node = pqueue_pop(visit_queue);
+		t_pqueue_node node = pqueue_pop(visitQueue);
 		/** l'indice de 'u' */
-		INDEX uID = *((INDEX *)node.value);
-		t_node * u = nodes + uID;
-
+		INDEX u = *((INDEX *)node.value);
 		/** le sommet n'est plus dans la file */
-		pqueue_nodes[uID] = NULL;
+		pqueue_nodes[u] = NULL;
 
 		/** si on a atteint 't' avec un cout suffisant,
 		  ou si on a atteint une autre partie connexe ... */
-		if (t->f_cost <= timer || u->f_cost == INF_WEIGHT) {
+		if (nodes[t].f_cost <= timer || nodes[u].f_cost == INF_WEIGHT) {
 			break ;
 		}
 
@@ -130,10 +112,10 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			/** position de v */
 			t_direction d = DIRECTIONS[i];
 			/** si on sort de la carte */
-			BYTE underx = (u->pos.x == 0)               && (d.x < 0);
-			BYTE overx  = (u->pos.x == lab->width - 1)  && (d.x > 0);
-			BYTE undery = (u->pos.y == 0)               && (d.y < 0);
-			BYTE overy  = (u->pos.y == lab->height - 1) && (d.y > 0);
+			BYTE underx = (nodes[u].pos.x == 0)               && (d.x < 0);
+			BYTE overx  = (nodes[u].pos.x == lab->width - 1)  && (d.x > 0);
+			BYTE undery = (nodes[u].pos.y == 0)               && (d.y < 0);
+			BYTE overy  = (nodes[u].pos.y == lab->height - 1) && (d.y > 0);
 			if (underx || overx || undery || overy) {
 				/** on passe à la direction suivante */
 				continue ;
@@ -152,36 +134,34 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			/** sinon, on est sur une case vide, ou sur la clef */
 
 			/** index de 'v' */
-			INDEX vID = vy * lab->width + vx;
-			t_node * v = nodes + vID;
+			INDEX v = vy * lab->width + vx;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 1);
+			astar_test_path(visitQueue, nodes, pqueue_nodes, 1, u, v, t);
 		}
 		/** si c'est un teleporteur, alors on essaye le chemin
 		    vers l'autre teleporteur */
-		BYTE tpID = lab_get_tpID(lab->map[u->pos.y][u->pos.x]);
+		BYTE tpID = lab_get_tpID(lab->map[nodes[u].pos.y][nodes[u].pos.x]);
 		if (tpID != MAX_TP) {
 			/** on recupere les 2 cases du teleporteurs */
 			t_pos * tp = lab->tps[tpID];
-			INDEX tp0ID = tp[0].y * lab->width + tp[0].x;
-			INDEX tp1ID = tp[1].y * lab->width + tp[1].x;
-			INDEX vID;
+			INDEX tp0 = tp[0].y * lab->width + tp[0].x;
+			INDEX tp1 = tp[1].y * lab->width + tp[1].x;
+			INDEX v;
 			/** si 'u' correspond à la 1ere case */
-			if (uID == tp0ID) {
+			if (u == tp0) {
 				/** alors 'v' est la 2ème */
-				vID = tp1ID;
+				v = tp1;
 			} else {
 			/** sinon, 'u' est la 2ème et 'v' la 1ère */
-				vID = tp0ID;
+				v = tp0;
 			}
-			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
-			astar_test_path(visit_queue, pqueue_nodes, u, v, t, 0);
+			astar_test_path(visitQueue, nodes, pqueue_nodes, 0, u, v, t);
 		}
 	}
 
 	/** plus besoin de la file de priorité: on libere la mémoire */
-	pqueue_delete(visit_queue);
+	pqueue_delete(visitQueue);
 	free(pqueue_nodes);
 
 	/** on crée le chemin allant de 's' à 't' */
