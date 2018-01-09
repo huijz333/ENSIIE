@@ -10,9 +10,11 @@ static WEIGHT heuristic(t_pos v, t_pos t) {
 	return (ABS((int)t.x - (int)v.x) + ABS((int)t.y - (int)v.y));
 }
 
+/** fonction interne, minimise le chemin de 's' à 'v', en regardant
+  si celui passant par 'u' et l'arc de poids 'w' est plus court */
 static void astar_test_path(t_pqueue * visitQueue, t_node * nodes,
-			    t_pqueue_node ** pqueue_nodes, WEIGHT w
-			    t_node * u, t_node * v, t_node * t) {
+		t_pqueue_node ** pqueue_nodes, WEIGHT w,
+		INDEX u, INDEX v, INDEX t) {
 	/** si ce nouveau chemin est de cout plus faible */
 	if (nodes[u].f_cost + w < nodes[v].f_cost) {
 		/* on ecrase le chemin precedant par le nouveau */
@@ -28,7 +30,6 @@ static void astar_test_path(t_pqueue * visitQueue, t_node * nodes,
 			pqueue_decrease(visitQueue, pqueue_nodes[v], &(nodes[v].cost));
 		}
 	}
-
 }
 
 /**
@@ -70,7 +71,7 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			nodes[i].pos.y = y;
 			nodes[i].index = i; /** on a besoin de stocker l'index pour la file de priorité */
 			/** pas de predecesseurs */
-			nodes[i].prev = NULL;
+			nodes[i].prev = MAX_NODES;
 			/** on definit sa distance de 's' à '+oo' */
 			nodes[i].f_cost = INF_WEIGHT;
 			nodes[i].cost = INF_WEIGHT;
@@ -121,8 +122,8 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 				continue ;
 			}
 
-			INDEX vx = u->pos.x + d.x;
-			INDEX vy = u->pos.y + d.y;
+			INDEX vx = nodes[u].pos.x + d.x;
+			INDEX vy = nodes[u].pos.y + d.y;
 			/** on regarde la case que l'on souhaite visiter */
 			wchar_t c = lab->map[vy][vx];
 			/** si c'est un mur, ou une porte (que l'on considère fermée) */
@@ -165,8 +166,8 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 	free(pqueue_nodes);
 
 	/** on crée le chemin allant de 's' à 't' */
-	if (t->f_cost <= timer) {
-		lab_print_path(lab, s, t);
+	if (nodes[t].f_cost <= timer) {
+		lab_print_path(lab, nodes, s, t);
 		free(nodes);
 		return (1);
 	}

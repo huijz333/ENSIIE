@@ -43,7 +43,7 @@ static int breadth_search(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 	/** 1.1 : on crée la file de visite */
 	t_list * visitQueue = list_new();
 	if (visitQueue == NULL) {
-		list_delete(unvisited);
+		list_delete(visitQueue);
 		return (0);
 	}
 
@@ -52,8 +52,8 @@ static int breadth_search(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 	   sauf pour l'origine à 0 */
 	INDEX i;
 	for (i = 0 ; i < n ; i++) {
-		node[i].pathlen = MAX_NODES;
-		node[i].prev    = MAX_NODES;
+		nodes[i].pathlen = MAX_NODES;
+		nodes[i].prev    = MAX_NODES;
 	}
 	nodes[s].pathlen = 0; /* source à 0 */
 

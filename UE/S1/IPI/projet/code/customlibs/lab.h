@@ -46,11 +46,11 @@ typedef struct	s_pos {
 
 /** represente un sommet du labyrinthe */
 typedef struct	s_node {
-	t_pos		pos;		/* la position sur la carte */
-	INDEX		index;		/* index sur la carte */
-	WEIGHT		f_cost;		/* poids == temps du chemin */
-	WEIGHT		cost;		/* poids + heuristique du chemin */
-	struct s_node	* prev;		/* predecesseur pour la remontée */
+	t_pos	pos;		/* la position sur la carte */
+	INDEX	index;		/* index sur la carte */
+	WEIGHT	f_cost;		/* poids == temps du chemin */
+	WEIGHT	cost;		/* poids + heuristique du chemin */
+	INDEX	prev;		/* predecesseur pour la remontée */
 }		t_node;
 
 
@@ -117,16 +117,16 @@ BYTE lab_get_tpID(wchar_t c);
  */
 int lab_solve(t_lab * lab, WEIGHT timer);
 
-
 /**
- *	@require : le labyrinthe, un sommet de départ 's', et un
- *		   sommet d'arrivée 't'.
+ *	@require : le labyrinthe, les sommets, un sommet de
+ *		   départ 's', et un sommet d'arrivée 't'.
  *	@ensure  : effectue l'algorithme de remontée de 's' à 't',
  *		   et affiche les directions successives à prendre
  *		   pour realiser le chemin.
  *	@assign  : ------------------
  */
-void lab_print_path(t_lab * lab, t_node * s, t_node * t);
+void lab_print_path(t_lab * lab, t_node * nodes, INDEX s, INDEX t);
+
 
 /** inclut à la fin, car requiet les définitions précèdentes */
 # include "astar.h"

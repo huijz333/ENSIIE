@@ -2,7 +2,7 @@ Le rapport se trouve dans "rapport.pdf"
 
 Le code dans 'exo1.c', 'exo2.c', 'exo3.c', 'customlibs/*.c'
 
-Pour tester il faut move les fichiers suivant de la V2 du projet, à la racine de ce dossier:
+Pour tester il faut déplacer les fichiers de la versio V2 du projet, à la racine de ce dossier:
 	- Makefile
 	- exec1.sh, exec2.sh, exec3.sh
 	- dossier 'tests'

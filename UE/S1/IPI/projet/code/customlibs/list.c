@@ -89,6 +89,15 @@ void * list_head(t_list * lst) {
 }
 
 /**
+ *	@require : un sommet de la liste
+ *	@ensure  : renvoie la donnée stockée par ce sommet
+ *	@assign  : ------------
+ */
+void * list_node_data(t_list_node * node) {
+	return (node + 1);
+}
+
+/**
  *	@require: une liste
  *	@ensure : renvoie la donnée en fin de liste 
  *	@assign : ---------------------

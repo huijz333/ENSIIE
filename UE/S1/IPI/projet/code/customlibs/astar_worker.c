@@ -6,7 +6,7 @@ t_worker worker;
 /** strucutres utile à la recherche */
 /** variable globale pour pouvoir être free dans le callback du signal */
 t_lab		* lab;
-t_pqueue	* visit_queue;
+t_pqueue	* visitQueue;
 t_pqueue_node	** pqueue_nodes;
 t_node		* nodes;
 t_node		* s;
@@ -41,44 +41,37 @@ static void sig_print(int signum) {
 
 /** fonction interne qui compare 2 doubles (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
-	if (*a < *b) {
-		return (-1);
-	}
-	if (*a > *b) {
-		return (1);
-	}
-	return (0);
+	return ((*a < *b) ? -1 : (*a > *b) ? 1 : 0);
 }
 
 /** heuristique : distance de manhattan */
 static WEIGHT heuristic(t_pos v, t_pos t) {
-	int vx = (int)v.x;
-	int vy = (int)v.y;
-	int tx = (int)t.x;
-	int ty = (int)t.y;
-	return (ABS(tx - vx) + ABS(ty - vy));
+	return (ABS((int)t.x - (int)v.x) + ABS((int)t.y - (int)v.y));
 }
 
-static void astar_test_path(t_node * u, t_node * v, t_node * t, WEIGHT w) {
+/** fonction interne, minimise le chemin de 's' à 'v', en regardant
+  si celui passant par 'u' et l'arc de poids 'w' est plus court */
+static void astar_test_path(INDEX u, INDEX v, INDEX t, WEIGHT w) {
 	/** si ce nouveau chemin est de cout plus faible */
-	if (u->f_cost + w < v->f_cost) {
+	if (nodes[u].f_cost + w < nodes[v].f_cost) {
 		/* on ecrase le chemin precedant par le nouveau */
-		v->f_cost = u->f_cost + w;
+		nodes[v].f_cost = nodes[u].f_cost + w;
 
 		/** poids de la fonction d'heuristique */
-		v->cost = v->f_cost + heuristic(v->pos, t->pos);
-		v->prev = u;
+		nodes[v].cost = nodes[v].f_cost + heuristic(nodes[v].pos, nodes[t].pos);
+		nodes[v].prev = u;
 
 		/* si on a mis 't' à jour, on notifie le pere */
 		if (v == t) {
 			/** on crée et on envoit le packet */
-			sendPacket(PACKET_ID_PATHTIME, t->f_cost);
+			sendPacket(PACKET_ID_PATHTIME, nodes[t].f_cost);
 		}
+
 		/** on enregistre les sommets dans la file */
-		if (pqueue_nodes[v->index] == NULL) {
-			pqueue_nodes[v->index] = pqueue_insert(visit_queue, &(v->cost), &(v->index));
+		if (pqueue_nodes[v] == NULL) {
+			pqueue_nodes[v] = pqueue_insert(visitQueue, &(nodes[v].cost), &(nodes[v].index));
 		} else {
-			pqueue_decrease(visit_queue, pqueue_nodes[v->index], &(v->cost));
+			pqueue_decrease(visitQueue, pqueue_nodes[v], &(nodes[v].cost));
 		}
 	}
 }
@@ -121,12 +114,12 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	INDEX n = lab->width * lab->height;
 	
 	/** file de priorité pour déterminer le prochain sommet à visiter */
-	visit_queue = pqueue_new((t_cmpf)weightcmp);
+	visitQueue = pqueue_new((t_cmpf)weightcmp);
 	pqueue_nodes = (t_pqueue_node **) malloc(sizeof(t_pqueue_node) * n);
 	nodes = (t_node *) malloc(sizeof(t_node) * n);
-	if (visit_queue == NULL || pqueue_nodes == NULL || nodes == NULL) {
+	if (visitQueue == NULL || pqueue_nodes == NULL || nodes == NULL) {
 		fprintf(stderr, "Not enough memory (%d)\n", getpid());
-		pqueue_delete(visit_queue);
+		pqueue_delete(visitQueue);
 		free(pqueue_nodes);
 		free(nodes);
 		lab_delete(lab);
@@ -134,10 +127,8 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	}
 
 	/** id dans le tableau 'nodes' des sommets 's' et 't' */
-	INDEX sID = sPos.y * lab->width + sPos.x;
-	INDEX tID = tPos.y * lab->width + tPos.x;
-	s = nodes + sID;
-	t = nodes + tID;
+	INDEX s = sPos.y * lab->width + sPos.x;
+	INDEX t = tPos.y * lab->width + tPos.x;
 	
 	/** prepare la communication inter-processus */
 	/** 1. INITIALISATION DE L'ALGORITHME */
@@ -152,7 +143,7 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 			node->pos.y = y;
 			node->index = i;
 			/** pas de predecesseurs */
-			node->prev = NULL;
+			node->prev = MAX_NODES;
 			/** on definit sa distance de 's' à '+oo' */
 			node->f_cost = INF_WEIGHT;
 			node->cost = INF_WEIGHT;
@@ -166,26 +157,25 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	}
 
 	/** on initialise le sommet source */
-	s->f_cost = 0; /* poids réel du chemin */
-	s->cost = heuristic(sPos, tPos);
-	pqueue_nodes[sID] = pqueue_insert(visit_queue, &(s->cost), &(s->index));
+	nodes[s].f_cost = 0; /* poids réel du chemin */
+	nodes[s].cost = heuristic(sPos, tPos);
+	pqueue_nodes[s] = pqueue_insert(visitQueue, &(nodes[s].cost), &(nodes[s].index));
 
 	/** 2. BOUCLE DE L'ALGORITHME A* */
 	/** Tant que la recherche doit s'affiner,
 	    et qu'il y a des sommets a visité, on les visite */
-	while (!shouldPrint && !pqueue_is_empty(visit_queue)) {
+	while (!shouldPrint && !pqueue_is_empty(visitQueue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité */
-		t_pqueue_node node = pqueue_pop(visit_queue);
+		t_pqueue_node node = pqueue_pop(visitQueue);
 		/** l'indice de 'u' */
-		INDEX uID = *((INDEX *)node.value);
-		t_node * u = nodes + uID;
+		INDEX u = *((INDEX *)node.value);
 
 		/** le sommet n'est plus dans la file */
-		pqueue_nodes[uID] = NULL;
+		pqueue_nodes[u] = NULL;
 
 		/** si on a atteint une autre partie connexe ... */
-		if (u->f_cost == INF_WEIGHT) {
+		if (nodes[u].f_cost == INF_WEIGHT) {
 			break ;
 		}
 
@@ -196,17 +186,17 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 			/** position de v */
 			t_direction d = DIRECTIONS[i];
 			/** si on sort de la carte */
-			BYTE underx = (u->pos.x == 0)               && (d.x < 0);
-			BYTE overx  = (u->pos.x == lab->width - 1)  && (d.x > 0);
-			BYTE undery = (u->pos.y == 0)               && (d.y < 0);
-			BYTE overy  = (u->pos.y == lab->height - 1) && (d.y > 0);
+			BYTE underx = (nodes[u].pos.x == 0)               && (d.x < 0);
+			BYTE overx  = (nodes[u].pos.x == lab->width - 1)  && (d.x > 0);
+			BYTE undery = (nodes[u].pos.y == 0)               && (d.y < 0);
+			BYTE overy  = (nodes[u].pos.y == lab->height - 1) && (d.y > 0);
 			if (underx || overx || undery || overy) {
 				/** on passe à la direction suivante */
 				continue ;
 			}
 
-			INDEX vx = u->pos.x + d.x;
-			INDEX vy = u->pos.y + d.y;
+			INDEX vx = nodes[u].pos.x + d.x;
+			INDEX vy = nodes[u].pos.y + d.y;
 			/** on regarde la case que l'on souhaite visiter */
 			wchar_t c = lab->map[vy][vx];
 			/** si c'est un mur, ou une porte fermée */
@@ -218,36 +208,34 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 			/** sinon, on est sur une case vide, ou sur la clef */
 			
 			/** index de 'v' */
-			INDEX vID = vy * lab->width + vx;
-			t_node * v = nodes + vID;
+			INDEX v = vy * lab->width + vx;
 			/** on teste ce nouveau chemin */
 			astar_test_path(u, v, t, 1);
 		}
 		/** si c'est un teleporteur, alors on essaye le chemin
 		    vers l'autre teleporteur */
-		BYTE tpID = lab_get_tpID(lab->map[u->pos.y][u->pos.x]);
+		BYTE tpID = lab_get_tpID(lab->map[nodes[u].pos.y][nodes[u].pos.x]);
 		if (tpID != MAX_TP) {
 			/** on recupere les 2 cases du teleporteurs */
 			t_pos * tp = lab->tps[tpID];
 			INDEX tp0ID = tp[0].y * lab->width + tp[0].x;
 			INDEX tp1ID = tp[1].y * lab->width + tp[1].x;
-			INDEX vID;
+			INDEX v;
 			/** si 'u' correspond à la 1ere case */
-			if (uID == tp0ID) {
+			if (u == tp0ID) {
 				/** alors 'v' est la 2ème */
-				vID = tp1ID;
+				v = tp1ID;
 			} else {
 			/** sinon, 'u' est la 2ème et 'v' la 1ère */
-				vID = tp0ID;
+				v = tp0ID;
 			}
-			t_node * v = nodes + vID;
 			/** on teste ce nouveau chemin */
 			astar_test_path(u, v, t, 0);
 		}
 	}
 	
 	/** libere la mémoire */
-	pqueue_delete(visit_queue);
+	pqueue_delete(visitQueue);
 	free(pqueue_nodes);
 
 	/** on notifie le pere qu'on a fini */
@@ -261,7 +249,7 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	
 	/** affiche le resultat */
 	if (shouldPrint) {
-		lab_print_path(lab, s, t);
+		lab_print_path(lab, nodes, s, t);
 	}
 	/**  libère la mémoire */
 	free(nodes);

@@ -1,39 +1,43 @@
 # include "lab.h"
 
 /**
- *	@require : le labyrinthe, un sommet de départ 's', et un
- *		   sommet d'arrivée 't'.
+ *	@require : le labyrinthe, les sommets, un sommet de
+ *		   départ 's', et un sommet d'arrivée 't'.
  *	@ensure  : effectue l'algorithme de remontée de 's' à 't',
  *		   et affiche les directions successives à prendre
  *		   pour realiser le chemin.
  *	@assign  : ------------------
  */
-void lab_print_path(t_lab * lab, t_node * s, t_node * t) {
+void lab_print_path(t_lab * lab, t_node * nodes, INDEX s, INDEX t) {
 
 	/** algorithme de remontée */
 	t_list * path = list_new();
 	while (t != s) {
-		list_push(path, t, sizeof(t_node));
-		t = t->prev;
+		list_push(path, &t, sizeof(INDEX));
+		t = nodes[t].prev;
 	}
-	list_push(path, s, sizeof(t_node));
+	list_push(path, &s, sizeof(INDEX));
 
 	/** sinon, on prends les 2 sommets de chaque arc du chemin */
 	t_list_node * first = path->head->next;
 	t_list_node * second = path->head->next->next;
 	while (second != path->head) {
 		/** la coordonnée des 2 sommets */
-		t_node * u = (t_node *)(first + 1);
-		t_node * v = (t_node *)(second + 1);
+		INDEX u = *((INDEX *)(list_node_data(first)));
+		INDEX v = *((INDEX *)(list_node_data(second)));
+		int ux = (int) nodes[u].pos.x;
+		int uy = (int) nodes[u].pos.y;
+		int vx = (int) nodes[v].pos.x;
+		int vy = (int) nodes[v].pos.y;
 		/** si les 2 cases sont identiques, et sont un teleporteur */
-		if (lab->map[u->pos.y][u->pos.x] == lab->map[v->pos.y][v->pos.x]
-				&& lab_get_tpID(lab->map[u->pos.y][u->pos.x]) != MAX_TP) {
+		if (lab->map[uy][ux] == lab->map[vy][vx]
+				&& lab_get_tpID(lab->map[uy][ux]) != MAX_TP) {
 			printf("TP\n");
 		} else {
 		/** sinon on cherche la direction, et on l'affiche */
 			BYTE i;
-			int dx = (int)v->pos.x - (int)u->pos.x;
-			int dy = (int)v->pos.y - (int)u->pos.y;
+			int dx = vx - ux;
+			int dy = vy - uy;
 			for (i = 0 ; i < MAX_DIRECTIONS ; i++) {
 				t_direction d = DIRECTIONS[i];
 				if (dx == d.x && dy == d.y) {

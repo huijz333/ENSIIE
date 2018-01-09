@@ -170,7 +170,9 @@
 					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log(m))\)
 				\end{itemize}
 				les détails techniques de cette structure peuvent être trouvés en annexe \cite{binary_heap},
-				et son implementation dans les fichiers \textit{pqueue.[c,h]}
+				et son implementation dans les fichiers \textit{pqueue.[c,h]}.
+				
+				On passe alors d'une complexité \(O(n^2)\) à \(O(n * log(n))\) pour l'algorithme de Dijkstra.
 
 				\begin{figure}[H]
 					\begin{center}
@@ -190,7 +192,7 @@
 					\begin{center}
 						\includegraphics[height=6cm,keepaspectratio]{./images/courbe_temps.png}
 					\end{center}
-					\caption{\textit{Temps de résolution (en sec.) de labyrinthe avec Dijkstra, allure en \(O(n * m * log(n))\)}}
+					\caption{\textit{Temps de résolution (en sec.) de labyrinthe avec Dijkstra, allure en \(O(n * log(m))\)}}
 					\label{courbe_temps}
 				\end{figure}
 
