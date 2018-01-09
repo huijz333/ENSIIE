@@ -6,35 +6,29 @@
  *			de l'algorithme de remontée
  *	@assign  : --------
  */
-static void print_path(t_node * nodes, INDEX sID, INDEX tID) {
-	INDEX uID = tID;
-	t_node * u = nodes + tID;
-	/** on construit le chemin */
+static void print_path(t_node * nodes, INDEX s, INDEX t) {
+	/** on construit le chemin en ajoutant les sommets sur une pile */
 	t_list * path = list_new();
-	while (uID != sID) {
-		list_push(path, &uID, sizeof(INDEX));
-		uID = u->prev;
-		u = nodes + uID;
+	INDEX u = t;
+	while (u != s) {
+		list_push(path, &u, sizeof(INDEX));
+		u = nodes[u].prev;
 	}
+	
 	/** on affiche */
-	printf(INDEX_IDENTIFIER "\n", sID + 1);
+	printf(INDEX_IDENTIFIER "\n", s + 1);
 	LIST_ITERATE_START(path, INDEX *, nodeRef) {
 		printf(INDEX_IDENTIFIER "\n", *nodeRef + 1);
 	}
 	LIST_ITERATE_STOP(path, INDEX *, nodeRef);
+	
 	/** libere la mémoire */
 	list_delete(path);
 }
 
-/** fonction interne qui compare 2 doubles (utile à la file de priorité) */
+/** fonction interne qui compare 2 nombres (utile à la file de priorité) */
 static int weightcmp(WEIGHT * a, WEIGHT * b) {
-	if (*a < *b) {
-		return (-1);
-	}
-	if (*a > *b) {
-		return (1);
-	}
-	return (0);
+	return ((*a < *b) ? -1 : (*a > *b) ? 1 : 0);
 }
 
 /**
@@ -46,7 +40,7 @@ static int weightcmp(WEIGHT * a, WEIGHT * b) {
  *			Renvoie 1 si un chemin a été trouvé, 0 sinon.
  *	@assign  : 'nodes': les attributs des sommets peuvent être modifié
  */
-static int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
+static int dijkstra(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 	/** file de priorité, enregistrant les sommets a visité dans l'ordre */
 	t_pqueue * visitQueue = pqueue_new((t_cmpf)weightcmp);
 	/** tableau enregistrant les sommets de la file (pour les repositionner) */
@@ -59,18 +53,16 @@ static int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
 	}
 
 	/** 1. INITIALISATION DE L'ALGORITHME */
-	t_node * s = nodes + sID;
 	/** pour chaque sommets */
 	INDEX i;
 	for (i = 0 ; i < n ; i++) {
-		t_node * node = nodes + i;
 		/** on definit sa distance de 's' à '+oo' */
-		node->cost = INF_WEIGHT;
+		nodes[i].cost = INF_WEIGHT;
 		/** le sommet n'est pas dans la file: pas de position dans la file */
 		pqueue_nodes[i] = NULL;
 	}
-	s->cost = 0;
-	pqueue_nodes[sID] = pqueue_insert(visitQueue, &(s->cost), &sID);
+	nodes[s].cost = 0;
+	pqueue_nodes[s] = pqueue_insert(visitQueue, &(nodes[s].cost), &s);
 
 	/** 2. BOUCLE DE L'ALGORITHME DIJKSTRA */
 	/** Tant qu'il y a des sommets a visité, on les visite */
@@ -79,47 +71,41 @@ static int dijkstra(t_node * nodes, INDEX n, INDEX sID, INDEX tID) {
 		  ceci est optimisé à l'aide d'une file de priorité, l'opération
 		  est donc ici trivial */
 		t_pqueue_node node = pqueue_pop(visitQueue);
-		INDEX	uID = *((INDEX *) node.value);
+		INDEX u = *((INDEX *) node.value);
 		/** le sommet n'est plus dans la file */
-		pqueue_nodes[uID] = NULL;
-		t_node * u = nodes + uID;
+		pqueue_nodes[u] = NULL;
 
 		/** si on a atteint 't', ou si on est dans une autre partie connexe ... */
-		if (uID == tID || u->cost == INF_WEIGHT) {
+		if (u == t || nodes[u].cost == INF_WEIGHT) {
 			break ;
 		}
 
 		/** 2.2 : on minimise les chemins voisins de 'u' */
 		/* pour chaque successeur de 'u' */
-		LIST_ITERATE_START(u->arcs, t_arc *, arc) {
+		LIST_ITERATE_START(nodes[u].arcs, t_arc *, arc) {
 			/** successeur 'v' de 'u' */
-			INDEX	vID = arc->to;
-			t_node	* v = nodes + vID;		
+			INDEX v = arc->to;
 			/** on teste voir si le chemin de 's' à 't' passant
 			  par 'u' et 'v' est de poids plus faible que le chemin
 			  précèdemment enregistré */
-			if (u->cost + arc->cost < v->cost) {
+			if (nodes[u].cost + arc->cost < nodes[v].cost) {
 				/* on ecrase le chemin precedant par le nouveau chemin */
-				v->cost = u->cost + arc->cost;
-				v->prev = uID;
+				nodes[v].cost = nodes[u].cost + arc->cost;
+				nodes[v].prev = u;
 				/** on enregistre les sommets dans la file de priorité */
-				if (pqueue_nodes[vID] == NULL) {
-					pqueue_nodes[vID] = pqueue_insert(visitQueue,
-							&(v->cost),
-							&(arc->to));
+				if (pqueue_nodes[v] == NULL) {
+					pqueue_nodes[v] = pqueue_insert(visitQueue, &(nodes[v].cost), &(arc->to));
 				} else {
-					pqueue_decrease(visitQueue,
-							pqueue_nodes[vID],
-							&(v->cost));
+					pqueue_decrease(visitQueue, pqueue_nodes[v], &(nodes[v].cost));
 				}
 			}
 		}
-		LIST_ITERATE_STOP(u->arcs, t_arc *, arc);
+		LIST_ITERATE_STOP(nodes[u].arcs, t_arc *, arc);
 	}
 
 	pqueue_delete(visitQueue);
 	free(pqueue_nodes);
-	return (nodes[tID].cost != INF_WEIGHT);
+	return (nodes[t].cost != INF_WEIGHT);
 }
 
 
