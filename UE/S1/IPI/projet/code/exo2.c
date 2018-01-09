@@ -65,7 +65,7 @@ static int dijkstra(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 	pqueue_nodes[s] = pqueue_insert(visitQueue, &(nodes[s].cost), &s);
 
 	/** 2. BOUCLE DE L'ALGORITHME DIJKSTRA */
-	/** Tant qu'il y a des sommets a visité, on les visite */
+	/** Tant qu'il y a des sommets à visiter, on les visite */
 	while (!pqueue_is_empty(visitQueue)) {
 		/** 2.1. : on cherche un noeud 'u' non visite minimisant d(u).
 		  ceci est optimisé à l'aide d'une file de priorité, l'opération
@@ -103,12 +103,11 @@ static int dijkstra(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 		LIST_ITERATE_STOP(nodes[u].arcs, t_arc *, arc);
 	}
 
+	/** libère la mémoire */
 	pqueue_delete(visitQueue);
 	free(pqueue_nodes);
 	return (nodes[t].cost != INF_WEIGHT);
 }
-
-
 
 int main(void) {
 	/* lecture des données */
