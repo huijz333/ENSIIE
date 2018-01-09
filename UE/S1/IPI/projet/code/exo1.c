@@ -6,22 +6,22 @@
  *			de l'algorithme de remontée
  *	@assign  : --------
  */
-static void print_path(t_node * nodes, INDEX sID, INDEX tID) {
-	INDEX uID = tID;
-	t_node * u = nodes + tID;
+static void print_path(t_node * nodes, INDEX s, INDEX t) {
 	/** on construit le chemin en ajoutant les sommets à une pile */
 	t_list * path = list_new();
-	while (uID != sID) {
-		list_push(path, &uID, sizeof(INDEX));
-		uID = u->prev;
-		u = nodes + uID;
+	INDEX u = t;
+	while (u != s) {
+		list_push(path, &u, sizeof(INDEX));
+		u = nodes[u].prev;
 	}
+
 	/** on affiche */
-	printf(INDEX_IDENTIFIER "\n", sID + 1);
+	printf(INDEX_IDENTIFIER "\n", s + 1);
 	LIST_ITERATE_START(path, INDEX *, nodeRef) {
 		printf(INDEX_IDENTIFIER "\n", *nodeRef + 1);
 	}
 	LIST_ITERATE_STOP(path, INDEX *, nodeRef);
+	
 	/** libere la mémoire */
 	list_delete(path);
 }
