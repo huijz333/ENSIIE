@@ -1,7 +1,7 @@
-# include "astar_worker.h"
+# include "astar_client.h"
 
 /** l'état du processus */
-t_worker worker;
+t_client client;
 
 /** strucutres utile à la recherche */
 /** variable globale pour pouvoir être free dans le callback du signal */
@@ -27,7 +27,7 @@ static void sendPacket(BYTE packetID, WEIGHT time) {
 	t_packet packet;
 	memset(&packet, 0, sizeof(t_packet));
 	packet.id = packetID;
-	packet.workerID = worker.id;
+	packet.clientID = client.id;
 	packet.time = time;
 	write(fd, &packet, sizeof(t_packet));
 }
@@ -81,7 +81,7 @@ static void astar_test_path(INDEX u, INDEX v, INDEX t, WEIGHT w) {
  *			'sPos':	la position de départ
  *			'tPos':	la position d'arrivé
  *			'p':	le pipe dans lequel écrire les packets
- *			'workerID': l'id de l'enfant (voir WORKER_* (astar_worker.h))
+ *			'clientID': l'id de l'enfant (voir CLIENT_* (astar_client.h))
  *	@ensure  : crée un nouveau processus qui cherche un chemin entre 's' et 't',
  *                 dans le labyrinthe, et qui écrit la longueur du chemin
  *		   dans le pipe 'p',
@@ -89,14 +89,14 @@ static void astar_test_path(INDEX u, INDEX v, INDEX t, WEIGHT w) {
  *		   le processus se suicide à la fin de la recherche
  *	@assign  : --------------------------------------------
  */
-t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE workerID) {
+t_client astar_client(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE clientID) {
 	/** creation du processus fils */
-	worker.pid	= fork();
-	worker.id	= workerID;
-	worker.time	= INF_WEIGHT;
-	/** si on est dans le père, on renvoit le worker */
-	if (worker.pid) {
-		return (worker);
+	client.pid	= fork();
+	client.id	= clientID;
+	client.time	= INF_WEIGHT;
+	/** si on est dans le père, on renvoit le client */
+	if (client.pid) {
+		return (client);
 	}
 
 	/** sinon, l'enfant tente de résoudre */
@@ -107,7 +107,7 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 
 	/** si on va de la clef à la porte, ou de la porte à la sortie
 	    on considère que l'on a la clef en poche */
-	BYTE hasKey = (workerID == WORKER_C_P) || (workerID == WORKER_P_S);
+	BYTE hasKey = (clientID == CLIENT_C_P) || (clientID == CLIENT_P_S);
 
 	/** nombre de case dans le labyrinthe */
 	lab = theLab;
@@ -256,5 +256,5 @@ t_worker astar_worker(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE wor
 	lab_delete(lab);
 	/** fin du processus */
 	exit(EXIT_SUCCESS);
-	return (worker);
+	return (client);
 }

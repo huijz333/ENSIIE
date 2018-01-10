@@ -130,6 +130,6 @@ void lab_print_path(t_lab * lab, t_node * nodes, INDEX s, INDEX t);
 
 /** inclut à la fin, car requiet les définitions précèdentes */
 # include "astar.h"
-# include "astar_worker.h"
+# include "astar_client.h"
 
 #endif

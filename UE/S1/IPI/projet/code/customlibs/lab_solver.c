@@ -91,14 +91,14 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 	pipe(p);
 
 	/** creation de 1.1, 1.2, 1.3, 1.4 */
-	t_worker workers[MAX_WORKERS];
-	workers[WORKER_E_S] = astar_worker(lab, lab->entry, lab->exit, p, WORKER_E_S);
-	workers[WORKER_E_C] = astar_worker(lab, lab->entry, lab->key,  p, WORKER_E_C);
-	workers[WORKER_C_P] = astar_worker(lab, lab->key,   lab->door, p, WORKER_C_P);
-	workers[WORKER_P_S] = astar_worker(lab, lab->door,  lab->exit, p, WORKER_P_S);
+	t_client clients[MAX_CLIENTS];
+	clients[CLIENT_E_S] = astar_client(lab, lab->entry, lab->exit, p, CLIENT_E_S);
+	clients[CLIENT_E_C] = astar_client(lab, lab->entry, lab->key,  p, CLIENT_E_C);
+	clients[CLIENT_C_P] = astar_client(lab, lab->key,   lab->door, p, CLIENT_C_P);
+	clients[CLIENT_P_S] = astar_client(lab, lab->door,  lab->exit, p, CLIENT_P_S);
 	BYTE i;
-	for (i = 0 ; i < MAX_WORKERS ;  i++) {
-		if (workers[i].pid == -1) {
+	for (i = 0 ; i < MAX_CLIENTS ;  i++) {
+		if (clients[i].pid == -1) {
 			fprintf(stderr, "A fork failed.\n");
 			return (0);
 		}
@@ -113,25 +113,25 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 	BYTE ended = 0; /** nombre de processus en attente d'affichage ou de terminaison */
 	t_packet packet;
 	while (read(p[0], &packet, sizeof(t_packet)) > 0) {
-		BYTE wID = packet.workerID;
+		BYTE wID = packet.clientID;
 		switch (packet.id) {
 			/** si c'est un paquet de mis à jour */
 			case PACKET_ID_PATHTIME:
 				/** on enregistre le temps pour cet enfant */
-				workers[wID].time = packet.time;
+				clients[wID].time = packet.time;
 
 				/** on lit le paquet */
 				switch (wID) {
 					/** si c'est le cas 1.1 */
-					case WORKER_E_S:
+					case CLIENT_E_S:
 						/** si le chemin est assez court */
-						if (workers[WORKER_E_S].time <= maxTime) {
+						if (clients[CLIENT_E_S].time <= maxTime) {
 							/** on l'affiche */
-							kill(workers[WORKER_E_S].pid, SIG_PRINT);
+							kill(clients[CLIENT_E_S].pid, SIG_PRINT);
 							/** et on tue les enfants */
-							for (i = 0 ; i < MAX_WORKERS ; i++) {
-								if (i != WORKER_E_S) {
-									kill(workers[i].pid, SIGKILL);
+							for (i = 0 ; i < MAX_CLIENTS ; i++) {
+								if (i != CLIENT_E_S) {
+									kill(clients[i].pid, SIGKILL);
 								}
 							}
 							/** on attends que tous les enfants aient fini */
@@ -144,28 +144,28 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 					default:
 						/** si la concatenation des
 						  chemins convient */
-						if (	workers[WORKER_E_C].time != INF_WEIGHT &&
-								workers[WORKER_C_P].time != INF_WEIGHT &&
-								workers[WORKER_P_S].time != INF_WEIGHT &&
+						if (	clients[CLIENT_E_C].time != INF_WEIGHT &&
+								clients[CLIENT_C_P].time != INF_WEIGHT &&
+								clients[CLIENT_P_S].time != INF_WEIGHT &&
 
-								workers[WORKER_E_C].time
-								+ workers[WORKER_C_P].time
-								+ workers[WORKER_P_S].time <= maxTime) {
+								clients[CLIENT_E_C].time
+								+ clients[CLIENT_C_P].time
+								+ clients[CLIENT_P_S].time <= maxTime) {
 							/** on tue le processus qui cherche un chemin
 							  sans passer par la porte */
-							kill(workers[WORKER_E_S].pid, SIGKILL);
+							kill(clients[CLIENT_E_S].pid, SIGKILL);
 
 							/** on affiche le chemin (entrée, clef) */
-							kill(workers[WORKER_E_C].pid, SIG_PRINT);
-							waitpid(workers[WORKER_E_C].pid, &status, 0);
+							kill(clients[CLIENT_E_C].pid, SIG_PRINT);
+							waitpid(clients[CLIENT_E_C].pid, &status, 0);
 
 							/** on affiche le chemin (clef, porte) */
-							kill(workers[WORKER_C_P].pid, SIG_PRINT);
-							waitpid(workers[WORKER_C_P].pid, &status, 0);
+							kill(clients[CLIENT_C_P].pid, SIG_PRINT);
+							waitpid(clients[CLIENT_C_P].pid, &status, 0);
 
 							/** on affiche le chemin (porte, sortie) */
-							kill(workers[WORKER_P_S].pid, SIG_PRINT);
-							waitpid(workers[WORKER_P_S].pid, &status, 0);
+							kill(clients[CLIENT_P_S].pid, SIG_PRINT);
+							waitpid(clients[CLIENT_P_S].pid, &status, 0);
 							/** succès */
 							return (1);
 						}
@@ -179,9 +179,9 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 				/** si ce processus a terminé,
 				    c'est qu'il n'y a pas de chemins assez
 				    court sans passer par la porte, on le tue */
-				if (wID == WORKER_E_S) {
+				if (wID == CLIENT_E_S) {
 					/** on tue le processus */
-					kill(workers[WORKER_E_S].pid, SIGKILL);
+					kill(clients[CLIENT_E_S].pid, SIGKILL);
 				}
 				/** si l'un des chemins:
 				    de l'entrée à la clef,
@@ -192,14 +192,14 @@ int lab_solve(t_lab * lab, WEIGHT maxTime) {
 				    ou si tous les programmes ont finis,
 				    que leur concatenation reste trop longue...
 				 */
-				if ((workers[wID].time == INF_WEIGHT && wID != WORKER_E_S)
-						|| ++ended == MAX_WORKERS) {
+				if ((clients[wID].time == INF_WEIGHT && wID != CLIENT_E_S)
+						|| ++ended == MAX_CLIENTS) {
 					/** alors, ca ne sert à rien que
 					    les autres continuent de chercher,
 					    il n'y a pas de solutions */
-					kill(workers[WORKER_E_C].pid, SIGKILL);
-					kill(workers[WORKER_C_P].pid, SIGKILL);
-					kill(workers[WORKER_P_S].pid, SIGKILL);
+					kill(clients[CLIENT_E_C].pid, SIGKILL);
+					kill(clients[CLIENT_C_P].pid, SIGKILL);
+					kill(clients[CLIENT_P_S].pid, SIGKILL);
 					fprintf(stderr, "Key, door, or exit couldn't be reached.\n");
 				}
 				break ;
