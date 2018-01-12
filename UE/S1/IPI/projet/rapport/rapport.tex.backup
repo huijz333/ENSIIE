@@ -170,7 +170,9 @@
 					\item '\underline{diminuer} la priorité d'un élément déjà inséré' : \(O(log(m))\)
 				\end{itemize}
 				les détails techniques de cette structure peuvent être trouvés en annexe \cite{binary_heap},
-				et son implementation dans les fichiers \textit{pqueue.[c,h]}
+				et son implementation dans les fichiers \textit{pqueue.[c,h]}.
+				
+				On passe alors d'une complexité \(O(n^2)\) à \(O(n * log(n))\) pour l'algorithme de Dijkstra.
 
 				\begin{figure}[H]
 					\begin{center}
@@ -190,7 +192,7 @@
 					\begin{center}
 						\includegraphics[height=6cm,keepaspectratio]{./images/courbe_temps.png}
 					\end{center}
-					\caption{\textit{Temps de résolution (en sec.) de labyrinthe avec Dijkstra, allure en \(O(n * m * log(n))\)}}
+					\caption{\textit{Temps de résolution (en sec.) de labyrinthe avec Dijkstra, allure en \(O(n * log(m))\)}}
 					\label{courbe_temps}
 				\end{figure}
 
@@ -209,8 +211,8 @@
 
 	\section{Application: résolution labyrinthe}
 	
-		\begin{wrapfigure}{R}{6cm}
-			\includegraphics[width=6.0cm]{./images/lab.png}
+		\begin{wrapfigure}{R}{4.5cm}
+			\includegraphics[width=4.5cm]{./images/lab.png}
 			\caption{\textit{Modélisation du labyrinthe}}
 			\label{modelisationlab}
 		\end{wrapfigure}
@@ -219,24 +221,24 @@
 		
 		Intuitivement, le labyrinthe peut être modélisé par ce type de graphe (voir Figure \ref{modelisationlab}).
 		On crée un sommet pour chaque case 'non-mur' (cases vides, téléporteurs, porte, clef).
-		Pour chaque sommet, on crée des arcs entre lui et ses voisins 'non-murs'.\newline
+		Pour chaque sommet, on crée des arcs entre lui et ses voisins.\newline
 			
-		\subsection{1ère approche}
+		\subsection{1ère approche} \label{first_approach}
 			Une fois le labyrinthe modélisé, il ne reste plus qu'à le résoudre à l'aide des algorithmes préalablment implementés.\newline
 			
-			Cependant, cette approche demande de générer un graphe dans le bon format, et il s'est avéré que générer un telle graphe est très lourd
+			Cependant, cette approche demande de générer un graphe dans le bon format, et il s'est avéré que générer un telle
 			en mémoire et en temps (requiet beaucoup de mémoires avec cette modélisation).
-			De plus, le problème étant parallélisable, une nouvelle implémentation spécifique au problème est nécessaire.
-			
+			La 1ère implementation est disponible dans le dossier '.bkp' de l'archive, on ne s'attardera pas dessus.
+
 		\begin{wrapfigure}{R}{8cm}
 			\includegraphics[width=8.0cm]{./images/exo3.png}
 			\caption{\textit{Modèle client/serveur}}
 			\label{exo3}
 		\end{wrapfigure}
-			
-			
-		\subsection{2ème approche}
-		
+
+		\subsection{Optimisation} \label{ssec:optimisation}
+			Après avoir ré-implementer A* specifiquement au problème, en travaillant directement sur la grille,
+			voici les résultats obtenus:
 			\begin{figure}[H]
 				\begin{center}
 					\includegraphics[width=10cm,height=\textheight,keepaspectratio]{./images/manhattan_performances.png}
@@ -246,13 +248,13 @@
 
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item 1: avec Dijkstra : Le programme passe 35\% (~ 0.4sec.) de son temps à générer le graphe, 65\% (~0.7sec) à résoudre.
-				\item 2: (1ère approche) avec A* et la distance de Manhattan. : Le programme passe 90 (~ 0.4sec)\%
+				\item 1: (\ref{first_approach}) avec A* et la distance de Manhattan. : Le programme passe 90 (~ 0.4sec)\%
 				de son temps à générer le graphe, 10\% (~0.05 sec) à résoudre.
-				\item 3: (2ème approche) avec A* et la distance de Manhattan : le programme ne génère pas de graphes, il résout
-				en travaillant sur la grille directement, et divise la recherche dans des processus fils.
+				\item 2: (\ref{ssec:optimisation}) avec A* et la distance de Manhattan : le programme ne génère pas de graphes, il résout
+				en travaillant sur la grille directement. (on utilise également 4 fois moins de mémoire qu'avec la 1ère approche).
 			\end{itemize}
-			
+
+		\subsection{Parallélisation}
 			Pour paralléliser la recherche, on crée un modèle 'client/serveur'.
 			Le processus père est le 'serveur', et les processus fils sont les 'clients'.\newline
 
@@ -273,6 +275,7 @@
 			(avec une autre heuristique par exemple, ou bien encore en divisant le chemin en 2 à l'aide d'un point subsidiaire à 'mi-chemin').
 			Mais pour des raisons de simplicité, on reste sur ce modèle qui offre déjà de belles performances:
 
+	\newpage
 	\section{A propos de l'implémentation}
 		Ci-joint, vous trouverez mon implémentation en language 'C'.
 		\subsection{Types / Structures de données}

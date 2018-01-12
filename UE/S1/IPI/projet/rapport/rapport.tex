@@ -274,19 +274,32 @@
 			On aurait pu imaginer que dés qu'un processus ait fini, il aide un autre client à résoudre une autre partie du chemin
 			(avec une autre heuristique par exemple, ou bien encore en divisant le chemin en 2 à l'aide d'un point subsidiaire à 'mi-chemin').
 			Mais pour des raisons de simplicité, on reste sur ce modèle qui offre déjà de belles performances:
+			
+		\subsection{Critiques/limites}
+		
+			Bien que les performances obtenus remplisse le cahier des charges, il y a des limites dans cette modélisation.
+			
+			Premièrement, la distance de Manhattan n'est sans doute pas une bonne heuristique pour ce problème, car elle ne prends
+			pas en compte la présence des téléporteurs.
+			
+			Deuxiemement, dans le pire des cas (c'est à dire, où A* ne converge pas rapidement, et devient equivalent à un parcours en largeur),
+			le programme est plus lent (et plus couteux en mémoire!) que si l'on avait effectué un parcours en largeur.
+			En effet, avec A*, l'opération 'passer au sommet suivant' est en \(O(log(m))\), avec 'm' le nombre de sommet dans la file de visite,
+			alors qu'avec un parcours en largeur, cette opération est en \(O(1)\).
+			Donc, si on doit parcourir tous les sommets, on a une complexité en \(O(n * log(m))\) (avec 'n' le nombre de sommet total, et
+			'm' le nombre de sommet en moyenne dans la file), contre \(O(n)\) avec un parcours en largeur classique.
 
-	\newpage
 	\section{A propos de l'implémentation}
-		Ci-joint, vous trouverez mon implémentation en language 'C'.
+		Ci-joint, vous trouverez l'implémentation en language C.
 		\subsection{Types / Structures de données}
 		
 		Les structures de données de manière générique, afin de pouvoir être ré-utilisé.
 		(voir les fichiers '.c' et '.h', qui sont commentés). 
 
 		\subsection{Qualité logiciel}
-			Mes programmes passent les tests fournis. J'ai également créé quelques tests supplémentaires pour mettre en défaut mon programme.
-			(notamment pour l'illustration \ref{courbe_temps})\newline
-			De plus, j'ai débuggé l'intégralité du code à l'aide de l'outil 'valgrind'.
+			Les programmes passent les tests fournis. Quelques tests supplémentaires ont également été créé pour mettre en défaut la résolution de labyrinthe,
+			et pour illustrer ce document. (notamment pour l'illustration \ref{courbe_temps})\newline
+			De plus, l'intégralité du code a été debogguer à l'aide de l'outil 'valgrind'.
 			Il ne semble y avoir ni fuite mémoire, ni dépassement de tampon, ni accès à de la mémoire non initialisée.
 			(avec des fichiers bien formattés du moins).
 			\begin{figure}[H]

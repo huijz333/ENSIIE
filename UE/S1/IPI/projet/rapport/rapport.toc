@@ -11,6 +11,7 @@
 \contentsline {subsection}{\numberline {2.1}1\IeC {\`e}re approche}{5}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Optimisation}{5}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Parall\IeC {\'e}lisation}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Critiques/limites}{6}{subsection.2.4}
 \contentsline {section}{\numberline {3}A propos de l'impl\IeC {\'e}mentation}{7}{section.3}
 \contentsline {subsection}{\numberline {3.1}Types / Structures de donn\IeC {\'e}es}{7}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Qualit\IeC {\'e} logiciel}{7}{subsection.3.2}
