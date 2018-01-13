@@ -2,6 +2,16 @@ Le rapport se trouve dans "rapport.pdf"
 
 Le code dans 'exo1.c', 'exo2.c', 'exo3.c', 'customlibs/*.c'
 
+Pour que les fonctions 'fork()' et 'kill()' compile sans warning,
+j'ai du ajouter:
+
+# define _DEFAULT_SOURCE
+
+dans customlibs/lab.h
+
+ca compile sans warning chez moi... en esperant que tout
+se passe bien de votre coté
+
 Pour tester il faut déplacer les fichiers de la versio V2 du projet, à la racine de ce dossier:
 	- Makefile
 	- exec1.sh, exec2.sh, exec3.sh

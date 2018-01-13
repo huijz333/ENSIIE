@@ -1,7 +1,7 @@
 #ifndef LAB_H
 # define LAB_H
 
-# define _BSD_SOURCE
+# define _DEFAULT_SOURCE
 # include <unistd.h>	/* fork  */
 # include <sys/types.h>	/* wait, kill */
 # include <sys/wait.h>	/* wait */
