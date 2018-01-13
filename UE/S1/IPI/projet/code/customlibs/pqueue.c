@@ -212,6 +212,8 @@ t_pqueue_node pqueue_pop(t_pqueue * pqueue) {
 }
 
 /*
+	TESTS et exemple d'utilisation
+
 static int dblcmp(double * a, double * b) {
 	if (*a < *b) {
 		return (-1);
@@ -221,11 +223,7 @@ static int dblcmp(double * a, double * b) {
 	}
 	return (0);
 }
-*/
-/*
-	TESTS et exemple d'utilisation
-*/
-/*
+
 int main() {
 
 	t_pqueue * pqueue = pqueue_new((t_cmpf)dblcmp);

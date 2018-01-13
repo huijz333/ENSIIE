@@ -69,13 +69,13 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			/** on recupere le sommet (x, y) */
 			nodes[i].pos.x = x;
 			nodes[i].pos.y = y;
-			nodes[i].index = i; /** on a besoin de stocker l'index pour la file de priorité */
+			/** on a besoin de stocker l'index pour la file de priorité */
+			nodes[i].index = i; 
 			/** pas de predecesseurs */
 			nodes[i].prev = MAX_NODES;
 			/** on definit sa distance de 's' à '+oo' */
 			nodes[i].f_cost = INF_WEIGHT;
 			nodes[i].cost = INF_WEIGHT;
-			nodes[i].index = i;
 
 			/** prepare la file de priorité */
 			pqueue_nodes[i] = NULL;
@@ -139,8 +139,8 @@ int astar(t_lab * lab, t_pos sPos, t_pos tPos, WEIGHT timer) {
 			/** on teste ce nouveau chemin */
 			astar_test_path(visitQueue, nodes, pqueue_nodes, 1, u, v, t);
 		}
-		/** si c'est un teleporteur, alors on essaye le chemin
-		    vers l'autre teleporteur */
+		/** si on est sur un teleporteur, alors on essaye
+		    le chemin vers l'autre teleporteur */
 		BYTE tpID = lab_get_tpID(lab->map[nodes[u].pos.y][nodes[u].pos.x]);
 		if (tpID != MAX_TP) {
 			/** on recupere les 2 cases du teleporteurs */

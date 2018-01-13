@@ -147,7 +147,6 @@ t_client astar_client(t_lab * theLab, t_pos sPos, t_pos tPos, int p[2], BYTE cli
 			/** on definit sa distance de 's' à '+oo' */
 			node->f_cost = INF_WEIGHT;
 			node->cost = INF_WEIGHT;
-			node->index = i;
 
 			/** prepare la file de priorité */
 			pqueue_nodes[i] = NULL;

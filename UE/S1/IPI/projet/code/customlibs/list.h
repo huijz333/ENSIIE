@@ -8,7 +8,14 @@
 
 /**
  *	Structure de donnée: liste doublement chainée
- *	pouvant servir de file ou de liste
+ *	pouvant servir de file ou de liste.
+ *
+ *	On distingue 'liste' de 'maillon'.
+ *
+ *	La donnée est copié juste derrière le maillon en mémoire
+ *
+ *	Le maillon 'head' ne contient aucunes données, c'est la racine
+ *	de la liste doublement chainé
  */
 
 typedef struct  s_list_node {
@@ -103,7 +110,19 @@ void list_clear(t_list * lst);
 void list_delete(t_list * lst);
 
 /**
- *	macro pratique pour itérer à travers la liste
+ *	macro pratique pour itérer à travers la liste.
+ *
+ *	exemple:
+ *
+ *	t_list * lst = list_new();
+ *	list_add(lst, "hello", strlen("hello"));
+ *	list_add(lst, "world", strlen("hello"));
+ *	list_add(lst, "I am toss", strlen("hello"));
+ *
+ *	LIST_ITERATE_START(lst, char *, string) {
+ *		printf("%s\n", string);
+ *	}
+ *	LIST_ITERATE_STOP(lst, char *, string);
  */
 # define LIST_ITERATE_START(L, T, V)\
 	if (L != NULL) {\
