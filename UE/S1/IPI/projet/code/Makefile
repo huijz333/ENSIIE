@@ -25,5 +25,3 @@ clean:
 ###### ET ICI #######
 ##### Si besoin, completer le makefile a partir d'ici
 ##### PREVENEZ VOTRE CHARGE DE PROJET
-old:
-

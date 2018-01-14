@@ -1,19 +1,20 @@
+CODE=code
+TARBALL=pereira-romain.tar.gz
+
 all: test build clean
 
 test:
-	cd ./code ; ./exec1.sh -q ; ./exec2.sh -q ; ./exec3.sh -q
+	cd $(CODE) ; ./exec1.sh -q ; ./exec2.sh -q ; ./exec3.sh -q
 
 build: clean
-	cp ./rapport/rapport.pdf code
-	cd ./code ; tar -cvzf pereira-romain.tar.gz *.c customlibs rapport.pdf .bkp/*.c .bkp/customlibs README
-	rm -rf code/rapport.pdf
+	cp ./rapport/rapport.pdf $(CODE)
+	cd $(CODE) ; tar -cvzf $(TARBALL) * .bkp ; rm -rf ./rapport.pdf ; mv $(TARBALL) ../
 
 extract:
-	mkdir -p extracted
-	cd extracted ; cp ../code/pereira-romain.tar.gz . ; tar -xvzf pereira-romain.tar.gz
+	mkdir -p extracted ; cp $(TARBALL) extracted ; cd extracted ; tar -xvzf $(TARBALL)
 
 clean:
-	make -C ./code clean
+	make -C $(CODE) clean
 
 fclean: clean
 	rm -rf ./build
