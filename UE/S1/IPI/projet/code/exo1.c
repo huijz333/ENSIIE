@@ -11,7 +11,7 @@ static void print_path(t_node * nodes, INDEX s, INDEX t) {
 	t_list * path = list_new();
 	INDEX u = t;
 	while (u != s) {
-		list_push(path, &u, sizeof(INDEX));
+		list_add_tail(path, &u, sizeof(INDEX));
 		u = nodes[u].prev;
 	}
 
@@ -58,12 +58,12 @@ static int breadth_search(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 	nodes[s].pathlen = 0; /* source à 0 */
 
 	/** on ajoute la source a la file */
-	list_add(visitQueue, &s, sizeof(INDEX));
+	list_add_head(visitQueue, &s, sizeof(INDEX));
 
 	/** 2 : tant que la file n'est pas vide */
 	while (visitQueue->size > 0) {
 		/** 2.1 : on pop la tête de file */
-		INDEX u = *((INDEX *) list_head(visitQueue));
+		INDEX u = *((INDEX *) list_get_head(visitQueue));
 		list_remove_head(visitQueue);	
 		/* si on a atteint 't', on a trouvé le chemin */
 		if (u == t) {
@@ -80,7 +80,7 @@ static int breadth_search(t_node * nodes, INDEX n, INDEX s, INDEX t) {
 				nodes[v].prev    = u;
 				nodes[v].pathlen = nodes[u].pathlen + 1;
 				/* on ajoute 'v' à la file */
-				list_add(visitQueue, &v, sizeof(INDEX));
+				list_add_head(visitQueue, &v, sizeof(INDEX));
 			}
 		}
 		LIST_ITERATE_STOP(nodes[u].successors, INDEX *, vRef);
@@ -117,7 +117,7 @@ int main(void) {
 				if (u->successors == NULL) {
 					u->successors = list_new();
 				}
-				list_add(u->successors, &j, sizeof(INDEX));
+				list_add_head(u->successors, &j, sizeof(INDEX));
 			}
 		}
 	}

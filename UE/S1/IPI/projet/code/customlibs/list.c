@@ -1,6 +1,15 @@
 # include "list.h"
 
 /**
+ *	@require : un sommet de la liste
+ *	@ensure  : renvoie la donnée stockée par ce sommet
+ *	@assign  : ------------
+ */
+void * list_node_data(t_list_node * node) {
+	return (node + 1);
+}
+
+/**
  *	@require: ---------------------
  *	@ensure : renvoie une nouvelle liste doublement chainée
  *	@assign : ---------------------
@@ -27,7 +36,7 @@ t_list * list_new(void) {
  *	@ensure : ajoute une copie de la donnée en debut de liste
  *	@assign : ---------------------
  */
-void * list_add(t_list * lst, void const * content, unsigned int content_size) {
+void * list_add_head(t_list * lst, void const * content, unsigned int content_size) {
 	t_list_node * node = (t_list_node *) malloc(sizeof(t_list_node) + content_size);
 	if (node == NULL) {
 		return (NULL);
@@ -53,7 +62,7 @@ void * list_add(t_list * lst, void const * content, unsigned int content_size) {
  *	@ensure : ajoute une copie de la donnée en fin de liste
  *	@assign : ---------------------
  */
-void * list_push(t_list * lst, void const * content, unsigned int content_size) {
+void * list_add_tail(t_list * lst, void const * content, unsigned int content_size) {
 	t_list_node * node = (t_list_node *) malloc(sizeof(t_list_node) + content_size);
 	if (node == NULL) {
 		return (NULL);
@@ -81,7 +90,7 @@ void * list_push(t_list * lst, void const * content, unsigned int content_size) 
  *	@ensure : renvoie la donnée en tête de liste 
  *	@assign : ---------------------
  */
-void * list_head(t_list * lst) {
+void * list_get_head(t_list * lst) {
 	if (lst->size == 0) {
 		return (NULL);
 	}
@@ -89,20 +98,11 @@ void * list_head(t_list * lst) {
 }
 
 /**
- *	@require : un sommet de la liste
- *	@ensure  : renvoie la donnée stockée par ce sommet
- *	@assign  : ------------
- */
-void * list_node_data(t_list_node * node) {
-	return (node + 1);
-}
-
-/**
  *	@require: une liste
  *	@ensure : renvoie la donnée en fin de liste 
  *	@assign : ---------------------
  */
-void * list_tail(t_list * lst) {
+void * list_get_tail(t_list * lst) {
 	if (lst->size == 0) {
 		return (NULL);
 	}

@@ -11,7 +11,7 @@ static void print_path(t_node * nodes, INDEX s, INDEX t) {
 	t_list * path = list_new();
 	INDEX u = t;
 	while (u != s) {
-		list_push(path, &u, sizeof(INDEX));
+		list_add_tail(path, &u, sizeof(INDEX));
 		u = nodes[u].prev;
 	}
 	
@@ -141,7 +141,7 @@ int main(void) {
 			t_arc arc;
 			arc.cost = (WEIGHT)value;
 			arc.to = j;
-			list_add(u->arcs, &arc, sizeof(t_arc));
+			list_add_head(u->arcs, &arc, sizeof(t_arc));
 		}
 	}
 

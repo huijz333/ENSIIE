@@ -29,6 +29,13 @@ typedef struct  s_list {
 }               t_list;
 
 /**
+ *	@require : un sommet de la liste
+ *	@ensure  : renvoie la donnée stockée par ce sommet
+ *	@assign  : ------------
+ */
+void * list_node_data(t_list_node * node);
+
+/**
  *	@require: ---------------------
  *	@ensure : renvoie une nouvelle liste doublement chainée
  *	@assign : ---------------------
@@ -40,35 +47,28 @@ t_list * list_new(void);
  *	@ensure : ajoute une copie de la donnée en debut de liste
  *	@assign : ---------------------
  */
-void * list_add(t_list * lst, void const * content, unsigned int content_size);
+void * list_add_head(t_list * lst, void const * content, unsigned int content_size);
 
 /**
  *	@require: une liste, une donnée, et la taille de la donnée
  *	@ensure : ajoute une copie de la donnée en fin de liste
  *	@assign : ---------------------
  */
-void * list_push(t_list * lst, void const * content, unsigned int content_size);
+void * list_add_tail(t_list * lst, void const * content, unsigned int content_size);
 
 /**
  *	@require: une liste
  *	@ensure : renvoie la donnée en tête de liste 
  *	@assign : ---------------------
  */
-void * list_head(t_list * lst);
-
-/**
- *	@require : un sommet de la liste
- *	@ensure  : renvoie la donnée stockée par ce sommet
- *	@assign  : ------------
- */
-void * list_node_data(t_list_node * node);
+void * list_get_head(t_list * lst);
 
 /**
  *	@require: une liste
  *	@ensure : renvoie la donnée en fin de liste 
  *	@assign : ---------------------
  */
-void * list_tail(t_list * lst);
+void * list_get_tail(t_list * lst);
 
 /**
  *	@require: une liste

@@ -13,10 +13,10 @@ void lab_print_path(t_lab * lab, t_node * nodes, INDEX s, INDEX t) {
 	/** algorithme de remontée */
 	t_list * path = list_new();
 	while (t != s) {
-		list_push(path, &t, sizeof(INDEX));
+		list_add_tail(path, &t, sizeof(INDEX));
 		t = nodes[t].prev;
 	}
-	list_push(path, &s, sizeof(INDEX));
+	list_add_tail(path, &s, sizeof(INDEX));
 
 	/** sinon, on prends les 2 sommets de chaque arc du chemin */
 	t_list_node * first = path->head->next;
