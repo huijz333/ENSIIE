@@ -146,7 +146,7 @@
 				Ainsi, on pourrait parcourir tous les sommets non-visités, et en extraire un minimum (dans le sens de sa distance à 's')
 				Si la file contient 'm' sommets non visité, la complexité de cette opération est en \(O(m)\).
 				
-				Après avoir implementé Dijkstra avec cette 2nde approche, j'ai étudié le temps d'éxecution.
+				Après avoir implementé Dijkstra avec cette 1ère approche, j'ai étudié le temps d'éxecution.
 				\begin{figure}[H]
 					\begin{center}
 						\includegraphics[width=6cm,height=\textheight,keepaspectratio]{./images/no_pqueue.png}
@@ -172,7 +172,7 @@
 				les détails techniques de cette structure peuvent être trouvés en annexe \cite{binary_heap},
 				et son implementation dans les fichiers \textit{pqueue.[c,h]}.
 				
-				On passe alors d'une complexité \(O(n^2)\) à \(O(n * log(n))\) pour l'algorithme de Dijkstra.
+				On passe alors d'une complexité \(O(n * m)\) à \(O(n * log(m))\) pour l'algorithme de Dijkstra.
 
 				\begin{figure}[H]
 					\begin{center}
