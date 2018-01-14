@@ -12,15 +12,14 @@ dans 'customlibs/lab.h'
 Ca compile sans warning chez moi... en esperant que tout
 se passe bien de votre coté
 
-Les fichiers de tests sont ceux de la V2 du projet
-et n'ont pas été modifié (à savoir):
+Pour tester le projet, il suffit de déplacer les fichiers
+de la V2 du projet à la racine de ce dossier.
 	- Makefile
 	- exec1.sh, exec2.sh, exec3.sh
-	- dossier 'tests'
 	- check_solution.py
+	- tests
 
-Le dossier '.bkp' contient ma 1ère implementation, elle permet
-d'illustrer mon rapport (comparatifs de performances).
-MAIS c'est bien le code à la racine du dossier qui correspond à mon rendu final.
+Mon rendu final correspond à la racine de ce dossier : le dossier '.bkp' contient ma 1ère
+implementation, elle permet d'illustrer mon rapport (comparatifs de performances).
 
 Romain PEREIRA

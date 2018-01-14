@@ -8,7 +8,7 @@ test:
 
 build: clean
 	cp ./rapport/rapport.pdf $(CODE)
-	cd $(CODE) ; tar -cvzf $(TARBALL) * .bkp ; rm -rf ./rapport.pdf ; mv $(TARBALL) ../
+	cd $(CODE) ; tar -cvzf $(TARBALL) README exo1.c exo2.c exo3.c customlibs .bkp ; rm -rf ./rapport.pdf ; mv $(TARBALL) ../
 
 extract:
 	mkdir -p extracted ; cp $(TARBALL) extracted ; cd extracted ; tar -xvzf $(TARBALL)
