@@ -2,8 +2,8 @@
 
 if test "$#" -ne "2" ; then
 	err="error: error usage: $0 file1 file2"
-elif ! (test -e $1 -a -e $2) ; then
-	err="error: $1 or $2 doesnt exist"
+elif ! (test -r $1 -a -r $2) ; then
+	err="error: $1 or $2 can't read"
 elif test -d $1 -o -d $2 ; then
 	err="$1 or $2 is a directory."
 else
