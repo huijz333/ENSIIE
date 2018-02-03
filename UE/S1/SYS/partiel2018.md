@@ -25,3 +25,34 @@ close(com[1]);
 car le père n'a à priori pas besoin d'écrire dans le pipe, et le programme se termine donc quand les 2 processus fils finissent.
 
 # exo5: #
+Programme "comment-ca-va" (version courte sans gérer les cas d'erreurs)
+
+``` C
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+int main(void) {
+    /** status à envoyer dans le 'wait' */
+    int exitStatus;
+    pid_t pid1 = fork();
+    /** si on est dans le fils */
+    if (pid1 == 0) {
+        pid_t pid2 = fork();
+        /** si on est dans le petit-fils */
+        if (pid2 == 0) {
+            printf("comment ");
+            exit(EXIT_SUCCESS);
+        }
+        while (wait(&exitStatus));
+        printf(" ca ");
+        exit(EXIT_SUCESS);
+    }
+    /** on attends que le fils ait fini */
+    int exitStatus;
+    while (wait(&exitStatus));
+    printf(" va\n);
+    return (0);
+}
+
+```
