@@ -5,13 +5,18 @@
 ``` echo "un" > /pub/1 ```
 #### Q-3 : ####
 ``` ls /pub > /pub/file ```
-#### Q-4 : ####
+##### Q-4 : #####
 ``` echo $PATH > /pub/path ```
 #### Q-5 : ####
 ``` find /pub -name "*.c" -or -name "*.h" ```
+
 ou plus court (mais moins générique)
+
 ``` find /pub -name "*.[ch] ```
 
+#### Q-6 : ####
+Idée: listez tous les fichiers ".sh" de l'arborescence "/pub", et comptez le nombre de ligne
+``` find /pub -name "*.sh" -print | wc -l ``` 
 
 # exo4: #
 
