@@ -16,6 +16,7 @@ ou plus court (mais moins générique)
 
 #### Q-6 : ####
 Idée: listez tous les fichiers ".sh" de l'arborescence "/pub", et comptez le nombre de ligne
+
 ``` find /pub -name "*.sh" -print | wc -l ``` 
 
 # exo2: #
@@ -36,6 +37,23 @@ renvoie '0' en cas de réussite, et non '0' en cas d'erreur.
 
 #### Q-2 : ####
 La fonction 'f' calcule et affiche la factoriel du paramètre.
+
+#### Q-3 : ####
+```
+if test "$#" -ne "2" ; then
+    echo "error usage: $0 [n] [m]"
+    exit 1
+fi
+
+n=$1
+m=$2
+if test t(n) -or t(m) ; then
+    echo "n or m isn't a number"
+    exit 1
+fi
+
+echo $[f(n) / f(m)]
+```
 
 # exo4: #
 
