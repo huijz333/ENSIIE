@@ -5,7 +5,7 @@
 ``` echo "un" > /pub/1 ```
 #### Q-3 : ####
 ``` ls /pub > /pub/file ```
-##### Q-4 : #####
+#### Q-4 : ####
 ``` echo $PATH > /pub/path ```
 #### Q-5 : ####
 ``` find /pub -name "*.c" -or -name "*.h" ```
@@ -18,9 +18,28 @@ ou plus court (mais moins générique)
 Idée: listez tous les fichiers ".sh" de l'arborescence "/pub", et comptez le nombre de ligne
 ``` find /pub -name "*.sh" -print | wc -l ``` 
 
+# exo2: #
+#### Q-1 : ####
+``` cat < 1 > 2 ```
+#### Q-2 : ####
+``` x="1231" ```
+#### Q-3 : ####
+``` cat < 1 ```
+#### Q-4 : ####
+``` cat 2 ```
+
+# exo3: #
+#### Q-1 : ####
+La fonction 't' teste à l'aide d'une expression régulière si la chaine de caractère passé en argument à un format numérique.
+Si la chaine passé '$1' est un nombre, alors la fonction renvoie le statut 1, sinon 0. (l'inverse du resultat 'test', car 'test'
+renvoie '0' en cas de réussite, et non '0' en cas d'erreur.
+
+#### Q-2 : ####
+La fonction 'f' calcule et affiche la factoriel du paramètre.
+
 # exo4: #
 
-### Q-1 : ###
+#### Q-1 : ####
 Le fichier "out" contiendra 2 fois les octets du fichier "in", les octets sont écris dans l'ordre,
 mais peuvent "se chevaucher".
 
@@ -30,14 +49,14 @@ exemple:
 Ceci est du au fait que 2 processus écrivent en meme temps dans le même pipe, on ne peut à priori pas savoir lequel des deux va écrire en premier.
 Cependant, chaque processus écrit l'integralité du fichier 1 fois, dans l'ordre
 
-### Q-2 ###
+#### Q-2 : ####
 ce programme ne s'arrête pas car le "read()" dans le processus pere est bloquant et ne se terminera jamais.
 
 Le pipe 'com[]' est ouvert en écriture et lecture dans le père et les 2 fils.
 Une fois les 2 fils terminés, il y a donc encore un écrivain potentiel dans le pipe,
 et donc le 'read()' est bloquant.
 
-### Q-3 ###
+#### Q-3 : ####
 Pour que le programme s'arrête, il suffit de rajouter ligne 58,
 ``` C
 close(com[1]);
