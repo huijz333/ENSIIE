@@ -1,3 +1,18 @@
+# exo1: #
+#### Q-1 : ####
+``` echo "un" > 1 ```
+#### Q-2 : ####
+``` echo "un" > /pub/1 ```
+#### Q-3 : ####
+``` ls /pub > /pub/file ```
+#### Q-4 : ####
+``` echo $PATH > /pub/path ```
+#### Q-5 : ####
+``` find /pub -name "*.c" -or -name "*.h" ```
+ou plus court (mais moins générique)
+``` find /pub -name "*.[ch] ```
+
+
 # exo4: #
 
 ### Q-1 : ###
