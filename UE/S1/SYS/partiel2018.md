@@ -56,3 +56,46 @@ int main(void) {
 }
 
 ```
+Programme "comment-ca-va" (version longue en gérant les cas d'erreurs)
+
+``` C
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+int main(void) {
+    /** status à envoyer dans le 'wait' */
+    int exitStatus;
+    pid_t pid1 = fork();
+    /** si on est dans le fils */
+    if (pid == -1) {
+        fprintf(stderr, "child fork() failed\n");
+        exit(EXIT_FAILURE);
+    }
+    if (pid1 == 0) {
+        pid_t pid2 = fork();
+        if (pid == -1) {
+            exit(EXIT_FAILURE);
+        }
+        
+        /** si on est dans le petit-fils */
+        if (pid2 == 0) {
+            printf("comment ");
+            exit(EXIT_SUCCESS);
+        }
+        while (wait(&exitStatus));
+        printf(" ca ");
+        exit(EXIT_SUCESS);
+    }
+    /** on attends que le fils ait fini */
+    int exitStatus;
+    while (wait(&exitStatus));
+    if (exitStatus == EXIT_FAILURE) {
+        fprintf(stderr, "grand-child fork() failed\n");
+        return (EXIT_FAILURE);
+    }
+    printf(" va\n);
+    return (EXIT_SUCCESS);
+}
+
+```
