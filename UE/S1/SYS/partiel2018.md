@@ -106,7 +106,6 @@ int main(void) {
         exit(EXIT_SUCESS);
     }
     /** on attends que le fils ait fini */
-    int exitStatus;
     while (wait(&exitStatus));
     printf(" va\n);
     return (0);
