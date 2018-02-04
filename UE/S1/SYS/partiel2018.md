@@ -145,7 +145,6 @@ int main(void) {
         exit(EXIT_SUCESS);
     }
     /** on attends que le fils ait fini */
-    int exitStatus;
     while (wait(&exitStatus));
     if (exitStatus == EXIT_FAILURE) {
         fprintf(stderr, "grand-child fork() failed\n");
