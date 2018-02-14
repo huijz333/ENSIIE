@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  13 FEB 2018 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.12.4)  13 FEB 2018 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -618,28 +618,28 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count123
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+Package hyperref Info: Option `colorlinks' set `true' on input line 37.
  (./rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box33
-Package hyperref Info: Link coloring ON on input line 35.
+Package hyperref Info: Link coloring ON on input line 39.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -648,9 +648,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count124
 )
-LaTeX Info: Redefining \ref on input line 35.
-LaTeX Info: Redefining \pageref on input line 35.
-LaTeX Info: Redefining \nameref on input line 35.
+LaTeX Info: Redefining \ref on input line 39.
+LaTeX Info: Redefining \pageref on input line 39.
+LaTeX Info: Redefining \nameref on input line 39.
 
 (./rapport.out) (./rapport.out)
 \@outlinefile=\write3
@@ -722,11 +722,11 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 37.
+(Font)              <12> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 37.
+(Font)              <6> on input line 41.
 (./rapport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 2.
@@ -736,270 +736,40 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
- <./images/graph.png, id=94, 587.19376pt x 331.2375pt>
-File: ./images/graph.png Graphic file (type png)
+ [1
 
-<use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 59.
-(pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
-File: ./images/graph.png Graphic file (type png)
- <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 59.
-(pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
-File: ./images/graph.png Graphic file (type png)
- <use ./images/graph.png>
-Package pdftex.def Info: ./images/graph.png used on input line 59.
-(pdftex.def)             Requested size: 126.09187pt x 71.13188pt.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
-[1
+LaTeX Warning: Empty `thebibliography' environment on input line 66.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 74--78
-
- []
-
-<./images/bits.png, id=107, 542.025pt x 120.45pt>
-File: ./images/bits.png Graphic file (type png)
- <use ./images/bits.png>
-Package pdftex.def Info: ./images/bits.png used on input line 80.
-(pdftex.def)             Requested size: 142.26378pt x 31.614pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 104--106
-
- []
-
-<./images/remonte.png, id=109, 662.475pt x 330.23375pt>
-File: ./images/remonte.png Graphic file (type png)
-
-<use ./images/remonte.png>
-Package pdftex.def Info: ./images/remonte.png used on input line 121.
-(pdftex.def)             Requested size: 142.26378pt x 70.9132pt.
- [2 <./images/graph.png (PNG copy)> <./images/bits.png>]
-Underfull \hbox (badness 1442) in paragraph at lines 125--131
-\T1/cmr/m/n/10 vers un autre som-met du graphe. Une fois l'algorithme
- []
-
-
-Underfull \hbox (badness 1331) in paragraph at lines 125--131
-\T1/cmr/m/n/10 de 'u', dans le chemin le plus court al-lant de 's' à 'u'.
- []
-
-
-Underfull \hbox (badness 1270) in paragraph at lines 125--131
-\T1/cmr/m/n/10 ment les prédécesseurs, en par-tant du som-met 't' jusqu'à
- []
-
-
-Underfull \hbox (badness 3568) in paragraph at lines 125--131
-\T1/cmr/m/n/10 ce que l'on ait at-teint 's'. La com-plex-ité de la re-
- []
-
-
-Underfull \hbox (badness 4556) in paragraph at lines 125--131
-\T1/cmr/m/n/10 con-struc-tion est en O(m), où 'm' est la longueur du
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 125--131
-
- []
-
-<./images/no_pqueue.png, id=128, 371.3875pt x 210.7875pt>
-File: ./images/no_pqueue.png Graphic file (type png)
-
-<use ./images/no_pqueue.png>
-Package pdftex.def Info: ./images/no_pqueue.png used on input line 152.
-(pdftex.def)             Requested size: 170.72131pt x 96.89587pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--159
-
- []
-
-[3 <./images/remonte.png> <./images/no_pqueue.png>]
-<./images/performances.png, id=139, 596.2275pt x 220.825pt>
-File: ./images/performances.png Graphic file (type png)
-
-<use ./images/performances.png>
-Package pdftex.def Info: ./images/performances.png used on input line 179.
-(pdftex.def)             Requested size: 312.97864pt x 115.918pt.
-
-<./images/courbe_temps.png, id=140, 484.05844pt x 300.3722pt>
-File: ./images/courbe_temps.png Graphic file (type png)
-
-<use ./images/courbe_temps.png>
-Package pdftex.def Info: ./images/courbe_temps.png used on input line 193.
-(pdftex.def)             Requested size: 275.11847pt x 170.71652pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 200--203
-
- []
-
-[4 <./images/performances.png> <./images/courbe_temps.png (PNG copy)>]
-<./images/lab.png, id=153, 572.1375pt x 570.13pt>
-File: ./images/lab.png Graphic file (type png)
- <use ./images/lab.png>
-Package pdftex.def Info: ./images/lab.png used on input line 215.
-(pdftex.def)             Requested size: 128.0374pt x 127.58646pt.
-
-Underfull \hbox (badness 1210) in paragraph at lines 216--216
-[]\T1/cmr/m/n/10 Figure 7: []\T1/cmr/m/it/10 Modélisation du
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 220--221
-
- []
-
-
-Underfull \hbox (badness 5245) in paragraph at lines 222--225
-\T1/cmr/m/n/10 de graphe (voir Fig-ure [][]7[][]). On crée un som-met pour
- []
-
-
-Underfull \hbox (badness 1087) in paragraph at lines 222--225
-\T1/cmr/m/n/10 chaque case 'non-mur' (cases vides, télé-por-teurs, porte, clef)
-.
- []
-
-
-Underfull \hbox (badness 4726) in paragraph at lines 222--225
-\T1/cmr/m/n/10 Pour chaque som-met, on crée des arcs en-tre lui et ses
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 222--225
-
- []
-
-
-Underfull \hbox (badness 3989) in paragraph at lines 227--228
-\T1/cmr/m/n/10 Une fois le labyrinthe mod-élisé, il ne reste plus qu'à le
- []
-
-
-Underfull \hbox (badness 8170) in paragraph at lines 227--228
-\T1/cmr/m/n/10 ré-soudre à l'aide des al-go-rithmes préal-abl-ment im-ple-men-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
-
- []
-
-<./images/exo3.png, id=155, 903.375pt x 903.375pt>
-File: ./images/exo3.png Graphic file (type png)
- <use ./images/exo3.png>
-Package pdftex.def Info: ./images/exo3.png used on input line 234.
-(pdftex.def)             Requested size: 227.62204pt x 227.62138pt.
-
-<./images/manhattan_performances.png, id=156, 587.19376pt x 190.7125pt>
-File: ./images/manhattan_performances.png Graphic file (type png)
-
-<use ./images/manhattan_performances.png>
-Package pdftex.def Info: ./images/manhattan_performances.png used on input line
- 244.
-(pdftex.def)             Requested size: 284.5288pt x 92.41104pt.
- [5 <./images/lab.png (PNG copy)> <./images/manhattan_performances.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 258--260
-
- []
-
-
-Underfull \hbox (badness 1990) in paragraph at lines 261--265
-\T1/cmr/m/n/10 (clef, porte), (porte, sor-tie)) Dés qu'un
- []
-
-
-Underfull \hbox (badness 3557) in paragraph at lines 261--265
-\T1/cmr/m/n/10 chemin (ou un chemin plus court que
- []
-
-
-Underfull \hbox (badness 5696) in paragraph at lines 261--265
-\T1/cmr/m/n/10 le précè-dent) est trouvé, il no-ti-fie le
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 261--265
-
- []
-
-
-Underfull \hbox (badness 2080) in paragraph at lines 266--269
-\T1/cmr/m/n/10 que lire les chemins des clients, et es-
- []
-
-
-Underfull \hbox (badness 5403) in paragraph at lines 266--269
-\T1/cmr/m/n/10 saye de trou-ver une so-lu-tion en con-
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 266--269
-\T1/cmr/m/n/10 caté-nant les chemins. Si une so-lu-tion
- []
-
-
-Underfull \hbox (badness 3118) in paragraph at lines 266--269
-\T1/cmr/m/n/10 con-vient, il no-ti-fie ces clients (via des
- []
-
-
-Underfull \hbox (badness 3428) in paragraph at lines 266--269
-\T1/cmr/m/n/10 'sig-naux') d'afficher leur chemin, et de
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 266--269
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 270--273
-
- []
-
-[6 <./images/exo3.png (PNG copy)>]
-<./images/valgrind.png, id=177, 702.625pt x 461.725pt>
-File: ./images/valgrind.png Graphic file (type png)
-
-<use ./images/valgrind.png>
-Package pdftex.def Info: ./images/valgrind.png used on input line 307.
-(pdftex.def)             Requested size: 341.43742pt x 224.37317pt.
- [7 <./images/valgrind.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 356.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 356.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 68.
+[3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 68.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 356.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 356.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 68.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 68.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 5976B1A4B92FE23794C5032C56FFAF7F;1407.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 356.
+(rerunfilecheck)             Checksum: 29B64743498C99D52E7D47B9A2E66056;776.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 68.
  ) 
 Here is how much of TeX's memory you used:
- 9422 strings out of 494924
- 137056 string characters out of 6179708
- 235309 words of memory out of 5000000
- 12572 multiletter control sequences out of 15000+600000
- 12452 words of font info for 31 fonts, out of 8000000 for 9000
+ 9292 strings out of 494924
+ 134619 string characters out of 6179708
+ 232715 words of memory out of 5000000
+ 12483 multiletter control sequences out of 15000+600000
+ 11766 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,8n,38p,942b,444s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,6n,38p,942b,318s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </hom
-e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/rperei
-ra/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/rpereira/.texm
-f-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/rpereira/.texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/rpereira/.texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecrm1200.600pk> </home/rpereira/.texmf-var/fonts/pk/ljfour/jk
-nappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (8 pages, 374081 bytes).
+e/rpereira/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/rperei
+ra/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/rpereira/.texm
+f-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/rpereira/.texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/rpereira/.texmf-var/fonts/pk/l
+jfour/jknappen/ec/ecrm1728.600pk>
+Output written on rapport.pdf (3 pages, 62684 bytes).
 PDF statistics:
- 550 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
+ 18 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

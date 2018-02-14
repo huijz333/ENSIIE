@@ -1,0 +1,68 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{floatrow}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{wrapfig}
+\usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
+
+%title setup
+\title{MPM2 Projet Mathématique 2017-2018}
+\author{
+			Etienne TAILLEFER DE LAPORTALIERE \\
+			Romain PEREIRA\\
+			Cyril PIQUET
+}
+\date{13/02/2018}
+
+% table of contents setup
+\renewcommand{\contentsname}{Sommaire}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=red
+}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+
+	\section*{Préambule}
+
+		Ce projet est réalisé dans le cadre de nos études à l'ENSIIE.
+		L'objectif est de modéliser un marché financier et de déterminer les prix et la couverture d'option européenne.
+
+	\section{Modèle de Cox-Ross-Rubinstein}
+		\subsection{Premier pricer}
+		\subsection{Deuxième pricer}
+		\subsection{Comparaison}
+		\subsection{La couverture}
+		
+	\section{Modèle de Black-Scholes}
+		\subsection{Le modèle}
+		\subsection{Le pricer par la méthode de Monte-Carlo}
+		\subsection{Le pricer par formule fermée}
+		
+	\section{Convergence des prix}
+	
+	\section{EDP de Black-Scholes}
+		
+	\newpage
+	\section{Références}
+		\begin{thebibliography}{}
+		\end{thebibliography}
+
+\end{document}
