@@ -50,8 +50,6 @@
 
 	\newpage
 	\section{Modèle de Cox-Ross-Rubinstein}
-		On a \( \boxed{l = 2^N} \) trajectoire possible pour l'évolution du prix de l'actif risqué, entre l'instant initial 1 et l'instant final N.\newline
-		On a \( \boxed{N + 1}   \) valeurs possibles pour \( S^{N}_{t_N} \)\newline
 		\textbf{1.} \(\mathbb{Q}\) est la probabilité risque-neutre, vérifiant: \( \mathbb{E}_{\mathbb{Q}}[T^{(N)}_{1}] = 1 + r_N \)
 		\newline
 		On note: \( q_n = \mathbb{Q}(T^{(N)}_1 = 1 + h_N) \)
