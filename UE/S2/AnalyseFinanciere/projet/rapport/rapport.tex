@@ -52,6 +52,10 @@
 	\section{Modèle de Cox-Ross-Rubinstein}
 		On a \( \boxed{l = 2^N} \) trajectoire possible pour l'évolution du prix de l'actif risqué, entre l'instant initial 1 et l'instant final N.\newline
 		On a \( \boxed{N + 1}   \) valeurs possibles pour \( S^{N}_{t_N} \)\newline
+		\newline
+		INSERT SCHEMA ICI ILLUSTRANT LES 2 VALEURS PRECEDENTES
+		\newline
+		
 		\textbf{1.} \(\mathbb{Q}\) est la probabilité risque-neutre, vérifiant: \( \mathbb{E}_{\mathbb{Q}}[T^{(N)}_{1}] = 1 + r_N \)
 		\newline
 		On note: \( q_n = \mathbb{Q}(T^{(N)}_1 = 1 + h_N) \)
@@ -59,11 +63,25 @@
 		\begin{align}
 			\begin{split}
 				\mathbb{E}_{\mathbb{Q}}[T^{(N)}_1] &= \sum_{t \in T^{(N)}_{1}(\Omega)}x 	\mathbb{P}(T^{(N)}_{1} = t) \\
-										\qquad &= (1 + h_n) * q_N + (1 + b_n) * (1 - q_n) \\
+										\qquad &= (1 + h_n) q_N + (1 + b_n) (1 - q_n) \\
 										\qquad &= 1 + r_N \\					
 										\qquad \Rightarrow \Aboxed{q_N &= \frac{r_N - b_N}{h_N - b_N}}
 			\end{split}
 		\end{align}
+		
+		\textbf{2.} Soit \(   p_(N) = \frac{1}{(1 + r_N)^N} \mathbb{E}_{\mathbb{Q}}[f(S^{(N)}_{t_N})]   \),
+		le prix de l'option qui paye \( f(S^{(N)}_{t_N} \). On a:
+		\begin{align}
+			\begin{split}
+				\bullet \qquad p_{(0)} 	&= f(s) \\
+				\bullet \qquad p_{(1)} 	&= \frac{1}{(1 + r_N)^1} \mathbb{E}_{\mathbb{Q}}[f(S^{(N)}_{t_1})] \\
+										&= \frac{1}{(1 + r_N)^1} \mathbb{E}_{\mathbb{Q}}[f(T^{(N)}_{1} S^{(N)}_{t_0})] \\
+										&= \frac{1}{1 + r_N} [ q_N f[(1 + h_N)  s] + (1 - q_N) f[(1 + b_N)  s)] ] \\
+										&= [...] \text{ (en se basant sur l'arbre de la figure 1)}\\
+				\bullet \qquad p_{(N)} 	&= \frac{1}{(1 + r_N)^N} \sum^{N}_{k = 0} {N\choose k} q_N^k (1 - q_N)^{N - k} f((1 + h_N)^k (1 + b_N)^{N - k})
+			\end{split}
+		\end{align}
+	
 		\subsection{Premier pricer}
 		\subsection{Deuxième pricer}
 		\subsection{Comparaison}

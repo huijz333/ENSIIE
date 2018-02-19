@@ -1,0 +1,65 @@
+---
+title: "TP1"
+author: "Romain PEREIRA"
+date: "19 février 2018"
+output: pdf_document
+---
+
+## Se rendre dans le dossier de travail
+```{r, include=TRUE}
+# setwd("/home/rpereira/ENSIIE/UE/S2/R/TP1")
+```
+
+
+## Sauvegarder des données vers un fichier ".txt" ou ".csv"
+```{r, include=TRUE}
+n <- 40
+df <- data.frame("Gaussienne" = rnorm(n),     "Uniforme"      = runif(n),
+                 "Poisson"    = rpois(n, 1),  "Exponentielle" = rexp(n),
+                 "Chi"        = rchisq(n, 1), "Binomiale"     = rbinom(n, 2, 0.5),
+                 "Cauchy"     = rcauchy(n))
+write.csv(df, file="./samples_40.csv")
+# ou:
+write.table(df, file="./samples_40.txt")
+```
+
+
+## Charger des données depuis un fichier ".txt" ou ".csv"
+```{r, include=TRUE}
+read.csv(file="./samples_40.csv", header=TRUE)["Gaussienne"]
+# ou
+read.table(file="./samples_40.txt", header=TRUE)["Gaussienne"]
+```
+
+## Tracé d'un échantillon de 10 points pour la loi normal N(0, 1)
+```{r, include=TRUE}
+centree_reduite <- function(n) {
+  x <- 1:n
+  y <- rnorm(n, 0, 1)
+  plot(x, y)
+  abline(h=0)
+  abline(h=-1)
+  abline(h=1)
+}
+```
+
+```{r, include=TRUE}
+centree_reduite(10)
+```
+
+```{r, include=TRUE}
+centree_reduite(100)
+```
+
+```{r, include=TRUE}
+centree_reduite(1000)
+```
+
+On remarque qu'il y a environ autant de valeurs positives que négatives (loi normal centrée réduite).
+
+## Moment d'ordre
+# 1: Moyenne
+# 2 : Variance
+# 3 : Skewness (< 0 => valeurs centrée à gauche de la moyenne, > 0 => centré à droite)
+# 4 : Kurtosis : tends vers +oo => tends vers loi uniforme , tends vers 0 => dirac
+
