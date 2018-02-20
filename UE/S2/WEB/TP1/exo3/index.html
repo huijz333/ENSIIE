@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+ - File              : index.html
+ - Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
+ - Date              :27 CET
+ - Last Modified Date: mar. 20 févr. 2018 12:08:37 CET
+ - Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
+-->
+<html>
+
+<head>
+	<!-- pour les accents -->
+	<meta charset="UTF-8">
+
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+	<title>Introduction à la programmation web</title>
+</head>
+
+<header>
+</header>
+
+
+<body>
+
+ 	<div class="flex-container">
+
+		<!-- header -->
+		<header>
+			<h1>Introduction à la programmation web</h1>
+			Cette page a pour objectif de faire le point sur <i> quelques </i>
+			informations en <span class="sigle">HTML</span>/<span class="sigle">CSS</span>
+		</header>
+
+		<!-- navbar -->
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="page_test.html">Secret</a></li>
+				<li><a href="page_test.html">Secret 2</a></li>
+			</ul> 
+		</nav>	
+
+
+		<!-- Corps principal -->
+		<div class="main_body">
+			<h2>HTML et CSS</h2>
+			<table>
+				<caption><span class="sigle">HTML</span> ou <span class="sigle">CSS</span>?</caption>
+				<tr>	<th></th>					<th><p class="sigle">HTML</p></th>		<th><span class="sigle">CSS</span></th>	</tr>
+				<tr>	<td>titre de la page</td>	<td>x</td>								<td></td>								</tr>
+				<tr>	<td>couleur du titre</td>	<td></td>								<td>x</td>								</tr>
+				<tr>	<td>liste numérotée</td>	<td>x</td>								<td></td>								</tr>
+				<tr>	<td>largeur du menu</td>	<td></td>								<td>x</td>								</tr>
+			</table>
+
+
+			<h2>Démonstration</h2>
+			Une petite vidéo de présentation.<br><br/>
+
+			<video width=”320” height=”240” controls>
+				<source src="./video/video.ogv" type="video/ogv">
+				<source src="./video/video.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+
+			 <!-- <iframe width=320 height=240 src="https://www.youtube.com/watch?v=FzQrmfZsKAc"></iframe> -->
+
+			<br><br/>
+			<a href="./page_test.html">Lien vers ma page de test</a>
+		</div>
+
+
+
+		<!-- Références -->
+		<aside>
+			<h2>Références</h2>
+			Quelques liens utiles:
+			<ul>
+				<li>
+					<img src="./w3c.png" alt="w3c logo" width=42 height=24 />
+					<a href="https://www.w3schools.com/">Site du <span class="sigle">W3C</span></a>
+
+					<ul>
+						<li><a href="https://validator.w3.org/">validation html</a></li>
+						<li><a href="https://validator.w3.org/">validation css</a></li>
+					</ul>
+				</li>
+				<li><a href="https://www.w3.org/WAI/">Web Accessibility Initiative</a>
+			</ul>
+		</aside>
+
+	</div> <!-- flex container -->
+</body>
+
+</html>
+

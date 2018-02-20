@@ -1,0 +1,20 @@
+h1, h2 {
+	color:#58acfa;
+}
+
+table, tr, td, th {
+	border: 1px solid grey;
+	border-collapse: collapse;
+}
+
+a {
+	color: cyan;
+}
+
+i {
+	color: red;
+}
+
+.sigle {
+	font-weight: bold;
+}

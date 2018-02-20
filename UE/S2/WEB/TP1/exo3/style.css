@@ -1,0 +1,55 @@
+h1, h2 {
+	color:#58acfa;
+}
+
+table, tr, td, th {
+	border: 1px solid grey;
+	border-collapse: collapse;
+}
+
+a {
+	color: cyan;
+}
+
+i {
+	color: red;
+}
+
+.sigle {
+	font-weight: bold;
+}
+
+nav {
+	font-size: 24px;
+	padding-top: 16px;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    width: 60px;
+    color: red;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    background-color: yellow;
+}
+
+header {
+	background: green;
+}
+
+aside {
+	background: purple;
+}
+
+.main_body {
+	background: pink;
+}
+
+.flex-container {
+}
