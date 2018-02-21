@@ -2,7 +2,9 @@
 title: "TP1"
 author: "Romain PEREIRA"
 date: "19 février 2018"
-output: pdf_document
+output:
+  pdf_document:
+    fig_caption: yes
 ---
 
 ## Se rendre dans le dossier de travail
@@ -12,7 +14,7 @@ output: pdf_document
 
 
 ## Sauvegarder des données vers un fichier ".txt" ou ".csv"
-```{r, include=TRUE}
+```{r, include=FALSE}
 n <- 40
 df <- data.frame("Gaussienne" = rnorm(n),     "Uniforme"      = runif(n),
                  "Poisson"    = rpois(n, 1),  "Exponentielle" = rexp(n),
@@ -31,7 +33,7 @@ read.csv(file="./samples_40.csv", header=TRUE)["Gaussienne"]
 read.table(file="./samples_40.txt", header=TRUE)["Gaussienne"]
 ```
 
-## Tracé d'un échantillon de 10 points pour la loi normal N(0, 1)
+## Tracer d'un échantillon de 10 points pour la loi normal N(0, 1)
 ```{r, include=TRUE}
 centree_reduite <- function(n) {
   x <- 1:n
@@ -55,7 +57,59 @@ centree_reduite(100)
 centree_reduite(1000)
 ```
 
-On remarque qu'il y a environ autant de valeurs positives que négatives (loi normal centrée réduite).
+On remarque qu'il y a environ autant de valeurs positives (dans [0, 1]) que négatives (dans [-1, 0]) (loi normal centrée réduite).
+
+ \newpage
+Je définie une fonction permettant de tracer un "data.frame", afin d'étudier la distribution qui nous est fournie.
+```{r, include=TRUE}
+tracer <- function(df, xrow, yrow) {
+  x <- unlist(df[xrow])
+  y <- unlist(df[yrow])
+  plot(x, y)
+}
+
+tracer(read.csv("./distribution_inconnue_1_100_realisations.csv"), "x", "X")
+```
+On obtient une figure qui n'est pas similaire à celle obtenu à partir de la loi N(0, 1).
+
+=> On peut donc supposer, qu'à priori, cette distribution ne suit pas une loi N(0, 1).
+
+Traçons les autres distributions générés précèdements:
+\newpage
+```{r, include=TRUE}
+df <- read.csv("./samples_40.csv")
+tracer(df, "X", "Gaussienne")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Uniforme")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Poisson")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Exponentielle")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Chi")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Binomiale")
+```
+
+\newpage
+```{r, include=TRUE}
+tracer(df, "X", "Cauchy")
+```
 
 ## Moment d'ordre
 # 1: Moyenne
