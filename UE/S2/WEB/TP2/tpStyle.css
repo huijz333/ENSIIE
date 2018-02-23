@@ -1,0 +1,9 @@
+h1{
+  text-align: center;
+  /* complétez le style des titres principaux de page */
+  color:blue;
+}
+
+p.erreur{
+  color: red;
+}
