@@ -6,7 +6,6 @@ output:
   pdf_document:
     fig_caption: yes
 ---
-
 ## Se rendre dans le dossier de travail
 ```{r, include=TRUE}
 # setwd("/home/rpereira/ENSIIE/UE/S2/R/TP1")
@@ -14,11 +13,11 @@ output:
 
 
 ## Sauvegarder des données vers un fichier ".txt" ou ".csv"
-```{r, include=FALSE}
+```{r, include=TRUE}
 n <- 40
 df <- data.frame("Gaussienne" = rnorm(n),     "Uniforme"      = runif(n),
                  "Poisson"    = rpois(n, 1),  "Exponentielle" = rexp(n),
-                 "Chi"        = rchisq(n, 1), "Binomiale"     = rbinom(n, 2, 0.5),
+                 "Chi"        = rchisq(n, 1), "Binomiale"     = rbinom(n, 1, 0.5),
                  "Cauchy"     = rcauchy(n))
 write.csv(df, file="./samples_40.csv")
 # ou:
@@ -28,92 +27,227 @@ write.table(df, file="./samples_40.txt")
 
 ## Charger des données depuis un fichier ".txt" ou ".csv"
 ```{r, include=TRUE}
-read.csv(file="./samples_40.csv", header=TRUE)["Gaussienne"]
+df <- read.csv(file="./samples_40.csv", header=TRUE)
+df["Gaussienne"]
 # ou
-read.table(file="./samples_40.txt", header=TRUE)["Gaussienne"]
+df2 <- read.table(file="./samples_40.txt", header=TRUE)
+df2["Gaussienne"]
 ```
 
 ## Tracer d'un échantillon de 10 points pour la loi normal N(0, 1)
-```{r, include=TRUE}
-centree_reduite <- function(n) {
+```{r, include=TRUE, fig.height=5, fig.width=8}
+ns <- c(10, 100, 1000)
+for (n in ns) {
   x <- 1:n
   y <- rnorm(n, 0, 1)
-  plot(x, y)
+  plot(x, y, main=paste("Distribution centrée réduite à", n, "points"))
   abline(h=0)
   abline(h=-1)
   abline(h=1)
 }
 ```
 
-```{r, include=TRUE}
-centree_reduite(10)
-```
-
-```{r, include=TRUE}
-centree_reduite(100)
-```
-
-```{r, include=TRUE}
-centree_reduite(1000)
-```
-
-On remarque qu'il y a environ autant de valeurs positives (dans [0, 1]) que négatives (dans [-1, 0]) (loi normal centrée réduite).
+On remarque qu'il y a environ autant de valeurs positives que négatives, et que la répartition est d'autant plus dense que l'on se rapproche de l'axe y=0.
 
  \newpage
 Je définie une fonction permettant de tracer un "data.frame", afin d'étudier la distribution qui nous est fournie.
-```{r, include=TRUE}
+
+Traçons la distribution inconnue:
+
+```{r, include=TRUE, fig.height=5, fig.width=8}
 tracer <- function(df, xrow, yrow) {
   x <- unlist(df[xrow])
   y <- unlist(df[yrow])
-  plot(x, y)
+  plot(x, y, main=yrow)
 }
 
-tracer(read.csv("./distribution_inconnue_1_100_realisations.csv"), "x", "X")
-```
-On obtient une figure qui n'est pas similaire à celle obtenu à partir de la loi N(0, 1).
-
-=> On peut donc supposer, qu'à priori, cette distribution ne suit pas une loi N(0, 1).
-
-Traçons les autres distributions générés précèdements:
-\newpage
-```{r, include=TRUE}
-df <- read.csv("./samples_40.csv")
-tracer(df, "X", "Gaussienne")
+df_inconnu <- read.csv("./distribution_inconnue_1_100_realisations.csv")
+tracer(df_inconnu, "x", "X");
 ```
 
-\newpage
-```{r, include=TRUE}
-tracer(df, "X", "Uniforme")
+... afin de les comparer avec les distributions générés précdémment:
+
+```{r, include=TRUE, fig.height=5, fig.width=8}
+distributions <- c("Gaussienne", "Uniforme", "Poisson", "Exponentielle", "Chi", "Binomiale", "Cauchy");
+for (distri in distributions) {
+  tracer(df, "X", distri);
+}
 ```
+On remarque qu'il semble plus probable que la distribution ne semble à priori pas suivre une loi N(0, 1), mais plutot une loi uniforme dans [0, 100]
 
 \newpage
+## Histogramme
+Je définis une fonction qui trace l'histogramme correspondant à la colonne 'row' du dataframe 'df'
 ```{r, include=TRUE}
-tracer(df, "X", "Poisson")
+tracer <- function(df, row, title) {
+  hist(unlist(df[row]), breaks="Sturges", xlab=row, main=paste("Distribution", title));
+}
+tracer(df_inconnu, "X", "Inconnue");
 ```
+L'histogramme semble indiqué que la distribution inconnue suit une loi uniforme.
 
 \newpage
-```{r, include=TRUE}
-tracer(df, "X", "Exponentielle")
-```
-
-\newpage
-```{r, include=TRUE}
-tracer(df, "X", "Chi")
-```
-
-\newpage
-```{r, include=TRUE}
-tracer(df, "X", "Binomiale")
+```{r, include=TRUE, fig.height=5, fig.width=8}
+for (distri in distributions) {
+  tracer(df, distri, distri);
+}
 ```
 
 \newpage
-```{r, include=TRUE}
-tracer(df, "X", "Cauchy")
-```
-
 ## Moment d'ordre
-# 1: Moyenne
-# 2 : Variance
-# 3 : Skewness (< 0 => valeurs centrée à gauche de la moyenne, > 0 => centré à droite)
-# 4 : Kurtosis : tends vers +oo => tends vers loi uniforme , tends vers 0 => dirac
+Générons une matrice (sous forme de data.frame) contenant les moments des ordres 1, 2, 3 et 4 de nos distributions.
+```{r, include=TRUE, fig.height=5, fig.width=8}
+library("moments")
+ajouter_ligne <- function(matrice, valeurs, nom) {
+  v <- unlist(valeurs)
+  m  <- data.frame(nom, mean(v), var(v), skewness(v), kurtosis(v))
+  names(m) <- c("Distribution", "Esperance", "Variance", "Skewness", "Kurtosis")
+  return (rbind(matrice, m))
+}
 
+matrice <- ajouter_ligne(data.frame(), df_inconnu["X"], "Inconnue")
+for (distri in distributions) {
+  matrice <- ajouter_ligne(matrice, df[distri], distri)
+}
+print(matrice, digits=5)
+```
+
+Pour les distributions suivantes, les valeurs théorique des moments sont:
+
+* Gaussienne ($\mu = 0, \sigma = 1$)
+    + Espérance : $0$
+    + Variance  : $1$
+    + Skewness : $0$
+    + Kurtosis : $3$
+
+* Uniforme ($a = 0, b = 1$)
+    + Espérance : $\frac{1}{2} = 0.5$
+    + Variance  : $\frac{1}{12} = 0.084$
+    + Skewness : $0$
+    + Kurtosis : $1.8$ => l'extrémité de la densité tend rapidement vers 0.
+    
+* Poisson ($\lambda = 1$)
+    + Espérance : $1$
+    + Variance  : $1$
+    + Skewness : $1$
+    + Kurtosis : $4$
+
+* Exponentielle ($\lambda = 1$)
+    + Espérance : $1$
+    + Variance  : $1$
+    + Skewness : $2$ => notre densité est dissymétrique vers la droite.
+    + Kurtosis : $9$
+
+* $\chi^2$ (Chi carré) ($df = 1$ (degree of freedom <=> degrée de liberté))
+    + Espérance : $1$
+    + Variance  : $2$
+    + Skewness : $\sqrt{8}=2.8$ => notre densité est dissymétrique vers la droite.
+    + Kurtosis : $15$
+
+* Binomiale ($n=1, p=0.5$)
+    + Espérance : $0.5$
+    + Variance  : $0.25$
+    + Skewness : $0$ => notre densité est symétrique.
+    + Kurtosis : $1$
+    
+* Cauchy : les moments sont non-définis.
+
+NB: Les Kurtosis utilisés sont 'non-normalisé' : j'ai ajouté '+ 3' aux valeurs théoriques normalisés ("Excess Kurtosis").
+
+Les résultats obtenus suivent les valeurs théoriques des différents moments, mais peuvent parfois s'en éloigner selon les échantillons générés.
+
+L'hypothèse précèdente semble d'autant plus probable car les Kurtosis de la distribution inconnue sont égal à ceux d'une distribution uniforme.
+
+\newpage
+## Quantiles et Boxplot
+```{r, include=TRUE, fig.height=5, fig.width=8}
+for (distri in distributions) {
+  x <- unlist(df[distri])
+  boxplot(x, main=distri)
+}
+
+# genere les colonnes Q1, Q2 et Q3
+Q  <- quantile(unlist(df_inconnu["X"]), c(0.25, 0.5, 0.75))
+Q1 <- c(Q[1])
+Q2 <- c(Q[2])
+Q3 <- c(Q[3])
+for (distri in distributions) {
+  Q  <- quantile(unlist(df[distri]), c(0.25, 0.5, 0.75))
+  Q1 <- c(Q1, Q[1])
+  Q2 <- c(Q2, Q[2])
+  Q3 <- c(Q3, Q[3])
+}
+
+# ajoute les colonnes au data frame
+matrice <- cbind(matrice, Q1)
+matrice <- cbind(matrice, Q2)
+matrice <- cbind(matrice, Q3)
+print(matrice, digits=5)
+```
+
+\newpage
+## Interpretation visuelle
+```{r, include=TRUE, fig.height=5, fig.width=8}
+# genere des distriutions de cauchy, avec n=100, et (x0, a) dans {(0, 1), (1, 1), (0, 2)}
+n <- 100
+params <- list(c(0, 1), c(50, 1), c(0, 4))
+
+# genere le nom des colonnes
+noms <- c()
+for (p in params) {
+  x0   <- p[1]
+  a    <- p[2]
+  noms <- c(noms, paste("Cauchy(", x0, ",", a, ")", sep=""))
+}
+
+# genere le data frame
+df <- data.frame(matrix(ncol=length(params), nrow=n))
+names(df) <- noms
+for (i in 1:length(params)) {
+  nom <- noms[i]
+  x0  <- params[[i]][1]
+  a   <- params[[i]][2]
+  df[nom] <- rcauchy(n, location=x0, scale=a)
+}
+print(df)
+
+# export en .csv
+write.csv(df, file="./cauchy_100.csv")
+
+# trace les distributions en nuage de points
+x <- 1:n
+for (nom in noms) {
+  y <- unlist(df[nom])
+  plot(x, y, main=nom)
+}
+
+# trace les distributions en histogramme
+for (nom in noms) {
+  y <- unlist(df[nom])
+  hist(y, breaks="Sturges", xlab=nom, main=nom)
+}
+
+# genere les moments et les quantiles
+library("moments")
+ajouter_ligne <- function(matrice, valeurs, nom) {
+  x <- unlist(valeurs)
+  Q <- quantile(x, c(0.25, 0.5, 0.75))
+  m  <- data.frame(nom, mean(x), var(x), skewness(x), kurtosis(x), Q[[1]][1], Q[[2]][1], Q[[3]][1])
+  names(m) <- c("Distribution", "Esperance", "Variance", "Skewness", "Kurtosis", "Q1", "Q2", "Q3")
+  return (rbind(matrice, m))
+}
+
+matrice <- data.frame()
+for (nom in noms) {
+  matrice <- ajouter_ligne(matrice, df[nom], nom)
+}
+print(matrice, digits=3)
+
+# trace les distributions avec boxplot
+for (nom in noms) {
+  y <- unlist(df[nom])
+  boxplot(y, main=nom)
+}
+```
+
+On remarque qu'une distribution de Cauchy(x0, a) a une forte probabilité d'avoir des valeurs dans [x0 - a, x0 + a], mais que certains tirages peuvent rapidement s'éloigner de cette intervalle.
