@@ -1,5 +1,5 @@
 ---
-title: "TP1"
+title: "TP1 stats"
 author: "Romain PEREIRA"
 date: "19 février 2018"
 output:
@@ -55,14 +55,14 @@ Je définie une fonction permettant de tracer un "data.frame", afin d'étudier l
 Traçons la distribution inconnue:
 
 ```{r, include=TRUE, fig.height=5, fig.width=8}
-tracer <- function(df, xrow, yrow) {
-  x <- unlist(df[xrow])
-  y <- unlist(df[yrow])
+tracer <- function(data, xrow, yrow) {
+  x <- unlist(data[xrow])
+  y <- unlist(data[yrow])
   plot(x, y, main=yrow)
 }
 
 df_inconnu <- read.csv("./distribution_inconnue_1_100_realisations.csv")
-tracer(df_inconnu, "x", "X");
+tracer(df_inconnu, "X", "x");
 ```
 
 ... afin de les comparer avec les distributions générés précdémment:
@@ -73,23 +73,21 @@ for (distri in distributions) {
   tracer(df, "X", distri);
 }
 ```
-On remarque qu'il semble plus probable que la distribution ne semble à priori pas suivre une loi N(0, 1), mais plutot une loi uniforme dans [0, 100]
 
 \newpage
 ## Histogramme
 Je définis une fonction qui trace l'histogramme correspondant à la colonne 'row' du dataframe 'df'
 ```{r, include=TRUE}
-tracer <- function(df, row, title) {
-  hist(unlist(df[row]), breaks="Sturges", xlab=row, main=paste("Distribution", title));
-}
-tracer(df_inconnu, "X", "Inconnue");
+hist(unlist(df_inconnu["x"]), xlab="Distribution Inconnue", main="Distribution Inconnue")
+hist(unlist(df_inconnu["x"]), xlab="Distribution Inconnue", breaks=50, main="Distribution Inconnue")
+hist(unlist(df_inconnu["x"]), xlab="Distribution Inconnue", freq=TRUE, main="Distribution Inconnue")
 ```
-L'histogramme semble indiqué que la distribution inconnue suit une loi uniforme.
+On remarque qu'il est probable que la distribution suit une loi normale $\mu=0, \sigma^2=5$.
 
 \newpage
 ```{r, include=TRUE, fig.height=5, fig.width=8}
 for (distri in distributions) {
-  tracer(df, distri, distri);
+  hist(unlist(df[distri]), xlab=distri, main=paste("Distribution", distri))
 }
 ```
 
@@ -105,7 +103,7 @@ ajouter_ligne <- function(matrice, valeurs, nom) {
   return (rbind(matrice, m))
 }
 
-matrice <- ajouter_ligne(data.frame(), df_inconnu["X"], "Inconnue")
+matrice <- ajouter_ligne(data.frame(), df_inconnu["x"], "Inconnue")
 for (distri in distributions) {
   matrice <- ajouter_ligne(matrice, df[distri], distri)
 }
@@ -152,11 +150,11 @@ Pour les distributions suivantes, les valeurs théorique des moments sont:
     
 * Cauchy : les moments sont non-définis.
 
-NB: Les Kurtosis utilisés sont 'non-normalisé' : j'ai ajouté '+ 3' aux valeurs théoriques normalisés ("Excess Kurtosis").
+NB: Les Kurtosis utilisés sont 'non-normalisés' : j'ai ajouté '+ 3' aux valeurs théoriques normalisés ("Excess Kurtosis").
 
 Les résultats obtenus suivent les valeurs théoriques des différents moments, mais peuvent parfois s'en éloigner selon les échantillons générés.
 
-L'hypothèse précèdente semble d'autant plus probable car les Kurtosis de la distribution inconnue sont égal à ceux d'une distribution uniforme.
+L'hypothèse précèdente ('la distribution inconnue suit une loi normal $\mu=0, \sigma=5$ ') semble d'autant plus probable, car les Kurtosis de la distribution inconnue sont égal à ceux d'une telle distribution normale.
 
 \newpage
 ## Quantiles et Boxplot
@@ -167,7 +165,7 @@ for (distri in distributions) {
 }
 
 # genere les colonnes Q1, Q2 et Q3
-Q  <- quantile(unlist(df_inconnu["X"]), c(0.25, 0.5, 0.75))
+Q  <- quantile(unlist(df_inconnu["x"]), c(0.25, 0.5, 0.75))
 Q1 <- c(Q[1])
 Q2 <- c(Q[2])
 Q3 <- c(Q[3])
@@ -226,6 +224,14 @@ for (nom in noms) {
   y <- unlist(df[nom])
   hist(y, breaks="Sturges", xlab=nom, main=nom)
 }
+
+# trace les distributions en histogramme sur la meme figure ...
+for (nom in noms) {
+  y <- unlist(df[nom])
+  hist(y, breaks="Sturges", xlab=nom, main=nom)
+  par(new=TRUE)
+}
+par(new=FALSE)
 
 # genere les moments et les quantiles
 library("moments")
