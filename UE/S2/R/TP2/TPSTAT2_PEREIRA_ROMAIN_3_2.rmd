@@ -1,0 +1,130 @@
+---
+title: "TP2 stats"
+author: "Romain PEREIRA"
+date: "5 Mars 2018"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    fig_caption: yes
+---
+
+# 1. Echantillon, Théorème Central Limite, Estimation Monte Carlo
+### 1.1 Simulation de 1000 échantillon i.i.d gaussien.
+```{r, include=TRUE}
+N <- 1000
+n <- c(5, 30, 100)
+
+empirical_mean <- function(vec) {
+  s <- 0
+  for (x in vec) {
+    s <- s + x
+  }
+  return (s / (length(vec) - 1))
+}
+
+empirical_var <- function(vec) {
+  m <- empirical_mean(vec)
+  s <- 0
+  for (x in vec) {
+    s <- s + (x - m) * (x - m)
+  }
+  return (s / (length(vec) - 1))
+}
+
+# fonction 'mean_hist'
+#
+# 'law' : fonction qui genere un vecteur de taille 'm', e.g: law(42)
+# 'title': titre de l'histogramme
+#
+# La fonction trace 3 histogrammes de la loi de la moyenne empirique
+# sur 'N' echantillons de taille dans 'ns'
+mean_hist <- function(law, title) {
+  for (nj in n) {
+    sample <- law(nj * N)
+    means <- c()
+    for (i in 1:N) {
+      subsample <- sample[((i-1)*nj + 1): (i * nj)]
+      Xni <- empirical_mean(subsample)
+      # vni <- empirical_var(subsample)
+      means <- c(means, Xni)
+    }
+    hist(means, xlab=paste("Moyenne empirique, enchantillon de taille n=", nj), main=title)
+  }
+}
+
+mean_hist(function(m) { return (rnorm(m, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
+```
+
+D'après le théorème central limite, la moyenne empirique suit approximativement une loi normal $N(\mu=1, \sigma=2/\sqrt{n})$
+
+En notant $(a_n, b_n) = (\mu, \frac{\sigma}{\sqrt{n}}) = (1, \frac{2}{\sqrt{n}})$,
+$U_n = \frac{\bar{X_n} - a_n}{b_n}$ suit une loi normal centrée réduite $N(0, 1)$.
+
+```{r, include=TRUE}
+# fonction 'mean_norm_hist'
+#
+# 'law' : fonction qui genere un vecteur de taille 'm', e.g: law(42)
+# 'title': titre de l'histogramme
+#
+# La fonction trace 3 histogrammes de la loi de la moyenne empirique renormalisé
+# sur 'N' echantillons de taille dans 'ns'
+mean_norm_hist <- function(law, title) {
+  for (nj in n) {
+    sample <- law(nj * N)
+    Xn <- empirical_mean(sample)
+    Un <- c()
+    for (i in 1:N) {
+      subsample <- sample[((i-1)*nj + 1): (i * nj)]
+      ani       <- empirical_mean(subsample)
+      bni       <- empirical_var(subsample) / sqrt(nj)
+      Uni       <- (Xn - ani) / bni
+      Un        <- c(Un, Uni)
+    }
+    hist(Un, xlab=paste("Moyenne empirique, enchantillon de taille n=", nj), main=title, breaks=nj)
+  }
+}
+
+mean_norm_hist(function(m) { return (rnorm(m, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
+```
+
+Les histogrammes obtenus montrent en effet une loi normale centrée réduite.
+
+Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1).
+(cf [Théorème Central Limite](https://fr.wikipedia.org/wiki/Théorème_central_limite))
+
+### 1.2 Loi de Pareto
+
+### 1.3 Loi de Poisson
+Soit $X$ une variable aléatoire suivant une loi de Poisson $P(\lambda)$.
+Alors, $\mathbb{E}[X]=\lambda$ et $\mathbb{V}[X]=\lambda$
+
+```{r, include=TRUE, echo=TRUE}
+mean_hist(function(m) { return (rpois(m, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
+mean_norm_hist(function(m) { return (rpois(m, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
+```
+
+De même, plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1).
+
+### 1.4 Méthode d'expérimentation
+On note $X=(X_1, ..., X_n)$ pour $n \in \mathbb{R}$,
+un échantillon de taille $n$ (simulable 'facilement')
+
+On suppose que tous les $X_i$ son i.i.d, et suivent la même loi.
+
+Soit $T : \Omega^n \rightarrow \mathbb{R}$ une statistique sur un echantillon de taille $n$.
+
+On peut trouver une approximation de l'espérance $\mathbb{E}[T(X)]$ en utilisant le protocole suivant:
+
+1. Fixer $N \in \mathbb{N}, N \gg 1$.
+2. Générer $N$ échantillons de taille $n$, notés $X^i = (X^i_1, ..., X^i_n)$ avec $1 \leq i \leq N$
+3. Je pose
+  + $\bar T_N = \frac{1}{N}\sum_{i=1}^{N}{T(X^i)} = \sum_{i=1}^{N}{\frac{1}{N}T(X^i)}$.
+  + On a: $\mathbb{E}[\frac{1}{N}T(X^i)] = \frac{1}{N}\mathbb{E}[T(X^i)] = \frac{1}{N}\mathbb{E}[T(X)]$
+  + Lorsque  $N$ devient grand ($\rightarrow +\infty$), le théorème central limite affirme:
+    + $(1)$ $\mathbb{E}[\bar T_N] \rightarrow N \frac{1}{N}\mathbb{E}[T(X)] = \mathbb{E}[T(X)]$
+    + $(2)$ : $\mathbb{V}[\bar T_N] \sim (\sqrt N \frac{1}{N}\mathbb{V}[T(X)] = \frac{1}{\sqrt N}\mathbb{V}[T(X)] ) \rightarrow 0$
+4. Donc d'après $(1)$ et $(2)$, on a $\bar T_n{\xrightarrow {\mathbb {L} ^{2}} \mathbb{E}[T(X)] = cste}$
+Autrement dit, la moyenne empirique (entant que variable aléatoire), tends en norme 2 vers la v.a constante $\mathbb{E}[T(X)]$
+    
+
