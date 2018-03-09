@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * 
  * @author rpereira
  *
- *         Implementation de Liste doublement chainé
+ *         Implementation de Liste doublement chainé circulaire
  *
  * @param <E>
  *            : n'importe quel object
