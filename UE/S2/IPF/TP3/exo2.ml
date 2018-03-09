@@ -56,12 +56,7 @@ Printf.printf "-42 == %d\n" (list_min [42 ; 0 ; -42]) ;;
  *	@type   : 'a -> 'a list
  *	@return : le nombre d’occurrences de x dans la liste l
  *)
-let nb_occ =	function x -> function lst ->	List.fold_right
-						(function t -> function n ->
-							(if x = t then 1 else 0) + n)
-						lst
-						0
-		;;
+let nb_occ x lst = List.fold_right (function t -> function n -> (if x = t then 1 else 0) + n) lst 0 ;;
 Printf.printf "2 == %d\n" (nb_occ 1 [1 ; 0 ; 0 ; 1]) ;;
 
 (**	moyenne
@@ -76,7 +71,7 @@ let moyenne =	function lst ->
 					(0.0, 0)
 				in
 			let (sum, n) = sum_and_n lst in
-			sum /. float_of_int(n)
+			sum /. (float_of_int n)
 		;;
 Printf.printf "20.0 == %f\n" (moyenne [10.0 ; 20.0 ; 30.0] ) ;;
 
@@ -88,6 +83,53 @@ let rec list_map =	function lst ->
 				function f ->
 					match lst with
 					| []	-> []
-					| h::t	-> [f h]@(list_map t f)
+					| h::t	-> (f h)::(list_map t f)
 			;;
 
+(**	list_append
+ *	@type	: 'a list -> 'a list -> 'a list
+ *	@return : la liste concatenenant les 2 listes
+ *)
+let list_append =	function l1 ->
+				function l2 ->
+					List.fold_right	(function x ->
+								 function y ->
+								 	x::y
+							) l1 l2
+	;;
+
+let rec list_append2 =	function l1 ->
+				function l2 ->
+					match l1 with
+					| []	-> l2
+					| a::b	-> a::(list_append2 b l2)
+			;;
+
+(**
+ *	Montrez que pour toutes listes l1, l2,
+ *	list_length (list_append l1 l2) == (list_length l1) + (list_length l2)
+ *
+ *	Preuve en induction structurelle:
+ *	
+ *	0) Ici, l1 varie. On note la proprité P(l1)
+ *
+ *	1) Montrons P([]):
+ *		Pour toute liste l2, (list_append2 [] l2) renvoie l2.
+ *		Donc, par définition:
+ *			list_length (list_append2 [] l2) = list_length l2
+ *	=> P([]) est vrai.
+ *
+ *	2) On suppose que P(l1) est vrai pour toutes listes 'l1' de longueur <= n.
+ *	Soit l une liste de longueur n + 1, on note l = x::l1, avec l1 une
+ *	liste de longueur n. Montrons que P(l) est vrai:
+ *
+ *	Par définition, pour toute liste l2,
+ *		list_append2 l l2	= list_append2 (x::l1) l2
+ *					= x::(list_append2 l1 l2)
+ *	(list_append2 l1 l2) est de longueur (list_length l1) + (list_length l2) par hypothèse
+ *	Donc, list_length x::(list_append2 l1 l2) 	=
+ *		(list_length l1) + (list_length l2) + 1 = (list_length l + list_length l2)
+ *	=> P(l) est vrai.
+ *
+ *	3) Conclusion : Pour toute liste l, P(l) est vrai.
+ *)
