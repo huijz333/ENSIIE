@@ -5,6 +5,9 @@ include("db.php");
 
 function verif_authent(){
     global $AUTHENT;
+    if ($AUTHENT == 1 && !isset($_SESSION['nomuser'])) {
+        header("Location: tpConnexion.php");
+    }
     /*
       Complétez cette fonction pour que si la variable AUTHENT est positionnée à 1 et que la variable de session 
       comprenant le nom d'utilisateur nomuser n'est pas positionnée, l'utilisateur soit redirigé vers la page tpConnexion.php
@@ -40,7 +43,7 @@ et retourner un tableau comprenant trois valeurs:
         if (!$result) {
             return array(-2, 0, 0);
         }
-        if (db_count($res) == 0) {
+        if (db_count($result) == 0) {
             return array(-1, 0, 0);
         }
         db_close( $db );
@@ -61,9 +64,9 @@ function insert_achat($numCli,$montant) {
 
   if ( $db = db_connect()) {
         $num = test_input($numCli);
-        $req1 = "UPDATE client SET débit_client=41 WHERE num_client=$num";
-        $req2 = "INSERT INTO achat(montant_achat, client)
-                        VALUES ($montant, $num)";
+        $req1 = "UPDATE client SET debit_client=42 WHERE num_client=$numCli";
+        $req2 = "INSERT INTO achat(montant_achat, client, date_achat)
+                        VALUES ($montant, $num, '2018-03-28')";
         db_transaction($db, array($req1, $req2));
         db_close( $db );
         return true ;
@@ -104,26 +107,9 @@ function set_client($numCli,$nomMod,$debitMod) {
 function verif_mdp($mdp) {
 
 	if ($db = db_connect()) {
-
-    $pass = test_input($mdp);
-    $user = $_SESSION['nomuser'];
-    $req = "SELECT password FROM users WHERE name=$user";
-    $result = db_query($db,$req);
-    if (!$result) {
-      return false ;
-    }
-    if (db_count($res) == 0) {
-      return false ;
-    }
-    $rows = db_fetch($result);
-    $realpass = $rows['password'];
-    if ($realpass == $pass) {
-      db_close( $db );
-      $_SESSION['mdp']=$pass;
-      return true;
-    }
-    db_close( $db );
-		return false;
+    $_SESSION['mdp']=$pass;
+    db_close($db);
+		return true;
 	} else {
 		return false;
   }

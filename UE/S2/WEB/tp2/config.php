@@ -6,6 +6,6 @@ $nom_base = "tpphp";
 $nom_user = "tpphp";
 $mdp="tpphp";
 
-$AUTHENT=1;
+$AUTHENT=0;
 
 ?>

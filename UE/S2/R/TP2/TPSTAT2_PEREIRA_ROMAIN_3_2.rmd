@@ -49,11 +49,11 @@ mean_hist <- function(law, title) {
       # vni <- empirical_var(subsample)
       means <- c(means, Xni)
     }
-    hist(means, xlab=paste("Moyenne empirique, enchantillon de taille n=", nj), main=title)
+    hist(means, xlab=paste("Moyenne empirique, enchantillon de taille n=", nj), main=title, breaks=nj)
   }
 }
 
-mean_hist(function(m) { return (rnorm(m, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
+mean_hist(function(n) { return (rnorm(n, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
 ```
 
 D'après le théorème central limite, la moyenne empirique suit approximativement une loi normal $N(\mu=1, \sigma=2/\sqrt{n})$
@@ -81,11 +81,11 @@ mean_norm_hist <- function(law, title) {
       Uni       <- (Xn - ani) / bni
       Un        <- c(Un, Uni)
     }
-    hist(Un, xlab=paste("Moyenne empirique, enchantillon de taille n=", nj), main=title, breaks=nj)
+    hist(Un, xlab=paste("Moyenne empirique centrée, enchantillon de taille n=", nj), main=title, breaks=nj)
   }
 }
 
-mean_norm_hist(function(m) { return (rnorm(m, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
+mean_norm_hist(function(n) { return (rnorm(n, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
 ```
 
 Les histogrammes obtenus montrent en effet une loi normale centrée réduite.
@@ -94,14 +94,26 @@ Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une
 (cf [Théorème Central Limite](https://fr.wikipedia.org/wiki/Théorème_central_limite))
 
 ### 1.2 Loi de Pareto
+Soit $X$ une variable aléatoire suivant une loi de Pareto $P(a, \alpha), \alpha > 2$.
+Alors, $\mathbb{E}[X]=\frac{\alpha a}{\alpha - 1}$ et $\mathbb{V}[X]=(\frac{\alpha a}{\alpha - 1})^2\frac{\alpha}{\alpha - 2}$
+
+```{r, include=TRUE}
+library("rmutil")
+a     <- 1.0
+alpha <- 2.5
+mean_hist(function(n) { return (rpareto(n, m=a, s=alpha)) }, "Distribution suivant une loi de Pareto P(1.0, 2.5)")
+mean_norm_hist(function(n) { return (rpareto(n, m=a, s=alpha)) }, "Distribution suivant une loi de Pareto P(1.0, 2.5)")
+```
+
+Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1) (mais également loi exponentielle).
 
 ### 1.3 Loi de Poisson
 Soit $X$ une variable aléatoire suivant une loi de Poisson $P(\lambda)$.
 Alors, $\mathbb{E}[X]=\lambda$ et $\mathbb{V}[X]=\lambda$
 
 ```{r, include=TRUE, echo=TRUE}
-mean_hist(function(m) { return (rpois(m, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
-mean_norm_hist(function(m) { return (rpois(m, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
+mean_hist(function(n) { return (rpois(n, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
+mean_norm_hist(function(n) { return (rpois(n, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
 ```
 
 De même, plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1).
@@ -124,7 +136,99 @@ On peut trouver une approximation de l'espérance $\mathbb{E}[T(X)]$ en utilisan
   + Lorsque  $N$ devient grand ($\rightarrow +\infty$), le théorème central limite affirme:
     + $(1)$ $\mathbb{E}[\bar T_N] \rightarrow N \frac{1}{N}\mathbb{E}[T(X)] = \mathbb{E}[T(X)]$
     + $(2)$ : $\mathbb{V}[\bar T_N] \sim (\sqrt N \frac{1}{N}\mathbb{V}[T(X)] = \frac{1}{\sqrt N}\mathbb{V}[T(X)] ) \rightarrow 0$
-4. Donc d'après $(1)$ et $(2)$, on a $\bar T_n{\xrightarrow {\mathbb {L} ^{2}} \mathbb{E}[T(X)] = cste}$
-Autrement dit, la moyenne empirique (entant que variable aléatoire), tends en norme 2 vers la v.a constante $\mathbb{E}[T(X)]$
+4. Donc d'après $(1)$ et $(2)$, on a $\bar T_n{\xrightarrow {\mathbb {L} ^{2}} \mathbb{E}[T(X)] = cste}$.
+Autrement dit, la moyenne empirique (entant que variable aléatoire), tends en norme 2 vers la v.a constante $\mathbb{E}[T(X)]$.
+La moyenne empirique est une bonne estimation de l'espérance quand N tends vers l'infini.
     
 
+# 2. Moyenne et dispersion.
+### 2.1 Inégalité de Bienaymé Tchebychev
+Soit X une variable aléatoire admettant un moment d'ordre 2 (et donc un moment d'ordre 1).
+L'inégalité de Bienaymé-Tchebychev affirme:
+$\forall \alpha \in \mathbb{R}^*_+, \mathbb{P}(|X-\mathbb{E}[X]| \geq \alpha) \leq \frac{\mathbb{V}[X]}{\alpha^2}$
+
+Pour une loi Gaussienne $N(\mu, \sigma^2)$, on a : 
+$\mathbb{P}(|X-\mu| \geq \alpha) \leq \frac{\sigma^2}{\alpha^2}$
+
+Pour une loi de Poisson $P(\lambda)$, on a : 
+$\mathbb{P}(|X-\lambda| \geq \alpha) \leq \frac{\lambda}{\alpha^2}$
+
+### 2.2 Estimation par Monte Carlo.
+$(a)$ $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[\mathbb{1}_{\{|X-\mu| \geq \delta\}}] = \mathbb{E}[Z]$,
+en posant $Z = \mathbb{1}_{\{|X-\mu| \geq \delta\}}$
+
+$(b)$
+
+On estime $\mathbb{E}[Z]$ par la moyenne empirique $\bar Z_N = \frac{1}{N}\sum_{i=1}^{N}{T(Z^i)}$ :
+```{r, include=TRUE, echo=TRUE}
+estimate_monte_carlo <- function(N, delta, mu, sigma, a, alpha, lambda) {
+  # On genere des distributions
+  XN       <- list("Gauss" = rnorm(N, mu, sigma), "Pareto" = rpareto(N, a, alpha), "Poisson"= rpois(N, lambda))
+  XN_means <- list("Gauss"=mu,                    "Pareto"= alpha*a/(alpha - 1),   "Poisson" = lambda)
+  ZN       <- list()
+  ZN_means <- list()
+  # Pour chaque distributions
+  for (distrib in names(XN)) {
+    # on recupere la distribution
+    XNi      <- XN[[distrib]]
+    XNi_mean <- XN_means[[distrib]]
+    # on génère la variable aléatoire Z correspondante
+    ZN[[distrib]] <- unlist(lapply(XNi, function(xi) {
+                              if (abs(xi-XNi_mean) >= delta) {
+                                return (1)
+                              }
+                              return (0)
+                            }))
+    ZN_means[[distrib]] <- empirical_mean(ZN[[distrib]])
+  }
+    # on affiche E[Zi] = P[|Xi - mean| >= delta]
+  return (list("XN"=XN, "XN_means"=XN_means, "ZN"=ZN, "ZN_means"=ZN_means));
+}
+
+estimation <- estimate_monte_carlo(N=1e6, delta=1, mu=0, sigma=1, a=1.0, alpha=2.5, lambda=1)
+estimation[["ZN_means"]]
+```
+
+La moyenne empirique est une variable aléatoire, et d'après le théorème centrale limite, on sait que cette variable aléatoire
+a une esperance $\mathbb{E}[\bar Z_N] = \mathbb{E}[Z]$ et une variance $\mathbb{V}[\bar Z_N] = \frac{\mathbb{V}[Z]}{\sqrt N}$.
+
+Donc d'après le théorème de Bienaymé Tchebichev, la précision de notre
+estimation $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[Z] \simeq \bar Z_N$,
+est donné par:
+
+$\forall \epsilon \geq 0, \mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] \leq \frac{\mathbb{V}[Z]}{\epsilon\sqrt N}$.
+
+$(c)$
+Application numérique:
+```{r, include=TRUE, echo=TRUE}
+precision_sup <- function(Z, eps) {
+  return (var(Z) / (eps * sqrt(N)));
+}
+```
+
+On a fixé $N=10^6$.
+Ici, on fixe $\epsilon=0.05$.
+
+En fonction des loi de X précèdentes, notre estimation de $\bar Z_N \simeq \mathbb{E}[Z]$ vérifie:
+$\mathbb{P}(\bar Z_N \notin [\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]) \leq ...$
+
+```{r, include=TRUE}
+eps <- 0.05
+XN <- estimation[["XN"]]
+ZN <- estimation[["ZN"]]
+for (distrib in names(XN)) {
+  print(paste(distrib, ":", precision_sup(ZN[[distrib]], eps)))
+}
+```
+
+Remarques:
+
+  + Plus $\epsilon$ est 'petit', plus notre précision est incertaine.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ s'éloigne de 1)
+  
+  + Plus $N$ est 'grand', plus notre précision est probable.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ tends vers 1)
+  
+  + Plus $\mathbb{V}[Z]$ est 'grande', plus notre précision est incertaine.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ s'éloigne de 1)
+  

@@ -34,7 +34,6 @@ function retour_menu()
 
 
 function vue_connexion() {
-
     echo '<section>
         <p> Bonjour, bienvenue sur l\'application de gestion des débits clients.
         Commencez par vous authentifier </p>
@@ -62,6 +61,21 @@ function affiche_erreur($str) {
     echo '<p class="erreur">'.$str.'</p>';
 }
 
+function affiche_erreur_client($errcode) {
+    switch ($errcode) {
+        case -1:
+            affiche_erreur("Aucun client n'a été trouvé pour ce numéro client.");
+            break ;
+        case -2:
+            affiche_erreur("La requete n'a pas pu être executé.");
+            break;
+        case -3:
+            affiche_erreur("La connection à la base de donnée a échouée");
+            break ;
+        default:
+            affiche_erreur("Erreur inconnue");
+    } 
+}
 
 function affiche_menu(){
 echo '<form action="tpGestionClient.php" method="post">'.
@@ -69,9 +83,9 @@ echo '<form action="tpGestionClient.php" method="post">'.
 	"<fieldset>
 	<legend>Choix:</legend>\n".
   ajout_champ("radio", "v", "choix", "Visualisation", "v", 1)."<br/>\n".  
-  ajout_champ("radio", "v", "choix", "Modification", "v", 1)."<br/>\n".  
-  ajout_champ("radio", "v", "choix", "Création", "v", 1)."<br/>\n".  
-  ajout_champ("radio", "v", "choix", "Achat", "v", 1)."<br/>\n".  
+  ajout_champ("radio", "m", "choix", "Modification", "m", 1)."<br/>\n".  
+  ajout_champ("radio", "c", "choix", "Création", "c", 1)."<br/>\n".  
+  ajout_champ("radio", "a", "choix", "Achat", "a", 1)."<br/>\n".  
 /*
 
 	Ajouter trois champs de menu:
@@ -94,14 +108,12 @@ function affiche_form_modif($numCli, $nomCli,$debitCli){
   - un champ numérique comprenant le débit actuel du client et permettant de le modifier
   - un champ pour envoyer le formulaire
 */
-  print "<form action="tpModifClient.php" method="POST"> \n";
 
-  print "<input type=\"hidden\" name=\"client_num\"/>\n";
-  print "<input type=\"text\" name=\"client_name\">Nom du client:</input>\n";
-  print "<input type=\"number\" name=\"client_debit\">Débit du client:</input>\n";
-  print "<input type=\"”submit”\" name=\"submit\"/>\n";
-
-  print "</form>\n";
+   echo '<form action="tpModifClient.php" method="POST">'.
+          ajout_champ('hidden', $numCli, 'numCli', '', '', 0).'<br/>'.
+          ajout_champ("text", $nomCli, "nomMod", "Nom du client", "nomMod", 1)."<br/>\n". 
+          ajout_champ("number", $debitCli, "debitMod", "Débit du client", "debitMod", 1)."<br/>\n". 
+          ajout_champ('submit', 'Envoyer', 'soumission', '', '', 0)."\n".'</form>';
 }
 
 
@@ -113,23 +125,21 @@ function affiche_form_achat($numCli,$achat){
   - un champ pour envoyer le formulaire
 */
 
-  print "<form action="tpNvelAchat.php" method="POST"> \n";
-  
-  print "<input type=\"hidden\" name=\"client_num\"/>\n";
-  print "<input type=\"number\" name=\"client_debit\">Montant de l'achat</input>\n";
-  print "<input type=\"”submit”\" name=\"submit\"/>\n";
 
-  print "</form>\n";
+   echo '<form action="tpNvelAchat.php" method="POST">'.
+          ajout_champ('hidden', $numCli, 'numCli', '', '', 0).'<br/>'.
+          ajout_champ("number", $achat, "montant", "Montant de l'achat.", "montant", 1)."<br/>\n". 
+          ajout_champ('submit', 'Envoyer', 'soumission', '', '', 0)."\n".'</form>';
+           
 }
 
 
 function affiche_form_creation($numCli){
-echo '<form action="tpCreationClient.php" method="post">'.
-        ajout_champ('hidden', $numCli, 'numCli', '', '', 0).'<br/>'.
-	ajout_champ("text", '', "nomCli", "Nom client", "nomCli", 1)."<br/>\n".	
-	ajout_champ("text", '', "debitInit", "Débit initial", "debitInit")."<br/>\n".	
-	ajout_champ('submit', 'Envoyer', 'soumission', '', '', 0)."\n".
-	'</form>';
+  echo '<form action="tpCreationClient.php" method="POST">'.
+          ajout_champ('hidden', $numCli, 'numCli', '', '', 0).'<br/>'.
+          ajout_champ("text", '', "nomCli", "Nom client", "nomCli", 1)."<br/>\n".	
+          ajout_champ("text", '', "debitInit", "Débit initial", "debitInit")."<br/>\n".	
+          ajout_champ('submit', 'Envoyer', 'soumission', '', '', 0)."\n".'</form>';
 }
 
 

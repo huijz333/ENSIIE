@@ -18,10 +18,9 @@ enTete("Vérification du mot de passe");
 
 if (verif_mdp($mdp)) {
 	header('Location: index.php');
-} else {
-	print "une erreur\n" ;
-	header('Location: index.php');
 }
+
+print "une erreur\n" ;
 
 
 pied();
