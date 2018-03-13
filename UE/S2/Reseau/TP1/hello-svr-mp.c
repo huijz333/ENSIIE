@@ -79,31 +79,34 @@ int main(int argc, char** argv)
 			fprintf(stderr,"%s: pb accept : sock=%d : %s\n",argv[0],sock,strerror(errno));
 			exit(1);
 		}
+		pid_t pid = fork();
+		if (pid == 0) {
+			char PDU[100];
+			/* Dialogue état début */
+			statut = write(cx,"HELLO",6);
+			if ( statut==-1 ) { close(cx); continue; }
+			printf("serveur: envoyé \"HELLO\" : "); fflush(stdout);
+			/* Dialogue état att-ok */
+			statut = lire_PDU(PDU,cx);
+			if ( statut!='O' ) goto error;
+			printf("reçu \"%s\" :", PDU); fflush(stdout);
+			if (tp != 0) {
+				usleep(tp);
+			}
+			statut = write(cx,"FIN",4);
+			if ( statut==-1 ) { close(cx); continue; }
+			printf(" envoyé \"FIN\" : quitte\n");
 
-		char PDU[100];
-		/* Dialogue état début */
-		statut = write(cx,"HELLO",6);
-		if ( statut==-1 ) { close(cx); continue; }
-		printf("serveur: envoyé \"HELLO\" : "); fflush(stdout);
-		/* Dialogue état att-ok */
-		statut = lire_PDU(PDU,cx);
-		if ( statut!='O' ) goto error;
-		printf("reçu \"%s\" :", PDU); fflush(stdout);
-		if (tp != 0) {
-			usleep(tp);
-		}
-		statut = write(cx,"FIN",4);
-		if ( statut==-1 ) { close(cx); continue; }
-		printf(" envoyé \"FIN\" : quitte\n");
-
-		/* Terminaison du dialogue (état fin) */
-		close(cx);
-		continue;
-
+			/* Terminaison du dialogue (état fin) */
+			close(cx);
+			exit(0);
 error:
-		close(cx);
-		fprintf(stderr,"%s: message de type %c est inattendu\n",
-				prgname,statut);
+			close(cx);
+			fprintf(stderr,"%s: message de type %c est inattendu\n",
+					prgname,statut);
+			exit(1);
+
+		}
 	}
 
 	close(sock);

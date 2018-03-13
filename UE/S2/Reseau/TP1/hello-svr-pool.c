@@ -69,6 +69,11 @@ int main(int argc, char** argv)
 
 	signal(SIGPIPE, gest_sigpipe);
 
+	pid_t pid1 = fork();
+	if (pid1 != 0) {
+		pid_t pid2 = fork();
+	}
+
 	while (1) {
 		int cx;
 		struct sockaddr cltSAP;

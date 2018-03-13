@@ -68,29 +68,9 @@ int main(int argc, char** argv)
 		fprintf(stderr,"%s: pb connect: %s\n",argv[0],strerror(errno));
 		exit(1);
 	}
-	char PDU[100];
-	/* Dialogue état début */
-	statut = lire_PDU(PDU, cx);
-	if ( statut!='H') goto error;
-	printf("client: reçu \"%s\" :", PDU); fflush(stdout); 
-	if (tp != 0) {
-		usleep(tp);
-	}
-	statut = write(cx,"O",1);
-	statut = write(cx,"K",2);
-	printf(" envoyé \"OK\" :"); fflush(stdout);
 
-	/* Dialogue état att-fin */
-	statut = lire_PDU(PDU, cx);
-	if ( statut!='F' ) goto error;
-	printf(" reçu \"%s\" : quitte\n", PDU);
-
-	/* Terminaison état fin */
-	close(cx);
-	return 0;
-
-error:
-	fprintf(stderr,"%s: message de type %c est inattendu\n",
-			prgname,statut);
+	/** pause */
+	pause();
+	
 	return 1;
 }
