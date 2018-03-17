@@ -3,15 +3,15 @@ title: "TP2 stats"
 author: "Romain PEREIRA"
 date: "5 Mars 2018"
 output:
-  html_document:
-    df_print: paged
   pdf_document:
     fig_caption: yes
+  html_document:
+    df_print: paged
 ---
 
 # 1. Echantillon, Théorème Central Limite, Estimation Monte Carlo
 ### 1.1 Simulation de 1000 échantillon i.i.d gaussien.
-```{r, include=TRUE}
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 N <- 1000
 n <- c(5, 30, 100)
 
@@ -56,12 +56,25 @@ mean_hist <- function(law, title) {
 mean_hist(function(n) { return (rnorm(n, mean=1, sd=2)) }, "Distribution Gausienne N(1, 2)")
 ```
 
-D'après le théorème central limite, la moyenne empirique suit approximativement une loi normal $N(\mu=1, \sigma=2/\sqrt{n})$
+Je pose $S_n = \sum_{i=1}^{n}X_i$, tel que::
+  + les $X_i$ i.i.d de même loi
+  + $E[X_i] = \mu$
+  + $\mathbb{V}[X_i]=\sigma^2$.
 
-En notant $(a_n, b_n) = (\mu, \frac{\sigma}{\sqrt{n}}) = (1, \frac{2}{\sqrt{n}})$,
+D'après le théorème central limite, pour $N$ assez grand, $S_n$ suit approximativement une loi normal ${N}(n\mu, n\sigma^2)$.
+
+En notant la moyenne empirique $\bar X_n = \frac{S_n}{n}$, on a:
+
+$\mathbb{E}[\bar X_n] = \mathbb{E}[\frac{S_n}{n}] = \frac{1}{n}\mathbb{E}[S_n] = \mu$
+
+$\mathbb{E}[\bar X_n] = \mathbb{V}[\frac{S_n}{n}] = \frac{1}{n^2}\mathbb{V}[S_n] = \frac{\sigma^2}{n}$
+
+Dans notre exemple, les $X_i$ suivent une loi $N(1, 2)$.
+
+En notant $(a_n, b_n) = (\text{moyenne}, \text{ecart-type}) = (\mu, \sqrt\frac{\sigma^2}{n}) = (1, \frac{2}{\sqrt{n}})$,
 $U_n = \frac{\bar{X_n} - a_n}{b_n}$ suit une loi normal centrée réduite $N(0, 1)$.
 
-```{r, include=TRUE}
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 # fonction 'mean_norm_hist'
 #
 # 'law' : fonction qui genere un vecteur de taille 'm', e.g: law(42)
@@ -97,7 +110,7 @@ Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une
 Soit $X$ une variable aléatoire suivant une loi de Pareto $P(a, \alpha), \alpha > 2$.
 Alors, $\mathbb{E}[X]=\frac{\alpha a}{\alpha - 1}$ et $\mathbb{V}[X]=(\frac{\alpha a}{\alpha - 1})^2\frac{\alpha}{\alpha - 2}$
 
-```{r, include=TRUE}
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 library("rmutil")
 a     <- 1.0
 alpha <- 2.5
@@ -111,7 +124,7 @@ Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une
 Soit $X$ une variable aléatoire suivant une loi de Poisson $P(\lambda)$.
 Alors, $\mathbb{E}[X]=\lambda$ et $\mathbb{V}[X]=\lambda$
 
-```{r, include=TRUE, echo=TRUE}
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 mean_hist(function(n) { return (rpois(n, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
 mean_norm_hist(function(n) { return (rpois(n, lambda=1)) }, "Distribution suivant une loi de Poisson P(1)")
 ```
@@ -119,7 +132,7 @@ mean_norm_hist(function(n) { return (rpois(n, lambda=1)) }, "Distribution suivan
 De même, plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1).
 
 ### 1.4 Méthode d'expérimentation
-On note $X=(X_1, ..., X_n)$ pour $n \in \mathbb{R}$,
+On note $X=(X_1, ..., X_n)$ pour $n \in \mathbb{R}$,
 un échantillon de taille $n$ (simulable 'facilement')
 
 On suppose que tous les $X_i$ son i.i.d, et suivent la même loi.
@@ -131,21 +144,22 @@ On peut trouver une approximation de l'espérance $\mathbb{E}[T(X)]$ en utilisan
 1. Fixer $N \in \mathbb{N}, N \gg 1$.
 2. Générer $N$ échantillons de taille $n$, notés $X^i = (X^i_1, ..., X^i_n)$ avec $1 \leq i \leq N$
 3. Je pose
-  + $\bar T_N = \frac{1}{N}\sum_{i=1}^{N}{T(X^i)} = \sum_{i=1}^{N}{\frac{1}{N}T(X^i)}$.
-  + On a: $\mathbb{E}[\frac{1}{N}T(X^i)] = \frac{1}{N}\mathbb{E}[T(X^i)] = \frac{1}{N}\mathbb{E}[T(X)]$
-  + Lorsque  $N$ devient grand ($\rightarrow +\infty$), le théorème central limite affirme:
-    + $(1)$ $\mathbb{E}[\bar T_N] \rightarrow N \frac{1}{N}\mathbb{E}[T(X)] = \mathbb{E}[T(X)]$
-    + $(2)$ : $\mathbb{V}[\bar T_N] \sim (\sqrt N \frac{1}{N}\mathbb{V}[T(X)] = \frac{1}{\sqrt N}\mathbb{V}[T(X)] ) \rightarrow 0$
-4. Donc d'après $(1)$ et $(2)$, on a $\bar T_n{\xrightarrow {\mathbb {L} ^{2}} \mathbb{E}[T(X)] = cste}$.
-Autrement dit, la moyenne empirique (entant que variable aléatoire), tends en norme 2 vers la v.a constante $\mathbb{E}[T(X)]$.
-La moyenne empirique est une bonne estimation de l'espérance quand N tends vers l'infini.
+  + $\bar T_N = \frac{1}{N}\sum_{i=1}^{N}{T(X^i)}$
+  + Lorsque  $N$ devient grand, d'après le théorème central limite (même raisonnement qu'en $\textbf{1.1}$):
+    + $(1)$ : $\mathbb{E}[\bar T_N] \xrightarrow[N \gg 1]{} \mathbb{E}[T(X)]$
+    + $(2)$ : $\mathbb{V}[\bar T_N] \xrightarrow[N \gg 1]{} \frac{1}{N}\mathbb{V}[T(X)] \xrightarrow[N \rightarrow +\infty]{} 0$
     
+4. Donc d'après $(1)$ et $(2)$, on a $\bar T_n{\xrightarrow[N \rightarrow +\infty]{\mathbb {L} ^{2}} \mathbb{E}[T(X)] = cste}$.
+
+Autrement dit, la moyenne empirique (entant que variable aléatoire), tends (en norme 2) vers la v.a constante $\mathbb{E}[T(X)]$.
+
+La moyenne empirique est une bonne estimation de l'espérance quand elle est effectué sur un grand nombre d'échantillon.
 
 # 2. Moyenne et dispersion.
 ### 2.1 Inégalité de Bienaymé Tchebychev
 Soit X une variable aléatoire admettant un moment d'ordre 2 (et donc un moment d'ordre 1).
 L'inégalité de Bienaymé-Tchebychev affirme:
-$\forall \alpha \in \mathbb{R}^*_+, \mathbb{P}(|X-\mathbb{E}[X]| \geq \alpha) \leq \frac{\mathbb{V}[X]}{\alpha^2}$
+$\forall \alpha \in \mathbb{R}^*_+, \mathbb{P}(|X-\mathbb{E}[X]| \geq \alpha) \leq \frac{1}{\alpha^2}\mathbb{V}[X]$
 
 Pour une loi Gaussienne $N(\mu, \sigma^2)$, on a : 
 $\mathbb{P}(|X-\mu| \geq \alpha) \leq \frac{\sigma^2}{\alpha^2}$
@@ -154,17 +168,31 @@ Pour une loi de Poisson $P(\lambda)$, on a :
 $\mathbb{P}(|X-\lambda| \geq \alpha) \leq \frac{\lambda}{\alpha^2}$
 
 ### 2.2 Estimation par Monte Carlo.
-$(a)$ $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[\mathbb{1}_{\{|X-\mu| \geq \delta\}}] = \mathbb{E}[Z]$,
-en posant $Z = \mathbb{1}_{\{|X-\mu| \geq \delta\}}$
+$(a)$ $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[1_{\{|X-\mu| \geq \delta\}}] = \mathbb{E}[Z]$,
+en posant $Z = 1_{\{|X-\mu| \geq \delta\}}$
 
 $(b)$
-
 On estime $\mathbb{E}[Z]$ par la moyenne empirique $\bar Z_N = \frac{1}{N}\sum_{i=1}^{N}{T(Z^i)}$ :
-```{r, include=TRUE, echo=TRUE}
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+# effectue une estimation de Monte Carlo sur une loi Gaussienne, de Pareto, et de Poisson.
+#
+# N : nombre d'echantillon pour la moyenne
+# delta : verifiant (a)
+# (mu, sigma) : paramètre de la loi Gausienne
+# (a, alpha) : paramètre de la loi de Pareto
+# (lambda) : paramètre de la loi de Poisson
+#
+# renvoie une liste contenant :
+#           - les distributions générées
+#           - la moyenne empirique de ces distributions
+#           - les distributions transformées Z (voir (a))
+#           - les espérances empirique de Z, approximation de (a)
 estimate_monte_carlo <- function(N, delta, mu, sigma, a, alpha, lambda) {
   # On genere des distributions
-  XN       <- list("Gauss" = rnorm(N, mu, sigma), "Pareto" = rpareto(N, a, alpha), "Poisson"= rpois(N, lambda))
-  XN_means <- list("Gauss"=mu,                    "Pareto"= alpha*a/(alpha - 1),   "Poisson" = lambda)
+  XN       <- list("Gauss" = rnorm(N, mu, sigma), "Pareto" = rpareto(N, a, alpha),
+                   "Poisson" = rpois(N, lambda))
+  XN_means <- list("Gauss" = mu,                  "Pareto" = alpha*a/(alpha - 1),
+                   "Poisson" = lambda)
   ZN       <- list()
   ZN_means <- list()
   # Pour chaque distributions
@@ -181,43 +209,47 @@ estimate_monte_carlo <- function(N, delta, mu, sigma, a, alpha, lambda) {
                             }))
     ZN_means[[distrib]] <- empirical_mean(ZN[[distrib]])
   }
-    # on affiche E[Zi] = P[|Xi - mean| >= delta]
-  return (list("XN"=XN, "XN_means"=XN_means, "ZN"=ZN, "ZN_means"=ZN_means));
+  return (list("XN" = XN, "XN_means" = XN_means, "ZN" = ZN, "ZN_means" = ZN_means))
 }
+```
+\newpage
+On obtient selon les différentes lois: $\mathbb{P}(|X-\mathbb{E}[X]|\geq \delta_{=1}) =\space ...$
 
-estimation <- estimate_monte_carlo(N=1e6, delta=1, mu=0, sigma=1, a=1.0, alpha=2.5, lambda=1)
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+N <- 1e5
+estimation <- estimate_monte_carlo(N, delta=1, mu=0, sigma=1, a=1.0, alpha=2.5, lambda=1)
 estimation[["ZN_means"]]
 ```
 
-La moyenne empirique est une variable aléatoire, et d'après le théorème centrale limite, on sait que cette variable aléatoire
-a une esperance $\mathbb{E}[\bar Z_N] = \mathbb{E}[Z]$ et une variance $\mathbb{V}[\bar Z_N] = \frac{\mathbb{V}[Z]}{\sqrt N}$.
+La moyenne empirique est une variable aléatoire, et on a montré que
+$\mathbb{E}[\bar Z_N] = \mathbb{E}[Z]$ et une variance $\mathbb{V}[\bar Z_N] = \frac{1}{N}\mathbb{V}[Z]$.
 
 Donc d'après le théorème de Bienaymé Tchebichev, la précision de notre
 estimation $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[Z] \simeq \bar Z_N$,
 est donné par:
 
-$\forall \epsilon \geq 0, \mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] \leq \frac{\mathbb{V}[Z]}{\epsilon\sqrt N}$.
+$\forall \epsilon \geq 0, \mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] \leq \frac{1}{\epsilon \space N}\mathbb{V}[Z]$.
 
 $(c)$
 Application numérique:
-```{r, include=TRUE, echo=TRUE}
-precision_sup <- function(Z, eps) {
-  return (var(Z) / (eps * sqrt(N)));
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+markov_sup <- function(Z, N, eps) {
+  return (var(Z) / (eps * N));
 }
+eps <- 1e-4
 ```
 
-On a fixé $N=10^6$.
-Ici, on fixe $\epsilon=0.05$.
+On a fixé plus tôt $N=10^5$. On fixe $\epsilon=10^{-4}$.
 
 En fonction des loi de X précèdentes, notre estimation de $\bar Z_N \simeq \mathbb{E}[Z]$ vérifie:
-$\mathbb{P}(\bar Z_N \notin [\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]) \leq ...$
 
-```{r, include=TRUE}
-eps <- 0.05
+$\mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] = \mathbb{P}(\bar Z_N \notin [\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]) \leq \space ...$
+
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 XN <- estimation[["XN"]]
 ZN <- estimation[["ZN"]]
 for (distrib in names(XN)) {
-  print(paste(distrib, ":", precision_sup(ZN[[distrib]], eps)))
+  print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, eps)))
 }
 ```
 
@@ -232,3 +264,90 @@ Remarques:
   + Plus $\mathbb{V}[Z]$ est 'grande', plus notre précision est incertaine.
   (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ s'éloigne de 1)
   
+Voici les bornes obtenus pour différentes valeurs de $\delta$ et $\sigma$:
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+print("Majoration par l'inégalité de Markov, de la probabilité que la moyenne obtenu s'écarte à +- epsilon prêt de l'espérance:");
+for (delta in c(1, 5, 10)) {
+  for (sigma in c(1, 10, 100)) {
+    estimation <- estimate_monte_carlo(N, delta, mu=0, sigma, a=1.0, alpha=2.5, lambda=1)
+    XN <- estimation[["XN"]]
+    ZN <- estimation[["ZN"]]
+    print("-----------------------------")
+    print(paste("Pour delta=", delta, " et sigma=", sigma, sep=""))
+    for (distrib in names(XN)) {
+      print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, eps)))
+    }   
+  }
+}
+```
+
+$(d)$ Inégalité de Chernoff.
+
+Soit X une variable aléatoire admettant une fonction génératrice.
+
+L'inégalité de Chernoff donne:
+
+$\forall t \in [0, 1] , \forall \epsilon \in \mathbb{R}^*_+,$
+  
+  $\mathbb{P}(X-\mathbb{E}[X] \geq \epsilon) \leq e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+  
+  $\mathbb{P}(X-\mathbb{E}[X] \leq -\epsilon) \leq e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+
+Donc,
+
+$\mathbb{P}(|X-\mathbb{E}[X]| \geq \epsilon) \leq 2e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+
+### 2.3.
+
+
+### 2.4.
+$(a)$
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+theta <- 0
+for (n in c(20, 100, 1000, 10000)) {
+  cauchy <- rcauchy(n, location=theta, scale=1)
+  m      <- empirical_mean(cauchy)
+  print(paste("n=", n, " ; la moyenne empirique calculé est: ", m, sep=""))
+}
+```
+
+La moyenne empirique donne des valeurs très différentes selon 'n', et ne semble pas converger.
+
+
+$(b)$
+Une variable aléatoire $X$ suivant une loi de Cauchy $C(\theta)$ n'admet pas d'espérance:
+
+$f_X(x, \theta) = \frac{1}{\pi}\frac{1}{1 + (x - \theta)^2}$, et quand $x \rightarrow +\infty$, $xf_X(x, \theta) \sim \frac{1}{x}$, donc:
+
+$\mathbb{E}[X] = \int_{-\infty}^{+\infty}|xf_X(x, \theta)|dx$ diverge.
+
+Donc le théorème central limite ne s'applique pas: il n'y a pas d'espérance, donc la moyenne empirique ne converge pas.
+
+Ceci s'explique par le fait que la probabilité d'obtenir une valeur éloigné de $\theta$ (la médiane) est trop elévé pour que la moyenne converge.
+
+$(c)$
+La médiane d'une loi de Cauchy $C(\theta)$ est $\theta$.
+
+Si l'on sait qu'une phénomène suit une loi de Cauchy, il est possible de déterminer son paramètre $\theta$ en suivant ce protocole:
+
+1. Fixer $n \in \mathbb{N}, n \gg 1$.
+2. Générer un échantillon de taille $n$.
+3. Trier les valeurs de cette échantillon par ordre croissant. (ou décroissant)
+4. La valeur au centre de l'échantillon trié (en $\frac{n}{2}$ ) est un estimateur de $\theta$.
+
+\newpage
+Application:
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+theta <- 0
+for (theta in c(-1, 0, 1)) {
+  print("--------------------------------------------------------")
+  print(paste("theta=", theta, sep=""))
+  for (n in c(20, 100, 1000, 10000)) {
+    cauchy <- rcauchy(n, location=theta, scale=1)
+    sorted <- sort(cauchy)
+    print(paste("la médiane de l'échantillon n=", n, " vaut:", sorted[n / 2 + 1], sep=""))
+  }
+}
+```
+
+Les valeurs obtenus par la simulation sont en accord avec celle attendu par notre protocole.
