@@ -1,0 +1,13 @@
+
+----------------------------------------------------------
+
+- Le rapport se situe dans le fichier "rapport.pdf".
+
+----------------------------------------------------------
+- Le code se situe dans le dossier "code".
+Un Makfile est disponible à la racine du dossier 'code' pour compiler
+un programme de tests. Veuillez taper la commande:
+```
+cd code ; make ; ./subset-sum-opt.out
+```
+

@@ -1,16 +1,14 @@
-CODE=code
 TARBALL=pereira-romain.tar.gz
 
-all: test build
+all: build
 
 build: clean
-	cd rendu ; tar -cvzf ../$(TARBALL) code rapport/rapport.pdf README
-
+	mkdir .tmp ; make -C code fclean ; cp -r code .tmp ;\
+		cp rapport/rapport.pdf .tmp ; cp README .tmp;\
+		cd .tmp ; tar -cvzf ../$(TARBALL) code rapport.pdf README
+	rm -rf .tmp
 extract:
 	mkdir -p extracted ; tar -xvzf $(TARBALL) -C extracted
-
-test:
-	echo "test"
 
 clean:
 	rm -rf extracted
