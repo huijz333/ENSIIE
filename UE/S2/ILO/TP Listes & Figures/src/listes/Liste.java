@@ -127,7 +127,7 @@ public class Liste<E> implements IListe<E> {
 
 	@Override
 	public boolean insert(E elt, int index) {
-		if (elt == null || index < 0 || index >= this.size) {
+		if (elt == null || index < 0 || index > this.size) {
 			return (false);
 		}
 		Maillon<E> newNode = new Maillon<E>(elt);
@@ -174,7 +174,9 @@ public class Liste<E> implements IListe<E> {
 		Maillon<E> cur = this.main.getNext();
 		while (cur != this.main) {
 			sb.append(cur.getData().toString());
-			sb.append(" ; ");
+			if (cur.getNext() != this.main) {
+				sb.append("->");
+			}
 			cur = cur.getNext();
 		}
 		sb.append("]");
@@ -203,4 +205,8 @@ public class Liste<E> implements IListe<E> {
 
 	}
 
+	@Override
+	public int hashCode() {
+		return (this.size() == 0 ? 1 : super.hashCode());
+	}
 }

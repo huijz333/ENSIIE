@@ -90,7 +90,7 @@ int lire_data(char*buf, int cx, int n)
 	int i,statut;
 	for (i=0 ; i<n ; i++) {
 		if ( to>0 ) {
-			struct pollfd fds = { cx, 0, 0 };
+			struct pollfd fds = { cx, POLLIN | POLLOUT, 0 };
 			if ( (statut=poll(&fds,1,300))<=0 ) {
 				if ( ! silence ) 
 					fprintf(stderr,"%s: pb lecture : %s\n",prgname,

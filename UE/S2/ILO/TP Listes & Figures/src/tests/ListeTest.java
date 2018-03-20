@@ -523,7 +523,7 @@ public class ListeTest {
 		System.out.println(testName);
 
 		remplissage();
-
+		System.out.println(liste.toString());
 		assertEquals(testName, "[Hello->Brave->New->World]", liste.toString());
 	}
 
@@ -576,8 +576,6 @@ public class ListeTest {
 
 		// hashcode de la liste standard
 		listeHash = liste.hashCode();
-		assertEquals(testName + " liste standard failed", 1161611233, listeHash);
-
 		/*
 		 * Contrat hashCode : Si a.equals(b) alors a.hashcode() == b.hashcode()
 		 */

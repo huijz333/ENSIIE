@@ -24,8 +24,7 @@ import listes.CollectionListe;
  *
  * @author davidroussel
  */
-public class CollectionListeTest
-{
+public class CollectionListeTest {
 	/**
 	 * La liste à tester. La nature du contenu de la liste importe peu du moment
 	 * qu'il est homogène : donc n'importe quel type ferait l'affaire.
@@ -35,11 +34,7 @@ public class CollectionListeTest
 	/**
 	 * Liste des éléments à ajouter à la collection
 	 */
-	private static String[] elements = new String[] {
-		"Hello",
-		"Brave",
-		"New",
-		"World" };
+	private static String[] elements = new String[] { "Hello", "Brave", "New", "World" };
 
 	/**
 	 * Element supplémentaire à ajouter à la collection
@@ -52,8 +47,7 @@ public class CollectionListeTest
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception
-	{
+	public static void setUpBeforeClass() throws Exception {
 		// rien
 	}
 
@@ -63,8 +57,7 @@ public class CollectionListeTest
 	 * @throws java.lang.Exception
 	 */
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception
-	{
+	public static void tearDownAfterClass() throws Exception {
 		// rien
 	}
 
@@ -74,8 +67,7 @@ public class CollectionListeTest
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		collection = new CollectionListe<String>();
 	}
 
@@ -85,8 +77,7 @@ public class CollectionListeTest
 	 * @throws java.lang.Exception
 	 */
 	@After
-	public void tearDown() throws Exception
-	{
+	public void tearDown() throws Exception {
 		collection.clear();
 		collection = null;
 		System.gc();
@@ -94,12 +85,12 @@ public class CollectionListeTest
 
 	/**
 	 * Remplissage d'une collection avec les éléments de #elements
-	 * @param collection la collection à remplir
+	 * 
+	 * @param collection
+	 *            la collection à remplir
 	 */
-	public static void remplissage(Collection<String> collection)
-	{
-		for (String elt : elements)
-		{
+	public static void remplissage(Collection<String> collection) {
+		for (String elt : elements) {
 			collection.add(elt);
 		}
 	}
@@ -108,8 +99,7 @@ public class CollectionListeTest
 	 * Test method for {@link listes.CollectionListe#CollectionListe()}.
 	 */
 	@Test
-	public final void testCollectionListe()
-	{
+	public final void testCollectionListe() {
 		String testName = new String("CollectionListe<String>()");
 		System.out.println(testName);
 
@@ -123,10 +113,8 @@ public class CollectionListeTest
 	 * {@link listes.CollectionListe#CollectionListe(java.util.Collection)}.
 	 */
 	@Test
-	public final void testCollectionListeCollectionOfE()
-	{
-		String testName = new String(
-				"CollectionListe<String>(Collection<String>)");
+	public final void testCollectionListeCollectionOfE() {
+		String testName = new String("CollectionListe<String>(Collection<String>)");
 		System.out.println(testName);
 
 		ArrayList<String> otherCollection = new ArrayList<String>();
@@ -138,10 +126,8 @@ public class CollectionListeTest
 		assertFalse(testName + " not empty", collection.isEmpty());
 		assertEquals(testName + " size", elements.length, collection.size());
 		int i = 0;
-		for (String elt : collection)
-		{
-			assertSame(testName + " elt[" + String.valueOf(i) + "]",
-					elements[i++], elt);
+		for (String elt : collection) {
+			assertSame(testName + " elt[" + String.valueOf(i) + "]", elements[i++], elt);
 		}
 	}
 
@@ -149,8 +135,7 @@ public class CollectionListeTest
 	 * Test method for {@link listes.CollectionListe#add(java.lang.Object)}.
 	 */
 	@Test
-	public final void testAddE()
-	{
+	public final void testAddE() {
 		String testName = new String("CollectionListe<String>.add(String)");
 		System.out.println(testName);
 
@@ -168,10 +153,8 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#addAll(java.util.Collection)}.
 	 */
 	@Test
-	public final void testAddAll()
-	{
-		String testName = new String(
-				"CollectionListe<String>.addAll(Collection<String>)");
+	public final void testAddAll() {
+		String testName = new String("CollectionListe<String>.addAll(Collection<String>)");
 		System.out.println(testName);
 
 		ArrayList<String> otherCollection = new ArrayList<String>();
@@ -183,10 +166,8 @@ public class CollectionListeTest
 		assertFalse(testName + " not empty", collection.isEmpty());
 		assertEquals(testName + " size", elements.length, collection.size());
 		int i = 0;
-		for (String elt : collection)
-		{
-			assertSame(testName + " elt[" + String.valueOf(i) + "]",
-					elements[i++], elt);
+		for (String elt : collection) {
+			assertSame(testName + " elt[" + String.valueOf(i) + "]", elements[i++], elt);
 		}
 	}
 
@@ -194,8 +175,7 @@ public class CollectionListeTest
 	 * Test method for {@link java.util.AbstractCollection#clear()}.
 	 */
 	@Test
-	public final void testClear()
-	{
+	public final void testClear() {
 		String testName = new String("CollectionListe<String>.clear()");
 		System.out.println(testName);
 		boolean result;
@@ -219,8 +199,7 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#contains(java.lang.Object)}.
 	 */
 	@Test
-	public final void testContains()
-	{
+	public final void testContains() {
 		String testName = new String("CollectionListe<String>.Contains(String)");
 		System.out.println(testName);
 		boolean result;
@@ -244,8 +223,7 @@ public class CollectionListeTest
 		result = collection.contains("Bonjour");
 		assertFalse(testName + " non null sur col remplie", result);
 
-		for (String elt : elements)
-		{
+		for (String elt : elements) {
 			// Recherche contenu non null contenu dans collection remplie
 			result = collection.contains(elt);
 			assertTrue(testName + " non null sur col remplie", result);
@@ -257,22 +235,17 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#containsAll(java.util.Collection)}.
 	 */
 	@Test
-	public final void testContainsAll()
-	{
-		String testName = new String(
-				"CollectionListe<String>.ContainsAll(Collection<String>)");
+	public final void testContainsAll() {
+		String testName = new String("CollectionListe<String>.ContainsAll(Collection<String>)");
 		System.out.println(testName);
 		boolean result;
 
 		// Recherche contenu null sur une collection vide
-		try
-		{
+		try {
 			result = collection.containsAll(null);
 
 			fail(testName + " null sur collection vide sans exception");
-		}
-		catch (NullPointerException npe)
-		{
+		} catch (NullPointerException npe) {
 			// il est normal d'obtenir une telle exception donc rien
 		}
 
@@ -281,8 +254,7 @@ public class CollectionListeTest
 		remplissage(forwardCollection);
 
 		// Ajout dans autre collection directe d'un elt supplémentaire
-		ArrayList<String> forwardCollectionPlus = new ArrayList<String>(
-				forwardCollection);
+		ArrayList<String> forwardCollectionPlus = new ArrayList<String>(forwardCollection);
 		forwardCollectionPlus.add(extraElement);
 
 		// Recherche contenu non null sur une collection vide
@@ -291,13 +263,11 @@ public class CollectionListeTest
 
 		// Remplissage autre collection dans l'ordre inverse
 		ArrayList<String> reverseCollection = new ArrayList<String>();
-		for (int i = elements.length - 1; i >= 0; i--)
-		{
+		for (int i = elements.length - 1; i >= 0; i--) {
 			reverseCollection.add(elements[i]);
 		}
 		// Ajout dans autre collection inverse d'un elt supplémentaire
-		ArrayList<String> reverseCollectionPlus = new ArrayList<String>(
-				reverseCollection);
+		ArrayList<String> reverseCollectionPlus = new ArrayList<String>(reverseCollection);
 		reverseCollectionPlus.add(extraElement);
 
 		// Remplissage autre collection différente
@@ -310,19 +280,15 @@ public class CollectionListeTest
 		// Remplissage collection
 		remplissage(collection);
 
-		CollectionListe<String> collectionPlus = new CollectionListe<String>(
-				collection);
+		CollectionListe<String> collectionPlus = new CollectionListe<String>(collection);
 		collectionPlus.add(extraElement);
 
 		// Contenu null non trouvé sur liste remplie
-		try
-		{
+		try {
 			result = collection.containsAll(null);
 
 			fail(testName + "null sur col remplie sans exception");
-		}
-		catch (NullPointerException npe)
-		{
+		} catch (NullPointerException npe) {
 			// il est normal d'obtenir une telle exception donc rien
 		}
 
@@ -353,8 +319,7 @@ public class CollectionListeTest
 	 * Test method for {@link java.util.AbstractCollection#isEmpty()}.
 	 */
 	@Test
-	public final void testIsEmpty()
-	{
+	public final void testIsEmpty() {
 		String testName = new String("CollectionListe<String>.isEmpty()");
 		System.out.println(testName);
 		boolean result = collection.isEmpty();
@@ -372,8 +337,7 @@ public class CollectionListeTest
 	 * Test method for {@link listes.CollectionListe#iterator()}.
 	 */
 	@Test
-	public final void testIterator()
-	{
+	public final void testIterator() {
 		String testName = new String("CollectionListe<String>.iterator()");
 		System.out.println(testName);
 
@@ -391,10 +355,8 @@ public class CollectionListeTest
 		assertNotNull(testName + " iterator non null", result);
 		assertTrue(testName + " iterator vide", result.hasNext());
 
-		for (int i = 0; i < elements.length; i++)
-		{
-			assertSame(testName + " iteration[" + String.valueOf(i) + "]",
-					elements[i], result.next());
+		for (int i = 0; i < elements.length; i++) {
+			assertSame(testName + " iteration[" + String.valueOf(i) + "]", elements[i], result.next());
 		}
 		assertFalse(testName + " iterator terminé", result.hasNext());
 	}
@@ -404,8 +366,7 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#remove(java.lang.Object)}.
 	 */
 	@Test
-	public final void testRemove()
-	{
+	public final void testRemove() {
 		String testName = new String("CollectionListe<String>.remove(String)");
 		System.out.println(testName);
 
@@ -426,20 +387,17 @@ public class CollectionListeTest
 		result = collection.remove(null);
 		assertFalse(testName + " retrait elt null sur col", result);
 
-		for (String elt : elements)
-		{
+		for (String elt : elements) {
 			// retrait de la première occurrence
 			result = collection.remove(elt);
 			// la seconde occurrence est toujours présence
 			assertTrue(testName + " retrait 1ere occurrence", result);
-			assertTrue(testName + " persistence 2eme occurrence",
-					collection.contains(elt));
+			assertTrue(testName + " persistence 2eme occurrence", collection.contains(elt));
 
 			// retrait de la seconde occurrence
 			result = collection.remove(elt);
 			assertTrue(testName + " retrait 2nde occurrence", result);
-			assertFalse(testName + " absence 2eme occurrence",
-					collection.contains(elt));
+			assertFalse(testName + " absence 2eme occurrence", collection.contains(elt));
 
 			// retrait elt non présent
 			result = collection.remove(elt);
@@ -452,24 +410,18 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#removeAll(java.util.Collection)}.
 	 */
 	@Test
-	public final void testRemoveAll()
-	{
-		String testName = new String("CollectionListe<String>.removeAll(" +
-				"Collection<String>)");
+	public final void testRemoveAll() {
+		String testName = new String("CollectionListe<String>.removeAll(" + "Collection<String>)");
 		System.out.println(testName);
 		boolean result;
 
 		// Retrait collection nulle sur collection vide
 		// Devrait générer un exception
-		try
-		{
+		try {
 			result = collection.removeAll(null);
 
-			fail(testName + " retrait collection null sur collection vide " +
-					"sans exception");
-		}
-		catch (NullPointerException npe)
-		{
+			fail(testName + " retrait collection null sur collection vide " + "sans exception");
+		} catch (NullPointerException npe) {
 			// Rien, on s'attends à cette exception
 		}
 
@@ -486,15 +438,11 @@ public class CollectionListeTest
 		remplissage(collection);
 
 		// Retrait collection nulle sur collection remplie
-		try
-		{
+		try {
 			result = collection.removeAll(null);
 
-			fail(testName +  " retrait collection null sur collection remplie" +
-					" sans exception");
-		}
-		catch (NullPointerException npe)
-		{
+			fail(testName + " retrait collection null sur collection remplie" + " sans exception");
+		} catch (NullPointerException npe) {
 			// Rien, on s'attends à cette exception
 		}
 
@@ -502,29 +450,25 @@ public class CollectionListeTest
 		result = collection.removeAll(otherCollection);
 		assertTrue(testName + " retrait collection +", result);
 		result = collection.isEmpty();
-		assertTrue(testName + " collection vide après retrait collection +",
-				result);
+		assertTrue(testName + " collection vide après retrait collection +", result);
 
 		// Re-remplissages
 		otherCollection.clear();
 		remplissage(collection);
 		remplissage(otherCollection);
 
-		CollectionListe<String> collectionPlus = new CollectionListe<String>(
-				collection);
+		CollectionListe<String> collectionPlus = new CollectionListe<String>(collection);
 		collectionPlus.add(extraElement);
 
 		// Retrait collection plus grande
 		result = collection.removeAll(collectionPlus);
 		assertTrue(testName + " retrait collection plus grande", result);
-		assertTrue(testName + " col vide après retrait collection plus grande",
-				collection.isEmpty());
+		assertTrue(testName + " col vide après retrait collection plus grande", collection.isEmpty());
 
 		// Retrait collection plus petite
 		result = collectionPlus.removeAll(otherCollection);
 		assertTrue(testName + " retrait collection plus petite", result);
-		assertEquals(testName + " taille 1 après retrait collection plus " +
-				"petite", 1, collectionPlus.size());
+		assertEquals(testName + " taille 1 après retrait collection plus " + "petite", 1, collectionPlus.size());
 	}
 
 	/**
@@ -532,23 +476,17 @@ public class CollectionListeTest
 	 * {@link java.util.AbstractCollection#retainAll(java.util.Collection)}.
 	 */
 	@Test
-	public final void testRetainAll()
-	{
-		String testName = new String("CollectionListe<String>.retainAll(" +
-				"Collection<String>)");
+	public final void testRetainAll() {
+		String testName = new String("CollectionListe<String>.retainAll(" + "Collection<String>)");
 		System.out.println(testName);
 		boolean result;
 
 		// Retain collection null sur collection vide
 		// Devrait générer une exception
-		try
-		{
+		try {
 			result = collection.retainAll(null);
-			fail(testName + " retainAll(null) sur collection vide sans " +
-					"exception");
-		}
-		catch (NullPointerException npe)
-		{
+			fail(testName + " retainAll(null) sur collection vide sans " + "exception");
+		} catch (NullPointerException npe) {
 			// Rien, on s'attends à cette exception
 		}
 
@@ -565,29 +503,22 @@ public class CollectionListeTest
 		collection.add(extraElement);
 
 		// Retain null collection sur collection remplie
-		try
-		{
+		try {
 			result = collection.retainAll(null);
 
-			fail(testName + " retainAll(null) sur collection remplie sans " +
-					"exception");
-		}
-		catch (NullPointerException npe)
-		{
+			fail(testName + " retainAll(null) sur collection remplie sans " + "exception");
+		} catch (NullPointerException npe) {
 			// Rien, on s'attends à cette exception
 		}
 
 		// Retain otherCollection sur collection remplie + extra element
 		result = collection.retainAll(otherCollection);
 		assertTrue(testName + " retainAll(other) sur col. remplie+", result);
-		assertEquals(testName + " retainAll(other) sur col. remplie+ size",
-				otherCollection.size(), collection.size());
+		assertEquals(testName + " retainAll(other) sur col. remplie+ size", otherCollection.size(), collection.size());
 		Iterator<String> it1 = collection.iterator();
 		Iterator<String> it2 = otherCollection.iterator();
-		for (; it1.hasNext() && it2.hasNext();)
-		{
-			assertSame(testName + " retainAll test same elts", it1.next(),
-					it2.next());
+		for (; it1.hasNext() && it2.hasNext();) {
+			assertSame(testName + " retainAll test same elts", it1.next(), it2.next());
 		}
 	}
 
@@ -595,8 +526,7 @@ public class CollectionListeTest
 	 * Test method for {@link listes.CollectionListe#size()}.
 	 */
 	@Test
-	public final void testSize()
-	{
+	public final void testSize() {
 		String testName = new String("CollectionListe<String>.size()");
 		System.out.println(testName);
 		int result;
@@ -608,18 +538,16 @@ public class CollectionListeTest
 		// Remplissage
 		remplissage(collection);
 
-		// Taille  après remplissage
+		// Taille après remplissage
 		result = collection.size();
-		assertEquals(testName + " taille collection après remplissage",
-				elements.length, result);
+		assertEquals(testName + " taille collection après remplissage", elements.length, result);
 	}
 
 	/**
 	 * Test method for {@link java.util.AbstractCollection#toArray()}.
 	 */
 	@Test
-	public final void testToArray()
-	{
+	public final void testToArray() {
 		String testName = new String("CollectionListe<String>.toArray()");
 		System.out.println(testName);
 		Object[] result;
@@ -633,12 +561,9 @@ public class CollectionListeTest
 
 		// toArray après remplissage
 		result = collection.toArray();
-		assertEquals(testName + " toArray après remplissage",
-				elements.length, result.length);
-		for (int i = 0; i < elements.length; i++)
-		{
-			assertSame(testName + " element[" + String.valueOf(i) + "]",
-					elements[i], result[i]);
+		assertEquals(testName + " toArray après remplissage", elements.length, result.length);
+		for (int i = 0; i < elements.length; i++) {
+			assertSame(testName + " element[" + String.valueOf(i) + "]", elements[i], result[i]);
 		}
 	}
 
@@ -646,8 +571,7 @@ public class CollectionListeTest
 	 * Test method for {@link java.util.AbstractCollection#toArray(T[])}.
 	 */
 	@Test
-	public final void testToArrayTArray()
-	{
+	public final void testToArrayTArray() {
 		String testName = new String("CollectionListe<String>.toArray(T[])");
 		System.out.println(testName);
 		String[] result;
@@ -661,12 +585,9 @@ public class CollectionListeTest
 
 		// toArray après remplissage
 		result = collection.toArray(new String[0]);
-		assertEquals(testName + " après remplissage",
-				elements.length, result.length);
-		for (int i = 0; i < elements.length; i++)
-		{
-			assertSame(testName + " element[" + String.valueOf(i) + "]",
-					elements[i], result[i]);
+		assertEquals(testName + " après remplissage", elements.length, result.length);
+		for (int i = 0; i < elements.length; i++) {
+			assertSame(testName + " element[" + String.valueOf(i) + "]", elements[i], result[i]);
 		}
 	}
 
@@ -674,8 +595,7 @@ public class CollectionListeTest
 	 * Test method for {@link java.util.AbstractCollection#toString()}.
 	 */
 	@Test
-	public final void testToString()
-	{
+	public final void testToString() {
 		String testName = new String("CollectionListe<String>.toString()");
 		System.out.println(testName);
 		String result;
@@ -695,8 +615,7 @@ public class CollectionListeTest
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
-	public final void testEqualsObject()
-	{
+	public final void testEqualsObject() {
 		String testName = new String("CollectionListe<String>.equals(Object)");
 		System.out.println(testName);
 		boolean result;
@@ -717,8 +636,7 @@ public class CollectionListeTest
 		assertFalse(testName + " this", result);
 
 		// Equals sur CollectionListe non semblable
-		CollectionListe<String> otherCollectionListe = new CollectionListe<String>(
-				collection);
+		CollectionListe<String> otherCollectionListe = new CollectionListe<String>(collection);
 		collection.add(extraElement);
 		result = collection.equals(otherCollectionListe);
 		assertFalse(testName + " otherCollectionListe non semblable", result);
@@ -750,8 +668,7 @@ public class CollectionListeTest
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	@Test
-	public final void testHashCode()
-	{
+	public final void testHashCode() {
 		String testName = new String("CollectionListe<String>.equals(Object)");
 		System.out.println(testName);
 		int result1, result2;
@@ -771,18 +688,15 @@ public class CollectionListeTest
 		// hasCode collections semblables
 		result1 = collection.hashCode();
 		result2 = otherCollection.hashCode();
-		assertEquals(testName + " hashCode collections remplies", result2,
-				result1);
+		assertEquals(testName + " hashCode collections remplies", result2, result1);
 
 		// hasCode collections dissemblables
 		collection.add(extraElement);
 		result1 = collection.hashCode();
-		assertTrue(testName + " hashCode collections remplies +",
-				result2 != result1);
+		assertTrue(testName + " hashCode collections remplies +", result2 != result1);
 
 		// [Optionnel]
 		// Les collections dissemblables ne sont plus égales
-		assertFalse(testName + " hashCode + equals direct +",
-				collection.equals(otherCollection));
+		assertFalse(testName + " hashCode + equals direct +", collection.equals(otherCollection));
 	}
 }

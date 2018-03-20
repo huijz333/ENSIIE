@@ -118,7 +118,7 @@ mean_hist(function(n) { return (rpareto(n, m=a, s=alpha)) }, "Distribution suiva
 mean_norm_hist(function(n) { return (rpareto(n, m=a, s=alpha)) }, "Distribution suivant une loi de Pareto P(1.0, 2.5)")
 ```
 
-Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1) (mais également loi exponentielle).
+Plus $n$ est grand, plus la loi moyenne empirique renormalisé semble suivre une loi N(0, 1) (bien qu'elle possède de nombreuses valeurs 'à droite' faisant penser à une allure exponentielle).
 
 ### 1.3 Loi de Poisson
 Soit $X$ une variable aléatoire suivant une loi de Poisson $P(\lambda)$.

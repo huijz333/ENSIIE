@@ -74,7 +74,7 @@ public interface Figure extends Cloneable {
 		// getCentre est une méthode abstraite mais rien ne nous empêche
 		// de l'utiliser dans une autre méthode. Grâce au lien dynamique
 		// TODO Remplacer par l'implémentation
-		return 0.0;
+		return this.getCentre().distance(f.getCentre());
 	}
 
 	/**

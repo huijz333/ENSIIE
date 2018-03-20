@@ -58,4 +58,9 @@ public class CollectionListe<E> extends AbstractCollection<E> {
 		}
 		return (true);
 	}
+
+	@Override
+	public int hashCode() {
+		return (this.isEmpty() ? 0 : super.hashCode());
+	}
 }
