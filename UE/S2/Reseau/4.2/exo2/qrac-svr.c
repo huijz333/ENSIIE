@@ -111,27 +111,36 @@ int main(int argc, char** argv)
     /* dialogue: etat REPOS */
     statut = lire_PDU(pdu,cx);
     if (statut != 'H') goto fin_dialogue_inattendue ;
-    gen_PDUcrq(pdu, 'C', n);
+    gen_PDUcrq(pdu, 'C', n ^ cle);
     statut = write(cx, pdu, 3);
 
     /* dialogue: etat ATTS */
     statut = lire_PDU(pdu,cx);
     if (statut != 'R') goto fin_dialogue_inattendue ;
     unsigned int n_client = extrait_N_de_PDUcrq(pdu);
-    if (n_client != n) {
+    if (n_client != n + 1) {
     	statut = write(cx, "F", 2);
     } else {
     	statut = write(cx, "O", 2);
     }
 
     /* dialogue: etat ACCEPT */
+    puts("a");
     statut = lire_PDU(pdu,cx);
     if (statut == 'Q') {
+	    int nquestion = extrait_N_de_PDUcrq(pdu);
+	    int idx = nquestion - 1;
+	    if (idx < 0 || idx >= q_r_n) {
+		    printf("erreur: numero de question inconnue\n");
+		    goto fin_dialogue_inattendue ;
+	    }
+	    char * nom = q_r_t[nquestion - 1].r;
+	    gen_PDUm8(pdu, nom);
+	    write(cx, pdu, 10);
+    } else {
 	    statut = write(cx, "F", 2);
 	    goto fin_dialogue_inattendue ;
     }
-#warning TODO
-
     /* dialogue: etat REPOS (FIN) */
     close(cx);
     continue;

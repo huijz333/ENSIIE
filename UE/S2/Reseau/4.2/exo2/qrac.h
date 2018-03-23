@@ -156,11 +156,8 @@ int lire_PDU(char*buf, int cx)
         break;
       case '8':
         nb =  lire_data(buf+1,cx,9);
-        if ( nb!=2 )    { return 'e'; }
+        if ( nb!=9 )    { return 'e'; }
         if ( buf[1] == 0 || buf[9] != 0 )    { return 'e'; }
-        int i;
-	for (i = 1 ; i < 9 && buf[i] ; i++);
-	for ( ; i < 10 ; i++) { if (!buf[i]) { return 'e'; } }
 	break;
       default:
         return 'e';
@@ -189,9 +186,10 @@ void gen_PDUcrq(char* pdu, int type, unsigned int v) {
  *   pdu contient tous les octets d'un PDU C, R ou Q.
 **/
 int extrait_N_de_PDUcrq(char* pdu) {
-	char high = pdu[1];
-	char low  = pdu[2];
-	return ((high << 8) | low);
+	unsigned char high = pdu[1];
+	unsigned char low  = pdu[2];
+	unsigned int p = (high << 8) | low;
+	return (p);
 }
 
 /**
@@ -204,8 +202,14 @@ int extrait_N_de_PDUcrq(char* pdu) {
 **/
 void gen_PDUm8(char* pdu, const char* msg)
 {
-    fprintf(stderr,"%s:%s:%d: TODO\n", prgname,__func__,__LINE__);
-    exit( 1 );
+    pdu[0] = '8';
+    int i;
+    for (i = 0; msg[i] && i < 8 ; i++) {
+	 pdu[i + 1] = msg[i];
+    }
+    for ( ; i < 9 ; i++) {
+	    pdu[i + 1] = 0;
+    }
 }
 
 /*=======================================================================*/

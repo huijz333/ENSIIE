@@ -83,7 +83,7 @@ int main(int argc, char** argv)
   /* dialogue: etat ATTC */
   statut = lire_PDU(pdu,cx);
   if ( statut!='C' ) goto fin_dialogue_inattendue;
-  unsigned short v = extrait_N_de_PDUcrq(pdu) ^ cle;
+  int v = extrait_N_de_PDUcrq(pdu) ^ cle;
   gen_PDUcrq(pdu,'R', v+1);
   statut = write(cx,pdu,3);
 
@@ -92,17 +92,18 @@ int main(int argc, char** argv)
   if (statut == 'F') {
 	  fprintf(stderr, "Vous n'etes pas autorisé!\n");
 	  goto fin_dialogue_erreur;
-  } else if (statut == 'O') {
-	/** dialogue : etat ACCEPT */
-  } else {
+  } else if (statut =! 'O') {
 	  goto fin_dialogue_inattendue ;
   }
-#warning TODO
-
+  gen_PDUcrq(pdu, 'Q', nquestion);
+  statut = write(cx, pdu, 3);
   /* dialogue: etat ACCEPT */
   statut = lire_PDU(pdu,cx);
   if (statut == 'F') {
-#warning TODO
+	  printf("Fin.\n");
+	  goto fin_dialogue_erreur;
+  } else if (statut == '8') {
+	  printf("Réponse à la question: %s\n", pdu + 1);
   } else {
 	goto fin_dialogue_inattendue;
   }
