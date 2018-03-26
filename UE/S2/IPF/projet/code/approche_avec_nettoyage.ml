@@ -17,29 +17,33 @@ open Utils ;;
 (**
  *	Fonction 'clean_up'
  *
- *	@param  : int list -> int -> float -> int list
- *	@return : TODO
+ *	@param  :	int list -> int -> float -> int list
+ *	@return :	l'ensemble des entiers 'l' filtré:
+ *			- les entiers plus grand que 's' sont supprimés
+ *			- lorsque 2 entiers sont 'delta prêt égaux', le plus petit est gardé
+ *
+ *	'delta prêt égaux' : 2 entiers x < y, sont 'delta prêt égaux', si (1 + delta)*x > y
+ *	Autrement dit, si en perturbant le plus petit (par un facteur proche de 1),
+ *	il devient plus grand que le 2ème. Ceci à lieu si 2 entiers sont 'très proches'
  *)
 let clean_up =	function l -> function s -> function d ->
-			let sl = List.sort (function x -> function y -> x - y) l in
-			let m1 = list_first sl in
-			let (t, _) = List.fold_left (function (t, m2) -> function e ->
-					if e != m2 && e <= s &&
-					(float_of_int e) >= (1.0 +. d) *. (float_of_int m2)
-					then
+			let sl =  l in
+			let m_min = list_first sl in
+			let (t, _) = List.fold_left (function (t, m) -> function e ->
+					if  (float_of_int e) > (1.0 +. d) *. (float_of_int m) && e <= s then
 						(set_union t [e], e)
 					else
-						(t, m2)
+						(t, m)
 					)
-			([m1], m1) sl in
+			([m_min], m_min) sl in
 			t
 		;;
 
 (**
- *	Fonction 'get_all_sums'
+ *	Fonction 'get_all_sums_2'
  *
- *	@param  :	int list -> int list
- *	@return :	renvoie la liste des sommes atteignables,
+ *	@param  :	float -> int list -> int list
+ *	@return :	renvoie la liste des sommes atteignables, filtrer par la fonction 'clean_up'
  *			en sommant sur les sous ensembles de la liste l
  *)
 let rec get_all_sums_2 = function d -> function l -> function s ->

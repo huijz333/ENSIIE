@@ -4,15 +4,16 @@
 \usepackage{floatrow}
 
 \usepackage{algorithm, algpseudocode}
-\newcommand{\vars}{\texttt}
-\newcommand{\func}{\textrm}
 \let\oldReturn\Return
 \renewcommand{\Return}{\State\oldReturn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
 \usepackage[T1]{fontenc}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{scrextend}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{listings}
@@ -52,7 +53,9 @@
 			sous-ensemble $E' \subseteq E$ vérifiant $\sum_{e \in E'}{e} = s'$.
 			\newline
 		\end{addmargin}
-		Le code est disponible dans le rendu.
+		Ce rapport présente (en pseudo-code), les algorithmes implémentés.
+		Le code OCaml est disponible dans le rendu, dans des fichiers de types 'approche\_naive.ml', 'approche\_plus\_directe.ml' ...
+		\newline
 		\newline
 		Un Makefile est disponible pour compiler le projet et les tests:
 		\begin{itemize}[label=-]
@@ -70,86 +73,150 @@
 		\newline
 		Si $Card(E) = n$, alors $Card(P(E)) = 2^n$, et $\forall E' \in P(E) , 0 <= Card(E') <= n$
 		\newline
-		\newline
 		Résoudre le problème (génerer ces ensembles et sommer dessus) se fait donc en $\boxed{O(2^nn)}$
-		\newline
-		\newline
-		Le code est disponible dans le fichier \textbf{approche\_naive.ml}.
-		\newline
 		\subsection{Question 1 : somme sur un ensemble}
 			\begin{algorithm}
 				\caption{Renvoie la somme des éléments de E}
 				\begin{algorithmic}[1]
-					\Function{Somme}{$\vars{E'}$}
+					\Function{Somme}{$E' \subset \mathbb{N}$}
 						\If{$E' = \emptyset$}
 							\Return 0
 						\EndIf
 						\State Soit $x \in E'$
-						\Return x + Somme($E' \backslash \{x\}$)
+						\Return x + $\mathtt{Somme}(E' \backslash \{x\}$)
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			Complexité en $O(n)$, où $n = Card(E')$
+			Complexité en $\boxed{O(n)}$, où $n = Card(E')$
 			
 		\subsection{Question 2 : génération des parties d'un ensemble}
 			\begin{algorithm}
 				\caption{Renvoie l'ensemble des parties de E}
 				\begin{algorithmic}[1]
-					\Function{Sous-ensembles}{$\vars{E}$}
+					\Function{Sous-ensembles}{$E \subset \mathbb{N}$}
 						\If{$E = \emptyset$}
 							\Return $\{\emptyset\}$
 						\EndIf
 						\State Soit $x \in E$
-						\State Soit $P \leftarrow Sous-ensembles(E \backslash \{x\})$
-						\Return $\{P\} \cup \{E' \cup x \mid E' \in P\}$
+						\State Soit $P \leftarrow \mathtt{Sous-ensembles}(E \backslash \{x\})$
+						\Return $P \cup \{E' \cup x \mid E' \in P\}$
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			Complexité en $O(2^n)$, où $n = Card(E)$
+			Complexité en $\boxed{O(2^n)}$, où $n = Card(E)$
 		
-		\newpage
 		\subsection{Question 3 : résolution de SUBSET\_SUM\_OPT par force brute}
 			\begin{algorithm}
 				\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 				\begin{algorithmic}[1]
-					\Function{subset\_sum}{$\vars{E}, \vars{s}$}
-						\State Soit $P \leftarrow Sous-ensembles(E)$
-						\Return $\underset{E' \in P}{\max}\{s' \mid s' = Somme(E') \quad et \quad s' \leq s\}$
+					\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
+						\State Soit $P \leftarrow \mathtt{Sous-ensembles}(E)$
+						\Return $\underset{E' \in P}{\max}\{s' \mid s' = \mathtt{Somme}(E') \quad et \quad s' \leq s\}$
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			Complexité en $O(2^nn)$, où $n = Card(E)$
-			
-		\section{Approche plus directe}
+			Complexité en $\boxed{O(2^nn)}$, où $n = Card(E)$
+		\newpage
+		\section{Approche plus directe}\label{approche_plus_directe}
 			Dans cette approche, plutot que de calculer l'ensemble des parties de $E$,
 			on se propose de calculer l'ensemble des sommes atteignables en sommet sur les parties de $E$.
 			
 			\subsection{Question 4 : sommes atteignables}
-			\begin{algorithm}
-				\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe $E' \subseteq E$ vérifiant $\sum\limits_{e \in E'}e = s$}
-				\begin{algorithmic}[1]
-					\Function{Get\_all\_sums}{$\vars{E}$}
-						\If{$E = \emptyset$}
-							\Return $\{0\}$
-						\EndIf
-						\State Soit $x \in E$
-						\State $S \leftarrow Get\_all\_sums(E \backslash \{x\})$
-						\Return $S \cup \{x + s \mid s \in S\}$
-					\EndFunction
-				\end{algorithmic}
-			\end{algorithm}
-			Si l'on suppose:
-			\begin{itemize}[label=-]
-				\setlength\itemsep{0.1em}
-				\item $n = Card(E)$
-				\item $m(n) = Card\{sommes \quad atteignables\} = \{s \mid \exists E' \subseteq E \mid \sum\limits_{e \in E'}e = s\} \leq 2^n$
-				\item $X \cup Y$ : opération en $O(Card(X) * Card(Y))$
-			\end{itemize}
-			Alors la complexité de cet algorithme est en $O(m(n)^2 * n)$
-			\newline
-			\textbf{N.B:} $m(n) \leq 2^n$ est la seule information que l'on peut avoir... On ne peut donc pas
-			comparer cette approche avec l'approche naïve \ref{approche_naive}
+				\begin{algorithm}
+					\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe $E' \subseteq E$ vérifiant $\sum\limits_{e \in E'}e = s$}
+					\begin{algorithmic}[1]
+						\Function{Get\_all\_sums}{$E \subset \mathbb{N}$}
+							\If{$E = \emptyset$}
+								\Return $\{0\}$
+							\EndIf
+							\State Soit $x \in E$
+							\State $S \leftarrow \mathtt{Get\_all\_sums}(E \backslash \{x\})$
+							\Return $S \cup \{x + s \mid s \in S\}$
+						\EndFunction
+					\end{algorithmic}
+				\end{algorithm}
+				Si l'on suppose:
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item $n = Card(E)$
+					\item $m(n) = Card\{sommes \quad atteignables\} = \{s \mid \exists E' \subseteq E \mid \sum\limits_{e \in E'}e = s\} \leq 2^n$
+					\item $X \cup Y$ : opération en $O(Card(X) * Card(Y))$
+				\end{itemize}
+				Alors la complexité de cet algorithme est en $\boxed{O(m(n)^2 * n)}$
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item $n$ : nombre de récursion
+					\item $m(n)^2$ : l'union
+				\end{itemize}
 
+			\subsection{Question 5 : résolution de SUBSET\_SUM\_OPT}
+				\begin{algorithm}
+					\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
+					\begin{algorithmic}[1]
+						\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
+							\State Soit $S \leftarrow \mathtt{Get\_all\_sums}(E)$
+							\Return $\max\{s' \in S \mid 0 \leq s' \leq s\}$
+						\EndFunction
+					\end{algorithmic}
+				\end{algorithm}
+				La complexité de cet algorithme de résolution est donc en $\boxed{O(m(n)^3 * n)}$
+
+	\newpage
+		\section{Approche avec nettoyage}\label{approche_naive}
+			On peut réduire la complexité de l'approche précèdente en réduisant ce que l'on a noté $m(n)$ (le nombre de sommes atteignables.
+			Dans cette approche, on se propose d'ajouter un 'filtre' sur l'algorithme qui génère les sommes.
+				\subsection{Question 6 ; fonction clean\_up}
+					Le filtre (l'algorithme 'clean\_up') est donnée dans l'énoncé. Cette fonction prends en paramètre:
+					\begin{itemize}[label=-]
+						\setlength\itemsep{0.1em}
+						\item $E \subset \mathbb{N}$ : l'ensemble a filtré
+						\item $s \in \mathbb{N}$ : un entier positif
+						\item $\delta \in \mathbb{R}_+^*$ : un réel positif (généralement $\ll 1$)
+					\end{itemize}
+					Cette fonction renvoie un nouvel ensemble $E' \subset E$, tel que:
+					\begin{itemize}[label=-]
+						\setlength\itemsep{0.1em}
+						\item	$\forall x \in E' , x \leq s$
+						\item	Si l'on considère la suite croissante $(u_n)_{n \in \mathbb{N}}$ des éléments de $E'$,
+								$\forall n \in \mathbb{N}, u_{n + 1} \geq (1 + \delta)u_n $.
+					\end{itemize}
+		
+					Autrement dit, tous les entiers strictement supérieurs à $n$ sont supprimés, et 
+					si l'on considère 2 entiers consécutifs de l'ensemble trié $x$ et $y$, tel que $x < y$,
+					ils sont 'proches d'un rapport d'au moins $(1 + \delta)$, $y$ est supprimé.
+					Ce filtre supprime donc les éléments de l'ensemble qui sont 'proches' l'un de l'autre (au regard de $\delta$)
+
+				\subsection{Question 7 : résolution de SUBSET\_SUM\_OPT}
+					L'algorithme de résolution est également fourni dans l'énoncé.
+					Il est le même que celui de 'l'approche plus directe' \ref{approche_plus_directe}, sauf que
+					lors du calcul des sommes atteignables filtrés par la fonction 'clean\_up'.
+					
+					\begin{algorithm}
+					\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe
+								$E' \subseteq E$ vérifiant $\sum\limits_{e \in E'}e = s$, passant les tests du filtre}
+					\begin{algorithmic}[1]
+						\Function{Get\_all\_sums\_2}{$E \subset \mathbb{N}$}
+							\If{$E = \emptyset$}
+								\Return $\{0\}$
+							\EndIf
+							\State Soit $x \in E$
+							\State $S \leftarrow \mathtt{Get\_all\_sums\_2}(E \backslash \{x\})$
+							\Return $\mathtt{clean\_up}(S \cup \{x + s \mid s \in S\})$
+						\EndFunction
+					\end{algorithmic}
+				\end{algorithm}
+				
+				\begin{algorithm}
+					\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
+					\begin{algorithmic}[1]
+						\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
+							\State Soit $S \leftarrow \mathtt{Get\_all\_sums\_2}(E)$
+							\Return $\max\{s' \in S \mid 0 \leq s' \leq s\}$
+						\EndFunction
+					\end{algorithmic}
+				\end{algorithm}
+				La complexité de cet algorithme de résolution est donc en $\boxed{O(m'(n)^3 * n)}$
+				
 	\newpage
 	\section{Références}
 		\begin{thebibliography}{}

@@ -6,4 +6,6 @@
 \contentsline {subsection}{\numberline {2.1}Question 4 : sommes atteignables}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Question 5 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{3}{subsection.2.2}
 \contentsline {section}{\numberline {3}Approche avec nettoyage}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Question 6 ; fonction clean\_up}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Question 7 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{4}{subsection.3.2}
 \contentsline {section}{\numberline {4}R\IeC {\'e}f\IeC {\'e}rences}{5}{section.4}

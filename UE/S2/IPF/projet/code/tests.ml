@@ -82,7 +82,7 @@ printf "##################################################\n" ;;
 
 printf "-------------------------------------------\n" ;;
 printf "Tests de la fonction 'clean_up'\n%!" ;;
-(** TODO *)
+assert ((clean_up (list_generate 1 100 1) 90 0.1) = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 12; 14; 16; 18; 20; 23; 26; 29; 32; 36; 40; 45; 50; 56; 62; 69; 76; 84] );;
 printf "Succes\n" ;;
 
 printf "-------------------------------------------\n" ;;
@@ -95,8 +95,6 @@ assert (subset_sum_2 0.01 [1; 2; 3] 6 = 6) ;;
 assert (subset_sum_2 0.01 [1; 2; 3] 5 = 5) ;;
 assert (subset_sum_2 0.01 [1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1] 6 = 6);;
 
-(** sur le test suivant, la valeur exacte n'est pas trouvé pour delta=0.01,
- *  mais est trouvé pour delta <= 0.001 *)
 assert (subset_sum_2 0.01 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 708);;
 assert (subset_sum_2 0.001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712);;
 assert (subset_sum_2 0.0001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712) ;;
