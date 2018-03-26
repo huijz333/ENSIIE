@@ -222,52 +222,53 @@ estimation[["ZN_means"]]
 ```
 
 La moyenne empirique est une variable aléatoire, et on a montré que
-$\mathbb{E}[\bar Z_N] = \mathbb{E}[Z]$ et une variance $\mathbb{V}[\bar Z_N] = \frac{1}{N}\mathbb{V}[Z]$.
+$\mathbb{E}[\bar Z_N] = \mathbb{E}[Z]$ et $\mathbb{V}[\bar Z_N] = \frac{1}{N}\mathbb{V}[Z]$.
 
 Donc d'après le théorème de Bienaymé Tchebichev, la précision de notre
-estimation $\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[Z] \simeq \bar Z_N$,
+estimation $$\mathbb{P}(|X-\mu|\geq \delta) = \mathbb{E}[Z] \simeq \bar Z_N$$
 est donné par:
-
-$\forall \epsilon \geq 0, \mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] \leq \frac{1}{\epsilon \space N}\mathbb{V}[Z]$.
+$$\forall \delta \geq 0, \mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \delta] \leq \frac{1}{\delta * \space N}\mathbb{V}[Z]$$
 
 $(c)$
 Application numérique:
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
-markov_sup <- function(Z, N, eps) {
-  return (var(Z) / (eps * N));
+markov_sup <- function(Z, N, delta) {
+  return (var(Z) / (delta * N));
 }
-eps <- 1e-4
+delta <- 1e-4
 ```
 
-On a fixé plus tôt $N=10^5$. On fixe $\epsilon=10^{-4}$.
+On a fixé plus tôt $N=10^5$. On fixe $\delta=10^{-4}$.
 
 En fonction des loi de X précèdentes, notre estimation de $\bar Z_N \simeq \mathbb{E}[Z]$ vérifie:
 
-$\mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \epsilon] = \mathbb{P}(\bar Z_N \notin [\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]) \leq \space ...$
+$\mathbb{P}[|\bar Z_N - \mathbb{E}[Z]| \geq \delta] = \mathbb{P}(\bar Z_N \notin [\mathbb{E}[Z] - \delta ; \mathbb{E}[Z] + \delta]) \leq \space ...$
 
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 XN <- estimation[["XN"]]
 ZN <- estimation[["ZN"]]
 for (distrib in names(XN)) {
-  print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, eps)))
+  print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, delta)))
 }
 ```
 
 Remarques:
 
-  + Plus $\epsilon$ est 'petit', plus notre précision est incertaine.
-  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ s'éloigne de 1)
+  + Plus $\delta$ est 'petit' devant 1, plus notre précision est incertaine.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \delta ; \mathbb{E}[Z] + \delta]$ s'éloigne de 1)
   
-  + Plus $N$ est 'grand', plus notre précision est probable.
-  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ tends vers 1)
+  + Plus $N$ est 'grand' devant 1, plus notre précision est probable.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \delta ; \mathbb{E}[Z] + \delta]$ tends vers 1)
   
-  + Plus $\mathbb{V}[Z]$ est 'grande', plus notre précision est incertaine.
-  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \epsilon ; \mathbb{E}[Z] + \epsilon]$ s'éloigne de 1)
-  
+  + Plus $\mathbb{V}[Z]$ est 'grande' devant $\delta$, plus notre précision est incertaine.
+  (la probabilité que notre estimation soit dans l'invervalle $[\mathbb{E}[Z] - \delta ; \mathbb{E}[Z] + \delta]$ s'éloigne de 1)
+
+\newpage
 Voici les bornes obtenus pour différentes valeurs de $\delta$ et $\sigma$:
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
-print("Majoration par l'inégalité de Markov, de la probabilité que la moyenne obtenu s'écarte à +- epsilon prêt de l'espérance:");
-for (delta in c(1, 5, 10)) {
+# Majoration par l'inégalité de Markov, de la probabilité que
+# la moyenne obtenu s'écarte à +- epsilon prêt de l'espérance:
+for (delta in c(1e-4, 1e-2, 1)) {
   for (sigma in c(1, 10, 100)) {
     estimation <- estimate_monte_carlo(N, delta, mu=0, sigma, a=1.0, alpha=2.5, lambda=1)
     XN <- estimation[["XN"]]
@@ -275,7 +276,7 @@ for (delta in c(1, 5, 10)) {
     print("-----------------------------")
     print(paste("Pour delta=", delta, " et sigma=", sigma, sep=""))
     for (distrib in names(XN)) {
-      print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, eps)))
+      print(paste(distrib, ":", markov_sup(ZN[[distrib]], N, delta)))
     }   
   }
 }
@@ -287,15 +288,40 @@ Soit X une variable aléatoire admettant une fonction génératrice.
 
 L'inégalité de Chernoff donne:
 
-$\forall t \in [0, 1] , \forall \epsilon \in \mathbb{R}^*_+,$
+$\forall \delta \in \mathbb{R}, \forall \epsilon \in \mathbb{R}^*_+,$
   
-  $\mathbb{P}(X-\mathbb{E}[X] \geq \epsilon) \leq e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+  $\mathbb{P}(X-\mathbb{E}[X] \geq \delta) \leq e^{-\epsilon \delta} \mathbb{E}[e^{(X-\mathbb{E}[X])\epsilon]}]$
   
-  $\mathbb{P}(X-\mathbb{E}[X] \leq -\epsilon) \leq e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+  $\mathbb{P}(X-\mathbb{E}[X] \leq -\delta) \leq e^{-\epsilon \delta} \mathbb{E}[e^{(X-\mathbb{E}[X])\epsilon]}]$
 
 Donc,
 
-$\mathbb{P}(|X-\mathbb{E}[X]| \geq \epsilon) \leq 2e^{-\epsilon t} \mathbb{E}[e^{(X-\mathbb{E}[X])t]}]$
+$\mathbb{P}(|X-\mathbb{E}[X]| \geq \delta) \leq 2e^{-\epsilon \delta} \mathbb{E}[e^{(X-\mathbb{E}[X])\epsilon]}]$
+
+Pour une variable Gaussienne $N(\mu, \sigma^2)$, on a:
+$\mathbb{P}(|X-\mathbb{E}[X]| \geq \delta) \leq 2e^{\frac{-\delta^2}{2\sigma^2}}$
+
+Pour une variable de Poisson $P(\lambda)$, on a:
+$\mathbb{P}(|X-\mathbb{E}[X]| \geq \delta) \leq 2e^{\frac{-\delta^2}{2(\lambda + \delta)}}$
+
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+# Majoration par l'inégalité de Chernoff, de la probabilité que
+# la moyenne obtenu s'écarte à +- delta prêt de l'espérance:
+for (delta in c(1e-4, 1e-2, 1, 10)) {
+  for (sigma in c(1, 10, 100)) {
+    estimation <- estimate_monte_carlo(N, delta, mu=0, sigma, a=1.0, alpha=2.5, lambda=1)
+    XN <- estimation[["XN"]]
+    ZN <- estimation[["ZN"]]
+    print("-----------------------------")
+    print(paste("Pour delta=", delta, " et sigma=", sigma, sep=""))
+    print(paste("Gaussienne", ":", 2.0 * exp(-delta * delta / (2 * sigma))))
+    print(paste("Poisson", ":", 2.0 * exp(-delta * delta / (2 * (delta + 1)))))
+ 
+  }
+}
+```
+
+Pour $\delta$ petit devant la variance, la borne tends vers 2... ce qui n'apporte pas d'informations utiles.
 
 ### 2.3.
 
@@ -328,14 +354,13 @@ Ceci s'explique par le fait que la probabilité d'obtenir une valeur éloigné d
 $(c)$
 La médiane d'une loi de Cauchy $C(\theta)$ est $\theta$.
 
-Si l'on sait qu'une phénomène suit une loi de Cauchy, il est possible de déterminer son paramètre $\theta$ en suivant ce protocole:
+Si l'on sait qu'un phénomène suit une loi de Cauchy, il est possible de déterminer son paramètre $\theta$ en suivant ce protocole:
 
 1. Fixer $n \in \mathbb{N}, n \gg 1$.
 2. Générer un échantillon de taille $n$.
 3. Trier les valeurs de cette échantillon par ordre croissant. (ou décroissant)
 4. La valeur au centre de l'échantillon trié (en $\frac{n}{2}$ ) est un estimateur de $\theta$.
 
-\newpage
 Application:
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 theta <- 0

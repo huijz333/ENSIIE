@@ -85,7 +85,9 @@ mean(dp)
 
 
 $(f)$
-
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+df <- read.csv(file="./distribution_inconue_2_100_realisations.csv", header=TRUE)
+```
 
 # 2. Ajuster une loi de Bernouilli
 
