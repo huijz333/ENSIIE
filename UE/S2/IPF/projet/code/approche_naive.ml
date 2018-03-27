@@ -2,7 +2,7 @@
 * File              : approche_naive.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :26 CET
-* Last Modified Date: dim. 18 mars 2018 12:18:18 CET
+* Last Modified Date: mar. 27 mars 2018 17:48:16 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 (**
@@ -39,18 +39,16 @@ let rec powerset =	function l ->
  *	@return : 	le résultat du problème SUBSET-SUM-OPT
  *			sur la liste et l'entier donné
  *)
-let subset_sum_0 =	function l -> function n ->
+let subset_sum_0 =	function l -> function s ->
 				let ps = powerset l in
 				(* fonction qui a un entier 'm', et
 				   une liste d'entier 'sl', associe
-				   un entier x (soit 'sum ss', soit 'm')
-				   tel que: m <= x <= n *)
+				   un entier s' (égal à 'sum sl' ou à 'm')
+				   tel que: m <= s' <= s *)
 				let f =	function m -> function sl ->
-						let s = sum sl in
-						if (m < s && s <= n) then s else m
+						let s' = sum sl in
+						if (m < s' && s' <= s) then s' else m
 					in
 				List.fold_left f 0 ps
 			;;
-
-
 

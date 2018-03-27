@@ -2,7 +2,7 @@
 * File              : approche_avec_nettoyage.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :42 CET
-* Last Modified Date: dim. 18 mars 2018 19:31:39 CET
+* Last Modified Date: mar. 27 mars 2018 17:44:57 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -12,7 +12,8 @@
  *	Réponses aux questions 6, 7
  *)
 
-open Utils ;;
+open Ensembles ;;
+open Listes ;;
 
 (**
  *	Fonction 'clean_up'
@@ -57,10 +58,10 @@ let rec get_all_sums_2 = function d -> function l -> function s ->
  *	@param	:	float -> int list -> int -> int
  *	@return :	le résultat du problème SUBSET-SUM-OPT
  *)
-let subset_sum_2 =	function d -> function l -> function n ->
-				let sums = get_all_sums_2 d l n in
+let subset_sum_2 =	function d -> function l -> function s ->
+				let sums = get_all_sums_2 d l s in
 				List.fold_left	(function sum1 -> function sum2 ->
-							if (sum1 < sum2 && sum2 <= n) then
+							if (sum1 < sum2 && sum2 <= s) then
 								sum2
 							else
 								sum1

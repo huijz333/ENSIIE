@@ -2,7 +2,7 @@
  * File              : approche_plus_directe.ml
  * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
  * Date              :07 CET
- * Last Modified Date: dim. 18 mars 2018 12:07:30 CET
+ * Last Modified Date: mar. 27 mars 2018 17:40:30 CEST
  * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
  *)
 (**
@@ -12,7 +12,7 @@
  *)
 
 (** importe les fonctions sur les 'set' *)
-open Utils ;;
+open Ensembles ;;
 
 (**
  *	Fonction 'get_all_sums'

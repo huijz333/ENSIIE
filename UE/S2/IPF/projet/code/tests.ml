@@ -2,13 +2,26 @@
 * File              : tests.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :31 CET
-* Last Modified Date: dim. 18 mars 2018 19:41:58 CET
+* Last Modified Date: mar. 27 mars 2018 17:49:39 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
 (** Tests de des différentes fonctions implémentés *)
 open Printf ;;
-open Utils ;;
+open Listes ;;
+open Ensembles ;;
+
+(** Debut des tests des fonctions auxiliaires sur les listes *)
+printf "###################################\n" ;;
+printf "#    Listes : debut des tests     #\n" ;;
+printf "###################################\n" ;;
+
+
+(** Debut des tests des fonctions auxiliaires sur les ensembles *)
+printf "######################################\n" ;;
+printf "#    Ensembles : debut des tests     #\n" ;;
+printf "######################################\n" ;;
+
 
 (** Debut des tests de la partie 'Approche naive' *)
 open Approche_naive ;;
@@ -99,3 +112,16 @@ assert (subset_sum_2 0.01 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 708);;
 assert (subset_sum_2 0.001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712);;
 assert (subset_sum_2 0.0001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712) ;;
 printf "Succes\n" ;;
+
+(** Debut des tests de la partie 'Approche de type diviser pour régner' *)
+open Approche_diviser_pour_regner ;;
+printf "#######################################################\n" ;;
+printf "#    Approche diviser pour régner: debut des tests    #\n" ;;
+printf "#######################################################\n" ;;
+
+printf "-------------------------------------------\n" ;;
+printf "Tests de la fonction 'is_feasible'\n%!" ;;
+assert (is_feasible 12 [1; 2; 4; 7] [10; 8; 2] = true) ;; (** 4 + 8 == 12 *)
+assert (is_feasible 16 [1; 2; 4; 7] [10; 8; 2] = false) ;;
+printf "Succes\n" ;;
+

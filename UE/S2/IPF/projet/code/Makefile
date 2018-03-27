@@ -1,9 +1,11 @@
 TARGET	= subset-sum-opt.out
 
-ML	= utils.ml\
+ML	= listes.ml\
+	  ensembles.ml\
 	  approche_naive.ml\
 	  approche_plus_directe.ml\
-	  approche_avec_nettoyage.ml
+	  approche_avec_nettoyage.ml\
+	  approche_diviser_pour_regner.ml
 
 CMO	= $(ML:%.ml=%.cmo)
 
@@ -12,15 +14,17 @@ CMI	= $(MLI:%.mli=%.cmi)
 
 all: $(TARGET)
 
-$(TARGET): $(CMI) $(CMO)
-	ocamlc -c tests.ml
+$(TARGET): $(CMI) $(CMO) tests.cmo
 	ocamlc $(CMO) tests.cmo -o $(TARGET)
 
-$(CMI): %.cmi : %.mli
+tests.cmo: tests.ml
+
+%.cmo : %.ml
 	ocamlc -c $<
 
-$(CMO): %.cmo : %.ml
+%.cmi : %.mli
 	ocamlc -c $<
+
 clean:
 	rm -rf $(CMI) $(CMO) tests.cmo tests.cmi
 
