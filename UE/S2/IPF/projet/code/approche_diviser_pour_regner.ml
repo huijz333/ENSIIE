@@ -2,7 +2,7 @@
 * File              : approche_diviser_pour_regner.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :42 CET
-* Last Modified Date: mar. 27 mars 2018 17:57:17 CEST
+* Last Modified Date: mar. 27 mars 2018 21:24:39 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -30,36 +30,35 @@ type is_feasible_result = TOO_SMALL | REACHED | TOO_BIG ;;
  *	@return :	Renvoie true si 's' s'écrit comme la somme d'un élément
  *			de 'l1' et d'un élément de 'l2', faux sinon
  *)
-let rec is_feasible =	function s -> function l1 -> function l2 ->
-				(**
-				 *	fonction interne qui test si l'on peut forme 's' en sommant
-				 *	l'entier 'x' avec un entier de la liste 'l'.
-				 *	On utilise le fait que 'l1' est croissante ici.
-				 *)
-				let rec test_sum =	function l -> function y ->
-								match l with
-								| []	-> 	TOO_SMALL
-								| x::t	->	if x + y = s then
-											REACHED
-										else if x + y > s then
-											TOO_BIG
-										else
-											test_sum t y
-							in
-				(** pour chaque élément de 'l2'(du plus grand au plus petit) *)
-				match l2 with
-				| []	->	false
-				| y::t	->	if y > s then
-							is_feasible s l1 t
-						else
-							let r = test_sum l1 y in
-							(
-							 match r with
-							 | TOO_SMALL	-> false
-							 | REACHED	-> true
-							 | TOO_BIG	-> is_feasible s l1 t
-							)
-			;;
+let is_feasible = function s -> function l1 -> function l2 ->
+	(**
+	 *	fonction interne qui test si l'on peut forme 's' en sommant
+	 *	l'entier 'x' avec un entier de la liste 'l'.
+	 *	On utilise le fait que 'l1' est croissante ici.
+	 *)
+	let rec test_sum = function l -> function y ->
+		match l with
+		| []	-> 	TOO_SMALL
+		| x::t	->	if x + y = s then
+					REACHED
+				else if x + y > s then
+					TOO_BIG
+				else
+					test_sum t y
+	in
+	(** pour chaque élément de 'l2'(du plus grand au plus petit) *)
+	let rec is_feasible_rec = function l2_tail ->
+		match l2_tail with
+		| []	->	false
+		| y::t	->	(
+					match (test_sum l1 y) with
+					 | TOO_SMALL	-> false
+					 | REACHED	-> true
+					 | TOO_BIG	-> is_feasible_rec t
+				)
+	in
+	is_feasible_rec l2
+;;
 
 (**
  *	Fonction 'best_feasible'
@@ -70,7 +69,36 @@ let rec is_feasible =	function s -> function l1 -> function l2 ->
  *			somme d'un élément de de 'l1' et d'un élément de 'l2',
  *			tel que s' < s, ou -1 si un tel s' n'existe pas.
  *)
-let rec best_feasible =	function s -> function l1 -> function l2 -> s + 1;;
+let best_feasible =	function s -> function l1 -> function l2 ->
+	(**
+	 *	fonction interne qui test si l'on peut forme 's' en sommant
+	 *	l'entier 'x' avec un entier de la liste 'l'.
+	 *	On utilise le fait que 'l1' est croissante ici.
+	 *)
+	let rec test_sum = function l -> function y -> function s' ->
+		match l with
+		| []	-> 	(TOO_SMALL, s')
+		| x::t	->	if x + y = s then
+					(REACHED, s)
+				else if x + y > s then
+					(TOO_BIG, s')
+				else
+					test_sum t y (max (x + y) s')
+	in
+	(** pour chaque élément de 'l2'(du plus grand au plus petit) *)
+	let rec best_feasible_rec = function l2_tail -> function s' ->
+		match l2_tail with
+		| []	->	s'
+		| y::t	->	(
+					match (test_sum l1 y s') with
+					 | (TOO_SMALL, s'')	-> s''
+					 | (REACHED, _)		-> s
+					 | (TOO_BIG, s'')	-> best_feasible_rec t s''
+				)
+	in
+	best_feasible_rec l2 (-1)
+;;
+
 
 
 (**
@@ -80,10 +108,13 @@ let rec best_feasible =	function s -> function l1 -> function l2 -> s + 1;;
  *	@return :	le résultat du problème SUBSET-SUM-OPT
  *)
 let rec subset_sum_3 =	function l -> function s ->
+				(**
+				 *	N.B : get_all_sums renvoie les sommes accessibles
+				 *	dans l'ordre croissant, d'où le 'list_reverse'
+				 *)
 				let (l1, l2) = list_split l in
-				let s1 = get_all_sums l1 in
-				let s2 = get_all_sums l1 in
-				best_feasible s s1 s2
+				let (s1, s2) = (get_all_sums l1, get_all_sums l2) in
+				best_feasible s s1 (list_reverse s2)
 			;;
 
 

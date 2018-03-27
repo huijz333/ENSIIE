@@ -2,7 +2,7 @@
 * File              : listes.mli
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :09 CEST
-* Last Modified Date: mar. 27 mars 2018 17:38:10 CEST
+* Last Modified Date: mar. 27 mars 2018 21:18:27 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 (**
@@ -51,6 +51,14 @@ val list_first : 'a list -> 'a
  *			et dont la concaténation contient tous les éléments de 'l'
  *)
 val list_split : 'a list -> 'a list * 'a list
+
+(**
+ *	Fonction 'list_reverse'
+ *
+ *	@param  :	'a list -> 'a list
+ *	@return :	La liste des éléments inversés de 'l'
+ *)
+val list_reverse : 'a list -> 'a list
 
 (**
  *	Fonction 'list_print'

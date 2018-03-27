@@ -42,6 +42,7 @@
 	\maketitle
 	\tableofcontents
 
+	\newpage
 	\section{Préambule}
 
 		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE. Rappel de l'énoncé:
@@ -54,8 +55,8 @@
 			\newline
 		\end{addmargin}
 		Ce rapport présente (en pseudo-code), les algorithmes implémentés.
-		Le code OCaml est disponible dans le rendu, dans des fichiers de types 'approche\_naive.ml', 'approche\_plus\_directe.ml' ...
 		\newline
+		Le code OCaml est disponible dans le rendu.
 		\newline
 		Un Makefile est disponible pour compiler le projet et les tests:
 		\begin{itemize}[label=-]
@@ -64,7 +65,19 @@
 			\item \textit{clean} : supprimes les fichiers compilés temporaires (.mlo et .cmo)
 			\item \textit{fclean} : supprimes tous les fichiers compilés (executable et temporaires)
 		\end{itemize}
+		Les testes sont unitaires et effectue dans l'ordre:
+		\begin{itemize}[label=-]
+			\item Les fonctions du module \textit{Listes}
+			\item Les fonctions du module \textit{Ensembles}
+			\item Les fonctions du module \textit{Approche\_naïve}
+			\item Les fonctions du module \textit{Approche\_plus\_directe}
+			\item Les fonctions du module \textit{Approche\_avec\_nettoyage}
+			\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
+			\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
+			\item Comparaisons des approches
+		\end{itemize}
 
+	\newpage
 	\section{Spécificités techniques}\label{approche_naive}
 		\subsection{Notations}
 			J'utiliserai les notations suivantes:
@@ -141,16 +154,16 @@
 		Dans cette approche, plutot que de calculer l'ensemble des parties de $E$,
 		on se propose de calculer l'ensemble des sommes atteignables en sommet sur les parties de $E$.
 		
-		\subsection{Question 4 : sommes atteignables}
+		\subsection{Question 4 : sommes atteignables}\label{get_all_sums}
 			\begin{algorithm}
 				\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe $E' \subseteq E$ vérifiant $\sum\limits_{e \in E'}e = s$}
 				\begin{algorithmic}[1]
-					\Function{Get\_all\_sums}{$E \subset \mathbb{N}$}
+					\Function{get\_all\_sums}{$E \subset \mathbb{N}$}
 						\If{$E = \emptyset$}
 							\Return $\{0\}$
 						\EndIf
 						\State Soit $x \in E$
-						\State $S \leftarrow \mathtt{Get\_all\_sums}(E \backslash \{x\})$
+						\State $S \leftarrow \mathtt{get\_all\_sums}(E \backslash \{x\})$
 						\Return $S \cup \{x + s \mid s \in S\}$
 					\EndFunction
 				\end{algorithmic}
@@ -173,7 +186,7 @@
 				\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 				\begin{algorithmic}[1]
 					\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
-						\State Soit $S \leftarrow \mathtt{Get\_all\_sums}(E)$
+						\State Soit $S \leftarrow \mathtt{get\_all\_sums}(E)$
 						\Return $\max\{s' \in S \mid 0 \leq s' \leq s\}$
 					\EndFunction
 				\end{algorithmic}
@@ -214,12 +227,12 @@
 					\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe
 							$E' \subseteq E$ vérifiant $\sum\limits_{e \in E'}e = s$, passant les tests du filtre}
 					\begin{algorithmic}[1]
-						\Function{Get\_all\_sums\_2}{$E \subset \mathbb{N}$}
+						\Function{get\_all\_sums\_2}{$E \subset \mathbb{N}$, $\delta \in \mathbb{R}^*_+$}
 							\If{$E = \emptyset$}
 								\Return $\{0\}$
 							\EndIf
 							\State Soit $x \in E$
-							\State $S \leftarrow \mathtt{Get\_all\_sums\_2}(E \backslash \{x\})$
+							\State $S \leftarrow \mathtt{get\_all\_sums\_2}(E \backslash \{x\})$
 							\Return $\mathtt{clean\_up}(S \cup \{x + s \mid s \in S\})$
 						\EndFunction
 					\end{algorithmic}
@@ -229,7 +242,7 @@
 				\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 				\begin{algorithmic}[1]
 					\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
-						\State Soit $S \leftarrow \mathtt{Get\_all\_sums\_2}(E)$
+						\State Soit $S \leftarrow \mathtt{get\_all\_sums\_2}(E, \delta)$
 						\Return $\max\{s' \in S \mid 0 \leq s' \leq s\}$
 					\EndFunction
 				\end{algorithmic}
@@ -245,7 +258,19 @@
 				d'une liste $l2$ d'entier décroissant, renvoie $true$ si $s$ s'écrit comme la somme d'un élément de $l1$ et d'un
 				élément de $l2$, et $false$ sinon.
 				\newline
-				La fonction implémenté suit l'algorithme suivant, qui se sert au maximum du fait que les listes soit triés:
+				La fonction implémenté suit l'algorithme suivant, qui se sert au maximum du fait que les listes soit triés.
+				Les 3 cas de retours possibles sont:
+				
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item $\mathtt{TOO\_SMALL}$ : Soit $y \in l2$, $\forall x \in l1, x + y < s \Rightarrow \forall y' < y, x + y' < x + y < s$.
+					En français, pour $y$ fixer, la somme des $x + y$ avec $x$ dans l1 est toujours inférieur à $s$.
+					Pour un $y$ plus petit, on ne risque donc pas d'atteindre une valeur plus proche de $s$.
+					\item $\mathtt{REACHED}$ : on a réussi à atteindre $s$.
+					\item $\mathtt{TOO\_BIG}$ : On a parcouru toutes les valeurs de $l2$, pour toutes les valeurs de $l1$,
+					sans avoir pu obtenir de couple $(x, y) \in l1 \times l2$ tel que $x + y <= s$.
+				\end{itemize}
+				
 				\begin{algorithm}
 					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l1 \times l2 \mid x + y = s$, \textbf{faux} sinon}
 					\begin{algorithmic}[1]
@@ -253,65 +278,76 @@
 												$l1 \in \mathbb{N}$,
 												$l2 \in \mathbb{N}$}
 							\For{$y \in l2$ (pris du plus grand au plus petit)}
-								\If{$y > s$}
-									\State \textbf{Passer au $y$ suivant} (car $y$ est déjà plus grand que 's')
-								\EndIf
 								\For{$x \in l1$ (pris du plus petit au plus grand)}
 									\If{$x + y = s$}
-										\State \textbf{Renvoyer true}
+										\State \textbf{Renvoyer true} (cas $\mathtt{REACHED}$)
 									\ElsIf{$x + y > s$}
-										\State \textbf{Passer au $y$ suivant} (on a dépassé 's' sans l'atteindre)
+										\State \textbf{Passer au $y$ suivant} (cas $\mathtt{TOO\_BIG}$)
 									\Else (si $x + y < s$)
 										\State \textbf{Passer au $x$ suivant} (car $x + y$ est déjà plus petit que 's')
 									\EndIf
 								\EndFor
-								\State \textbf{Renvoyer faux} ($\forall x \in l1, x + y < s$) on n'atteindra donc pas 's' pour un 'y' plus petit.
+								\State \textbf{Renvoyer faux} (cas $\mathtt{TOO\_SMALL}$)
 							\EndFor
-							\State \textbf{Renvoyer faux} (on n'a pas réussi à atteindre 's')
+							\State \textbf{Renvoyer faux} (on a eu que des cas $\mathtt{TOO\_BIG}$)
 						\EndFunction
 					\end{algorithmic}
 				\end{algorithm}
-			\newpage
-			\subsection{Question 9 : best\_feasible}
+
+			\subsection{Question 9 : best\_feasible}\label{best_feasible}
 				Au regard de la Question 8 (\ref{is_feasible}), on nous demande maintenant de créer une fonction qui sur
 				la donnée d'un entier $s$, d'une liste $l1$ d'entier croissant, d'une liste $l2$ d'entier décroissant,
 				renvoie le plus grand entier $s' \leq s$ somme d'un élément de $l1$ et d'un élément de $l2$
 				\newline
 				\newline
 				N.B: non explicitement dis dans le sujet, mais si un tel entier $s'$ n'existe pas, $-1$ est renvoyé.
+				\newpage
 				\begin{algorithm}
-					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l1 \times l2 \mid x + y = s$, \textbf{faux} sinon}
+					\caption{$\underset{(x, y) \in l1 \times l2}{\max}\{x + y \mid x + y < s}$}
 					\begin{algorithmic}[1]
-						\Function{is\_feasible}{$s \in \mathbb{N}$,
+						\Function{best\_feasible}{$s \in \mathbb{N}$,
 												$l1 \in \mathbb{N}$,
 												$l2 \in \mathbb{N}$}
 							\State $s' \leftarrow -1$
 							\For{$y \in l2$ (pris du plus grand au plus petit)}
-								\If{$y > s$}
-									\State \textbf{Passer au $y$ suivant} (car $y$ est déjà plus grand que 's')
-								\EndIf
 								\For{$x \in l1$ (pris du plus petit au plus grand)}
 									\If{$x + y = s$}
-										\State \textbf{Renvoyer $s' \leftarrow x + y$}
+										\State \textbf{Renvoyer $s$} (cas $\mathtt{REACHED}$)
 									\ElsIf{$x + y > s$}
-										\State \textbf{Passer au $y$ suivant} (on a dépassé 's' sans l'atteindre)
+										\State \textbf{Passer au $y$ suivant} (cas $\mathtt{TOO\_BIG}$)
 									\Else (si $x + y < s$)
 										\If{$x + y > s'$}
 											\State $s' \leftarrow x + y$
 										\EndIf
-										\State \textbf{Passer au $x$ suivant} (car $x + y$ est déjà plus petit que 's')
+										\State \textbf{Passer au $x$ suivant}
 									\EndIf
 								\EndFor
-								\State \textbf{Renvoyer $s'$} (on a trouvé $s'$ maximum).
+								\State \textbf{Renvoyer $s'$} (cas $\mathtt{TOO\_SMALL}$).
 							\EndFor
-							\State \textbf{Renvoyer $s'$} (on n'a pas réussi à atteindre 's')
+							\State \textbf{Renvoyer $s'$} (on a eu que des cas $\mathtt{TOO\_BIG}$)
 						\EndFunction
 					\end{algorithmic}
 				\end{algorithm}
 				
-			\newpage
 			\subsection{Question 10 : résolution de SUBSET\_SUM\_OPT}
-
+				En se servant des fonctions \ref{get_all_sums}, \ref{best_feasible},
+				en en ajoutant 2 fonctions subsidiaires (voir \textit{Listes.ml})
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item $\mathtt{split}$ : sépares une liste en 2 sous liste de longueur égal (à 1 prêt)
+					\item $\mathtt{reverse}$ : inverse les éléments d'une liste
+				\end{itemize}
+				on peut élaborer l'algorithme de résolution suivant, qui se base sur l'idée de 'diviser pour régner':
+				\begin{algorithm}
+					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l1 \times l2 \mid x + y = s$, \textbf{faux} sinon}
+					\begin{algorithmic}[1]
+						\Function{subset\_sum}{$l \subset \mathbb{N}$, $s \in \mathbb{N}$}
+							\State $(l1, l2) \leftarrow \mathtt{split}(l)$
+							\State $(s1, s2) \leftarrow (\mathtt{get\_all\_sums}(l1), \mathtt{get\_all\_sums}(l2))$
+							\Return $\mathtt{best\_feasible}(s, l1, \mathtt{reverse}(l2))$
+						\EndFunction
+					\end{algorithmic}
+				\end{algorithm}
 	\newpage
 	\section{Références}
 		\begin{thebibliography}{}

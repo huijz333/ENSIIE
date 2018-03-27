@@ -2,7 +2,7 @@
 * File              : tests.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :31 CET
-* Last Modified Date: mar. 27 mars 2018 17:49:39 CEST
+* Last Modified Date: mar. 27 mars 2018 21:41:30 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -124,4 +124,18 @@ printf "Tests de la fonction 'is_feasible'\n%!" ;;
 assert (is_feasible 12 [1; 2; 4; 7] [10; 8; 2] = true) ;; (** 4 + 8 == 12 *)
 assert (is_feasible 16 [1; 2; 4; 7] [10; 8; 2] = false) ;;
 printf "Succes\n" ;;
+
+printf "-------------------------------------------\n" ;;
+printf "Tests de la fonction 'subset_sum_3'\n%!" ;;
+assert (subset_sum_3 [] 42 = 0) ;;
+assert (subset_sum_3 [1] 42 = 1) ;;
+assert (subset_sum_3 [42] 1 = 0) ;;
+assert (subset_sum_3 [1; 2; 3] 42 = 6) ;;
+assert (subset_sum_3 [1; 2; 3] 6 = 6) ;;
+assert (subset_sum_3 [1; 2; 3] 5 = 5) ;;
+assert (subset_sum_3 [1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1] 6 = 6);;
+assert (subset_sum_3 [42; 666; 007; 24; 12; 30; 31; 27; 28; 1; 2; 3; 5000; 7500 ; 9500] 10000 = 9707) ;;
+printf "Succes\n" ;;
+
+
 

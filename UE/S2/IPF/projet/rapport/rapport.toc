@@ -14,6 +14,6 @@
 \contentsline {subsection}{\numberline {5.2}Question 7 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{6}{subsection.5.2}
 \contentsline {section}{\numberline {6}Approche de type \textit {Diviser pour r\IeC {\'e}gner}}{7}{section.6}
 \contentsline {subsection}{\numberline {6.1}Question 8 : is\_feasible}{7}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Question 9 : best\_feasible}{8}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Question 10 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{9}{subsection.6.3}
-\contentsline {section}{\numberline {7}R\IeC {\'e}f\IeC {\'e}rences}{10}{section.7}
+\contentsline {subsection}{\numberline {6.2}Question 9 : best\_feasible}{7}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Question 10 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{8}{subsection.6.3}
+\contentsline {section}{\numberline {7}R\IeC {\'e}f\IeC {\'e}rences}{9}{section.7}
