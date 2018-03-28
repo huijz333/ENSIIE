@@ -2,7 +2,7 @@
 * File              : approche_naive.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :26 CET
-* Last Modified Date: mar. 27 mars 2018 17:48:16 CEST
+* Last Modified Date: mer. 28 mars 2018 16:52:34 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 (**
@@ -25,30 +25,32 @@ let sum = function l -> List.fold_left (function s -> function x -> s + x) 0 l ;
  *	@param  : 'a list -> ('a list) list
  *	@return : la liste des sous-listes que l'on peut extraire de 'l'
  *)
-let rec powerset =	function l ->
-				match l with
-				| [] 	->	[[]]
-				| h::t	->	let ps = powerset t in
-						ps@(List.map (function sl -> h::sl) ps)
-			;;
+let rec powerset = function l ->
+	match l with
+	| [] 	->	[[]]
+	| h::t	->	let ps = powerset t in
+				ps@(List.map (function sl -> h::sl) ps)
+;;
 
 (**
  *	Fonction 'subset_sum_0'
  *
- *	@param  : 	int list -> int -> int
+ *	@param  : 	int list -> int -> int * int list 
  *	@return : 	le résultat du problème SUBSET-SUM-OPT
  *			sur la liste et l'entier donné
  *)
-let subset_sum_0 =	function l -> function s ->
-				let ps = powerset l in
-				(* fonction qui a un entier 'm', et
-				   une liste d'entier 'sl', associe
-				   un entier s' (égal à 'sum sl' ou à 'm')
-				   tel que: m <= s' <= s *)
-				let f =	function m -> function sl ->
-						let s' = sum sl in
-						if (m < s' && s' <= s) then s' else m
-					in
-				List.fold_left f 0 ps
-			;;
+let subset_sum_0 = function l -> function s ->
+	let ps = powerset l in
+	(**
+	 *	fonction qui a un entier 'm', et
+	 *	une liste d'entier 'sl', associe
+	 *	un entier s' (égal à 'sum sl' ou à 'm')
+	 *	tel que: m <= s' <= s
+	 *)
+	let f =	function (s', e') -> function e'' ->
+			let s'' = sum e'' in
+			if (s' < s'' && s'' <= s) then (s'', e'') else (s', e')
+	in
+	List.fold_left f (0, []) ps
+;;
 

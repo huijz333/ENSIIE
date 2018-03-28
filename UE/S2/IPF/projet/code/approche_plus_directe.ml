@@ -2,7 +2,7 @@
  * File              : approche_plus_directe.ml
  * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
  * Date              :07 CET
- * Last Modified Date: mer. 28 mars 2018 16:26:29 CEST
+ * Last Modified Date: mer. 28 mars 2018 17:23:22 CEST
  * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
  *)
 (**
@@ -17,34 +17,34 @@ open Ensembles ;;
 (**
  *	Fonction 'get_all_sums'
  *
- *	@param  :	int list -> int list
- *	@return :	renvoie la liste des sommes atteignables,
- *			en sommant sur les sous ensembles de la liste l
+ *	@names  :	l -> ret
+ *	@param  : 	int list -> (int * int list) list
+ *	@return : 	renvoie la liste des couples (somme, ensembles) = (s, e)
+ *			ou 's' elle est la somme des éléments de 'e' c 'l'
  *
  *)
 let rec get_all_sums =	function l ->
-				match l with
-				| []		->	[0]
-				| e::tail	->	let sums = get_all_sums tail in
-				set_union sums (List.map (function t -> e + t) sums)
-			;;
-
+	match l with
+	| []	->	[(0, [])]
+	| x::t	->	let sums = get_all_sums t in
+			set_union sums (List.map (function (s, e) -> (x + s, x::e)) sums)
+;;
 
 (**
  *	Fonction 'subset_sum_1'
  *
- *	@param  :	int list -> int -> int
+ *	@param  :	int list -> int -> int * int list
  *	@return :	le résultat du problème SUBSET-SUM-OPT sur la
  *			liste et l'entier donné
  *)
 let subset_sum_1 = function l -> function n ->
 			let sums = get_all_sums l in
-			List.fold_left	(function s' -> function s'' ->
+			List.fold_left	(function (s', e') -> function (s'', e'') ->
 						if (s' < s'' && s'' <= n) then
-							s''
+							(s'', e'')
 						else
-							s'
-					) 0 sums
+							(s', e')
+					) (0, []) sums
 			;;
 
 

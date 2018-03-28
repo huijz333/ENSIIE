@@ -14,6 +14,7 @@
 \usepackage{scrextend}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{listings}
@@ -99,6 +100,11 @@
 				\item Soit 2 ensembles X, Y, $X \cup Y$ est une opération en $O(Card(X) * Card(Y))$
 				\item Soit $E \subset \mathbb{N}$, $\max{E}$ est une opération en $O(Card(E))$
 			\end{itemize}
+			
+			\subsection{Bonus}\label{bonus}
+				L'implémentation a également été légèrement plus loin que ce que rapport ce document.
+				Dans les différentes approches de résolution, les fonctions renvoie également
+				le sous-ensemble sur lequel la somme a été obtenu.
 
 	\newpage
 	\section{Approche naïve}\label{approche_naive}
@@ -135,7 +141,7 @@
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			Complexité en $\boxed{O(2^n)}$, où $n = Card(E)$
+			Complexité en $\boxed{O(2^nn)}$, où $n = Card(E)$
 		
 		\subsection{Question 3 : résolution de SUBSET\_SUM\_OPT par force brute}
 			\begin{algorithm}
@@ -147,7 +153,7 @@
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			Complexité en $\boxed{O(2^{n+1}n)}$, où $n = Card(E)$
+			Complexité en $\boxed{O(2^nn)}$, où $n = Card(E)$
 			
 	\newpage
 	\section{Approche plus directe}\label{approche_plus_directe}
@@ -174,14 +180,17 @@
 				\item $n = Card(E)$
 				\item $m(n) = Card\{sommes \quad atteignables\} = \{s \mid \exists E' \subseteq E \mid \sum\limits_{e \in E'}e = s\} \leq 2^n$
 			\end{itemize}
-			Alors la complexité de cet algorithme est en $\boxed{O(m(n)^2 * n)}$
+			Alors la complexité de cet algorithme est en $\boxed{O(m(n) * n)}$
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
 				\item $n$ : nombre de récursion
 				\item $m(n)^2$ : l'union
 			\end{itemize}
+			\textbf{Remarque:} Cette algorithme fourni les sommes atteignables dans un ordre croissant. ($\bullet < \bullet$)
 
 		\subsection{Question 5 : résolution de SUBSET\_SUM\_OPT}
+			Une fois l'ensemble des sommes atteignables calculés, la résolution du problème devient trivial.
+			La complexité de cet algorithme de résolution est donc en $\boxed{O(m(n) * n)}$
 			\begin{algorithm}
 				\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 				\begin{algorithmic}[1]
@@ -191,14 +200,13 @@
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			La complexité de cet algorithme de résolution est donc en $\boxed{O(m(n)^2 * n)}$
 
 	\newpage
 	\section{Approche avec nettoyage}\label{approche_naive}
 		On peut réduire la complexité de l'approche précèdente en réduisant ce que l'on a noté $m(n)$ (le nombre de sommes atteignables.
 		Dans cette approche, on se propose d'ajouter un 'filtre' sur l'algorithme qui génère les sommes.
 			\subsection{Question 6 ; fonction clean\_up}
-				Le filtre (l'algorithme 'clean\_up') est donnée dans l'énoncé. Cette fonction prends en paramètre:
+				Le filtre (l'algorithme $\mathtt{clean\_up}$ est donnée dans l'énoncé. Cette fonction prends en paramètre:
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
 					\item $E \subset \mathbb{N}$ : l'ensemble a filtré
@@ -216,12 +224,21 @@
 				Autrement dit, tous les entiers strictement supérieurs à $s$ sont supprimés, et 
 				si l'on considère 2 entiers consécutifs de l'ensemble trié $x$ et $y$, tel que $x < y$,
 				ils sont 'proches d'un rapport d'au moins $(1 + \delta)$, $y$ est supprimé.
-				Ce filtre supprime donc les éléments de l'ensemble qui sont 'proches' l'un de l'autre (au regard de $\delta$)
+				Ce filtre supprime donc les éléments de l'ensemble qui sont 'proches' l'un de l'autre (au regard de $\delta$).
+				En supprimant des valeurs proches, on espère pouvoir former les mêmes sommes qu'avec toutes les valeurs,
+				mais en effectuant ainsi moins de sommations.
+				\newline
+				\newline
+				Par exemple, pour l'entrée $\llbracket 0, 100 \rrbracket$, $s = 90$ et $\delta=0.01$, on obtient la sortie
+				$$[1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 12; 14; 16; 18; 20; 23; 26; 29; 32; 36; 40; 45; 50; 56; 62; 69; 76; 84]$$
+				On remarque que les valeurs les plus 'petites' sont convervés ($\leq 10$), et que plus les valeurs deviennent 'grandes',
+				moins elles passent le filtre.
+				
 
 			\subsection{Question 7 : résolution de SUBSET\_SUM\_OPT}
 				L'algorithme de résolution est également fourni dans l'énoncé.
 				Il est le même que celui de 'l'approche plus directe' \ref{approche_plus_directe}, sauf que
-				lors du calcul des sommes atteignables filtrés par la fonction 'clean\_up'.
+				lors du calcul des sommes atteignables filtrés par la fonction $\mathtt{clean\_up}$.
 				
 				\begin{algorithm}
 					\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe
@@ -247,38 +264,38 @@
 					\EndFunction
 				\end{algorithmic}
 			\end{algorithm}
-			La complexité de cet algorithme de résolution est donc en $\boxed{O(m'(n)^2 * n)}$,
+			La complexité de cet algorithme de résolution est donc en $\boxed{O(m'(n) * n)}$,
 			avec $$m'(n) = Card\{sommes \quad atteignables \quad filtres\} \leq m(n) \leq 2^n$$.
 			\textbf{Attention} cependant, pour $\delta$ trop grand, on perd l'optimalité du résultat.
 
 		\newpage
 		\section{Approche de type \textit{Diviser pour régner}}\label{approche_naive}
 			\subsection{Question 8 : is\_feasible}\label{is_feasible}
-				On nous demande ici de créer une fonction qui sur la donnée d'un entier $s$, d'une liste $l1$ d'entier croissant,
-				d'une liste $l2$ d'entier décroissant, renvoie $true$ si $s$ s'écrit comme la somme d'un élément de $l1$ et d'un
-				élément de $l2$, et $false$ sinon.
+				On nous demande ici de créer une fonction qui sur la donnée d'un entier $s$, d'une liste $l_1$ d'entier croissant,
+				d'une liste $l_2$ d'entier décroissant, renvoie $true$ si $s$ s'écrit comme la somme d'un élément de $l_1$ et d'un
+				élément de $l_2$, et $false$ sinon.
 				\newline
 				La fonction implémenté suit l'algorithme suivant, qui se sert au maximum du fait que les listes soit triés.
 				Les 3 cas de retours possibles sont:
 				
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
-					\item $\mathtt{TOO\_SMALL}$ : Soit $y \in l2$, $\forall x \in l1, x + y < s \Rightarrow \forall y' < y, x + y' < x + y < s$.
-					En français, pour $y$ fixer, la somme des $x + y$ avec $x$ dans l1 est toujours inférieur à $s$.
+					\item $\mathtt{TOO\_SMALL}$ : Soit $y \in l_2$, $\forall x \in l1, x + y < s \Rightarrow \forall y' < y, x + y' < x + y < s$.
+					En français, pour $y$ fixer, la somme des $x + y$ avec $x$ dans $l_1$ est toujours inférieur à $s$.
 					Pour un $y$ plus petit, on ne risque donc pas d'atteindre une valeur plus proche de $s$.
 					\item $\mathtt{REACHED}$ : on a réussi à atteindre $s$.
-					\item $\mathtt{TOO\_BIG}$ : On a parcouru toutes les valeurs de $l2$, pour toutes les valeurs de $l1$,
-					sans avoir pu obtenir de couple $(x, y) \in l1 \times l2$ tel que $x + y <= s$.
+					\item $\mathtt{TOO\_BIG}$ : On a parcouru toutes les valeurs de $l_2$, pour toutes les valeurs de $l_1$,
+					sans avoir pu obtenir de couple $(x, y) \in l_1 \times l_2$ tel que $x + y <= s$.
 				\end{itemize}
 				
 				\begin{algorithm}
-					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l1 \times l2 \mid x + y = s$, \textbf{faux} sinon}
+					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l_1 \times l_2 \mid x + y = s$, \textbf{faux} sinon}
 					\begin{algorithmic}[1]
 						\Function{is\_feasible}{$s \in \mathbb{N}$,
-												$l1 \in \mathbb{N}$,
-												$l2 \in \mathbb{N}$}
-							\For{$y \in l2$ (pris du plus grand au plus petit)}
-								\For{$x \in l1$ (pris du plus petit au plus grand)}
+												$l_1 \subset \mathbb{N}$,
+												$l_2 \subset \mathbb{N}$}
+							\For{$y \in l_2$ (pris du plus grand au plus petit)}
+								\For{$x \in l_1$ (pris du plus petit au plus grand)}
 									\If{$x + y = s$}
 										\State \textbf{Renvoyer true} (cas $\mathtt{REACHED}$)
 									\ElsIf{$x + y > s$}
@@ -293,24 +310,31 @@
 						\EndFunction
 					\end{algorithmic}
 				\end{algorithm}
+				
+				Les complexités sont:
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item Dans le pire des cas (où l'on a que des cas $TOO_BIG$) : $O(Card(l_1)Card(l_2)$
+					\item Dans le meilleur des cas (cas $REACHED$ avec le 1er $y$ et le 1er $x$...) : $O(1)$ (peu probable)
+					\item Le cas moyen n'est pas évident à évaluer, étant donné que $l_1$ et $l_2$ dépendent de nombreux paramètres...
+				\end{itemize}
 
 			\subsection{Question 9 : best\_feasible}\label{best_feasible}
 				Au regard de la Question 8 (\ref{is_feasible}), on nous demande maintenant de créer une fonction qui sur
-				la donnée d'un entier $s$, d'une liste $l1$ d'entier croissant, d'une liste $l2$ d'entier décroissant,
-				renvoie le plus grand entier $s' \leq s$ somme d'un élément de $l1$ et d'un élément de $l2$
+				la donnée d'un entier $s$, d'une liste $l_1$ d'entier croissant, d'une liste $l_2$ d'entier décroissant,
+				renvoie le plus grand entier $s' \leq s$ somme d'un élément de $l_1$ et d'un élément de $l_2$
 				\newline
 				\newline
 				N.B: non explicitement dis dans le sujet, mais si un tel entier $s'$ n'existe pas, $-1$ est renvoyé.
-				\newpage
 				\begin{algorithm}
-					\caption{$\underset{(x, y) \in l1 \times l2}{\max}\{x + y \mid x + y < s}$}
+					\caption{Renvoie $\underset{(x, y) \in l_1 \times l_2}{\max}\{x + y \mid x + y < s\}$}
 					\begin{algorithmic}[1]
 						\Function{best\_feasible}{$s \in \mathbb{N}$,
-												$l1 \in \mathbb{N}$,
-												$l2 \in \mathbb{N}$}
+												$l_1 \subset \mathbb{N}$,
+												$l_2 \subset \mathbb{N}$}
 							\State $s' \leftarrow -1$
-							\For{$y \in l2$ (pris du plus grand au plus petit)}
-								\For{$x \in l1$ (pris du plus petit au plus grand)}
+							\For{$y \in l_2$ (pris du plus grand au plus petit)}
+								\For{$x \in l_1$ (pris du plus petit au plus grand)}
 									\If{$x + y = s$}
 										\State \textbf{Renvoyer $s$} (cas $\mathtt{REACHED}$)
 									\ElsIf{$x + y > s$}
@@ -339,22 +363,28 @@
 				\end{itemize}
 				on peut élaborer l'algorithme de résolution suivant, qui se base sur l'idée de 'diviser pour régner':
 				\begin{algorithm}
-					\caption{Renvoie \textbf{true} si $\exists (x, y) \in l1 \times l2 \mid x + y = s$, \textbf{faux} sinon}
+					\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 					\begin{algorithmic}[1]
-						\Function{subset\_sum}{$l \subset \mathbb{N}$, $s \in \mathbb{N}$}
-							\State $(l1, l2) \leftarrow \mathtt{split}(l)$
-							\State $(s1, s2) \leftarrow (\mathtt{get\_all\_sums}(l1), \mathtt{get\_all\_sums}(l2))$
-							\Return $\mathtt{best\_feasible}(s, l1, \mathtt{reverse}(l2))$
+						\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
+							\State $(l_1, l_2) \leftarrow \mathtt{split}(l)$
+							\State $(s_1, s_2) \leftarrow (\mathtt{get\_all\_sums}(l1), \mathtt{get\_all\_sums}(l2))$
+							\Return $\mathtt{best\_feasible}(s, s_1, \mathtt{reverse}(s_2))$
 						\EndFunction
 					\end{algorithmic}
 				\end{algorithm}
+				
+			\subsection{Question 13 : Bonus}
+				Comme dit précèdemment (\ref{bonus}), ce bonus a été effectué: les fonctions de résolution renvoie également
+				le sous-ensemble sur lequel la somme a été obtenu.
+
 	\newpage
 	\section{Références}
 		\begin{thebibliography}{}
-			\bibitem{cache_friendly}
-				'Writting Cache-Friendly code', Gerson Robboy, Portland State University\newline
-				\href{http://web.cecs.pdx.edu/~jrb/cs201/lectures/cache.friendly.code.pdf}
-				      {\textit{http://web.cecs.pdx.edu/~jrb/cs201/lectures/cache.friendly.code.pdf}}.
+			\bibitem{ocaml}
+				'Module List' - INRIA\newline
+				\href{https://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html}
+				      {\textit{https://caml.inria.fr/pub/docs/manual-ocaml/libref/List.html}}
+
   \end{thebibliography}
 
 \end{document}

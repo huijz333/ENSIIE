@@ -2,7 +2,7 @@
 * File              : approche_diviser_pour_regner.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :42 CET
-* Last Modified Date: mer. 28 mars 2018 16:34:40 CEST
+* Last Modified Date: mer. 28 mars 2018 17:05:04 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -11,12 +11,15 @@
  *
  *	Réponses aux questions 8, 9, 10
  *)
-
-open Approche_plus_directe ;;
 open Ensembles ;;
 open Listes ;;
 
-
+let rec get_all_sums =	function l ->
+	match l with
+	| []		->	[0]
+	| e::tail	->	let sums = get_all_sums tail in
+				set_union sums (List.map (function t -> e + t) sums)
+;;
 
 (** un type utile qui permet de savoir si l'on a réussi à atteindre 's', ou si on l'a depassé *)
 (** voir Question 8. du rapport qui détail l'algorithme *)

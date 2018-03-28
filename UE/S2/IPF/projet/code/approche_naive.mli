@@ -1,4 +1,11 @@
 (**
+* File              : approche_naive.mli
+* Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
+* Date              : mer. 28 mars 2018 16:43:54 CEST
+* Last Modified Date: mer. 28 mars 2018 16:43:54 CEST
+* Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
+*)
+(**
  *	3. Approche Naive:
  *
  *	Réponses aux questions 1, 2, 3
@@ -24,7 +31,7 @@ val powerset : 'a list -> 'a list list
 (**
  *	Fonction 'subset_sum_0'
  *
- *	@param  : int list -> int -> int
+ *	@param  : int list -> int -> int * int list
  *	@return : le résultat du problème SUBSET-SUM-OPT sur la liste et l'entier donné
  *)
-val subset_sum_0 : int list -> int -> int
+val subset_sum_0 : int list -> int -> int * int list
