@@ -2,7 +2,7 @@
 * File              : tests.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :31 CET
-* Last Modified Date: mar. 27 mars 2018 21:41:30 CEST
+* Last Modified Date: mer. 28 mars 2018 16:37:49 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -138,4 +138,87 @@ assert (subset_sum_3 [42; 666; 007; 24; 12; 30; 31; 27; 28; 1; 2; 3; 5000; 7500 
 printf "Succes\n" ;;
 
 
+
+(** Début de la derniere partie avec des tests aléatoires *)
+printf "####################################################################\n" ;;
+printf "#    Comparaison des approches et amélioration: debut des tests    #\n" ;;
+printf "####################################################################\n" ;;
+
+(** fonction interne qui génère une liste de n entiers aléatoires dans [0, m - 1] *)
+let rec gen_random = function n -> function m ->
+	if n <= 0 then
+		[]
+	else
+		(Random.int m)::(gen_random (n - 1) m)
+;;
+
+(**
+ *	génère des ensembles de i, i+1, ... j nombres aléatoires,
+ *	et génère un problème SUBSET_SUM_OPT à résoudre.
+ *	ce problème est résolu avec chaque approche,
+ *	et on teste si les 4 approches trouvent bien le même résultat.
+ *)
+let rec test_rand = function i -> function j ->
+	if i <= j then
+		let n = i in
+		let m = n * 2 in
+		let s = (n * m) / 2 in
+		let l = gen_random n m in
+		let s0 = subset_sum_0 l s in
+		let s1 = subset_sum_1 l s in
+		let s2 = subset_sum_2 0.0 l s in
+		let s3 = subset_sum_3 l s in
+		printf "%d %d %d %d (%d)\n" s0 s1 s2 s3 s;
+		list_int_print l ;
+		assert (s0 = s1) ;
+		assert (s0 = s2) ;
+		assert (s0 = s3) ;
+		test_rand (i + 1) j
+;;
+
+printf "----------------------------------------------\n" ;;
+printf "Tests des approches avec des listes aléatoires\n%!" ;;
+printf "----------------------------------------------\n" ;;
+test_rand 1 15 ;;
+printf "Succes\n" ;;
+
+printf "--------i-------------------------------------------\n" ;;
+printf "Comparaison des approches avec des listes aléatoires\n%!" ;;
+printf "----------------------------------------------------\n" ;;
+
+(**
+ *	calcul le temps d'execution en 'ms' de chaque algorithme
+ * 	pour le meme probleme subset_sum_opt, avec un ensemble
+ *	à i élément, puis i + 1 éléments, puis ... puis j éléments.
+ *	Un temps '-1' indique que l'approche a fait un dépassement de pile
+ *)
+let rec time_rand = function i -> function j ->
+	if i > j then
+		[]
+	else
+		let n = i in
+		let m = n * 2 in
+		let s = (n * m) / 2 in
+		let l = gen_random n m in
+		let time = function subset_sum ->
+			try
+				let t  = Sys.time () in
+				let _ = subset_sum l s in
+				int_of_float ((Sys.time () -. t) *. 1000.0)
+			with Stack_overflow -> -1
+		in
+		[
+			i;
+			(time subset_sum_0);
+			(time subset_sum_1);
+			(time (subset_sum_2 0.01));
+			(time subset_sum_3)
+		]::
+		(time_rand (i + 1) j)
+;;
+
+printf "Les temps sont en millisecondes, -1 indique un dépassement de pile\n" ;;
+printf "[Card(E); subset_sum_0; subset_sum_1; subset_sum_2; subset_sum_3]\n";;
+list_int_list_print (time_rand 1 24) ;;
+printf "Succes\n" ;;
 

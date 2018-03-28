@@ -2,7 +2,7 @@
  * File              : approche_plus_directe.ml
  * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
  * Date              :07 CET
- * Last Modified Date: mar. 27 mars 2018 17:40:30 CEST
+ * Last Modified Date: mer. 28 mars 2018 16:26:29 CEST
  * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
  *)
 (**
@@ -39,11 +39,11 @@ let rec get_all_sums =	function l ->
  *)
 let subset_sum_1 = function l -> function n ->
 			let sums = get_all_sums l in
-			List.fold_left	(function sum1 -> function sum2 ->
-						if (sum1 < sum2 && sum2 <= n) then
-							sum2
+			List.fold_left	(function s' -> function s'' ->
+						if (s' < s'' && s'' <= n) then
+							s''
 						else
-							sum1
+							s'
 					) 0 sums
 			;;
 

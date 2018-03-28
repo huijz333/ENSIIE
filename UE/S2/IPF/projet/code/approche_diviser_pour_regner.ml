@@ -2,7 +2,7 @@
 * File              : approche_diviser_pour_regner.ml
 * Author            : Romain PEREIRA <romain.pereira@ensiie.fr>
 * Date              :42 CET
-* Last Modified Date: mar. 27 mars 2018 21:24:39 CEST
+* Last Modified Date: mer. 28 mars 2018 16:34:40 CEST
 * Last Modified By  : Romain PEREIRA <romain.pereira@ensiie.fr>
 *)
 
@@ -72,7 +72,7 @@ let is_feasible = function s -> function l1 -> function l2 ->
 let best_feasible =	function s -> function l1 -> function l2 ->
 	(**
 	 *	fonction interne qui test si l'on peut forme 's' en sommant
-	 *	l'entier 'x' avec un entier de la liste 'l'.
+	 *	l'entier 'y' avec un entier de la liste 'l'.
 	 *	On utilise le fait que 'l1' est croissante ici.
 	 *)
 	let rec test_sum = function l -> function y -> function s' ->
