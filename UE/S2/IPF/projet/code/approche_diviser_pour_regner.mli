@@ -26,17 +26,17 @@ val is_feasible : int -> int list -> int list -> bool
  *	Fonction 'best_feasible'
  *
  *	@names	:	s   -> l1       -> l2       -> s'
- *	@param  :	int -> int list -> int list -> int
+ *	@param  :	int * int list -> int list -> int list -> int * int list
  *	@return :	Renvoie le plus entier s', qui peut s'écrire comme la
  *			somme d'un élément de de 'l1' et d'un élément de 'l2',
  *			tel que s' < s, ou -1 si un tel s' n'existe pas.
  *)
-val best_feasible : int -> int list -> int list -> int
+val best_feasible : int -> (int * int list) list -> (int * int list) list -> int * int list
 
 (**
  *	Fonction 'subset_sum_3'
  *
- *	@param	:	float -> int list -> int -> int
+ *	@param	:	float -> int list -> int -> int * int list
  *	@return :	le résultat du problème SUBSET-SUM-OPT
  *)
-val subset_sum_3 : int list -> int -> int
+val subset_sum_3 : int list -> int -> int * int list

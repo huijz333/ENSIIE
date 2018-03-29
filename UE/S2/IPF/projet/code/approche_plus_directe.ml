@@ -37,10 +37,10 @@ let rec get_all_sums =	function l ->
  *	@return :	le résultat du problème SUBSET-SUM-OPT sur la
  *			liste et l'entier donné
  *)
-let subset_sum_1 = function l -> function n ->
+let subset_sum_1 = function l -> function s ->
 			let sums = get_all_sums l in
 			List.fold_left	(function (s', e') -> function (s'', e'') ->
-						if (s' < s'' && s'' <= n) then
+						if (s' < s'' && s'' <= s) then
 							(s'', e'')
 						else
 							(s', e')

@@ -15,13 +15,24 @@
 (**
  *	Fonction 'clean_up'
  *
- *	@param  : int list -> int -> float -> int list
+ *	@param  : (int * int list) list -> int -> float -> (int * int list) list
  *	@return : TODO
  *)
-val clean_up : int list -> int -> float -> int list
+val clean_up : (int * int list) list -> int -> float -> (int * int list) list
 
 (**
- *	@param	:	float -> int list -> int -> int
+ *	Fonction 'get_all_sums_2'
+ *
+ *	@param  :	float -> int list -> int -> (int * int list) list
+ *	@return :	renvoie la liste des sommes atteignables,
+ *			filtrée par la fonction 'clean_up',
+ *			en sommant sur les sous ensembles de la liste l
+ *)
+val get_all_sums_2 : float -> int list -> int -> (int * int list) list
+	
+
+(**
+ *	@param	:	float -> int list -> int -> int * int list
  *	@return :	le résultat du problème SUBSET-SUM-OPT
  *)
-val subset_sum_2 : float -> int list -> int -> int
+val subset_sum_2 : float -> int list -> int -> int * int list

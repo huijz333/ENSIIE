@@ -55,4 +55,3 @@ let rec set_intersect =	function s1 -> function s2 ->
  *)
 let set_union = function s1 -> function s2 -> list_to_set (s1 @ s2) ;;
 
-

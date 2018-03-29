@@ -21,7 +21,7 @@ printf "###################################\n" ;;
 printf "######################################\n" ;;
 printf "#    Ensembles : debut des tests     #\n" ;;
 printf "######################################\n" ;;
-
+list_int_print (set_union [1;2;3;4;5] [3;4;5;6;7]) ;;
 
 (** Debut des tests de la partie 'Approche naive' *)
 open Approche_naive ;;
@@ -73,7 +73,6 @@ printf "-------------------------------------------\n" ;;
 printf "Tests de la fonction 'get_all_sums'\n%!" ;;
 assert (get_all_sums []  = [(0, [])]);;
 assert (get_all_sums [1] = [(0, []); (1, [1])]) ;;
-assert (get_all_sums [1; 1] = [(0, []); (1, [1]); (2, [1; 1])]);;
 assert ((List.sort (function (s, _) -> function (s', _) -> s - s') (get_all_sums [1; 3; 4]))
 		= [(0, []); (1, [1]); (3, [3]); (4, [4]);
 			(4, [1; 3]); (5, [1; 4]); (7, [3; 4]); (8, [1; 3; 4])] );;
@@ -87,7 +86,6 @@ assert (subset_sum_1 [42] 1 = (0, [])) ;;
 assert (subset_sum_1 [1; 2; 3] 42 = (6, [1; 2; 3])) ;;
 assert (subset_sum_1 [1; 2; 3] 6  = (6, [1; 2; 3])) ;;
 assert (subset_sum_1 [1; 2; 3] 5  = (5, [2; 3])) ;;
-assert (subset_sum_1 [1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1] 6 = (6, [1; 1; 1; 1; 1; 1]));;
 assert (
 		let (s, e) = subset_sum_1 [42; 666; 007; 24; 12; 30; 7500 ; 9500] 10000 in
 		s = 9615 &&
@@ -104,24 +102,31 @@ printf "##################################################\n" ;;
 
 printf "-------------------------------------------\n" ;;
 printf "Tests de la fonction 'clean_up'\n%!" ;;
-assert ((clean_up (list_generate 1 100 1) 90 0.1) =
-		[1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 12; 14; 16; 18; 20; 23;
-		26; 29; 32; 36; 40; 45; 50; 56; 62; 69; 76; 84] );;
+let list_add_empty_sum = function l ->
+	List.map (function x -> (x, [])) l
+;;
+assert ((clean_up (list_add_empty_sum (list_generate 1 100 1)) 90 0.1) =
+		
+		(list_add_empty_sum (list_reverse [1; 2; 3; 4; 5; 6; 7; 8; 9; 10;
+		 			12; 14; 16; 18; 20; 23;
+					26; 29; 32; 36; 40; 45;
+					50; 56; 62; 69; 76; 84]))
+	);;
 printf "Succes\n" ;;
 
 printf "-------------------------------------------\n" ;;
 printf "Tests de la fonction 'subset_sum_2'\n%!" ;;
-assert (subset_sum_2 0.01 [] 42 = 0) ;;
-assert (subset_sum_2 0.01 [1] 42 = 1) ;;
-assert (subset_sum_2 0.01 [42] 1 = 0) ;;
-assert (subset_sum_2 0.01 [1; 2; 3] 42 = 6) ;;
-assert (subset_sum_2 0.01 [1; 2; 3] 6 = 6) ;;
-assert (subset_sum_2 0.01 [1; 2; 3] 5 = 5) ;;
-assert (subset_sum_2 0.01 [1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1] 6 = 6);;
-
-assert (subset_sum_2 0.01 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 708);;
-assert (subset_sum_2 0.001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712);;
-assert (subset_sum_2 0.0001 [1 ; 2 ; 3 ; 1 ; 2 ; 3 ; 42; 666; 007] 712 = 712) ;;
+assert (subset_sum_2 0.01 [] 42 = (0, [])) ;;
+assert (subset_sum_2 0.01 [1] 42 = (1, [1])) ;;
+assert (subset_sum_2 0.01 [42] 1 = (0, [])) ;;
+assert (subset_sum_2 0.01 [1; 2; 3] 42 = (6, [1; 2; 3])) ;;
+assert (subset_sum_2 0.01 [1; 2; 3] 6  = (6, [1; 2; 3])) ;;
+assert (subset_sum_2 0.01 [1; 2; 3] 5  = (5, [2; 3])) ;;
+assert (
+		let (s, e) = subset_sum_2 0.00001 [42; 666; 007; 24; 12; 30; 7500 ; 9500] 10000 in
+		s = 9615 &&
+		(List.sort (function x -> function y -> x - y) e) = [7; 12; 24; 30; 42; 9500]
+	) ;;
 printf "Succes\n" ;;
 
 (** Debut des tests de la partie 'Approche de type diviser pour régner' *)
@@ -138,14 +143,17 @@ printf "Succes\n" ;;
 
 printf "-------------------------------------------\n" ;;
 printf "Tests de la fonction 'subset_sum_3'\n%!" ;;
-assert (subset_sum_3 [] 42 = 0) ;;
-assert (subset_sum_3 [1] 42 = 1) ;;
-assert (subset_sum_3 [42] 1 = 0) ;;
-assert (subset_sum_3 [1; 2; 3] 42 = 6) ;;
-assert (subset_sum_3 [1; 2; 3] 6 = 6) ;;
-assert (subset_sum_3 [1; 2; 3] 5 = 5) ;;
-assert (subset_sum_3 [1; 1; 1; 1; 1; 1; 1; 1; 1; 1; 1] 6 = 6);;
-assert (subset_sum_3 [42; 666; 007; 24; 12; 30; 31; 27; 28; 1; 2; 3; 5000; 7500 ; 9500] 10000 = 9707) ;;
+assert (subset_sum_3 [] 42 = (0, [])) ;;
+assert (subset_sum_3 [1] 42 = (1, [1])) ;;
+assert (subset_sum_3 [42] 1 = (0, [])) ;;
+assert (subset_sum_3 [1; 2; 3] 42 = (6, [3; 1; 2])) ;;
+assert (subset_sum_3 [1; 2; 3] 6  = (6, [3; 1; 2])) ;;
+assert (subset_sum_3 [1; 2; 3] 5  = (5, [3; 2])) ;;
+assert (
+		let (s, e) = subset_sum_3 [42; 666; 007; 24; 12; 30; 7500 ; 9500] 10000 in
+		s = 9615 &&
+		(List.sort (function x -> function y -> x - y) e) = [7; 12; 24; 30; 42; 9500]
+	) ;;
 printf "Succes\n" ;;
 
 
@@ -174,15 +182,13 @@ let rec test_rand = function i -> function j ->
 		let n = i in
 		let m = n * 2 in
 		let s = (n * m) / 2 in
-		let l = gen_random n m in
+		let l = list_to_set (gen_random n m) in
 		let (s0, e0) = subset_sum_0 l s in
 		let (s1, e1) = subset_sum_1 l s in
-		let s2 = subset_sum_2 0.0 l s in
-		let s3 = subset_sum_3 l s in
-		printf "%d %d %d %d (%d)\n" s0 s1 s2 s3 s;
-		list_int_print l ;
+		let (_, _) = subset_sum_2 0.01 l s in
+		let (s3, e3) = subset_sum_3 l s in
 		assert (s0 = s1) ;
-		assert (s0 = s2) ;
+		(* assert (s0 = s2) ; pas toujours vrai! *)
 		assert (s0 = s3) ;
 		test_rand (i + 1) j
 ;;
@@ -193,7 +199,7 @@ printf "----------------------------------------------\n" ;;
 test_rand 1 15 ;;
 printf "Succes\n" ;;
 
-printf "--------i-------------------------------------------\n" ;;
+printf "----------------------------------------------------\n" ;;
 printf "Comparaison des approches avec des listes aléatoires\n%!" ;;
 printf "----------------------------------------------------\n" ;;
 
@@ -204,9 +210,7 @@ printf "----------------------------------------------------\n" ;;
  *	Un temps '-1' indique que l'approche a fait un dépassement de pile
  *)
 let rec time_rand = function i -> function j ->
-	if i > j then
-		[]
-	else
+	if i <= j then
 		let n = i in
 		let m = n * 2 in
 		let s = (n * m) / 2 in
@@ -218,18 +222,16 @@ let rec time_rand = function i -> function j ->
 				int_of_float ((Sys.time () -. t) *. 1000.0)
 			with Stack_overflow -> -1
 		in
-		[
-			i;
-			(time subset_sum_0);
-			(time subset_sum_1);
-			(time (subset_sum_2 0.01));
-			(time subset_sum_3)
-		]::
+		printf "running %d/%d\n%!" i j ;
+		printf "%d %d %d %d %d\n%!" i (time subset_sum_0) (time subset_sum_0)
+			(time (subset_sum_2 0.01)) (time subset_sum_3) ;
 		(time_rand (i + 1) j)
 ;;
 
 printf "Les temps sont en millisecondes, -1 indique un dépassement de pile\n" ;;
 printf "[Card(E); subset_sum_0; subset_sum_1; subset_sum_2; subset_sum_3]\n";;
-list_int_list_print (time_rand 1 24) ;;
+printf "IN\n%!" ;
+time_rand 1 40 ;;
+printf "OUT\n%!" ;
 printf "Succes\n" ;;
 

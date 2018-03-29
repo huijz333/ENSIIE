@@ -92,12 +92,7 @@ let list_split = function l ->
  *	@return :	La liste des éléments inversés de 'l'
  *)
 let list_reverse = function l ->
-	let rec list_reverse_rec = function acc -> function lst ->
-		match lst with
-		| []	-> acc
-		| h::t	-> list_reverse_rec (h::acc) t
-	in
-	list_reverse_rec [] l
+	List.fold_left (function l -> function x -> x::l) [] l
 ;;
 
 (**
@@ -111,7 +106,7 @@ let list_print = function l -> function print_elem ->
 	let rec list_print_rec = function lrec ->
 	match lrec with
 	| []	->	Printf.printf "]"
-	| [x]	->	print_elem x ; Printf.printf "]\n"
+	| [x]	->	print_elem x ; Printf.printf "]"
 	| h::t	->	print_elem h ; Printf.printf "; " ;
 			list_print_rec t
 	in
