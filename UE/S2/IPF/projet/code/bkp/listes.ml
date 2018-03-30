@@ -34,26 +34,12 @@ let rec list_contains =	function l -> function e ->
  *			ou -1 si la liste est vide
  *)
 let rec list_min = function l ->
-	let min = function x -> function y -> if x < y then x else y
-	in
-	match l with
-	| []	-> max_int
-	| h::t  -> min h (list_min t)
-;;
-
-(**
- *	Fonction 'list_find'
- *
- *	@param  :	'a list -> ('b * 'a -> bool) -> 'b -> bool
- *	@return :	vrai si l'un des éléments y de la liste passe le test 'cmp x y'
- *)
-let rec list_find = function lst -> function cmp -> function x ->
-	match lst with
-	| []	->	false
-	| y::t	->	if cmp x y then
-				true
-			else
-				list_find t cmp x
+	let min =	function x -> function y ->
+				if x < y then x else y
+			in
+			match l with
+			| []	-> -1
+			| h::t  -> min h (list_min t)
 ;;
 
 (**
@@ -106,7 +92,12 @@ let list_split = function l ->
  *	@return :	La liste des éléments inversés de 'l'
  *)
 let list_reverse = function l ->
-	List.fold_left (function l -> function x -> x::l) [] l
+	let rec list_reverse_rec = function acc -> function lst ->
+		match lst with
+		| []	-> acc
+		| h::t	-> list_reverse_rec (h::acc) t
+	in
+	list_reverse_rec [] l
 ;;
 
 (**
@@ -120,7 +111,7 @@ let list_print = function l -> function print_elem ->
 	let rec list_print_rec = function lrec ->
 	match lrec with
 	| []	->	Printf.printf "]"
-	| [x]	->	print_elem x ; Printf.printf "]"
+	| [x]	->	print_elem x ; Printf.printf "]\n"
 	| h::t	->	print_elem h ; Printf.printf "; " ;
 			list_print_rec t
 	in

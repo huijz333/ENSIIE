@@ -44,12 +44,3 @@ val set_intersect : 'a list -> 'a list -> 'a list
  *)
 val set_union : 'a list -> 'a list -> 'a list
 
-(**
- *	Fonction 'set_union_cmp'
- *
- *	@type   :	'a list -> 'a list -> ('a * 'a -> bool) -> 'a list
- *	@return :	s1 u s2 ('s1 union s2')
- *		 	où 2 éléments (x1, x2) de s1 x s2 sont égaux
- *			si cmp x1 x2 = true
- *)
-val set_union_cmp : 'a list -> 'a list -> ('a -> 'a -> bool) -> 'a list

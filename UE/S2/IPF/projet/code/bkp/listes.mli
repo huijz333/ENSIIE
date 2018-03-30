@@ -18,14 +18,6 @@
 val list_contains : 'a list -> 'a -> bool
 
 (**
- *	Fonction 'list_find'
- *
- *	@param  :	'a list -> ('b * 'a -> bool) -> 'b -> bool
- *	@return :	vrai si l'un des éléments y de la liste passe le test 'cmp x y'
- *)
-val list_find : 'a list -> ('b -> 'a -> bool) -> 'b -> bool
-
-(**
  *	Fonction 'list_min'
  *
  *	@param  :	int list -> int

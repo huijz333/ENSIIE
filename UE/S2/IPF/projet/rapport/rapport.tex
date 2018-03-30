@@ -47,39 +47,40 @@
 	\section{Préambule}
 
 		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE. Rappel de l'énoncé:
-		
+		\newline
 		\begin{addmargin}[2em]{0em}
+			\label{problem}{
 			SUBSET-SUM-OPT - Etant donnée un ensemble fini $E$ d'entiers
 			strictements positifs et un entier cible s, trouver l'entier
 			$s' \leq s$ le plus grand possible, tel qu'il existe un
 			sous-ensemble $E' \subseteq E$ vérifiant $\sum_{e \in E'}{e} = s'$.
+			}
 			\newline
 		\end{addmargin}
 		Ce rapport présente (en pseudo-code), les algorithmes implémentés.
 		\newline
 		Le code OCaml est disponible dans le rendu.
 		\newline
-		Un Makefile est disponible pour compiler le projet et les tests:
-		\begin{itemize}[label=-]
-			\setlength\itemsep{0.1em}
-			\item \textit{make} : compile les fichiers sources avec les tests vers un executable \textbf{subset-sum-opt.out}
-			\item \textit{clean} : supprimes les fichiers compilés temporaires (.mlo et .cmo)
-			\item \textit{fclean} : supprimes tous les fichiers compilés (executable et temporaires)
-		\end{itemize}
-		Les testes sont unitaires et effectue dans l'ordre:
-		\begin{itemize}[label=-]
-			\item Les fonctions du module \textit{Listes}
-			\item Les fonctions du module \textit{Ensembles}
-			\item Les fonctions du module \textit{Approche\_naïve}
-			\item Les fonctions du module \textit{Approche\_plus\_directe}
-			\item Les fonctions du module \textit{Approche\_avec\_nettoyage}
-			\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
-			\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
-			\item Comparaisons des approches
-		\end{itemize}
+		\subsection{Spécificités techniques}
+			Un Makefile est disponible pour compiler le projet et les tests:
+			\begin{itemize}[label=-]
+				\setlength\itemsep{0.1em}
+				\item \textit{make} : compile les fichiers sources avec les tests vers un executable \textbf{subset-sum-opt.out}
+				\item \textit{clean} : supprimes les fichiers compilés temporaires (.mlo et .cmo)
+				\item \textit{fclean} : supprimes tous les fichiers compilés (executable et temporaires)
+			\end{itemize}
+			Les testes sont unitaires et effectue dans l'ordre:
+			\begin{itemize}[label=-]
+				\item Les fonctions du module \textit{Listes}
+				\item Les fonctions du module \textit{Ensembles}
+				\item Les fonctions du module \textit{Approche\_naïve}
+				\item Les fonctions du module \textit{Approche\_plus\_directe}
+				\item Les fonctions du module \textit{Approche\_avec\_nettoyage}
+				\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
+				\item Les fonctions du module \textit{Approche\_diviser\_pour\_regner}
+				\item Comparaisons des approches
+			\end{itemize}
 
-	\newpage
-	\section{Spécificités techniques}\label{approche_naive}
 		\subsection{Notations}
 			J'utiliserai les notations suivantes:
 			\begin{itemize}[label=-]
@@ -91,8 +92,7 @@
 			Soit $E$ un ensemble tel que $Card(E) = n$, alors
 			$$Card(P(E)) = 2^n$$
 			$$\forall E' \in P(E) , 0 <= Card(E') <= n$$
-			\newline
-			\newline
+			\newpage
 			On considèrera les complexités pour les opérations suivantes:
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
@@ -102,16 +102,17 @@
 			\end{itemize}
 			
 			\subsection{Bonus}\label{bonus}
-				L'implémentation a également été légèrement plus loin que ce que rapport ce document.
-				Dans les différentes approches de résolution, les fonctions renvoie également
-				le sous-ensemble sur lequel la somme a été obtenu.
+				L'implémentation a également été légèrement plus loin que les algorithmes présentés dans ce document: elle permet
+				de savoir sur quelle partie $E' \subset E$ la somme $\sum\limits_{e \in E'}e = s$ a été atteinte.
+				\newline
+				\newline
+				\textbf{La 1ère implémentation (qui est plus simple, mais sans l'ensemble sur lequel les sommes sont obtenus)
+				est disponible dans le dossier 'bkp' du rendu.}
 
 	\newpage
 	\section{Approche naïve}\label{approche_naive}
 		Cette approche consiste à determiner tous les sous-ensembles $E'$ de $E$, d'effectuer la somme sur
 		tous les $E'$, et de renvoyer la somme la plus proche de $s$. Cette approche par 'force brute' est lourde.
-		\newline
-		\newline
 		\subsection{Question 1 : somme sur un ensemble}
 			\begin{algorithm}
 				\caption{Renvoie la somme des éléments de E}
@@ -269,7 +270,7 @@
 			\textbf{Attention} cependant, pour $\delta$ trop grand, on perd l'optimalité du résultat.
 
 		\newpage
-		\section{Approche de type \textit{Diviser pour régner}}\label{approche_naive}
+		\section{Approche de type \textit{Diviser pour régner}}\label{approche_diviser_pour_regner}
 			\subsection{Question 8 : is\_feasible}\label{is_feasible}
 				On nous demande ici de créer une fonction qui sur la donnée d'un entier $s$, d'une liste $l_1$ d'entier croissant,
 				d'une liste $l_2$ d'entier décroissant, renvoie $true$ si $s$ s'écrit comme la somme d'un élément de $l_1$ et d'un
@@ -359,7 +360,8 @@
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
 					\item $\mathtt{split}$ : sépares une liste en 2 sous liste de longueur égal (à 1 prêt)
-					\item $\mathtt{reverse}$ : inverse les éléments d'une liste
+					\item $\mathtt{sort}$ : tri les éléments dans l'ordre croissant
+					\item $\mathtt{invsort}$ : tri les éléments dans l'ordre décroissant
 				\end{itemize}
 				on peut élaborer l'algorithme de résolution suivant, qui se base sur l'idée de 'diviser pour régner':
 				\begin{algorithm}
@@ -368,15 +370,89 @@
 						\Function{subset\_sum}{$E \subset \mathbb{N}, s \in \mathbb{N}$}
 							\State $(l_1, l_2) \leftarrow \mathtt{split}(l)$
 							\State $(s_1, s_2) \leftarrow (\mathtt{get\_all\_sums}(l1), \mathtt{get\_all\_sums}(l2))$
-							\Return $\mathtt{best\_feasible}(s, s_1, \mathtt{reverse}(s_2))$
+							\Return $\mathtt{best\_feasible}(s, \mathtt{sort}(s_1), \mathtt{invsort}(s_2))$
 						\EndFunction
 					\end{algorithmic}
 				\end{algorithm}
 				
+		\section{Comparaison des approches et améliorations}
+			\subsection{Question 11}
+				(voir 'tests.ml')
+			\subsection{Question 12}
+				(voir 'tests.ml')
 			\subsection{Question 13 : Bonus}
 				Comme dit précèdemment (\ref{bonus}), ce bonus a été effectué: les fonctions de résolution renvoie également
 				le sous-ensemble sur lequel la somme a été obtenu.
 
+			\subsection{Illustration}\label{illustrations}
+			
+				Les graphiques suivants ont été généré sur les tests suivant:
+				\begin{itemize}[label=-]
+					\setlength\itemsep{0.1em}
+					\item 1) Fixer $n = Card(E)$
+					\item 2) Générer un ensemble $E \subset \mathbb{N}$ tel que $Card(E) = n$ et $\forall x \in E, 1 \leq x \leq 2n$
+					\item 3) Résoudre le probleme: $SUBSET\_SUM(s = \frac{n * \frac{n}{2}}{2}, E)$ avec les 4 approches.
+				\end{itemize}
+				
+				Pour $1 \leq n \leq 17$, toutes les résolutions fonctionnent, et on obtient ces allures de courbes:
+				
+				\begin{figure}[H]
+					\includegraphics[width=16cm]{./images/cmp_n_1_17.png}
+					\caption{\textit{La complexité de l'approche naïve suit effectivement une allure exponentielle}}
+				\end{figure}
+
+				\newpage
+				Pour $n > 18$, l'approche naïve (\ref{approche_naive}) provoque une erreur de dépassement de pile, je n'ai pas pu
+				la tester pour des $n$ plus grands.
+				\begin{figure}[H]
+					\includegraphics[width=16cm]{./images/cmp_n_18_50.png}
+				\end{figure}
+				On remarque que l'approche plus directe (\ref{approche_plus_directe}) a une allure exponentielle (en $O(2^n)$),
+				et que l'approche 'diviser pour régner' (\ref{approche_diviser_pour_regner}) aussi, mais avec une allure plus 'écrasé'.
+				
+				\newpage
+				Pour $n \geq 50$, l'approche diviser pour régner prends plus de 2 secondes... Voici les performances de l'approche avec nettoyage
+				pour $n \gg 1$:
+				\begin{figure}[H]
+					\includegraphics[width=18cm]{./images/approche_avec_nettoyage_100_1000_100000.png}
+				\end{figure}
+				Pour $n \geq 140\quad000$, j'obtiens un dépassement de pile sur ma machine.
+				\newline
+				Les résultats ont été obtenus pour $\delta = 10^{-7}$, et si l'on note $r$ le résultat obtenu,
+				il s'éloigne d'au plus $1\%$ de $s$ $$100 \frac{r}{s} \leq 0.01$$
+				\newline
+				\newline
+				\textbf{N.B:} Les données brutes (format .csv) sont disponibles dans le rendu.
+		\newpage
+		\section{Conclusion}
+			L'objectif de ce projet était de résoudre le problème SUBSET\_SUM\_OPT \ref{problem}, problème NP-difficle,
+			à l'aide de différentes approches, puis de comparer les résultats obtenus.
+			\newline
+			\newline
+			L'implémentation des 4 méthodes demandées a été effectué avec succès.
+			\newline
+			
+			Pour les méthodes naïve, plus directe, et de type diviser pour régner, le résultat obtenu est optimal.
+			Bien que ces algorithmes soient plus longs que l'approche avec nettoyage, on s'assure l'optimalité du résultat
+			et donc la réponse au problème.
+			\newline
+			Cependant, pour des valeurs de $n = Card(E)$ trop grandes ($ > 50$), nos implémentations sont lentes ($\geq 4 sec.)$,
+			ou pire, elles atteignent les limites de la machine et s'arrête suite à des dépassements de piles.
+			\newline
+			
+			L'approche avec nettoyage quant à elle est plus rapide (voir Illustrations \ref{illustrations}),
+			mais ne permet de trouver une solution optimal.
+			\newline
+			\newline
+			Pour aller plus loin dans la résolution du problème, il est donc maintenant question de savoir
+			s'il existe des structures de données permettant d'optimiser nos algorithmes
+			(l'utilisation d'une pile explicit en mémoire RAM, au lieu de la pile-machine pour éviter les dépassements de pile, par exemple),
+			ou bien encore d'autres algorithmes plus performant donnant une solution exacte (nottement en allant plus loin dans la logique
+			de 'diviser pour régner', ou en trouvant un filtre type 'clean\_up' qui garanti tout de même l'optimalité)
+			\newline
+			\newline
+			Quelques recherches ont été effectué sur ces pistes, mais n'ont pas pu être mis en oeuvre par manque de temps.
+			
 	\newpage
 	\section{Références}
 		\begin{thebibliography}{}

@@ -26,11 +26,11 @@ let set_add = function s -> function x -> if list_contains s x then s else x::s 
  *	@type   : 'a list -> 'a list
  *	@return : converti la liste en ensemble contenant tous ces elements
  *)
-let rec list_to_set = function l ->
-	match l with
-	| []	-> []
-	| h::t	-> set_add (list_to_set t) h
-;;
+let rec list_to_set =	function l ->
+				match l with
+                    		| []	-> []
+                    		| h::t	-> set_add (list_to_set t) h
+			;;
 
 (**
  *	Fonction 'set_intersect'
@@ -54,20 +54,3 @@ let rec set_intersect =	function s1 -> function s2 ->
  *	@return : s1 u s2 ('s1 union s2')
  *)
 let set_union = function s1 -> function s2 -> list_to_set (s1 @ s2) ;;
-
-(**
- *	Fonction 'set_union_cmp'
- *
- *	@type   :	'a list -> 'a list -> ('a * 'a -> bool) -> 'a list
- *	@return :	s1 u s2 ('s1 union s2')
- *		 	où 2 éléments (x1, x2) de s1 x s2 sont égaux
- *			si cmp x1 x2 = true
- *)
-let rec set_union_cmp = function s1 -> function s2 -> function cmp ->
-	match s2 with
-	| []	->	s1
-	| h::t	->	if list_find s1 cmp h then
-				(set_union_cmp s1 t cmp)
-			else
-				h::(set_union_cmp s1 t cmp)
-;;

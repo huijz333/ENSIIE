@@ -1,13 +1,16 @@
-
 ----------------------------------------------------------
-
 - Le rapport se situe dans le fichier "rapport.pdf".
-
 ----------------------------------------------------------
-- Le code se situe dans le dossier "code".
+- Le code final (avec bonus) se situe à la racine du dossier "code"
 Un Makefile est disponible à la racine du dossier 'code' pour compiler
 un programme de tests. Veuillez taper la commande:
 ```
 cd code ; make ; ./subset-sum-opt.out
 ```
+----------------------------------------------------------
+- Le code intermédiaire (sans le bonus) se situe dans le dossier 'code/bkp'
+----------------------------------------------------------
+- Le fichier 'out.csv' contient les données générés pour
+dessiner les illustrations du rapport.
 
+Bonne lecture :) Romain

@@ -26,8 +26,10 @@ open Ensembles ;;
 let rec get_all_sums =	function l ->
 	match l with
 	| []	->	[(0, [])]
-	| x::t	->	let sums = get_all_sums t in
-			set_union sums (List.map (function (s, e) -> (x + s, x::e)) sums)
+	| x::t	->	let sums  = get_all_sums t in
+			let sums2 = List.map (function (s, e) -> (x + s, x::e)) sums in
+			let cmp   = function (s, _) -> function (s', _) -> s = s' in
+			set_union_cmp sums sums2 cmp
 ;;
 
 (**
@@ -38,13 +40,13 @@ let rec get_all_sums =	function l ->
  *			liste et l'entier donné
  *)
 let subset_sum_1 = function l -> function s ->
-			let sums = get_all_sums l in
-			List.fold_left	(function (s', e') -> function (s'', e'') ->
-						if (s' < s'' && s'' <= s) then
-							(s'', e'')
-						else
-							(s', e')
-					) (0, []) sums
-			;;
+	let sums = get_all_sums l in
+	List.fold_left	(function (s', e') -> function (s'', e'') ->
+				if (s' < s'' && s'' <= s) then
+					(s'', e'')
+				else
+					(s', e')
+			) (0, []) sums
+;;
 
 
