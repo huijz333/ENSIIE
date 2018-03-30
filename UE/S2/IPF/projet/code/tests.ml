@@ -21,11 +21,20 @@ assert (list_min [5;1;2] = 1) ;;
 assert (list_generate 1 10 1 = [1;2;3;4;5;6;7;8;9;10]) ;;
 assert (list_generate 1 10 2 = [1;3;5;7;9]) ;;
 assert (list_first [42; 43] = 42) ;;
+printf "Succes\n" ;;
 
 (** Debut des tests des fonctions auxiliaires sur les ensembles *)
 printf "######################################\n" ;;
 printf "#    Ensembles : debut des tests     #\n" ;;
 printf "######################################\n" ;;
+assert (set_add [] 1 = [1]) ;;
+assert (set_add [1] 1 = [1]) ;;
+assert (list_to_set [1;1;1;2;2;1;2] = [1;2]) ;;
+assert (set_intersect [1;2] [2;3] = [2]) ;;
+assert (set_intersect [1;2] [3;4] = []) ;;
+assert (set_union [1;2;3;4] [3;4;5;6] = [1;2;3;4;5;6]) ;;
+printf "Succes\n" ;;
+
 
 (** Debut des tests de la partie 'Approche naive' *)
 open Approche_naive ;;
