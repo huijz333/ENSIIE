@@ -31,6 +31,15 @@
 \usepackage{etoolbox}
 \patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -40,36 +49,50 @@
 }
 			
 \begin{document}
+
+	\begin{titlepage}
+		\begin{sffamily}
+			\begin{center}
+
+				\textsc{\LARGE ENSIIE}\\[2cm]
+				\textsc{\Large Rapport de projet d'IPF}\\[1.5cm]
+				% Title
+				\HRule \\[0.4cm]
+				{ \huge \bfseries Projet individuel d'algorithme-programmation IPF\\[0.4cm] }
+				\HRule \\[2cm]
+
+				\begin{minipage}{0.4\textwidth}
+				\begin{flushleft} \large
+					Romain \textsc{Pereira}\\
+				\end{flushleft}
+				\end{minipage}
+				\begin{minipage}{0.4\textwidth}
+				\begin{flushright} \large
+					\emph{Enseignant :} M. \textsc{Mouilleron}\\
+				\end{flushright}
+				\end{minipage}
+
+				\vfill
+				% Bottom of the page
+				{\large 03/04/2018}
+			\end{center}
+		\end{sffamily}
+	\end{titlepage}
+
 	\maketitle
 	\tableofcontents
 
 	\newpage
 	\section{Préambule}
-
-		Ce projet est réalisé dans le cadre de mes études à l'ENSIIE. Rappel de l'énoncé:
-		\newline
-		\begin{addmargin}[2em]{0em}
-			\label{problem}{
-			SUBSET-SUM-OPT - Etant donnée un ensemble fini $E$ d'entiers
-			strictements positifs et un entier cible s, trouver l'entier
-			$s' \leq s$ le plus grand possible, tel qu'il existe un
-			sous-ensemble $E' \subseteq E$ vérifiant $\sum_{e \in E'}{e} = s'$.
-			}
-			\newline
-		\end{addmargin}
-		Ce rapport présente (en pseudo-code), les algorithmes implémentés.
-		\newline
-		Le code OCaml est disponible dans le rendu.
-		\newline
-		\subsection{Spécificités techniques}
+		\subsection*{Spécificités techniques}
 			Un Makefile est disponible pour compiler le projet et les tests:
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item \textit{make} : compile les fichiers sources avec les tests vers un executable \textbf{subset-sum-opt.out}
+				\item \textit{make} : compile les fichiers sources avec les tests vers un exécutable \textbf{subset-sum-opt.out}
 				\item \textit{clean} : supprimes les fichiers compilés temporaires (.mlo et .cmo)
-				\item \textit{fclean} : supprimes tous les fichiers compilés (executable et temporaires)
+				\item \textit{fclean} : supprimes tous les fichiers compilés (exécutable et temporaires)
 			\end{itemize}
-			Les testes sont unitaires et effectue dans l'ordre:
+			Les tests sont unitaires et effectués dans l'ordre:
 			\begin{itemize}[label=-]
 				\item Les fonctions du module \textit{Listes}
 				\item Les fonctions du module \textit{Ensembles}
@@ -81,37 +104,52 @@
 				\item Comparaisons des approches
 			\end{itemize}
 
-		\subsection{Notations}
+		\subsection*{Notations}
 			J'utiliserai les notations suivantes:
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
 				\item Soit $E$ est un ensemble, $Card(E)$ est le cardinal de $E$.
 				\item Soit $E$ est un ensemble, $P(E)$ est l'ensemble formé des parties de $E$
 			\end{itemize}
-		\subsection{Rappels/Complexités}
+		\subsection*{Rappels/Complexités}
 			Soit $E$ un ensemble tel que $Card(E) = n$, alors
 			$$Card(P(E)) = 2^n$$
 			$$\forall E' \in P(E) , 0 <= Card(E') <= n$$
-			\newpage
-			On considèrera les complexités pour les opérations suivantes:
+			Les opérations suivantes ont pour complexité:
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item Soit $(x, y)$ des scalaires, je considère que les 4 opérations élémentaires ($x+y$, $x-y$, $x*y$, $x/y$) sont en $O(1)$
+				\item Soit $(x, y)$ des scalaires, les 4 opérations élémentaires ($x+y$, $x-y$, $x*y$, $x/y$) sont en $O(1)$
 				\item Soit 2 ensembles X, Y, $X \cup Y$ est une opération en $O(Card(X) * Card(Y))$
 				\item Soit $E \subset \mathbb{N}$, $\max{E}$ est une opération en $O(Card(E))$
 			\end{itemize}
 			
-			\subsection{Bonus}\label{bonus}
+		\subsection*{Bonus}\label{bonus}
 				L'implémentation a également été légèrement plus loin que les algorithmes présentés dans ce document: elle permet
 				de savoir sur quelle partie $E' \subset E$ la somme $\sum\limits_{e \in E'}e = s$ a été atteinte.
 				\newline
 				\newline
-				\textbf{La 1ère implémentation (qui est plus simple, mais sans l'ensemble sur lequel les sommes sont obtenus)
+				\textbf{La 1ère implémentation (qui est plus simple, mais sans l'ensemble sur lequel les sommes sont obtenues)
 				est disponible dans le dossier 'bkp' du rendu.}
-
+				
+	\section{Introduction}
+		Rappel de l'énoncé:
+		\newline
+		\begin{addmargin}[2em]{0em}
+			\label{problem}{
+			SUBSET-SUM-OPT - Etant donnée un ensemble fini $E$ d'entiers
+			strictements positifs et un entier cible s, trouver l'entier
+			$s' \leq s$ le plus grand possible, tel qu'il existe un
+			sous-ensemble $E' \subseteq E$ vérifiant $\sum_{e \in E'}{e} = s'$.
+			}
+			\newline
+		\end{addmargin}
+		Ce rapport présente différentes approches pour répondre au problème, proposé par le sujet.
+		\newline
+		Après l'étude de chaques approches, leurs performances seront comparées.
+		
 	\newpage
 	\section{Approche naïve}\label{approche_naive}
-		Cette approche consiste à determiner tous les sous-ensembles $E'$ de $E$, d'effectuer la somme sur
+		Cette approche consiste à déterminer tous les sous-ensembles $E'$ de $E$, d'effectuer la somme sur
 		tous les $E'$, et de renvoyer la somme la plus proche de $s$. Cette approche par 'force brute' est lourde.
 		\subsection{Question 1 : somme sur un ensemble}
 			\begin{algorithm}
@@ -158,7 +196,7 @@
 			
 	\newpage
 	\section{Approche plus directe}\label{approche_plus_directe}
-		Dans cette approche, plutot que de calculer l'ensemble des parties de $E$,
+		Dans cette approche, plutôt que de calculer l'ensemble des parties de $E$,
 		on se propose de calculer l'ensemble des sommes atteignables en sommet sur les parties de $E$.
 		
 		\subsection{Question 4 : sommes atteignables}\label{get_all_sums}
@@ -184,13 +222,13 @@
 			Alors la complexité de cet algorithme est en $\boxed{O(m(n) * n)}$
 			\begin{itemize}[label=-]
 				\setlength\itemsep{0.1em}
-				\item $n$ : nombre de récursion
+				\item $n$ : nombre de récursions
 				\item $m(n)$ : l'union
 			\end{itemize}
-			\textbf{Remarque:} Cette algorithme fourni les sommes atteignables dans un ordre croissant. ($\bullet < \bullet$)
+			\textbf{Remarque:} Cette algorithme fournit les sommes atteignables dans un ordre croissant. ($\bullet < \bullet$)
 
 		\subsection{Question 5 : résolution de SUBSET\_SUM\_OPT}
-			Une fois l'ensemble des sommes atteignables calculés, la résolution du problème devient trivial.
+			Une fois l'ensemble des sommes atteignables calculées, la résolution du problème devient triviale.
 			La complexité de cet algorithme de résolution est donc en $\boxed{O(m(n) * n)}$
 			\begin{algorithm}
 				\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
@@ -204,13 +242,13 @@
 
 	\newpage
 	\section{Approche avec nettoyage}\label{approche_naive}
-		On peut réduire la complexité de l'approche précèdente en réduisant ce que l'on a noté $m(n)$ (le nombre de sommes atteignables.
+		On peut réduire la complexité de l'approche précédente en réduisant ce que l'on a noté $m(n)$ (le nombre de sommes atteignables.
 		Dans cette approche, on se propose d'ajouter un 'filtre' sur l'algorithme qui génère les sommes.
-			\subsection{Question 6 ; fonction clean\_up}
-				Le filtre (l'algorithme $\mathtt{clean\_up}$ est donnée dans l'énoncé. Cette fonction prends en paramètre:
+			\subsection{Question 6 : fonction clean\_up}
+				Le filtre (l'algorithme $\mathtt{clean\_up}$ est donné dans l'énoncé. Cette fonction prend en paramètre:
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
-					\item $E \subset \mathbb{N}$ : l'ensemble a filtré
+					\item $E \subset \mathbb{N}$ : l'ensemble à filtrer
 					\item $s \in \mathbb{N}$ : un entier positif
 					\item $\delta \in \mathbb{R}_+^*$ : un réel positif (généralement $\ll 1$)
 				\end{itemize}
@@ -224,7 +262,7 @@
 	
 				Autrement dit, tous les entiers strictement supérieurs à $s$ sont supprimés, et 
 				si l'on considère 2 entiers consécutifs de l'ensemble trié $x$ et $y$, tel que $x < y$,
-				ils sont 'proches d'un rapport d'au moins $(1 + \delta)$, $y$ est supprimé.
+				et s'ils sont 'proches d'un rapport d'au moins $(1 + \delta)$, $y$ est supprimé.
 				Ce filtre supprime donc les éléments de l'ensemble qui sont 'proches' l'un de l'autre (au regard de $\delta$).
 				En supprimant des valeurs proches, on espère pouvoir former les mêmes sommes qu'avec toutes les valeurs,
 				mais en effectuant ainsi moins de sommations.
@@ -232,14 +270,14 @@
 				\newline
 				Par exemple, pour l'entrée $\llbracket 0, 100 \rrbracket$, $s = 90$ et $\delta=0.01$, on obtient la sortie
 				$$[1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 12; 14; 16; 18; 20; 23; 26; 29; 32; 36; 40; 45; 50; 56; 62; 69; 76; 84]$$
-				On remarque que les valeurs les plus 'petites' sont convervés ($\leq 10$), et que plus les valeurs deviennent 'grandes',
+				On remarque que les valeurs les plus 'petites' sont conservées ($\leq 10$), et que plus les valeurs deviennent 'grandes',
 				moins elles passent le filtre.
 				
 
 			\subsection{Question 7 : résolution de SUBSET\_SUM\_OPT}
 				L'algorithme de résolution est également fourni dans l'énoncé.
 				Il est le même que celui de 'l'approche plus directe' \ref{approche_plus_directe}, sauf que
-				lors du calcul des sommes atteignables filtrés par la fonction $\mathtt{clean\_up}$.
+				lors du calcul des sommes atteignables filtrées par la fonction $\mathtt{clean\_up}$.
 				
 				\begin{algorithm}
 					\caption{Renvoie l'ensemble des entiers $s$ tels qu'il existe
@@ -276,13 +314,13 @@
 				d'une liste $l_2$ d'entier décroissant, renvoie $true$ si $s$ s'écrit comme la somme d'un élément de $l_1$ et d'un
 				élément de $l_2$, et $false$ sinon.
 				\newline
-				La fonction implémenté suit l'algorithme suivant, qui se sert au maximum du fait que les listes soit triés.
+				La fonction implémentée suit l'algorithme suivant, qui se sert au maximum du fait que les listes soient triés.
 				Les 3 cas de retours possibles sont:
 				
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
-					\item $\mathtt{TOO\_SMALL}$ : Soit $y \in l_2$, $\forall x \in l1, x + y < s \Rightarrow \forall y' < y, x + y' < x + y < s$.
-					En français, pour $y$ fixer, la somme des $x + y$ avec $x$ dans $l_1$ est toujours inférieur à $s$.
+					\item $\mathtt{TOO\_SMALL}$ : Soit $y \in l_2$, $\forall x \in l_1, x + y < s \Rightarrow \forall y' < y, x + y' < x + y < s$.
+					En français, pour $y$ fixé, la somme des $x + y$ avec $x$ dans $l_1$ est toujours inférieur à $s$.
 					Pour un $y$ plus petit, on ne risque donc pas d'atteindre une valeur plus proche de $s$.
 					\item $\mathtt{REACHED}$ : on a réussi à atteindre $s$.
 					\item $\mathtt{TOO\_BIG}$ : On a parcouru toutes les valeurs de $l_2$, pour toutes les valeurs de $l_1$,
@@ -356,14 +394,14 @@
 				
 			\subsection{Question 10 : résolution de SUBSET\_SUM\_OPT}
 				En se servant des fonctions \ref{get_all_sums}, \ref{best_feasible},
-				en en ajoutant 2 fonctions subsidiaires (voir \textit{Listes.ml})
+				et en ajoutant 2 fonctions subsidiaires (voir \textit{Listes.ml}) ...
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
-					\item $\mathtt{split}$ : sépares une liste en 2 sous liste de longueur égal (à 1 prêt)
+					\item $\mathtt{split}$ : sépare une liste en 2 sous liste de longueur égal (à 1 prêt)
 					\item $\mathtt{sort}$ : tri les éléments dans l'ordre croissant
 					\item $\mathtt{invsort}$ : tri les éléments dans l'ordre décroissant
 				\end{itemize}
-				on peut élaborer l'algorithme de résolution suivant, qui se base sur l'idée de 'diviser pour régner':
+				... on peut élaborer l'algorithme de résolution suivant, qui se base sur l'idée de 'diviser pour régner':
 				\begin{algorithm}
 					\caption{Renvoie la réponse au problème SUBSET\_SUM\_OPT sur (E, s)}
 					\begin{algorithmic}[1]
@@ -376,17 +414,15 @@
 				\end{algorithm}
 				
 		\section{Comparaison des approches et améliorations}
-			\subsection{Question 11}
-				(voir 'tests.ml')
-			\subsection{Question 12}
-				(voir 'tests.ml')
+			\subsection{Question 11/12}
+				(voir 'tests.ml')l')
 			\subsection{Question 13 : Bonus}
-				Comme dit précèdemment (\ref{bonus}), ce bonus a été effectué: les fonctions de résolution renvoie également
+				Comme dit précédemment (\ref{bonus}), ce bonus a été effectué: les fonctions de résolution renvoient également
 				le sous-ensemble sur lequel la somme a été obtenu.
 
 			\subsection{Illustration}\label{illustrations}
 			
-				Les graphiques suivants ont été généré sur les tests suivant:
+				Les graphiques suivants ont été généré sur les tests suivants:
 				\begin{itemize}[label=-]
 					\setlength\itemsep{0.1em}
 					\item 1) Fixer $n = Card(E)$
@@ -398,16 +434,18 @@
 				
 				\begin{figure}[H]
 					\includegraphics[width=16cm]{./images/cmp_n_1_17.png}
-					\caption{\textit{La complexité de l'approche naïve suit effectivement une allure exponentielle}}
+					\caption{\textit{Comparaison des approches pour $1 \leq n \leq 17$}}
 				\end{figure}
-
+				La complexité de l'approche naïve suit effectivement une allure exponentielle.
+				
 				\newpage
 				Pour $n > 18$, l'approche naïve (\ref{approche_naive}) provoque une erreur de dépassement de pile, je n'ai pas pu
 				la tester pour des $n$ plus grands.
 				\begin{figure}[H]
 					\includegraphics[width=16cm]{./images/cmp_n_18_50.png}
+					\caption{\textit{Comparaison des approches pour $18 \leq n \leq 50$}}
 				\end{figure}
-				On remarque que l'approche plus directe (\ref{approche_plus_directe}) a une allure exponentielle (en $O(2^n)$),
+				L'approche plus directe (\ref{approche_plus_directe}) a une allure exponentielle (en $O(2^n)$),
 				et que l'approche 'diviser pour régner' (\ref{approche_diviser_pour_regner}) aussi, mais avec une allure plus 'écrasé'.
 				
 				\newpage
@@ -415,17 +453,18 @@
 				pour $n \gg 1$:
 				\begin{figure}[H]
 					\includegraphics[width=18cm]{./images/approche_avec_nettoyage_100_1000_100000.png}
+					\caption{\textit{Comparaison des approches pour $100 \leq n \leq 100\quad000$}}
 				\end{figure}
 				Pour $n \geq 140\quad000$, j'obtiens un dépassement de pile sur ma machine.
 				\newline
-				Les résultats ont été obtenus pour $\delta = 10^{-7}$, et si l'on note $r$ le résultat obtenu,
+				Les résultats ont été obtenus pour $\delta = 10^{-7}$, et si $r$ est le résultat obtenu,
 				il s'éloigne d'au plus $1\%$ de $s$ $$100 \frac{r}{s} \leq 0.01$$
 				\newline
 				\newline
 				\textbf{N.B:} Les données brutes (format .csv) sont disponibles dans le rendu.
 		\newpage
 		\section{Conclusion}
-			L'objectif de ce projet était de résoudre le problème SUBSET\_SUM\_OPT \ref{problem}, problème NP-difficle,
+			L'objectif de ce projet était de résoudre le problème SUBSET\_SUM\_OPT \ref{problem}, problème NP-difficile,
 			à l'aide de différentes approches, puis de comparer les résultats obtenus.
 			\newline
 			\newline
@@ -433,22 +472,21 @@
 			\newline
 			
 			Pour les méthodes naïve, plus directe, et de type diviser pour régner, le résultat obtenu est optimal.
-			Bien que ces algorithmes soient plus longs que l'approche avec nettoyage, on s'assure l'optimalité du résultat
-			et donc la réponse au problème.
+			Bien que ces algorithmes soient plus longs que l'approche avec nettoyage, l'optimalité du résultat est assuré.
 			\newline
-			Cependant, pour des valeurs de $n = Card(E)$ trop grandes ($ > 50$), nos implémentations sont lentes ($\geq 4 sec.)$,
+			Cependant, pour des valeurs de $n = Card(E)$ trop grandes ($ > 50$), les implémentations sont lentes ($\geq 4 sec.)$,
 			ou pire, elles atteignent les limites de la machine et s'arrête suite à des dépassements de piles.
 			\newline
 			
 			L'approche avec nettoyage quant à elle est plus rapide (voir Illustrations \ref{illustrations}),
-			mais ne permet de trouver une solution optimal.
+			mais ne permet de trouver une solution optimale.
 			\newline
 			\newline
 			Pour aller plus loin dans la résolution du problème, il est donc maintenant question de savoir
-			s'il existe des structures de données permettant d'optimiser nos algorithmes
-			(l'utilisation d'une pile explicit en mémoire RAM, au lieu de la pile-machine pour éviter les dépassements de pile, par exemple),
-			ou bien encore d'autres algorithmes plus performant donnant une solution exacte (nottement en allant plus loin dans la logique
-			de 'diviser pour régner', ou en trouvant un filtre type 'clean\_up' qui garanti tout de même l'optimalité)
+			s'il existe des structures de données permettant d'optimiser les algorithmes
+			(l'utilisation d'une pile explicite en mémoire RAM, au lieu de la pile-machine pour éviter les dépassements de pile, par exemple),
+			ou bien encore d'autres algorithmes plus performant donnant une solution exacte (nottament en allant plus loin dans la logique
+			de 'diviser pour régner', ou en trouvant un filtre type 'clean\_up' qui garantit tout de même l'optimalité)
 			\newline
 			\newline
 			Quelques recherches ont été effectué sur ces pistes, mais n'ont pas pu être mis en oeuvre par manque de temps.

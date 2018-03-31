@@ -16,52 +16,58 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\catcode `:\active 
+\catcode `;\active 
+\catcode `!\active 
+\catcode `?\active 
+\select@language{french}
+\@writefile{toc}{\select@language{french}}
+\@writefile{lof}{\select@language{french}}
+\@writefile{lot}{\select@language{french}}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Pr\IeC {\'e}ambule}{2}{section.1}}
-\newlabel{problem}{{1}{2}{Préambule}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Sp\IeC {\'e}cificit\IeC {\'e}s techniques}{2}{subsection.1.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Notations}{2}{subsection.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Rappels/Complexit\IeC {\'e}s}{2}{subsection.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Bonus}{3}{subsection.1.4}}
-\newlabel{bonus}{{1.4}{3}{Bonus}{subsection.1.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Approche na\IeC {\"\i }ve}{4}{section.2}}
-\newlabel{approche_naive}{{2}{4}{Approche naïve}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Question 1 : somme sur un ensemble}{4}{subsection.2.1}}
+\newlabel{bonus}{{1}{2}{Bonus}{section*.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Introduction}{3}{section.2}}
+\newlabel{problem}{{2}{3}{Introduction}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Approche na\IeC {\"\i }ve}{4}{section.3}}
+\newlabel{approche_naive}{{3}{4}{Approche naïve}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Question 1 : somme sur un ensemble}{4}{subsection.3.1}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Renvoie la somme des \IeC {\'e}l\IeC {\'e}ments de E}}{4}{algorithm.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Question 2 : g\IeC {\'e}n\IeC {\'e}ration des parties d'un ensemble}{4}{subsection.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Question 2 : g\IeC {\'e}n\IeC {\'e}ration des parties d'un ensemble}{4}{subsection.3.2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Renvoie l'ensemble des parties de E}}{4}{algorithm.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Question 3 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT par force brute}{4}{subsection.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Question 3 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT par force brute}{4}{subsection.3.3}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Renvoie la r\IeC {\'e}ponse au probl\IeC {\`e}me SUBSET\_SUM\_OPT sur (E, s)}}{4}{algorithm.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Approche plus directe}{5}{section.3}}
-\newlabel{approche_plus_directe}{{3}{5}{Approche plus directe}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Question 4 : sommes atteignables}{5}{subsection.3.1}}
-\newlabel{get_all_sums}{{3.1}{5}{Question 4 : sommes atteignables}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Approche plus directe}{5}{section.4}}
+\newlabel{approche_plus_directe}{{4}{5}{Approche plus directe}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Question 4 : sommes atteignables}{5}{subsection.4.1}}
+\newlabel{get_all_sums}{{4.1}{5}{Question 4 : sommes atteignables}{subsection.4.1}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Renvoie l'ensemble des entiers $s$ tels qu'il existe $E' \subseteq E$ v\IeC {\'e}rifiant $\DOTSB \sum@ \slimits@ \limits _{e \in E'}e = s$}}{5}{algorithm.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Question 5 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{5}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Question 5 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{5}{subsection.4.2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Renvoie la r\IeC {\'e}ponse au probl\IeC {\`e}me SUBSET\_SUM\_OPT sur (E, s)}}{5}{algorithm.5}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Approche avec nettoyage}{6}{section.4}}
-\newlabel{approche_naive}{{4}{6}{Approche avec nettoyage}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Question 6 ; fonction clean\_up}{6}{subsection.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Question 7 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{6}{subsection.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Approche avec nettoyage}{6}{section.5}}
+\newlabel{approche_naive}{{5}{6}{Approche avec nettoyage}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Question 6 : fonction clean\_up}{6}{subsection.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Question 7 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{6}{subsection.5.2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Renvoie l'ensemble des entiers $s$ tels qu'il existe $E' \subseteq E$ v\IeC {\'e}rifiant $\DOTSB \sum@ \slimits@ \limits _{e \in E'}e = s$, passant les tests du filtre}}{6}{algorithm.6}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces Renvoie la r\IeC {\'e}ponse au probl\IeC {\`e}me SUBSET\_SUM\_OPT sur (E, s)}}{7}{algorithm.7}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Approche de type \textit  {Diviser pour r\IeC {\'e}gner}}{7}{section.5}}
-\newlabel{approche_diviser_pour_regner}{{5}{7}{Approche de type \textit {Diviser pour régner}}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Question 8 : is\_feasible}{7}{subsection.5.1}}
-\newlabel{is_feasible}{{5.1}{7}{Question 8 : is\_feasible}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Approche de type \textit  {Diviser pour r\IeC {\'e}gner}}{7}{section.6}}
+\newlabel{approche_diviser_pour_regner}{{6}{7}{Approche de type \textit {Diviser pour régner}}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Question 8 : is\_feasible}{7}{subsection.6.1}}
+\newlabel{is_feasible}{{6.1}{7}{Question 8 : is\_feasible}{subsection.6.1}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces Renvoie \textbf  {true} si $\exists (x, y) \in l_1 \times l_2 \mid x + y = s$, \textbf  {faux} sinon}}{7}{algorithm.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Question 9 : best\_feasible}{8}{subsection.5.2}}
-\newlabel{best_feasible}{{5.2}{8}{Question 9 : best\_feasible}{subsection.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Question 9 : best\_feasible}{8}{subsection.6.2}}
+\newlabel{best_feasible}{{6.2}{8}{Question 9 : best\_feasible}{subsection.6.2}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {9}{\ignorespaces Renvoie $\begingroup \setbox \z@ \hbox {\thinmuskip 0mu \medmuskip \m@ne mu\thickmuskip \@ne mu \setbox \tw@ \hbox {$\qopname  \relax m{max}\mathsurround \z@ $}\kern -\wd \tw@ ${}\qopname  \relax m{max}{}\mathsurround \z@ $}\edef relatedcapstyle{\endgroup \let \binrel@@ \relax }relatedcapstyle\binrel@@ {\mathop {\kern \z@ \qopname  \relax m{max}}\limits _{(x, y) \in l_1 \times l_2}}\{x + y \mid x + y < s\}$}}{8}{algorithm.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Question 10 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{8}{subsection.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Question 10 : r\IeC {\'e}solution de SUBSET\_SUM\_OPT}{8}{subsection.6.3}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {10}{\ignorespaces Renvoie la r\IeC {\'e}ponse au probl\IeC {\`e}me SUBSET\_SUM\_OPT sur (E, s)}}{8}{algorithm.10}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Comparaison des approches et am\IeC {\'e}liorations}{9}{section.6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Question 11}{9}{subsection.6.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Question 12}{9}{subsection.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Question 13 : Bonus}{9}{subsection.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Illustration}{9}{subsection.6.4}}
-\newlabel{illustrations}{{6.4}{9}{Illustration}{subsection.6.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textit  {La complexit\IeC {\'e} de l'approche na\IeC {\"\i }ve suit effectivement une allure exponentielle}}}{9}{figure.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Comparaison des approches et am\IeC {\'e}liorations}{9}{section.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Question 11/12}{9}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Question 13 : Bonus}{9}{subsection.7.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Illustration}{9}{subsection.7.3}}
+\newlabel{illustrations}{{7.3}{9}{Illustration}{subsection.7.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textit  {Comparaison des approches pour $1 \leq n \leq 17$}}}{9}{figure.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textit  {Comparaison des approches pour $18 \leq n \leq 50$}}}{10}{figure.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textit  {Comparaison des approches pour $100 \leq n \leq 100\hskip 1em\relax 000$}}}{11}{figure.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{12}{section.8}}
 \bibcite{ocaml}{1}
 \bibcite{sous_ensembles}{2}
-\@writefile{toc}{\contentsline {section}{\numberline {8}R\IeC {\'e}f\IeC {\'e}rences}{13}{section.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}R\IeC {\'e}f\IeC {\'e}rences}{13}{section.9}}
