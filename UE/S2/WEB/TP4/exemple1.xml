@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?>
+<rhythmdb version="1.8">
+  <entry type="song">
+    <title>Marche pour la cérémonie turque - Le bourgeois gentilhomme</title>
+    <genre>classique</genre>
+    <artist>Jean-Baptiste Lully</artist>
+    <album>Le concert des nations</album>
+    <track-number>4</track-number>
+    <duration>123</duration>
+    <file-size>2614718</file-size>
+    <location>file:///chezmoi/04%20-%20Piste%204.ogg</location>
+    <mtime>1320669818</mtime>
+    <first-seen>1413276916</first-seen>
+    <last-seen>1413276918</last-seen>
+    <bitrate>160</bitrate>
+    <date>0</date>
+    <media-type>audio/x-vorbis</media-type>
+  </entry>
+  <entry type="song">
+    <title>RENDEZ-VOUS AVEC X... 21.08.2010</title>
+    <genre>émission</genre>
+    <artist>Patrick PESNOT</artist>
+    <album>France Inter - RENDEZ-VOUS AVEC X...</album>
+    <duration>2340</duration>
+    <file-size>37517440</file-size>
+    <location>file:///chezmoi/RENDEZ-VOUS%20AVEC%20X.../http---rf.proxycast.org-m-media-273073201426-c-culture-p-RENDEZ-VOUS-AVEC-X...-14726-l3-20100821-l4--http---media.radiofrance-podcast.net-podcast09-14726-21.08.2010-ITEMA-20238716-0.mp3</location>
+    <mtime>1282911260</mtime>
+    <first-seen>1413276916</first-seen>
+    <last-seen>1413276918</last-seen>
+    <bitrate>128</bitrate>
+    <date>0</date>
+    <media-type>audio/mpeg</media-type>
+    <comment>Patrick PESNOT - Realisation</comment>
+  </entry>
+  <entry type="song">
+    <title>Arias</title>
+    <genre>classique</genre>
+    <artist>Rossini - Juan Diego Florez</artist>
+    <album>Album inconnu</album>
+    <track-number>8</track-number>
+    <disc-number>1</disc-number>
+    <duration>362</duration>
+    <file-size>6200822</file-size>
+    <location>file:///chezmoi/Rossini%20-%20Juan%20Diego%20Florez/Album%20inconnu/08.%20Arias.ogg</location>
+    <mtime>1320669852</mtime>
+    <first-seen>1413276918</first-seen>
+    <last-seen>1413276919</last-seen>
+    <bitrate>160</bitrate>
+    <date>1</date>
+    <media-type>audio/x-vorbis</media-type>
+    <album-artist>Rossini - Juan Diego Florez</album-artist>
+  </entry>
+</rhythmdb>

@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="yes"?>
+<bouteilles>
+
+	<bouteille nom="Template">
+		<volume unit="cl"></volume>
+		<origine></origine>
+		<mineraux>
+			<ion type="positif">
+				<elem>Calcium</elem>
+				<quantite unit="mg/L">71</quantite>
+			</ion>
+
+			<ion type="negatif"></ion>
+	</bouteille>
+
+
+
+</bouteilles>
