@@ -1,0 +1,80 @@
+---
+title: "TP4 stats"
+author: "Romain PEREIRA"
+date: "27 Avril 2018"
+output:
+  pdf_document:
+    fig_caption: yes
+  html_document:
+    df_print: paged
+---
+
+# 1) Test de Student
+### 1) Test sur une distribution $N(\mu = 1, \sigma = 2)$ (en supposant $\sigma$ inconnue)
+$(a)$ Risque de 1ère espèce
+
+H_0 : $\mu = \mu_0$
+
+H_1 : $\mu = \mu_1$
+
+Soit $\boxed{\alpha = \mathbb{P}(choisir \quad H_1 \mid H_0 \quad est \quad vraie)}$ est l'erreur de 1ère espèce.
+
+$(b)$ Lemme de Neyman-Pearson
+
+La région critique optimale au seuil $\alpha$ ('zone de rejet') est $W$, et peut se mettre sous la forme:
+$$\boxed{W = \{\Lambda_n > K_{\alpha}\}} \quad avec \quad
+\boxed{\Lambda_n =  \frac{\sqrt{n}(\bar{X_n} - \mu_0)}{S_n}} \quad et \quad
+\boxed{K_{\alpha} = \mu_0 + \frac{\sigma_0}{\sqrt{n}} F_{T_{n-1}}^{-1}(1 - \alpha)}$$
+où $F_{T_{n-1}}$ est la fonction de répartition de $T_{n-1}$ (Loi de Student à $n-1$ degrés de liberté).
+
+$(c)$ Programmation de la règle de décision.
+
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+# Règle de décision : 'S_n' suit elle une loi N('u0', *) ou N('u1', *) ? 
+# sous un risque de 1ère espèce 'a'
+# la fonction renvoie True si l'hypothèse H0 : u = u0 est rejeté, False sinon
+delta <- function(S_n, a, u0, u1) {
+  n        <- length(S_n)
+  X_n_bar  <- 1.0 / n * sum(S_n)
+  sigma_2  <- 1.0 / (n - 1) * sum((S_n - X_n_bar) * (S_n - X_n_bar))
+  lambda_n <- sqrt(n / sigma_2) * (X_n_bar - u0)
+  K_a      <- qt(p=1.0 - a, df=n-1)
+  return (lambda_n > K_a)
+}
+
+if (delta(rnorm(n=20, mean=1, sd=2), 0.05, 1.0, 1.5)) {
+  print("H0 est rejeté: u=u1")
+} else {
+  print("H0 non rejeté: u=u0")
+}
+```
+\newpage
+### 2) Test sur $N=100$ distributions $N(\mu = 1, \sigma = 2)$ (en supposant $\sigma$ inconnue)
+
+$(a)$
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+for (i in 1:100) {
+  print(paste(i, " : ", delta(rnorm(n=20, mean=1, sd=2), 0.05, 1.0, 1.5), sep=""))
+}
+```
+
+On observe que pour certains echantillons, le test de Student rejette l'hypothèse $H_0 : \mu = \mu_0$
+(alors qu'on sait que cette hypothèse est vraie)
+
+$(b)$
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+for (a in c(0.2, 0.1, 0.05, 0.01)) {
+  # TODO
+}
+```
+
+
+
+On pose:
+$$Z_n = \frac{L(X;\mu_1)}{L(X;\mu_0)}$$
+
+On peut montrer que
+$$Z_N= exp(\frac{1}{\sigma_0^2}(\mu_1 - \mu_0)\sum_{i=1}^n{X_i}) \quad  exp(-\frac{n}{2 \sigma_0^2}(\mu_1^2 - \mu_0^2)) $$
+
+$$\boxed{W = \{(x_1, ..., x_n) ; \frac{1}{n} \sum_{i=1}^n{x_i} > K_{\alpha} \}} \quad et \quad
+\boxed{K_{\alpha} = \mu_0 + \frac{\sigma_0}{\sqrt{n}} \phi^{-1}(1 - \alpha)}$$
