@@ -53,28 +53,82 @@ if (delta(rnorm(n=20, mean=1, sd=2), 0.05, 1.0, 1.5)) {
 
 $(a)$
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+sum <- 0
 for (i in 1:100) {
-  print(paste(i, " : ", delta(rnorm(n=20, mean=1, sd=2), 0.05, 1.0, 1.5), sep=""))
+  if (delta(rnorm(n=20, mean=1, sd=2), 0.05, 1.0, 1.5)) {
+    sum <- sum + 1
+  }
 }
+print(paste("nombre de fois que H0 a été rejeté: ", sum, sep=""))
 ```
 
 On observe que pour certains echantillons, le test de Student rejette l'hypothèse $H_0 : \mu = \mu_0$
 (alors qu'on sait que cette hypothèse est vraie)
 
 $(b)$
+Si $\alpha$ augmente, alors $K_\alpha$ diminue, la zone de rejet augmente.
+(on aura plus (+) tendance à choisir $H_1$ alors que $H_0$ est vrai)
+
+$(c)$
 ```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
 for (a in c(0.2, 0.1, 0.05, 0.01)) {
-  # TODO
+  sum <- 0
+  for (i in 1:100) {
+    if (delta(rnorm(n=20, mean=1, sd=2), a, 1.0, 1.5)) {
+      sum <- sum + 1
+    }
+  }
+  print(paste("alpha=", a, " ; nombre de fois que H0 a été rejeté: ", sum, sep=""))
 }
 ```
 
 
 
-On pose:
-$$Z_n = \frac{L(X;\mu_1)}{L(X;\mu_0)}$$
+### 3) Test sur $N=100$ distributions $N(\mu = 1.5, \sigma = 2)$ (en supposant $\sigma$ inconnue)
 
-On peut montrer que
-$$Z_N= exp(\frac{1}{\sigma_0^2}(\mu_1 - \mu_0)\sum_{i=1}^n{X_i}) \quad  exp(-\frac{n}{2 \sigma_0^2}(\mu_1^2 - \mu_0^2)) $$
+$(a)$
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+for (a in c(0.2, 0.1, 0.05, 0.01)) {
+  sum <- 0
+  for (i in 1:100) {
+    # si vrai, alors H0 est rejeté
+    if (delta(rnorm(n=20, mean=1.5, sd=2), a, 1.0, 1.5)) {
+      sum <- sum + 1
+    }
+  }
+  print(paste("nombre de fois que H0 a été rejeté: ", sum, sep=""))
+}
+```
+On constate que plus $\alpha$ est grand, moins l'on rejète H0, et donc plus
+l'on se trompe si l'on suit le test.
 
-$$\boxed{W = \{(x_1, ..., x_n) ; \frac{1}{n} \sum_{i=1}^n{x_i} > K_{\alpha} \}} \quad et \quad
-\boxed{K_{\alpha} = \mu_0 + \frac{\sigma_0}{\sqrt{n}} \phi^{-1}(1 - \alpha)}$$
+$(b)$
+La puissance d'un test, notée $P$ est la probabilité de rejeter $H_0$ lorsque $H_1$ est vraie.
+
+$(c)$
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+u1s <- c(1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0)
+y   <- c()
+for (u1 in u1s) {
+  sum <- 0 # nombre de fois ou on rejete H0 (alors que H0 est vrai)
+  for (i in 1:100) {
+    if (delta(rnorm(n=20, mean=1.0, sd=2), 0.05, 1.0, u1)) {
+      sum <- sum + 1
+    }
+  }
+  y <- c(y, sum)
+}
+plot(u1s, 100 - y, xlab="valeur de H1 : u1", ylab="Pourcentage de bon choix", main="Pourcentage de bonnes décisions, en fonction de H1 : u1, pour une loi N(1.0, s)", sub="(pour le test de Student précèdent)", type="l")
+```
+
+\newpage
+### 4) Utilisation de 't.test'
+
+```{r, include=TRUE, echo=TRUE, fig.height=5, fig.width=8}
+Sn <- rnorm(n=20, mean=1.0, sd=2)
+t.test(Sn, mu=1.0)
+```
+
+$t$ est la valeur qui correspond au $\Lambda_n$ précèdent. C'est le $t$ du test de Student. (https://en.wikipedia.org/wiki/Student's_t-test)
+
+$df$ (degree of freedom) est le nombre de degree de liberté dans le test de Student.
