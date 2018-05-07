@@ -1,10 +1,17 @@
 # import des dependances (cos, sin, arctan et sqrt)
 import math
 import matplotlib.pyplot as plt
-import numpy as np
 
 # l'animation a ete inspire de:
 # https://stackoverflow.com/questions/10896054/simple-animation-of-2d-coordinates-using-matplotlib-and-pyplot
+
+# renvoie le signe d'un nombre
+def sign(x):
+	if x < 0.0:
+		return -1
+	if x > 0.0:
+		return 1
+	return 0
 
 # liste des planetes, format: [nom, distance au soleil, theta 0, vitesse angulaire / au Soleil]
 # constantes correspond aux index dans le tableau
@@ -51,8 +58,8 @@ while True:
 		X = planete[D] * math.cos(O) / MAX_D
 		Y = planete[D] * math.sin(O) / MAX_D
 		# position logarithmique
-		x = np.sign(X) * np.log(abs(X) + 1.0) / np.log(2.0)
-		y = np.sign(Y) * np.log(abs(Y) + 1.0) / np.log(2.0)
+		x = sign(X) * math.log(abs(X) + 1.0) / math.log(2.0)
+		y = sign(Y) * math.log(abs(Y) + 1.0) / math.log(2.0)
 		plt.plot(x, y, marker='o', linestyle='None')
 		plt.text(x, y, planete[NOM])
 	
