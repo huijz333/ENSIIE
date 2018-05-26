@@ -1,0 +1,34 @@
+1) a. (voir cours)
+
+2) d. ('package-private', voir https://stackoverflow.com/questions/16164902/what-is-the-default-access-modifier-in-java)
+
+3) c. (https://www.tutorialspoint.com/cplusplus/cpp_class_access_modifiers.htm)
+
+4) c. (https://stackoverflow.com/questions/860339/difference-baetween-private-public-and-protected-inheritance)
+
+5) c. (par élimination...)
+
+6) a. pour les objets, b. pour les types primitifs
+
+7) c. le pointeur 'this' ne peut pas être nulle (il est définit lors de l'allocation/construction de l'objet,
+si cette étape échoue, alors l'objet n'existe pas, 'this' non plus...)
+Par exemple, si un 'new' échoue en Java, une 'NotEnoughMemoryException' est levé.
+
+8) a. et c. (https://fr.wikipedia.org/wiki/Surcharge_(programmation_informatique))
+
+9) a. et d.
+
+10) b. et d.
+
+11) a. et b.
+
+12) b. (https://pastebin.com/H7YwQhVE) , c. est discutable, car les attributs sont initialisés à 0 (ou null), mais ceci meme si un autre constructeur est appelé.
+ou alors le constructeur par défaut est toujours appelé? bref
+
+13) b.
+
+14) c. : un constructeur ne retourne rien, il construit un objet dont on a une référence non nulle
+
+15) b. et c. (http://en.cppreference.com/w/cpp/language/copy_constructor)
+
+16) a. (https://stackoverflow.com/questions/347358/inheriting-constructors)
