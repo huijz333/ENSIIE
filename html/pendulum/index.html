@@ -36,14 +36,16 @@
 			var cos2DTheta = Math.cos(dTheta);
 			var sinDTheta = Math.sin(dTheta);
 
-			this.dTheta1 = 0;
-			this.dTheta2 = 0;
+			//reset des forces
+			this.d2Theta1 = 0;
+			this.d2Theta2 = 0;
 
 			while (this.updates.length > 0) {
 				var updateFunction = this.updates.pop();
 				updateFunction();
 			}
 
+			//calcul les forces
 			this.d2Theta1 += (g * (sinTheta2 * cosDTheta - mu * sinTheta1) - (this.l2 * this.dTheta2 * this.dTheta2 + this.l1 * this.dTheta1 * this.dTheta1 * cosDTheta) * sinDTheta) / (this.l1 * (mu - cos2DTheta));
 
 			this.d2Theta2 += (mu * g * (sinTheta1 * cosDTheta - sinTheta2) + (mu * this.l1 * this.dTheta1 * this.dTheta1 + this.l2 * this.dTheta2 * this.dTheta2 * cosDTheta) * sinDTheta) / (this.l2 * (mu - cos2DTheta));
