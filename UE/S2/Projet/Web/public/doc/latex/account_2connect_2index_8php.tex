@@ -1,0 +1,36 @@
+\hypertarget{account_2connect_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/connect/index.php}
+\label{account_2connect_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/connect/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/connect/index.\+php}}
+
+
+Crée une session utilisateur.  
+
+
+
+
+\subsection{Description détaillée}
+Crée une session utilisateur. 
+
+Si succès, génère une session P\+HP (renvoie un Cookie de session) \begin{DoxyVerb}    Sinon, renvoie le code d'erreur correspondant.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Paramètres}
+{\em } & 
+\begin{DoxyItemize}
+\item P\+O\+ST {\itshape mail} 
+\item P\+O\+ST {\itshape pass} 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\begin{DoxyItemize}
+\item C\+O\+O\+K\+IE {\itshape P\+H\+P\+S\+E\+S\+S\+ID} \+: le cookie de session
+\item code reponse\+:
+\begin{DoxyItemize}
+\item 200 \+: l\textquotesingle{}utilisateur est connecté, affiche l\textquotesingle{}utilisateur au format J\+S\+ON
+\item 400 \+: erreur de la requête \+: paramètre(s) manquant(s)
+\item 401 \+: identifiants incorrects
+\item 503 \+: erreur serveur \+: accès à la base de donnée 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}

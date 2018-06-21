@@ -1,0 +1,34 @@
+\hypertarget{account_2register_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/register/index.php}
+\label{account_2register_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/register/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/register/index.\+php}}
+
+
+Enregistre un nouvel utilisateur sur le site.  
+
+
+
+
+\subsection{Description détaillée}
+Enregistre un nouvel utilisateur sur le site. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em } & 
+\begin{DoxyItemize}
+\item P\+O\+ST {\itshape mail} \+: l\textquotesingle{}adresse mail lié au compte
+\item P\+O\+ST {\itshape pseudo} \+: un pseudo
+\item P\+O\+ST {\itshape pass} \+: un mot de passe
+\item P\+O\+ST {\itshape grecaptcha} \+: un code google-\/recaptcha v2 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\begin{DoxyItemize}
+\item code reponse\+:
+\begin{DoxyItemize}
+\item 200 \+: l\textquotesingle{}utilisateur a été enregistré avec succès
+\item 400 \+: erreur de la requête (paramètre(s) manquant(s) ou invalide(s))
+\item 503 \+: erreur serveur (accès à la base de donnée) 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}

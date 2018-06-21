@@ -1,0 +1,133 @@
+/**
+ *      Contient le css global de la page
+ */
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("../images/background.png");
+	background-attachment: fixed;
+	/**
+	color:  	#888888;
+	background-color:  #2B2E35;*/
+	font-family: Arial, Helvetica, sans-serif
+}
+
+h1 {
+	color: #FFFFFF;
+}
+
+/** un bouton */
+.button {
+	display: inline-block;
+	background-color: #45484A;
+	border: 0.3rem solid transparent;
+	border-radius: 0.2rem;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+.button_text {
+	padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+}
+
+.button:hover {
+	color: #CCCCCC;
+	background-color: #2B2E35;
+	transition: all 0.15s ease-in-out;
+}
+
+/** un texte cliquable */
+.label {
+	color: #959AA2;
+	font-size: 0.8rem;
+}
+
+.label-button {
+	cursor: pointer;
+	transition: all 0.15s ease-in-out;
+}
+
+.label-button:hover {
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+/** prompt: un icone et une entrée texte:; */
+.prompt {
+	display: flex;
+	width: 12rem;
+	align-items: center; /* align vertical */
+	color: #656A72;
+	background-color: #17191F;
+	border-style: solid;
+	border-width: 0.15rem;
+	border-radius: 0.3rem;
+	border-color: #272830;
+	transition: all 0.15s ease-in-out;
+}
+
+.prompt:hover {
+	color: #FFFFFF;
+	border-color: #FFFFFF;
+}
+
+.prompt input {
+	height: 2rem;
+	text-indent: 0.5rem;
+	background: transparent;
+	border: none;
+	color: #FFFFFF;
+}
+
+.prompt-logo {
+	margin-left: 0.5rem;
+}
+/* fin prompt */
+
+/** animation de chargement */
+.chargement {
+	border: 1rem solid #EEEEEE;
+	border-radius: 50%;
+	border-top: 1rem solid #7289DA;
+	width: 4rem;
+	height: 4rem;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+
+/** tooltip */
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: -200%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}

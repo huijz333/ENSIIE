@@ -1,0 +1,30 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}La probl\IeC {\'e}matique}{2}{section.1}
+\contentsline {section}{\numberline {2}Solution technique}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Organisation du travail}{2}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Organisation g\IeC {\'e}n\IeC {\'e}ral}{2}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}R\IeC {\'e}partition des r\IeC {\^o}les}{2}{subsubsection.2.1.2}
+\contentsline {subsection}{\numberline {2.2}Back-end}{2}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Base de donn\IeC {\'e}es}{2}{subsubsection.2.2.1}
+\contentsline {paragraph}{Permission}{3}{section*.3}
+\contentsline {paragraph}{R\IeC {\^o}le}{3}{section*.4}
+\contentsline {paragraph}{Utilisateur}{3}{section*.5}
+\contentsline {paragraph}{Notification}{3}{section*.6}
+\contentsline {paragraph}{Jeton de r\IeC {\'e}initialisation}{3}{section*.7}
+\contentsline {paragraph}{Ecole, ville, ...}{4}{section*.8}
+\contentsline {paragraph}{Equipe}{4}{section*.9}
+\contentsline {paragraph}{Tournoi}{4}{section*.10}
+\contentsline {paragraph}{Match}{4}{section*.11}
+\contentsline {subsubsection}{\numberline {2.2.2}L'architecture du site}{5}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}API 'REST'}{6}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.4}API externe des jeux}{7}{subsubsection.2.2.4}
+\contentsline {paragraph}{League of Legends - Riot Games}{7}{section*.12}
+\contentsline {paragraph}{Fortnite}{7}{section*.13}
+\contentsline {paragraph}{PUBG}{7}{section*.14}
+\contentsline {paragraph}{Hearthstone (Blizzard)}{7}{section*.15}
+\contentsline {subsection}{\numberline {2.3}Front-end}{8}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Le 'layout'}{8}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Discord}{9}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Notification}{9}{subsubsection.2.3.3}
+\contentsline {section}{\numberline {3}Conclusion}{9}{section.3}
+\contentsline {section}{\numberline {4}R\IeC {\'e}f\IeC {\'e}rences}{10}{section.4}

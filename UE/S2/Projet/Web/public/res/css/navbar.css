@@ -1,0 +1,94 @@
+/**
+ *      Contient le css de la barre de recherche (en haut au milieu)
+ */
+.navbar {
+	position: fixed;
+	width: calc(100% - 12rem);
+	height: 4rem;
+	top: 0rem;
+	left: 12rem;
+	background-color: #1B1C23F7;
+	box-shadow: 0.5vh 1vh 0.5vh 0.5vh rgba(0, 0, 0, 0.5);
+	z-index: 3;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-item {
+	position: relative;
+}
+
+.navbar-item-profil {
+	display: flex;
+	padding: 1.0rem 1.0rem;
+	text-align: center;
+}
+
+.navbar-item-profil span {
+	color: white;
+	margin-top: 0.5rem;
+}
+
+.navbar-item-profil img {
+	width: 2rem;
+	height: 2rem;
+	margin-left: 1.0rem;
+}
+
+.navbar-item-icon {
+	display: block;
+	color: #F0F0F0;
+	text-align: center;
+	padding: 1.2rem 1.2rem;
+	font-size: 1.4rem;
+}
+
+.navbar-item-hoverable {
+	border-top: 0.2rem solid #1B1C23F7;
+	transition: all 0.15s ease-in-out;
+}
+
+.navbar-item-hoverable:hover {
+	cursor: pointer;
+	color: #FFFFFF;
+	border-color: #FFFFFF;
+	border-top: 0.2rem solid #FFFFFF;
+	background-color: #12132367;
+}
+
+.navbar-item-bell {
+	position: absolute;
+	right: 0rem;
+}
+
+.navbar-item .notifications {
+	position: absolute;
+	min-width: 12rem;
+	max-width: 12rem;
+	right: 0rem;
+	top: 4rem;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	overflow: hidden;
+	border: none;
+	-webkit-border-radius: 0.8rem;
+	border-radius: 0.3rem;
+	font: normal 1rem/1 Impact, Charcoal, sans-serif;
+	color: rgba(255,255,255,1);
+	-o-text-overflow: clip;
+	text-overflow: clip;
+	background: rgba(80,92,96,0.91);
+	-webkit-box-shadow: 0.45rem 0.45rem 0.45rem 0 rgba(0,0,0,0.3) ;
+	box-shadow: 0.15rem 0.15rem 0.15rem 0 rgba(0,0,0,0.3) ;
+	text-shadow: 0 0.075rem 0.075rem rgba(0,0,0,0.2) ;
+}
+
+.navbar-item .notifications-counter {
+	position: absolute;
+	width: 1.2rem;
+	height: 1.2rem;
+	right: 0.2rem;
+	top: 0.5rem;
+}

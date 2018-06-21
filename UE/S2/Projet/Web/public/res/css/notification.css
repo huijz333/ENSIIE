@@ -1,0 +1,63 @@
+/**
+ *      Contient le css de tout ce qui touche aux notifications
+ */
+.notifications {
+	position: absolute;
+	max-height: 60vh;
+	overflow-y: scroll;
+	z-index: 99;
+	background: #FFFFFF;
+	border: 0.1rem solid #1B1C23F7;
+	box-shadow: 0 0 4rem #FFFFFFFF;
+}
+
+.notifications-vu {
+	float: right;
+	cursor: pointer;
+	text-decoration: underline;
+	color: #0000FF;
+}
+
+.notifications-title {
+	font-weight: bold;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.notifications-counter {
+	padding-top: 0.2rem;
+	position: absolute;
+	width: 1.2rem;
+	z-index: 99;
+	text-align: center;
+	background: #EE0000;
+	border-radius: 0.2rem;
+	pointer-events: none;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 0.8rem;
+	transition: all 0.15s ease-in-out;
+}
+
+.notification {
+	cursor: pointer;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	border-top: 0.1rem solid #1B1C23F7;
+}
+
+.notification-unseen {
+	background: red
+}
+
+.notification-content {
+	
+}
+
+.notification-date {
+	font-size: 0.7rem;
+}

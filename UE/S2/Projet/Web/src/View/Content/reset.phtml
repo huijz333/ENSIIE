@@ -1,0 +1,74 @@
+<!-- PAGE DE REINTIALISATION DU MOT DE PASSE -->
+
+<h1>Réinitialisation du mot de passe</h1>
+
+<?php
+use Model\ULC\Utilisateur\Utilisateur;
+
+if (isset ( $_GET ['mail'] ) && isset ( $_GET ['token'] )) {
+	$mail = filter_input ( INPUT_GET, 'mail', FILTER_SANITIZE_EMAIL );
+	$token = filter_input ( INPUT_GET, 'token', FILTER_SANITIZE_STRING );
+	$user = Utilisateur::instance ();
+	if ($user->isTokenValid ( $mail, $token )) {
+		?>
+<script>
+			function changePassword() {
+				var pass = document.getElementById("resetPassID").value;
+				if (pass.length < 6) {
+					toast("Le mot de passe est trop court", "error");
+				} else if (pass != document.getElementById("confirmResetPassID").value) {
+					toast("Les mots de passe sont différents.", "error");
+				} else {
+					var mail  = "<?php echo $_GET ['mail'];  ?>";
+					var token = "<?php echo $_GET ['token']; ?>";
+					requestAPI(	"/user/account/password/modify/",
+								{
+									200:	function() {
+												toast("Mot de passe modifié.</br>Vous pouvez maintenant vous connecter.");
+<?php
+												if (! $this->getUser ()->isConnected ()) {
+?>
+													document.getElementById("input_mailID").value = mail;
+													document.getElementById("input_passID").value = pass;
+<?php
+												}
+?>
+											},
+									400:	function() {
+												toast("La requête est invalide.</br>Veuillez contacter un administrateur.", "error");
+											},
+									401:	function() {
+												toast("Le token a expiré...</br>Veuillez en regénérer un nouveau.", "error");
+											},
+									503:	function() {
+												toast("La base de donnée du site est actuellement indisponible...", "error");
+											}
+								},
+
+								{
+									"mail": mail,
+									"token": token,
+									"pass": pass
+								}
+					);
+				}
+			}
+		</script>
+
+<input id="resetPassID" />
+<input id="confirmResetPassID" />
+<button onclick=changePassword();>Valider</button>
+<?php
+	} else {
+		?>
+<h3>Token invalide (erroné ou expiré)</h3>
+<h4>Veuillez ré-itérer la manipulation de réinitialisation.</h4>
+<?php
+	}
+} else {
+	?>
+
+<h3>Adresse mail ou token manquant</h3>
+<?php
+}
+?>

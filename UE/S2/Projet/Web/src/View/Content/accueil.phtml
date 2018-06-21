@@ -1,0 +1,144 @@
+<!-- ACCUEIL DU SITE -->
+
+
+		<style type="text/css">
+
+			#bgVideo {
+			    position: fixed;
+			    left: 0;
+			    top: 0;
+			    min-width: 100%;
+			    min-height: 100%;
+			    z-index: -1;
+			}
+
+			.accueil {
+				display: inline-block;
+				padding-left: 1rem;
+				padding-top: 0.1rem;
+				padding-bottom: 2rem;
+				padding-right: 1rem;
+				width: 30rem;
+				transition: all 1.0s ease-in-out;
+				color: #F1F1F1;
+			}
+
+			.accueil:hover {
+				background: rgba(0, 0, 0, 0.5);
+				margin-left: 22%;
+				margin-right: 10rem;
+				margin-top: 2rem;
+				padding-top: 2rem;
+				padding-bottom: 4rem;
+				padding-left: 6rem;
+				padding-right: 6rem;
+			}
+
+			h1 {
+				transition: all 1.0s ease-in;
+			}
+
+			.accueil:hover h1 {
+				transform: translateX(calc(50% - 14rem));
+			}
+
+			h2 {
+				transition: all 1.0s ease-out;
+			}
+
+			.accueil:hover h2 {
+				transform: translateX(calc(50% - 8rem));
+			}
+
+			h3 {
+				transition: all 1.0s ease-in-out;
+				text-decoration: underline;
+			}
+
+			.accueil:hover h3 {
+				transform: translateX(calc(50% - 9rem));
+			}
+
+			.accueil-details {
+				color: #f1f1f100;
+				transition: all 1s steps(4, end);
+				text-align: center;
+				font-size: 1.2rem;
+			}
+
+			.accueil:hover .accueil-details {
+				color: #f1f1f1FF;
+			}
+
+			.accueil-content {
+				line-height: 1.5rem;
+			}
+
+			.accueil-details-inscription {
+				cursor: pointer;
+				font-size: 1rem;
+				text-decoration: underline;
+			}
+
+		</style>
+
+
+        <!-- video de fond du site -->
+		<video class="accueil-video" autoplay muted loop id="bgVideo">
+			<source src="./res/video/bg.mp4" type="video/mp4">
+		</video>
+
+		<div class="accueil">
+			<div class="accueil-content">
+				<div class="accueil-title">
+					<h1 style="font-size: 3.5rem;">REJOIGNEZ ULC</h1>
+					<h2 style="font-size: 2rem;" id="timer">Temps avant ouverture</h2>
+					<h3 style="font-size: 1rem;">La 1ère ligue universitaire d'e-sport</h3>
+				</div>
+				<div class="accueil-details">
+					Pour le lancement de la plateforme, nous vous proposons
+					<span style="font-weight: bold">un championnat universitaire national</span>
+					visant à opposer toutes les écoles d'ingénieurs, dans un immense tournoi de
+					<span style="font-weight: bold">League of Legends</span>
+				</div>
+				</br>
+				<div class="accueil-details">
+					Montrer à tous que <strong>vous</strong>, êtes le meilleur.
+					<div class="accueil-details-inscription " onclick="setState(STATE.REGISTER);">(Pré-inscrivez vous dés maintenant)</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Display the countdown timer in an element -->
+
+		<script>
+			// Set the date we're counting down to
+			var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
+
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+			  // Get todays date and time
+			  var now = new Date().getTime();
+
+			  // Find the distance between now an the count down date
+			  var distance = countDownDate - now;
+
+			  // Time calculations for days, hours, minutes and seconds
+			  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			  // Display the result in the element with id="demo"
+			  document.getElementById("timer").innerHTML = days + "j " + hours + "h "
+			  + minutes + "m " + seconds + "s ";
+
+			  // If the count down is finished, write some text
+			  if (distance < 0) {
+			    clearInterval(x);
+			    document.getElementById("demo").innerHTML = "EXPIRED";
+			  }
+			}, 1000);
+		</script>

@@ -1,0 +1,240 @@
+\hypertarget{lol_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/lol.php}
+\label{lol_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/lol.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/lol.\+php}}
+
+
+Various functions, not specific and widely used.  
+
+
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lol_8php_a97fe54fd1c1f43c5b79d9c2e253c42a1}{multiarray\+\_\+search} (\$field, \$value, \$array, \$default\+\_\+value=false)
+\item 
+\hyperlink{lol_8php_a5133dd10d633e75afb662cd8753c7c3f}{multiarray\+\_\+search\+\_\+key} (\$field, \$value, \$array)
+\item 
+\hyperlink{lol_8php_a467bbf964092ca25b7fd7b94b32725de}{multiarray\+\_\+filter} (\$field, \$value, \$array)
+\item 
+\hyperlink{lol_8php_aad427741d142b867fd23b6c9e291cbc8}{startswith} (\$haystack, \$needle)
+\item 
+\hyperlink{lol_8php_a2c0472bf77404493f459f2f392bc6cfd}{endswith} (\$haystack, \$needle)
+\item 
+\hyperlink{lol_8php_a663921c08c6e251b51ca06a34a796bb3}{str\+\_\+replace\+\_\+first} (\$needle, \$replace, \$haystack)
+\item 
+\hyperlink{lol_8php_a0f2b119b5fbb89b4355541cabdf0b2b4}{list\+\_\+templates} ()
+\item 
+\hyperlink{lol_8php_ab71a840938f7bbf34a89b9f9ab4af671}{get\+\_\+generation\+\_\+time} (\$start\+\_\+generation\+\_\+time)
+\item 
+\hyperlink{lol_8php_a29d98d715efe41dae9c399ef52a44445}{get\+\_\+category\+\_\+mime\+\_\+type} (\$mime\+\_\+type)
+\item 
+\hyperlink{lol_8php_a4f2354fbb8df0aa2bf481b131519bd3e}{curl\+\_\+downloader} (\$urls, \$fetch\+\_\+content=true, \$verbose=true)
+\item 
+\hyperlink{lol_8php_a675a3ef7611bceb202dcfc25a5ee728e}{clean\+\_\+cache} (\$folder=\textquotesingle{}tmp/\textquotesingle{})
+\item 
+\hyperlink{lol_8php_a6b9c0f4de0cddde43699d9a43893e6d0}{is\+\_\+command\+\_\+line} ()
+\item 
+\hyperlink{lol_8php_ae6f6a4ec342feca6fa6580a47a78301f}{get\+\_\+url\+\_\+rewriting} ()
+\item 
+\hyperlink{lol_8php_a0cb3be4b8eb95f0377b4ba300344aa8e}{check\+\_\+curl\+\_\+availability} ()
+\item 
+\hyperlink{lol_8php_a846b56f3884f81e5b72a5595926315fa}{is\+\_\+pdo\+\_\+sqlite\+\_\+available} ()
+\item 
+\hyperlink{lol_8php_a393527d377158078dd075b1d8ca448a0}{format\+\_\+date} (\$timestamp)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Various functions, not specific and widely used. 
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2014 Freeder, M\+IT License, See the L\+I\+C\+E\+N\+SE file for copying permissions. 
+\end{DoxyCopyright}
+
+
+\subsection{Documentation des fonctions}
+\index{lol.\+php@{lol.\+php}!check\+\_\+curl\+\_\+availability@{check\+\_\+curl\+\_\+availability}}
+\index{check\+\_\+curl\+\_\+availability@{check\+\_\+curl\+\_\+availability}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{check\+\_\+curl\+\_\+availability()}{check_curl_availability()}}]{\setlength{\rightskip}{0pt plus 5cm}check\+\_\+curl\+\_\+availability (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a0cb3be4b8eb95f0377b4ba300344aa8e}{}\label{lol_8php_a0cb3be4b8eb95f0377b4ba300344aa8e}
+Check if curl is available \begin{DoxyReturn}{Renvoie}
+null or an array of disabled functions. 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!clean\+\_\+cache@{clean\+\_\+cache}}
+\index{clean\+\_\+cache@{clean\+\_\+cache}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{clean\+\_\+cache(\$folder=\textquotesingle{}tmp/\textquotesingle{})}{clean_cache($folder='tmp/')}}]{\setlength{\rightskip}{0pt plus 5cm}clean\+\_\+cache (
+\begin{DoxyParamCaption}
+\item[{}]{\$folder = {\ttfamily \textquotesingle{}tmp/\textquotesingle{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a675a3ef7611bceb202dcfc25a5ee728e}{}\label{lol_8php_a675a3ef7611bceb202dcfc25a5ee728e}
+Clean the rain\+T\+PL cache 
+\begin{DoxyParams}{Paramètres}
+{\em (optional)} & \$folder, folder with the rain\+T\+PL cache, default to tmp \\
+\hline
+\end{DoxyParams}
+\index{lol.\+php@{lol.\+php}!curl\+\_\+downloader@{curl\+\_\+downloader}}
+\index{curl\+\_\+downloader@{curl\+\_\+downloader}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{curl\+\_\+downloader(\$urls, \$fetch\+\_\+content=true, \$verbose=true)}{curl_downloader($urls, $fetch_content=true, $verbose=true)}}]{\setlength{\rightskip}{0pt plus 5cm}curl\+\_\+downloader (
+\begin{DoxyParamCaption}
+\item[{}]{\$urls, }
+\item[{}]{\$fetch\+\_\+content = {\ttfamily true}, }
+\item[{}]{\$verbose = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a4f2354fbb8df0aa2bf481b131519bd3e}{}\label{lol_8php_a4f2354fbb8df0aa2bf481b131519bd3e}
+Downloads all the urls in the array \$urls and returns an array with the results and the http status\+\_\+codes.
+
+Mostly inspired by blogotext by timovn \+: \href{https://github.com/timovn/blogotext/blob/master/inc/fich.php}{\tt https\+://github.\+com/timovn/blogotext/blob/master/inc/fich.\+php}
+
+Note\+: If open\+\_\+basedir or safe\+\_\+mode, Curl will not follow redirections \+: \href{https://stackoverflow.com/questions/24687145/curlopt-followlocation-and-curl-multi-and-safe-mode}{\tt https\+://stackoverflow.\+com/questions/24687145/curlopt-\/followlocation-\/and-\/curl-\/multi-\/and-\/safe-\/mode}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em an} & array \$urls of associative arrays \{\textquotesingle{}url\textquotesingle{}, \textquotesingle{}post\textquotesingle{}\} for each U\+RL. \textquotesingle{}post\textquotesingle{} is a J\+S\+ON array of data to send {\itshape via} P\+O\+ST. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+an array \{\textquotesingle{}results\textquotesingle{}, \textquotesingle{}status\+\_\+code\textquotesingle{}\}, results being an array of the retrieved contents, indexed by U\+R\+Ls, and \textquotesingle{}status\+\_\+codes\textquotesingle{} being an array of status\+\_\+code, indexed by U\+RL. 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!endswith@{endswith}}
+\index{endswith@{endswith}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{endswith(\$haystack, \$needle)}{endswith($haystack, $needle)}}]{\setlength{\rightskip}{0pt plus 5cm}endswith (
+\begin{DoxyParamCaption}
+\item[{}]{\$haystack, }
+\item[{}]{\$needle}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a2c0472bf77404493f459f2f392bc6cfd}{}\label{lol_8php_a2c0472bf77404493f459f2f392bc6cfd}
+Check that \$haystack ends with \$needle. \index{lol.\+php@{lol.\+php}!format\+\_\+date@{format\+\_\+date}}
+\index{format\+\_\+date@{format\+\_\+date}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{format\+\_\+date(\$timestamp)}{format_date($timestamp)}}]{\setlength{\rightskip}{0pt plus 5cm}format\+\_\+date (
+\begin{DoxyParamCaption}
+\item[{}]{\$timestamp}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a393527d377158078dd075b1d8ca448a0}{}\label{lol_8php_a393527d377158078dd075b1d8ca448a0}
+Format date for pretty printing 
+\begin{DoxyParams}{Paramètres}
+{\em \$timestamp} & date in timestamp format. \\
+\hline
+\end{DoxyParams}
+\index{lol.\+php@{lol.\+php}!get\+\_\+category\+\_\+mime\+\_\+type@{get\+\_\+category\+\_\+mime\+\_\+type}}
+\index{get\+\_\+category\+\_\+mime\+\_\+type@{get\+\_\+category\+\_\+mime\+\_\+type}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{get\+\_\+category\+\_\+mime\+\_\+type(\$mime\+\_\+type)}{get_category_mime_type($mime_type)}}]{\setlength{\rightskip}{0pt plus 5cm}get\+\_\+category\+\_\+mime\+\_\+type (
+\begin{DoxyParamCaption}
+\item[{}]{\$mime\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a29d98d715efe41dae9c399ef52a44445}{}\label{lol_8php_a29d98d715efe41dae9c399ef52a44445}
+Returns the global category of a M\+I\+M\+E-\/\+T\+Y\+PE 
+\begin{DoxyParams}{Paramètres}
+{\em \$mime\+\_\+type,a} & M\+I\+M\+E-\/\+T\+Y\+PE \\
+\hline
+\end{DoxyParams}
+\index{lol.\+php@{lol.\+php}!get\+\_\+generation\+\_\+time@{get\+\_\+generation\+\_\+time}}
+\index{get\+\_\+generation\+\_\+time@{get\+\_\+generation\+\_\+time}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{get\+\_\+generation\+\_\+time(\$start\+\_\+generation\+\_\+time)}{get_generation_time($start_generation_time)}}]{\setlength{\rightskip}{0pt plus 5cm}get\+\_\+generation\+\_\+time (
+\begin{DoxyParamCaption}
+\item[{}]{\$start\+\_\+generation\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_ab71a840938f7bbf34a89b9f9ab4af671}{}\label{lol_8php_ab71a840938f7bbf34a89b9f9ab4af671}
+Get the total generation time. 
+\begin{DoxyParams}{Paramètres}
+{\em \$start\+\_\+generation\+\_\+time} & is a milliseconds timestamp \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Generation time as a string, with units (seconds or milliseconds) 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!get\+\_\+url\+\_\+rewriting@{get\+\_\+url\+\_\+rewriting}}
+\index{get\+\_\+url\+\_\+rewriting@{get\+\_\+url\+\_\+rewriting}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{get\+\_\+url\+\_\+rewriting()}{get_url_rewriting()}}]{\setlength{\rightskip}{0pt plus 5cm}get\+\_\+url\+\_\+rewriting (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_ae6f6a4ec342feca6fa6580a47a78301f}{}\label{lol_8php_ae6f6a4ec342feca6fa6580a47a78301f}
+Check if url\+\_\+rewriting is available \begin{DoxyReturn}{Renvoie}
+1 if available, 0 otherwise 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!is\+\_\+command\+\_\+line@{is\+\_\+command\+\_\+line}}
+\index{is\+\_\+command\+\_\+line@{is\+\_\+command\+\_\+line}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{is\+\_\+command\+\_\+line()}{is_command_line()}}]{\setlength{\rightskip}{0pt plus 5cm}is\+\_\+command\+\_\+line (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a6b9c0f4de0cddde43699d9a43893e6d0}{}\label{lol_8php_a6b9c0f4de0cddde43699d9a43893e6d0}
+Check if the script is run from the command line or not \begin{DoxyReturn}{Renvoie}
+true if script is run from command line, false otherwise 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!is\+\_\+pdo\+\_\+sqlite\+\_\+available@{is\+\_\+pdo\+\_\+sqlite\+\_\+available}}
+\index{is\+\_\+pdo\+\_\+sqlite\+\_\+available@{is\+\_\+pdo\+\_\+sqlite\+\_\+available}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{is\+\_\+pdo\+\_\+sqlite\+\_\+available()}{is_pdo_sqlite_available()}}]{\setlength{\rightskip}{0pt plus 5cm}is\+\_\+pdo\+\_\+sqlite\+\_\+available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a846b56f3884f81e5b72a5595926315fa}{}\label{lol_8php_a846b56f3884f81e5b72a5595926315fa}
+Check if pdo\+\_\+sqlite is available \begin{DoxyReturn}{Renvoie}
+true if available, false otherwise 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!list\+\_\+templates@{list\+\_\+templates}}
+\index{list\+\_\+templates@{list\+\_\+templates}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{list\+\_\+templates()}{list_templates()}}]{\setlength{\rightskip}{0pt plus 5cm}list\+\_\+templates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a0f2b119b5fbb89b4355541cabdf0b2b4}{}\label{lol_8php_a0f2b119b5fbb89b4355541cabdf0b2b4}
+List all available templates. \begin{DoxyReturn}{Renvoie}
+An array \{path, name, current\} where path is the template path, name is the template name and current is true if this is the current template, false otherwise. 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!multiarray\+\_\+filter@{multiarray\+\_\+filter}}
+\index{multiarray\+\_\+filter@{multiarray\+\_\+filter}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{multiarray\+\_\+filter(\$field, \$value, \$array)}{multiarray_filter($field, $value, $array)}}]{\setlength{\rightskip}{0pt plus 5cm}multiarray\+\_\+filter (
+\begin{DoxyParamCaption}
+\item[{}]{\$field, }
+\item[{}]{\$value, }
+\item[{}]{\$array}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a467bbf964092ca25b7fd7b94b32725de}{}\label{lol_8php_a467bbf964092ca25b7fd7b94b32725de}
+Filters a 2D array returning all the entries where \$field is not equal to \$value. \begin{DoxyReturn}{Renvoie}
+The filtered array. 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!multiarray\+\_\+search@{multiarray\+\_\+search}}
+\index{multiarray\+\_\+search@{multiarray\+\_\+search}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{multiarray\+\_\+search(\$field, \$value, \$array, \$default\+\_\+value=false)}{multiarray_search($field, $value, $array, $default_value=false)}}]{\setlength{\rightskip}{0pt plus 5cm}multiarray\+\_\+search (
+\begin{DoxyParamCaption}
+\item[{}]{\$field, }
+\item[{}]{\$value, }
+\item[{}]{\$array, }
+\item[{}]{\$default\+\_\+value = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a97fe54fd1c1f43c5b79d9c2e253c42a1}{}\label{lol_8php_a97fe54fd1c1f43c5b79d9c2e253c42a1}
+Search for the first item with value \$value for field \$field in a 2D array. \begin{DoxyReturn}{Renvoie}
+The sub-\/array or \$default\+\_\+value. 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!multiarray\+\_\+search\+\_\+key@{multiarray\+\_\+search\+\_\+key}}
+\index{multiarray\+\_\+search\+\_\+key@{multiarray\+\_\+search\+\_\+key}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{multiarray\+\_\+search\+\_\+key(\$field, \$value, \$array)}{multiarray_search_key($field, $value, $array)}}]{\setlength{\rightskip}{0pt plus 5cm}multiarray\+\_\+search\+\_\+key (
+\begin{DoxyParamCaption}
+\item[{}]{\$field, }
+\item[{}]{\$value, }
+\item[{}]{\$array}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a5133dd10d633e75afb662cd8753c7c3f}{}\label{lol_8php_a5133dd10d633e75afb662cd8753c7c3f}
+Search for the key of the first item with value \$value for field \$field in a 2D array. \begin{DoxyReturn}{Renvoie}
+The matching key or -\/1 
+\end{DoxyReturn}
+\index{lol.\+php@{lol.\+php}!startswith@{startswith}}
+\index{startswith@{startswith}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{startswith(\$haystack, \$needle)}{startswith($haystack, $needle)}}]{\setlength{\rightskip}{0pt plus 5cm}startswith (
+\begin{DoxyParamCaption}
+\item[{}]{\$haystack, }
+\item[{}]{\$needle}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_aad427741d142b867fd23b6c9e291cbc8}{}\label{lol_8php_aad427741d142b867fd23b6c9e291cbc8}
+Check that \$haystack starts with \$needle. \index{lol.\+php@{lol.\+php}!str\+\_\+replace\+\_\+first@{str\+\_\+replace\+\_\+first}}
+\index{str\+\_\+replace\+\_\+first@{str\+\_\+replace\+\_\+first}!lol.\+php@{lol.\+php}}
+\subsubsection[{\texorpdfstring{str\+\_\+replace\+\_\+first(\$needle, \$replace, \$haystack)}{str_replace_first($needle, $replace, $haystack)}}]{\setlength{\rightskip}{0pt plus 5cm}str\+\_\+replace\+\_\+first (
+\begin{DoxyParamCaption}
+\item[{}]{\$needle, }
+\item[{}]{\$replace, }
+\item[{}]{\$haystack}
+\end{DoxyParamCaption}
+)}\hypertarget{lol_8php_a663921c08c6e251b51ca06a34a796bb3}{}\label{lol_8php_a663921c08c6e251b51ca06a34a796bb3}
+Replace only the first occurrence of \$needle in \$haystack by \$replace. 

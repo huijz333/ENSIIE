@@ -1,0 +1,82 @@
+<!-- PAGE LISTANT LES TOURNOIS-->
+
+<?php
+use Model\ULC\Utilisateur\Permission;
+if ($this->getUser ()->isConnected () && $this->getUser ()->hasPermission ( Permission::$CREATE_TOURNAMENT )) {
+?>
+	<h1>Modération</h1>
+	<div class="button">
+		<div class="button_text">Créer un tournoi</div>
+	</div>
+	
+	<div class="button">
+		<div class="button_text">Modifier un tournoi</div>
+	</div>
+<?php
+}
+?>
+
+<!--  liste des tournois  -->
+<h1>Les tournois</h1>
+<div id="Liste"></div>
+<script type="text/javascript">
+function loadTournaments() {
+                requestAPI("/tournament/list/",
+                	{
+                		200: 	function(response) {
+                		
+									// la liste des tournois au format json
+		                        	var tournaments = JSON.parse(response).liste_tournois;
+
+		                        	//pour chaque tournoi
+		                        	var tab = document.createElement("table");                       // Create a <table> element
+		                        	var line = document.createElement("tr");
+		                        	var cell1 = document.createElement("th");
+		                        	var cell2 = document.createElement("th");
+		                        	var cell3 = document.createElement("th");
+		                        	var cell4 = document.createElement("th");
+		                        	var cell5 = document.createElement("th");
+		                        	cell1.appendChild(document.createTextNode("Nom"));
+		                        	cell2.appendChild(document.createTextNode("Description"));
+		                        	cell3.appendChild(document.createTextNode("Jeu"));
+		                        	cell4.appendChild(document.createTextNode("Debut inscriptions"));
+		                        	cell5.appendChild(document.createTextNode("Fin inscriptions"));
+		                        	line.appendChild(cell1);
+									line.appendChild(cell2);
+									line.appendChild(cell3);
+									line.appendChild(cell4);
+									line.appendChild(cell5);
+									tab.appendChild(line);
+		                        	for (var i = 0 ; i < tournaments.length ; i++) {
+		                        		//le tournoi
+		                        		var tournoi = tournaments[i];
+		                        		var line = document.createElement("tr");
+		                        		var cell1 = document.createElement("td");
+		                        		var nom = document.createElement(tournoi.nom);
+		                        		var cell2 = document.createElement("td"); 
+										var description = document.createTextNode(tournoi.description);
+										var cell3 = document.createElement("td");
+										var jeu = document.createTextNode(tournoi.jeu);
+										var cell4 = document.createElement("td");
+										var debut_inscriptions = document.createTextNode(tournoi.debut_inscriptions);
+										var cell5 = document.createElement("td");
+										var fin_inscriptions = document.createTextNode(tournoi.fin_inscriptions);
+										cell1.appendChild(nom);
+										cell2.appendChild(description);
+										cell3.appendChild(jeu);
+										cell4.appendChild(debut_inscriptions);
+										cell5.appendChild(fin_inscriptions);
+										line.appendChild(cell1);
+										line.appendChild(cell2);
+										line.appendChild(cell3);
+										line.appendChild(cell4);
+										line.appendChild(cell5);
+										tab.appendChild(line);
+		                        	}
+		                        	document.getElementById("Liste").appendChild(tab);
+                				}
+                	}
+                );
+            }
+	loadTournaments();
+</script>

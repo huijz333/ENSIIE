@@ -1,0 +1,64 @@
+<!-- PAGE LISTANT LES JOUEURS -->
+
+<div id="Liste">
+</div>
+<script type="text/javascript">
+function loadPlayers() {
+                requestAPI("/user/list/",
+                	{
+                		200: 	function(response) {
+                		
+									// la liste des joueurs au format json
+		                        	var players = JSON.parse(response).liste_joueurs;
+
+		                        	//pour chaque joueur
+		                        	var tab = document.createElement("table");
+		                        	var line = document.createElement("tr");
+		                        	var cell1 = document.createElement("th");
+		                        	var cell2 = document.createElement("th");
+		                        	var cell3 = document.createElement("th");
+		                        	cell1.appendChild(document.createTextNode("Image"));
+		                        	cell2.appendChild(document.createTextNode("Pseudo"));
+		                        	cell3.appendChild(document.createTextNode("Mail"));
+		                        	line.appendChild(cell1);
+									line.appendChild(cell2);
+									line.appendChild(cell3);
+									tab.appendChild(line);
+
+									var loadNextPlayer = function(i) {
+										if (i >= players.length) {
+											return ;
+										}
+										
+		                        		var joueur = players[i];
+		                        		var line = document.createElement("tr");
+		                        		var cell1 = document.createElement("td");
+		                        		var img = document.createElement("img");
+		                        		
+                        				img.src = "http://localhost:8080/api/user/account/image/get/" + joueur.pseudo + ".png";
+                        				img.style.width  = "3rem";
+                        				img.style.height = img.style.width;
+
+		                        		var cell2 = document.createElement("td"); 
+										var pseudo = document.createTextNode(joueur.pseudo);
+										var cell3 = document.createElement("td");
+										var mail = document.createTextNode(joueur.mail);
+										cell1.appendChild(img);
+										cell2.appendChild(pseudo);
+										cell3.appendChild(mail);
+										line.appendChild(cell1);
+										line.appendChild(cell2);
+										line.appendChild(cell3);
+										tab.appendChild(line);
+										
+										loadNextPlayer(i + 1);
+
+		                        	}
+		                        	document.getElementById("Liste").appendChild(tab);
+		                        	loadNextPlayer(0);
+                				}
+                	}
+                );
+            }
+            loadPlayers();
+</script>

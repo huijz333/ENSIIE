@@ -1,0 +1,71 @@
+/**
+ *      Contient le css de la barre de navigation (à gauche vertical)
+ */
+.sidebar {
+	display: block;
+	width: 12rem;
+	height: 100%;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	background-color: #1B1C23F7;
+	box-shadow: 0.5vh 1vh 0.5vh 0.5vh rgba(0, 0, 0, 0.5);
+	overflow-x: hidden;
+}
+
+.sidebar-logo {
+	width: 100%;
+	color: #FFFFFF;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.sidebar-section {
+	font-size: 0.8rem;
+	color: #656A72;
+	width: 100%;
+	margin-top: 1rem;
+	margin-bottom: 1.6rem;
+}
+
+.sidebar-section-title {
+	margin-left: 0.5rem;
+	margin-right: 1rem;
+	margin-bottom: 0.4rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: default;
+}
+
+.sidebar-section-item {
+	display: flex;
+	align-items: center; /* align vertical */
+	color: #959AA2;
+	height: 2.0rem;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.15s ease-in-out;
+	border-left: 0.1rem solid #1B1C23;
+}
+
+.sidebar-section-item:hover {
+	color: #FFFFFF;
+	border-left: 0.1rem solid #FFFFFF;
+	background-color: #12132367;
+}
+
+.sidebar-section-item i {
+	min-width: 1rem;
+	margin-left: 1.0rem;
+	margin-right: 0.5rem;
+}
+
+.sidebar-section-item img {
+	width: 1rem;
+	height: 1rem;
+	min-width: 1rem;
+	margin-left: 1.0rem;
+	margin-right: 0.5rem;
+}

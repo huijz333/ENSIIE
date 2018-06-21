@@ -1,0 +1,32 @@
+\hypertarget{user_2game_2lol_2accounts_2delete_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/accounts/delete/index.php}
+\label{user_2game_2lol_2accounts_2delete_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/accounts/delete/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/accounts/delete/index.\+php}}
+
+
+Supprimes la liaison entre un compte League of Legends et l\textquotesingle{}utilisateur du site.  
+
+
+
+
+\subsection{Description détaillée}
+Supprimes la liaison entre un compte League of Legends et l\textquotesingle{}utilisateur du site. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em } & 
+\begin{DoxyItemize}
+\item P\+O\+ST {\itshape summoner\+Name} \+: le nom d\textquotesingle{}invocateur à dé-\/lier
+\item C\+O\+O\+K\+IE {\itshape P\+H\+P\+S\+E\+S\+S\+ID} \+: le cookie de session P\+HP \hyperlink{user_2account_2connect_2index_8php}{api/user/account/connect/index.\+php} 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\begin{DoxyItemize}
+\item code reponse\+:
+\begin{DoxyItemize}
+\item 200 \+: l\textquotesingle{}invocateur a été de-\/lié avec succès
+\item 400 \+: erreur de la requête (paramètre(s) manquant(s) ou invalide(s))
+\item 404 \+: l\textquotesingle{}invocateur fourni n\textquotesingle{}était pas lié à l\textquotesingle{}utilisateur 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}

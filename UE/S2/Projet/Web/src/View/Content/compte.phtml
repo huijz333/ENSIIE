@@ -1,0 +1,285 @@
+<!-- PAGE DU COMPTE D'UN JOUEUR CONNECTE -->
+
+<?php
+use Model\ULC\Utilisateur\Utilisateur;
+
+if (! $this->getUser ()->isConnected ()) {
+	echo 'Non connecté';
+} else {
+	?>
+<!-- DEBUT: Profil -->
+<script>
+			function uploadProfilImage() {
+				var input = document.getElementById('input_image_profil');
+				if (input.files.length < 1) {
+					toast('Veuillez selectionner une image.', "erreur")
+					return ;
+				}
+
+                requestAPI('/user/account/image/set/',
+                	{
+	                    200: function(response) {
+	                        toast('Votre image a bien été uploadé :) ' + response, "fine");
+	                        updateProfilPicture();
+	                    }
+                	},
+
+                	{
+                		'image': input.files[0]
+                	}
+                );
+			}
+
+			function sendResetToken() {
+				var mail = "<?php echo $this->getUser()->getMail() ?>";
+                requestAPI('/user/account/password/reset/',
+                    	{
+    	                    200: function(response) {
+    	                        toast("Le token a été généré et envoyé par mail à l'adresse <strong>" + mail + "</strong>", "fine");
+    	                    },
+    	                    400: function(response) {
+    	                    	toast("Erreur dans la requete", "error")
+                        	},
+                        	503: function(response) {
+                            	toast("Erreur serveur. Veuillez contacter un administrateur.", "error");
+                        	}
+                    	},
+
+                    	{
+                    		'mail': mail
+                    	}
+                    );
+			}
+		</script>
+
+<h1>Votre compte</h1>
+
+<div>
+	<div class="text-capitalize">Modifier votre image de profil:</div>
+	<div class="button" style="margin-top: 1.5rem;">
+		<input type="file" accept="image/*" id="input_image_profil">
+	</div>
+	<div class="button" onclick="uploadProfilImage();">
+		<div class="button_text">Envoyer</div>
+	</div>
+
+	<br></br>
+
+	<div>
+		Changer mon mot de passe:
+		<div class="button" onclick="sendResetToken()">
+			<div class="button_text">Envoyer mail de réintialisation</div>
+		</div>
+	</div>
+</div>
+
+<div>
+
+	<h1>Vos permissions</h1>
+	<div id="permissionsListID"></div>
+</div>
+
+<script>
+	requestAPI("/permission/get/",
+    		{
+    			200:	function(response) {
+    						var permissions = JSON.parse(response);
+    						requestAPI("/user/account/permission/get/",
+	        		    		{
+	        		    			200:	function(response) {
+			        		        			var permissionsID = JSON.parse(response);
+			        	                    	var tab = document.createElement("table");
+		        		        				var line = document.createElement("tr");
+		        		        				var c1 = document.createElement("th");
+		        		        				c1.innerHTML = "Nom des permissions";
+		        		        				var c2 = document.createElement("th");
+		        		        				c2.innerHTML = "Description";
+		        		        				line.appendChild(c1);
+		        		        				line.appendChild(c2);
+		        		        				tab.appendChild(line);
+			        	                    	for (var i = 0 ; i < permissionsID.length ; i++) {
+			        	                        	var permissionID = permissionsID[i];
+			        		        				var line = document.createElement("tr");
+			        		        				var c1 = document.createElement("td");
+			        		        				var c2 = document.createElement("td");
+			        		        				c1.appendChild(document.createTextNode(permissions[permissionID].name));
+			        		        				c2.appendChild(document.createTextNode(permissions[permissionID].desc));
+			        		        				line.appendChild(c1);
+			        		        				line.appendChild(c2);
+			        		        				tab.appendChild(line);
+			        		        			}	        		        			
+			        	                		document.getElementById("permissionsListID").appendChild(tab);
+			        		    			}
+	        		    				},
+	        		    				
+		        		    		{
+		        		    			'pseudo': '<?php echo Utilisateur::instance()->getPseudo(); ?>'
+		        		    		}
+	        		    );
+    			}
+    		}
+    );
+</script>
+
+<!-- FIN: Profil -->
+
+
+<!-- DEBUT : League of Legends -->
+<script>
+			function regenerateCode() {
+                requestAPI('/user/game/lol/third-party-code/generate/', {
+	                    200: function(response) {
+	                        document.getElementById("code").value = response;
+	                    }
+                	}
+                );
+			}
+			regenerateCode();
+
+			function verificateCode() {
+				var summonerName = document.getElementById('summoner_name').value;
+				requestAPI('/user/game/lol/third-party-code/link/',
+	                {
+	                    200: 	function(response) {
+	                        		toast("Le nom d'invocateur '" + summonerName + "' est maintenant lié à votre compte!", "fine");
+	                    		},
+
+	                    400: 	function(response) {
+	                    			toast("Le nom d'invocateur '" + summonerName + "' ne semble pas exister: " + response, "error")
+	                    		}
+	                },
+
+					{
+						'summonerName': summonerName
+					}
+                );
+			}
+
+			function copyCode() {
+				var copyText = document.getElementById("code");
+				copyText.select();
+				document.execCommand("Copy");
+				toast("Code copié " + copyText.value, "fine");
+			}
+			
+            function updateAccountsList() {
+                requestAPI(	"/user/game/lol/accounts/get/",
+		                    {
+		                        200: 	function(response) {
+			                        		console.log(response);
+				                            //supprimes les invocateurs précèdents
+				                            while (node_notifications_list.firstChild) {
+				                                node_notifications_list.removeChild(node_notifications_list.firstChild);
+				                            }
+				                            //ajoutes les nouveaux invocateurs
+				                            var summoners = JSON.parse(response);
+				                            var node_list = document.getElementById("lol_accounts");
+				                            for (var i in summoners) {
+				                                var summoner = summoners[i];
+				                                var node_summoner = document.createElement("li");
+				                                var node_summoner_icon = document.createElement("img");
+				                                node_summoner_icon.style.maxWidth = "2rem";
+				                                node_summoner_icon.style.minWidth = "2rem";
+				                                node_summoner_icon.src = "http://ddragon.leagueoflegends.com/cdn/8.9.1/img/profileicon/" + summoner.profileIconId  + ".png";
+				                                var node_summoner_name = document.createElement("span");
+				                                node_summoner_name.innerHTML = summoner.name;
+				                                node_summoner.appendChild(node_summoner_icon);
+				                                node_summoner.appendChild(node_summoner_name);
+				                                node_list.appendChild(node_summoner);
+				                            }
+		                        },
+		                        400: 	function(response) {
+		                            		toast("Impossible de récuperer la liste des comptes League of Legends liés...", "error");
+		                        		}
+		                    },
+		                    {
+			                    "pseudo" : "<?php echo $this->getUser()->getPseudo(); ?>"
+		                    }
+                );
+            }
+            updateAccountsList();
+		</script>
+
+<h1>
+	<img src="./res/images/lol.png" alt="LOL" width="35" height="35" />
+	League of Legends
+</h1>
+
+<h3>Liste des comptes liées:</h3>
+<ul id="lol_accounts"></ul>
+<div>
+	<h4>Veuillez entrer votre pseudo League of Legends, puis entrez le code
+		dans votre client:</h4>
+	<input id="summoner_name"></input> <input type="text" id="code"
+		style="cursor: pointer;" onclick="copyCode();" readonly></input>
+	<div class="button" onclick="verificateCode()">
+		<div class="button_text">Lier les comptes</div>
+	</div>
+</div>
+
+<!-- FIN : League of Legends -->
+
+
+
+<!-- DEBUT : PUBG -->
+<script>
+
+        function getFullStats() {
+            var nickname = document.getElementById('"pubg_name"').value;
+            var regions = document.getElementById('Regions').value;
+            var mode = document.getElementById('Modes').value;
+           print("Le nom "+nickname+"  "+regions+"  "+mode );
+        }
+        function getProfileByNickname() {
+            var nickname=document.getElementById('"pubg_name"').value;
+            const playerName = encodeURIComponent(String(nickname).toLowerCase().replace(/\s/g, ''));
+            const uri = "https://pubgtracker.com/api/profile/pc/${playerName}";
+
+            return this.handleCache(uri).then((content) => new Profile(content));
+        }
+    </script>
+
+<style>
+.code {
+	cursor: pointer;
+}
+</style>
+
+<h1>
+	<img src="./res/images/pubg.png" alt="PUBG" width="40" height="40" />
+	PLAYERUNKNOWN'S BATTLEGROUNDS
+</h1>
+
+<h3>Liste des comptes liées:</h3>
+<ul id="pubg_accounts"></ul>
+<div>Veuillez entrer votre pseudo PLAYERUNKNOWN'S BATTLEGROUNDS :</div>
+<form>
+	Pseudo: <input id="pubg_name"></input> Mode: <input id="Modes"
+		list="Modes_list" name="link1" />
+	<datalist id="Modes_list">
+		<option label="SOLO" value="solo" />
+		<option label="DUO" value="duo" />
+		<option label="SQUAD" value="squad" />
+		<option label="SOLO-FPP" value="solo-fpp" />
+		<option label="DUO-FPP" value="duo-fpp" />
+		<option label="SQUAD-FPP" value="squad-fpp" />
+	</datalist>
+	Regions: <input id="Regions" list="Regions_list" name="link2" />
+	<datalist id="Regions_list">
+		<option label="North America" value="na" />
+		<option label="Europe" value="eu" />
+		<option label="Asia" value="as" />
+		<option label="Southeast Asia" value="sea" />
+		<option label="South America" value="sa" />
+		<option label="Oceania" value="oc" />
+	</datalist>
+	<button style="cursor: pointer;" onclick="getProfileByNickname();">Submit</button>
+</form>
+
+<!-- FIN : PUBG -->
+
+
+
+<?php
+} // If connected
+?>

@@ -1,0 +1,62 @@
+<?php
+require ('../vendor/autoload.php');
+
+use Model\ULC\Discord\API;
+
+$client = \Model\ULC\Discord\API::client ();
+$members = $client->guild->listGuildMembers ( [ 
+		'guild.id' => API::guildID (),
+		'limit' => 10 
+] );
+$membersCount = count ( $members );
+
+?>
+
+
+<!-- discord component -->
+<div class="discord">
+
+	<!-- header -->
+	<div class="discord-header"
+		onclick="window.open('https://discord.gg/BcsrE47', '_blank')">
+		<!-- logo -->
+		<div class="discord-header-img">
+			<img src="./res/images/discord/header.png"></img>
+		</div>
+
+		<!-- rejoignez nous -->
+		<div class="discord-header-title">Rejoignez nous!</div>
+
+		<!-- membres -->
+		<div class="discord-header-title">
+			<strong><?php echo $membersCount; ?></strong> Membres au total
+		</div>
+
+	</div>
+
+	<!-- content -->
+	<div class="discord-body">
+		<!-- liste des membres en ligne -->
+		<div>
+			<!-- titre -->
+			<div class="discord-body-title">Membres</div>
+
+			<!-- les membres -->
+<?php
+for($j = 0; $j < 4; $j ++) {
+	for($i = 0; $i < $membersCount; $i ++) {
+		$user = $members [$i]->user;
+		?>
+			<div class="discord-body-member">
+				<img
+					src="https://cdn.discordapp.com/avatars/<?php echo $user->id . '/' . $user->avatar ; ?>.png"/>
+				<?php echo $user->username ; ?>
+			</div>
+<?php
+	}
+}
+?>
+		</div>
+	</div>
+
+</div>

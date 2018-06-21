@@ -1,0 +1,20 @@
+\hypertarget{user_2account_2role_2add_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/role/add/index.php}
+\label{user_2account_2role_2add_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/role/add/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/role/add/index.\+php}}
+
+
+Ajoutes un rôle à un utilisateur.  
+
+
+
+
+\subsection{Description détaillée}
+Ajoutes un rôle à un utilisateur. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em C\+O\+O\+K\+IE} & {\itshape P\+H\+P\+S\+E\+S\+S\+ID} \+: le cookie de session P\+O\+ST {\itshape utilisateur\+\_\+id} \+: l\textquotesingle{}id de l\textquotesingle{}utilisateur P\+O\+ST {\itshape role\+\_\+id} \+: l\textquotesingle{}id du role \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+-\/ code reponse\+: 200 \+: le rôle a été attribué avec succès 400 \+: erreur requête 401 \+: non autorisé 409 \+: le role n\textquotesingle{}a pas pu être attributé (role déjà attribué) 503 \+: la connection à la base de données a échoué 
+\end{DoxyReturn}

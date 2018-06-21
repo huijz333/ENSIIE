@@ -1,0 +1,48 @@
+\hypertarget{game_2lol_2third-party-code_2link_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/third-\/party-\/code/link/index.php}
+\label{game_2lol_2third-party-code_2link_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/third-\/party-\/code/link/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/game/lol/third-\/party-\/code/link/index.\+php}}
+
+
+Lis un compte League of Legends à l\textquotesingle{}utilisateur connecté du site. \hyperlink{game_2lol_2third-party-code_2generate_2index_8php}{api/user/game/lol/third-\/party-\/code/generate/index.\+php}.  
+
+
+
+
+\subsection{Description détaillée}
+Lis un compte League of Legends à l\textquotesingle{}utilisateur connecté du site. \hyperlink{game_2lol_2third-party-code_2generate_2index_8php}{api/user/game/lol/third-\/party-\/code/generate/index.\+php}. 
+
+Relis l\textquotesingle{}utilisateur de la session courante au compte League of Legend passé en paramètre.
+
+Arguments\+:
+\begin{DoxyItemize}
+\item summoner\+Name \+: nom de l\textquotesingle{}invocateur (e.\+x\+: \textquotesingle{}P\+CF toss\textquotesingle{})
+\end{DoxyItemize}
+
+Code erreur\+:
+\begin{DoxyItemize}
+\item 200\+: la liaison a bien été enregistré.
+\item 400\+: reqûete mal formatté. (paramètre manquant, utilisateru non connecté, ou sumonner\+ID inexistant)
+\item 408\+: aucun third-\/party-\/code n\textquotesingle{}est défini.
+\item 409\+: le compte est déjà lié à un autre utilisateur du site.
+\item 424\+: le code entré dans League of Legend n\textquotesingle{}est pas bon
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em } & 
+\begin{DoxyItemize}
+\item C\+O\+O\+K\+IE {\itshape P\+H\+P\+S\+E\+S\+S\+ID} \+: le cookie de session P\+HP \hyperlink{account_2connect_2index_8php}{api/user/account/connect/index.\+php}
+\item P\+O\+ST {\itshape summoner\+Name} \+: le nom d\textquotesingle{}invocateur du compte League of Legends à associer. (e.\+x\+: \textquotesingle{}P\+CF toss\textquotesingle{}) 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+-\/ le code généré
+\begin{DoxyItemize}
+\item code reponse\+:
+\item 200 \+: le code a été généré avec succès
+\item 400 \+: erreur de la requête (paramètre(s) manquant(s) ou invalide(s))
+\item 408\+: aucun third-\/party-\/code n\textquotesingle{}est défini.
+\item 409\+: le compte est déjà lié à un autre utilisateur du site.
+\item 424\+: le code entré dans League of Legend n\textquotesingle{}est pas bon 
+\end{DoxyItemize}
+\end{DoxyReturn}

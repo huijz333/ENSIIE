@@ -1,0 +1,182 @@
+
+<!-- barre de navigation en haut-->
+<ul class="nav navbar">
+
+	<!-- barre de recherche -->
+	<script>
+		function searchUser(event) {
+		    if (event.keyCode == 13) {
+			    redirectToPage("profil&pseudo=" + document.getElementById("searchID").value);
+		    }
+		}
+	</script>
+	
+	<li class="navbar-item" style="float: left">
+		<div class="prompt" style="margin-top: 0.8rem; margin-left: 1rem">
+			<i class="prompt-logo fa fa-search navbar-search-logo"></i>
+			<input id="searchID" class="prompt-input" type="text" placeholder="Rechercher..." onkeydown="searchUser(event);" />
+		</div>
+	</li>
+
+
+<?php
+if ($this->getUser ()->isConnected ()) {
+	?>
+	<li class="navbar-item navbar-item-hoverable" style="float: right"
+		onclick="redirectToPage('profil&pseudo=<?php echo $this->getUser()->getPseudo(); ?>');">
+		<div class="navbar-item-profil">
+			<span><?php echo $this->getUser()->getPseudo(); ?></span> <img
+				id="profilPictureID"></img>
+		</div>
+	</li>
+
+	<li class="navbar-item" style="float: right"><i
+		class="navbar-item-icon navbar-item-hoverable fa fa-question"></i></li>
+
+	<li class="navbar-item" style="float: right"><i
+		class="navbar-item-icon navbar-item-hoverable fa fa-book"></i></li>
+
+	<!-- la cloche des notifications -->
+	<li class="navbar-item" id="notification-bell" style="float: right">
+		<div class="navbar-item-hoverable navbar-item-bell"
+			onclick="switchNotificationVisiblity();">
+			<i class="navbar-item-icon fa fa-bell"></i>
+		</div> <!-- notifications -->
+		<div id="notifications-counter" class="notifications-counter"
+			style="display: none;"></div>
+		<div id="notifications" class="notifications" style="display: none;">
+
+			<script>
+				/** retelecharges l'image de profil sur la barre de navigation */
+				function updateProfilPicture() {
+					document.getElementById("profilPictureID").src = "http://localhost:8080/api/user/account/image/get/<?php echo $this->getUser()->getPseudo(); ?>.png" + "?" + new Date().getTime();
+					console.log("set: " + document.getElementById("profilPictureID").src);
+				}
+				updateProfilPicture();
+				
+				function seeNotifications() {
+					requestAPI("/user/notification/seeall/",
+						{
+							200: 	function(response) {
+										toast("vu", 2, 500);
+									}
+						}
+					);
+				}
+			</script>
+
+			<div class="notifications-title">
+				Notifications
+				<div class="notifications-vu" onmousedown="seeNotifications();">vu</div>
+			</div>
+			<div id="notifications-list"></div>
+		</div>
+
+	</li>			
+
+		<?php
+}
+?>
+	</ul>
+
+
+<?php
+if ($this->getUser ()->isConnected ()) {
+	?>
+<!-- la cloche des notifications -->
+<script type="text/javascript">
+			/** recharges les notifications */
+        	var node_notifications 		= document.getElementById("notifications");
+        	var node_notifications_list	= document.getElementById("notifications-list");
+        	var node_counter 		    = document.getElementById("notifications-counter");
+
+			function loadNotifications() {
+                requestAPI("/user/notification/get",
+                	{
+                		200: 	function(response) {
+		                        	//supprimes le contenu précèdent
+									while (node_notifications_list.firstChild) {
+		    							node_notifications_list.removeChild(node_notifications_list.firstChild);
+									}
+
+									// les notifications au format json
+		                        	var notifications = JSON.parse(response).notifications;
+
+		                        	// nombre de notifications non lues
+		                        	var unseen = 0;
+		                        	//pour chaque notification
+		                        	for (var i = 0 ; i < notifications.length ; i++) {
+		                        		//la notifcation
+		                        		var notification = notifications[i];
+
+		                        		//on cree un element html
+		                        		var node_notification   = document.createElement("div");
+		                        		node_notification.classList.add("notification");
+		                        		node_notification.id    = "notification_" + i;
+		                        		node_notification.onclick = function() {
+		                        										node_notification.classList.remove("notification-unseen");
+							                                            requestAPI("/user/notification/see/",
+							                                            	{
+																				200: 	function(response) {
+																							toast("vu " + response, 2, 500);
+																						}
+																			},
+
+																			{
+																				'id': notification.id
+																			}
+																		);
+																		if (notification.action) {
+																			redirectToPage(notification.action);
+																		}
+									                        		};
+                                        //si non lu...
+                                        if (notification.status == "unseen") {
+                                            ++unseen;
+                                            node_notification.classList.add("notification-unseen");
+                                        }
+
+
+										var node_notification_content = document.createElement("div");
+										node_notification_content.classList.add("notification-content");
+										node_notification_content.innerHTML = notification.content;
+		                        		node_notification_content.id        = "notification_content_" + i;
+
+		                        		var node_notification_date = document.createElement("div");
+		                        		node_notification_date.classList.add("notification-date");
+		                        		node_notification_date.id = "notification-date";
+		                        		node_notification_date.innerHTML = notification.date;
+
+										node_notification.appendChild(node_notification_content);
+										node_notification.appendChild(node_notification_date);
+										node_notifications_list.appendChild(node_notification);
+		                        	}
+
+		                        	//on met à jour le nombre de notifications non lues
+		                        	node_counter.innerHTML = unseen > 10 ? 10 + "+" : unseen;
+		                        	node_counter.style.display = unseen == 0 ? "none" : "";
+
+                				}
+                	},
+
+                	{
+                		"max": 99
+                	}
+                );
+			}
+			/** on rappelle la fonction toutes les 2 secondes */
+			setInterval(loadNotifications, 2000);
+			loadNotifications();
+
+			/** rends visible / invisible la barre des notifications */
+			function switchNotificationVisiblity() {
+				if (node_notifications.style.display == "") {
+					fadeOut(node_notifications, 60, 0.25);
+				} else {
+					fadeIn(node_notifications, 60, 0.25);
+				}
+			}
+		</script>
+<?php
+}
+?>

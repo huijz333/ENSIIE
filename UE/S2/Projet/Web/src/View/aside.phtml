@@ -1,0 +1,393 @@
+<?php
+
+namespace View;
+
+/**
+ * affiche les informations sur le profil du joueur
+ */
+function afficher_compte() {
+	?>
+<script>
+		function disconnect() {
+			requestAPI(	"/user/account/disconnect/",
+						{
+						    200: function(response) {
+						        toast('Déconnecté(e). Vous allez être redirigé(e).', 'fine');
+						        setTimeout(	function () {
+							        			window.location.replace(window.location.href);
+							        		},
+							        		1000
+								);
+						    }
+						}
+			);
+		}
+	</script>
+
+	<div class="button" style="margin-top: 2.0rem; width: 8rem;"
+		onclick="redirectToPage('compte');">
+		<div class="button_text">Mon compte</div>
+	</div>
+	
+	<div class="button" style="width: 8rem;"
+		onclick="redirectToPage('tournois');">
+		<div class="button_text" onclick="">Mes tournois</div>
+	</div>
+	
+	<div class="button" style="width: 8rem;" onclick="disconnect();">
+		<div class="button_text">Se déconnecter</div>
+	</div>
+<?php
+}
+
+/**
+ * affiche les formulaires de connections / enregistrement
+ */
+function afficher_champs() {
+	?>
+<!--  style -->
+<style>
+.shake-animation {
+	animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+	10%, 90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%, 80% {
+		transform : translateX(2px);
+	}
+	
+	30%, 50%, 70% {
+		transform: translateX(-4px);
+	}
+
+	40%, 60% {
+		transform: translateX(4px);
+		}
+}
+</style>
+
+<!-- formulaire d'enregistrement -->
+<div id="inscription_form" class="aside-login-form">
+	<!-- addresse mail -->
+	<div id="mailID" class="prompt">
+		<i class="prompt-logo fa fa-envelope navbar-search-logo"></i> <input
+			id="input_mailID" name="mail" class="prompt-input" type="text"
+			placeholder="Adresse mail..." oninput="return onInput(event);"
+			onkeypress="return onPressed(event);" />
+	</div>
+
+	<!-- champ pseudo -->
+	<div id="pseudoID" class="prompt">
+		<i class="prompt-logo fa fa-user navbar-search-logo"></i> <input
+			id="input_pseudoID" name="pseudo" class="prompt-input" type="text"
+			placeholder="Pseudo..." oninput="return onInput(event);" />
+	</div>
+
+	<!-- champ mot de passe -->
+	<div id="passID" class="prompt">
+		<i class="prompt-logo fa fa-lock navbar-search-logo"></i> <input
+			id="input_passID" name="pass" class="prompt-input" type="password"
+			placeholder="Mot de passe..." onkeypress="return onPressed(event);"
+			oninput="return onInput(event);" />
+	</div>
+
+	<!-- champ confirmation de mot de passe -->
+	<div id="confirmPassID" class="prompt">
+		<i class="prompt-logo fa fa-lock navbar-search-logo"></i> <input
+			id="input_confirmPassID" class="prompt-input" type="password"
+			placeholder="Confirmer..." onkeypress="return onPressed(event);"
+			oninput="return onInput(event);" />
+	</div>
+
+	<!-- le captcha -->
+	<!--<div id="captchaID" class="g-recaptcha aside-captcha" data-sitekey="6LfSvVEUAAAAAI2FQTEC8rBUcm3DybzVmf8g44t_"></div>-->
+	<div id="captchaID" class="g-recaptcha aside-captcha"></div>
+	<script type="text/javascript">
+                    var onloadCallback = function() {
+                        grecaptcha.render('captchaID', {
+                          'sitekey' : '6LfSvVEUAAAAAI2FQTEC8rBUcm3DybzVmf8g44t_'
+                        });
+                    };
+                </script>
+
+	<script
+		src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+		async defer></script>
+
+
+	<!-- se connecter / s'enregistrer -->
+	<div class="aside-labels" style="margin-top: 0.5rem;">
+		<a class="label label-button" onclick="setState(STATE.CONNECT);">Se
+			connecter</a> <span class="label"> | </span> <a
+			class="label label-button" onclick="setState(STATE.REGISTER);">S'enregistrer</a>
+		</br> <a class="label label-button" onclick="setState(STATE.RESET)">Mot
+			de passe oublié</a>
+	</div>
+
+</div>
+
+
+<!-- script de coulissement -->
+<script>
+
+
+/** tableau contenant les différents champs et leur tests de validité */
+				var form = [
+				        		{
+				            		"id"		:	"mailID",
+				        			"inputID"	:	"input_mailID", 
+				        			"error"		: 	"Veuillez entrer une adresse mail valide.",
+				            		"validate" 	:	function() {
+				                						var mail = document.getElementById("input_mailID").value;
+				                						var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				                						return re.test(String(mail).toLowerCase());
+				                					}
+									},
+				
+				        		{
+				            		"id"		:	"pseudoID",
+									"inputID"	:	"input_pseudoID",
+									"error"		:	"Veuillez entrer un pseudo valide.",
+				            		"validate" 	:	function() {
+				                    					var pseudo = document.getElementById("input_pseudoID").value;
+				                    					return (pseudo.length > 0);
+				                    				}
+									},
+				
+				        		{
+				            		"id"		:	"passID",
+									"inputID"	:	"input_passID",
+									"error"		:	"Veuillez entrer un mot de passe d'au moins 6 caractères.", 
+				            		"validate" 	:	function() {
+				    									var pass = document.getElementById("input_passID").value;
+				    									return (pass.length >= 6);
+				                    				}
+									},
+				     
+				        		{
+				            		"id"		:	"confirmPassID",
+									"inputID"	:	"input_confirmPassID", 
+									"error"		:	"Veuillez entrer 2 fois le même mot de passe.", 
+				            		"validate" 	:	function() {
+				    									var pass = document.getElementById("input_passID").value;
+				    									var pass        = document.getElementById("input_passID").value;
+									                    var confirmPass = document.getElementById("input_confirmPassID").value;
+									                    var confirmPassDiv = document.getElementById("confirmPassID");
+									                    return (pass == confirmPass);
+				            						}
+				        		}
+				];
+				
+				/**
+				 *  met à jour le style des éléments en fonction des entrées
+				 *  (met en vert quand les mots de passes sont égaux...)
+				 */
+				 function validateInputs() {
+					 form.forEach(	function(element) {
+				                        var htmlElement = document.getElementById(element.id);
+				                        if (document.getElementById(element.inputID).value.length == 0) {
+				                        	htmlElement.style.borderColor = "";
+				                        } else if (element.validate()) {
+				                        	htmlElement.style.borderColor = "#22FF22";
+				                        } else {
+				                        	htmlElement.style.borderColor = "#FF2222";             
+				                        }
+					 });
+				 }
+
+
+            	var STATE = {
+                    	"CONNECT": {
+                        	"set":		function(prevState) {
+			                                form.forEach(	function(element) {
+				                                				var htmlElement = document.getElementById(element.id);
+				                                				htmlElement.style.borderColor = "";
+			                                				}
+                            				);
+	                            
+			                    			document.getElementById("mailID").style.display  = "";
+			                    			document.getElementById("pseudoID").style.display  = "none";
+			                                document.getElementById("passID").style.display = "";
+			                                document.getElementById("confirmPassID").style.display = "none";
+			                                document.getElementById("captchaID").style.display = "none";
+            							},
+            				
+               				"unset":	function(nextState) {
+            							},
+            				
+                        	"action":	function () {
+			                                var mail = document.getElementById("input_mailID").value;
+			                                var pass =  document.getElementById("input_passID").value;
+			
+			                                requestAPI('/user/account/connect/', 
+			                                    {
+			                                        200:    function(response) {
+				                                        		var timeout = 1500;
+			                                                    toast("Connecté(e). Vous allez être redirigé(e).", "fine", timeout);
+			                                                    setTimeout(function () { window.location.replace(window.location.href); }, timeout);
+			                                                },
+
+			                                        400:    function(response) {
+			                                        			toast("Erreur de connexion: " + response, "error");
+			                                        		}
+			                                    },
+			
+			                                    {
+			                                        "mail": mail,
+			                                        "pass" : pass
+			                                    }
+			                                );
+			                         	}
+                        },
+                        
+                    	"REGISTER": {
+                        	"set":		function(prevState) {
+
+                            				document.getElementById("mailID").style.display  = "";
+			                    			document.getElementById("pseudoID").style.display  = "";
+			                                document.getElementById("passID").style.display = "";
+			                                document.getElementById("confirmPassID").style.display = "";
+			                                document.getElementById("captchaID").style.display = "";
+
+			                                validateInputs();
+                        				},
+                        				
+                            "unset":	function(nextState) {
+                        				},
+                        				
+                        	"action":	function() {
+
+                        		for (var index in form) {
+			                                    var element = form[index];
+			                                    var htmlElement = document.getElementById(element.id);
+			                                    if (!element.validate()) {
+			                                    	toast(element.error, "error");
+			                                    	htmlElement.classList.add('shake-animation');
+				                                    setTimeout(function() { htmlElement.classList.remove('shake-animation'); }, 1000);
+				                                    return ;
+			                                    }
+			                                }
+                                
+			                                var catpchaResponse = grecaptcha.getResponse();
+			                                if (catpchaResponse == null || catpchaResponse.length == 0) {
+			                                    toast("Veuillez prouvez que vous n'êtes pas un robot.", "error");
+			                                    return ;
+			                                }
+			
+			                                requestAPI('/user/account/register/', 
+			                                    {
+			                                        200:    function(response) {
+			                                                    toast("Enregistré(e). Vous pouvez maintenant vous connecter.", "fine");
+			                                                    setState(STATE.CONNECT);
+			                                                },
+			                                        400:    function(response) {
+			                                                    toast("Enregistrement impossible : " + response, "error");
+			                                                    grecaptcha.reset();
+
+			                                                }
+			                                    },
+			
+			                                    {
+			                                        "mail"          : document.getElementById("input_mailID").value,
+			                                        "pseudo"        : document.getElementById("input_pseudoID").value,
+			                                        "pass"          : document.getElementById("input_passID").value,
+			                                        "g-recaptcha"   : catpchaResponse
+			                                    }
+			                                );
+			                        	}     	
+                       	},
+                       	
+                    	"RESET": {
+                        	"set":		function(prevState) {
+			                    			document.getElementById("mailID").style.display  = "";
+			                    			document.getElementById("pseudoID").style.display  = "none";
+			                                document.getElementById("passID").style.display = "none";
+			                                document.getElementById("confirmPassID").style.display = "none";
+			                                document.getElementById("captchaID").style.display = "none";
+			            				},
+            				
+                			"unset":	function(nextState) {
+		            					},
+            				
+            				"action":	function() {
+			            					var mail = document.getElementById("input_mailID").value;
+			                                if (!form[0].validate()) {
+			                                    toast("Veuillez entrer une adresse mail valide.", "error");
+			                                    return ;
+			                                }
+			            	                requestAPI('/user/account/password/reset/',
+			            	                    	{
+			            	    	                    200: function(response) {
+			            	    	                        toast("Le token a été généré et envoyé par mail à l'adresse <strong>" + mail + "</strong>", "fine");
+			            	    	                    }
+			            	                    	},
+			
+			            	                    	{
+			            	                    		'mail': mail
+			            	                    	}
+			            	          		);
+                						}
+                    	}
+            	};
+            	
+            	var currentState = STATE.CONNECT;
+            	currentState.set();
+
+            	/** definit la vue qui doit être utilisée */
+            	function setState(nextState) {
+                	if (currentState == nextState) {
+                    	currentState.action();
+                	} else {                    	
+                		currentState.unset(nextState);
+                		nextState.set(currentState);
+                		currentState = nextState;
+                	}
+            	}
+
+                /** lorsqu'un touche est appuyé */
+                function onInput(event) {
+                    if (this.currentState != STATE.CONNECT) {
+                        validateInputs();
+                    }
+                }
+
+                /** lorsque l'utilisateur appuie sur une touche */
+                function onPressed(event) {
+                    /* si la touche entrée */
+                    if (event.keyCode == 13) {
+                        currentState.action();
+                    }
+                }
+            </script>
+<?php
+}
+function afficher_discord() {
+	?>
+<div
+	style="width: 12rem; height: 12rem; margin-left: 1rem; margin-top: 1rem;">
+<?php
+	include 'discord.phtml';
+	?>
+    </div>
+<?php
+}
+?>
+<!-- barre de navigation à droite -->
+<section class="aside">
+
+
+<?php
+if (! $this->getUser ()->isConnected ()) {
+	afficher_champs ();
+} else {
+	afficher_compte ();
+}
+afficher_discord ();
+?>
+
+
+        </section>

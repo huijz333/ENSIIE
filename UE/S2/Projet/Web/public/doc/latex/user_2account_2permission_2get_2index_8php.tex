@@ -1,0 +1,29 @@
+\hypertarget{user_2account_2permission_2get_2index_8php}{}\section{Référence du fichier /home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/permission/get/index.php}
+\label{user_2account_2permission_2get_2index_8php}\index{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/permission/get/index.\+php@{/home/rpereira/\+E\+N\+S\+I\+I\+E-\/\+W\+E\+B-\/\+P\+R\+O\+J\+E\+C\+T/public/api/user/account/permission/get/index.\+php}}
+
+
+Renvoie la liste de toutes les permissions du joueur.  
+
+
+
+
+\subsection{Description détaillée}
+Renvoie la liste de toutes les permissions du joueur. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em } & G\+ET {\itshape pseudo} \+: le pseudo du joueur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+
+\begin{DoxyItemize}
+\item J\+S\+ON \+: les permissions
+\item code reponse\+:
+\begin{DoxyItemize}
+\item 200 \+: les permissions ont été récupéré avec succès
+\item 400 \+: requete mal formatté (parametre manquant)
+\item 503 \+: la connection à la base de données a échoué 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}

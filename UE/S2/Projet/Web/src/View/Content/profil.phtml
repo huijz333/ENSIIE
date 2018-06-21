@@ -1,0 +1,111 @@
+<!-- PAGE DE  PROFIL D'UN JOUEUR -->
+
+<?php
+$pseudo = isset ( $_GET ['pseudo'] ) ? $_GET ['pseudo'] : 'toss';
+?>
+
+<!-- DEBUT: Profil -->
+
+<h1>Profil de <?php echo $pseudo;?></h1>
+<div>
+
+	<h1>Permissions</h1>
+	<div id="permissionsListID"></div>
+</div>
+
+<script>
+	requestAPI("/permission/get/",
+    		{
+    			200:	function(response) {
+    						var permissions = JSON.parse(response);
+    						requestAPI("/user/account/permission/get/",
+	        		    		{
+        		    			200:	function(response) {
+		        		        			var permissionsID = JSON.parse(response);
+		        	                    	var tab = document.createElement("table");
+		    		        				var line = document.createElement("tr");
+		    		        				var c1 = document.createElement("th");
+		    		        				c1.innerHTML = "Nom des permissions";
+		    		        				var c2 = document.createElement("th");
+		    		        				c2.innerHTML = "Description";
+		    		        				line.appendChild(c1);
+		    		        				line.appendChild(c2);
+		    		        				tab.appendChild(line);
+		        	                    	for (var i = 0 ; i < permissionsID.length ; i++) {
+		        	                        	var permissionID = permissionsID[i];
+		        		        				var line = document.createElement("tr");
+		        		        				var c1 = document.createElement("td");
+		        		        				var c2 = document.createElement("td");
+		        		        				c1.appendChild(document.createTextNode(permissions[permissionID].name));
+		        		        				c2.appendChild(document.createTextNode(permissions[permissionID].desc));
+		        		        				line.appendChild(c1);
+		        		        				line.appendChild(c2);
+		        		        				tab.appendChild(line);
+		        		        			}	        		        			
+		        	                		document.getElementById("permissionsListID").appendChild(tab);
+		        		    			}
+				    				},
+	        		    				
+		        		    		{
+		        		    			'pseudo': '<?php echo $pseudo; ?>'
+		        		    		}
+	        		    );
+    			}
+    		}
+    );
+</script>
+
+<!-- FIN: Profil -->
+
+
+<!-- DEBUT : League of Legends -->
+	<script>
+            function updateAccountsList() {
+                requestAPI(	"/user/game/lol/accounts/get/",
+		                    {
+		                        200: 	function(response) {
+				                            //supprimes les invocateurs précèdents
+				                            while (node_notifications_list.firstChild) {
+				                                node_notifications_list.removeChild(node_notifications_list.firstChild);
+				                            }
+				                            //ajoutes les nouveaux invocateurs
+				                            var summoners = JSON.parse(response);
+				                            var node_list = document.getElementById("lol_accounts");
+				                            for (var i in summoners) {
+				                                var summoner = summoners[i];
+				                                var node_summoner = document.createElement("li");
+				                                var node_summoner_icon = document.createElement("img");
+				                                node_summoner_icon.style.maxWidth = "2rem";
+				                                node_summoner_icon.style.minWidth = "2rem";
+				                                node_summoner_icon.src = "http://ddragon.leagueoflegends.com/cdn/8.9.1/img/profileicon/" + summoner.profileIconId  + ".png";
+				                                var node_summoner_name = document.createElement("a");
+				                                node_summoner_name.innerHTML = summoner.name;
+				                                node_summoner_name.href = "http://euw.op.gg/summoner/userName=" + summoner.name;
+				                                node_summoner.appendChild(node_summoner_icon);
+				                                node_summoner.appendChild(node_summoner_name);
+				                                node_list.appendChild(node_summoner);
+				                            }
+		                        },
+		                        400: 	function(response) {
+		                            		toast("Impossible de récuperer la liste des comptes League of Legends liés...", "error");
+		                        		}
+		                    },
+		                    {
+			                    "pseudo" : "<?php echo $pseudo; ?>"
+		                    }
+                );
+            }
+            updateAccountsList();
+		</script>
+
+<h1>
+	<img src="./res/images/lol.png" alt="LOL" width="35" height="35" />
+	League of Legends
+</h1>
+
+<h3>Liste des comptes liées:</h3>
+<ul id="lol_accounts"></ul>
+
+
+<!-- FIN : League of Legends -->
+

@@ -1,0 +1,38 @@
+<!-- PAGE LISTANT LES EQUIPES -->
+
+<h1>Liste des équipes</h1>
+<div id="Liste">
+</div>
+<script type="text/javascript">
+function loadTeams() {
+                requestAPI("/team/list/",
+                	{
+                		200: 	function(response) {
+                		
+									// la liste des équipes au format json
+									console.log(response);
+		                        	var teams = JSON.parse(response).equipes;
+
+		                        	//pour chaque équipe
+		                        	var tab = document.createElement("table");
+		                        	var line = document.createElement("tr");
+		                        	var cell1 = document.createElement("th");
+		                        	cell1.appendChild(document.createTextNode("Nom"));
+		                        	line.appendChild(cell1);
+									tab.appendChild(line);
+		                        	for (var i = 0 ; i < teams.length ; i++) {
+		                        		//l'équipe
+		                        		var equipe = teams[i];
+		                        		var line = document.createElement("tr");
+		                        		var cell1 = document.createElement("td");
+										cell1.innerHTML = equipe.nom;
+										line.appendChild(cell1);
+										tab.appendChild(line);
+		                        	}
+		                        	document.getElementById("Liste").appendChild(tab);
+                				}
+                	}
+                );
+            }
+            loadTeams();
+</script>

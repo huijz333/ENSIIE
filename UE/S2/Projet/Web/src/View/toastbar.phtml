@@ -1,0 +1,107 @@
+        <!-- la barre des messages d'informations en bas du site (toast) -->
+        <div id="toastbar">Bienvenue :)</div>
+
+        <style>
+            #toastbar {
+                opacity: 0.0;
+                max-width: 20rem;
+                min-width: 20rem;
+                margin-left: -10rem;
+                background-color: #333;
+                color: #F1F1F1;
+                text-align: center;
+                border-radius: 0.3rem;
+                padding: 1rem;
+                position: fixed;
+                z-index: 99;
+                left: 50%;
+                bottom: 2rem;
+            }
+
+            #toastbar.error {
+                background-color: #FF2222;
+            }
+
+            #toastbar.warning {
+                background-color: orange;
+                color: orange;
+            }
+
+            #toastbar.fine {
+                background-color: #22FF22;
+            }
+
+            #toastbar.fadeIn {
+                animation-name: "fadeIn";
+                animation-duration: 0.5s;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0.0;
+                    transform: translateY(4rem);
+                }
+
+                to {
+                    opacity: 1.0;
+                    transform: translateY(0rem);
+                }
+            }
+
+            #toastbar.fadeOut {
+                animation-name: "fadeOut";
+                animation-duration: 0.5s;
+            }
+
+            @keyframes fadeOut {
+                from {
+                    opacity: 1.0;
+                    transform: translateY(0rem);
+                }
+
+                to {
+                    opacity: 0.0;
+                    transform: translateY(4rem);
+                }
+            }
+
+        </style>
+
+
+        <script type="text/javascript">
+            var bar = document.getElementById("toastbar");
+            var toasts = {};
+            var nextSlot = 0;
+
+            function toast(message, level="fine", duration=2.0) {
+                if (toasts[message] || duration < 0) {
+                    return ;
+                }
+
+                var totalDuration = (0.5 + 0.5 + duration) * 1000;
+                setTimeout( function() {
+                                bar.classList.add(level);
+                                bar.classList.add("fadeIn");
+                                bar.innerHTML = message;
+                                bar.style.opacity = 1.0;
+                                setTimeout( function() {
+                                                bar.classList.remove("fadeIn");
+                                                bar.classList.add("fadeOut");
+                                                setTimeout( function() {
+                                                                toasts[message] = false;
+                                                                bar.classList.remove(level);
+                                                                bar.classList.remove("fadeOut");
+                                                                bar.style.opacity = 0.0;
+                                                                nextSlot -= totalDuration;
+                                                            },
+                                                            0.5 * 1000
+                                                );
+                                            },
+                                            (0.5 + duration) * 1000
+                                );
+                            },
+                            nextSlot
+                        );
+                    nextSlot += totalDuration;
+            }
+        </script>
