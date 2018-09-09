@@ -41,7 +41,7 @@ actiontp = 'TP'
 import copy
 import time
 
-sleeptime = max(1/(timer/5), 0.005)
+sleeptime = 0.5#max(1/(timer/5), 0.005)
 
 HOV = 40
 
