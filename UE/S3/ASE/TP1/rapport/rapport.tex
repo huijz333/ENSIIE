@@ -1,0 +1,255 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{floatrow}
+
+\usepackage{algorithm, algpseudocode}
+\let\oldReturn\Return
+\renewcommand{\Return}{\State\oldReturn}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{scrextend}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{wrapfig}
+\usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
+
+%title setup
+\title{TD1 : l'ordonnanceur du noyau Linux}
+\author{Romain PEREIRA}
+\date{25/10/2018}
+
+% table of contents setup
+\renewcommand{\contentsname}{Sommaire}
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=red
+}
+
+\lstset{language=C,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{cyan}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+
+\lstdefinelanguage{Markdown}{}
+
+\begin{document}
+    
+    \begin{titlepage}
+        \begin{sffamily}
+            \begin{center}
+                
+                                
+                \begin{figure}[h!]
+                    \includegraphics[width=6cm]{ensiie.jpeg}
+                \end{figure}
+
+                \HRule \\[0.4cm]
+                { \huge \bfseries Architecture d'un système d'exploitation\\[0.4cm] }
+                \HRule \\[2.0cm]
+                
+                { \huge \bfseries TD2\\[0.5cm] }
+
+                \textsc{\Large L'ordonnanceur du noyau Linux}\\[2.0cm]
+
+                \vfill
+                \begin{minipage}{0.4\textwidth}
+                    \begin{flushleft} \large
+                        \emph{Etudiant:} Romain \textsc{Pereira}\\
+                    \end{flushleft}
+                \end{minipage}
+                \begin{minipage}{0.4\textwidth}
+                    \begin{flushright} \large
+                        \emph{Encadrants:}  M. \textsc{Loussert}\\
+                                            M. \textsc{Taboada}
+                    \end{flushright}
+                \end{minipage}
+                \\[2.0cm]
+                {\large 25/10/2018}
+            \end{center}
+        \end{sffamily}
+    \end{titlepage}
+    
+    \maketitle
+    \tableofcontents
+    \section{Préambule}
+    
+    Le but de ce TP est de comprendre le fonctionnement d'un ordonnanceur, en étudiant l'ordonnanceur du noyau Linux.
+
+    \newpage
+    \section{Fonctionnement de l'ordonnanceur}
+        \paragraph{Q.1}
+        Nos ordinateurs de bureau dispose généralement d'un seul processeur (avec 1, 2, 4 ou 8 coeurs d'execution).
+        
+        Lorsque plusieurs processus s'execute sur la machine, il faut donc qu'il
+        y ait un méchanisme de partage du processeur : il est le seul point d'execution pour les processus.
+    
+        C'est la fonction principale de l'ordonnanceur.
+        Il choisit dans quel ordre plusieurs processus peuvent être executé sur un même processeur.
+        
+        \textbf{N.B} : l'ordonnanceur est lui même un processus.
+                
+        L'execution de l'ordonnanceur peut avoir lieu pour répondre aux problèmes suivants:
+        
+        - Lorsqu'un processus se clone (\textit{fork()}) : lequel du père ou du fils doit avoir la priorité d'éxecution?
+        
+        - Lorsque le processus courant s'arrête : quel processus doit prendre la main ensuite
+        
+        - Lorsqu'un processus bloque sur une entrée/sortie, ou qu'il est en attente : doit t'il continuer de bloquer le processeur alors qu'il ne travaille pas?
+        
+        - Lorsqu'une entrée/sortie est interrompu : peut être que le processus a fini son job, ou bien c'est un signal indiquant qu'un processus précèdemment en attente entrée/sortie peut maintenant effectué son travail.
+        
+        
+        Aussi, on distingue 2 grandes politiques décidant de l'execution de l'ordonnanceur.
+
+        - non-pre-emptive : l'ordonnanceur ne tourne que si le processus utilisateur s'arrête, bloque, ou demande explicitement à changer de processus.
+        Si le processus ne rends pas la main pendant 100 ans, l'ordonanneur attendra impassiblement pendant 100 ans.
+
+        \label{preempt}
+        - pre-emptive : Chaque processus à un temps d'execution fixe.
+        L'ordonnanceur est executé à intervalle régulier, et détermine le prochain prochain processus qui doit être executé sur le prochaine 'créneau'.
+
+
+        \paragraph{Q.2}
+        La fonction \textit{sched\_yield} passe la main sur le processeur d'un processus à un autre
+        (ou d'un processus vers lui même s'il reste le plus 'prioritaire').
+        
+        S'il n'y a pas d'autre processus devant être executer, cette fonction s'arrête.
+        
+        \paragraph{Q.3}
+        Code modifié
+        \lstset{language=C}
+\begin{lstlisting}[frame=single]
+[...]
+printk("current=%p\n", current);
+schedule();
+printk("current=%p\n", current);
+[...]
+\end{lstlisting}
+
+        Compilation de l'image linux modifié et déploiement
+\lstset{language=bash}
+\begin{lstlisting}[frame=single]
+cd ~/debian_kernel/linux-4.9.30/
+make bindeb-pkg
+dpkg -i ../linux-image-4.9.30_4.9.30-2_amd64.deb
+reboot
+\end{lstlisting}
+
+Programme utilisateur 'main.c'
+\lstset{language=C}
+\begin{lstlisting}[frame=single]
+int main() {
+    sched_yield();
+    return 0;
+}
+\end{lstlisting}
+
+Compile et lance le programme utilisateur
+\begin{lstlisting}[frame=single]
+gcc main.c
+./a.out
+dmesg
+\end{lstlisting}
+
+Sortie dmesg
+\begin{lstlisting}[frame=single]
+[  170.029953] current=ffff9337bbe47140
+[  170.029956] current=ffff9337bbe47140
+\end{lstlisting}
+
+=> Le pointeur 'current' reste inchangé
+Ceci est dû au fait que peu de processus tourne sur la machine virtuelle.
+Le processus prioritaire reste le même entre 2 appels de 'schedule()'
+
+En lançant d'autres processus sur la machine, la valeur du pointeur aurait changé
+
+
+\paragraph{Q.4}
+On génère d'abord les 'ctags' pour naviguer plus facilement dans le code source.
+
+\lstset{language=bash}
+\begin{lstlisting}[frame=single]
+cd ~/debian_kernel/linux-4.9.30/
+ctags -R .
+\end{lstlisting}
+
+
+Lecture de 'core.c'
+\lstset{language=C}
+\begin{lstlisting}[frame=single]
+ligne  profondeur/schedule()  execution
+4898  0  schedule();
+
+3454  1  sched_submit_work(task);
+3438  2  ...
+
+//debut boucle : desactive le préemption
+3456  1  preempt_disable();
+
+3457  1  __schedule(false);
+3342  2  cpu_rq(); // recuperes la 'run queue' du CPU
+3343  2  prev = rq->curr; // enregistre le processus courant dans la run queue
+3391  2  next = pick_next_task(rq, prev, cookie); // recuperes la task suivante
+
+// réactive la préemption
+3457  1  sched_preempt_enable_no_resched();
+
+3459  1  need_resched();
+// tant que 'need_resched()' renvoit 'vrai',
+// on boucle sur partir de preempt_disable()
+\end{lstlisting}
+        
+\paragraph{Q.5} La fonction principal de l'ordonnanceur est 'schedule()'
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single]
+// choisit le prochain processus à être executé
+// avant l'appel de cette fonction, un processus tourne
+schedule();
+// apres l'appel, un autre processus peut tourner
+\end{lstlisting}
+        
+\paragraph{Q.6}
+La préemption est un mecanisme d'ordonnancement qui consiste à donner un temps maximal d'execution à un processus,
+au dela duquelle l'algorithme d'ordonnancement sera relancé (c.f \ref{preempt} )
+
+Si la préemption est active lors de l'execution de l'ordonnanceur, ...
+ 
+    \newpage
+    \section{Références}
+    \begin{thebibliography}{}
+
+        \bibitem{modernos}\label{modernos}
+        Modern Operating Systems - Andrew S. Tanenbaum, Herbert Bos (page 149-166)\newline
+        \href{https://github.com/concerttttt/books/blob/master/Modern Operating Systems 4th Edition--Andrew Tanenbaum.pdf}
+        {\textit{https://github.com/concerttttt/books/}}\newline
+        
+    \end{thebibliography}
+    
+\end{document}
