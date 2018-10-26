@@ -262,6 +262,15 @@ struct task_struct *pick_next_task (struct rq *rq,
 				    struct pin_cookie cookie);
 \end{lstlisting}
  
+ \paragraph{Q.9}
+ La fonction \textit{context_switch} se trouve à la ligne 2862 du fichier 'core.c'.
+ Elle est declaré en '__always_inline', ce qui signifie que le code de cette fonction doit être duppliqué par le compilateur,
+ et ré-insérer dans le binaire executable à chaque appel vers cette fonction (voir \ref{inlinefunc} )
+ 
+ 
+ 
+ \paragraph{Q.10} TODO
+
     \newpage
     \section{Références}
     \begin{thebibliography}{}
@@ -270,6 +279,11 @@ struct task_struct *pick_next_task (struct rq *rq,
         Modern Operating Systems - Andrew S. Tanenbaum, Herbert Bos (page 149-166)\newline
         \href{https://github.com/concerttttt/books/blob/master/Modern Operating Systems 4th Edition--Andrew Tanenbaum.pdf}
         {\textit{https://github.com/concerttttt/books/}}\newline
+	
+        \bibitem{inlinefunc}\label{inlinefunc}
+        Inlining in Linux - Linux Kernel Documentation\newline
+        \href{https://www.kernel.org/doc/local/inline.html}
+        {\textit{https://www.kernel.org/doc/local/inline.html}}\newline
         
     \end{thebibliography}
     
