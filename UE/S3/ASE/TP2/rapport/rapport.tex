@@ -261,18 +261,38 @@ struct task_struct *pick_next_task (struct rq *rq,
 				    struct task_struct *prev,
 				    struct pin_cookie cookie);
 \end{lstlisting}
+
+ \paragraph{Q.9} TODO
  
- \paragraph{Q.9}
+ \paragraph{Q.10}
  La fonction \textit{context_switch} se trouve à la ligne 2862 du fichier 'core.c'.
  Elle est declaré en '__always_inline', ce qui signifie que le code de cette fonction doit être duppliqué par le compilateur,
  et ré-insérer dans le binaire executable à chaque appel vers cette fonction (voir \ref{inlinefunc} )
  
  Cette fonction rétablie l'état du processus sur le processeur, état dans lequel il avait été stoppé lors de son dernier créneau d'execution (ou dans un nouvel état si c'est un nouveau processus).
+
+ \paragraph{Q.12}
+ L'usage de pointeur de fonctions permet de relier l'ordonnanceur à des algorithmes d'ordonnancement.
  
+ La structure 'struct sched_class' définit toutes les fonctions qu'un algorithme d'ordonnancement doit implémenter.
  
- 
- 
- \paragraph{Q.10} TODO
+ Il suffit d'initialiser cette structure avec des implémentations des fonctions de l'algorithme, et l'ordonnanceur l'executera
+
+ Dans le fichire core.c, c'est le CFS (Completely Fair Scheduling) qui est utilisé
+
+\lstset{language=C}
+\begin{lstlisting}[frame=single]
+      /*
+9023  * All the scheduling class methods:
+9024  */ 
+9025 const struct sched_class fair_sched_class = {
+9026     .next           = &idle_sched_class,
+9027     .enqueue_task       = enqueue_task_fair,
+9028     .dequeue_task       = dequeue_task_fair,
+9029     .yield_task     = yield_task_fair,
+9030     .yield_to_task      = yield_to_task_fair,
+9031     [...] 
+\end{lstlisting}
 
     \newpage
     \section{Références}
