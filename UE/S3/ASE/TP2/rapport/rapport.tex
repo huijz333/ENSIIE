@@ -271,6 +271,8 @@ struct task_struct *pick_next_task (struct rq *rq,
  
  Cette fonction rétablie l'état du processus sur le processeur, état dans lequel il avait été stoppé lors de son dernier créneau d'execution (ou dans un nouvel état si c'est un nouveau processus).
 
+\newpage
+\section{Abstractions de l'ordonnanceur}
  \paragraph{Q.12}
  L'usage de pointeur de fonctions permet de relier l'ordonnanceur à des algorithmes d'ordonnancement.
  
@@ -293,6 +295,15 @@ struct task_struct *pick_next_task (struct rq *rq,
 9030     .yield_to_task      = yield_to_task_fair,
 9031     [...] 
 \end{lstlisting}
+
+  \paragraph{Q.13}
+  Dans le noyau Linux, l'algorithme \textbf{Completely Fair Scheduling First (CFS)} est implémenté dans le fichier \textbf{kernel/sched/fair.c}
+
+
+\newpage
+\section{Completely Fair Scheduling}
+  \paragraph{Q.14} TODO
+
 
     \newpage
     \section{Références}
