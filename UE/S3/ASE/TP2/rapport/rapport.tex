@@ -267,6 +267,9 @@ struct task_struct *pick_next_task (struct rq *rq,
  Elle est declaré en '__always_inline', ce qui signifie que le code de cette fonction doit être duppliqué par le compilateur,
  et ré-insérer dans le binaire executable à chaque appel vers cette fonction (voir \ref{inlinefunc} )
  
+ Cette fonction rétablie l'état du processus sur le processeur, état dans lequel il avait été stoppé lors de son dernier créneau d'execution (ou dans un nouvel état si c'est un nouveau processus).
+ 
+ 
  
  
  \paragraph{Q.10} TODO
