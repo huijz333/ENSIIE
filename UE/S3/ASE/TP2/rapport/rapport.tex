@@ -236,10 +236,31 @@ schedule();
 \end{lstlisting}
         
 \paragraph{Q.6}
-La préemption est un mecanisme d'ordonnancement qui consiste à donner un temps maximal d'execution à un processus,
+La pré-emption est un mecanisme d'ordonnancement qui consiste à donner un temps maximal d'execution à un processus,
 au dela duquelle l'algorithme d'ordonnancement sera relancé (c.f \ref{preempt} )
 
 Si la préemption est active lors de l'execution de l'ordonnanceur, ...
+ 
+ \paragraph{Q.7}
+ La 'run-queue' est une structure de données (de type tableau). Elle liste la priorité d'execution des processus.
+ A chaque processeur est associé une run-queue.
+ 
+ La run-queue est verouillé au début de la fonction \textiŧ{schedule} (alors que le processus 'prev' vient de finir son créneau d'execution)
+ 
+ Ensuite, le prochain processus devant être executé est élu par l'ordonnanceur : c'est le processus 'next'
+ 
+ Une fois l'election terminé, le verrou de la run-queue est retiré et le processus 'next' commence son execution.
+ 
+ Ce verrou sur la run-queue permet donc de ne pas modifier la priorité des processus pendant l'éléction.
+ Une fois l'election terminé, le processus 'next' libère ce verrou pour que la priorité des processus puissent être mis à jour par la suite.
+ 
+\paragraph{Q.8} ligne 3258 core.c
+\lstset{language=C}
+\begin{lstlisting}[frame=single]
+struct task_struct *pick_next_task (struct rq *rq,
+				    struct task_struct *prev,
+				    struct pin_cookie cookie);
+\end{lstlisting}
  
     \newpage
     \section{Références}
