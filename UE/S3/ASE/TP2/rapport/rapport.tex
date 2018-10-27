@@ -63,8 +63,7 @@
     \begin{titlepage}
         \begin{sffamily}
             \begin{center}
-                
-                                
+
                 \begin{figure}[h!]
                     \includegraphics[width=6cm]{ensiie.jpeg}
                 \end{figure}
@@ -186,7 +185,7 @@ Sortie dmesg
 
 => Le pointeur 'current' reste inchangé
 Ceci est dû au fait que peu de processus tourne sur la machine virtuelle.
-Le processus prioritaire reste le même entre 2 appels de 'schedule()'
+Le processus prioritaire reste le même entre 2 appels de $schedule()$
 
 En lançant d'autres processus sur la machine, la valeur du pointeur aurait changé
 
@@ -250,7 +249,7 @@ De plus, la desactivation de la préemption permet d'éviter de compatibiliser
 le temps passé par le processus dans le code de l'ordonnanceur.
 
  \paragraph{Q.7}
- La 'run-queue' est une structure de données (de type tableau). Elle liste la priorité d'execution des processus.
+ La 'run-queue' est une file de priorité. Elle stocke les processus par ordre de priorité d'éxecution.
  A chaque processeur est associé une run-queue.
  
  La run-queue est verouillé au début de la fonction \textit{schedule} (alors que le processus 'prev' vient de finir son créneau d'execution)
@@ -270,8 +269,14 @@ struct task_struct *pick_next_task (struct rq *rq,
 				    struct pin_cookie cookie);
 \end{lstlisting}
 
- \paragraph{Q.9} TODO
- 
+  \newpage
+ \paragraph{Q.9}
+    Description brève du fonctionnement de l'ordonnanceur
+    
+    \begin{figure}[h!]
+        \includegraphics[width=12cm]{q9.png}
+    \end{figure}
+
  \paragraph{Q.10}
  La fonction $context\_switch$ se trouve à la ligne 2862 du fichier 'core.c'.
  Elle est declaré en $\_\_always\_inline$, ce qui signifie que le code de cette fonction doit être duppliqué par le compilateur,
@@ -305,11 +310,45 @@ struct task_struct *pick_next_task (struct rq *rq,
 \end{lstlisting}
 
   \paragraph{Q.13}
-  Dans le noyau Linux, l'algorithme \textbf{Completely Fair Scheduling First (CFS)} est implémenté dans le fichier \textbf{kernel/sched/fair.c}
+  Voici quelques algorithme d'ordonnancement du noyau Linux.
+  
+    \begin{itemize}
+        \item \textbf{SCHED\_NORMAL : Completely Fair Scheduling (CFS)} est l'algorithme utilisé par défaut sur de très nombreuses distributions Linux.
+        Il est detaillé en \ref{cfs}
+        \item \textbf{SCHED\_DEADLINE : Deadline Scheduler}
+        \item \textbf{SCHED\_RR : Round-Robin Scheduling}
+        \item \textbf{SCHED\_FIFO : First in, first out} : c'est l'algorithme le plus simple envisageable.
+        Les processus demandent du temps d'éxecution sur le CPU.
+        Ces demandes sont placés dans une file FIFO (les processus sont éxecutés
+        dans l'ordre dans lequelle ils ont demandé le CPU : 1er arrivé, 1er servi).
+        \item \textbf{Brain Fuck Scheduler (BFS) \ref{bfssched}} est utilisé par défaut dans quelques distributions.
+        Il a été proposé comme une alternative plus légère au CFS (avec nombre plus faible d'heuristiques et de paramètres à ajuster).
+    \end{itemize}
+
+robably the simplest of all scheduling algorithms ever devised is nonpreemp-
+tive first-come, first-served. With this algorithm, processes are assigned the CPU
+in the order they request it. Basically, there is a single queue of ready processes.
+When the first job enters the system from the outside in the morning, it is started
+immediately and allowed to run as long as it wants to. It is not interrupted because
+it has run too long. As other jobs come in, they are put onto the end of the queue.
+When the running process blocks, the first process on the queue is run next. When
+a blocked process becomes ready, like a newly arrived job, it is put on the end of
+the queue, behind all waiting processes.SEC. 2.4
+157
+SCHEDULING
+The great strength of this algorithm is that it is easy to understand and equally
+easy to program. It is also fair in the same sense that allocating scarce concert
+tickets or brand-new iPhones to people who are willing to stand on line starting at
+2 A . M . is fair. With this algorithm, a single linked list keeps track of all ready proc-
+esses. Picking a process to run just requires removing one from the front of the
+queue. Adding a new job or unblocked process just requires attaching it to the end
+of the queue. What could be simpler to understand and implement?
+Unfortunately, first-come, first-served also has a powerful disadvantage. Sup-
+pose there is one compute-bound process that runs
 
 
 \newpage
-\section{Completely Fair Scheduling (CFS)}
+\section{Completely Fair Scheduling (CFS)}\label{cfs}
   \paragraph{Q.14} Il est implémenté dans le fichier \textbf{kernel/sched/fair.c}
 
   \paragraph{Q.15} Cet algorithme se base sur les 'red-black tree' (arbre binaire bicolore \ref{rbtree})
@@ -355,7 +394,7 @@ struct task_struct *pick_next_task (struct rq *rq,
         \href{https://github.com/concerttttt/books/blob/master/Modern Operating Systems 4th Edition--Andrew Tanenbaum.pdf}
         {\textit{https://github.com/concerttttt/books/}}\newline
 	
-	\bibitem{rbtree}\label{rbtree}
+        \bibitem{rbtree}\label{rbtree}
         Arbre bicolore - Wikipédia\newline
         \href{https://fr.wikipedia.org/wiki/Arbre\_bicolore}
         {\textit{https://fr.wikipedia.org/wiki/Arbre\_bicolore}}\newline
@@ -364,6 +403,12 @@ struct task_struct *pick_next_task (struct rq *rq,
         Inlining in Linux - Linux Kernel Documentation\newline
         \href{https://www.kernel.org/doc/local/inline.html}
         {\textit{https://www.kernel.org/doc/local/inline.html}}\newline
+               
+        \bibitem{{bfssched}}\label{bfssched}
+        Brain\_Fuck\_Scheduler - Wikipédia\newline
+        \href{https://en.wikipedia.org/wiki/Brain\_Fuck\_Scheduler}
+        {\textit{https://en.wikipedia.org/wiki/Brain\_Fuck\_Scheduler}}\newline
+
         
     \end{thebibliography}
     
