@@ -5,28 +5,17 @@
 \contentsline {paragraph}{Q.2}{2}{section*.3}
 \contentsline {paragraph}{Q.3}{2}{section*.4}
 \contentsline {paragraph}{Q.4}{3}{section*.5}
-\contentsline {paragraph}{Q.5}{4}{section*.6}
+\contentsline {paragraph}{Q.5}{3}{section*.6}
 \contentsline {paragraph}{Q.6}{4}{section*.7}
 \contentsline {paragraph}{Q.7}{4}{section*.8}
 \contentsline {paragraph}{Q.8}{4}{section*.9}
 \contentsline {paragraph}{Q.9}{4}{section*.10}
-\contentsline {section}{\numberline {3}Cr\IeC {\'e}ation d'un allocateur en mode utilisateur}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Gestion du malloc}{5}{subsection.3.1}
-\contentsline {paragraph}{Q.10}{5}{section*.11}
-\contentsline {paragraph}{Q.11}{5}{section*.12}
-\contentsline {paragraph}{Q.12}{5}{section*.13}
-\contentsline {paragraph}{Q.13}{5}{section*.14}
-\contentsline {paragraph}{Q.14}{6}{section*.15}
-\contentsline {subsection}{\numberline {3.2}Gestion du free}{6}{subsection.3.2}
-\contentsline {paragraph}{Q.15}{6}{section*.16}
-\contentsline {paragraph}{Q.16}{6}{section*.17}
-\contentsline {paragraph}{Q.17}{6}{section*.18}
-\contentsline {paragraph}{Q.18}{7}{section*.19}
-\contentsline {paragraph}{Q.19}{7}{section*.20}
-\contentsline {paragraph}{Q.20}{8}{section*.21}
-\contentsline {section}{\numberline {4}Biblioth\IeC {\`e}que dynamique}{9}{section.4}
-\contentsline {paragraph}{Q.21}{9}{section*.22}
-\contentsline {paragraph}{Q.22}{9}{section*.23}
-\contentsline {section}{\numberline {5}Wrapper de la fonction malloc}{11}{section.5}
-\contentsline {paragraph}{Q.23}{11}{section*.24}
-\contentsline {section}{\numberline {6}R\IeC {\'e}f\IeC {\'e}rences}{13}{section.6}
+\contentsline {paragraph}{Q.10}{4}{section*.11}
+\contentsline {section}{\numberline {3}Abstractions de l'ordonnanceur}{5}{section.3}
+\contentsline {paragraph}{Q.12}{5}{section*.12}
+\contentsline {paragraph}{Q.13}{5}{section*.13}
+\contentsline {section}{\numberline {4}Completely Fair Scheduling (CFS)}{6}{section.4}
+\contentsline {paragraph}{Q.14}{6}{section*.14}
+\contentsline {paragraph}{Q.15}{6}{section*.15}
+\contentsline {paragraph}{Q.16}{6}{section*.16}
+\contentsline {section}{\numberline {5}R\IeC {\'e}f\IeC {\'e}rences}{7}{section.5}
