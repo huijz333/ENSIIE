@@ -61,6 +61,7 @@ static int simple_getattr(const char *path, struct stat *stbuf)
 				stbuf->st_mode = S_IFREG | 0444;
 				stbuf->st_nlink = 1;
 				stbuf->st_size = dir.files[i].size;
+				stbuf->st_mtime = time(NULL);
 				break ;
 			}
 		}
@@ -116,6 +117,28 @@ static int simple_read(const char *path, char *buf, size_t size, off_t offset)
 	return -ENOENT;
 }
 
+static int simple_rename(const char * old, const char * new) {
+	if (strcmp(old, new) == 0) {
+		return 0;
+	}
+
+	unsigned int i;
+	for (i = 0 ; i < dir.entry_count ; i++) {
+		if (strcmp(old+1, dir.files[i].filename) == 0) {
+			unsigned int j;
+			for (j = 0 ; j < dir.entry_count ; j++) {
+				if (strcmp(new+1, dir.files[j].filename) == 0
+					)//&& (flags & RENAME_NOREPLACE)) {
+					
+					return -EEXIST;
+			}
+			strcpy(dir.files[i].filename, new + 1);
+			return 0;
+		}
+	}
+	return -ENOENT;
+}
+
 static struct fuse_operations simple_oper = {
 	.getattr	= simple_getattr,
 	.getdir		= simple_getdir,
@@ -124,7 +147,7 @@ static struct fuse_operations simple_oper = {
 //	.mkdir		=
 //	.unlink		=
 // 	.rmdir		=
-//	.rename		=
+	.rename		= simple_rename
 //	.chmod		=
 };
 
