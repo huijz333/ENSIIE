@@ -1,0 +1,492 @@
+Analysis & Synthesis report for bus_ia
+Mon Nov  5 12:42:04 2018
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |bus_ia|rs232in:inst4|state
+  9. State Machine - |bus_ia|initiateur:inst|state
+ 10. State Machine - |bus_ia|plus12:inst2|state
+ 11. State Machine - |bus_ia|terminateur:inst3|state
+ 12. State Machine - |bus_ia|terminateurSplit:inst5|state
+ 13. State Machine - |bus_ia|rs232out:inst6|state
+ 14. Registers Removed During Synthesis
+ 15. Removed Registers Triggering Further Register Optimizations
+ 16. General Register Statistics
+ 17. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 18. Parameter Settings for User Entity Instance: rs232out:inst6
+ 19. Parameter Settings for User Entity Instance: terminateur:inst3
+ 20. Parameter Settings for User Entity Instance: plus12:inst2
+ 21. Parameter Settings for User Entity Instance: rs232in:inst4
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Nov  5 12:42:04 2018           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; bus_ia                                          ;
+; Top-level Entity Name              ; bus_ia                                          ;
+; Family                             ; Cyclone II                                      ;
+; Total logic elements               ; 363                                             ;
+;     Total combinational functions  ; 274                                             ;
+;     Dedicated logic registers      ; 285                                             ;
+; Total registers                    ; 285                                             ;
+; Total pins                         ; 5                                               ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C35F672C6       ;                    ;
+; Top-level entity name                                                      ; bus_ia             ; bus_ia             ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                       ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                             ; Library ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
+; terminateur.vhd                  ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/terminateur.vhd      ;         ;
+; initiateur.vhd                   ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/initiateur.vhd       ;         ;
+; terminateurSplit.vhd             ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/terminateurSplit.vhd ;         ;
+; rs232in.vhd                      ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/rs232in.vhd          ;         ;
+; plus12.vhd                       ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/plus12.vhd           ;         ;
+; rs232out.vhd                     ; yes             ; User VHDL File                     ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/rs232out.vhd         ;         ;
+; bus_ia.bdf                       ; yes             ; User Block Diagram/Schematic File  ; /home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/bus_ia.bdf           ;         ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 363   ;
+;                                             ;       ;
+; Total combinational functions               ; 274   ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 78    ;
+;     -- 3 input functions                    ; 134   ;
+;     -- <=2 input functions                  ; 62    ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 249   ;
+;     -- arithmetic mode                      ; 25    ;
+;                                             ;       ;
+; Total registers                             ; 285   ;
+;     -- Dedicated logic registers            ; 285   ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 5     ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 285   ;
+; Total fan-out                               ; 1689  ;
+; Average fan-out                             ; 2.99  ;
++---------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                     ;
++-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
+; Compilation Hierarchy Node  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name            ; Library Name ;
++-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
+; |bus_ia                     ; 274 (1)           ; 285 (0)      ; 0           ; 0            ; 0       ; 0         ; 5    ; 0            ; |bus_ia                        ; work         ;
+;    |initiateur:inst|        ; 52 (52)           ; 85 (85)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|initiateur:inst        ; work         ;
+;    |plus12:inst2|           ; 80 (80)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|plus12:inst2           ; work         ;
+;    |rs232in:inst4|          ; 48 (48)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|rs232in:inst4          ; work         ;
+;    |rs232out:inst6|         ; 39 (39)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|rs232out:inst6         ; work         ;
+;    |terminateur:inst3|      ; 9 (9)             ; 38 (38)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|terminateur:inst3      ; work         ;
+;    |terminateurSplit:inst5| ; 45 (45)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|terminateurSplit:inst5 ; work         ;
++-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |bus_ia|rs232in:inst4|state                                                                                                    ;
++---------------------+----------------+-----------------+---------------+--------------+----------------+-----------------+---------------------+
+; Name                ; state.WAIT_FIN ; state.GEN_PULSE ; state.WAIT_1B ; state.ECRIRE ; state.MainLoop ; state.WAIT_1P5B ; state.WAIT_StartBit ;
++---------------------+----------------+-----------------+---------------+--------------+----------------+-----------------+---------------------+
+; state.WAIT_StartBit ; 0              ; 0               ; 0             ; 0            ; 0              ; 0               ; 0                   ;
+; state.WAIT_1P5B     ; 0              ; 0               ; 0             ; 0            ; 0              ; 1               ; 1                   ;
+; state.MainLoop      ; 0              ; 0               ; 0             ; 0            ; 1              ; 0               ; 1                   ;
+; state.ECRIRE        ; 0              ; 0               ; 0             ; 1            ; 0              ; 0               ; 1                   ;
+; state.WAIT_1B       ; 0              ; 0               ; 1             ; 0            ; 0              ; 0               ; 1                   ;
+; state.GEN_PULSE     ; 0              ; 1               ; 0             ; 0            ; 0              ; 0               ; 1                   ;
+; state.WAIT_FIN      ; 1              ; 0               ; 0             ; 0            ; 0              ; 0               ; 1                   ;
++---------------------+----------------+-----------------+---------------+--------------+----------------+-----------------+---------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |bus_ia|initiateur:inst|state                                                                                                                                                              ;
++---------------------------------+----------------------+------------------+-----------------------+-----------------------+---------------------------------+------------------------------+---------------+
+; Name                            ; state.ST_NDATA_WRITE ; state.ST_EndLoop ; state.ST_BUSIN_LOADED ; state.ST_NDATA_LOADED ; state.ST_BUSIN_AND_NDATA_LOADED ; state.ST_WAIT_BUSIN_OR_NDATA ; state.ST_INIT ;
++---------------------------------+----------------------+------------------+-----------------------+-----------------------+---------------------------------+------------------------------+---------------+
+; state.ST_INIT                   ; 0                    ; 0                ; 0                     ; 0                     ; 0                               ; 0                            ; 0             ;
+; state.ST_WAIT_BUSIN_OR_NDATA    ; 0                    ; 0                ; 0                     ; 0                     ; 0                               ; 1                            ; 1             ;
+; state.ST_BUSIN_AND_NDATA_LOADED ; 0                    ; 0                ; 0                     ; 0                     ; 1                               ; 0                            ; 1             ;
+; state.ST_NDATA_LOADED           ; 0                    ; 0                ; 0                     ; 1                     ; 0                               ; 0                            ; 1             ;
+; state.ST_BUSIN_LOADED           ; 0                    ; 0                ; 1                     ; 0                     ; 0                               ; 0                            ; 1             ;
+; state.ST_EndLoop                ; 0                    ; 1                ; 0                     ; 0                     ; 0                               ; 0                            ; 1             ;
+; state.ST_NDATA_WRITE            ; 1                    ; 0                ; 0                     ; 0                     ; 0                               ; 0                            ; 1             ;
++---------------------------------+----------------------+------------------+-----------------------+-----------------------+---------------------------------+------------------------------+---------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------+
+; State Machine - |bus_ia|plus12:inst2|state                                                      ;
++--------------------+--------------------+------------------+--------------------+---------------+
+; Name               ; state.ST_WRITE_SUM ; state.ST_COMPUTE ; state.ST_WRITE_TFT ; state.ST_READ ;
++--------------------+--------------------+------------------+--------------------+---------------+
+; state.ST_READ      ; 0                  ; 0                ; 0                  ; 0             ;
+; state.ST_WRITE_TFT ; 0                  ; 0                ; 1                  ; 1             ;
+; state.ST_COMPUTE   ; 0                  ; 1                ; 0                  ; 1             ;
+; state.ST_WRITE_SUM ; 1                  ; 0                ; 0                  ; 1             ;
++--------------------+--------------------+------------------+--------------------+---------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------+
+; State Machine - |bus_ia|terminateur:inst3|state                                      ;
++---------------------+---------------------+--------------------+---------------------+
+; Name                ; state.ST_WRITE_DUMP ; state.ST_WRITE_OUT ; state.ST_READ_BUSIN ;
++---------------------+---------------------+--------------------+---------------------+
+; state.ST_READ_BUSIN ; 0                   ; 0                  ; 0                   ;
+; state.ST_WRITE_OUT  ; 0                   ; 1                  ; 1                   ;
+; state.ST_WRITE_DUMP ; 1                   ; 0                  ; 1                   ;
++---------------------+---------------------+--------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------+
+; State Machine - |bus_ia|terminateurSplit:inst5|state                                               ;
++----------------------+---------------+----------------+----------------------+---------------------+
+; Name                 ; state.ST_LOOP ; state.ST_WRITE ; state.ST_WAIT_NOBUSY ; state.ST_READ_BUSIN ;
++----------------------+---------------+----------------+----------------------+---------------------+
+; state.ST_READ_BUSIN  ; 0             ; 0              ; 0                    ; 0                   ;
+; state.ST_WAIT_NOBUSY ; 0             ; 0              ; 1                    ; 1                   ;
+; state.ST_WRITE       ; 0             ; 1              ; 0                    ; 1                   ;
+; state.ST_LOOP        ; 1             ; 0              ; 0                    ; 1                   ;
++----------------------+---------------+----------------+----------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |bus_ia|rs232out:inst6|state                                 ;
++----------------+--------------+--------------+--------------+----------------+
+; Name           ; state.ST_ADV ; state.ST_ATT ; state.ST_FOR ; state.ST_BEGIN ;
++----------------+--------------+--------------+--------------+----------------+
+; state.ST_BEGIN ; 0            ; 0            ; 0            ; 0              ;
+; state.ST_FOR   ; 0            ; 0            ; 1            ; 1              ;
+; state.ST_ATT   ; 0            ; 1            ; 0            ; 1              ;
+; state.ST_ADV   ; 1            ; 0            ; 0            ; 1              ;
++----------------+--------------+--------------+--------------+----------------+
+
+
++-----------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                ;
++----------------------------------------+------------------------------------------+
+; Register name                          ; Reason for Removal                       ;
++----------------------------------------+------------------------------------------+
+; initiateur:inst|R_tft[40]              ; Stuck at VCC due to stuck port data_in   ;
+; terminateurSplit:inst5|R[44..47]       ; Stuck at GND due to stuck port data_in   ;
+; initiateur:inst|R_tft[33..37]          ; Merged with initiateur:inst|R_tft[32]    ;
+; initiateur:inst|R_tft[39]              ; Merged with initiateur:inst|R_tft[38]    ;
+; initiateur:inst|R_tft[42,43]           ; Merged with initiateur:inst|R_tft[41]    ;
+; plus12:inst2|R_tft[33..37]             ; Merged with plus12:inst2|R_tft[32]       ;
+; plus12:inst2|R_tft[39]                 ; Merged with plus12:inst2|R_tft[38]       ;
+; plus12:inst2|R_tft[42,43]              ; Merged with plus12:inst2|R_tft[41]       ;
+; terminateur:inst3|R_tft[33..37]        ; Merged with terminateur:inst3|R_tft[32]  ;
+; terminateur:inst3|R_tft[39]            ; Merged with terminateur:inst3|R_tft[38]  ;
+; terminateur:inst3|R_tft[42,43]         ; Merged with terminateur:inst3|R_tft[41]  ;
+; terminateurSplit:inst5|R[34,35]        ; Merged with terminateurSplit:inst5|R[33] ;
+; terminateurSplit:inst5|R[37]           ; Merged with terminateurSplit:inst5|R[36] ;
+; terminateurSplit:inst5|R[39]           ; Merged with terminateurSplit:inst5|R[38] ;
+; terminateurSplit:inst5|R[42,43]        ; Merged with terminateurSplit:inst5|R[41] ;
+; plus12:inst2|R_tft[41]                 ; Stuck at GND due to stuck port data_in   ;
+; terminateur:inst3|R_tft[41]            ; Stuck at GND due to stuck port data_in   ;
+; terminateurSplit:inst5|R[41]           ; Stuck at GND due to stuck port data_in   ;
+; initiateur:inst|R_tft[41]              ; Stuck at GND due to stuck port data_in   ;
+; terminateurSplit:inst5|R[36]           ; Merged with terminateurSplit:inst5|R[33] ;
+; Total Number of Removed Registers = 40 ;                                          ;
++----------------------------------------+------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                               ;
++------------------------+---------------------------+--------------------------------------------------------------------------------------+
+; Register name          ; Reason for Removal        ; Registers Removed due to This Register                                               ;
++------------------------+---------------------------+--------------------------------------------------------------------------------------+
+; plus12:inst2|R_tft[41] ; Stuck at GND              ; terminateur:inst3|R_tft[41], terminateurSplit:inst5|R[41], initiateur:inst|R_tft[41] ;
+;                        ; due to stuck port data_in ;                                                                                      ;
++------------------------+---------------------------+--------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 285   ;
+; Number of registers using Synchronous Clear  ; 2     ;
+; Number of registers using Synchronous Load   ; 18    ;
+; Number of registers using Asynchronous Clear ; 29    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 225   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|initiateur:inst|R_i[0]           ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R[38]     ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R_i[0]    ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 33 LEs               ; 33 LEs                 ; Yes        ; |bus_ia|terminateurSplit:inst5|R[6]      ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_i[0]            ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_data[7]         ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |bus_ia|rs232in:inst4|R_baud[13]         ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |bus_ia|plus12:inst2|Selector3           ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |bus_ia|terminateur:inst3|Selector2      ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |bus_ia|terminateurSplit:inst5|Selector0 ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |bus_ia|rs232out:inst6|Selector0         ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |bus_ia|plus12:inst2|Selector1           ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |bus_ia|initiateur:inst|Selector4        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232out:inst6 ;
++----------------+----------+---------------------------------+
+; Parameter Name ; Value    ; Type                            ;
++----------------+----------+---------------------------------+
+; freq           ; 50000000 ; Signed Integer                  ;
+; baud           ; 9600     ; Signed Integer                  ;
++----------------+----------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: terminateur:inst3 ;
++----------------+----------+------------------------------------+
+; Parameter Name ; Value    ; Type                               ;
++----------------+----------+------------------------------------+
+; myaddr         ; 11111111 ; Unsigned Binary                    ;
++----------------+----------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: plus12:inst2 ;
++----------------+----------+-------------------------------+
+; Parameter Name ; Value    ; Type                          ;
++----------------+----------+-------------------------------+
+; myadr          ; 11000000 ; Unsigned Binary               ;
++----------------+----------+-------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rs232in:inst4 ;
++----------------+----------+--------------------------------+
+; Parameter Name ; Value    ; Type                           ;
++----------------+----------+--------------------------------+
+; freq           ; 50000000 ; Signed Integer                 ;
+; baud           ; 9600     ; Signed Integer                 ;
++----------------+----------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Nov  5 12:42:01 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off bus_ia -c bus_ia
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file gentick.vhd
+    Info (12022): Found design unit 1: gentick-montage
+    Info (12023): Found entity 1: gentick
+Info (12021): Found 2 design units, including 1 entities, in source file terminateur.vhd
+    Info (12022): Found design unit 1: terminateur-montage
+    Info (12023): Found entity 1: terminateur
+Info (12021): Found 2 design units, including 1 entities, in source file initiateur.vhd
+    Info (12022): Found design unit 1: initiateur-Montage
+    Info (12023): Found entity 1: initiateur
+Info (12021): Found 2 design units, including 1 entities, in source file terminateurSplit.vhd
+    Info (12022): Found design unit 1: terminateurSplit-Montage
+    Info (12023): Found entity 1: terminateurSplit
+Info (12021): Found 2 design units, including 1 entities, in source file rs232in.vhd
+    Info (12022): Found design unit 1: rs232in-montage
+    Info (12023): Found entity 1: rs232in
+Info (12021): Found 2 design units, including 1 entities, in source file plus12.vhd
+    Info (12022): Found design unit 1: plus12-Montage
+    Info (12023): Found entity 1: plus12
+Info (12021): Found 2 design units, including 1 entities, in source file rs232out.vhd
+    Info (12022): Found design unit 1: rs232out-montage
+    Info (12023): Found entity 1: rs232out
+Info (12021): Found 1 design units, including 1 entities, in source file bus_ia.bdf
+    Info (12023): Found entity 1: bus_ia
+Info (12127): Elaborating entity "bus_ia" for the top level hierarchy
+Info (12128): Elaborating entity "rs232out" for hierarchy "rs232out:inst6"
+Info (12128): Elaborating entity "terminateurSplit" for hierarchy "terminateurSplit:inst5"
+Info (12128): Elaborating entity "terminateur" for hierarchy "terminateur:inst3"
+Info (12128): Elaborating entity "plus12" for hierarchy "plus12:inst2"
+Warning (10541): VHDL Signal Declaration warning at plus12.vhd(69): used implicit default value for signal "debug" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "initiateur" for hierarchy "initiateur:inst"
+Info (12128): Elaborating entity "rs232in" for hierarchy "rs232in:inst4"
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 386 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 2 output pins
+    Info (21061): Implemented 381 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 632 megabytes
+    Info: Processing ended: Mon Nov  5 12:42:04 2018
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:02
+
+

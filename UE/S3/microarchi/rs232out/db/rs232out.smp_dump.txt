@@ -1,0 +1,7 @@
+
+State Machine - |rs232out|state
+Name state.ST_ADV state.ST_ATT state.ST_FOR state.ST_BEGIN 
+state.ST_BEGIN 0 0 0 0 
+state.ST_FOR 0 0 1 1 
+state.ST_ATT 0 1 0 1 
+state.ST_ADV 1 0 0 1 

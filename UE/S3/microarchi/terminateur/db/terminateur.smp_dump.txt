@@ -1,0 +1,6 @@
+
+State Machine - |terminateur|state
+Name state.ST_WRITE_DUMP state.ST_WRITE_OUT state.ST_READ_BUSIN 
+state.ST_READ_BUSIN 0 0 0 
+state.ST_WRITE_OUT 0 1 1 
+state.ST_WRITE_DUMP 1 0 1 

@@ -1,0 +1,44 @@
+Quelques applications pour communiquer via RS232
+  - soit avec un composant du FPGA (BASIQUE)
+  - soit avec les composants initiateur et terminateur
+    du BUSIA via des drivers pour tous les composants
+    du bus.
+
+BASIQUE:
+  Génération d'un lecteur du lien serie:
+    $ gcc rtest.c ttyS.c -o r
+  Génération d'un ecrivain du lien serie:
+    $ gcc wtest.c ttyS.c -o w
+  Pour les lancer:
+    $ ./r
+    ou
+    $ ./w
+  Pour configurer:
+    - la liaison serie, il faut ouvrir rtest.c et
+      wtest.c et changer le define TTY_NAME en haut du fichier.
+    - la vitesse de la liason série, il faut ouvrir rtest.c et
+      wtest.c et changer le define TTY_BAUD en haut du fichier.
+
+BUSIA:
+  Pour generer l'executable avec les drivers drv0, drv1, ...:
+    $ gcc busia.c drv0.c drv1.c ... -lrt
+
+  Pour le lancer:
+    $ ./a.out /dev/ttyXXX
+  où /dev/ttyXXX est le lien RS232 vers le FPGA
+
+  Pour configurer la vitesse de la liason série, il faut
+  ouvrir busia.c et changer le define TTY_BAUD en haut du fichier.
+
+  Les drivers existants sont:
+    - ping-pong: envoie toutes les 2 secondes un messages au bloc
+      terminateur.
+    - plus12: répète indéfiniment:
+        une demande interactive de deux entiers, les envoie au
+        composant plus12, récupère le résultat et l'affiche.
+      Pour sa compilation il faut ajouter les bibliothèques readline,
+      history et curses.
+       $ gcc busia.c ping-pong.c plus12.c -lreadline -lhistory -lcurses -lrt
+      sur les machines de l'ENSIIE
+       $ gcc busia.c ping-pong.c plus12.c -L/pub/readline/lib \
+         -lreadline -lhistory -lcurses -lrt
