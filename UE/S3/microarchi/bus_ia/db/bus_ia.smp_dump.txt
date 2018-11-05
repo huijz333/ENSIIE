@@ -1,0 +1,47 @@
+
+State Machine - |bus_ia|rs232in:inst4|state
+Name state.WAIT_FIN state.GEN_PULSE state.WAIT_1B state.ECRIRE state.MainLoop state.WAIT_1P5B state.WAIT_StartBit 
+state.WAIT_StartBit 0 0 0 0 0 0 0 
+state.WAIT_1P5B 0 0 0 0 0 1 1 
+state.MainLoop 0 0 0 0 1 0 1 
+state.ECRIRE 0 0 0 1 0 0 1 
+state.WAIT_1B 0 0 1 0 0 0 1 
+state.GEN_PULSE 0 1 0 0 0 0 1 
+state.WAIT_FIN 1 0 0 0 0 0 1 
+
+State Machine - |bus_ia|initiateur:inst|state
+Name state.ST_NDATA_WRITE state.ST_EndLoop state.ST_BUSIN_LOADED state.ST_NDATA_LOADED state.ST_BUSIN_AND_NDATA_LOADED state.ST_WAIT_BUSIN_OR_NDATA state.ST_INIT 
+state.ST_INIT 0 0 0 0 0 0 0 
+state.ST_WAIT_BUSIN_OR_NDATA 0 0 0 0 0 1 1 
+state.ST_BUSIN_AND_NDATA_LOADED 0 0 0 0 1 0 1 
+state.ST_NDATA_LOADED 0 0 0 1 0 0 1 
+state.ST_BUSIN_LOADED 0 0 1 0 0 0 1 
+state.ST_EndLoop 0 1 0 0 0 0 1 
+state.ST_NDATA_WRITE 1 0 0 0 0 0 1 
+
+State Machine - |bus_ia|plus12:inst2|state
+Name state.ST_WRITE_SUM state.ST_COMPUTE state.ST_WRITE_TFT state.ST_READ 
+state.ST_READ 0 0 0 0 
+state.ST_WRITE_TFT 0 0 1 1 
+state.ST_COMPUTE 0 1 0 1 
+state.ST_WRITE_SUM 1 0 0 1 
+
+State Machine - |bus_ia|terminateur:inst3|state
+Name state.ST_WRITE_DUMP state.ST_WRITE_OUT state.ST_READ_BUSIN 
+state.ST_READ_BUSIN 0 0 0 
+state.ST_WRITE_OUT 0 1 1 
+state.ST_WRITE_DUMP 1 0 1 
+
+State Machine - |bus_ia|terminateurSplit:inst5|state
+Name state.ST_LOOP state.ST_WRITE state.ST_WAIT_NOBUSY state.ST_READ_BUSIN 
+state.ST_READ_BUSIN 0 0 0 0 
+state.ST_WAIT_NOBUSY 0 0 1 1 
+state.ST_WRITE 0 1 0 1 
+state.ST_LOOP 1 0 0 1 
+
+State Machine - |bus_ia|rs232out:inst6|state
+Name state.ST_ADV state.ST_ATT state.ST_FOR state.ST_BEGIN 
+state.ST_BEGIN 0 0 0 0 
+state.ST_FOR 0 0 1 1 
+state.ST_ATT 0 1 0 1 
+state.ST_ADV 1 0 0 1 

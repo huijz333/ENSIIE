@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Oct 15 10:36:42 2018
+Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Revision Name : bouton_diode
+Top-level Entity Name : bouton_diode
+Family : Cyclone II
+Total logic elements : 7
+    Total combinational functions : 7
+    Dedicated logic registers : 4
+Total registers : 4
+Total pins : 4
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

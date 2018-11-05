@@ -1,0 +1,7 @@
+
+State Machine - |bouton_diode|state
+Name state.e0 state.a1 state.a0 state.debut 
+state.debut 0 0 0 0 
+state.a0 0 0 1 1 
+state.a1 0 1 0 1 
+state.e0 1 0 0 1 

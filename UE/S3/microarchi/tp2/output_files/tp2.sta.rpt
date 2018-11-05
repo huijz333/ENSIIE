@@ -1,0 +1,474 @@
+TimeQuest Timing Analyzer report for tp2
+Mon Sep 24 12:36:06 2018
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Slow Model Fmax Summary
+  6. Slow Model Setup Summary
+  7. Slow Model Hold Summary
+  8. Slow Model Recovery Summary
+  9. Slow Model Removal Summary
+ 10. Slow Model Minimum Pulse Width Summary
+ 11. Propagation Delay
+ 12. Minimum Propagation Delay
+ 13. Fast Model Setup Summary
+ 14. Fast Model Hold Summary
+ 15. Fast Model Recovery Summary
+ 16. Fast Model Removal Summary
+ 17. Fast Model Minimum Pulse Width Summary
+ 18. Propagation Delay
+ 19. Minimum Propagation Delay
+ 20. Multicorner Timing Analysis Summary
+ 21. Progagation Delay
+ 22. Minimum Progagation Delay
+ 23. Clock Transfers
+ 24. Report TCCS
+ 25. Report RSKM
+ 26. Unconstrained Paths
+ 27. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                                      ;
++--------------------+-------------------------------------------------------------------+
+; Quartus II Version ; Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition ;
+; Revision Name      ; tp2                                                               ;
+; Device Family      ; Cyclone II                                                        ;
+; Device Name        ; EP2C35F672C6                                                      ;
+; Timing Models      ; Final                                                             ;
+; Delay Model        ; Combined                                                          ;
+; Rise/Fall Delays   ; Unavailable                                                       ;
++--------------------+-------------------------------------------------------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
+----------
+; Clocks ;
+----------
+No clocks to report.
+
+
+---------------------------
+; Slow Model Fmax Summary ;
+---------------------------
+No paths to report.
+
+
+----------------------------
+; Slow Model Setup Summary ;
+----------------------------
+No paths to report.
+
+
+---------------------------
+; Slow Model Hold Summary ;
+---------------------------
+No paths to report.
+
+
+-------------------------------
+; Slow Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Slow Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
+------------------------------------------
+; Slow Model Minimum Pulse Width Summary ;
+------------------------------------------
+No paths to report.
+
+
++----------------------------------------------------------+
+; Propagation Delay                                        ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 7.346 ;       ;       ; 7.346 ;
+; e[0]       ; s[1]        ; 7.343 ;       ;       ; 7.343 ;
+; e[0]       ; s[2]        ; 7.455 ;       ;       ; 7.455 ;
+; e[0]       ; s[3]        ; 7.385 ; 7.385 ; 7.385 ; 7.385 ;
+; e[0]       ; s[4]        ;       ; 7.593 ; 7.593 ;       ;
+; e[0]       ; s[5]        ; 7.612 ; 7.612 ; 7.612 ; 7.612 ;
+; e[0]       ; s[6]        ; 7.608 ; 7.608 ; 7.608 ; 7.608 ;
+; e[1]       ; err         ; 8.774 ;       ;       ; 8.774 ;
+; e[1]       ; s[0]        ; 7.116 ; 7.116 ; 7.116 ; 7.116 ;
+; e[1]       ; s[1]        ; 7.111 ;       ;       ; 7.111 ;
+; e[1]       ; s[2]        ;       ; 7.223 ; 7.223 ;       ;
+; e[1]       ; s[3]        ; 7.125 ; 7.125 ; 7.125 ; 7.125 ;
+; e[1]       ; s[4]        ; 7.361 ;       ;       ; 7.361 ;
+; e[1]       ; s[5]        ; 7.383 ; 7.383 ; 7.383 ; 7.383 ;
+; e[1]       ; s[6]        ;       ; 7.341 ; 7.341 ;       ;
+; e[2]       ; err         ; 8.428 ;       ;       ; 8.428 ;
+; e[2]       ; s[0]        ; 6.774 ; 6.774 ; 6.774 ; 6.774 ;
+; e[2]       ; s[1]        ;       ; 6.776 ; 6.776 ;       ;
+; e[2]       ; s[2]        ; 6.885 ; 6.885 ; 6.885 ; 6.885 ;
+; e[2]       ; s[3]        ; 6.822 ; 6.822 ; 6.822 ; 6.822 ;
+; e[2]       ; s[4]        ; 7.027 ; 7.027 ; 7.027 ; 7.027 ;
+; e[2]       ; s[5]        ; 7.042 ;       ;       ; 7.042 ;
+; e[2]       ; s[6]        ; 7.036 ; 7.036 ; 7.036 ; 7.036 ;
+; e[3]       ; err         ; 7.437 ;       ;       ; 7.437 ;
+; e[3]       ; s[0]        ;       ; 5.752 ; 5.752 ;       ;
+; e[3]       ; s[1]        ;       ; 5.785 ; 5.785 ;       ;
+; e[3]       ; s[2]        ;       ; 5.893 ; 5.893 ;       ;
+; e[3]       ; s[3]        ;       ; 5.830 ; 5.830 ;       ;
+; e[3]       ; s[4]        ; 6.031 ;       ;       ; 6.031 ;
+; e[3]       ; s[5]        ; 6.046 ;       ;       ; 6.046 ;
+; e[3]       ; s[6]        ;       ; 6.044 ; 6.044 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
++----------------------------------------------------------+
+; Minimum Propagation Delay                                ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 7.346 ;       ;       ; 7.346 ;
+; e[0]       ; s[1]        ; 7.343 ;       ;       ; 7.343 ;
+; e[0]       ; s[2]        ; 7.455 ;       ;       ; 7.455 ;
+; e[0]       ; s[3]        ; 7.385 ; 7.385 ; 7.385 ; 7.385 ;
+; e[0]       ; s[4]        ;       ; 7.593 ; 7.593 ;       ;
+; e[0]       ; s[5]        ; 7.612 ; 7.612 ; 7.612 ; 7.612 ;
+; e[0]       ; s[6]        ; 7.608 ; 7.608 ; 7.608 ; 7.608 ;
+; e[1]       ; err         ; 8.774 ;       ;       ; 8.774 ;
+; e[1]       ; s[0]        ; 7.116 ; 7.116 ; 7.116 ; 7.116 ;
+; e[1]       ; s[1]        ; 7.111 ;       ;       ; 7.111 ;
+; e[1]       ; s[2]        ;       ; 7.223 ; 7.223 ;       ;
+; e[1]       ; s[3]        ; 7.125 ; 7.125 ; 7.125 ; 7.125 ;
+; e[1]       ; s[4]        ; 7.361 ;       ;       ; 7.361 ;
+; e[1]       ; s[5]        ; 7.383 ; 7.383 ; 7.383 ; 7.383 ;
+; e[1]       ; s[6]        ;       ; 7.341 ; 7.341 ;       ;
+; e[2]       ; err         ; 8.428 ;       ;       ; 8.428 ;
+; e[2]       ; s[0]        ; 6.774 ; 6.774 ; 6.774 ; 6.774 ;
+; e[2]       ; s[1]        ;       ; 6.776 ; 6.776 ;       ;
+; e[2]       ; s[2]        ; 6.885 ; 6.885 ; 6.885 ; 6.885 ;
+; e[2]       ; s[3]        ; 6.822 ; 6.822 ; 6.822 ; 6.822 ;
+; e[2]       ; s[4]        ; 7.027 ; 7.027 ; 7.027 ; 7.027 ;
+; e[2]       ; s[5]        ; 7.042 ;       ;       ; 7.042 ;
+; e[2]       ; s[6]        ; 7.036 ; 7.036 ; 7.036 ; 7.036 ;
+; e[3]       ; err         ; 7.437 ;       ;       ; 7.437 ;
+; e[3]       ; s[0]        ;       ; 5.752 ; 5.752 ;       ;
+; e[3]       ; s[1]        ;       ; 5.785 ; 5.785 ;       ;
+; e[3]       ; s[2]        ;       ; 5.893 ; 5.893 ;       ;
+; e[3]       ; s[3]        ;       ; 5.830 ; 5.830 ;       ;
+; e[3]       ; s[4]        ; 6.031 ;       ;       ; 6.031 ;
+; e[3]       ; s[5]        ; 6.046 ;       ;       ; 6.046 ;
+; e[3]       ; s[6]        ;       ; 6.044 ; 6.044 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
+----------------------------
+; Fast Model Setup Summary ;
+----------------------------
+No paths to report.
+
+
+---------------------------
+; Fast Model Hold Summary ;
+---------------------------
+No paths to report.
+
+
+-------------------------------
+; Fast Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Fast Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
+------------------------------------------
+; Fast Model Minimum Pulse Width Summary ;
+------------------------------------------
+No paths to report.
+
+
++----------------------------------------------------------+
+; Propagation Delay                                        ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[1]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[2]        ; 3.903 ;       ;       ; 3.903 ;
+; e[0]       ; s[3]        ; 3.868 ; 3.868 ; 3.868 ; 3.868 ;
+; e[0]       ; s[4]        ;       ; 3.952 ; 3.952 ;       ;
+; e[0]       ; s[5]        ; 3.962 ; 3.962 ; 3.962 ; 3.962 ;
+; e[0]       ; s[6]        ; 3.972 ; 3.972 ; 3.972 ; 3.972 ;
+; e[1]       ; err         ; 4.488 ;       ;       ; 4.488 ;
+; e[1]       ; s[0]        ; 3.726 ; 3.726 ; 3.726 ; 3.726 ;
+; e[1]       ; s[1]        ; 3.727 ;       ;       ; 3.727 ;
+; e[1]       ; s[2]        ;       ; 3.785 ; 3.785 ;       ;
+; e[1]       ; s[3]        ; 3.749 ; 3.749 ; 3.749 ; 3.749 ;
+; e[1]       ; s[4]        ; 3.834 ;       ;       ; 3.834 ;
+; e[1]       ; s[5]        ; 3.845 ; 3.845 ; 3.845 ; 3.845 ;
+; e[1]       ; s[6]        ;       ; 3.854 ; 3.854 ;       ;
+; e[2]       ; err         ; 4.339 ;       ;       ; 4.339 ;
+; e[2]       ; s[0]        ; 3.578 ; 3.578 ; 3.578 ; 3.578 ;
+; e[2]       ; s[1]        ;       ; 3.579 ; 3.579 ;       ;
+; e[2]       ; s[2]        ; 3.638 ; 3.638 ; 3.638 ; 3.638 ;
+; e[2]       ; s[3]        ; 3.607 ; 3.607 ; 3.607 ; 3.607 ;
+; e[2]       ; s[4]        ; 3.691 ; 3.691 ; 3.691 ; 3.691 ;
+; e[2]       ; s[5]        ; 3.698 ;       ;       ; 3.698 ;
+; e[2]       ; s[6]        ; 3.703 ; 3.703 ; 3.703 ; 3.703 ;
+; e[3]       ; err         ; 3.815 ;       ;       ; 3.815 ;
+; e[3]       ; s[0]        ;       ; 3.052 ; 3.052 ;       ;
+; e[3]       ; s[1]        ;       ; 3.058 ; 3.058 ;       ;
+; e[3]       ; s[2]        ;       ; 3.113 ; 3.113 ;       ;
+; e[3]       ; s[3]        ;       ; 3.085 ; 3.085 ;       ;
+; e[3]       ; s[4]        ; 3.172 ;       ;       ; 3.172 ;
+; e[3]       ; s[5]        ; 3.171 ;       ;       ; 3.171 ;
+; e[3]       ; s[6]        ;       ; 3.180 ; 3.180 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
++----------------------------------------------------------+
+; Minimum Propagation Delay                                ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[1]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[2]        ; 3.903 ;       ;       ; 3.903 ;
+; e[0]       ; s[3]        ; 3.868 ; 3.868 ; 3.868 ; 3.868 ;
+; e[0]       ; s[4]        ;       ; 3.952 ; 3.952 ;       ;
+; e[0]       ; s[5]        ; 3.962 ; 3.962 ; 3.962 ; 3.962 ;
+; e[0]       ; s[6]        ; 3.972 ; 3.972 ; 3.972 ; 3.972 ;
+; e[1]       ; err         ; 4.488 ;       ;       ; 4.488 ;
+; e[1]       ; s[0]        ; 3.726 ; 3.726 ; 3.726 ; 3.726 ;
+; e[1]       ; s[1]        ; 3.727 ;       ;       ; 3.727 ;
+; e[1]       ; s[2]        ;       ; 3.785 ; 3.785 ;       ;
+; e[1]       ; s[3]        ; 3.749 ; 3.749 ; 3.749 ; 3.749 ;
+; e[1]       ; s[4]        ; 3.834 ;       ;       ; 3.834 ;
+; e[1]       ; s[5]        ; 3.845 ; 3.845 ; 3.845 ; 3.845 ;
+; e[1]       ; s[6]        ;       ; 3.854 ; 3.854 ;       ;
+; e[2]       ; err         ; 4.339 ;       ;       ; 4.339 ;
+; e[2]       ; s[0]        ; 3.578 ; 3.578 ; 3.578 ; 3.578 ;
+; e[2]       ; s[1]        ;       ; 3.579 ; 3.579 ;       ;
+; e[2]       ; s[2]        ; 3.638 ; 3.638 ; 3.638 ; 3.638 ;
+; e[2]       ; s[3]        ; 3.607 ; 3.607 ; 3.607 ; 3.607 ;
+; e[2]       ; s[4]        ; 3.691 ; 3.691 ; 3.691 ; 3.691 ;
+; e[2]       ; s[5]        ; 3.698 ;       ;       ; 3.698 ;
+; e[2]       ; s[6]        ; 3.703 ; 3.703 ; 3.703 ; 3.703 ;
+; e[3]       ; err         ; 3.815 ;       ;       ; 3.815 ;
+; e[3]       ; s[0]        ;       ; 3.052 ; 3.052 ;       ;
+; e[3]       ; s[1]        ;       ; 3.058 ; 3.058 ;       ;
+; e[3]       ; s[2]        ;       ; 3.113 ; 3.113 ;       ;
+; e[3]       ; s[3]        ;       ; 3.085 ; 3.085 ;       ;
+; e[3]       ; s[4]        ; 3.172 ;       ;       ; 3.172 ;
+; e[3]       ; s[5]        ; 3.171 ;       ;       ; 3.171 ;
+; e[3]       ; s[6]        ;       ; 3.180 ; 3.180 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
++----------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                        ;
++------------------+-------+------+----------+---------+---------------------+
+; Clock            ; Setup ; Hold ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+-------+------+----------+---------+---------------------+
+; Worst-case Slack ; N/A   ; N/A  ; N/A      ; N/A     ; N/A                 ;
+; Design-wide TNS  ; 0.0   ; 0.0  ; 0.0      ; 0.0     ; 0.0                 ;
++------------------+-------+------+----------+---------+---------------------+
+
+
++----------------------------------------------------------+
+; Progagation Delay                                        ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 7.346 ;       ;       ; 7.346 ;
+; e[0]       ; s[1]        ; 7.343 ;       ;       ; 7.343 ;
+; e[0]       ; s[2]        ; 7.455 ;       ;       ; 7.455 ;
+; e[0]       ; s[3]        ; 7.385 ; 7.385 ; 7.385 ; 7.385 ;
+; e[0]       ; s[4]        ;       ; 7.593 ; 7.593 ;       ;
+; e[0]       ; s[5]        ; 7.612 ; 7.612 ; 7.612 ; 7.612 ;
+; e[0]       ; s[6]        ; 7.608 ; 7.608 ; 7.608 ; 7.608 ;
+; e[1]       ; err         ; 8.774 ;       ;       ; 8.774 ;
+; e[1]       ; s[0]        ; 7.116 ; 7.116 ; 7.116 ; 7.116 ;
+; e[1]       ; s[1]        ; 7.111 ;       ;       ; 7.111 ;
+; e[1]       ; s[2]        ;       ; 7.223 ; 7.223 ;       ;
+; e[1]       ; s[3]        ; 7.125 ; 7.125 ; 7.125 ; 7.125 ;
+; e[1]       ; s[4]        ; 7.361 ;       ;       ; 7.361 ;
+; e[1]       ; s[5]        ; 7.383 ; 7.383 ; 7.383 ; 7.383 ;
+; e[1]       ; s[6]        ;       ; 7.341 ; 7.341 ;       ;
+; e[2]       ; err         ; 8.428 ;       ;       ; 8.428 ;
+; e[2]       ; s[0]        ; 6.774 ; 6.774 ; 6.774 ; 6.774 ;
+; e[2]       ; s[1]        ;       ; 6.776 ; 6.776 ;       ;
+; e[2]       ; s[2]        ; 6.885 ; 6.885 ; 6.885 ; 6.885 ;
+; e[2]       ; s[3]        ; 6.822 ; 6.822 ; 6.822 ; 6.822 ;
+; e[2]       ; s[4]        ; 7.027 ; 7.027 ; 7.027 ; 7.027 ;
+; e[2]       ; s[5]        ; 7.042 ;       ;       ; 7.042 ;
+; e[2]       ; s[6]        ; 7.036 ; 7.036 ; 7.036 ; 7.036 ;
+; e[3]       ; err         ; 7.437 ;       ;       ; 7.437 ;
+; e[3]       ; s[0]        ;       ; 5.752 ; 5.752 ;       ;
+; e[3]       ; s[1]        ;       ; 5.785 ; 5.785 ;       ;
+; e[3]       ; s[2]        ;       ; 5.893 ; 5.893 ;       ;
+; e[3]       ; s[3]        ;       ; 5.830 ; 5.830 ;       ;
+; e[3]       ; s[4]        ; 6.031 ;       ;       ; 6.031 ;
+; e[3]       ; s[5]        ; 6.046 ;       ;       ; 6.046 ;
+; e[3]       ; s[6]        ;       ; 6.044 ; 6.044 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
++----------------------------------------------------------+
+; Minimum Progagation Delay                                ;
++------------+-------------+-------+-------+-------+-------+
+; Input Port ; Output Port ; RR    ; RF    ; FR    ; FF    ;
++------------+-------------+-------+-------+-------+-------+
+; e[0]       ; s[0]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[1]        ; 3.843 ;       ;       ; 3.843 ;
+; e[0]       ; s[2]        ; 3.903 ;       ;       ; 3.903 ;
+; e[0]       ; s[3]        ; 3.868 ; 3.868 ; 3.868 ; 3.868 ;
+; e[0]       ; s[4]        ;       ; 3.952 ; 3.952 ;       ;
+; e[0]       ; s[5]        ; 3.962 ; 3.962 ; 3.962 ; 3.962 ;
+; e[0]       ; s[6]        ; 3.972 ; 3.972 ; 3.972 ; 3.972 ;
+; e[1]       ; err         ; 4.488 ;       ;       ; 4.488 ;
+; e[1]       ; s[0]        ; 3.726 ; 3.726 ; 3.726 ; 3.726 ;
+; e[1]       ; s[1]        ; 3.727 ;       ;       ; 3.727 ;
+; e[1]       ; s[2]        ;       ; 3.785 ; 3.785 ;       ;
+; e[1]       ; s[3]        ; 3.749 ; 3.749 ; 3.749 ; 3.749 ;
+; e[1]       ; s[4]        ; 3.834 ;       ;       ; 3.834 ;
+; e[1]       ; s[5]        ; 3.845 ; 3.845 ; 3.845 ; 3.845 ;
+; e[1]       ; s[6]        ;       ; 3.854 ; 3.854 ;       ;
+; e[2]       ; err         ; 4.339 ;       ;       ; 4.339 ;
+; e[2]       ; s[0]        ; 3.578 ; 3.578 ; 3.578 ; 3.578 ;
+; e[2]       ; s[1]        ;       ; 3.579 ; 3.579 ;       ;
+; e[2]       ; s[2]        ; 3.638 ; 3.638 ; 3.638 ; 3.638 ;
+; e[2]       ; s[3]        ; 3.607 ; 3.607 ; 3.607 ; 3.607 ;
+; e[2]       ; s[4]        ; 3.691 ; 3.691 ; 3.691 ; 3.691 ;
+; e[2]       ; s[5]        ; 3.698 ;       ;       ; 3.698 ;
+; e[2]       ; s[6]        ; 3.703 ; 3.703 ; 3.703 ; 3.703 ;
+; e[3]       ; err         ; 3.815 ;       ;       ; 3.815 ;
+; e[3]       ; s[0]        ;       ; 3.052 ; 3.052 ;       ;
+; e[3]       ; s[1]        ;       ; 3.058 ; 3.058 ;       ;
+; e[3]       ; s[2]        ;       ; 3.113 ; 3.113 ;       ;
+; e[3]       ; s[3]        ;       ; 3.085 ; 3.085 ;       ;
+; e[3]       ; s[4]        ; 3.172 ;       ;       ; 3.172 ;
+; e[3]       ; s[5]        ; 3.171 ;       ;       ; 3.171 ;
+; e[3]       ; s[6]        ;       ; 3.180 ; 3.180 ;       ;
++------------+-------------+-------+-------+-------+-------+
+
+
+-------------------
+; Clock Transfers ;
+-------------------
+Nothing to report.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 4     ; 4    ;
+; Unconstrained Input Port Paths  ; 31    ; 31   ;
+; Unconstrained Output Ports      ; 8     ; 8    ;
+; Unconstrained Output Port Paths ; 31    ; 31   ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Mon Sep 24 12:36:05 2018
+Info: Command: quartus_sta tp2 -c tp2
+Info: qsta_default_script.tcl version: #1
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'tp2.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
+Warning (332068): No clocks defined in design.
+Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info (332159): No clocks to report
+Info: Analyzing Slow Model
+Info (332140): No fmax paths to report
+Info (332140): No Setup paths to report
+Info (332140): No Hold paths to report
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332140): No Minimum Pulse Width paths to report
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info: Analyzing Fast Model
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
+Warning (332068): No clocks defined in design.
+Info (332140): No Setup paths to report
+Info (332140): No Hold paths to report
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332140): No Minimum Pulse Width paths to report
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 495 megabytes
+    Info: Processing ended: Mon Sep 24 12:36:06 2018
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
