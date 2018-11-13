@@ -98,7 +98,9 @@
     \tableofcontents
     \section{Préambule}
     
-    Le but de ce TP est de comprendre le fonctionnement d'un ordonnanceur, en étudiant l'ordonnanceur du noyau Linux.
+    Le but de ce TP est de comprendre le fonctionnement de l'ordonnancement des processus sur les processeurs.
+    
+    Pour cela, on étudie l'ordonnancement sous le noyau Linux.
 
     \newpage
     \section{Fonctionnement de l'ordonnanceur}
@@ -139,7 +141,7 @@
         La fonction \textit{sched\_yield} passe la main sur le processeur d'un processus à un autre
         (ou d'un processus vers lui même s'il reste le plus 'prioritaire').
         
-        S'il n'y a pas d'autre processus devant être executer, cette fonction s'arrête.
+        S'il n'y a pas d'autre processus devant être executé, cette fonction s'arrête.
         
         \paragraph{Q.3}
         Code modifié
@@ -209,15 +211,15 @@ ligne  profondeur/schedule()  execution
 3454  1  sched_submit_work(task);
 3438  2  ...
 
-//debut boucle : desactive le préemption
+//debut boucle : desactive le preemption
 3456  1  preempt_disable();
 
 3457  1  __schedule(false);
 3342  2  cpu_rq(); // recuperes la 'run queue' du CPU
 3343  2  prev = rq->curr; // enregistre le processus courant dans la run queue
-3391  2  next = pick_next_task(rq, prev, cookie); // recuperes la task suivante
+3391  2  next = pick_next_task(rq, prev, cookie); // recuperes le processus suivant
 
-// réactive la préemption
+// reactive la preemption
 3457  1  sched_preempt_enable_no_resched();
 
 3459  1  need_resched();
@@ -229,7 +231,7 @@ ligne  profondeur/schedule()  execution
 
 \lstset{language=C}
 \begin{lstlisting}[frame=single]
-// choisit le prochain processus à être executé
+// choisit le prochain processus a executer
 // avant l'appel de cette fonction, un processus tourne
 schedule();
 // apres l'appel, un autre processus peut tourner
@@ -252,7 +254,7 @@ le temps passé par le processus dans le code de l'ordonnanceur.
  La 'run-queue' est une file de priorité. Elle stocke les processus par ordre de priorité d'éxecution.
  A chaque processeur est associé une run-queue.
  
- La run-queue est verouillé au début de la fonction \textit{schedule} (alors que le processus 'prev' vient de finir son créneau d'execution)
+ La run-queue est verrouillée au début de la fonction \textit{schedule} (alors que le processus 'prev' vient de finir son créneau d'execution)
  
  Ensuite, le prochain processus devant être executé est élu par l'ordonnanceur : c'est le processus 'next'
  
@@ -279,17 +281,64 @@ struct task_struct *pick_next_task (struct rq *rq,
 
  \paragraph{Q.10}
  La fonction $context\_switch$ se trouve à la ligne 2862 du fichier 'core.c'.
- Elle est declaré en $\_\_always\_inline$, ce qui signifie que le code de cette fonction doit être duppliqué par le compilateur,
- et ré-insérer dans le binaire executable à chaque appel vers cette fonction (voir \ref{inlinefunc} )
+ Elle est declaré en $\_\_always\_inline$, ce qui signifie que le code de cette fonction est duppliqué par le compilateur,
+ et ré-insérer dans le binaire executable à chaque point appel de cette fonction (voir \ref{inlinefunc})
  
- Cette fonction rétablie l'état du processus sur le processeur, état dans lequel il avait été stoppé lors de son dernier créneau d'execution (ou dans un nouvel état si c'est un nouveau processus).
+ Cette fonction rétablie l'état du processus sur le processeur, état dans lequel il avait été stoppé lors de sa dernière d'execution.
+ 
+ Le code source a été parcouru en utilisant \ref{elixir}.
+ 
+ Du code écrit en assembleur executé par cette fonction a été trouvé dans :
+ \begin{itemize}
+  \item \textbf{arch/include/asm/mmu\_context.h}, dans la fonction $arch\_start\_context\_switch$
+  \item \textbf{arch/*/include/asm/atomic.h}, dans les fonctions $atomic\_inc$.
+  Ces fonctions servent à incrémenter une valeur de manière atomique (avec un verrou), selon l'architecture du processeur (les architectures sont listées ici \href{https://elixir.bootlin.com/linux/latest/source/arch}{https://elixir.bootlin.com/linux/latest/source/arch})
+  \item \textbf{arch/*/include/switch\_to.h}, déclares le prototype de \textbf{la fonction de changement de contexte} (du changement d'état du processeur : registres et mémoire).
+\end{itemize}
 
-\newpage
+  En remontant dans l'historique Git du dépot de Linus Torvald, je suis tombé sur ce commit :
+  
+  \href{https://github.com/torvalds/linux/blob/f05e798ad4c09255f590f5b2c00a7ca6c172f983/arch/x86/include/asm/switch\_to.h}
+  {https://github.com/torvalds/linux/blob/f05e798ad4c09255f590f5b2c00a7ca6c172f983/arch/x86/include/asm/switch\_to.h}
+
+  On y voit une implémentation en assembleur du changement de contexte, pour l'architecture \href{https://fr.wikipedia.org/wiki/X86}{Intel x86}.
+  
+  \paragraph{Q.11} Cette ordonnanceur est bien adapté au temps partagé (plus de processus que de coeurs),
+  car le méchanisme de changement de contexte est au coeur de l'ordonnanceur.
+  
+  L'ordonnanceur a été historiquement construit de sorte à partager 1 processeur entre plusieurs processus.
+  Le nombre de processus est variable, et ne peut pas être déterminé en amont.
+  
+  Avec l'augmentation du nombre de coeurs, l'ordonnanceur a été ajusté, mais la logique historique reste la même.
+  
+  Dans un cadre massivement parallèle (type \textbf{HPC}), le nombre de processus peut être déterminé.
+  
+  Lors de l'éxecution d'un programme sur un HPC, on peut imaginer que l'utilisateur choisisse en amont le nombre de processus qu'il souhaite utilisé.
+  
+  Ainsi, on peut donc créer un ordonnanceur moins généraliste, mais plus performant en réduisant l'overhead dû au calcul de priorité et au changement de contexte.
+  
+  Par exemple, on peut imaginer avoir 1 seul processus par coeur de calcul.
+  
+  Ou encore, avoir un nombre fixe de processus par coeur, et les faire executer à intervalle régulier ('par créneau')
+  
+  On peut aussi imaginer ajouter des registres aux processeurs uniquement dédié au stockage.
+  Ces registres pourraient servir à stocker le contexte d'un processus.
+  A chaque processus est associé un lot de registre, on supprime ainsi toute
+  l'étape de re-copiage des registres dans le changement de contexte.
+  \newline
+  \newline
+  \newline
+  \textit{Finalement, \textbf{non}, cette ordonnanceur n'est pas adapté à un contexte HPC. Dans un contexte HPC, on cherche
+  à tout prix la performance. On peut réduire la place de l'ordonnanceur par le déterminisme du nombre de processus, et ainsi
+  optimiser cette partie du système}
+
+
+
 \section{Abstractions de l'ordonnanceur}
  \paragraph{Q.12}
  L'usage de pointeur de fonctions permet de relier l'ordonnanceur à des algorithmes d'ordonnancement.
  
- La structure $struct sched\_class$ définit toutes les fonctions qu'un algorithme d'ordonnancement doit implémenter.
+ La structure $struct$ $sched\_class$ définit toutes les fonctions qu'un algorithme d'ordonnancement doit implémenter.
  
  Il suffit d'initialiser cette structure avec des implémentations des fonctions de l'algorithme, et l'ordonnanceur l'executera
 
@@ -313,39 +362,22 @@ struct task_struct *pick_next_task (struct rq *rq,
   Voici quelques algorithme d'ordonnancement du noyau Linux.
   
     \begin{itemize}
-        \item \textbf{SCHED\_NORMAL : Completely Fair Scheduling (CFS)} est l'algorithme utilisé par défaut sur de très nombreuses distributions Linux.
-        Il est detaillé en \ref{cfs}
-        \item \textbf{SCHED\_DEADLINE : Deadline Scheduler}
-        \item \textbf{SCHED\_RR : Round-Robin Scheduling}
         \item \textbf{SCHED\_FIFO : First in, first out} : c'est l'algorithme le plus simple envisageable.
         Les processus demandent du temps d'éxecution sur le CPU.
-        Ces demandes sont placés dans une file FIFO (les processus sont éxecutés
+        Ces demandes sont placées dans une file FIFO (les processus sont éxecutés
         dans l'ordre dans lequelle ils ont demandé le CPU : 1er arrivé, 1er servi).
+        \item \textbf{SCHED\_DEADLINE : Deadline Scheduler} ( \ref{deadsched} ) : chaque processus déclare lui même le temps d'éxecution dont il a besoin pour éxecuter une tâche, et l'ordonnanceur les place dans la run-queue.
+        Si un processus tente de tourner plus longtemps que prévu, il est stoppé et reprendra où il s'est arrêté à la prochaine éxecution.
+        \item \textbf{SCHED\_RR : Round-Robin Scheduling}. Cet algorithme défini un quantum de temps.
+        Les processus sont ordonnancés par quantum de temps. Le choix de la taille du quantum est primordiale pour avoir de bonnes performances. Si le changement de contexte (de processus) prends $X ms$, et que le quantum fait $Y ms$, le processeur
+        passe $\frac{X}{X + Y}$ de son temps à changer de contexte. Pour $X=1ms$, et $Y=3ms$, le processeur passe $\frac{1}{4}$ de son temps à changer de contexte.
+        Il faut donc trouver un quantum suffisement grand par rapport au temps pris par le changement de contexte, mais suffisement petit (pour éviter que des tâches courtes ne retiennent le processeur plus longtemps qu'elles n'en ont vraiment besoin).
+        \item \textbf{SCHED\_NORMAL : Completely Fair Scheduling (CFS)} est l'algorithme
+        utilisé par défaut sur de très nombreuses distributions Linux. Il est detaillé en \ref{cfs}
         \item \textbf{Brain Fuck Scheduler (BFS) \ref{bfssched}} est utilisé par défaut dans quelques distributions.
-        Il a été proposé comme une alternative plus légère au CFS (avec nombre plus faible d'heuristiques et de paramètres à ajuster).
+        Il a été proposé comme une alternative plus légère au CFS
+        (avec un nombre plus faible d'heuristiques et de paramètres à ajuster).
     \end{itemize}
-
-robably the simplest of all scheduling algorithms ever devised is nonpreemp-
-tive first-come, first-served. With this algorithm, processes are assigned the CPU
-in the order they request it. Basically, there is a single queue of ready processes.
-When the first job enters the system from the outside in the morning, it is started
-immediately and allowed to run as long as it wants to. It is not interrupted because
-it has run too long. As other jobs come in, they are put onto the end of the queue.
-When the running process blocks, the first process on the queue is run next. When
-a blocked process becomes ready, like a newly arrived job, it is put on the end of
-the queue, behind all waiting processes.SEC. 2.4
-157
-SCHEDULING
-The great strength of this algorithm is that it is easy to understand and equally
-easy to program. It is also fair in the same sense that allocating scarce concert
-tickets or brand-new iPhones to people who are willing to stand on line starting at
-2 A . M . is fair. With this algorithm, a single linked list keeps track of all ready proc-
-esses. Picking a process to run just requires removing one from the front of the
-queue. Adding a new job or unblocked process just requires attaching it to the end
-of the queue. What could be simpler to understand and implement?
-Unfortunately, first-come, first-served also has a powerful disadvantage. Sup-
-pose there is one compute-bound process that runs
-
 
 \newpage
 \section{Completely Fair Scheduling (CFS)}\label{cfs}
@@ -353,7 +385,7 @@ pose there is one compute-bound process that runs
 
   \paragraph{Q.15} Cet algorithme se base sur les 'red-black tree' (arbre binaire bicolore \ref{rbtree})
 
-  \paragraph{Q.16} Cette algorithme est décrit avec détail dans l'ouvrage \ref{modernos} , page 749.
+  \paragraph{Q.16} Cet algorithme est décrit avec détail dans l'ouvrage \ref{modernos}, page 749.
   
   L'algorithme CFS stocke les processus dans une file de priorité ayant la structure d'un red-black tree (appelé 'run-queue').
   
@@ -382,8 +414,8 @@ pose there is one compute-bound process that runs
   
   Aussi, cette file d'éxecution en 'red-black tree' ne contient que les processus pouvant être éxecuté.
   
-  Les processus bloquant, en attente d'un signal (type I/O), sont placés dans une file d'attente concurrante ('wait-queue').
-  Lorsqu'un évènement les débloque et qu'ils peuvent être éxecuté, ils sont alors placés dans la 'run-queue'.
+  Les processus bloquant, en attente d'un signal (type I/O), sont placés dans une autre file d'attente, concurrante car des évènements peuvent surgir à tout moment, appelé 'wait-queue'.
+  Lorsqu'un évènement débloque un processus, il est placé dans la 'run-queue'.
 
     \newpage
     \section{Références}
@@ -404,12 +436,20 @@ pose there is one compute-bound process that runs
         \href{https://www.kernel.org/doc/local/inline.html}
         {\textit{https://www.kernel.org/doc/local/inline.html}}\newline
                
-        \bibitem{{bfssched}}\label{bfssched}
+        \bibitem{bfssched}\label{bfssched}
         Brain\_Fuck\_Scheduler - Wikipédia\newline
         \href{https://en.wikipedia.org/wiki/Brain\_Fuck\_Scheduler}
         {\textit{https://en.wikipedia.org/wiki/Brain\_Fuck\_Scheduler}}\newline
 
+        \bibitem{deadsched}\label{deadsched}
+        SCHED\_DEADLINE - Wikipédia\newline
+        \href{https://en.wikipedia.org/wiki/SCHED\_DEADLINE}
+        {\textit{https://en.wikipedia.org/wiki/SCHED\_DEADLINE}}\newline
         
+        \bibitem{elixir}\label{elixir}
+        Parcourir code source Linux - elixir.bootlin.com\newline
+        \href{https://elixir.bootlin.com/linux/latest/source}
+        {\textit{https://elixir.bootlin.com/linux/latest/source}}\newline
     \end{thebibliography}
     
 \end{document}
