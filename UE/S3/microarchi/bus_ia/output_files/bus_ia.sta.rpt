@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for bus_ia
-Mon Nov 12 12:42:15 2018
+Tue Nov 13 11:51:41 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -112,7 +112,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +------------+-----------------+------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
 +------------+-----------------+------------+------+
-; 171.38 MHz ; 171.38 MHz      ; clk        ;      ;
+; 167.03 MHz ; 167.03 MHz      ; clk        ;      ;
 +------------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -122,7 +122,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------+--------+---------------+
 ; Clock ; Slack  ; End Point TNS ;
 +-------+--------+---------------+
-; clk   ; -4.835 ; -380.809      ;
+; clk   ; -4.987 ; -395.871      ;
 +-------+--------+---------------+
 
 
@@ -152,7 +152,7 @@ No paths to report.
 +-------+--------+-----------------------+
 ; Clock ; Slack  ; End Point TNS         ;
 +-------+--------+-----------------------+
-; clk   ; -1.380 ; -329.380              ;
+; clk   ; -1.380 ; -356.380              ;
 +-------+--------+-----------------------+
 
 
@@ -161,106 +161,106 @@ No paths to report.
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack  ; From Node                            ; To Node                               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
-; -4.835 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.870      ;
-; -4.790 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.825      ;
-; -4.525 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.560      ;
-; -4.449 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.484      ;
-; -4.446 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.481      ;
-; -4.406 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.441      ;
-; -4.404 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.439      ;
-; -4.401 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.436      ;
-; -4.378 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.413      ;
-; -4.371 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.406      ;
-; -4.139 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.174      ;
-; -4.136 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.171      ;
-; -4.051 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.086      ;
-; -4.020 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.055      ;
-; -4.017 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.052      ;
-; -4.006 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.041      ;
-; -3.992 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.027      ;
-; -3.989 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.024      ;
-; -3.985 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.020      ;
-; -3.982 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 5.017      ;
-; -3.917 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.952      ;
-; -3.868 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.902      ;
-; -3.823 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.857      ;
-; -3.741 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.776      ;
-; -3.734 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.769      ;
-; -3.689 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.724      ;
-; -3.622 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.657      ;
-; -3.608 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.643      ;
-; -3.594 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.629      ;
-; -3.587 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.622      ;
-; -3.558 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.592      ;
-; -3.531 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.566      ;
-; -3.528 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.563      ;
-; -3.439 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.473      ;
-; -3.433 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.468      ;
-; -3.424 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.459      ;
-; -3.411 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.445      ;
-; -3.404 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 4.438      ;
-; -3.305 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.340      ;
-; -3.286 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.322      ;
-; -3.281 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.316      ;
-; -3.277 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.312      ;
-; -3.270 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.305      ;
-; -3.229 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.264      ;
-; -3.184 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.219      ;
-; -3.176 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.212      ;
-; -3.157 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.192      ;
-; -3.154 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.189      ;
-; -3.133 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.168      ;
-; -3.131 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.167      ;
-; -3.081 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.116      ;
-; -3.045 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.080      ;
-; -2.982 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.017      ;
-; -2.979 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 4.014      ;
-; -2.950 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 3.984      ;
-; -2.919 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.954      ;
-; -2.900 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.936      ;
-; -2.897 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.933      ;
-; -2.895 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.930      ;
-; -2.892 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.927      ;
-; -2.866 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.902      ;
-; -2.816 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.851      ;
-; -2.800 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.835      ;
-; -2.772 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.807      ;
-; -2.765 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.800      ;
-; -2.759 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.794      ;
-; -2.747 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.783      ;
-; -2.719 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.755      ;
-; -2.712 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.748      ;
-; -2.695 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.730      ;
-; -2.692 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.727      ;
-; -2.651 ; rs232out:inst6|R_baud[3]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.009     ; 3.678      ;
-; -2.651 ; rs232out:inst6|R_baud[3]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.009     ; 3.678      ;
-; -2.594 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.629      ;
-; -2.591 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 3.626      ;
-; -2.584 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.619      ;
-; -2.577 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 3.611      ;
-; -2.568 ; initiateur:inst|R_tft[31]            ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.001      ; 3.605      ;
-; -2.559 ; rs232out:inst6|R_baud[5]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.009     ; 3.586      ;
-; -2.559 ; rs232out:inst6|R_baud[5]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.009     ; 3.586      ;
-; -2.510 ; initiateur:inst|state.ST_NDATA_WRITE ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.000      ; 3.546      ;
-; -2.502 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.538      ;
-; -2.497 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.532      ;
-; -2.484 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.000      ; 3.520      ;
-; -2.483 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.000      ; 3.519      ;
-; -2.477 ; rs232out:inst6|R_baud[4]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.009     ; 3.504      ;
-; -2.477 ; rs232out:inst6|R_baud[4]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.009     ; 3.504      ;
-; -2.473 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.010      ; 3.519      ;
-; -2.472 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.010      ; 3.518      ;
-; -2.418 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.001      ; 3.455      ;
-; -2.417 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.001      ; 3.454      ;
-; -2.402 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 3.436      ;
-; -2.385 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.001      ; 3.422      ;
-; -2.384 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.001      ; 3.421      ;
-; -2.355 ; initiateur:inst|R_32[29]             ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.010      ; 3.401      ;
-; -2.319 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.354      ;
-; -2.314 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 3.348      ;
-; -2.311 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.346      ;
-; -2.297 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.332      ;
-; -2.290 ; gentick:inst8|R_tft[25]              ; plus12:inst2|state.ST_WRITE_TFT       ; clk          ; clk         ; 1.000        ; 0.001      ; 3.327      ;
+; -4.987 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 6.023      ;
+; -4.950 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.986      ;
+; -4.679 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.715      ;
+; -4.631 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.667      ;
+; -4.630 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.666      ;
+; -4.594 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.630      ;
+; -4.593 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.629      ;
+; -4.537 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.573      ;
+; -4.439 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.474      ;
+; -4.402 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.437      ;
+; -4.340 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.376      ;
+; -4.323 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.359      ;
+; -4.322 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.358      ;
+; -4.211 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 5.247      ;
+; -4.181 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.217      ;
+; -4.180 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.216      ;
+; -4.174 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 5.210      ;
+; -4.131 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.166      ;
+; -3.989 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 5.024      ;
+; -3.984 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.020      ;
+; -3.983 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 5.019      ;
+; -3.906 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.942      ;
+; -3.903 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.939      ;
+; -3.792 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.827      ;
+; -3.761 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.797      ;
+; -3.672 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.708      ;
+; -3.564 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.600      ;
+; -3.550 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.586      ;
+; -3.549 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.585      ;
+; -3.496 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.531      ;
+; -3.459 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.494      ;
+; -3.433 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.469      ;
+; -3.402 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.438      ;
+; -3.365 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.401      ;
+; -3.358 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.393      ;
+; -3.316 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.352      ;
+; -3.315 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.351      ;
+; -3.264 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.300      ;
+; -3.252 ; plus12:inst2|R_tft[32]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 4.284      ;
+; -3.250 ; plus12:inst2|R_tft[32]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 4.282      ;
+; -3.188 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.223      ;
+; -3.181 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.217      ;
+; -3.130 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.166      ;
+; -3.127 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.000      ; 4.163      ;
+; -3.125 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.000      ; 4.161      ;
+; -3.124 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.159      ;
+; -3.102 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.137      ;
+; -3.094 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 4.130      ;
+; -3.077 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.113      ;
+; -3.076 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 4.112      ;
+; -3.065 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.100      ;
+; -3.046 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 4.081      ;
+; -2.952 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.988      ;
+; -2.911 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.947      ;
+; -2.908 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.944      ;
+; -2.907 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.943      ;
+; -2.896 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.932      ;
+; -2.885 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.920      ;
+; -2.849 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.884      ;
+; -2.834 ; plus12:inst2|R_tft[27]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.866      ;
+; -2.832 ; plus12:inst2|R_tft[27]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.864      ;
+; -2.825 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.861      ;
+; -2.824 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.860      ;
+; -2.803 ; initiateur:inst|state.ST_NDATA_WRITE ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; -0.001     ; 3.838      ;
+; -2.802 ; plus12:inst2|R_tft[29]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.834      ;
+; -2.801 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.837      ;
+; -2.800 ; plus12:inst2|R_tft[29]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.832      ;
+; -2.794 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.829      ;
+; -2.755 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.791      ;
+; -2.716 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.751      ;
+; -2.710 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.742      ;
+; -2.708 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.740      ;
+; -2.671 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.707      ;
+; -2.670 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.706      ;
+; -2.657 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.693      ;
+; -2.652 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.687      ;
+; -2.633 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.668      ;
+; -2.593 ; plus12:inst2|R_tft[28]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.625      ;
+; -2.591 ; plus12:inst2|R_tft[28]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.623      ;
+; -2.524 ; rs232out:inst6|R_baud[7]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; 0.001      ; 3.561      ;
+; -2.501 ; plus12:inst2|R_tft[26]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.533      ;
+; -2.500 ; rs232out:inst6|R_baud[7]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; 0.001      ; 3.537      ;
+; -2.499 ; plus12:inst2|R_tft[26]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.531      ;
+; -2.488 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.524      ;
+; -2.468 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.504      ;
+; -2.467 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.503      ;
+; -2.455 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.490      ;
+; -2.415 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 3.450      ;
+; -2.405 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.441      ;
+; -2.364 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.396      ;
+; -2.363 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 3.399      ;
+; -2.362 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.394      ;
+; -2.344 ; rs232out:inst6|R_baud[12]            ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; 0.001      ; 3.381      ;
+; -2.321 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 3.357      ;
+; -2.320 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 3.352      ;
+; -2.320 ; rs232out:inst6|R_baud[12]            ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; 0.001      ; 3.357      ;
+; -2.318 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 3.350      ;
+; -2.318 ; initiateur:inst|R_32[30]             ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.005      ; 3.359      ;
+; -2.308 ; gentick:inst8|R_tft[24]              ; plus12:inst2|state.ST_WRITE_TFT       ; clk          ; clk         ; 1.000        ; -0.004     ; 3.340      ;
+; -2.280 ; rs232in:inst4|R_baud[0]              ; rs232in:inst4|R_baud[13]              ; clk          ; clk         ; 1.000        ; 0.000      ; 3.316      ;
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -269,106 +269,106 @@ No paths to report.
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack ; From Node                                       ; To Node                                         ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; rs232out:inst6|R_i[0]                           ; rs232out:inst6|R_i[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; rs232out:inst6|R_i[3]                           ; rs232out:inst6|R_i[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; initiateur:inst|state.ST_NDATA_WRITE            ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[0]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; initiateur:inst|R_i[1]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|rx_R                              ; rs232in:inst4|rx_R                              ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232in:inst4|state.WAIT_FIN                    ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|state.WAIT_StartBit               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|state.WAIT_1P5B                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|R_i[1]                            ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|R_i[2]                            ; rs232in:inst4|R_i[2]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|R_i[3]                            ; rs232in:inst4|R_i[3]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; rs232in:inst4|state.WAIT_FIN                    ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|state.WAIT_StartBit               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|state.WAIT_1P5B                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232in:inst4|state.WAIT_1B                     ; rs232in:inst4|state.WAIT_1B                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; initiateur:inst|R_pulse                         ; initiateur:inst|R_pulse                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; initiateur:inst|state.ST_NDATA_WRITE            ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[0]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; initiateur:inst|R_i[1]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; terminateur:inst3|state.ST_READ_BUSIN           ; terminateur:inst3|state.ST_READ_BUSIN           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; plus12:inst2|state.ST_COMPUTE                   ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; plus12:inst2|state.ST_READ                      ; plus12:inst2|state.ST_READ                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; initiateur:inst|state.ST_BUSIN_LOADED           ; initiateur:inst|state.ST_BUSIN_LOADED           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; gentick:inst8|state.ST_READ_BUSIN               ; gentick:inst8|state.ST_READ_BUSIN               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; plus12:inst2|state.ST_COMPUTE                   ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; terminateur:inst3|state.ST_READ_BUSIN           ; terminateur:inst3|state.ST_READ_BUSIN           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; plus12:inst2|state.ST_WRITE_SUM                 ; plus12:inst2|state.ST_WRITE_SUM                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[0]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; terminateurSplit:inst5|R_i[1]                   ; terminateurSplit:inst5|R_i[1]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; terminateurSplit:inst5|R_i[2]                   ; terminateurSplit:inst5|R_i[2]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232out:inst6|R_i[0]                           ; rs232out:inst6|R_i[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; rs232out:inst6|R_i[3]                           ; rs232out:inst6|R_i[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232out:inst6|state.ST_ATT                     ; rs232out:inst6|state.ST_ATT                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232out:inst6|state.ST_BEGIN                   ; rs232out:inst6|state.ST_BEGIN                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232out:inst6|R_i[2]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h100:inst7|state.ST_DECR                        ; h100:inst7|state.ST_DECR                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
 ; 0.391 ; rs232out:inst6|R_data[8]                        ; rs232out:inst6|R_data[8]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; h10:inst1|C[1]                                  ; h10:inst1|C[1]                                  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; h10:inst1|C[2]                                  ; h10:inst1|C[2]                                  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.391 ; h10:inst1|R                                     ; h10:inst1|R                                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
-; 0.520 ; plus12:inst2|R_tft[40]                          ; terminateur:inst3|R_tft[40]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
-; 0.521 ; terminateurSplit:inst5|R[11]                    ; terminateurSplit:inst5|R[3]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.787      ;
-; 0.521 ; terminateurSplit:inst5|R[12]                    ; terminateurSplit:inst5|R[4]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.787      ;
-; 0.522 ; rs232in:inst4|rx_fifo_R[1]                      ; rs232in:inst4|rx_fifo_R[2]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; rs232in:inst4|rx_R                              ; rs232in:inst4|R_sh[7]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; rs232in:inst4|R_sh[5]                           ; rs232in:inst4|R_sh[4]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; rs232in:inst4|R_sh[2]                           ; initiateur:inst|R_data[2]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; terminateur:inst3|R_tft[15]                     ; initiateur:inst|R_tft[15]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; initiateur:inst|R_32[12]                        ; initiateur:inst|R_32[4]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.522 ; initiateur:inst|R_32[8]                         ; gentick:inst8|R_tft[8]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
-; 0.523 ; rs232in:inst4|R_sh[2]                           ; rs232in:inst4|R_sh[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
-; 0.523 ; initiateur:inst|R_32[31]                        ; initiateur:inst|R_32[23]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
-; 0.523 ; initiateur:inst|R_32[17]                        ; initiateur:inst|R_32[9]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
-; 0.523 ; initiateur:inst|R_32[27]                        ; initiateur:inst|R_32[19]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
-; 0.524 ; terminateur:inst3|R_tft[7]                      ; initiateur:inst|R_tft[7]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
-; 0.524 ; initiateur:inst|R_32[10]                        ; initiateur:inst|R_32[2]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
-; 0.525 ; rs232in:inst4|rx_fifo_R[0]                      ; rs232in:inst4|rx_fifo_R[1]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.525 ; rs232in:inst4|R_sh[5]                           ; initiateur:inst|R_data[5]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.525 ; initiateur:inst|R_32[16]                        ; initiateur:inst|R_32[8]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
+; 0.391 ; h10:inst10|C[0]                                 ; h10:inst10|C[0]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h10:inst10|C[1]                                 ; h10:inst10|C[1]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h10:inst10|C[2]                                 ; h10:inst10|C[2]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h10:inst10|C[3]                                 ; h10:inst10|C[3]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h10:inst10|state                                ; h10:inst10|state                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.391 ; h10:inst10|R                                    ; h10:inst10|R                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.517 ; initiateur:inst|R_32[5]                         ; gentick:inst8|R_tft[5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.517 ; terminateurSplit:inst5|R[17]                    ; terminateurSplit:inst5|R[9]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.517 ; terminateurSplit:inst5|R[9]                     ; terminateurSplit:inst5|R[1]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.783      ;
+; 0.518 ; initiateur:inst|R_tft[2]                        ; gentick:inst8|R_tft[2]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.784      ;
+; 0.519 ; terminateurSplit:inst5|R[15]                    ; terminateurSplit:inst5|R[7]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.785      ;
+; 0.520 ; initiateur:inst|R_tft[32]                       ; gentick:inst8|R_tft[32]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.520 ; initiateur:inst|R_tft[38]                       ; gentick:inst8|R_tft[38]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.520 ; terminateur:inst3|R_tft[19]                     ; initiateur:inst|R_tft[19]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.520 ; terminateurSplit:inst5|R[10]                    ; terminateurSplit:inst5|R[2]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.520 ; h10:inst10|C[3]                                 ; h10:inst10|state                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.786      ;
+; 0.521 ; initiateur:inst|R_32[20]                        ; initiateur:inst|R_32[12]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.787      ;
+; 0.521 ; terminateurSplit:inst5|R[31]                    ; terminateurSplit:inst5|R[23]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.787      ;
+; 0.522 ; initiateur:inst|R_32[16]                        ; initiateur:inst|R_32[8]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
+; 0.522 ; terminateur:inst3|R_tft[11]                     ; initiateur:inst|R_tft[11]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.788      ;
+; 0.523 ; terminateur:inst3|R_tft[17]                     ; initiateur:inst|R_tft[17]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
+; 0.523 ; terminateur:inst3|R_tft[21]                     ; initiateur:inst|R_tft[21]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.789      ;
+; 0.524 ; rs232in:inst4|rx_R                              ; rs232in:inst4|R_sh[7]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
+; 0.524 ; initiateur:inst|R_32[25]                        ; initiateur:inst|R_32[17]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
+; 0.524 ; initiateur:inst|R_32[3]                         ; gentick:inst8|R_tft[3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
+; 0.524 ; terminateur:inst3|R_tft[9]                      ; initiateur:inst|R_tft[9]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.790      ;
+; 0.525 ; terminateurSplit:inst5|R[38]                    ; terminateurSplit:inst5|R[31]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
 ; 0.525 ; initiateur:inst|R_32[8]                         ; initiateur:inst|R_32[0]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.525 ; terminateur:inst3|R_tft[19]                     ; initiateur:inst|R_tft[19]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.525 ; terminateurSplit:inst5|R[29]                    ; terminateurSplit:inst5|R[21]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.525 ; rs232in:inst4|rx_fifo_R[1]                      ; rs232in:inst4|rx_R                              ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
-; 0.526 ; terminateur:inst3|R_tft[38]                     ; initiateur:inst|R_tft[38]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; rs232out:inst6|R_baud[12]                       ; rs232out:inst6|R_baud[12]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; initiateur:inst|R_32[21]                        ; initiateur:inst|R_32[13]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; initiateur:inst|R_32[20]                        ; initiateur:inst|R_32[12]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; initiateur:inst|R_32[26]                        ; initiateur:inst|R_32[18]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; terminateur:inst3|R_tft[6]                      ; initiateur:inst|R_tft[6]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.526 ; terminateur:inst3|R_tft[22]                     ; initiateur:inst|R_tft[22]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
-; 0.529 ; initiateur:inst|R_32[20]                        ; gentick:inst8|R_tft[20]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
-; 0.532 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.798      ;
-; 0.533 ; rs232in:inst4|R_sh[1]                           ; rs232in:inst4|R_sh[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.799      ;
-; 0.534 ; rs232in:inst4|R_sh[0]                           ; initiateur:inst|R_data[0]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
-; 0.534 ; rs232in:inst4|R_sh[1]                           ; initiateur:inst|R_data[1]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
-; 0.535 ; rs232in:inst4|R_sh[4]                           ; initiateur:inst|R_data[4]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.801      ;
-; 0.535 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_LOOP            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.801      ;
-; 0.535 ; terminateurSplit:inst5|R[38]                    ; terminateurSplit:inst5|R[30]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.801      ;
-; 0.536 ; rs232in:inst4|R_sh[4]                           ; rs232in:inst4|R_sh[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.802      ;
-; 0.539 ; initiateur:inst|state.ST_BUSIN_LOADED           ; gentick:inst8|state.ST_READ_BUSIN               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.805      ;
-; 0.541 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[2]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.807      ;
-; 0.542 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[1]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.808      ;
-; 0.542 ; h10:inst1|state                                 ; h10:inst1|R                                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.808      ;
-; 0.543 ; rs232in:inst4|state.WAIT_1B                     ; rs232in:inst4|state.MainLoop                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.809      ;
-; 0.554 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.820      ;
-; 0.556 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.GEN_PULSE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.822      ;
-; 0.556 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[3]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.822      ;
-; 0.558 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.824      ;
-; 0.559 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.ECRIRE                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.825      ;
-; 0.566 ; plus12:inst2|R_tft[32]                          ; terminateur:inst3|R_tft[32]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.832      ;
-; 0.568 ; gentick:inst8|state.ST_READ_BUSIN               ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.834      ;
-; 0.642 ; terminateurSplit:inst5|R[21]                    ; terminateurSplit:inst5|R[13]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.908      ;
-; 0.646 ; rs232out:inst6|R_data[1]                        ; rs232out:inst6|R_data[0]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.912      ;
-; 0.649 ; initiateur:inst|R_32[7]                         ; gentick:inst8|R_tft[7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.915      ;
-; 0.649 ; terminateurSplit:inst5|R[18]                    ; terminateurSplit:inst5|R[10]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.915      ;
-; 0.651 ; terminateurSplit:inst5|R[32]                    ; terminateurSplit:inst5|R[24]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.917      ;
-; 0.653 ; initiateur:inst|R_32[5]                         ; gentick:inst8|R_tft[5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.919      ;
-; 0.657 ; initiateur:inst|R_32[13]                        ; gentick:inst8|R_tft[13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.923      ;
-; 0.658 ; plus12:inst2|R_res[8]                           ; terminateur:inst3|R_tft[8]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.924      ;
-; 0.662 ; rs232in:inst4|R_sh[6]                           ; rs232in:inst4|R_sh[5]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.928      ;
-; 0.663 ; rs232in:inst4|R_sh[3]                           ; initiateur:inst|R_data[3]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.929      ;
-; 0.663 ; gentick:inst8|R_tft[30]                         ; plus12:inst2|R_tft[30]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.929      ;
-; 0.664 ; initiateur:inst|R_32[24]                        ; initiateur:inst|R_32[16]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.930      ;
-; 0.664 ; terminateurSplit:inst5|R[33]                    ; terminateurSplit:inst5|R[25]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.930      ;
-; 0.664 ; terminateurSplit:inst5|R[33]                    ; terminateurSplit:inst5|R[26]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.930      ;
-; 0.666 ; terminateur:inst3|R_tft[26]                     ; initiateur:inst|R_tft[26]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.932      ;
-; 0.666 ; rs232in:inst4|R_sh[6]                           ; initiateur:inst|R_data[6]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.932      ;
+; 0.525 ; initiateur:inst|R_32[17]                        ; gentick:inst8|R_tft[17]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
+; 0.525 ; rs232out:inst6|R_data[5]                        ; rs232out:inst6|R_data[4]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
+; 0.525 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.791      ;
+; 0.526 ; initiateur:inst|R_32[18]                        ; initiateur:inst|R_32[10]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.792      ;
+; 0.527 ; initiateur:inst|R_32[18]                        ; gentick:inst8|R_tft[18]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.793      ;
+; 0.527 ; initiateur:inst|R_32[14]                        ; initiateur:inst|R_32[6]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.793      ;
+; 0.527 ; rs232out:inst6|R_data[7]                        ; rs232out:inst6|R_data[6]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.793      ;
+; 0.529 ; rs232in:inst4|R_sh[7]                           ; rs232in:inst4|R_sh[6]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
+; 0.529 ; rs232in:inst4|R_sh[4]                           ; rs232in:inst4|R_sh[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
+; 0.529 ; rs232in:inst4|R_sh[2]                           ; rs232in:inst4|R_sh[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
+; 0.529 ; initiateur:inst|R_32[31]                        ; initiateur:inst|R_32[23]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
+; 0.529 ; initiateur:inst|R_32[11]                        ; initiateur:inst|R_32[3]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.795      ;
+; 0.530 ; initiateur:inst|R_32[24]                        ; initiateur:inst|R_32[16]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.796      ;
+; 0.530 ; plus12:inst2|R_res[2]                           ; terminateur:inst3|R_tft[2]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.796      ;
+; 0.530 ; initiateur:inst|R_32[11]                        ; gentick:inst8|R_tft[11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.796      ;
+; 0.531 ; rs232in:inst4|R_sh[3]                           ; rs232in:inst4|R_sh[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.531 ; gentick:inst8|R_tft[25]                         ; plus12:inst2|R_tft[25]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.531 ; rs232out:inst6|R_baud[12]                       ; rs232out:inst6|R_baud[12]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.531 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.797      ;
+; 0.532 ; initiateur:inst|R_32[9]                         ; initiateur:inst|R_32[1]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.798      ;
+; 0.534 ; h100:inst7|R[23]                                ; h100:inst7|R[23]                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
+; 0.534 ; initiateur:inst|R_32[1]                         ; gentick:inst8|R_tft[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
+; 0.534 ; initiateur:inst|R_32[9]                         ; gentick:inst8|R_tft[9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.800      ;
+; 0.535 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_NDATA_LOADED           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.801      ;
+; 0.536 ; initiateur:inst|R_32[13]                        ; initiateur:inst|R_32[5]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.802      ;
+; 0.538 ; initiateur:inst|R_32[13]                        ; gentick:inst8|R_tft[13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.804      ;
+; 0.538 ; rs232in:inst4|state.GEN_PULSE                   ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.804      ;
+; 0.541 ; h10:inst10|C[0]                                 ; h10:inst10|C[1]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.807      ;
+; 0.542 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[2]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.808      ;
+; 0.542 ; h10:inst10|C[0]                                 ; h10:inst10|C[2]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.808      ;
+; 0.543 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.ECRIRE                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.809      ;
+; 0.545 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.GEN_PULSE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.811      ;
+; 0.546 ; initiateur:inst|state.ST_NDATA_LOADED           ; initiateur:inst|state.ST_EndLoop                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.812      ;
+; 0.547 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.813      ;
+; 0.550 ; gentick:inst8|state.ST_WRITE_OUT                ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.816      ;
+; 0.550 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[1]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.816      ;
+; 0.550 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[2]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.816      ;
+; 0.551 ; plus12:inst2|state.ST_WRITE_SUM                 ; terminateur:inst3|state.ST_WRITE_DUMP           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.817      ;
+; 0.551 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_WAIT_NOBUSY     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.817      ;
+; 0.552 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.818      ;
+; 0.553 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_LOOP            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.819      ;
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -452,31 +452,31 @@ No paths to report.
 ; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gentick:inst8|state.ST_READ_BUSIN ;
 ; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; gentick:inst8|state.ST_WRITE_OUT  ;
 ; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gentick:inst8|state.ST_WRITE_OUT  ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[0]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[0]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[1]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[1]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[2]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[2]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[3]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[3]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|R                       ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|R                       ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|state                   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|state                   ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[0]           ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[0]           ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[10]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[10]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[11]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[11]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[12]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[12]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[13]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[13]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[14]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[14]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[15]          ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[0]                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[0]                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[10]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[10]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[11]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[11]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[12]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[12]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[13]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[13]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[14]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[14]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[15]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[15]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[16]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[16]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[17]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[17]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[18]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[18]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[19]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[19]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[1]                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[1]                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[20]                  ;
 +--------+--------------+----------------+------------------+-------+------------+-----------------------------------+
 
 
@@ -485,8 +485,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; reset     ; clk        ; 5.773 ; 5.773 ; Rise       ; clk             ;
-; rx        ; clk        ; 3.633 ; 3.633 ; Rise       ; clk             ;
+; reset     ; clk        ; 5.240 ; 5.240 ; Rise       ; clk             ;
+; rx        ; clk        ; 3.480 ; 3.480 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -495,8 +495,8 @@ No paths to report.
 +-----------+------------+--------+--------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +-----------+------------+--------+--------+------------+-----------------+
-; reset     ; clk        ; -3.785 ; -3.785 ; Rise       ; clk             ;
-; rx        ; clk        ; -3.403 ; -3.403 ; Rise       ; clk             ;
+; reset     ; clk        ; -4.674 ; -4.674 ; Rise       ; clk             ;
+; rx        ; clk        ; -3.250 ; -3.250 ; Rise       ; clk             ;
 +-----------+------------+--------+--------+------------+-----------------+
 
 
@@ -505,8 +505,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 8.950 ; 8.950 ; Rise       ; clk             ;
-; tx        ; clk        ; 8.472 ; 8.472 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 7.956 ; 7.956 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 7.329 ; 7.329 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 7.281 ; 7.281 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 7.335 ; 7.335 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 7.344 ; 7.344 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 7.565 ; 7.565 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 7.561 ; 7.561 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 7.595 ; 7.595 ; Rise       ; clk             ;
+; tx        ; clk        ; 8.847 ; 8.847 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -515,8 +522,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 8.950 ; 8.950 ; Rise       ; clk             ;
-; tx        ; clk        ; 8.329 ; 8.329 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 7.956 ; 7.956 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 6.979 ; 6.979 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 6.981 ; 6.981 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 6.992 ; 6.992 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 6.994 ; 6.994 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 7.220 ; 7.220 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 7.211 ; 7.211 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 7.246 ; 7.246 ; Rise       ; clk             ;
+; tx        ; clk        ; 8.575 ; 8.575 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -525,7 +539,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 9.958 ; 9.958 ;    ;
+; reset      ; diode       ;    ; 9.937 ; 9.937 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -534,7 +548,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 9.958 ; 9.958 ;    ;
+; reset      ; diode       ;    ; 9.937 ; 9.937 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -543,7 +557,7 @@ No paths to report.
 +-------+--------+---------------+
 ; Clock ; Slack  ; End Point TNS ;
 +-------+--------+---------------+
-; clk   ; -1.506 ; -37.817       ;
+; clk   ; -1.575 ; -38.676       ;
 +-------+--------+---------------+
 
 
@@ -573,7 +587,7 @@ No paths to report.
 +-------+--------+-----------------------+
 ; Clock ; Slack  ; End Point TNS         ;
 +-------+--------+-----------------------+
-; clk   ; -1.380 ; -329.380              ;
+; clk   ; -1.380 ; -356.380              ;
 +-------+--------+-----------------------+
 
 
@@ -582,106 +596,106 @@ No paths to report.
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack  ; From Node                            ; To Node                               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
-; -1.506 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.538      ;
-; -1.489 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.521      ;
-; -1.378 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.410      ;
-; -1.346 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.378      ;
-; -1.344 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.376      ;
-; -1.343 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.375      ;
-; -1.329 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.361      ;
-; -1.326 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.358      ;
-; -1.324 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.356      ;
-; -1.317 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.349      ;
-; -1.218 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.250      ;
-; -1.215 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.247      ;
-; -1.184 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.216      ;
-; -1.181 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.213      ;
-; -1.181 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.213      ;
-; -1.164 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.196      ;
-; -1.164 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.196      ;
-; -1.161 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.193      ;
-; -1.157 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.189      ;
-; -1.154 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.186      ;
-; -1.128 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.160      ;
-; -1.113 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.144      ;
-; -1.096 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.127      ;
-; -1.079 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.111      ;
-; -1.062 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.094      ;
-; -1.053 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.085      ;
-; -1.019 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.051      ;
-; -1.011 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.043      ;
-; -0.999 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.031      ;
-; -0.992 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.024      ;
-; -0.985 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.016      ;
-; -0.968 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.000      ;
-; -0.965 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.997      ;
-; -0.951 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.982      ;
-; -0.951 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.983      ;
-; -0.932 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.964      ;
-; -0.931 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.962      ;
-; -0.924 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.955      ;
-; -0.917 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.949      ;
-; -0.897 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.929      ;
-; -0.890 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.922      ;
-; -0.883 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.915      ;
-; -0.871 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; -0.001     ; 1.902      ;
-; -0.831 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.863      ;
-; -0.823 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.855      ;
-; -0.820 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.852      ;
-; -0.817 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.849      ;
-; -0.814 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.846      ;
-; -0.812 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.844      ;
-; -0.803 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.835      ;
-; -0.800 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.832      ;
-; -0.776 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.808      ;
-; -0.744 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.776      ;
-; -0.741 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.773      ;
-; -0.735 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.766      ;
-; -0.723 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.755      ;
-; -0.720 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.752      ;
-; -0.711 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; -0.001     ; 1.742      ;
-; -0.708 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; -0.001     ; 1.739      ;
-; -0.703 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.735      ;
-; -0.701 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.733      ;
-; -0.689 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.721      ;
-; -0.669 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.701      ;
-; -0.660 ; rs232out:inst6|R_baud[3]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.008     ; 1.684      ;
-; -0.660 ; rs232out:inst6|R_baud[3]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.008     ; 1.684      ;
-; -0.658 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.690      ;
-; -0.655 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.687      ;
-; -0.652 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.684      ;
-; -0.649 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.681      ;
-; -0.649 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.681      ;
-; -0.642 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.674      ;
-; -0.635 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.667      ;
-; -0.628 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.660      ;
-; -0.606 ; initiateur:inst|R_tft[31]            ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.001      ; 1.639      ;
-; -0.601 ; initiateur:inst|state.ST_NDATA_WRITE ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.000      ; 1.633      ;
-; -0.591 ; rs232out:inst6|R_baud[5]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.008     ; 1.615      ;
-; -0.591 ; rs232out:inst6|R_baud[5]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.008     ; 1.615      ;
-; -0.589 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.620      ;
-; -0.588 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.620      ;
-; -0.585 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.617      ;
-; -0.581 ; rs232out:inst6|R_baud[4]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; -0.008     ; 1.605      ;
-; -0.581 ; rs232out:inst6|R_baud[4]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; -0.008     ; 1.605      ;
-; -0.579 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.611      ;
-; -0.578 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.000      ; 1.610      ;
-; -0.578 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.000      ; 1.610      ;
-; -0.558 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.590      ;
-; -0.546 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.577      ;
-; -0.546 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.011      ; 1.589      ;
-; -0.546 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.011      ; 1.589      ;
-; -0.511 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.001      ; 1.544      ;
-; -0.511 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.001      ; 1.544      ;
-; -0.510 ; rs232out:inst6|R_baud[3]             ; rs232out:inst6|state.ST_ADV           ; clk          ; clk         ; 1.000        ; -0.008     ; 1.534      ;
-; -0.510 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.541      ;
-; -0.507 ; initiateur:inst|R_32[29]             ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.009      ; 1.548      ;
-; -0.498 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.001      ; 1.531      ;
-; -0.498 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.001      ; 1.531      ;
-; -0.491 ; gentick:inst8|R_tft[25]              ; plus12:inst2|state.ST_WRITE_TFT       ; clk          ; clk         ; 1.000        ; 0.001      ; 1.524      ;
-; -0.490 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.521      ;
-; -0.487 ; plus12:inst2|R_tft[6]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.519      ;
-; -0.478 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.002     ; 1.508      ;
+; -1.575 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.607      ;
+; -1.565 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.597      ;
+; -1.446 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.478      ;
+; -1.437 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.469      ;
+; -1.436 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.468      ;
+; -1.427 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.459      ;
+; -1.426 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.458      ;
+; -1.416 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.448      ;
+; -1.370 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.401      ;
+; -1.360 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.391      ;
+; -1.320 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.352      ;
+; -1.308 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.340      ;
+; -1.307 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.339      ;
+; -1.278 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.310      ;
+; -1.277 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.309      ;
+; -1.256 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.288      ;
+; -1.246 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.278      ;
+; -1.241 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.272      ;
+; -1.211 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.242      ;
+; -1.182 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.214      ;
+; -1.181 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.213      ;
+; -1.127 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.159      ;
+; -1.121 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.153      ;
+; -1.115 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.146      ;
+; -1.097 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.129      ;
+; -1.045 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.077      ;
+; -1.001 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 2.033      ;
+; -0.983 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.015      ;
+; -0.982 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 2.014      ;
+; -0.970 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 2.001      ;
+; -0.960 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.991      ;
+; -0.941 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.973      ;
+; -0.916 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.947      ;
+; -0.915 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.947      ;
+; -0.912 ; plus12:inst2|R_tft[32]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.003     ; 1.941      ;
+; -0.907 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.939      ;
+; -0.906 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.938      ;
+; -0.905 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.937      ;
+; -0.890 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; 0.000      ; 1.922      ;
+; -0.887 ; plus12:inst2|R_tft[32]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.003     ; 1.916      ;
+; -0.873 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.905      ;
+; -0.865 ; plus12:inst2|state.ST_WRITE_SUM      ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; 0.000      ; 1.897      ;
+; -0.841 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.872      ;
+; -0.840 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.871      ;
+; -0.820 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.852      ;
+; -0.811 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.842      ;
+; -0.806 ; plus12:inst2|R_tft[1]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.837      ;
+; -0.803 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.835      ;
+; -0.802 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.834      ;
+; -0.802 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.834      ;
+; -0.796 ; plus12:inst2|R_tft[0]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.827      ;
+; -0.786 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.818      ;
+; -0.756 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.788      ;
+; -0.736 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.767      ;
+; -0.735 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.767      ;
+; -0.734 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.766      ;
+; -0.727 ; plus12:inst2|R_tft[29]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.755      ;
+; -0.726 ; plus12:inst2|R_tft[14]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.758      ;
+; -0.725 ; initiateur:inst|state.ST_NDATA_WRITE ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; -0.001     ; 1.756      ;
+; -0.724 ; plus12:inst2|R_tft[27]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.752      ;
+; -0.715 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.746      ;
+; -0.705 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.737      ;
+; -0.702 ; plus12:inst2|R_tft[29]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 1.730      ;
+; -0.699 ; plus12:inst2|R_tft[27]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 1.727      ;
+; -0.682 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.714      ;
+; -0.681 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.713      ;
+; -0.677 ; plus12:inst2|R_tft[12]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.708      ;
+; -0.675 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.703      ;
+; -0.668 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.699      ;
+; -0.660 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[7]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.692      ;
+; -0.654 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[12]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.686      ;
+; -0.650 ; plus12:inst2|R_tft[25]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 1.678      ;
+; -0.647 ; plus12:inst2|R_tft[13]               ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.678      ;
+; -0.622 ; plus12:inst2|R_tft[4]                ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.654      ;
+; -0.620 ; plus12:inst2|R_tft[28]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.648      ;
+; -0.615 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[8]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.646      ;
+; -0.614 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.646      ;
+; -0.613 ; plus12:inst2|R_tft[17]               ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.645      ;
+; -0.595 ; plus12:inst2|R_tft[28]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 1.623      ;
+; -0.584 ; rs232out:inst6|R_baud[7]             ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; 0.001      ; 1.617      ;
+; -0.583 ; rs232out:inst6|R_baud[7]             ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; 0.001      ; 1.616      ;
+; -0.565 ; plus12:inst2|R_tft[26]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.593      ;
+; -0.554 ; plus12:inst2|R_tft[15]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.586      ;
+; -0.553 ; h100:inst7|R[0]                      ; h100:inst7|R[23]                      ; clk          ; clk         ; 1.000        ; 0.008      ; 1.593      ;
+; -0.551 ; plus12:inst2|R_tft[2]                ; plus12:inst2|R_res[5]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.582      ;
+; -0.540 ; plus12:inst2|R_tft[26]               ; terminateur:inst3|state.ST_WRITE_OUT  ; clk          ; clk         ; 1.000        ; -0.004     ; 1.568      ;
+; -0.531 ; h100:inst7|R[1]                      ; h100:inst7|R[23]                      ; clk          ; clk         ; 1.000        ; 0.008      ; 1.571      ;
+; -0.518 ; h100:inst7|R[0]                      ; h100:inst7|R[22]                      ; clk          ; clk         ; 1.000        ; 0.008      ; 1.558      ;
+; -0.518 ; rs232out:inst6|R_baud[12]            ; rs232out:inst6|state.ST_ATT           ; clk          ; clk         ; 1.000        ; 0.001      ; 1.551      ;
+; -0.517 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[11]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.549      ;
+; -0.517 ; rs232out:inst6|R_baud[12]            ; rs232out:inst6|state.ST_BEGIN         ; clk          ; clk         ; 1.000        ; 0.001      ; 1.550      ;
+; -0.516 ; plus12:inst2|R_tft[5]                ; plus12:inst2|R_res[10]                ; clk          ; clk         ; 1.000        ; 0.000      ; 1.548      ;
+; -0.516 ; plus12:inst2|R_tft[3]                ; plus12:inst2|R_res[6]                 ; clk          ; clk         ; 1.000        ; -0.001     ; 1.547      ;
+; -0.514 ; plus12:inst2|R_tft[24]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.004     ; 1.542      ;
+; -0.511 ; plus12:inst2|R_tft[38]               ; terminateur:inst3|state.ST_WRITE_DUMP ; clk          ; clk         ; 1.000        ; -0.003     ; 1.540      ;
+; -0.509 ; rs232in:inst4|R_baud[0]              ; rs232in:inst4|R_baud[13]              ; clk          ; clk         ; 1.000        ; 0.000      ; 1.541      ;
+; -0.501 ; plus12:inst2|R_tft[16]               ; plus12:inst2|R_res[9]                 ; clk          ; clk         ; 1.000        ; 0.000      ; 1.533      ;
+; -0.499 ; initiateur:inst|R_32[30]             ; gentick:inst8|state.ST_WRITE_OUT      ; clk          ; clk         ; 1.000        ; 0.005      ; 1.536      ;
+; -0.498 ; gentick:inst8|R_tft[24]              ; plus12:inst2|state.ST_WRITE_TFT       ; clk          ; clk         ; 1.000        ; -0.004     ; 1.526      ;
+; -0.496 ; h100:inst7|R[2]                      ; h100:inst7|R[23]                      ; clk          ; clk         ; 1.000        ; 0.008      ; 1.536      ;
 +--------+--------------------------------------+---------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -690,106 +704,106 @@ No paths to report.
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack ; From Node                                       ; To Node                                         ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; rs232out:inst6|R_i[0]                           ; rs232out:inst6|R_i[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; rs232out:inst6|R_i[3]                           ; rs232out:inst6|R_i[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; initiateur:inst|state.ST_NDATA_WRITE            ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[0]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; initiateur:inst|R_i[1]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|rx_R                              ; rs232in:inst4|rx_R                              ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232in:inst4|state.WAIT_FIN                    ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|state.WAIT_StartBit               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|state.WAIT_1P5B                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|R_i[1]                            ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|R_i[2]                            ; rs232in:inst4|R_i[2]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|R_i[3]                            ; rs232in:inst4|R_i[3]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; rs232in:inst4|state.WAIT_FIN                    ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|state.WAIT_StartBit               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|state.WAIT_1P5B                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232in:inst4|state.WAIT_1B                     ; rs232in:inst4|state.WAIT_1B                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; initiateur:inst|R_pulse                         ; initiateur:inst|R_pulse                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; initiateur:inst|state.ST_NDATA_WRITE            ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[0]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; initiateur:inst|R_i[1]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; terminateur:inst3|state.ST_READ_BUSIN           ; terminateur:inst3|state.ST_READ_BUSIN           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; plus12:inst2|state.ST_COMPUTE                   ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; plus12:inst2|state.ST_READ                      ; plus12:inst2|state.ST_READ                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; initiateur:inst|state.ST_BUSIN_LOADED           ; initiateur:inst|state.ST_BUSIN_LOADED           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; gentick:inst8|state.ST_READ_BUSIN               ; gentick:inst8|state.ST_READ_BUSIN               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; plus12:inst2|state.ST_COMPUTE                   ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; terminateur:inst3|state.ST_READ_BUSIN           ; terminateur:inst3|state.ST_READ_BUSIN           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; plus12:inst2|state.ST_WRITE_SUM                 ; plus12:inst2|state.ST_WRITE_SUM                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[0]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; terminateurSplit:inst5|R_i[1]                   ; terminateurSplit:inst5|R_i[1]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; terminateurSplit:inst5|R_i[2]                   ; terminateurSplit:inst5|R_i[2]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232out:inst6|R_i[0]                           ; rs232out:inst6|R_i[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; rs232out:inst6|R_i[3]                           ; rs232out:inst6|R_i[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232out:inst6|state.ST_ATT                     ; rs232out:inst6|state.ST_ATT                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232out:inst6|state.ST_BEGIN                   ; rs232out:inst6|state.ST_BEGIN                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232out:inst6|R_i[2]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h100:inst7|state.ST_DECR                        ; h100:inst7|state.ST_DECR                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
 ; 0.215 ; rs232out:inst6|R_data[8]                        ; rs232out:inst6|R_data[8]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; h10:inst1|C[1]                                  ; h10:inst1|C[1]                                  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; h10:inst1|C[2]                                  ; h10:inst1|C[2]                                  ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.215 ; h10:inst1|R                                     ; h10:inst1|R                                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
-; 0.238 ; rs232in:inst4|rx_R                              ; rs232in:inst4|R_sh[7]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
-; 0.239 ; terminateur:inst3|R_tft[15]                     ; initiateur:inst|R_tft[15]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
-; 0.239 ; plus12:inst2|R_tft[40]                          ; terminateur:inst3|R_tft[40]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
-; 0.240 ; initiateur:inst|R_32[31]                        ; initiateur:inst|R_32[23]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; initiateur:inst|R_32[17]                        ; initiateur:inst|R_32[9]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; initiateur:inst|R_32[26]                        ; initiateur:inst|R_32[18]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; initiateur:inst|R_32[27]                        ; initiateur:inst|R_32[19]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; initiateur:inst|R_32[8]                         ; gentick:inst8|R_tft[8]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; terminateurSplit:inst5|R[11]                    ; terminateurSplit:inst5|R[3]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.240 ; terminateurSplit:inst5|R[12]                    ; terminateurSplit:inst5|R[4]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
-; 0.241 ; rs232in:inst4|R_sh[5]                           ; rs232in:inst4|R_sh[4]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; rs232in:inst4|R_sh[2]                           ; initiateur:inst|R_data[2]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; rs232out:inst6|R_baud[12]                       ; rs232out:inst6|R_baud[12]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; terminateur:inst3|R_tft[7]                      ; initiateur:inst|R_tft[7]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; initiateur:inst|R_32[12]                        ; initiateur:inst|R_32[4]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; terminateur:inst3|R_tft[6]                      ; initiateur:inst|R_tft[6]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.241 ; terminateur:inst3|R_tft[19]                     ; initiateur:inst|R_tft[19]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
-; 0.242 ; rs232in:inst4|rx_fifo_R[1]                      ; rs232in:inst4|rx_fifo_R[2]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.242 ; terminateur:inst3|R_tft[38]                     ; initiateur:inst|R_tft[38]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.242 ; rs232in:inst4|R_sh[2]                           ; rs232in:inst4|R_sh[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.242 ; initiateur:inst|R_32[10]                        ; initiateur:inst|R_32[2]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.242 ; terminateur:inst3|R_tft[22]                     ; initiateur:inst|R_tft[22]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.242 ; terminateurSplit:inst5|R[29]                    ; terminateurSplit:inst5|R[21]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
-; 0.243 ; rs232in:inst4|rx_fifo_R[0]                      ; rs232in:inst4|rx_fifo_R[1]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
-; 0.243 ; initiateur:inst|R_32[16]                        ; initiateur:inst|R_32[8]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
-; 0.243 ; rs232in:inst4|rx_fifo_R[1]                      ; rs232in:inst4|rx_R                              ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
-; 0.244 ; initiateur:inst|R_32[20]                        ; initiateur:inst|R_32[12]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
-; 0.244 ; initiateur:inst|R_32[8]                         ; initiateur:inst|R_32[0]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
-; 0.245 ; rs232in:inst4|R_sh[5]                           ; initiateur:inst|R_data[5]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.397      ;
-; 0.245 ; initiateur:inst|R_32[21]                        ; initiateur:inst|R_32[13]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.397      ;
-; 0.245 ; initiateur:inst|R_32[20]                        ; gentick:inst8|R_tft[20]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.397      ;
-; 0.246 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_LOOP            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.398      ;
-; 0.247 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
-; 0.248 ; rs232in:inst4|R_sh[1]                           ; rs232in:inst4|R_sh[0]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.400      ;
-; 0.249 ; rs232in:inst4|R_sh[1]                           ; initiateur:inst|R_data[1]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
-; 0.249 ; terminateurSplit:inst5|R[38]                    ; terminateurSplit:inst5|R[30]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
-; 0.249 ; initiateur:inst|state.ST_BUSIN_LOADED           ; gentick:inst8|state.ST_READ_BUSIN               ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
-; 0.250 ; rs232in:inst4|R_sh[4]                           ; initiateur:inst|R_data[4]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.402      ;
-; 0.250 ; rs232in:inst4|R_sh[0]                           ; initiateur:inst|R_data[0]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.402      ;
-; 0.251 ; rs232in:inst4|R_sh[4]                           ; rs232in:inst4|R_sh[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
-; 0.251 ; h10:inst1|state                                 ; h10:inst1|R                                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
-; 0.253 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[2]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.405      ;
-; 0.255 ; rs232in:inst4|state.WAIT_1B                     ; rs232in:inst4|state.MainLoop                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
-; 0.255 ; terminateurSplit:inst5|R_i[0]                   ; terminateurSplit:inst5|R_i[1]                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
-; 0.260 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.GEN_PULSE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.412      ;
-; 0.260 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.412      ;
-; 0.262 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.ECRIRE                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.414      ;
-; 0.263 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[3]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.415      ;
-; 0.264 ; rs232in:inst4|state.WAIT_1P5B                   ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.416      ;
-; 0.266 ; plus12:inst2|R_tft[32]                          ; terminateur:inst3|R_tft[32]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.418      ;
-; 0.267 ; gentick:inst8|state.ST_READ_BUSIN               ; initiateur:inst|state.ST_NDATA_WRITE            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.419      ;
-; 0.286 ; terminateurSplit:inst5|R[21]                    ; terminateurSplit:inst5|R[13]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.438      ;
-; 0.291 ; initiateur:inst|R_32[7]                         ; gentick:inst8|R_tft[7]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.443      ;
-; 0.292 ; terminateurSplit:inst5|R[18]                    ; terminateurSplit:inst5|R[10]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.444      ;
-; 0.294 ; terminateurSplit:inst5|R[32]                    ; terminateurSplit:inst5|R[24]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.446      ;
-; 0.295 ; initiateur:inst|R_32[5]                         ; gentick:inst8|R_tft[5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.447      ;
-; 0.295 ; plus12:inst2|R_res[8]                           ; terminateur:inst3|R_tft[8]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.447      ;
-; 0.297 ; initiateur:inst|R_32[13]                        ; gentick:inst8|R_tft[13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.449      ;
-; 0.299 ; terminateurSplit:inst5|R[33]                    ; terminateurSplit:inst5|R[25]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.451      ;
-; 0.299 ; terminateurSplit:inst5|R[33]                    ; terminateurSplit:inst5|R[26]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.451      ;
-; 0.300 ; plus12:inst2|R_tft[5]                           ; terminateur:inst3|R_tft[5]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.452      ;
-; 0.300 ; rs232in:inst4|R_i[3]                            ; rs232in:inst4|state.GEN_PULSE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.452      ;
-; 0.303 ; rs232in:inst4|R_i[3]                            ; rs232in:inst4|state.ECRIRE                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.455      ;
-; 0.309 ; initiateur:inst|state.ST_EndLoop                ; initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.461      ;
-; 0.314 ; plus12:inst2|R_res[4]                           ; terminateur:inst3|R_tft[4]                      ; clk          ; clk         ; 0.000        ; 0.001      ; 0.467      ;
-; 0.314 ; rs232out:inst6|R_data[1]                        ; rs232out:inst6|R_data[0]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.466      ;
-; 0.316 ; gentick:inst8|R_tft[5]                          ; plus12:inst2|R_tft[5]                           ; clk          ; clk         ; 0.000        ; -0.001     ; 0.467      ;
+; 0.215 ; h10:inst10|C[0]                                 ; h10:inst10|C[0]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h10:inst10|C[1]                                 ; h10:inst10|C[1]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h10:inst10|C[2]                                 ; h10:inst10|C[2]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h10:inst10|C[3]                                 ; h10:inst10|C[3]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h10:inst10|state                                ; h10:inst10|state                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215 ; h10:inst10|R                                    ; h10:inst10|R                                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.237 ; terminateurSplit:inst5|R[9]                     ; terminateurSplit:inst5|R[1]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.389      ;
+; 0.238 ; initiateur:inst|R_32[5]                         ; gentick:inst8|R_tft[5]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
+; 0.238 ; terminateur:inst3|R_tft[19]                     ; initiateur:inst|R_tft[19]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
+; 0.238 ; terminateurSplit:inst5|R[17]                    ; terminateurSplit:inst5|R[9]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
+; 0.238 ; h10:inst10|C[3]                                 ; h10:inst10|state                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.390      ;
+; 0.239 ; initiateur:inst|R_32[20]                        ; initiateur:inst|R_32[12]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.239 ; initiateur:inst|R_tft[2]                        ; gentick:inst8|R_tft[2]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.239 ; terminateur:inst3|R_tft[11]                     ; initiateur:inst|R_tft[11]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.239 ; terminateurSplit:inst5|R[15]                    ; terminateurSplit:inst5|R[7]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.391      ;
+; 0.240 ; rs232in:inst4|rx_R                              ; rs232in:inst4|R_sh[7]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; initiateur:inst|R_tft[32]                       ; gentick:inst8|R_tft[32]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; initiateur:inst|R_32[16]                        ; initiateur:inst|R_32[8]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; terminateur:inst3|R_tft[17]                     ; initiateur:inst|R_tft[17]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; terminateur:inst3|R_tft[21]                     ; initiateur:inst|R_tft[21]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; terminateurSplit:inst5|R[31]                    ; terminateurSplit:inst5|R[23]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.240 ; terminateurSplit:inst5|R[10]                    ; terminateurSplit:inst5|R[2]                     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.392      ;
+; 0.241 ; initiateur:inst|R_tft[38]                       ; gentick:inst8|R_tft[38]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.241 ; initiateur:inst|R_32[25]                        ; initiateur:inst|R_32[17]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.241 ; initiateur:inst|R_32[17]                        ; gentick:inst8|R_tft[17]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.241 ; terminateur:inst3|R_tft[9]                      ; initiateur:inst|R_tft[9]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.242 ; terminateurSplit:inst5|R[38]                    ; terminateurSplit:inst5|R[31]                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.242 ; initiateur:inst|R_32[8]                         ; initiateur:inst|R_32[0]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.242 ; initiateur:inst|R_32[3]                         ; gentick:inst8|R_tft[3]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.242 ; rs232out:inst6|R_data[5]                        ; rs232out:inst6|R_data[4]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.242 ; rs232out:inst6|R_i[1]                           ; rs232out:inst6|R_i[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.243 ; rs232in:inst4|R_sh[7]                           ; rs232in:inst4|R_sh[6]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; rs232in:inst4|R_sh[4]                           ; rs232in:inst4|R_sh[3]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; rs232out:inst6|R_baud[12]                       ; rs232out:inst6|R_baud[12]                       ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; initiateur:inst|R_32[31]                        ; initiateur:inst|R_32[23]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; initiateur:inst|R_32[18]                        ; initiateur:inst|R_32[10]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.243 ; initiateur:inst|R_32[14]                        ; initiateur:inst|R_32[6]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.395      ;
+; 0.244 ; rs232in:inst4|R_sh[3]                           ; rs232in:inst4|R_sh[2]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
+; 0.244 ; initiateur:inst|R_32[24]                        ; initiateur:inst|R_32[16]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
+; 0.244 ; initiateur:inst|R_32[18]                        ; gentick:inst8|R_tft[18]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
+; 0.244 ; rs232out:inst6|R_data[7]                        ; rs232out:inst6|R_data[6]                        ; clk          ; clk         ; 0.000        ; 0.000      ; 0.396      ;
+; 0.245 ; rs232in:inst4|R_sh[2]                           ; rs232in:inst4|R_sh[1]                           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.397      ;
+; 0.245 ; plus12:inst2|R_res[2]                           ; terminateur:inst3|R_tft[2]                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.397      ;
+; 0.246 ; gentick:inst8|R_tft[25]                         ; plus12:inst2|R_tft[25]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.398      ;
+; 0.246 ; initiateur:inst|R_i[0]                          ; initiateur:inst|R_i[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.398      ;
+; 0.247 ; initiateur:inst|R_32[9]                         ; initiateur:inst|R_32[1]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.247 ; initiateur:inst|R_32[11]                        ; initiateur:inst|R_32[3]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.247 ; initiateur:inst|R_32[11]                        ; gentick:inst8|R_tft[11]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.399      ;
+; 0.248 ; h100:inst7|R[23]                                ; h100:inst7|R[23]                                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.400      ;
+; 0.248 ; initiateur:inst|R_32[9]                         ; gentick:inst8|R_tft[9]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.400      ;
+; 0.249 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; initiateur:inst|state.ST_NDATA_LOADED           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
+; 0.249 ; initiateur:inst|R_32[1]                         ; gentick:inst8|R_tft[1]                          ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
+; 0.249 ; rs232in:inst4|state.GEN_PULSE                   ; rs232in:inst4|state.WAIT_FIN                    ; clk          ; clk         ; 0.000        ; 0.000      ; 0.401      ;
+; 0.250 ; initiateur:inst|R_32[13]                        ; initiateur:inst|R_32[5]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.402      ;
+; 0.250 ; h10:inst10|C[0]                                 ; h10:inst10|C[1]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.402      ;
+; 0.250 ; h10:inst10|C[0]                                 ; h10:inst10|C[2]                                 ; clk          ; clk         ; 0.000        ; 0.000      ; 0.402      ;
+; 0.251 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.ECRIRE                      ; clk          ; clk         ; 0.000        ; 0.000      ; 0.403      ;
+; 0.252 ; initiateur:inst|R_32[13]                        ; gentick:inst8|R_tft[13]                         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.404      ;
+; 0.252 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[2]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.404      ;
+; 0.253 ; rs232in:inst4|state.MainLoop                    ; rs232in:inst4|state.GEN_PULSE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.405      ;
+; 0.255 ; initiateur:inst|state.ST_NDATA_LOADED           ; initiateur:inst|state.ST_EndLoop                ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
+; 0.255 ; plus12:inst2|state.ST_WRITE_SUM                 ; terminateur:inst3|state.ST_WRITE_DUMP           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
+; 0.255 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_WAIT_NOBUSY     ; clk          ; clk         ; 0.000        ; 0.000      ; 0.407      ;
+; 0.256 ; rs232in:inst4|state.WAIT_StartBit               ; rs232in:inst4|R_i[0]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.408      ;
+; 0.256 ; gentick:inst8|state.ST_WRITE_OUT                ; plus12:inst2|state.ST_COMPUTE                   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.408      ;
+; 0.257 ; rs232in:inst4|R_i[0]                            ; rs232in:inst4|R_i[1]                            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.409      ;
+; 0.258 ; terminateurSplit:inst5|state.ST_WRITE           ; terminateurSplit:inst5|state.ST_LOOP            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.410      ;
+; 0.258 ; plus12:inst2|state.ST_WRITE_SUM                 ; terminateur:inst3|state.ST_WRITE_OUT            ; clk          ; clk         ; 0.000        ; 0.000      ; 0.410      ;
+; 0.259 ; plus12:inst2|state.ST_WRITE_SUM                 ; terminateur:inst3|state.ST_READ_BUSIN           ; clk          ; clk         ; 0.000        ; 0.000      ; 0.411      ;
 +-------+-------------------------------------------------+-------------------------------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -873,31 +887,31 @@ No paths to report.
 ; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gentick:inst8|state.ST_READ_BUSIN ;
 ; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; gentick:inst8|state.ST_WRITE_OUT  ;
 ; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gentick:inst8|state.ST_WRITE_OUT  ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[0]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[0]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[1]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[1]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[2]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[2]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|C[3]                    ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|C[3]                    ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|R                       ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|R                       ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h10:inst1|state                   ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h10:inst1|state                   ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[0]           ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[0]           ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[10]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[10]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[11]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[11]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[12]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[12]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[13]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[13]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[14]          ;
-; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; initiateur:inst|R_32[14]          ;
-; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; initiateur:inst|R_32[15]          ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[0]                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[0]                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[10]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[10]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[11]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[11]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[12]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[12]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[13]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[13]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[14]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[14]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[15]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[15]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[16]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[16]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[17]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[17]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[18]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[18]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[19]                  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[19]                  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[1]                   ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; h100:inst7|R[1]                   ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; h100:inst7|R[20]                  ;
 +--------+--------------+----------------+------------------+-------+------------+-----------------------------------+
 
 
@@ -906,8 +920,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; reset     ; clk        ; 3.048 ; 3.048 ; Rise       ; clk             ;
-; rx        ; clk        ; 2.022 ; 2.022 ; Rise       ; clk             ;
+; reset     ; clk        ; 2.826 ; 2.826 ; Rise       ; clk             ;
+; rx        ; clk        ; 1.918 ; 1.918 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -916,8 +930,8 @@ No paths to report.
 +-----------+------------+--------+--------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +-----------+------------+--------+--------+------------+-----------------+
-; reset     ; clk        ; -2.139 ; -2.139 ; Rise       ; clk             ;
-; rx        ; clk        ; -1.902 ; -1.902 ; Rise       ; clk             ;
+; reset     ; clk        ; -2.544 ; -2.544 ; Rise       ; clk             ;
+; rx        ; clk        ; -1.798 ; -1.798 ; Rise       ; clk             ;
 +-----------+------------+--------+--------+------------+-----------------+
 
 
@@ -926,8 +940,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 4.882 ; 4.882 ; Rise       ; clk             ;
-; tx        ; clk        ; 4.564 ; 4.564 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 4.403 ; 4.403 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 4.070 ; 4.070 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 4.060 ; 4.060 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 4.075 ; 4.075 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 4.089 ; 4.089 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 4.177 ; 4.177 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 4.170 ; 4.170 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 4.212 ; 4.212 ; Rise       ; clk             ;
+; tx        ; clk        ; 4.698 ; 4.698 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -936,8 +957,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 4.882 ; 4.882 ; Rise       ; clk             ;
-; tx        ; clk        ; 4.499 ; 4.499 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 4.403 ; 4.403 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 3.931 ; 3.931 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 3.931 ; 3.931 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 3.942 ; 3.942 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 3.944 ; 3.944 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 4.041 ; 4.041 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 4.030 ; 4.030 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 4.065 ; 4.065 ; Rise       ; clk             ;
+; tx        ; clk        ; 4.587 ; 4.587 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -946,7 +974,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 5.739 ; 5.739 ;    ;
+; reset      ; diode       ;    ; 5.728 ; 5.728 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -955,7 +983,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 5.739 ; 5.739 ;    ;
+; reset      ; diode       ;    ; 5.728 ; 5.728 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -964,10 +992,10 @@ No paths to report.
 +------------------+----------+-------+----------+---------+---------------------+
 ; Clock            ; Setup    ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +------------------+----------+-------+----------+---------+---------------------+
-; Worst-case Slack ; -4.835   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-;  clk             ; -4.835   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
-; Design-wide TNS  ; -380.809 ; 0.0   ; 0.0      ; 0.0     ; -329.38             ;
-;  clk             ; -380.809 ; 0.000 ; N/A      ; N/A     ; -329.380            ;
+; Worst-case Slack ; -4.987   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  clk             ; -4.987   ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; -395.871 ; 0.0   ; 0.0      ; 0.0     ; -356.38             ;
+;  clk             ; -395.871 ; 0.000 ; N/A      ; N/A     ; -356.380            ;
 +------------------+----------+-------+----------+---------+---------------------+
 
 
@@ -976,8 +1004,8 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; reset     ; clk        ; 5.773 ; 5.773 ; Rise       ; clk             ;
-; rx        ; clk        ; 3.633 ; 3.633 ; Rise       ; clk             ;
+; reset     ; clk        ; 5.240 ; 5.240 ; Rise       ; clk             ;
+; rx        ; clk        ; 3.480 ; 3.480 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -986,8 +1014,8 @@ No paths to report.
 +-----------+------------+--------+--------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
 +-----------+------------+--------+--------+------------+-----------------+
-; reset     ; clk        ; -2.139 ; -2.139 ; Rise       ; clk             ;
-; rx        ; clk        ; -1.902 ; -1.902 ; Rise       ; clk             ;
+; reset     ; clk        ; -2.544 ; -2.544 ; Rise       ; clk             ;
+; rx        ; clk        ; -1.798 ; -1.798 ; Rise       ; clk             ;
 +-----------+------------+--------+--------+------------+-----------------+
 
 
@@ -996,8 +1024,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 8.950 ; 8.950 ; Rise       ; clk             ;
-; tx        ; clk        ; 8.472 ; 8.472 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 7.956 ; 7.956 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 7.329 ; 7.329 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 7.281 ; 7.281 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 7.335 ; 7.335 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 7.344 ; 7.344 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 7.565 ; 7.565 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 7.561 ; 7.561 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 7.595 ; 7.595 ; Rise       ; clk             ;
+; tx        ; clk        ; 8.847 ; 8.847 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -1006,8 +1041,15 @@ No paths to report.
 +-----------+------------+-------+-------+------------+-----------------+
 ; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
 +-----------+------------+-------+-------+------------+-----------------+
-; diodeh10  ; clk        ; 4.882 ; 4.882 ; Rise       ; clk             ;
-; tx        ; clk        ; 4.499 ; 4.499 ; Rise       ; clk             ;
+; diodeh10  ; clk        ; 4.403 ; 4.403 ; Rise       ; clk             ;
+; pin_name1 ; clk        ; 3.931 ; 3.931 ; Rise       ; clk             ;
+; pin_name2 ; clk        ; 3.931 ; 3.931 ; Rise       ; clk             ;
+; pin_name3 ; clk        ; 3.942 ; 3.942 ; Rise       ; clk             ;
+; pin_name4 ; clk        ; 3.944 ; 3.944 ; Rise       ; clk             ;
+; pin_name5 ; clk        ; 4.041 ; 4.041 ; Rise       ; clk             ;
+; pin_name6 ; clk        ; 4.030 ; 4.030 ; Rise       ; clk             ;
+; pin_name7 ; clk        ; 4.065 ; 4.065 ; Rise       ; clk             ;
+; tx        ; clk        ; 4.587 ; 4.587 ; Rise       ; clk             ;
 +-----------+------------+-------+-------+------------+-----------------+
 
 
@@ -1016,7 +1058,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 9.958 ; 9.958 ;    ;
+; reset      ; diode       ;    ; 9.937 ; 9.937 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -1025,7 +1067,7 @@ No paths to report.
 +------------+-------------+----+-------+-------+----+
 ; Input Port ; Output Port ; RR ; RF    ; FR    ; FF ;
 +------------+-------------+----+-------+-------+----+
-; reset      ; diode       ;    ; 5.739 ; 5.739 ;    ;
+; reset      ; diode       ;    ; 5.728 ; 5.728 ;    ;
 +------------+-------------+----+-------+-------+----+
 
 
@@ -1034,7 +1076,7 @@ No paths to report.
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 2147     ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 2555     ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1044,7 +1086,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+----------+----------+----------+----------+----------+
 ; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+----------+----------+----------+----------+----------+
-; clk        ; clk      ; 2147     ; 0        ; 0        ; 0        ;
+; clk        ; clk      ; 2555     ; 0        ; 0        ; 0        ;
 +------------+----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1069,9 +1111,9 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 2     ; 2    ;
-; Unconstrained Input Port Paths  ; 74    ; 74   ;
-; Unconstrained Output Ports      ; 3     ; 3    ;
-; Unconstrained Output Port Paths ; 4     ; 4    ;
+; Unconstrained Input Port Paths  ; 72    ; 72   ;
+; Unconstrained Output Ports      ; 10    ; 10   ;
+; Unconstrained Output Port Paths ; 32    ; 32   ;
 +---------------------------------+-------+------+
 
 
@@ -1081,7 +1123,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Nov 12 12:42:14 2018
+    Info: Processing started: Tue Nov 13 11:51:39 2018
 Info: Command: quartus_sta bus_ia -c bus_ia
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -1094,10 +1136,10 @@ Info (332105): Deriving Clocks
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow Model
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -4.835
+Info (332146): Worst-case setup slack is -4.987
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -4.835      -380.809 clk 
+    Info (332119):    -4.987      -395.871 clk 
 Info (332146): Worst-case hold slack is 0.391
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -1107,14 +1149,14 @@ Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -1.380
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -1.380      -329.380 clk 
+    Info (332119):    -1.380      -356.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -1.506
+Info (332146): Worst-case setup slack is -1.575
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -1.506       -37.817 clk 
+    Info (332119):    -1.575       -38.676 clk 
 Info (332146): Worst-case hold slack is 0.215
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
@@ -1124,14 +1166,14 @@ Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -1.380
     Info (332119):     Slack End Point TNS Clock 
     Info (332119): ========= ============= =====================
-    Info (332119):    -1.380      -329.380 clk 
+    Info (332119):    -1.380      -356.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 503 megabytes
-    Info: Processing ended: Mon Nov 12 12:42:15 2018
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Tue Nov 13 11:51:41 2018
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

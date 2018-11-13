@@ -14,7 +14,8 @@ entity h10 is
         clk : in STD_LOGIC;
 		  reset : in STD_LOGIC;
         T   : in  STD_LOGIC;
-        S   : out STD_LOGIC
+        S   : out STD_LOGIC;
+        C_out   : out STD_LOGIC_VECTOR(3 downto 0)
 	 );
 end h10;
 
@@ -23,11 +24,11 @@ architecture montage of h10 is
 -------------------------------------------------------------------------------
 --  Partie Opérative
 -------------------------------------------------------------------------------
-    type T_CMD is (INIT, COUNT);
+    type T_CMD is (INIT, COUNT, NOOP);
 	 -- la commande courante
     signal CMD :  T_CMD; 
 	 -- registre de comptagne 10 => 0 => 10 => ...
-	 signal C : integer range 0 to 15;
+	 signal C : unsigned(3 downto 0);
 	 signal R : STD_LOGIC ;
 	
 	 -- boolean vaux 1 si C est à 0, 0 sinon
@@ -47,22 +48,19 @@ begin
 --  Partie Opérative
 -------------------------------------------------------------------------------
 
-    process (reset,clk)
-    begin 
-	   if reset = '1' then
-		    C <= 0;
-		    R <= '0';
-		elsif clk'event and clk = '1' then
+    process (clk)
+    begin if clk'event and clk = '1' then
 	     IF CMD = INIT THEN
-				C <= 10;
+				C <= to_unsigned(9, 4);
 				R <= not(R);
-		  ELSIF CMD = COUNT THEN
+		  ELSIF CMD = COUNT AND T = '1' THEN
 				C <= C - 1;
 		  END IF;
     end if; end process;
 	 
 	 C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
 	 S <= R ;
+	 C_out <= STD_LOGIC_VECTOR(C);
 
 -------------------------------------------------------------------------------
 -- Partie Contrôle
@@ -93,7 +91,7 @@ begin
     -- fonction de sortie
 	 with state  select CMD <=
          INIT    when   ST_INIT,
-         COUNT   when   others;
+         COUNT   when   ST_COUNT;
 			
 end montage;
 

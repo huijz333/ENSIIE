@@ -7,12 +7,19 @@ clk => plus12:inst2.clk
 clk => gentick:inst8.clk
 clk => initiateur:inst.clk
 clk => rs232in:inst4.clk
-clk => h10:inst1.clk
+clk => h10:inst10.clk
 clk => h100:inst7.clk
 reset => instnot.IN0
 rx => rs232in:inst4.rx
 diode <= instnot.DB_MAX_OUTPUT_PORT_TYPE
-diodeh10 <= h10:inst1.S
+diodeh10 <= h10:inst10.S
+pin_name1 <= sept:inst11.s0
+pin_name2 <= sept:inst11.s1
+pin_name3 <= sept:inst11.s2
+pin_name4 <= sept:inst11.s3
+pin_name5 <= sept:inst11.s4
+pin_name6 <= sept:inst11.s5
+pin_name7 <= sept:inst11.s6
 
 
 |bus_ia|rs232out:inst6
@@ -1045,21 +1052,20 @@ debug[6] <= debug.DB_MAX_OUTPUT_PORT_TYPE
 debug[7] <= rx_R.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|bus_ia|h10:inst1
+|bus_ia|h10:inst10
 clk => state.CLK
+clk => R.CLK
 clk => C[0].CLK
 clk => C[1].CLK
 clk => C[2].CLK
 clk => C[3].CLK
-clk => R.CLK
 reset => state.ACLR
-reset => R.ACLR
-reset => C[3].ENA
-reset => C[2].ENA
-reset => C[1].ENA
-reset => C[0].ENA
-T => ~NO_FANOUT~
+T => process_0.IN1
 S <= R.DB_MAX_OUTPUT_PORT_TYPE
+C_out[0] <= C[0].DB_MAX_OUTPUT_PORT_TYPE
+C_out[1] <= C[1].DB_MAX_OUTPUT_PORT_TYPE
+C_out[2] <= C[2].DB_MAX_OUTPUT_PORT_TYPE
+C_out[3] <= C[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |bus_ia|h100:inst7
@@ -1114,5 +1120,47 @@ E[21] => ~NO_FANOUT~
 E[22] => ~NO_FANOUT~
 E[23] => ~NO_FANOUT~
 T <= T.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|bus_ia|sept:inst11
+e[0] => Mux0.IN19
+e[0] => Mux1.IN19
+e[0] => Mux2.IN19
+e[0] => Mux3.IN19
+e[0] => Mux4.IN19
+e[0] => Mux5.IN19
+e[0] => Mux6.IN19
+e[1] => Mux0.IN18
+e[1] => Mux1.IN18
+e[1] => Mux2.IN18
+e[1] => Mux3.IN18
+e[1] => Mux4.IN18
+e[1] => Mux5.IN18
+e[1] => Mux6.IN18
+e[1] => Mux7.IN10
+e[2] => Mux0.IN17
+e[2] => Mux1.IN17
+e[2] => Mux2.IN17
+e[2] => Mux3.IN17
+e[2] => Mux4.IN17
+e[2] => Mux5.IN17
+e[2] => Mux6.IN17
+e[2] => Mux7.IN9
+e[3] => Mux0.IN16
+e[3] => Mux1.IN16
+e[3] => Mux2.IN16
+e[3] => Mux3.IN16
+e[3] => Mux4.IN16
+e[3] => Mux5.IN16
+e[3] => Mux6.IN16
+e[3] => Mux7.IN8
+s0 <= Mux6.DB_MAX_OUTPUT_PORT_TYPE
+s1 <= Mux5.DB_MAX_OUTPUT_PORT_TYPE
+s2 <= Mux4.DB_MAX_OUTPUT_PORT_TYPE
+s3 <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+s4 <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+s5 <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+s6 <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+err <= Mux7.DB_MAX_OUTPUT_PORT_TYPE
 
 

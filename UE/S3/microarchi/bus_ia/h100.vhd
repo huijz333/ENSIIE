@@ -8,7 +8,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
-
+  
 entity h100 is
     port(
         clk : in STD_LOGIC;
@@ -48,13 +48,15 @@ begin
     process (clk)
     begin if clk'event and clk = '1' then
 	     IF CMD = LOAD THEN 
-		      R <= x"0F4240";
+		      --R <= unsigned(E);
+				-- R <= 50 000 000; 1 tick par seconde
+				R <= to_unsigned(5000000, 24); -- 10 ticks par seconde
 		  ELSIF CMD = DECR THEN
 				R <= R - 1;
 		  END IF;
     end if; end process;
 	 
-	 R_IS_NULL <= '1' WHEN R = x"000000" ELSE '0' ;
+	 R_IS_NULL <= '1' WHEN R = 0 ELSE '0' ;
 
 -------------------------------------------------------------------------------
 -- Partie Contrôle
