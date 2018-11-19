@@ -14,8 +14,7 @@ entity h10 is
         clk : in STD_LOGIC;
 		  reset : in STD_LOGIC;
         T   : in  STD_LOGIC;
-        S   : out STD_LOGIC;
-        C_out   : out STD_LOGIC_VECTOR(3 downto 0)
+        S   : out STD_LOGIC
 	 );
 end h10;
 
@@ -48,10 +47,14 @@ begin
 --  Partie Opérative
 -------------------------------------------------------------------------------
 
-    process (clk)
-    begin if clk'event and clk = '1' then
+    process (reset, clk)
+    begin
+	   IF reset = '1' THEN
+			C <= to_unsigned(10, 4);
+			R <= '1';
+	   ELSIF clk'event and clk = '1' then
 	     IF CMD = INIT THEN
-				C <= to_unsigned(9, 4);
+				C <= to_unsigned(10, 4);
 				R <= not(R);
 		  ELSIF CMD = COUNT AND T = '1' THEN
 				C <= C - 1;
@@ -60,7 +63,6 @@ begin
 	 
 	 C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
 	 S <= R ;
-	 C_out <= STD_LOGIC_VECTOR(C);
 
 -------------------------------------------------------------------------------
 -- Partie Contrôle

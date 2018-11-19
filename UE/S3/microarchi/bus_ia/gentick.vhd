@@ -16,6 +16,7 @@
 
 library IEEE;
 use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity gentick is
 	generic(
@@ -69,13 +70,13 @@ begin
     process (reset, clk)
     begin
 	   if reset = '1' then
-		   R_V <= x"17A120";
+			R_V <= STD_LOGIC_VECTOR(to_unsigned(5000000, 24)); -- 10 ticks par seconde
 	   elsif clk'event and clk = '1' then
 	     IF CMD_tft = INIT THEN 
 		      R_tft <= busin ;
 		  END IF;
 		  IF CMD_v = INIT THEN
-		      --R_V <= R_tft(23 downto 0);
+		      R_V <= R_tft(23 downto 0);
 		  END IF ;
     end if; end process;
 

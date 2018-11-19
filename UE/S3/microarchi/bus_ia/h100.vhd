@@ -48,9 +48,7 @@ begin
     process (clk)
     begin if clk'event and clk = '1' then
 	     IF CMD = LOAD THEN 
-		      --R <= unsigned(E);
-				-- R <= 50 000 000; 1 tick par seconde
-				R <= to_unsigned(5000000, 24); -- 10 ticks par seconde
+		      R <= unsigned(E); -- charges E, sortie du bloc dans le bus ia
 		  ELSIF CMD = DECR THEN
 				R <= R - 1;
 		  END IF;
