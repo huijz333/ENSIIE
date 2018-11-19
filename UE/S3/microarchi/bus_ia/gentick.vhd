@@ -1,4 +1,7 @@
 -------------------------------------------------------------------------------
+--
+-- Ce bloc est le wrapper dans le bus ia
+-- 
 -- Ce module transfert tous les messages (????,addrsrc,addrdest,data) venant de
 -- busin.
 --
@@ -70,7 +73,7 @@ begin
     process (reset, clk)
     begin
 	   if reset = '1' then
-			R_V <= STD_LOGIC_VECTOR(to_unsigned(5000000, 24)); -- 10 ticks par seconde
+			R_V <= STD_LOGIC_VECTOR(to_unsigned(500000, 24)); -- 1000 ticks par seconde
 	   elsif clk'event and clk = '1' then
 	     IF CMD_tft = INIT THEN 
 		      R_tft <= busin ;

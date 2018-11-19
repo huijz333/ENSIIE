@@ -165,7 +165,7 @@ GND*                         : AC18      :        :                   :         
 GND*                         : AC19      :        :                   :         : 7         :                
 GND*                         : AC20      :        :                   :         : 7         :                
 GND*                         : AC21      :        :                   :         : 7         :                
-GND*                         : AC22      :        :                   :         : 7         :                
+dvdf                         : AC22      : output : 3.3-V LVTTL       :         : 7         : Y              
 GND*                         : AC23      :        :                   :         : 6         :                
 NC                           : AC24      :        :                   :         :           :                
 GND*                         : AC25      :        :                   :         : 6         :                
@@ -209,7 +209,7 @@ GND*                         : AE10      :        :                   :         
 GND*                         : AE11      :        :                   :         : 8         :                
 GND*                         : AE12      :        :                   :         : 8         :                
 GND*                         : AE13      :        :                   :         : 8         :                
-GND+                         : AE14      :        :                   :         : 7         :                
+SEL2                         : AE14      : input  : 3.3-V LVTTL       :         : 7         : N              
 GND*                         : AE15      :        :                   :         : 7         :                
 GND*                         : AE16      :        :                   :         : 7         :                
 GND*                         : AE17      :        :                   :         : 7         :                
@@ -234,7 +234,7 @@ GND*                         : AF10      :        :                   :         
 VCCIO8                       : AF11      : power  :                   : 3.3V    : 8         :                
 GND                          : AF12      : gnd    :                   :         :           :                
 GND*                         : AF13      :        :                   :         : 8         :                
-GND+                         : AF14      :        :                   :         : 7         :                
+SEL1                         : AF14      : input  : 3.3-V LVTTL       :         : 7         : N              
 GND                          : AF15      : gnd    :                   :         :           :                
 VCCIO7                       : AF16      : power  :                   : 3.3V    : 7         :                
 GND*                         : AF17      :        :                   :         : 7         :                

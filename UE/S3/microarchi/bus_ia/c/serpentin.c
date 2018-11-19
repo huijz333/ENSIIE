@@ -59,12 +59,12 @@ int ADDR_SRC  = ADDR;
 int ADDR_DEST = ADDR;
 int ADDR_FREQ = ADDR;
 
-static void wtest_read(int*adest, int*reg, int*value)
+static void wtest_read(int*adest, int*value)
 {
     char* cmd;
     char rw[100]; int arg1,arg2;
     char prompt[100];
-    sprintf(prompt,"entrer r|w|? [reg] [val] > ");
+    sprintf(prompt,"entrer h|f [val] > ");
 
     while (1) {
         cmd=rl_gets(prompt);
@@ -87,7 +87,6 @@ fprintf(stderr,"st=%d ;%s;%d;%x;\n",status,rw,arg1,arg2);
           case 2:
             if ( rw[0]=='f' ) {
                 *adest  = ADDR_FREQ;
-                *reg   = 0;
                 *value = arg1;
                 return;
             } else
@@ -102,9 +101,9 @@ static void wtest()
     //reset();
 int cnt=0;
     Tmessage mess;
-    int adest,reg,value;
+    int adest,value;
     while (1) {
-        wtest_read(&adest,&reg,&value);
+        wtest_read(&adest,&value);
         mess.ctl  = 0;
         mess.asrc = ADDR;
         mess.ades = adest;

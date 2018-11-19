@@ -1,8 +1,9 @@
 
 -------------------------------------------------------------------------------
--- Ce module prends un entier 24 bits E en entrée
---	Puis, sa sortie est à 0 pendant E cycle consécutifs, puis passe à 1 pour un cycle
--- Ensuite, E est rechargé
+-- Entrée:
+--		clk, reset la clock et le reset
+--		Entier E coddé sur 24 bits
+--		Entier F coddé sur 3 bits, le facteur de vitesse
 -------------------------------------------------------------------------------
 
 library IEEE;

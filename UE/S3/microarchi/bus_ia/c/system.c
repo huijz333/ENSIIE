@@ -23,7 +23,6 @@
 # Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 # #######################################################################*/
-#define _XOPEN_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -39,8 +38,6 @@
 #define CLOCK_REALTIME 0
 int clock_gettime(clockid_t clk_id, struct timespec *tp);
 #endif
-
-char *ptsname(int fd);
 
 #include "driver.h"
 #include "system.h"
