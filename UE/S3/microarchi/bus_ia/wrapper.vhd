@@ -21,7 +21,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity gentick is
+entity wrapper is
 	generic(
 		MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001010" -- 10
     );
@@ -39,9 +39,9 @@ entity gentick is
         -- interface V
         busv : out STD_LOGIC_VECTOR(23 downto 0)
 	 );
-end gentick;
+end wrapper;
 
-architecture montage of gentick is
+architecture montage of wrapper is
 
 -------------------------------------------------------------------------------
 --  Partie Opérative
@@ -73,7 +73,7 @@ begin
     process (reset, clk)
     begin
 	   if reset = '1' then
-			R_V <= STD_LOGIC_VECTOR(to_unsigned(500000, 24)); -- 1000 ticks par seconde
+			R_V <= STD_LOGIC_VECTOR(to_unsigned(5000000, 24)); -- 100 ticks par seconde
 	   elsif clk'event and clk = '1' then
 	     IF CMD_tft = INIT THEN 
 		      R_tft <= busin ;
