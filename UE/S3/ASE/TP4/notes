@@ -1,0 +1,120 @@
+4. ??
+
+5. /etc/shadow , mot de passe hashé car stocké localement
+
+6. ajouter une '*' à un mot de passe => bannir le compte utilisateur
+(car plus aucun mot de passe ne donnera ce hash)
+
+hash | {ensemble infini caractères} => {ensemble fini de caractères}
+
+non, pas le mot de passe de Alice (elle n'en a pas)
+oui et non pour Bob, peut être en brute force si on connait l'algo de hashage
+
+7. alors root ne pourra plus se logger
+car l'uid est < 1000, les tests suivant ne passeront pas
+
+alors Bob ne pourra plus se logger (à cause du 'pam_deny.so')
+
+### SCHEMA
+
+       LDAP                 AUTH
+        |                     |
+-------------------------------------------
+   |               |               |
+machine        machine          machine
+
+LDAP : Stockes les informations des utilisateurs (identification)
+AUTH : Authentifie les utilisateurs (e.x: Kerberos)
+
+8. Oui
+
+9.
+> Accepted password for bob form ::1 port 47404 ssh2
+> pam_unix(sshd:session) : session opened for user bob by (uid=0)
+
+10.
+requisite => required   : change rien
+required  => sufficient : ????
+
+11.
+ssh alice@localhost
+ssh renvoie
+> Enter passphrase for key '/root/.ssh/id_rsa'
+RSA = algorithme asymétrique
+Il demande l'accès à la clef privé
+
+Alice n'a pas de mot de passe (cf '!!' et '*')
+Donc ssh utilise son propre système d'authentification, et non pas celui système (via RSA)
+La clef privé a été chiffré à l'aide d'un mot de passe (pour éviter le vol de clef)
+
+Une fois connecté sous Alice, on a la clef dans '.ssh/authorized_keys
+
+Logs:
+> localhost sshd[6609] : Accepted publickey for alice from ::1 port 47410 ssh2: RSA SHA256:/JdhKRDYT.....
+> localhost sshd[6609] : pam_unix(sshd:session): session opened for user alice by (uid=0)
+
+
+12.
+> drwxrwxr-x 2 bob 4096 19 nov. 15:22
+
+Protection '775'
+
+> umask
+'0002'
+
+(complément à 8, masque octal)
+
+13. Oui on a le droit de créer, car on est sous root (root à le droit d'écrire partout)
+> -rw-r--r--. 1 root    0 19 nov. 15:52 toto
+Ce ficher appartient à root
+
+Linux applique le masque octal (umask), mais par défaut,
+il est non executable par mesure de sécurité
+
+14.
+> rm toto
+'rm : supprimer fichier vide (protégé en écriture) " toto " ? y
+
+Le système notifie qu'on a pas les droits d'écriture sur le fichier (entant que 'bob')
+Mais le fichier a été supprimé, car 'bob' à le droit d'écriture dans le dossier
+
+15.
+> chmod 1755 test
+> drwsr-sr-t. 1 bob    0 19 nov. 15:52 test
+
+16.
+Oui, on a toujours le droit, et le fichier appartient à 'root'
+> -rw-r--r--. 1 root    0 19 nov. 15:52 toto
+
+17. Oui on a toujours le droit
+
+18.
+> chown root test
+> drwsr-sr-t. 1 root    0 19 nov. 15:52 test
+
+19. Non bob ne peut pas l'effacer
+Car il y a le sticky bit (le 't') sur le repertoire => il faut être propriétaire du dossier pour supprimer un fichier
+bob != root => ne peut pas effacer
+
+20.
+/bin/passwd : modifie des fichiers auxquelles seul root à accès (/etc/shadow)
+
+21. En utilisant les ACL
+
+Pour pouvoir parcourir le dossier
+> setfacl -m u:alice:rx dossier
+
+Pour pouvoir ecrire dans le fichier du dossier
+> setfacl -m u:alice:rw pour_alice
+
+22. On remarque que l'utilisateur 'sftp' est ch-rooté dans '/home/sftp'
+
+Lors d'une connection ssh:
+'
+This service allows sftp connections only.
+Connection to localhost closed.
+'
+(le service n'autorise que des connections sftp)
+
+Lors d'une connection sftp:
+'Connected to localhost'
