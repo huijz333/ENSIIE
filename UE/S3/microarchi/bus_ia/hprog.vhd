@@ -119,14 +119,14 @@ begin
          COUNT   when   ST_COUNT;
 			
 	 with E select V_E <=
-			 to_unsigned( 20, 8) when "000",
-			 to_unsigned( 45, 8) when "001",
-			 to_unsigned( 71, 8) when "010",
-			 to_unsigned(100, 8) when "011",
-			 to_unsigned(122, 8) when "100",
-			 to_unsigned(148, 8) when "101",
-			 to_unsigned(174, 8) when "110",
-			 to_unsigned(200, 8) when "111";
+			 to_unsigned( 2, 8) when "000",
+			 to_unsigned( 5, 8) when "001",
+			 to_unsigned( 7, 8) when "010",
+			 to_unsigned(10, 8) when "011",
+			 to_unsigned(12, 8) when "100",
+			 to_unsigned(15, 8) when "101",
+			 to_unsigned(17, 8) when "110",
+			 to_unsigned(20, 8) when "111";
 			
 end montage;
 

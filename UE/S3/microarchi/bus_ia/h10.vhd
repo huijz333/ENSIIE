@@ -28,8 +28,8 @@ architecture montage of h10 is
 	 -- la commande courante
     signal CMD :  T_CMD; 
 	 
-	 -- registre de comptagne 10 => 0 => 10 => ...
-	 signal C : unsigned(7 downto 0);
+	 -- registre de comptagne 10 => 9 => ... => 0 => 10 => ...
+	 signal C : unsigned(3 downto 0);
 	 signal R : STD_LOGIC ;
 	
 	 -- boolean vaux 1 si C est à 0, 0 sinon
@@ -52,11 +52,11 @@ begin
     process (reset, clk)
     begin
 	   IF reset = '1' THEN
-			C <= to_unsigned(100, 8);
+			C <= to_unsigned(10, 4);
 			R <= '1';
 	   ELSIF clk'event and clk = '1' then
 	     IF CMD = INIT THEN
-				C <= to_unsigned(100, 8);
+				C <= to_unsigned(10, 4);
 				R <= not(R);
 		  ELSIF CMD = COUNT AND T = '1' THEN
 				C <= C - 1;
