@@ -118,3 +118,6 @@ Connection to localhost closed.
 
 Lors d'une connection sftp:
 'Connected to localhost'
+
+
+Avec l'utilisateur bob, le chroot est '/', alors qu'avec sftp, le chroot avec '/home/stfp'
