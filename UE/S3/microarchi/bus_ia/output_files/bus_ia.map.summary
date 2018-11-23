@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Mon Nov 19 12:39:12 2018
+Analysis & Synthesis Status : Successful - Fri Nov 23 10:25:46 2018
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : bus_ia
 Top-level Entity Name : bus_ia
 Family : Cyclone II
-Total logic elements : 531
+Total logic elements : 554
     Total combinational functions : 390
-    Dedicated logic registers : 394
-Total registers : 394
+    Dedicated logic registers : 430
+Total registers : 430
 Total pins : 15
 Total virtual pins : 0
 Total memory bits : 0

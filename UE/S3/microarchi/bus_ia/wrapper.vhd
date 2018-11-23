@@ -58,9 +58,9 @@ ARCHITECTURE montage OF wrapper IS
 	signal R_tft   :  STD_LOGIC_VECTOR (43 downto 0);
 
 	-- Commande pour 'busmsg'
-	-- 	SEND => envoit du message
-	-- 	NOOP => envoit d'un buffer 0
-	TYPE T_CMD_Msg IS (SEND, NOOP);
+	-- 	LOAD => chargement du message
+	-- 	NOOP => charge un message vide (NOOP)
+	TYPE T_CMD_Msg IS (LOAD, NOOP);
 	signal CMD_Msg : T_CMD_Msg ;
 	signal R_Msg   :  STD_LOGIC_VECTOR (23 downto 0);
 
@@ -98,13 +98,14 @@ BEGIN
 			IF CMD_Msg = LOAD THEN
 				R_Msg <= R_tft(23 downto 0);
 			-- sinon (== commande NOOP), on met le registre à 0
-			ELSIF
+			ELSE
 				R_Msg <= (others => '0');
 			END IF ;
 		END IF;
 	END PROCESS;
 
-	busou  <= R_tft;
+	-- sortie
+	busout <= R_tft;
 	busmsg <= R_Msg;
 
 	-------------------------------------------------------------------------------
@@ -148,7 +149,7 @@ BEGIN
 		'0'    WHEN   others
 	; 
 
-	WITH state WHEN busout_valid <=
+	WITH state SELECT busout_valid <=
 		'1'    WHEN    ST_WRITE_OUT,
 		'0'    WHEN   others
 	; 

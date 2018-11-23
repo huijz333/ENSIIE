@@ -27,14 +27,17 @@ ENTITY dispacher IS
 			-- message en entrée
 			busmsg : in STD_LOGIC_VECTOR(23 downto 0);
 
-		    -- les 32 valeurs du 7 segments configurées (7 * 32 = 224)
-		    busSS : out STD_LOGIC_VECTOR(223 downto 0);
+		   -- les 32 valeurs du 7 segments configurées (7 * 32 = 224)
+		   busSS : out STD_LOGIC_VECTOR(223 downto 0);
 
-		    -- N : nombre de valeurs configurées à interpréter
-		    busN : out STD_LOGIC_VECTOR(5 downto 0);
+		   -- N : nombre de valeurs configurées à interpréter
+		   busN : out STD_LOGIC_VECTOR(5 downto 0);
 
-		    -- N_clock : nombre de clock à attendre pour générer un tick
-		    busNClock : out STD_LOGIC_VECTOR(20 downto 0)
+		   -- N_clock : nombre de clock à attendre pour générer un tick
+		   busNClock : out STD_LOGIC_VECTOR(20 downto 0);
+			
+			-- est à '1' si l'on doit envoyer un message au PC tous les 1000 ticks
+			busTICK1000 : out STD_LOGIC
 	    );
 END dispacher;
 
@@ -47,7 +50,7 @@ ARCHITECTURE montage OF dispacher IS
 	-- Commande pour 'busmsg'
 	-- 	SEND => envoit du message
 	-- 	NOOP => envoit d'un buffer 0
-	TYPE T_CMD IS (READ, DISPATCH);
+	TYPE T_CMD IS (READ_MSG, DISPATCH);
 	signal cmd : T_CMD;
 
 	-- le registre de stockage des données du dernier message reçu
@@ -86,7 +89,7 @@ BEGIN
 		-- si on reset
 		IF reset = '1' THEN
 			-- 100 ticks par seconde (500 est en kilo-clock)
-			R_N_CLOCK <= STD_LOGIC_VECTOR(to_unsigned(5000, 20));
+			R_N_CLOCK <= STD_LOGIC_VECTOR(to_unsigned(5000, 21));
 
 			-- configure le serpentin pour qu'il soit vide
 			R_N  <= STD_LOGIC_VECTOR(to_unsigned(32, 6));
@@ -98,7 +101,7 @@ BEGIN
 		ELSIF clk'event AND clk = '1' THEN
 
 			-- stocke le message
-			IF cmd = READ THEN
+			IF cmd = READ_MSG THEN
 				R_Msg <= busmsg;
 
 			-- dispatch le message
@@ -130,12 +133,15 @@ BEGIN
 
 					-- si commande set-N(n)
 					WHEN "101" =>
-						R_N <= R_tft(5 downto 0);
+						R_N <= R_Msg(5 downto 0);
 
 					-- si commande set-val(i, v)
 					WHEN "110" =>
 						-- TODO
-						-- R_SS((i + 1) * 7 - 1, i * 7) <= R_tft(6 downto 0);
+						-- R_SS((i + 1) * 7 - 1, i * 7) <= R_Msg(6 downto 0);
+						
+					WHEN others =>
+						-- message invalide
 				END CASE;
 			END IF;
 		END IF;
@@ -164,7 +170,7 @@ BEGIN
 
 	-- fonction de sortie    
 	WITH state SELECT cmd <=
-		READ       WHEN   ST_READ,
+		READ_MSG   WHEN   ST_READ,
 		DISPATCH   WHEN   ST_DISPATCH
 	; 
 

@@ -2,8 +2,10 @@
 -------------------------------------------------------------------------------
 -- Entrée:
 --		clk, reset la clock et le reset
---		Entier E coddé sur 24 bits
---		Entier F coddé sur 3 bits, le facteur de vitesse
+--		Entier E coddé sur 21 bits (nombre de kilo master cycle)
+--
+--	Sortie:
+--		T , le tick : '1' tous les 'E' master cycle, sinon '0'
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -14,7 +16,7 @@ entity h100 is
 	port(
 		    clk : in STD_LOGIC;
 		    reset : in STD_LOGIC;
-		    E   : in  STD_LOGIC_VECTOR(23 downto 0);
+		    E   : in  STD_LOGIC_VECTOR(20 downto 0);
 		    T   : out STD_LOGIC
 	    );
 end h100;
@@ -49,7 +51,9 @@ begin
 	process (clk)
 	begin if clk'event and clk = '1' then
 		IF CMD = LOAD THEN 
-			R <= unsigned(E); -- charges E, sortie du bloc dans le bus ia
+			-- charges 'E' dans 'R' en kilo master cycle
+			R(23 downto 3) <= unsigned(E);
+			R(2  downto 0) <= to_unsigned(0, 3);
 		ELSIF CMD = DECR THEN
 			R <= R - 1;
 		END IF;
@@ -60,8 +64,8 @@ begin
     -------------------------------------------------------------------------------
     -- Partie Contrôle
     -------------------------------------------------------------------------------
-    -- Inputs:  E
-    -- Outputs: T, CMD
+    -- Inputs:  R_IS_NULL, state
+    -- Outputs: T, CMD, state
     -------------------------------------------------------------------------------
 
     -- fonction de transitition    
