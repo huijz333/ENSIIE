@@ -14,8 +14,8 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- diode h10
-entity hprog is
+-- moduler
+entity moduler is
 	port(
 		    clk : in STD_LOGIC;
 		    reset : in STD_LOGIC;
@@ -25,9 +25,9 @@ entity hprog is
 		    E0    : in STD_LOGIC;
 		    S     : out STD_LOGIC
 	    );
-end hprog;
+end moduler;
 
-architecture montage of hprog is
+architecture montage of moduler is
 
     -------------------------------------------------------------------------------
     --  Partie Opérative

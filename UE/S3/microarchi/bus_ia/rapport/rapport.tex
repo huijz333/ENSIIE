@@ -19,6 +19,7 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{wrapfig}
+\usepackage{array}
 \usepackage[hmargin=1.25in,vmargin=1.25in]{geometry}
 
 % table of contents setup
@@ -133,6 +134,22 @@
     \newpage
     \section{Manuel utilisateur}
     
+    \paragraph{Bouton de droite} 'Bouton reset' , réinitialise l'état du serpentin dans son état initial
+    
+    \paragraph{Interrupteurs} 'IVDF2 IVDF1 IVDF0' permettent de régler la vitesse de défilement
+    
+    // TODO : graph des vitesses
+    
+    \paragraph{Diodes d'interrupteur} 'DVDF2 DVDF1 DVDF0' allumé ou éteintes selon que les interrupteurs IVDF2, IVDF1 ou IVDF0 sont actifs ou inactifs.
+    
+    \paragraph{Diode défilement} 'DVDF' cette diode clignote à la vitesse de défilement
+    
+    \paragraph{Selectionneur serpentin} 'SEL1 SEL2' permettent de selectionner le type de serpentin
+    
+    // TODO graph des serpentins
+    
+    \paragraph{BUS - IA} BUS-IA, prends un message pour communiquer avec le serpentin \ref{formatmsg}
+
     \newpage
     \section{Présentation générale}
     
@@ -155,7 +172,7 @@
         
         - \textbf{bits 20 à 0} Ce sont les données du message, le format varie selon le \textit{type}
         
-        \subsection{Format des messages}
+        \subsection{Format des messages}\label{formatmsg}
         
         Ci-dessous, voici les commandes supportées par le processeur,
         et le format des messages permettant d'executer ces commandes.
@@ -195,7 +212,7 @@
         - \textbf{bits 20 à 0} : \textit{non utilisées}
         \newline
         \newline
-        \textbf{set-N(n)} Indique au processeur le nombre de \textbf{valeurs} à faire défiler en boucle sur le 7-segments. (\textbf{n} compris entre 1 et 32)
+        \textbf{set-N(n)} Indique au processeur le nombre de \textbf{valeurs} à faire défiler en boucle sur le 7-segments. (\textbf{n} compris entre 1 et 32)\label{N}
         
         - \textbf{bits 23 à 21} : ``101''
 
@@ -217,11 +234,205 @@
     \newpage
     \section{Description matérielle}
     
+        \subsection{Schéma général}
+        
+        // TODO SCHEMA GENERAL
+    
     \newpage
     \section{Présentation générale}
         \subsection{Schéma général}
         \subsection{Description des blocs}
         
+        \subsubsection{Wrapper}
+        
+        Il s'agit de l'interface de communication dans le BUS-IA.
+        
+        Ce bloc suit le protocole 'handshake' dans le BUS-IA.
+        
+        Il récupère les messages qui lui sont destinés,
+        puis les renvoie vers le processeur du serpentin.
+        
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+            
+            - busin : entrée dans le BUS-IA (44 bits, protocole handshake)
+            
+            - busin\_valid : entrée dans le BUS-IA (1 bit, protocole handshake)
+
+            - busout\_eated : entrée dans le BUS-IA (1 bit, protocole handshake)
+                            
+        \textbf{Sorties}
+            
+            - busout : sortie vers le BUS-IA (44 bits, protocole handshake)
+           
+            - busout\_valid : sortie vers le BUS-IA (1 bit, protocole handshake)
+           
+            - busin\_eated : sortie vers lle BUS-IA (1 bit, protocole handshake)
+
+            - busmsg : sortie vers le processeur du serpentin (24 bits, pas de protocole)
+
+
+        
+        \subsubsection{Dispatcher}
+        
+        Il s'agit du bloc de répartition.
+                
+        Il récupère les \textit{messages} qui lui sont destinés,
+        les interprète, et modifie ses sorties en fonction.
+        
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+            
+            - busmsg : le message a interpreté (24 bits)
+                            
+        \textbf{Sorties}
+            
+            - bus\_ss : sortie vers le 7-segment (32 * 7 = 224 bits), coddant les configurations possibles du 7-segments.
+           
+            - bus\_n : sortie vers le 7-segment (6 bit), coddant 'N' (\ref{N})
+
+            - bus\_n\_clock : sortie vers le générateur de ticks (20 bits), coddant le nombre de \textbf{kilo master clock} à attendre pour générer un tick. (la master clock étant à 50MHz, pour une entrée
+            $$(1001110001000)_2 kHz = (5000)_{10} kHz = (5000000) Hz$$
+            On aura 100 ticks seront générés par secondes.)
+            
+            - bus\_tick1000 : sortie vers le générateur de tick, '1' ou '0' selon que le générateur doit envoit un message au PC tous les 1000 ticks.
+
+        
+        \subsubsection{H100}
+        
+        Il s'agit du générateur de tick.
+                
+        Il récupère un nombre \textit{N\_clock}, puis compte \textit{N\_clock} \textbf{kilo master clock}
+        avant de générer un tick.
+        
+        Lorsqu'un tick est généré, sa sortie passe à '1' pendant un master clock, sinon elle vaut '0'
+        
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+            
+            - N\_clock : le nombre de \textbf{kilo master clock} (20 bits)
+                            
+        \textbf{Sorties}
+            
+            - T : '1' ou '0' si un tick est généré ou non (1 bit)
+        
+        \subsubsection{H10}
+        
+        Il s'agit d'un compteur de tick.
+                
+        Il module le signal du tick en un signale de clignotement.
+        
+        Sa sortie alterne entre '1' et '0' tous les 10 ticks.
+        
+        Une diode est branché sur ce bloc, elle clignote avec une fréquence de 10 ticks.
+                
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+            
+            - T : un tick (1 bit)
+                            
+        \textbf{Sorties}
+            
+            - S : le signal de sortie (1 bit)
+        
+        \subsubsection{Moduleur}
+        
+        Il s'agit d'un moduleur de tick programmable.
+                
+        Il prends un entier \textit{X} coddé sur 3 bits en entrée (avec donc 7 valeurs possibles)
+        
+        Il génère un tick tous les \textit{Y} ticks de H100, avec la correspondance:
+        
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{ccccccccc}
+                   X & ``000'' & ``001'' & ``010'' & ``011'' & ``100'' & ``101'' & ``110'' & ``111'' \\
+                   Y &    2    &    5    &    7    &    10   &    12   &   15    &   17    &    20   \\
+            \end{tabular}
+        \end{table}
+        
+        Ce tick est envoyé dans l'entrée du serpentin programmable.
+
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+
+            - E2 E1 E0 : l'entier coddé sur 3 bits (3 x 1 bit)
+
+            - T : un tick (1 bit)
+                            
+        \textbf{Sorties}
+            
+            - S : le tick de sortie (1 bit)
+        
+        \subsubsection{Serpentin Programmable}
+        
+        Il s'agit du serpentin programmable.
+        
+        On appelle \textit{frame} 7 bits configurant l'état des segments sur le 7-segment.
+
+        Si le i-ème bit est à '1', cela indique que le i-ème segment doit être allumé, sinon il est éteinds.
+        
+        Ce bloc prends en entrée un tableau de 32 \textit{frames}.
+        
+        Il selectionne successivement (modulo N) les frames 1 à N, lorsqu'un tick est reçu.
+
+        \textbf{Entrées}
+        
+            - clk, reset : la master clock et le reset
+
+            - T : un tick venant du moduleur (1 bit)
+            
+            - frames : les images programmées sur le 7-segment (7 * 32 = 224 bits)
+            
+            - N : le nombre de frames sur lesquelles le 7-segment doit boucler (entre 1 et 32, 6 bits)
+            
+        \textbf{Sorties}
+            
+            - S6 S5 S4 S4 S3 S2 S1 S0 : les 7 bits coddant la frame en cours.
+        
+        \subsubsection{Serpentin clignottant}
+        
+        Il s'agit du serpentin pré-programmé.
+        
+        Il sort la configuration du serpentin correspondant à un clignotement.
+        
+        \textbf{Sorties}
+            
+            - N : ``000010'' (2, le serpentin boucle sur 2 frames)
+            
+            - frames : ''000...000 1111111`` (toutes les frames éteintes, et une allumée)
+        
+        \subsubsection{Serpentin horaire}
+        
+        Il s'agit du serpentin pré-programmé.
+        
+        Il sort la configuration du serpentin correspond à une rotation horaire.
+        
+        \textbf{Sorties}
+            
+            - N : ``000110'' (6, le serpentin boucle sur 6 frames)
+            
+            - frames : la configuration correspondante
+                
+                
+        \subsubsection{Serpentin anti-horaire}
+        
+        Il s'agit du serpentin pré-programmé.
+        
+        Il sort la configuration du serpentin correspond à une rotation anti-horaire.
+        
+        \textbf{Sorties}
+            
+            - N : ``000110'' (6, le serpentin boucle sur 6 frames)
+            
+            - frames : la configuration correspondante
+            
+                
     \newpage
     \section{Implémentation du bloc ????}
     
