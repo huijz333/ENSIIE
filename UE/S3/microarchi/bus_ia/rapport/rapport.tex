@@ -16,6 +16,7 @@
 \usepackage{amsfonts}
 \usepackage{stmaryrd}
 \usepackage{graphicx}
+\usepackage{eurosym}
 \usepackage{color}
 \usepackage{listings}
 \usepackage{wrapfig}
@@ -31,6 +32,29 @@
 \usepackage[T1]{fontenc}
 \usepackage[frenchb]{babel}
 
+\usepackage[T1]{fontenc}
+\usepackage{beramono}% monospaced font with bold variant
+ 
+\usepackage{listings}
+\lstdefinelanguage{VHDL}{
+   morekeywords={
+     library,use,all,entity,is,port,in,out,end,architecture,of,
+     begin,and
+   },
+   morecomment=[l]--
+}
+ 
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+   language     = VHDL,
+   basicstyle   = \ttfamily,
+   keywordstyle = \color{keyword}\bfseries,
+   commentstyle = \color{comment}
+}
+ 
+ 
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \newcommand{\hsp}{\hspace{20pt}}
@@ -120,7 +144,7 @@
     \newline
     \newline
     \textbf{Accessible}
-    Pour la modique somme de 29.99€, offrez vous un\\
+    Pour la modique somme de 29.99\euro, offrez vous un\\
     \\
     \\
     \\
@@ -136,18 +160,41 @@
     
     \paragraph{Bouton de droite} 'Bouton reset' , réinitialise l'état du serpentin dans son état initial
     
-    \paragraph{Interrupteurs} 'IVDF2 IVDF1 IVDF0' permettent de régler la vitesse de défilement
+    \paragraph{Interrupteurs} 'IVDF2 IVDF1 IVDF0' permettent de régler la vitesse de défilement (en nombre de ticks)
     
-    // TODO : graph des vitesses
-    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{cccc}
+                IVDF2 & IVDF1 & IVDF0 & vitesse de défilement \\
+                  0   &   0   &   0   & 2 \\
+                  0   &   0   &   1   & 5 \\
+                  0   &   1   &   0   & 7 \\
+                  0   &   1   &   1   & 10 \\
+                  1   &   0   &   0   & 12 \\
+                  1   &   0   &   1   & 15 \\
+                  1   &   1   &   0   & 17 \\
+                  1   &   1   &   1   & 20 \\
+        \end{tabular}
+    \end{table}
+        
     \paragraph{Diodes d'interrupteur} 'DVDF2 DVDF1 DVDF0' allumé ou éteintes selon que les interrupteurs IVDF2, IVDF1 ou IVDF0 sont actifs ou inactifs.
     
     \paragraph{Diode défilement} 'DVDF' cette diode clignote à la vitesse de défilement
     
     \paragraph{Selectionneur serpentin} 'SEL1 SEL2' permettent de selectionner le type de serpentin
     
-    // TODO graph des serpentins
-    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{cccc}
+                SEL1 & SEL0 & type de serpentin \\
+                  0  &   0  &    clignotement   \\
+                  0  &   1  &    horaire        \\
+                  1  &   0  &    anti-horaire   \\
+                  1  &   1  &    programmable   \\
+        \end{tabular}
+    \end{table}
+        
+        
     \paragraph{BUS - IA} BUS-IA, prends un message pour communiquer avec le serpentin \ref{formatmsg}
 
     \newpage
@@ -164,14 +211,22 @@
         - \textbf{bits 43 à 24} Ce sont les bits du contrôle du BUS-IA (voir Bus-IA)
         
         - \textbf{bits 23 à 0} Ce sont les bits du message
-        \newline
-        \newline
+
+        \begin{figure}[h!]
+            \includegraphics[width=10cm]{messages1.png}
+        \end{figure}
+
         Un \textit{message} doit avoir le format:
         
         - \textbf{bits 23 à 21} Ce sont les bits coddant le \textit{type} du \textit{message}
         
         - \textbf{bits 20 à 0} Ce sont les données du message, le format varie selon le \textit{type}
         
+        \begin{figure}[h!]
+            \includegraphics[width=10cm]{messages2.png}
+        \end{figure}
+        
+        \newpage
         \subsection{Format des messages}\label{formatmsg}
         
         Ci-dessous, voici les commandes supportées par le processeur,
@@ -197,7 +252,7 @@
         - \textbf{bits 23 à 21} : ``010''
 
         - \textbf{bits 20 à 0} : \textit{non utilisées}
-        \newpage
+
         \textbf{h-check-OFF()} Demande au processeur d'arrêter d'envoyer au PC un message TICK1000
         
         - \textbf{bits 23 à 21} : ``011''
@@ -235,13 +290,23 @@
     \section{Description matérielle}
     
         \subsection{Schéma général}
+
+         Quelques simplifications ont eu lieu pour la lisibilité du schéma:
         
-        // TODO SCHEMA GENERAL
-    
+        - En réalité, chaque bloc prend la master clock et le bouton reset en entrée
+        
+        - Les 224 bits de configuration et les 6 bits coddant N ont été groupé en un seul fil (de 230 bits)
+        
+        - S6 S5 S4 S3 S2 S1 S0 sont combinés en un seul fil
+
+        \begin{figure}[h!]
+            \hspace*{-2cm}                                                          
+            \includegraphics[width=20cm]{schema.png}
+            \caption{Schéma général simplifié du matérielle}
+        \end{figure}
+
     \newpage
-    \section{Présentation générale}
-        \subsection{Schéma général}
-        \subsection{Description des blocs}
+    \subsection{Description des blocs}
         
         \subsubsection{Wrapper}
         
@@ -289,7 +354,7 @@
                             
         \textbf{Sorties}
             
-            - bus\_ss : sortie vers le 7-segment (32 * 7 = 224 bits), coddant les configurations possibles du 7-segments.
+            - bus\_ss : sortie vers le 7-segment (32 * 7 + 6 = 224 bits), coddant les configurations possibles du 7-segments.
            
             - bus\_n : sortie vers le 7-segment (6 bit), coddant 'N' (\ref{N})
 
@@ -395,7 +460,7 @@
             
             - S6 S5 S4 S4 S3 S2 S1 S0 : les 7 bits coddant la frame en cours.
         
-        \subsubsection{Serpentin clignottant}
+        \subsubsection{Serpentin clignotant}
         
         Il s'agit du serpentin pré-programmé.
         
@@ -434,7 +499,155 @@
             
                 
     \newpage
-    \section{Implémentation du bloc ????}
+    \section{Implémentation du bloc H100}
     
+        \begin{figure}[h!]
+            \includegraphics[width=12cm]{h100.png}
+            \caption{}
+        \end{figure}
     
+            
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{ccccccccc}
+                   \textbf{Etat} & \textbf{numéro de lignes} & sortie T \\
+                     LOAD        &         5 à 6             &    0     \\
+                     DECR        &         7 à 10            &    0     \\
+                     TICK        &          11               &    1     \\
+                \end{tabular}
+        \end{table}
+        
+        \begin{figure}[h!]
+            \includegraphics[width=8cm]{h100diag.png}
+            \caption{}
+        \end{figure}
+        
+        
+        \newpage
+        \begin{algorithm}
+            \caption{Algorithme qui tourne en boucle sur le bloc}
+            \begin{algorithmic}[1]
+                \State \textbf{Entrée} $E$ entier sur 20 bits
+                \State \textbf{Sortie} $T$ un tick coddé sur 1 bit ('0' ou '1')
+                \State \textbf{Registre} $R_c$ compteur sur 23 bits
+                \Function{update}{}
+                    \State $T = 0$
+                    \State $R_c$ := $E$
+                    \State \textbf{Tant que} $R_c \neq 0$
+                        \State \qquad $R_c$ := $R_c - 1$
+                        \State \qquad Attendre 1 master clock
+                    \State \textbf{Fin tant que}
+                    \State $T = 1$
+                    \State Attendre 1 master clock
+                \EndFunction
+            \end{algorithmic}
+        \end{algorithm}
+        
+        
+        Implémentation VHDL
+        \begin{lstlisting}[style=vhdl]
+
+-------------------------------------------------------------------------------
+-- Entrée:
+--		clk, reset la clock et le reset
+--		Entier E coddé sur 21 bits (nombre de kilo master cycle)
+--
+--	Sortie:
+--		T , le tick : '1' tous les 'E' master cycle, sinon '0'
+-------------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity h100 is
+	port(
+		    clk : in STD_LOGIC;
+		    reset : in STD_LOGIC;
+		    E   : in  STD_LOGIC_VECTOR(20 downto 0);
+		    T   : out STD_LOGIC
+	    );
+end h100;
+
+architecture montage of h100 is
+
+    -------------------------------------------------------------------------------
+    --  Partie Opérative
+    -------------------------------------------------------------------------------
+	type T_CMD is (LOAD, DECR, NOOP);
+    -- la commande courante
+	signal CMD :  T_CMD; 
+    -- le registre de stockage, compteur des clocks
+	signal R   :  unsigned (23 downto 0);
+	 -- boolean vrai si R est à 0
+	signal R_IS_NULL:  STD_LOGIC;
+
+    -------------------------------------------------------------------------------
+    -- Partie Contrôle
+    -------------------------------------------------------------------------------
+	type STATE_TYPE is (
+	ST_LOAD, ST_DECR, ST_TICK
+);
+signal state : STATE_TYPE;
+
+begin
+
+    -------------------------------------------------------------------------------
+    --  Partie Opérative
+    -------------------------------------------------------------------------------
+
+	process (clk)
+	begin if clk'event and clk = '1' then
+		IF CMD = LOAD THEN 
+			-- charges 'E' dans 'R' en kilo master cycle
+			R(23 downto 3) <= unsigned(E);
+			R(2  downto 0) <= to_unsigned(0, 3);
+		ELSIF CMD = DECR THEN
+			R <= R - 1;
+		END IF;
+	end if; end process;
+
+	R_IS_NULL <= '1' WHEN R = 0 ELSE '0' ;
+
+    -------------------------------------------------------------------------------
+    -- Partie Contrôle
+    -------------------------------------------------------------------------------
+    -- Inputs:  R_IS_NULL, state
+    -- Outputs: T, CMD, state
+    -------------------------------------------------------------------------------
+
+    -- fonction de transitition    
+	process (reset, clk)
+	begin
+		if reset = '1' then
+			state <= ST_LOAD;
+		elsif clk'event and clk = '1' then
+			case state is
+				when ST_LOAD =>
+					state <= ST_DECR ;
+				when ST_DECR =>
+					IF R_IS_NULL = '1' THEN
+						state <= ST_TICK;
+					END IF ;
+				when ST_TICK =>
+					state <= ST_LOAD ;
+			end case;
+		end if;
+	end process;
+
+    -- fonction de sortie    
+	with state  select T <=
+	'1'    when   ST_TICK,
+	'0'    when   others;
+
+	with state  select CMD <=
+	LOAD   when   ST_LOAD,
+	DECR   when   ST_DECR,
+	NOOP   when   ST_TICK;
+
+end montage;
+
+
+\end{lstlisting}
+
 \end{document}
