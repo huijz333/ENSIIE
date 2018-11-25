@@ -354,7 +354,7 @@
                             
         \textbf{Sorties}
             
-            - bus\_ss : sortie vers le 7-segment (32 * 7 + 6 = 224 bits), codant les configurations possibles du 7-segments.
+            - bus\_ss : sortie vers le 7-segment (32 * 7 = 224 bits), codant les configurations possibles du 7-segments.
            
             - bus\_n : sortie vers le 7-segment (6 bit), codant 'N' (\ref{N})
 
@@ -364,7 +364,7 @@
             $$(1001110001000)_2 kHz = (5000)_{10} kHz = (5000000) Hz$$
             On aura 100 ticks seront générés par secondes.
             
-            - bus\_tick1000 : sortie vers le générateur de tick, '1' ou '0' selon que le générateur envoie un message au PC tous les 1000 ticks.
+            - bus\_tick1000 : sortie vers le générateur de tick, '1' ou '0' selon que le générateur envoie ou non un message au PC tous les 1000 ticks.
 
         
         \subsubsection{H100}
@@ -618,7 +618,7 @@ begin
     -- Outputs: T, CMD, state
     -------------------------------------------------------------------------------
 
-    -- fonction de transitition    
+    -- fonction de transition    
 	process (reset, clk)
 	begin
 		if reset = '1' then
