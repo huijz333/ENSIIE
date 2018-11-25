@@ -109,7 +109,7 @@
                     \end{flushright}
                 \end{minipage}
                 \\[2.0cm]
-                {\large 25/10/2018}
+                {\large 25/11/2018}
             \end{center}
         \end{sffamily}
     \end{titlepage}
@@ -118,11 +118,11 @@
     \section*{Préambule}
     Ce projet a été réalisé dans le cadre de nos études à l'ENSIIE (Ecole National Supérieur d'informatique pour l'industrie et l'entreprise) d'Evry.
     
-    Ce projet est l'aboustissement de nos cours en Micro-architecture.
+    Ce projet est l'aboutissement de nos cours en Micro-architecture.
     
     Nous programmions sur un FPGA d'Altera (gamme Cyclone), en VHDL et à l'aide du logiciel Quartus.
     
-    L'objectif a été de réalisé un serpentin programmable, et affichable sur un 7-segment.
+    L'objectif a été de réaliser un serpentin programmable, et affichable sur un 7-segment.
 
     \newpage
     \section{Introduction}
@@ -130,7 +130,7 @@
     \newline
     Ne cherchez plus, voici \textbf{le Serpentin 3000}
     \newline
-    Cette modeste plaquette electronique passionera les petits comme les grands enfants.
+    Cette modeste plaquette électronique passionera les petits comme les grands enfants.
     \newline
     \newline
     \textbf{Amusez vous!}
@@ -144,7 +144,7 @@
     \newline
     \newline
     \textbf{Accessible}
-    Pour la modique somme de 29.99\euro, offrez vous un\\
+    Pour la modique somme de 4.99\euro, offrez vous un\\
     \\
     \\
     \\
@@ -177,11 +177,11 @@
         \end{tabular}
     \end{table}
         
-    \paragraph{Diodes d'interrupteur} 'DVDF2 DVDF1 DVDF0' allumé ou éteintes selon que les interrupteurs IVDF2, IVDF1 ou IVDF0 sont actifs ou inactifs.
+    \paragraph{Diodes d'interrupteurs} 'DVDF2 DVDF1 DVDF0' allumées ou éteintes selon que les interrupteurs IVDF2, IVDF1 ou IVDF0 sont actifs ou inactifs.
     
     \paragraph{Diode défilement} 'DVDF' cette diode clignote à la vitesse de défilement
     
-    \paragraph{Selectionneur serpentin} 'SEL1 SEL2' permettent de selectionner le type de serpentin
+    \paragraph{Sélectionneur serpentin} 'SEL1 SEL2' permettent de sélectionner le type de serpentin
     
     \begin{table}[h]
         \centering
@@ -195,7 +195,7 @@
     \end{table}
         
         
-    \paragraph{BUS - IA} BUS-IA, prends un message pour communiquer avec le serpentin \ref{formatmsg}
+    \paragraph{BUS - IA} BUS-IA, prend un message pour communiquer avec le serpentin \ref{formatmsg}
 
     \newpage
     \section{Présentation générale}
@@ -218,7 +218,7 @@
 
         Un \textit{message} doit avoir le format:
         
-        - \textbf{bits 23 à 21} Ce sont les bits coddant le \textit{type} du \textit{message}
+        - \textbf{bits 23 à 21} Ce sont les bits codant le \textit{type} du \textit{message}
         
         - \textbf{bits 20 à 0} Ce sont les données du message, le format varie selon le \textit{type}
         
@@ -273,7 +273,7 @@
 
         - \textbf{bits 20 à 6} : \textit{non utilisées} 
 
-        - \textbf{bits 5 à 0} : \textbf{n} coddé sur 6 bits ($2^6 = 64$)
+        - \textbf{bits 5 à 0} : \textbf{n} codé sur 6 bits ($2^6 = 64$)
         \newline
         \newline
         \textbf{set-val(i, v)} Indique au processeur la i-ème valeur du 7-segments est \textbf{v}
@@ -282,9 +282,9 @@
 
         - \textbf{bits 20 à 13} : \textit{non utilisées} 
 
-        - \textbf{bits 12 à 6} : \textbf{v} les 7 bits correspond aux 7 segments de l'afficheur (0 => éteinds, 1 => allumé)
+        - \textbf{bits 12 à 6} : \textbf{v} les 7 bits correspond aux 7 segments de l'afficheur (0 => éteint, 1 => allumé)
 
-        - \textbf{bits 5 à 0} : \textbf{n} coddé sur 6 bits ($2^6 = 64$)
+        - \textbf{bits 5 à 0} : \textbf{n} codé sur 6 bits ($2^6 = 64$)
 
     \newpage
     \section{Description matérielle}
@@ -295,14 +295,14 @@
         
         - En réalité, chaque bloc prend la master clock et le bouton reset en entrée
         
-        - Les 224 bits de configuration et les 6 bits coddant N ont été groupé en un seul fil (de 230 bits)
+        - Les 224 bits de configuration et les 6 bits codant N ont été groupé en un seul fil (de 230 bits)
         
         - S6 S5 S4 S3 S2 S1 S0 sont combinés en un seul fil
 
         \begin{figure}[h!]
             \hspace*{-2cm}                                                          
             \includegraphics[width=20cm]{schema.png}
-            \caption{Schéma général simplifié du matérielle}
+            \caption{Schéma général simplifié du matériel}
         \end{figure}
 
     \newpage
@@ -354,15 +354,17 @@
                             
         \textbf{Sorties}
             
-            - bus\_ss : sortie vers le 7-segment (32 * 7 + 6 = 224 bits), coddant les configurations possibles du 7-segments.
+            - bus\_ss : sortie vers le 7-segment (32 * 7 + 6 = 224 bits), codant les configurations possibles du 7-segments.
            
-            - bus\_n : sortie vers le 7-segment (6 bit), coddant 'N' (\ref{N})
+            - bus\_n : sortie vers le 7-segment (6 bit), codant 'N' (\ref{N})
 
-            - bus\_n\_clock : sortie vers le générateur de ticks (20 bits), coddant le nombre de \textbf{kilo master clock} à attendre pour générer un tick. (la master clock étant à 50MHz, pour une entrée
-            $$(1001110001000)_2 kHz = (5000)_{10} kHz = (5000000) Hz$$
-            On aura 100 ticks seront générés par secondes.)
+            - bus\_n\_clock : sortie vers le générateur de ticks (20 bits), codant le nombre de \textbf{kilo master clock} à attendre pour générer un tick.
             
-            - bus\_tick1000 : sortie vers le générateur de tick, '1' ou '0' selon que le générateur doit envoit un message au PC tous les 1000 ticks.
+            La master clock est à 50MHz, pour une entrée
+            $$(1001110001000)_2 kHz = (5000)_{10} kHz = (5000000) Hz$$
+            On aura 100 ticks seront générés par secondes.
+            
+            - bus\_tick1000 : sortie vers le générateur de tick, '1' ou '0' selon que le générateur envoie un message au PC tous les 1000 ticks.
 
         
         \subsubsection{H100}
@@ -408,7 +410,7 @@
         
         Il s'agit d'un moduleur de tick programmable.
                 
-        Il prends un entier \textit{X} coddé sur 3 bits en entrée (avec donc 7 valeurs possibles)
+        Il prend un entier \textit{X} codé sur 3 bits en entrée (avec donc 7 valeurs possibles)
         
         Il génère un tick tous les \textit{Y} ticks de H100, avec la correspondance:
         
@@ -426,7 +428,7 @@
         
             - clk, reset : la master clock et le reset
 
-            - E2 E1 E0 : l'entier coddé sur 3 bits (3 x 1 bit)
+            - E2 E1 E0 : l'entier codé sur 3 bits (3 x 1 bit)
 
             - T : un tick (1 bit)
                             
@@ -440,11 +442,11 @@
         
         On appelle \textit{frame} 7 bits configurant l'état des segments sur le 7-segment.
 
-        Si le i-ème bit est à '1', cela indique que le i-ème segment doit être allumé, sinon il est éteinds.
+        Si le i-ème bit est à '1', cela indique que le i-ème segment doit être allumé, sinon il est éteint.
         
-        Ce bloc prends en entrée un tableau de 32 \textit{frames}.
+        Ce bloc prend en entrée un tableau de 32 \textit{frames}.
         
-        Il selectionne successivement (modulo N) les frames 1 à N, lorsqu'un tick est reçu.
+        Il sélectionne successivement (modulo N) les frames 1 à N, lorsqu'un tick est reçu.
 
         \textbf{Entrées}
         
@@ -458,7 +460,7 @@
             
         \textbf{Sorties}
             
-            - S6 S5 S4 S4 S3 S2 S1 S0 : les 7 bits coddant la frame en cours.
+            - S6 S5 S4 S4 S3 S2 S1 S0 : les 7 bits codant la frame en cours.
         
         \subsubsection{Serpentin clignotant}
         
@@ -528,7 +530,7 @@
             \caption{Algorithme qui tourne en boucle sur le bloc}
             \begin{algorithmic}[1]
                 \State \textbf{Entrée} $E$ entier sur 20 bits
-                \State \textbf{Sortie} $T$ un tick coddé sur 1 bit ('0' ou '1')
+                \State \textbf{Sortie} $T$ un tick codé sur 1 bit ('0' ou '1')
                 \State \textbf{Registre} $R_c$ compteur sur 23 bits
                 \Function{update}{}
                     \State $T = 0$
@@ -550,7 +552,7 @@
 -------------------------------------------------------------------------------
 -- Entrée:
 --		clk, reset la clock et le reset
---		Entier E coddé sur 21 bits (nombre de kilo master cycle)
+--		Entier E codé sur 21 bits (nombre de kilo master cycle)
 --
 --	Sortie:
 --		T , le tick : '1' tous les 'E' master cycle, sinon '0'

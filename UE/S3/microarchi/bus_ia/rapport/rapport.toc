@@ -3,9 +3,9 @@
 \contentsline {section}{\numberline {2}Manuel utilisateur}{3}{section.2}
 \contentsline {paragraph}{Bouton de droite}{3}{section*.3}
 \contentsline {paragraph}{Interrupteurs}{3}{section*.4}
-\contentsline {paragraph}{Diodes d'interrupteur}{3}{section*.5}
+\contentsline {paragraph}{Diodes d'interrupteurs}{3}{section*.5}
 \contentsline {paragraph}{Diode d\IeC {\'e}filement}{3}{section*.6}
-\contentsline {paragraph}{Selectionneur serpentin}{3}{section*.7}
+\contentsline {paragraph}{S\IeC {\'e}lectionneur serpentin}{3}{section*.7}
 \contentsline {paragraph}{BUS - IA}{3}{section*.8}
 \contentsline {section}{\numberline {3}Pr\IeC {\'e}sentation g\IeC {\'e}n\IeC {\'e}rale}{4}{section.3}
 \contentsline {subsection}{\numberline {3.1}Fonctionnement}{4}{subsection.3.1}
