@@ -14,23 +14,23 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity serpentinprog is
+entity serpentinclignotant is
 	port(
 		-- sorties vers le 7-segment
 		 Config     : OUT STD_LOGIC_VECTOR(229 downto 0)
 	 );
-end serpentinprog;
+end serpentinclignotant;
 
-architecture montage of serpentinprog is
+architecture montage of serpentinclignotant is
 
 begin
 
 	-- boucle sur 2 frames
-	Config(  5 downto 0) <= "000010";
+	Config(229 downto 224) <= "000010";
 	
 	-- 2 frames, 1 allumé, 1 éteinte
-	Config( 12 downto  6) <= "1111111";
-	Config(229 downto 13) <= (others => '0');
+	Config(  6 downto  0) <= "1111111";
+	Config(223 downto  7) <= (others => '0');
 
 end montage;
 
