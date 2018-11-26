@@ -14,26 +14,26 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity serpentin is
+entity serpentinprog is
 	port(
 		-- entrées
-		    clk    : in STD_LOGIC;
-		    reset  : in STD_LOGIC;
-		    cmd_in : in STD_LOGIC_VECTOR(2 downto 0);
-		    T      : in  STD_LOGIC;
+		 clk    : in STD_LOGIC;
+		 reset  : in STD_LOGIC;
+		 cmd_in : in STD_LOGIC_VECTOR(2 downto 0);
+		 T      : in  STD_LOGIC;
 
-		-- sorties vers le 7-segment
-		    S0     : OUT STD_LOGIC;
-		    S1     : OUT STD_LOGIC;
-		    S2     : OUT STD_LOGIC;
-		    S3     : OUT STD_LOGIC;
-		    S4     : OUT STD_LOGIC;
-		    S5     : OUT STD_LOGIC;
-		    S6     : OUT STD_LOGIC
-	    );
-end serpentin;
+	-- sorties vers le 7-segment
+		 S0     : OUT STD_LOGIC;
+		 S1     : OUT STD_LOGIC;
+		 S2     : OUT STD_LOGIC;
+		 S3     : OUT STD_LOGIC;
+		 S4     : OUT STD_LOGIC;
+		 S5     : OUT STD_LOGIC;
+		 S6     : OUT STD_LOGIC
+	 );
+end serpentinprog;
 
-architecture montage of serpentin is
+architecture montage of serpentinprog is
 
     -------------------------------------------------------------------------------
     --  Partie Opérative

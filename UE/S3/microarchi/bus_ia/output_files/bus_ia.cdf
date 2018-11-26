@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP2C35F672) Path("/home/romain.pereira/microarchi/bus_ia/output_files/") File("bus_ia.sof") MfrSpec(OpMask(1));
+		Device PartName(EP2C35F672) Path("/home/romain.pereira/ENSIIE/UE/S3/microarchi/bus_ia/output_files/") File("bus_ia.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

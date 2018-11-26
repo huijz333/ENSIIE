@@ -1,5 +1,5 @@
 Fitter report for bus_ia
-Fri Nov 23 10:26:00 2018
+Mon Nov 26 12:49:13 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,35 +10,34 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Fitter Summary
   3. Fitter Settings
   4. Parallel Compilation
-  5. Ignored Assignments
-  6. Incremental Compilation Preservation Summary
-  7. Incremental Compilation Partition Settings
-  8. Incremental Compilation Placement Preservation
-  9. Pin-Out File
- 10. Fitter Resource Usage Summary
- 11. Fitter Partition Statistics
- 12. Input Pins
- 13. Output Pins
- 14. I/O Bank Usage
- 15. All Package Pins
- 16. Output Pin Default Load For Reported TCO
- 17. Fitter Resource Utilization by Entity
- 18. Delay Chain Summary
- 19. Pad To Core Delay Chain Fanout
- 20. Control Signals
- 21. Global & Other Fast Signals
- 22. Non-Global High Fan-Out Signals
- 23. Other Routing Usage Summary
- 24. LAB Logic Elements
- 25. LAB-wide Signals
- 26. LAB Signals Sourced
- 27. LAB Signals Sourced Out
- 28. LAB Distinct Inputs
- 29. Fitter Device Options
- 30. Operating Settings and Conditions
- 31. Estimated Delay Added for Hold Timing Summary
- 32. Estimated Delay Added for Hold Timing Details
- 33. Fitter Messages
+  5. Incremental Compilation Preservation Summary
+  6. Incremental Compilation Partition Settings
+  7. Incremental Compilation Placement Preservation
+  8. Pin-Out File
+  9. Fitter Resource Usage Summary
+ 10. Fitter Partition Statistics
+ 11. Input Pins
+ 12. Output Pins
+ 13. I/O Bank Usage
+ 14. All Package Pins
+ 15. Output Pin Default Load For Reported TCO
+ 16. Fitter Resource Utilization by Entity
+ 17. Delay Chain Summary
+ 18. Pad To Core Delay Chain Fanout
+ 19. Control Signals
+ 20. Global & Other Fast Signals
+ 21. Non-Global High Fan-Out Signals
+ 22. Other Routing Usage Summary
+ 23. LAB Logic Elements
+ 24. LAB-wide Signals
+ 25. LAB Signals Sourced
+ 26. LAB Signals Sourced Out
+ 27. LAB Distinct Inputs
+ 28. Fitter Device Options
+ 29. Operating Settings and Conditions
+ 30. Estimated Delay Added for Hold Timing Summary
+ 31. Estimated Delay Added for Hold Timing Details
+ 32. Fitter Messages
 
 
 
@@ -64,18 +63,18 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Fri Nov 23 10:26:00 2018           ;
+; Fitter Status                      ; Successful - Mon Nov 26 12:49:13 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; bus_ia                                          ;
 ; Top-level Entity Name              ; bus_ia                                          ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 529 / 33,216 ( 2 % )                            ;
-;     Total combinational functions  ; 391 / 33,216 ( 1 % )                            ;
-;     Dedicated logic registers      ; 430 / 33,216 ( 1 % )                            ;
-; Total registers                    ; 430                                             ;
-; Total pins                         ; 15 / 475 ( 3 % )                                ;
+; Total logic elements               ; 522 / 33,216 ( 2 % )                            ;
+;     Total combinational functions  ; 393 / 33,216 ( 1 % )                            ;
+;     Dedicated logic registers      ; 387 / 33,216 ( 1 % )                            ;
+; Total registers                    ; 387                                             ;
+; Total pins                         ; 22 / 475 ( 5 % )                                ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0 / 483,840 ( 0 % )                             ;
 ; Embedded Multiplier 9-bit elements ; 0 / 70 ( 0 % )                                  ;
@@ -145,29 +144,14 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+----------------------------------------------------------------------------------------+
-; Ignored Assignments                                                                    ;
-+----------+----------------+--------------+------------+---------------+----------------+
-; Name     ; Ignored Entity ; Ignored From ; Ignored To ; Ignored Value ; Ignored Source ;
-+----------+----------------+--------------+------------+---------------+----------------+
-; Location ;                ;              ; pin_name1  ; PIN_V13       ; QSF Assignment ;
-; Location ;                ;              ; pin_name2  ; PIN_V14       ; QSF Assignment ;
-; Location ;                ;              ; pin_name3  ; PIN_AE11      ; QSF Assignment ;
-; Location ;                ;              ; pin_name4  ; PIN_AD11      ; QSF Assignment ;
-; Location ;                ;              ; pin_name5  ; PIN_AC12      ; QSF Assignment ;
-; Location ;                ;              ; pin_name6  ; PIN_AB12      ; QSF Assignment ;
-; Location ;                ;              ; pin_name7  ; PIN_AF10      ; QSF Assignment ;
-+----------+----------------+--------------+------------+---------------+----------------+
-
-
 +----------------------------------------------+
 ; Incremental Compilation Preservation Summary ;
 +---------------------+------------------------+
 ; Type                ; Value                  ;
 +---------------------+------------------------+
 ; Placement (by node) ;                        ;
-;     -- Requested    ; 0 / 839 ( 0.00 % )     ;
-;     -- Achieved     ; 0 / 839 ( 0.00 % )     ;
+;     -- Requested    ; 0 / 805 ( 0.00 % )     ;
+;     -- Achieved     ; 0 / 805 ( 0.00 % )     ;
 ;                     ;                        ;
 ; Routing (by net)    ;                        ;
 ;     -- Requested    ; 0 / 0 ( 0.00 % )       ;
@@ -190,7 +174,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name                 ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
-; Top                            ; 836     ; 0                 ; N/A                     ; Source File       ;
+; Top                            ; 802     ; 0                 ; N/A                     ; Source File       ;
 ; hard_block:auto_generated_inst ; 3       ; 0                 ; N/A                     ; Source File       ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 
@@ -206,29 +190,29 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 +---------------------------------------------+----------------------+
 ; Resource                                    ; Usage                ;
 +---------------------------------------------+----------------------+
-; Total logic elements                        ; 529 / 33,216 ( 2 % ) ;
-;     -- Combinational with no register       ; 99                   ;
-;     -- Register only                        ; 138                  ;
-;     -- Combinational with a register        ; 292                  ;
+; Total logic elements                        ; 522 / 33,216 ( 2 % ) ;
+;     -- Combinational with no register       ; 135                  ;
+;     -- Register only                        ; 129                  ;
+;     -- Combinational with a register        ; 258                  ;
 ;                                             ;                      ;
 ; Logic element usage by number of LUT inputs ;                      ;
-;     -- 4 input functions                    ; 104                  ;
-;     -- 3 input functions                    ; 145                  ;
-;     -- <=2 input functions                  ; 142                  ;
-;     -- Register only                        ; 138                  ;
+;     -- 4 input functions                    ; 106                  ;
+;     -- 3 input functions                    ; 169                  ;
+;     -- <=2 input functions                  ; 118                  ;
+;     -- Register only                        ; 129                  ;
 ;                                             ;                      ;
 ; Logic elements by mode                      ;                      ;
-;     -- normal mode                          ; 336                  ;
-;     -- arithmetic mode                      ; 55                   ;
+;     -- normal mode                          ; 339                  ;
+;     -- arithmetic mode                      ; 54                   ;
 ;                                             ;                      ;
-; Total registers*                            ; 430 / 34,593 ( 1 % ) ;
-;     -- Dedicated logic registers            ; 430 / 33,216 ( 1 % ) ;
+; Total registers*                            ; 387 / 34,593 ( 1 % ) ;
+;     -- Dedicated logic registers            ; 387 / 33,216 ( 1 % ) ;
 ;     -- I/O registers                        ; 0 / 1,377 ( 0 % )    ;
 ;                                             ;                      ;
-; Total LABs:  partially or completely used   ; 43 / 2,076 ( 2 % )   ;
+; Total LABs:  partially or completely used   ; 44 / 2,076 ( 2 % )   ;
 ; Virtual pins                                ; 0                    ;
-; I/O pins                                    ; 15 / 475 ( 3 % )     ;
-;     -- Clock pins                           ; 4 / 8 ( 50 % )       ;
+; I/O pins                                    ; 22 / 475 ( 5 % )     ;
+;     -- Clock pins                           ; 3 / 8 ( 38 % )       ;
 ;                                             ;                      ;
 ; Global signals                              ; 1                    ;
 ; M4Ks                                        ; 0 / 105 ( 0 % )      ;
@@ -241,11 +225,11 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; ASMI blocks                                 ; 0 / 1 ( 0 % )        ;
 ; CRC blocks                                  ; 0 / 1 ( 0 % )        ;
 ; Average interconnect usage (total/H/V)      ; 0% / 0% / 0%         ;
-; Peak interconnect usage (total/H/V)         ; 4% / 4% / 3%         ;
-; Maximum fan-out                             ; 430                  ;
-; Highest non-global fan-out                  ; 78                   ;
-; Total fan-out                               ; 2575                 ;
-; Average fan-out                             ; 2.70                 ;
+; Peak interconnect usage (total/H/V)         ; 3% / 4% / 3%         ;
+; Maximum fan-out                             ; 387                  ;
+; Highest non-global fan-out                  ; 85                   ;
+; Total fan-out                               ; 2451                 ;
+; Average fan-out                             ; 2.71                 ;
 +---------------------------------------------+----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -258,28 +242,28 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 +---------------------------------------------+---------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                 ; Low                            ;
 ;                                             ;                     ;                                ;
-; Total logic elements                        ; 529 / 33216 ( 2 % ) ; 0 / 33216 ( 0 % )              ;
-;     -- Combinational with no register       ; 99                  ; 0                              ;
-;     -- Register only                        ; 138                 ; 0                              ;
-;     -- Combinational with a register        ; 292                 ; 0                              ;
+; Total logic elements                        ; 522 / 33216 ( 2 % ) ; 0 / 33216 ( 0 % )              ;
+;     -- Combinational with no register       ; 135                 ; 0                              ;
+;     -- Register only                        ; 129                 ; 0                              ;
+;     -- Combinational with a register        ; 258                 ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Logic element usage by number of LUT inputs ;                     ;                                ;
-;     -- 4 input functions                    ; 104                 ; 0                              ;
-;     -- 3 input functions                    ; 145                 ; 0                              ;
-;     -- <=2 input functions                  ; 142                 ; 0                              ;
-;     -- Register only                        ; 138                 ; 0                              ;
+;     -- 4 input functions                    ; 106                 ; 0                              ;
+;     -- 3 input functions                    ; 169                 ; 0                              ;
+;     -- <=2 input functions                  ; 118                 ; 0                              ;
+;     -- Register only                        ; 129                 ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Logic elements by mode                      ;                     ;                                ;
-;     -- normal mode                          ; 336                 ; 0                              ;
-;     -- arithmetic mode                      ; 55                  ; 0                              ;
+;     -- normal mode                          ; 339                 ; 0                              ;
+;     -- arithmetic mode                      ; 54                  ; 0                              ;
 ;                                             ;                     ;                                ;
-; Total registers                             ; 430                 ; 0                              ;
-;     -- Dedicated logic registers            ; 430 / 33216 ( 1 % ) ; 0 / 33216 ( 0 % )              ;
+; Total registers                             ; 387                 ; 0                              ;
+;     -- Dedicated logic registers            ; 387 / 33216 ( 1 % ) ; 0 / 33216 ( 0 % )              ;
 ;                                             ;                     ;                                ;
-; Total LABs:  partially or completely used   ; 43 / 2076 ( 2 % )   ; 0 / 2076 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 44 / 2076 ( 2 % )   ; 0 / 2076 ( 0 % )               ;
 ;                                             ;                     ;                                ;
 ; Virtual pins                                ; 0                   ; 0                              ;
-; I/O pins                                    ; 15                  ; 0                              ;
+; I/O pins                                    ; 22                  ; 0                              ;
 ; Embedded Multiplier 9-bit elements          ; 0 / 70 ( 0 % )      ; 0 / 70 ( 0 % )                 ;
 ; Total memory bits                           ; 0                   ; 0                              ;
 ; Total RAM block bits                        ; 0                   ; 0                              ;
@@ -292,8 +276,8 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ;     -- Registered Output Connections        ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Internal Connections                        ;                     ;                                ;
-;     -- Total Connections                    ; 2575                ; 0                              ;
-;     -- Registered Connections               ; 1291                ; 0                              ;
+;     -- Total Connections                    ; 2451                ; 0                              ;
+;     -- Registered Connections               ; 1203                ; 0                              ;
 ;                                             ;                     ;                                ;
 ; External Connections                        ;                     ;                                ;
 ;     -- Top                                  ; 0                   ; 0                              ;
@@ -301,7 +285,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ;                                             ;                     ;                                ;
 ; Partition Interface                         ;                     ;                                ;
 ;     -- Input Ports                          ; 8                   ; 0                              ;
-;     -- Output Ports                         ; 7                   ; 0                              ;
+;     -- Output Ports                         ; 14                  ; 0                              ;
 ;     -- Bidir Ports                          ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Registered Ports                            ;                     ;                                ;
@@ -325,13 +309,13 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 ; Name  ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Location assigned by ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
-; SEL1  ; AF14  ; 7        ; 33           ; 0            ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; Fitter               ;
-; SEL2  ; AE14  ; 7        ; 33           ; 0            ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; Fitter               ;
+; SEL1  ; B10   ; 3        ; 22           ; 36           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; Fitter               ;
+; SEL2  ; W25   ; 6        ; 65           ; 10           ; 3           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; Fitter               ;
 ; clk   ; N2    ; 2        ; 0            ; 18           ; 0           ; 1                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; ivdf0 ; N25   ; 5        ; 65           ; 19           ; 0           ; 5                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; ivdf1 ; N26   ; 5        ; 65           ; 19           ; 1           ; 6                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; ivdf2 ; P25   ; 6        ; 65           ; 19           ; 2           ; 5                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
-; reset ; G26   ; 5        ; 65           ; 27           ; 1           ; 78                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; reset ; G26   ; 5        ; 65           ; 27           ; 1           ; 85                    ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; rx    ; C25   ; 5        ; 65           ; 32           ; 2           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 
@@ -347,6 +331,13 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; dvdf0    ; AE23  ; 7        ; 63           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
 ; dvdf1    ; AF23  ; 7        ; 63           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
 ; dvdf2    ; AB21  ; 7        ; 63           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss0      ; V13   ; 8        ; 27           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss1      ; V14   ; 8        ; 27           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss2      ; AE11  ; 8        ; 27           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss3      ; AD11  ; 8        ; 27           ; 0            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss4      ; AC12  ; 8        ; 24           ; 0            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss5      ; AB12  ; 8        ; 24           ; 0            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ss6      ; AF10  ; 8        ; 24           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
 ; tx       ; B25   ; 5        ; 65           ; 32           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
 +----------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
 
@@ -358,12 +349,12 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 +----------+-----------------+---------------+--------------+
 ; 1        ; 0 / 64 ( 0 % )  ; 3.3V          ; --           ;
 ; 2        ; 3 / 59 ( 5 % )  ; 3.3V          ; --           ;
-; 3        ; 0 / 56 ( 0 % )  ; 3.3V          ; --           ;
+; 3        ; 1 / 56 ( 2 % )  ; 3.3V          ; --           ;
 ; 4        ; 0 / 58 ( 0 % )  ; 3.3V          ; --           ;
 ; 5        ; 5 / 65 ( 8 % )  ; 3.3V          ; --           ;
-; 6        ; 2 / 59 ( 3 % )  ; 3.3V          ; --           ;
-; 7        ; 7 / 58 ( 12 % ) ; 3.3V          ; --           ;
-; 8        ; 1 / 56 ( 2 % )  ; 3.3V          ; --           ;
+; 6        ; 3 / 59 ( 5 % )  ; 3.3V          ; --           ;
+; 7        ; 5 / 58 ( 9 % )  ; 3.3V          ; --           ;
+; 8        ; 8 / 56 ( 14 % ) ; 3.3V          ; --           ;
 +----------+-----------------+---------------+--------------+
 
 
@@ -433,7 +424,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; AB9      ;            ; 8        ; VCCIO8                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; AB10     ; 154        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AB11     ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; AB12     ; 171        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; AB12     ; 171        ; 8        ; ss5                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; AB13     ;            ; 8        ; VCCIO8                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; AB14     ;            ; 7        ; VCCIO7                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; AB15     ; 198        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -459,7 +450,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; AC9      ; 163        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AC10     ; 164        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AC11     ; 168        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AC12     ; 172        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; AC12     ; 172        ; 8        ; ss4                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; AC13     ; 185        ; 8        ; GND+                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
 ; AC14     ; 191        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AC15     ; 199        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -484,7 +475,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; AD8      ; 149        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AD9      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; AD10     ; 167        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AD11     ; 173        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; AD11     ; 173        ; 8        ; ss3                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; AD12     ; 181        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AD13     ; 186        ; 8        ; GND+                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
 ; AD14     ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -510,10 +501,10 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; AE8      ; 159        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AE9      ; 165        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AE10     ; 169        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AE11     ; 174        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; AE11     ; 174        ; 8        ; ss2                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; AE12     ; 182        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AE13     ; 183        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AE14     ; 188        ; 7        ; SEL2                                     ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; AE14     ; 188        ; 7        ; GND+                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
 ; AE15     ; 189        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AE16     ; 200        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AE17     ; 206        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -534,11 +525,11 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; AF7      ; 158        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AF8      ; 160        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; AF9      ; 166        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AF10     ; 170        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; AF10     ; 170        ; 8        ; ss6                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; AF11     ;            ; 8        ; VCCIO8                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; AF12     ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; AF13     ; 184        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; AF14     ; 187        ; 7        ; SEL1                                     ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
+; AF14     ; 187        ; 7        ; GND+                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
 ; AF15     ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; AF16     ;            ; 7        ; VCCIO7                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; AF17     ; 205        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -559,7 +550,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; B7       ; 466        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; B8       ; 458        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; B9       ; 452        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; B10      ; 448        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; B10      ; 448        ; 3        ; SEL1                                     ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; N               ; no       ; Off          ;
 ; B11      ; 435        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; B12      ; 433        ; 3        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; B13      ; 429        ; 4        ; GND+                                     ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
@@ -978,8 +969,8 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; V10      ; 141        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; V11      ; 177        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; V12      ;            ; 8        ; VCCIO8                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; V13      ; 176        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; V14      ; 175        ; 8        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; V13      ; 176        ; 8        ; ss0                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; V14      ; 175        ; 8        ; ss1                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; V15      ;            ; 7        ; VCCIO7                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; V16      ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; V17      ; 218        ; 7        ; GND*                                     ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -1016,7 +1007,7 @@ The pin-out file can be found in /home/romain.pereira/ENSIIE/UE/S3/microarchi/bu
 ; W22      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; W23      ; 272        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; W24      ; 271        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; W25      ; 273        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; W25      ; 273        ; 6        ; SEL2                                     ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; W26      ; 274        ; 6        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; Y1       ; 103        ; 1        ; GND*                                     ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; Y2       ;            ;          ; NC                                       ;        ;              ;         ; --         ;                 ; --       ; --           ;
@@ -1090,17 +1081,17 @@ Note: User assignments will override these defaults. The user specified values a
 +-----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node  ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name            ; Library Name ;
 +-----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------+--------------+
-; |bus_ia                     ; 529 (0)     ; 430 (0)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 15   ; 0            ; 99 (0)       ; 138 (0)           ; 292 (1)          ; |bus_ia                        ; work         ;
-;    |dispacher:inst17|       ; 51 (51)     ; 46 (46)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 27 (27)           ; 19 (19)          ; |bus_ia|dispacher:inst17       ; work         ;
-;    |h100:inst15|            ; 38 (38)     ; 27 (27)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 11 (11)      ; 1 (1)             ; 26 (26)          ; |bus_ia|h100:inst15            ; work         ;
-;    |hprog:inst1|            ; 36 (36)     ; 10 (10)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (13)      ; 0 (0)             ; 23 (23)          ; |bus_ia|hprog:inst1            ; work         ;
-;    |initiateur:inst|        ; 127 (127)   ; 85 (85)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (13)      ; 70 (70)           ; 44 (44)          ; |bus_ia|initiateur:inst        ; work         ;
-;    |plus12:inst2|           ; 92 (92)     ; 52 (52)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 10 (10)      ; 10 (10)           ; 72 (72)          ; |bus_ia|plus12:inst2           ; work         ;
-;    |rs232in:inst4|          ; 58 (58)     ; 37 (37)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 21 (21)      ; 10 (10)           ; 27 (27)          ; |bus_ia|rs232in:inst4          ; work         ;
-;    |rs232out:inst6|         ; 40 (40)     ; 30 (30)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (9)        ; 1 (1)             ; 30 (30)          ; |bus_ia|rs232out:inst6         ; work         ;
-;    |terminateur:inst3|      ; 44 (44)     ; 38 (38)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 5 (5)             ; 33 (33)          ; |bus_ia|terminateur:inst3      ; work         ;
-;    |terminateurSplit:inst5| ; 50 (50)     ; 43 (43)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (5)        ; 3 (3)             ; 42 (42)          ; |bus_ia|terminateurSplit:inst5 ; work         ;
-;    |wrapper:inst11|         ; 70 (70)     ; 62 (62)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 11 (11)           ; 53 (53)          ; |bus_ia|wrapper:inst11         ; work         ;
+; |bus_ia                     ; 522 (1)     ; 387 (0)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 22   ; 0            ; 135 (1)      ; 129 (0)           ; 258 (0)          ; |bus_ia                        ; work         ;
+;    |h100:inst16|            ; 59 (59)     ; 26 (26)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 33 (33)      ; 0 (0)             ; 26 (26)          ; |bus_ia|h100:inst16            ; work         ;
+;    |h10:inst9|              ; 13 (13)     ; 6 (6)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 3 (3)             ; 3 (3)            ; |bus_ia|h10:inst9              ; work         ;
+;    |initiateur:inst|        ; 121 (121)   ; 85 (85)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (18)      ; 59 (59)           ; 44 (44)          ; |bus_ia|initiateur:inst        ; work         ;
+;    |moduler:inst10|         ; 36 (36)     ; 10 (10)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 14 (14)      ; 0 (0)             ; 22 (22)          ; |bus_ia|moduler:inst10         ; work         ;
+;    |plus12:inst2|           ; 97 (97)     ; 52 (52)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (18)      ; 15 (15)           ; 64 (64)          ; |bus_ia|plus12:inst2           ; work         ;
+;    |rs232in:inst4|          ; 59 (59)     ; 37 (37)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 13 (13)      ; 11 (11)           ; 35 (35)          ; |bus_ia|rs232in:inst4          ; work         ;
+;    |rs232out:inst6|         ; 42 (42)     ; 30 (30)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 12 (12)      ; 0 (0)             ; 30 (30)          ; |bus_ia|rs232out:inst6         ; work         ;
+;    |terminateur:inst3|      ; 45 (45)     ; 38 (38)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (7)        ; 7 (7)             ; 31 (31)          ; |bus_ia|terminateur:inst3      ; work         ;
+;    |terminateurSplit:inst5| ; 51 (51)     ; 43 (43)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 2 (2)             ; 43 (43)          ; |bus_ia|terminateurSplit:inst5 ; work         ;
+;    |wrapper:inst17|         ; 69 (69)     ; 60 (60)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 32 (32)           ; 31 (31)          ; |bus_ia|wrapper:inst17         ; work         ;
 +-----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+--------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -1117,9 +1108,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; dvdf1    ; Output   ; --            ; --            ; --                    ; --  ;
 ; dvdf0    ; Output   ; --            ; --            ; --                    ; --  ;
 ; dvdf     ; Output   ; --            ; --            ; --                    ; --  ;
+; ss0      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss1      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss2      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss3      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss4      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss5      ; Output   ; --            ; --            ; --                    ; --  ;
+; ss6      ; Output   ; --            ; --            ; --                    ; --  ;
 ; SEL1     ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; SEL2     ; Input    ; (0) 170 ps    ; (0) 170 ps    ; --                    ; --  ;
-; reset    ; Input    ; (0) 171 ps    ; (6) 2523 ps   ; --                    ; --  ;
+; SEL2     ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
+; reset    ; Input    ; (6) 2523 ps   ; (0) 171 ps    ; --                    ; --  ;
 ; ivdf2    ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; ivdf1    ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
 ; ivdf0    ; Input    ; (0) 171 ps    ; (0) 171 ps    ; --                    ; --  ;
@@ -1136,90 +1134,97 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; SEL1                                                   ;                   ;         ;
 ; SEL2                                                   ;                   ;         ;
 ; reset                                                  ;                   ;         ;
-;      - rs232out:inst6|state.ST_BEGIN                   ; 0                 ; 0       ;
-;      - hprog:inst1|R                                   ; 0                 ; 0       ;
-;      - rs232out:inst6|state.ST_ADV                     ; 0                 ; 0       ;
-;      - rs232out:inst6|state.ST_FOR                     ; 0                 ; 0       ;
-;      - rs232out:inst6|state.ST_ATT                     ; 0                 ; 0       ;
-;      - terminateurSplit:inst5|state.ST_WRITE           ; 0                 ; 0       ;
-;      - hprog:inst1|state                               ; 0                 ; 0       ;
-;      - terminateurSplit:inst5|state.ST_WAIT_NOBUSY     ; 0                 ; 0       ;
-;      - hprog:inst1|C[7]                                ; 0                 ; 0       ;
-;      - hprog:inst1|C[6]                                ; 0                 ; 0       ;
-;      - hprog:inst1|C[5]                                ; 0                 ; 0       ;
-;      - terminateurSplit:inst5|state.ST_READ_BUSIN      ; 0                 ; 0       ;
-;      - terminateurSplit:inst5|state.ST_LOOP            ; 0                 ; 0       ;
-;      - terminateur:inst3|state.ST_WRITE_DUMP           ; 0                 ; 0       ;
-;      - hprog:inst1|C[0]~_emulated                      ; 0                 ; 0       ;
-;      - hprog:inst1|C[0]~18                             ; 0                 ; 0       ;
-;      - hprog:inst1|C[4]~_emulated                      ; 0                 ; 0       ;
-;      - hprog:inst1|C[4]~2                              ; 0                 ; 0       ;
-;      - hprog:inst1|C[2]~_emulated                      ; 0                 ; 0       ;
-;      - hprog:inst1|C[2]~10                             ; 0                 ; 0       ;
-;      - hprog:inst1|C[3]~_emulated                      ; 0                 ; 0       ;
-;      - hprog:inst1|C[3]~6                              ; 0                 ; 0       ;
-;      - hprog:inst1|C[1]~_emulated                      ; 0                 ; 0       ;
-;      - hprog:inst1|C[1]~14                             ; 0                 ; 0       ;
-;      - h100:inst15|state.ST_TICK                       ; 0                 ; 0       ;
-;      - plus12:inst2|state.ST_WRITE_SUM                 ; 0                 ; 0       ;
-;      - terminateur:inst3|state.ST_READ_BUSIN           ; 0                 ; 0       ;
-;      - plus12:inst2|state.ST_WRITE_TFT                 ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA    ; 0                 ; 0       ;
-;      - h100:inst15|state.ST_DECR                       ; 0                 ; 0       ;
-;      - plus12:inst2|state.ST_COMPUTE                   ; 0                 ; 0       ;
-;      - plus12:inst2|state.ST_READ                      ; 0                 ; 0       ;
-;      - terminateur:inst3|state.ST_WRITE_OUT            ; 0                 ; 0       ;
-;      - wrapper:inst11|state.ST_WRITE_OUT               ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_BUSIN_LOADED           ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_NDATA_WRITE            ; 0                 ; 0       ;
-;      - wrapper:inst11|state.ST_READ_BUSIN              ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_INIT                   ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_EndLoop                ; 0                 ; 0       ;
-;      - h100:inst15|state.ST_LOAD                       ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[0]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[1]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[2]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[3]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[4]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[5]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[6]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[7]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[8]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[9]                   ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[10]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[11]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[12]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[13]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[14]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[15]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[16]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[17]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[18]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[19]                  ; 0                 ; 0       ;
-;      - dispacher:inst17|R_N_CLOCK[20]                  ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_NDATA_LOADED           ; 0                 ; 0       ;
-;      - rs232in:inst4|state.GEN_PULSE                   ; 0                 ; 0       ;
-;      - initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; 0                 ; 0       ;
-;      - rs232in:inst4|state.MainLoop                    ; 0                 ; 0       ;
-;      - dispacher:inst17|R_Msg[23]~0                    ; 0                 ; 0       ;
-;      - rs232in:inst4|state.WAIT_1P5B                   ; 0                 ; 0       ;
-;      - rs232in:inst4|state.WAIT_1B                     ; 0                 ; 0       ;
-;      - rs232in:inst4|state.WAIT_StartBit               ; 0                 ; 0       ;
-;      - wrapper:inst11|state.ST_WRITE_MSG               ; 0                 ; 0       ;
-;      - rs232in:inst4|state.ECRIRE                      ; 0                 ; 0       ;
-;      - rs232in:inst4|state.WAIT_FIN                    ; 0                 ; 0       ;
-;      - hprog:inst1|C[0]~17                             ; 0                 ; 0       ;
-;      - hprog:inst1|C[4]~1                              ; 0                 ; 0       ;
-;      - hprog:inst1|C[2]~9                              ; 0                 ; 0       ;
-;      - hprog:inst1|C[3]~5                              ; 0                 ; 0       ;
-;      - hprog:inst1|C[1]~13                             ; 0                 ; 0       ;
-;      - diode                                           ; 1                 ; 6       ;
+;      - rs232out:inst6|state.ST_BEGIN                   ; 1                 ; 0       ;
+;      - h10:inst9|R                                     ; 1                 ; 0       ;
+;      - moduler:inst10|R                                ; 1                 ; 0       ;
+;      - rs232out:inst6|state.ST_ADV                     ; 1                 ; 0       ;
+;      - rs232out:inst6|state.ST_FOR                     ; 1                 ; 0       ;
+;      - rs232out:inst6|state.ST_ATT                     ; 1                 ; 0       ;
+;      - terminateurSplit:inst5|state.ST_WRITE           ; 1                 ; 0       ;
+;      - h10:inst9|state                                 ; 1                 ; 0       ;
+;      - moduler:inst10|state                            ; 1                 ; 0       ;
+;      - terminateurSplit:inst5|state.ST_WAIT_NOBUSY     ; 1                 ; 0       ;
+;      - h10:inst9|C[2]                                  ; 1                 ; 0       ;
+;      - h10:inst9|C[1]                                  ; 1                 ; 0       ;
+;      - h10:inst9|C[0]                                  ; 1                 ; 0       ;
+;      - h10:inst9|C[3]                                  ; 1                 ; 0       ;
+;      - moduler:inst10|C[7]                             ; 1                 ; 0       ;
+;      - moduler:inst10|C[6]                             ; 1                 ; 0       ;
+;      - moduler:inst10|C[5]                             ; 1                 ; 0       ;
+;      - terminateurSplit:inst5|state.ST_READ_BUSIN      ; 1                 ; 0       ;
+;      - terminateurSplit:inst5|state.ST_LOOP            ; 1                 ; 0       ;
+;      - terminateur:inst3|state.ST_WRITE_DUMP           ; 1                 ; 0       ;
+;      - h100:inst16|state.ST_TICK                       ; 1                 ; 0       ;
+;      - moduler:inst10|C[0]~_emulated                   ; 1                 ; 0       ;
+;      - moduler:inst10|C[0]~18                          ; 1                 ; 0       ;
+;      - moduler:inst10|C[4]~_emulated                   ; 1                 ; 0       ;
+;      - moduler:inst10|C[4]~2                           ; 1                 ; 0       ;
+;      - moduler:inst10|C[2]~_emulated                   ; 1                 ; 0       ;
+;      - moduler:inst10|C[2]~10                          ; 1                 ; 0       ;
+;      - moduler:inst10|C[3]~_emulated                   ; 1                 ; 0       ;
+;      - moduler:inst10|C[3]~6                           ; 1                 ; 0       ;
+;      - moduler:inst10|C[1]~_emulated                   ; 1                 ; 0       ;
+;      - moduler:inst10|C[1]~14                          ; 1                 ; 0       ;
+;      - plus12:inst2|state.ST_WRITE_SUM                 ; 1                 ; 0       ;
+;      - terminateur:inst3|state.ST_READ_BUSIN           ; 1                 ; 0       ;
+;      - plus12:inst2|state.ST_WRITE_TFT                 ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA    ; 1                 ; 0       ;
+;      - h100:inst16|state.ST_DECR                       ; 1                 ; 0       ;
+;      - plus12:inst2|state.ST_COMPUTE                   ; 1                 ; 0       ;
+;      - plus12:inst2|state.ST_READ                      ; 1                 ; 0       ;
+;      - terminateur:inst3|state.ST_WRITE_OUT            ; 1                 ; 0       ;
+;      - wrapper:inst17|state.ST_WRITE_OUT               ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_BUSIN_LOADED           ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_NDATA_WRITE            ; 1                 ; 0       ;
+;      - wrapper:inst17|state.ST_READ_BUSIN              ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_INIT                   ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_EndLoop                ; 1                 ; 0       ;
+;      - h100:inst16|state.ST_LOAD                       ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[0]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[1]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[2]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[3]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[4]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[5]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[6]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[7]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[8]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[9]                     ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[10]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[11]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[12]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[13]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[14]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[15]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[16]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[17]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[18]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[19]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[20]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_N_CLOCK[21]                    ; 1                 ; 0       ;
+;      - wrapper:inst17|R_tft[31]~0                      ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_NDATA_LOADED           ; 1                 ; 0       ;
+;      - rs232in:inst4|state.GEN_PULSE                   ; 1                 ; 0       ;
+;      - wrapper:inst17|state.ST_LOAD_MSG                ; 1                 ; 0       ;
+;      - initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; 1                 ; 0       ;
+;      - rs232in:inst4|state.MainLoop                    ; 1                 ; 0       ;
+;      - rs232in:inst4|state.WAIT_1P5B                   ; 1                 ; 0       ;
+;      - rs232in:inst4|state.WAIT_1B                     ; 1                 ; 0       ;
+;      - rs232in:inst4|state.WAIT_StartBit               ; 1                 ; 0       ;
+;      - rs232in:inst4|state.ECRIRE                      ; 1                 ; 0       ;
+;      - rs232in:inst4|state.WAIT_FIN                    ; 1                 ; 0       ;
+;      - moduler:inst10|C[0]~17                          ; 1                 ; 0       ;
+;      - moduler:inst10|C[4]~1                           ; 1                 ; 0       ;
+;      - moduler:inst10|C[2]~9                           ; 1                 ; 0       ;
+;      - moduler:inst10|C[3]~5                           ; 1                 ; 0       ;
+;      - moduler:inst10|C[1]~13                          ; 1                 ; 0       ;
+;      - diode                                           ; 0                 ; 6       ;
 ; ivdf2                                                  ;                   ;         ;
 ; ivdf1                                                  ;                   ;         ;
 ; ivdf0                                                  ;                   ;         ;
 ; clk                                                    ;                   ;         ;
 ; rx                                                     ;                   ;         ;
-;      - rs232in:inst4|rx_fifo_R[0]~feeder               ; 0                 ; 6       ;
+;      - rs232in:inst4|rx_fifo_R[0]                      ; 0                 ; 6       ;
 +--------------------------------------------------------+-------------------+---------+
 
 
@@ -1228,30 +1233,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 ; Name                                         ; Location           ; Fan-Out ; Usage                      ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +----------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
-; clk                                          ; PIN_N2             ; 430     ; Clock                      ; yes    ; Global Clock         ; GCLK2            ; --                        ;
-; dispacher:inst17|R_Msg[23]~0                 ; LCCOMB_X61_Y26_N12 ; 24      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; dispacher:inst17|R_N_CLOCK[0]~0              ; LCCOMB_X60_Y26_N0  ; 21      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; h100:inst15|state.ST_LOAD                    ; LCFF_X63_Y27_N1    ; 25      ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
-; h100:inst15|state.ST_TICK                    ; LCFF_X62_Y27_N15   ; 26      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; hprog:inst1|C~30                             ; LCCOMB_X62_Y27_N24 ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; initiateur:inst|R_i[1]~1                     ; LCCOMB_X61_Y25_N24 ; 3       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; initiateur:inst|state.ST_NDATA_LOADED        ; LCFF_X62_Y27_N3    ; 36      ; Clock enable, Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA ; LCFF_X61_Y27_N7    ; 41      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; plus12:inst2|state.ST_COMPUTE                ; LCFF_X61_Y27_N29   ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; plus12:inst2|state.ST_READ                   ; LCFF_X61_Y27_N19   ; 40      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; plus12:inst2|state.ST_WRITE_SUM              ; LCFF_X60_Y27_N27   ; 41      ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
-; reset                                        ; PIN_G26            ; 78      ; Async. clear, Latch enable ; no     ; --                   ; --               ; --                        ;
-; rs232in:inst4|WideNor1                       ; LCCOMB_X62_Y28_N20 ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rs232in:inst4|state.ECRIRE                   ; LCFF_X62_Y27_N13   ; 23      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rs232in:inst4|state.GEN_PULSE                ; LCFF_X62_Y27_N9    ; 10      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rs232out:inst6|R_data[0]~1                   ; LCCOMB_X58_Y27_N16 ; 12      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; rs232out:inst6|state.ST_ATT                  ; LCFF_X61_Y27_N1    ; 16      ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
-; rs232out:inst6|state.ST_BEGIN                ; LCFF_X61_Y27_N13   ; 18      ; Sync. clear, Sync. load    ; no     ; --                   ; --               ; --                        ;
-; terminateur:inst3|Selector1~5                ; LCCOMB_X60_Y27_N16 ; 2       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; terminateur:inst3|state.ST_READ_BUSIN        ; LCFF_X61_Y27_N15   ; 44      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; terminateurSplit:inst5|R_i[0]~0              ; LCCOMB_X57_Y27_N24 ; 38      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
-; terminateurSplit:inst5|state.ST_READ_BUSIN   ; LCFF_X60_Y27_N3    ; 44      ; Clock enable, Sync. load   ; no     ; --                   ; --               ; --                        ;
-; wrapper:inst11|state.ST_READ_BUSIN           ; LCFF_X61_Y27_N11   ; 41      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; clk                                          ; PIN_N2             ; 387     ; Clock                      ; yes    ; Global Clock         ; GCLK2            ; --                        ;
+; h100:inst16|state.ST_LOAD                    ; LCFF_X63_Y27_N29   ; 24      ; Sync. clear                ; no     ; --                   ; --               ; --                        ;
+; h100:inst16|state.ST_TICK                    ; LCFF_X63_Y27_N17   ; 25      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; h10:inst9|C~2                                ; LCCOMB_X63_Y26_N4  ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; initiateur:inst|R_i[1]~1                     ; LCCOMB_X58_Y27_N28 ; 3       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; initiateur:inst|state.ST_NDATA_LOADED        ; LCFF_X64_Y27_N21   ; 36      ; Clock enable, Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA ; LCFF_X60_Y27_N11   ; 41      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; moduler:inst10|C~30                          ; LCCOMB_X63_Y27_N20 ; 8       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; plus12:inst2|state.ST_COMPUTE                ; LCFF_X61_Y27_N3    ; 17      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; plus12:inst2|state.ST_READ                   ; LCFF_X60_Y27_N23   ; 40      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; plus12:inst2|state.ST_WRITE_SUM              ; LCFF_X60_Y27_N1    ; 41      ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
+; reset                                        ; PIN_G26            ; 85      ; Async. clear, Latch enable ; no     ; --                   ; --               ; --                        ;
+; rs232in:inst4|WideNor1                       ; LCCOMB_X62_Y27_N4  ; 4       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rs232in:inst4|state.ECRIRE                   ; LCFF_X62_Y27_N21   ; 23      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rs232in:inst4|state.GEN_PULSE                ; LCFF_X62_Y27_N7    ; 10      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rs232out:inst6|R_i[3]~0                      ; LCCOMB_X59_Y25_N2  ; 12      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; rs232out:inst6|state.ST_ATT                  ; LCFF_X64_Y27_N15   ; 16      ; Sync. load                 ; no     ; --                   ; --               ; --                        ;
+; rs232out:inst6|state.ST_BEGIN                ; LCFF_X62_Y27_N1    ; 18      ; Sync. clear, Sync. load    ; no     ; --                   ; --               ; --                        ;
+; terminateur:inst3|Selector1~5                ; LCCOMB_X59_Y27_N20 ; 2       ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; terminateur:inst3|state.ST_READ_BUSIN        ; LCFF_X61_Y27_N27   ; 44      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; terminateurSplit:inst5|R_i[0]~0              ; LCCOMB_X58_Y25_N16 ; 38      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; terminateurSplit:inst5|state.ST_READ_BUSIN   ; LCFF_X60_Y27_N21   ; 44      ; Clock enable, Sync. load   ; no     ; --                   ; --               ; --                        ;
+; wrapper:inst17|R_N_CLOCK[0]~0                ; LCCOMB_X55_Y26_N16 ; 22      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
+; wrapper:inst17|R_tft[31]~0                   ; LCCOMB_X56_Y26_N16 ; 35      ; Clock enable               ; no     ; --                   ; --               ; --                        ;
 +----------------------------------------------+--------------------+---------+----------------------------+--------+----------------------+------------------+---------------------------+
 
 
@@ -1260,7 +1265,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+----------------------+------------------+---------------------------+
 ; Name ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +------+----------+---------+----------------------+------------------+---------------------------+
-; clk  ; PIN_N2   ; 430     ; Global Clock         ; GCLK2            ; --                        ;
+; clk  ; PIN_N2   ; 387     ; Global Clock         ; GCLK2            ; --                        ;
 +------+----------+---------+----------------------+------------------+---------------------------+
 
 
@@ -1269,37 +1274,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------+---------+
 ; Name                                            ; Fan-Out ;
 +-------------------------------------------------+---------+
-; reset                                           ; 78      ;
+; reset                                           ; 85      ;
 ; initiateur:inst|state.ST_NDATA_WRITE            ; 44      ;
 ; terminateur:inst3|state.ST_READ_BUSIN           ; 44      ;
 ; terminateurSplit:inst5|state.ST_READ_BUSIN      ; 44      ;
-; wrapper:inst11|state.ST_READ_BUSIN              ; 41      ;
 ; initiateur:inst|state.ST_WAIT_BUSIN_OR_NDATA    ; 41      ;
 ; plus12:inst2|state.ST_WRITE_SUM                 ; 41      ;
 ; plus12:inst2|state.ST_READ                      ; 40      ;
 ; terminateurSplit:inst5|R_i[0]~0                 ; 38      ;
 ; initiateur:inst|state.ST_NDATA_LOADED           ; 36      ;
-; h100:inst15|state.ST_TICK                       ; 26      ;
-; h100:inst15|state.ST_LOAD                       ; 25      ;
-; wrapper:inst11|state.ST_WRITE_MSG               ; 24      ;
-; dispacher:inst17|R_Msg[23]~0                    ; 24      ;
+; wrapper:inst17|R_tft[31]~0                      ; 35      ;
+; h100:inst16|state.ST_TICK                       ; 25      ;
+; h100:inst16|state.ST_LOAD                       ; 24      ;
 ; rs232in:inst4|state.ECRIRE                      ; 23      ;
+; wrapper:inst17|R_N_CLOCK[0]~0                   ; 22      ;
 ; rs232in:inst4|state.WAIT_StartBit               ; 21      ;
-; dispacher:inst17|R_N_CLOCK[0]~0                 ; 21      ;
 ; rs232out:inst6|state.ST_BEGIN                   ; 18      ;
 ; rs232in:inst4|state.MainLoop                    ; 17      ;
 ; plus12:inst2|state.ST_COMPUTE                   ; 17      ;
 ; rs232out:inst6|state.ST_ATT                     ; 16      ;
-; rs232out:inst6|R_data[0]~1                      ; 12      ;
-; ~GND                                            ; 11      ;
-; hprog:inst1|state                               ; 11      ;
+; rs232out:inst6|R_i[3]~0                         ; 12      ;
+; moduler:inst10|state                            ; 11      ;
 ; rs232in:inst4|state.GEN_PULSE                   ; 10      ;
-; hprog:inst1|C~30                                ; 8       ;
+; ~GND                                            ; 8       ;
+; moduler:inst10|C~30                             ; 8       ;
 ; rs232in:inst4|state.WAIT_1P5B                   ; 7       ;
+; wrapper:inst17|state.ST_READ_BUSIN              ; 7       ;
 ; plus12:inst2|R_tft[32]                          ; 7       ;
 ; ivdf1                                           ; 6       ;
 ; initiateur:inst|state.ST_INIT                   ; 6       ;
 ; terminateur:inst3|state.ST_WRITE_OUT            ; 6       ;
+; h10:inst9|state                                 ; 6       ;
 ; terminateurSplit:inst5|state.ST_WRITE           ; 6       ;
 ; ivdf0                                           ; 5       ;
 ; ivdf2                                           ; 5       ;
@@ -1311,7 +1316,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; plus12:inst2|R_tft[6]                           ; 5       ;
 ; plus12:inst2|R_tft[17]                          ; 5       ;
 ; plus12:inst2|R_tft[5]                           ; 5       ;
-; wrapper:inst11|state.ST_WRITE_OUT               ; 5       ;
+; wrapper:inst17|state.ST_WRITE_OUT               ; 5       ;
 ; plus12:inst2|state.ST_WRITE_TFT                 ; 5       ;
 ; initiateur:inst|R_pulse                         ; 5       ;
 ; rs232in:inst4|rx_R                              ; 4       ;
@@ -1333,24 +1338,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; initiateur:inst|state.ST_BUSIN_LOADED           ; 4       ;
 ; plus12:inst2|R_tft[12]                          ; 4       ;
 ; plus12:inst2|R_tft[8]                           ; 4       ;
-; hprog:inst1|Mux2~0                              ; 4       ;
+; moduler:inst10|Mux2~0                           ; 4       ;
 ; plus12:inst2|R_tft[0]                           ; 4       ;
+; h10:inst9|C~2                                   ; 4       ;
 ; terminateurSplit:inst5|R_i[0]                   ; 4       ;
+; h10:inst9|C[0]                                  ; 4       ;
+; h10:inst9|C[1]                                  ; 4       ;
 ; rs232out:inst6|R_i[0]                           ; 4       ;
-; hprog:inst1|C[1]~13                             ; 3       ;
-; hprog:inst1|C[3]~5                              ; 3       ;
-; hprog:inst1|C[2]~9                              ; 3       ;
-; hprog:inst1|C[4]~1                              ; 3       ;
-; hprog:inst1|C[0]~17                             ; 3       ;
+; moduler:inst10|C[1]~13                          ; 3       ;
+; moduler:inst10|C[3]~5                           ; 3       ;
+; moduler:inst10|C[2]~9                           ; 3       ;
+; moduler:inst10|C[4]~1                           ; 3       ;
+; moduler:inst10|C[0]~17                          ; 3       ;
 ; rs232in:inst4|R_i[3]                            ; 3       ;
 ; rs232in:inst4|state~11                          ; 3       ;
 ; rs232in:inst4|R_i[1]                            ; 3       ;
 ; terminateur:inst3|R_tft[32]                     ; 3       ;
 ; plus12:inst2|r[9]~22                            ; 3       ;
 ; plus12:inst2|r[9]~20                            ; 3       ;
-; dispacher:inst17|state                          ; 3       ;
 ; initiateur:inst|R_i[1]~1                        ; 3       ;
-; initiateur:inst|R_32[26]                        ; 3       ;
+; initiateur:inst|R_32[27]                        ; 3       ;
 ; plus12:inst2|r[7]~18                            ; 3       ;
 ; plus12:inst2|r[5]~15                            ; 3       ;
 ; plus12:inst2|r[5]~14                            ; 3       ;
@@ -1363,41 +1370,36 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; initiateur:inst|R_i[1]                          ; 3       ;
 ; initiateur:inst|state.ST_EndLoop                ; 3       ;
 ; plus12:inst2|R_tft[1]                           ; 3       ;
-; hprog:inst1|Mux3~0                              ; 3       ;
-; hprog:inst1|Mux1~0                              ; 3       ;
-; hprog:inst1|Mux2~1                              ; 3       ;
-; hprog:inst1|Mux0~0                              ; 3       ;
+; moduler:inst10|Mux3~0                           ; 3       ;
+; moduler:inst10|Mux1~0                           ; 3       ;
+; moduler:inst10|Mux2~1                           ; 3       ;
+; moduler:inst10|Mux0~0                           ; 3       ;
+; h100:inst16|state.ST_DECR                       ; 3       ;
 ; plus12:inst2|R_tft[38]                          ; 3       ;
 ; terminateur:inst3|state.ST_WRITE_DUMP           ; 3       ;
 ; terminateurSplit:inst5|state.ST_LOOP            ; 3       ;
+; h10:inst9|C[2]                                  ; 3       ;
 ; terminateurSplit:inst5|Selector2~0              ; 3       ;
 ; rs232out:inst6|R_i[1]                           ; 3       ;
 ; rs232out:inst6|state.ST_FOR                     ; 3       ;
 ; rs232out:inst6|state.ST_ADV                     ; 3       ;
+; h100:inst16|R[0]                                ; 3       ;
 ; terminateurSplit:inst5|R_i[1]                   ; 3       ;
 ; terminateur:inst3|Selector1~5                   ; 2       ;
 ; terminateurSplit:inst5|R[38]                    ; 2       ;
-; terminateur:inst3|R_tft[22]                     ; 2       ;
 ; rs232in:inst4|rx_fifo_R[0]                      ; 2       ;
 ; rs232in:inst4|rx_fifo_R[1]                      ; 2       ;
 ; plus12:inst2|R_res[7]                           ; 2       ;
-; terminateur:inst3|R_tft[21]                     ; 2       ;
 ; plus12:inst2|R_res[6]                           ; 2       ;
 ; rs232in:inst4|state.WAIT_FIN                    ; 2       ;
-; terminateur:inst3|R_tft[7]                      ; 2       ;
-; terminateur:inst3|R_tft[15]                     ; 2       ;
-; initiateur:inst|R_32[23]                        ; 2       ;
-; initiateur:inst|R_32[11]                        ; 2       ;
-; terminateur:inst3|R_tft[14]                     ; 2       ;
-; initiateur:inst|R_32[22]                        ; 2       ;
-; initiateur:inst|R_32[21]                        ; 2       ;
-; initiateur:inst|R_32[10]                        ; 2       ;
 ; plus12:inst2|R_res[5]                           ; 2       ;
+; terminateur:inst3|R_tft[21]                     ; 2       ;
+; terminateur:inst3|R_tft[15]                     ; 2       ;
+; terminateur:inst3|R_tft[14]                     ; 2       ;
 ; terminateur:inst3|R_tft[13]                     ; 2       ;
+; terminateur:inst3|R_tft[7]                      ; 2       ;
 ; terminateur:inst3|R_tft[6]                      ; 2       ;
-; wrapper:inst11|R_tft[11]                        ; 2       ;
-; wrapper:inst11|R_tft[22]                        ; 2       ;
-; wrapper:inst11|R_tft[23]                        ; 2       ;
+; terminateur:inst3|R_tft[22]                     ; 2       ;
 ; rs232in:inst4|state.WAIT_1B                     ; 2       ;
 ; rs232in:inst4|R_baud[13]                        ; 2       ;
 ; rs232in:inst4|R_baud[12]                        ; 2       ;
@@ -1413,87 +1415,95 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rs232in:inst4|R_baud[2]                         ; 2       ;
 ; rs232in:inst4|R_baud[1]                         ; 2       ;
 ; rs232in:inst4|R_baud[0]                         ; 2       ;
+; rs232in:inst4|R_sh[4]                           ; 2       ;
+; rs232in:inst4|R_sh[5]                           ; 2       ;
+; rs232in:inst4|R_sh[6]                           ; 2       ;
+; rs232in:inst4|R_sh[7]                           ; 2       ;
 ; rs232in:inst4|R_sh[3]                           ; 2       ;
 ; rs232in:inst4|R_sh[2]                           ; 2       ;
 ; rs232in:inst4|R_sh[1]                           ; 2       ;
-; rs232in:inst4|R_sh[6]                           ; 2       ;
-; rs232in:inst4|R_sh[7]                           ; 2       ;
-; rs232in:inst4|R_sh[5]                           ; 2       ;
-; rs232in:inst4|R_sh[4]                           ; 2       ;
-; initiateur:inst|R_32[19]                        ; 2       ;
-; initiateur:inst|R_32[18]                        ; 2       ;
-; initiateur:inst|R_32[15]                        ; 2       ;
-; initiateur:inst|R_32[14]                        ; 2       ;
-; initiateur:inst|R_32[17]                        ; 2       ;
-; initiateur:inst|R_32[20]                        ; 2       ;
-; initiateur:inst|R_32[16]                        ; 2       ;
-; initiateur:inst|R_32[13]                        ; 2       ;
-; initiateur:inst|R_32[9]                         ; 2       ;
-; wrapper:inst11|R_tft[21]                        ; 2       ;
-; wrapper:inst11|R_tft[10]                        ; 2       ;
 ; plus12:inst2|r[10]~23                           ; 2       ;
 ; terminateur:inst3|R_tft[19]                     ; 2       ;
 ; plus12:inst2|R_res[4]                           ; 2       ;
 ; terminateur:inst3|R_tft[12]                     ; 2       ;
 ; terminateur:inst3|R_tft[5]                      ; 2       ;
+; initiateur:inst|R_32[21]                        ; 2       ;
+; initiateur:inst|R_32[20]                        ; 2       ;
+; initiateur:inst|R_32[19]                        ; 2       ;
+; initiateur:inst|R_32[18]                        ; 2       ;
+; initiateur:inst|R_32[17]                        ; 2       ;
+; initiateur:inst|R_32[16]                        ; 2       ;
+; initiateur:inst|R_32[15]                        ; 2       ;
+; initiateur:inst|R_32[14]                        ; 2       ;
+; initiateur:inst|R_32[13]                        ; 2       ;
+; initiateur:inst|R_32[11]                        ; 2       ;
+; initiateur:inst|R_32[10]                        ; 2       ;
+; initiateur:inst|R_32[9]                         ; 2       ;
+; initiateur:inst|R_32[22]                        ; 2       ;
+; initiateur:inst|R_32[23]                        ; 2       ;
 ; rs232in:inst4|R_i[2]                            ; 2       ;
 ; initiateur:inst|state.ST_BUSIN_AND_NDATA_LOADED ; 2       ;
 ; initiateur:inst|Selector3~0                     ; 2       ;
-; terminateur:inst3|R_tft[27]                     ; 2       ;
-; terminateur:inst3|R_tft[26]                     ; 2       ;
+; terminateur:inst3|R_tft[28]                     ; 2       ;
+; terminateur:inst3|R_tft[29]                     ; 2       ;
 ; terminateur:inst3|R_tft[30]                     ; 2       ;
 ; terminateur:inst3|R_tft[31]                     ; 2       ;
 ; terminateur:inst3|R_tft[38]                     ; 2       ;
-; terminateur:inst3|R_tft[29]                     ; 2       ;
-; terminateur:inst3|R_tft[28]                     ; 2       ;
+; terminateur:inst3|R_tft[27]                     ; 2       ;
+; terminateur:inst3|R_tft[26]                     ; 2       ;
 ; initiateur:inst|R_32[12]                        ; 2       ;
 ; initiateur:inst|R_32[8]                         ; 2       ;
-; wrapper:inst11|R_tft[19]                        ; 2       ;
-; wrapper:inst11|R_tft[7]                         ; 2       ;
-; wrapper:inst11|R_tft[18]                        ; 2       ;
-; wrapper:inst11|R_tft[15]                        ; 2       ;
-; wrapper:inst11|R_tft[3]                         ; 2       ;
-; wrapper:inst11|R_tft[14]                        ; 2       ;
-; wrapper:inst11|R_tft[4]                         ; 2       ;
-; wrapper:inst11|R_tft[6]                         ; 2       ;
-; wrapper:inst11|R_tft[17]                        ; 2       ;
-; wrapper:inst11|R_tft[5]                         ; 2       ;
-; wrapper:inst11|R_tft[20]                        ; 2       ;
-; wrapper:inst11|R_tft[16]                        ; 2       ;
-; wrapper:inst11|R_tft[13]                        ; 2       ;
-; wrapper:inst11|R_tft[9]                         ; 2       ;
 ; terminateur:inst3|R_tft[25]                     ; 2       ;
-; wrapper:inst11|R_tft[2]                         ; 2       ;
 ; plus12:inst2|R_res[10]                          ; 2       ;
 ; terminateur:inst3|R_tft[18]                     ; 2       ;
 ; plus12:inst2|R_res[3]                           ; 2       ;
 ; terminateur:inst3|R_tft[11]                     ; 2       ;
 ; terminateur:inst3|R_tft[4]                      ; 2       ;
-; initiateur:inst|Selector0~1                     ; 2       ;
-; wrapper:inst11|Equal0~2                         ; 2       ;
-; wrapper:inst11|Selector0~0                      ; 2       ;
-; initiateur:inst|busout[27]~10                   ; 2       ;
-; initiateur:inst|R_32[27]                        ; 2       ;
-; initiateur:inst|R_tft[26]                       ; 2       ;
-; initiateur:inst|busout[25]~8                    ; 2       ;
-; initiateur:inst|R_32[25]                        ; 2       ;
-; initiateur:inst|busout[24]~7                    ; 2       ;
-; initiateur:inst|R_32[24]                        ; 2       ;
-; initiateur:inst|busout[30]~6                    ; 2       ;
-; initiateur:inst|R_32[30]                        ; 2       ;
-; initiateur:inst|busout[31]~5                    ; 2       ;
-; initiateur:inst|R_32[31]                        ; 2       ;
-; initiateur:inst|busout[29]~3                    ; 2       ;
-; initiateur:inst|R_32[29]                        ; 2       ;
-; initiateur:inst|busout[28]~2                    ; 2       ;
+; wrapper:inst17|R_tft[21]                        ; 2       ;
+; wrapper:inst17|R_tft[20]                        ; 2       ;
+; wrapper:inst17|R_tft[19]                        ; 2       ;
+; wrapper:inst17|R_tft[18]                        ; 2       ;
+; wrapper:inst17|R_tft[17]                        ; 2       ;
+; wrapper:inst17|R_tft[16]                        ; 2       ;
+; wrapper:inst17|R_tft[15]                        ; 2       ;
+; wrapper:inst17|R_tft[14]                        ; 2       ;
+; wrapper:inst17|R_tft[13]                        ; 2       ;
+; wrapper:inst17|R_tft[11]                        ; 2       ;
+; wrapper:inst17|R_tft[10]                        ; 2       ;
+; wrapper:inst17|R_tft[9]                         ; 2       ;
+; wrapper:inst17|R_tft[7]                         ; 2       ;
+; wrapper:inst17|R_tft[6]                         ; 2       ;
+; wrapper:inst17|R_tft[5]                         ; 2       ;
+; wrapper:inst17|R_tft[4]                         ; 2       ;
+; wrapper:inst17|R_tft[3]                         ; 2       ;
+; wrapper:inst17|R_tft[2]                         ; 2       ;
+; wrapper:inst17|R_tft[22]                        ; 2       ;
+; wrapper:inst17|R_tft[23]                        ; 2       ;
+; initiateur:inst|Selector2~1                     ; 2       ;
+; wrapper:inst17|Equal0~2                         ; 2       ;
+; wrapper:inst17|Selector0~0                      ; 2       ;
+; initiateur:inst|busout[28]~10                   ; 2       ;
 ; initiateur:inst|R_32[28]                        ; 2       ;
-; wrapper:inst11|R_tft[12]                        ; 2       ;
-; wrapper:inst11|R_tft[8]                         ; 2       ;
+; initiateur:inst|busout[29]~9                    ; 2       ;
+; initiateur:inst|R_32[29]                        ; 2       ;
+; initiateur:inst|busout[30]~8                    ; 2       ;
+; initiateur:inst|R_32[30]                        ; 2       ;
+; initiateur:inst|busout[31]~7                    ; 2       ;
+; initiateur:inst|R_32[31]                        ; 2       ;
+; initiateur:inst|R_tft[27]                       ; 2       ;
+; initiateur:inst|busout[26]~4                    ; 2       ;
+; initiateur:inst|R_32[26]                        ; 2       ;
+; initiateur:inst|busout[25]~3                    ; 2       ;
+; initiateur:inst|R_32[25]                        ; 2       ;
+; initiateur:inst|busout[24]~2                    ; 2       ;
+; initiateur:inst|R_32[24]                        ; 2       ;
+; wrapper:inst17|R_tft[12]                        ; 2       ;
+; wrapper:inst17|R_tft[8]                         ; 2       ;
 ; plus12:inst2|r[7]~17                            ; 2       ;
 ; plus12:inst2|r[3]~12                            ; 2       ;
 ; plus12:inst2|r[3]~11                            ; 2       ;
 ; terminateur:inst3|R_tft[24]                     ; 2       ;
-; wrapper:inst11|R_tft[1]                         ; 2       ;
+; wrapper:inst17|R_tft[1]                         ; 2       ;
 ; plus12:inst2|R_res[9]                           ; 2       ;
 ; terminateur:inst3|R_tft[17]                     ; 2       ;
 ; plus12:inst2|R_res[2]                           ; 2       ;
@@ -1502,81 +1512,80 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; initiateur:inst|Selector6~0                     ; 2       ;
 ; initiateur:inst|R_i[2]                          ; 2       ;
 ; plus12:inst2|Equal1~2                           ; 2       ;
-; wrapper:inst11|R_tft[27]                        ; 2       ;
-; wrapper:inst11|R_tft[26]                        ; 2       ;
-; wrapper:inst11|R_tft[25]                        ; 2       ;
-; wrapper:inst11|R_tft[24]                        ; 2       ;
-; wrapper:inst11|R_tft[30]                        ; 2       ;
-; wrapper:inst11|R_tft[31]                        ; 2       ;
-; wrapper:inst11|R_tft[29]                        ; 2       ;
-; wrapper:inst11|R_tft[28]                        ; 2       ;
-; wrapper:inst11|R_tft[0]                         ; 2       ;
+; wrapper:inst17|R_tft[28]                        ; 2       ;
+; wrapper:inst17|R_tft[29]                        ; 2       ;
+; wrapper:inst17|R_tft[30]                        ; 2       ;
+; wrapper:inst17|R_tft[31]                        ; 2       ;
+; wrapper:inst17|R_tft[27]                        ; 2       ;
+; wrapper:inst17|R_tft[26]                        ; 2       ;
+; wrapper:inst17|R_tft[25]                        ; 2       ;
+; wrapper:inst17|R_tft[24]                        ; 2       ;
+; wrapper:inst17|R_tft[0]                         ; 2       ;
 ; plus12:inst2|R_res[8]                           ; 2       ;
 ; terminateur:inst3|R_tft[16]                     ; 2       ;
 ; plus12:inst2|R_res[1]                           ; 2       ;
 ; terminateur:inst3|R_tft[9]                      ; 2       ;
 ; terminateur:inst3|R_tft[2]                      ; 2       ;
-; h100:inst15|Equal0~6                            ; 2       ;
-; h100:inst15|Equal0~5                            ; 2       ;
-; h100:inst15|Equal0~4                            ; 2       ;
-; h100:inst15|state.ST_DECR                       ; 2       ;
+; h100:inst16|Equal0~6                            ; 2       ;
+; h100:inst16|R[22]                               ; 2       ;
+; h100:inst16|R[21]                               ; 2       ;
+; h100:inst16|R[20]                               ; 2       ;
+; h100:inst16|R[19]                               ; 2       ;
+; h100:inst16|R[18]                               ; 2       ;
+; h100:inst16|R[17]                               ; 2       ;
+; h100:inst16|Equal0~4                            ; 2       ;
+; h100:inst16|R[16]                               ; 2       ;
+; h100:inst16|R[15]                               ; 2       ;
+; h100:inst16|R[14]                               ; 2       ;
+; h100:inst16|R[13]                               ; 2       ;
+; h100:inst16|R[12]                               ; 2       ;
+; h100:inst16|R[11]                               ; 2       ;
+; h100:inst16|R[10]                               ; 2       ;
+; h100:inst16|R[9]                                ; 2       ;
+; h100:inst16|R[8]                                ; 2       ;
+; h100:inst16|R[7]                                ; 2       ;
+; h100:inst16|R[6]                                ; 2       ;
+; h100:inst16|R[5]                                ; 2       ;
+; h100:inst16|R[4]                                ; 2       ;
+; h100:inst16|R[3]                                ; 2       ;
+; h100:inst16|R[2]                                ; 2       ;
+; h100:inst16|R[1]                                ; 2       ;
 ; terminateur:inst3|process_1~0                   ; 2       ;
 ; plus12:inst2|R_tft[40]                          ; 2       ;
-; plus12:inst2|busout[27]~8                       ; 2       ;
-; plus12:inst2|busout[26]~7                       ; 2       ;
-; plus12:inst2|busout[25]~6                       ; 2       ;
-; plus12:inst2|busout[24]~5                       ; 2       ;
-; plus12:inst2|busout[30]~4                       ; 2       ;
-; plus12:inst2|busout[31]~3                       ; 2       ;
-; plus12:inst2|busout[29]~2                       ; 2       ;
-; plus12:inst2|busout[28]~1                       ; 2       ;
+; plus12:inst2|busout[28]~8                       ; 2       ;
+; plus12:inst2|busout[29]~7                       ; 2       ;
+; plus12:inst2|busout[30]~6                       ; 2       ;
+; plus12:inst2|busout[31]~5                       ; 2       ;
+; plus12:inst2|busout[27]~4                       ; 2       ;
+; plus12:inst2|busout[26]~3                       ; 2       ;
+; plus12:inst2|busout[25]~2                       ; 2       ;
+; plus12:inst2|busout[24]~1                       ; 2       ;
 ; plus12:inst2|R_res[0]                           ; 2       ;
 ; terminateur:inst3|R_tft[8]                      ; 2       ;
 ; terminateur:inst3|R_tft[1]                      ; 2       ;
-; hprog:inst1|C[1]~14                             ; 2       ;
-; hprog:inst1|C[3]~6                              ; 2       ;
-; hprog:inst1|C[2]~10                             ; 2       ;
-; hprog:inst1|C[4]~2                              ; 2       ;
-; hprog:inst1|C[0]~18                             ; 2       ;
+; moduler:inst10|C[1]~14                          ; 2       ;
+; moduler:inst10|C[3]~6                           ; 2       ;
+; moduler:inst10|C[2]~10                          ; 2       ;
+; moduler:inst10|C[4]~2                           ; 2       ;
+; moduler:inst10|C[0]~18                          ; 2       ;
 ; terminateurSplit:inst5|Selector1~0              ; 2       ;
 ; terminateur:inst3|R_tft[0]                      ; 2       ;
-; hprog:inst1|C[5]                                ; 2       ;
-; hprog:inst1|C[6]                                ; 2       ;
-; hprog:inst1|C[7]                                ; 2       ;
+; moduler:inst10|C[5]                             ; 2       ;
+; moduler:inst10|C[6]                             ; 2       ;
+; moduler:inst10|C[7]                             ; 2       ;
+; h10:inst9|C[3]                                  ; 2       ;
+; h10:inst9|C~0                                   ; 2       ;
 ; terminateurSplit:inst5|state.ST_WAIT_NOBUSY     ; 2       ;
 ; rs232out:inst6|Selector0~0                      ; 2       ;
 ; rs232out:inst6|Selector3~4                      ; 2       ;
 ; rs232out:inst6|Selector2~1                      ; 2       ;
 ; rs232out:inst6|Selector2~0                      ; 2       ;
 ; rs232out:inst6|R_i[3]                           ; 2       ;
-; hprog:inst1|R                                   ; 2       ;
-; terminateur:inst3|R_tft[23]                     ; 2       ;
+; moduler:inst10|R                                ; 2       ;
+; h10:inst9|R                                     ; 2       ;
 ; terminateur:inst3|R_tft[20]                     ; 2       ;
+; terminateur:inst3|R_tft[23]                     ; 2       ;
 ; rs232out:inst6|R_data[8]                        ; 2       ;
-; h100:inst15|R[23]                               ; 2       ;
-; h100:inst15|R[22]                               ; 2       ;
-; h100:inst15|R[21]                               ; 2       ;
-; h100:inst15|R[20]                               ; 2       ;
-; h100:inst15|R[19]                               ; 2       ;
-; h100:inst15|R[18]                               ; 2       ;
-; h100:inst15|R[17]                               ; 2       ;
-; h100:inst15|R[16]                               ; 2       ;
-; h100:inst15|R[15]                               ; 2       ;
-; h100:inst15|R[14]                               ; 2       ;
-; h100:inst15|R[13]                               ; 2       ;
-; h100:inst15|R[12]                               ; 2       ;
-; h100:inst15|R[11]                               ; 2       ;
-; h100:inst15|R[10]                               ; 2       ;
-; h100:inst15|R[9]                                ; 2       ;
-; h100:inst15|R[8]                                ; 2       ;
-; h100:inst15|R[7]                                ; 2       ;
-; h100:inst15|R[6]                                ; 2       ;
-; h100:inst15|R[5]                                ; 2       ;
-; h100:inst15|R[4]                                ; 2       ;
-; h100:inst15|R[3]                                ; 2       ;
-; h100:inst15|R[2]                                ; 2       ;
-; h100:inst15|R[1]                                ; 2       ;
-; h100:inst15|R[0]                                ; 2       ;
 ; terminateurSplit:inst5|R_i[2]                   ; 2       ;
 ; rs232out:inst6|R_baud[12]                       ; 2       ;
 ; rs232out:inst6|R_baud[11]                       ; 2       ;
@@ -1594,23 +1603,20 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rs232out:inst6|R_i[2]                           ; 2       ;
 ; initiateur:inst|state.ST_INIT~feeder            ; 1       ;
 ; rx                                              ; 1       ;
-; dispacher:inst17|R_N_CLOCK[9]~_wirecell         ; 1       ;
-; dispacher:inst17|R_N_CLOCK[8]~_wirecell         ; 1       ;
-; dispacher:inst17|R_N_CLOCK[7]~_wirecell         ; 1       ;
-; dispacher:inst17|R_N_CLOCK[3]~_wirecell         ; 1       ;
-; dispacher:inst17|R_N_CLOCK[12]~_wirecell        ; 1       ;
-; dispacher:inst17|state~0                        ; 1       ;
-; dispacher:inst17|R_N_CLOCK[12]~5                ; 1       ;
-; dispacher:inst17|R_N_CLOCK[9]~4                 ; 1       ;
-; dispacher:inst17|R_N_CLOCK[8]~3                 ; 1       ;
-; dispacher:inst17|R_N_CLOCK[7]~2                 ; 1       ;
-; dispacher:inst17|R_N_CLOCK[3]~1                 ; 1       ;
-; h100:inst15|state.ST_LOAD~0                     ; 1       ;
-; wrapper:inst11|R_tft[40]~0                      ; 1       ;
+; wrapper:inst17|R_N_CLOCK[21]~8                  ; 1       ;
+; wrapper:inst17|R_N_CLOCK[18]~7                  ; 1       ;
+; wrapper:inst17|R_N_CLOCK[17]~6                  ; 1       ;
+; wrapper:inst17|R_N_CLOCK[13]~5                  ; 1       ;
+; wrapper:inst17|R_N_CLOCK[10]~4                  ; 1       ;
+; wrapper:inst17|R_N_CLOCK[8]~3                   ; 1       ;
+; wrapper:inst17|R_N_CLOCK[7]~2                   ; 1       ;
+; wrapper:inst17|R_N_CLOCK[5]~1                   ; 1       ;
+; h100:inst16|state.ST_LOAD~0                     ; 1       ;
+; wrapper:inst17|R_tft[40]~1                      ; 1       ;
 ; plus12:inst2|Selector1~2                        ; 1       ;
 ; plus12:inst2|r[7]~29                            ; 1       ;
-; wrapper:inst11|Selector2~2                      ; 1       ;
 ; rs232in:inst4|R_i~5                             ; 1       ;
+; wrapper:inst17|Selector2~2                      ; 1       ;
 ; plus12:inst2|r[9]~28                            ; 1       ;
 ; terminateur:inst3|Selector1~6                   ; 1       ;
 ; plus12:inst2|Selector2~4                        ; 1       ;
@@ -1618,51 +1624,45 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateur:inst3|Selector2~2                   ; 1       ;
 ; terminateurSplit:inst5|R~34                     ; 1       ;
 ; terminateurSplit:inst5|R~33                     ; 1       ;
-; plus12:inst2|r[12]~27                           ; 1       ;
-; plus12:inst2|r[12]~26                           ; 1       ;
-; plus12:inst2|r[12]~25                           ; 1       ;
 ; terminateurSplit:inst5|R~32                     ; 1       ;
 ; terminateurSplit:inst5|R~31                     ; 1       ;
 ; terminateurSplit:inst5|R[31]                    ; 1       ;
-; plus12:inst2|busout[22]~32                      ; 1       ;
-; plus12:inst2|R_res[12]                          ; 1       ;
-; plus12:inst2|mess_resultat[23]~0                ; 1       ;
-; plus12:inst2|s[7]                               ; 1       ;
-; plus12:inst2|busout[21]~31                      ; 1       ;
 ; terminateurSplit:inst5|R~30                     ; 1       ;
-; plus12:inst2|s[6]~7                             ; 1       ;
-; plus12:inst2|r[6]~24                            ; 1       ;
 ; terminateurSplit:inst5|R~29                     ; 1       ;
 ; terminateurSplit:inst5|R[30]                    ; 1       ;
 ; terminateurSplit:inst5|R~28                     ; 1       ;
 ; terminateurSplit:inst5|R[23]                    ; 1       ;
+; plus12:inst2|s[7]                               ; 1       ;
+; plus12:inst2|s[6]~7                             ; 1       ;
+; plus12:inst2|r[6]~27                            ; 1       ;
+; plus12:inst2|r[12]~26                           ; 1       ;
+; plus12:inst2|r[12]~25                           ; 1       ;
+; plus12:inst2|r[12]~24                           ; 1       ;
 ; rs232in:inst4|Selector3~0                       ; 1       ;
 ; rs232in:inst4|rx_R~0                            ; 1       ;
 ; rs232in:inst4|rx_fifo_R[2]                      ; 1       ;
 ; rs232in:inst4|state~14                          ; 1       ;
-; plus12:inst2|busout[7]~30                       ; 1       ;
-; plus12:inst2|busout[15]~29                      ; 1       ;
-; plus12:inst2|busout[14]~28                      ; 1       ;
-; plus12:inst2|Equal0~3                           ; 1       ;
-; plus12:inst2|Equal0~2                           ; 1       ;
-; plus12:inst2|Equal0~1                           ; 1       ;
-; plus12:inst2|Equal0~0                           ; 1       ;
 ; terminateurSplit:inst5|R~27                     ; 1       ;
 ; plus12:inst2|s[5]                               ; 1       ;
-; plus12:inst2|busout[13]~27                      ; 1       ;
 ; terminateurSplit:inst5|R~26                     ; 1       ;
 ; terminateurSplit:inst5|R[29]                    ; 1       ;
-; plus12:inst2|busout[6]~26                       ; 1       ;
 ; terminateurSplit:inst5|R~25                     ; 1       ;
 ; terminateurSplit:inst5|R[22]                    ; 1       ;
 ; terminateurSplit:inst5|R~24                     ; 1       ;
 ; terminateurSplit:inst5|R[15]                    ; 1       ;
-; initiateur:inst|busout[11]~33                   ; 1       ;
-; initiateur:inst|R_tft[11]                       ; 1       ;
-; initiateur:inst|busout[22]~32                   ; 1       ;
-; initiateur:inst|R_tft[22]                       ; 1       ;
-; initiateur:inst|busout[23]~31                   ; 1       ;
-; initiateur:inst|R_tft[23]                       ; 1       ;
+; plus12:inst2|busout[21]~32                      ; 1       ;
+; plus12:inst2|Equal0~3                           ; 1       ;
+; plus12:inst2|Equal0~2                           ; 1       ;
+; plus12:inst2|Equal0~1                           ; 1       ;
+; plus12:inst2|Equal0~0                           ; 1       ;
+; plus12:inst2|busout[15]~31                      ; 1       ;
+; plus12:inst2|busout[14]~30                      ; 1       ;
+; plus12:inst2|busout[13]~29                      ; 1       ;
+; plus12:inst2|busout[7]~28                       ; 1       ;
+; plus12:inst2|busout[6]~27                       ; 1       ;
+; plus12:inst2|busout[22]~26                      ; 1       ;
+; plus12:inst2|R_res[12]                          ; 1       ;
+; plus12:inst2|mess_resultat[23]~0                ; 1       ;
 ; rs232in:inst4|Selector0~0                       ; 1       ;
 ; rs232in:inst4|Selector2~0                       ; 1       ;
 ; rs232in:inst4|Selector1~0                       ; 1       ;
@@ -1681,10 +1681,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rs232in:inst4|R_baud~1                          ; 1       ;
 ; rs232in:inst4|R_baud~0                          ; 1       ;
 ; plus12:inst2|busout[40]~25                      ; 1       ;
-; initiateur:inst|busout[21]~30                   ; 1       ;
-; initiateur:inst|R_tft[21]                       ; 1       ;
-; initiateur:inst|busout[10]~29                   ; 1       ;
-; initiateur:inst|R_tft[10]                       ; 1       ;
 ; plus12:inst2|s[11]                              ; 1       ;
 ; plus12:inst2|s[11]~6                            ; 1       ;
 ; plus12:inst2|busout[19]~24                      ; 1       ;
@@ -1699,31 +1695,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R~20                     ; 1       ;
 ; terminateurSplit:inst5|R[14]                    ; 1       ;
 ; terminateurSplit:inst5|R[7]                     ; 1       ;
-; rs232out:inst6|R_data~9                         ; 1       ;
-; wrapper:inst11|R_Msg~23                         ; 1       ;
-; wrapper:inst11|R_Msg~22                         ; 1       ;
-; wrapper:inst11|R_Msg~21                         ; 1       ;
-; wrapper:inst11|R_Msg~20                         ; 1       ;
-; wrapper:inst11|R_Msg~19                         ; 1       ;
-; wrapper:inst11|R_Msg~18                         ; 1       ;
-; wrapper:inst11|R_Msg~17                         ; 1       ;
-; wrapper:inst11|R_Msg~16                         ; 1       ;
-; wrapper:inst11|R_Msg~15                         ; 1       ;
-; wrapper:inst11|R_Msg~14                         ; 1       ;
-; wrapper:inst11|R_Msg~13                         ; 1       ;
-; wrapper:inst11|R_Msg~12                         ; 1       ;
-; wrapper:inst11|R_Msg~11                         ; 1       ;
-; wrapper:inst11|R_Msg~10                         ; 1       ;
-; wrapper:inst11|R_Msg~9                          ; 1       ;
-; wrapper:inst11|R_Msg~8                          ; 1       ;
-; wrapper:inst11|R_Msg~7                          ; 1       ;
-; wrapper:inst11|R_Msg~6                          ; 1       ;
-; wrapper:inst11|R_Msg~5                          ; 1       ;
-; wrapper:inst11|R_Msg~4                          ; 1       ;
-; wrapper:inst11|R_Msg~3                          ; 1       ;
-; wrapper:inst11|R_Msg~2                          ; 1       ;
-; wrapper:inst11|R_Msg~1                          ; 1       ;
-; wrapper:inst11|R_Msg~0                          ; 1       ;
+; rs232out:inst6|R_data~8                         ; 1       ;
 ; rs232in:inst4|R_i~4                             ; 1       ;
 ; rs232in:inst4|R_i~3                             ; 1       ;
 ; rs232in:inst4|R_i~2                             ; 1       ;
@@ -1733,48 +1705,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rs232in:inst4|Equal0~2                          ; 1       ;
 ; rs232in:inst4|Equal0~1                          ; 1       ;
 ; rs232in:inst4|Equal0~0                          ; 1       ;
-; initiateur:inst|Selector2~0                     ; 1       ;
-; rs232in:inst4|R_sh[0]                           ; 1       ;
+; initiateur:inst|Selector2~2                     ; 1       ;
 ; plus12:inst2|busout[38]~21                      ; 1       ;
-; initiateur:inst|busout[19]~28                   ; 1       ;
-; initiateur:inst|R_tft[19]                       ; 1       ;
-; initiateur:inst|busout[7]~27                    ; 1       ;
-; initiateur:inst|R_tft[7]                        ; 1       ;
-; initiateur:inst|R_32[7]                         ; 1       ;
-; initiateur:inst|busout[18]~26                   ; 1       ;
-; initiateur:inst|R_tft[18]                       ; 1       ;
-; initiateur:inst|busout[15]~25                   ; 1       ;
-; initiateur:inst|R_tft[15]                       ; 1       ;
-; initiateur:inst|busout[3]~24                    ; 1       ;
-; initiateur:inst|R_tft[3]                        ; 1       ;
-; initiateur:inst|R_32[3]                         ; 1       ;
-; initiateur:inst|busout[14]~23                   ; 1       ;
-; initiateur:inst|R_tft[14]                       ; 1       ;
-; initiateur:inst|busout[4]~22                    ; 1       ;
-; initiateur:inst|R_tft[4]                        ; 1       ;
-; initiateur:inst|R_32[4]                         ; 1       ;
-; initiateur:inst|busout[6]~21                    ; 1       ;
-; initiateur:inst|R_tft[6]                        ; 1       ;
-; initiateur:inst|R_32[6]                         ; 1       ;
-; initiateur:inst|busout[17]~20                   ; 1       ;
-; initiateur:inst|R_tft[17]                       ; 1       ;
-; initiateur:inst|busout[5]~19                    ; 1       ;
-; initiateur:inst|R_tft[5]                        ; 1       ;
-; initiateur:inst|R_32[5]                         ; 1       ;
-; initiateur:inst|busout[20]~18                   ; 1       ;
-; initiateur:inst|R_tft[20]                       ; 1       ;
-; initiateur:inst|busout[16]~17                   ; 1       ;
-; initiateur:inst|R_tft[16]                       ; 1       ;
+; rs232in:inst4|R_sh[0]                           ; 1       ;
 ; plus12:inst2|busout[32]~20                      ; 1       ;
 ; terminateur:inst3|R_tft[40]                     ; 1       ;
-; initiateur:inst|busout[13]~16                   ; 1       ;
-; initiateur:inst|R_tft[13]                       ; 1       ;
-; initiateur:inst|busout[9]~15                    ; 1       ;
-; initiateur:inst|R_tft[9]                        ; 1       ;
 ; terminateurSplit:inst5|R~19                     ; 1       ;
-; initiateur:inst|busout[2]~14                    ; 1       ;
-; initiateur:inst|R_tft[2]                        ; 1       ;
-; initiateur:inst|R_32[2]                         ; 1       ;
 ; plus12:inst2|s[10]~4                            ; 1       ;
 ; plus12:inst2|busout[18]~19                      ; 1       ;
 ; terminateurSplit:inst5|R~18                     ; 1       ;
@@ -1787,42 +1723,64 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R[20]                    ; 1       ;
 ; terminateurSplit:inst5|R~15                     ; 1       ;
 ; terminateurSplit:inst5|R[13]                    ; 1       ;
-; rs232out:inst6|R_data~8                         ; 1       ;
+; rs232out:inst6|R_data~7                         ; 1       ;
 ; terminateurSplit:inst5|R[6]                     ; 1       ;
-; wrapper:inst11|R_Msg[20]                        ; 1       ;
-; wrapper:inst11|R_Msg[19]                        ; 1       ;
-; wrapper:inst11|R_Msg[18]                        ; 1       ;
-; wrapper:inst11|R_Msg[17]                        ; 1       ;
-; wrapper:inst11|R_Msg[16]                        ; 1       ;
-; wrapper:inst11|R_Msg[15]                        ; 1       ;
-; wrapper:inst11|R_Msg[14]                        ; 1       ;
-; wrapper:inst11|R_Msg[13]                        ; 1       ;
-; wrapper:inst11|R_Msg[12]                        ; 1       ;
-; wrapper:inst11|R_Msg[11]                        ; 1       ;
-; wrapper:inst11|R_Msg[10]                        ; 1       ;
-; wrapper:inst11|R_Msg[9]                         ; 1       ;
-; wrapper:inst11|R_Msg[8]                         ; 1       ;
-; wrapper:inst11|R_Msg[7]                         ; 1       ;
-; wrapper:inst11|R_Msg[6]                         ; 1       ;
-; wrapper:inst11|R_Msg[5]                         ; 1       ;
-; wrapper:inst11|R_Msg[4]                         ; 1       ;
-; wrapper:inst11|R_Msg[3]                         ; 1       ;
-; wrapper:inst11|R_Msg[2]                         ; 1       ;
-; wrapper:inst11|R_Msg[1]                         ; 1       ;
-; wrapper:inst11|R_Msg[22]                        ; 1       ;
-; wrapper:inst11|R_Msg[23]                        ; 1       ;
-; wrapper:inst11|R_Msg[21]                        ; 1       ;
-; wrapper:inst11|R_Msg[0]                         ; 1       ;
+; initiateur:inst|busout[21]~33                   ; 1       ;
+; initiateur:inst|R_tft[21]                       ; 1       ;
+; initiateur:inst|busout[20]~32                   ; 1       ;
+; initiateur:inst|R_tft[20]                       ; 1       ;
+; initiateur:inst|busout[19]~31                   ; 1       ;
+; initiateur:inst|R_tft[19]                       ; 1       ;
+; initiateur:inst|busout[18]~30                   ; 1       ;
+; initiateur:inst|R_tft[18]                       ; 1       ;
+; initiateur:inst|busout[17]~29                   ; 1       ;
+; initiateur:inst|R_tft[17]                       ; 1       ;
+; initiateur:inst|busout[16]~28                   ; 1       ;
+; initiateur:inst|R_tft[16]                       ; 1       ;
+; initiateur:inst|busout[15]~27                   ; 1       ;
+; initiateur:inst|R_tft[15]                       ; 1       ;
+; initiateur:inst|busout[14]~26                   ; 1       ;
+; initiateur:inst|R_tft[14]                       ; 1       ;
+; initiateur:inst|busout[13]~25                   ; 1       ;
+; initiateur:inst|R_tft[13]                       ; 1       ;
+; initiateur:inst|busout[11]~24                   ; 1       ;
+; initiateur:inst|R_tft[11]                       ; 1       ;
+; initiateur:inst|busout[10]~23                   ; 1       ;
+; initiateur:inst|R_tft[10]                       ; 1       ;
+; initiateur:inst|busout[9]~22                    ; 1       ;
+; initiateur:inst|R_tft[9]                        ; 1       ;
+; initiateur:inst|busout[7]~21                    ; 1       ;
+; initiateur:inst|R_tft[7]                        ; 1       ;
+; initiateur:inst|R_32[7]                         ; 1       ;
+; initiateur:inst|busout[6]~20                    ; 1       ;
+; initiateur:inst|R_tft[6]                        ; 1       ;
+; initiateur:inst|R_32[6]                         ; 1       ;
+; initiateur:inst|busout[5]~19                    ; 1       ;
+; initiateur:inst|R_tft[5]                        ; 1       ;
+; initiateur:inst|R_32[5]                         ; 1       ;
+; initiateur:inst|busout[4]~18                    ; 1       ;
+; initiateur:inst|R_tft[4]                        ; 1       ;
+; initiateur:inst|R_32[4]                         ; 1       ;
+; initiateur:inst|busout[3]~17                    ; 1       ;
+; initiateur:inst|R_tft[3]                        ; 1       ;
+; initiateur:inst|R_32[3]                         ; 1       ;
+; initiateur:inst|busout[2]~16                    ; 1       ;
+; initiateur:inst|R_tft[2]                        ; 1       ;
+; initiateur:inst|R_32[2]                         ; 1       ;
+; initiateur:inst|busout[22]~15                   ; 1       ;
+; initiateur:inst|R_tft[22]                       ; 1       ;
+; initiateur:inst|busout[23]~14                   ; 1       ;
+; initiateur:inst|R_tft[23]                       ; 1       ;
 ; rs232in:inst4|state~12                          ; 1       ;
 ; initiateur:inst|Selector3~1                     ; 1       ;
+; initiateur:inst|R_data[4]                       ; 1       ;
+; initiateur:inst|R_data[5]                       ; 1       ;
+; initiateur:inst|R_data[6]                       ; 1       ;
+; initiateur:inst|R_data[7]                       ; 1       ;
 ; initiateur:inst|R_data[3]                       ; 1       ;
 ; initiateur:inst|R_data[2]                       ; 1       ;
 ; initiateur:inst|R_data[1]                       ; 1       ;
 ; initiateur:inst|R_data[0]                       ; 1       ;
-; initiateur:inst|R_data[6]                       ; 1       ;
-; initiateur:inst|R_data[7]                       ; 1       ;
-; initiateur:inst|R_data[5]                       ; 1       ;
-; initiateur:inst|R_data[4]                       ; 1       ;
 ; initiateur:inst|busout[12]~13                   ; 1       ;
 ; initiateur:inst|R_tft[12]                       ; 1       ;
 ; initiateur:inst|busout[8]~12                    ; 1       ;
@@ -1845,56 +1803,33 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R[19]                    ; 1       ;
 ; terminateurSplit:inst5|R~10                     ; 1       ;
 ; terminateurSplit:inst5|R[12]                    ; 1       ;
-; rs232out:inst6|R_data~7                         ; 1       ;
+; rs232out:inst6|R_data~6                         ; 1       ;
 ; terminateurSplit:inst5|R[5]                     ; 1       ;
 ; rs232out:inst6|R_data[7]                        ; 1       ;
-; dispacher:inst17|R_Msg[20]                      ; 1       ;
-; dispacher:inst17|R_Msg[19]                      ; 1       ;
-; dispacher:inst17|R_Msg[18]                      ; 1       ;
-; dispacher:inst17|R_Msg[17]                      ; 1       ;
-; dispacher:inst17|R_Msg[16]                      ; 1       ;
-; dispacher:inst17|R_Msg[15]                      ; 1       ;
-; dispacher:inst17|R_Msg[14]                      ; 1       ;
-; dispacher:inst17|R_Msg[13]                      ; 1       ;
-; dispacher:inst17|R_Msg[12]                      ; 1       ;
-; dispacher:inst17|R_Msg[11]                      ; 1       ;
-; dispacher:inst17|R_Msg[10]                      ; 1       ;
-; dispacher:inst17|R_Msg[9]                       ; 1       ;
-; dispacher:inst17|R_Msg[8]                       ; 1       ;
-; dispacher:inst17|R_Msg[7]                       ; 1       ;
-; dispacher:inst17|R_Msg[6]                       ; 1       ;
-; dispacher:inst17|R_Msg[5]                       ; 1       ;
-; dispacher:inst17|R_Msg[4]                       ; 1       ;
-; dispacher:inst17|R_Msg[3]                       ; 1       ;
-; dispacher:inst17|R_Msg[2]                       ; 1       ;
-; dispacher:inst17|R_Msg[1]                       ; 1       ;
-; dispacher:inst17|R_Msg[22]                      ; 1       ;
-; dispacher:inst17|R_Msg[23]                      ; 1       ;
-; dispacher:inst17|R_Msg[21]                      ; 1       ;
-; dispacher:inst17|R_Msg[0]                       ; 1       ;
+; wrapper:inst17|state.ST_LOAD_MSG                ; 1       ;
 ; initiateur:inst|R_i~3                           ; 1       ;
 ; initiateur:inst|R_i~2                           ; 1       ;
 ; initiateur:inst|R_i~0                           ; 1       ;
 ; initiateur:inst|Add0~0                          ; 1       ;
 ; initiateur:inst|R_pulse~0                       ; 1       ;
-; wrapper:inst11|Selector0~1                      ; 1       ;
+; wrapper:inst17|Selector0~1                      ; 1       ;
 ; initiateur:inst|Selector6~1                     ; 1       ;
 ; initiateur:inst|state.ST_BUSIN_LOADED~1         ; 1       ;
-; initiateur:inst|Selector0~0                     ; 1       ;
+; initiateur:inst|Selector2~0                     ; 1       ;
 ; initiateur:inst|state.ST_BUSIN_LOADED~0         ; 1       ;
-; wrapper:inst11|Selector1~0                      ; 1       ;
-; wrapper:inst11|Equal0~1                         ; 1       ;
-; wrapper:inst11|Equal0~0                         ; 1       ;
-; initiateur:inst|R_tft[27]                       ; 1       ;
-; initiateur:inst|busout[26]~9                    ; 1       ;
-; initiateur:inst|R_tft[25]                       ; 1       ;
-; initiateur:inst|R_tft[24]                       ; 1       ;
+; wrapper:inst17|Selector1~0                      ; 1       ;
+; wrapper:inst17|Equal0~1                         ; 1       ;
+; wrapper:inst17|Equal0~0                         ; 1       ;
+; initiateur:inst|R_tft[28]                       ; 1       ;
+; initiateur:inst|R_tft[29]                       ; 1       ;
 ; initiateur:inst|R_tft[30]                       ; 1       ;
 ; initiateur:inst|R_tft[31]                       ; 1       ;
-; initiateur:inst|busout[38]~4                    ; 1       ;
+; initiateur:inst|busout[38]~6                    ; 1       ;
 ; initiateur:inst|R_tft[38]                       ; 1       ;
-; initiateur:inst|R_tft[29]                       ; 1       ;
-; initiateur:inst|R_tft[28]                       ; 1       ;
+; initiateur:inst|busout[27]~5                    ; 1       ;
+; initiateur:inst|R_tft[26]                       ; 1       ;
+; initiateur:inst|R_tft[25]                       ; 1       ;
+; initiateur:inst|R_tft[24]                       ; 1       ;
 ; initiateur:inst|busout[32]~1                    ; 1       ;
 ; initiateur:inst|R_tft[32]                       ; 1       ;
 ; plus12:inst2|Selector0~0                        ; 1       ;
@@ -1915,32 +1850,55 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R[18]                    ; 1       ;
 ; terminateurSplit:inst5|R~6                      ; 1       ;
 ; terminateurSplit:inst5|R[11]                    ; 1       ;
-; rs232out:inst6|R_data~6                         ; 1       ;
+; rs232out:inst6|R_data~5                         ; 1       ;
 ; terminateurSplit:inst5|R[4]                     ; 1       ;
 ; rs232out:inst6|R_data[6]                        ; 1       ;
-; dispacher:inst17|R_N_CLOCK[20]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[19]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[18]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[17]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[16]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[15]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[14]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[13]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[12]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[11]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[10]                  ; 1       ;
-; dispacher:inst17|R_N_CLOCK[9]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[8]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[7]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[6]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[5]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[4]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[3]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[2]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[1]                   ; 1       ;
-; dispacher:inst17|R_N_CLOCK[0]                   ; 1       ;
-; h100:inst15|Selector1~0                         ; 1       ;
-; h100:inst15|Equal0~7                            ; 1       ;
+; h100:inst16|R~22                                ; 1       ;
+; h100:inst16|R~21                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[21]                    ; 1       ;
+; h100:inst16|R~20                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[20]                    ; 1       ;
+; h100:inst16|R~19                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[19]                    ; 1       ;
+; h100:inst16|R~18                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[18]                    ; 1       ;
+; h100:inst16|R~17                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[17]                    ; 1       ;
+; h100:inst16|R~16                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[16]                    ; 1       ;
+; h100:inst16|R~15                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[15]                    ; 1       ;
+; h100:inst16|R~14                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[14]                    ; 1       ;
+; h100:inst16|R~13                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[13]                    ; 1       ;
+; h100:inst16|R~12                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[12]                    ; 1       ;
+; h100:inst16|R~11                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[11]                    ; 1       ;
+; h100:inst16|R~10                                ; 1       ;
+; wrapper:inst17|R_N_CLOCK[10]                    ; 1       ;
+; h100:inst16|R~9                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[9]                     ; 1       ;
+; h100:inst16|R~8                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[8]                     ; 1       ;
+; h100:inst16|R~7                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[7]                     ; 1       ;
+; h100:inst16|R~6                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[6]                     ; 1       ;
+; h100:inst16|R~5                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[5]                     ; 1       ;
+; h100:inst16|R~4                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[4]                     ; 1       ;
+; h100:inst16|R~3                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[3]                     ; 1       ;
+; h100:inst16|R~2                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[2]                     ; 1       ;
+; h100:inst16|R~1                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[1]                     ; 1       ;
+; h100:inst16|R~0                                 ; 1       ;
+; wrapper:inst17|R_N_CLOCK[0]                     ; 1       ;
+; h100:inst16|Selector1~0                         ; 1       ;
 ; initiateur:inst|Selector1~2                     ; 1       ;
 ; initiateur:inst|Selector1~1                     ; 1       ;
 ; initiateur:inst|Selector1~0                     ; 1       ;
@@ -1948,9 +1906,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; plus12:inst2|Equal1~1                           ; 1       ;
 ; plus12:inst2|Equal1~0                           ; 1       ;
 ; plus12:inst2|Selector1~0                        ; 1       ;
-; wrapper:inst11|R_tft[40]                        ; 1       ;
-; wrapper:inst11|R_tft[38]                        ; 1       ;
-; wrapper:inst11|R_tft[32]                        ; 1       ;
+; wrapper:inst17|R_tft[40]                        ; 1       ;
+; wrapper:inst17|R_tft[38]                        ; 1       ;
+; wrapper:inst17|R_tft[32]                        ; 1       ;
 ; terminateur:inst3|Selector0~2                   ; 1       ;
 ; plus12:inst2|Selector3~0                        ; 1       ;
 ; plus12:inst2|s~0                                ; 1       ;
@@ -1962,30 +1920,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R[17]                    ; 1       ;
 ; terminateurSplit:inst5|R~3                      ; 1       ;
 ; terminateurSplit:inst5|R[10]                    ; 1       ;
-; rs232out:inst6|R_data~5                         ; 1       ;
+; rs232out:inst6|R_data~4                         ; 1       ;
 ; terminateurSplit:inst5|R[3]                     ; 1       ;
 ; rs232out:inst6|R_data[5]                        ; 1       ;
-; h100:inst15|state~10                            ; 1       ;
-; h100:inst15|Equal0~3                            ; 1       ;
-; h100:inst15|Equal0~2                            ; 1       ;
-; h100:inst15|Equal0~1                            ; 1       ;
-; h100:inst15|Equal0~0                            ; 1       ;
-; hprog:inst1|C[1]~15                             ; 1       ;
-; hprog:inst1|C[3]~7                              ; 1       ;
-; hprog:inst1|C[2]~11                             ; 1       ;
-; hprog:inst1|C[4]~3                              ; 1       ;
-; hprog:inst1|C[0]~19                             ; 1       ;
+; moduler:inst10|C[1]~15                          ; 1       ;
+; moduler:inst10|C[3]~7                           ; 1       ;
+; moduler:inst10|C[2]~11                          ; 1       ;
+; moduler:inst10|C[4]~3                           ; 1       ;
+; moduler:inst10|C[0]~19                          ; 1       ;
+; h100:inst16|state~10                            ; 1       ;
+; h100:inst16|Equal0~5                            ; 1       ;
+; h100:inst16|Equal0~3                            ; 1       ;
+; h100:inst16|Equal0~2                            ; 1       ;
+; h100:inst16|Equal0~1                            ; 1       ;
+; h100:inst16|Equal0~0                            ; 1       ;
 ; terminateur:inst3|Selector1~4                   ; 1       ;
 ; terminateur:inst3|Equal0~1                      ; 1       ;
+; plus12:inst2|R_tft[28]                          ; 1       ;
+; plus12:inst2|R_tft[29]                          ; 1       ;
+; plus12:inst2|R_tft[30]                          ; 1       ;
+; plus12:inst2|R_tft[31]                          ; 1       ;
+; terminateur:inst3|Equal0~0                      ; 1       ;
 ; plus12:inst2|R_tft[27]                          ; 1       ;
 ; plus12:inst2|R_tft[26]                          ; 1       ;
 ; plus12:inst2|R_tft[25]                          ; 1       ;
 ; plus12:inst2|R_tft[24]                          ; 1       ;
-; terminateur:inst3|Equal0~0                      ; 1       ;
-; plus12:inst2|R_tft[30]                          ; 1       ;
-; plus12:inst2|R_tft[31]                          ; 1       ;
-; plus12:inst2|R_tft[29]                          ; 1       ;
-; plus12:inst2|R_tft[28]                          ; 1       ;
 ; terminateurSplit:inst5|Add0~1                   ; 1       ;
 ; terminateurSplit:inst5|R_i~1                    ; 1       ;
 ; terminateurSplit:inst5|Add0~0                   ; 1       ;
@@ -1996,37 +1955,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; terminateurSplit:inst5|R[16]                    ; 1       ;
 ; terminateurSplit:inst5|R~1                      ; 1       ;
 ; terminateurSplit:inst5|R[9]                     ; 1       ;
-; rs232out:inst6|R_data~4                         ; 1       ;
+; rs232out:inst6|R_data~3                         ; 1       ;
 ; terminateurSplit:inst5|R[2]                     ; 1       ;
 ; rs232out:inst6|R_data[4]                        ; 1       ;
-; hprog:inst1|Add0~18                             ; 1       ;
-; hprog:inst1|Add0~17                             ; 1       ;
-; hprog:inst1|Add0~16                             ; 1       ;
-; hprog:inst1|C[1]~_emulated                      ; 1       ;
-; hprog:inst1|C[3]~_emulated                      ; 1       ;
-; hprog:inst1|C[2]~_emulated                      ; 1       ;
-; hprog:inst1|C[4]~_emulated                      ; 1       ;
-; hprog:inst1|C[0]~_emulated                      ; 1       ;
+; moduler:inst10|Add0~18                          ; 1       ;
+; moduler:inst10|Add0~17                          ; 1       ;
+; moduler:inst10|Add0~16                          ; 1       ;
+; moduler:inst10|C[1]~_emulated                   ; 1       ;
+; moduler:inst10|C[3]~_emulated                   ; 1       ;
+; moduler:inst10|C[2]~_emulated                   ; 1       ;
+; moduler:inst10|C[4]~_emulated                   ; 1       ;
+; moduler:inst10|C[0]~_emulated                   ; 1       ;
+; h10:inst9|C~4                                   ; 1       ;
+; h10:inst9|Add0~0                                ; 1       ;
+; h10:inst9|C~3                                   ; 1       ;
+; h10:inst9|C~1                                   ; 1       ;
 ; terminateurSplit:inst5|Selector1~2              ; 1       ;
 ; terminateurSplit:inst5|Selector1~1              ; 1       ;
 ; terminateurSplit:inst5|R~0                      ; 1       ;
 ; terminateurSplit:inst5|R[8]                     ; 1       ;
-; rs232out:inst6|R_data~3                         ; 1       ;
+; rs232out:inst6|R_data~2                         ; 1       ;
 ; terminateurSplit:inst5|R[1]                     ; 1       ;
 ; rs232out:inst6|R_data[3]                        ; 1       ;
-; hprog:inst1|state~2                             ; 1       ;
-; hprog:inst1|state~1                             ; 1       ;
-; hprog:inst1|state~0                             ; 1       ;
+; moduler:inst10|state~2                          ; 1       ;
+; moduler:inst10|state~1                          ; 1       ;
+; moduler:inst10|state~0                          ; 1       ;
+; h10:inst9|state~0                               ; 1       ;
 ; rs232out:inst6|state.ST_ATT~0                   ; 1       ;
+; rs232out:inst6|R_i~3                            ; 1       ;
 ; rs232out:inst6|R_i~2                            ; 1       ;
-; rs232out:inst6|R_i~1                            ; 1       ;
 ; rs232out:inst6|Add0~0                           ; 1       ;
-; rs232out:inst6|R_i~0                            ; 1       ;
+; rs232out:inst6|R_i~1                            ; 1       ;
 ; rs232out:inst6|Selector1~0                      ; 1       ;
-; rs232out:inst6|R_data~2                         ; 1       ;
+; rs232out:inst6|R_data~1                         ; 1       ;
 ; terminateurSplit:inst5|R[0]                     ; 1       ;
 ; rs232out:inst6|R_data[2]                        ; 1       ;
-; hprog:inst1|R~0                                 ; 1       ;
+; moduler:inst10|R~0                              ; 1       ;
+; h10:inst9|R~0                                   ; 1       ;
 ; rs232out:inst6|Selector0~1                      ; 1       ;
 ; rs232out:inst6|Selector3~3                      ; 1       ;
 ; rs232out:inst6|Selector3~2                      ; 1       ;
@@ -2063,68 +2028,66 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rs232in:inst4|Add0~2                            ; 1       ;
 ; rs232in:inst4|Add0~1                            ; 1       ;
 ; rs232in:inst4|Add0~0                            ; 1       ;
-; h100:inst15|R[23]~70                            ; 1       ;
-; h100:inst15|R[22]~69                            ; 1       ;
-; h100:inst15|R[22]~68                            ; 1       ;
-; h100:inst15|R[21]~67                            ; 1       ;
-; h100:inst15|R[21]~66                            ; 1       ;
-; h100:inst15|R[20]~65                            ; 1       ;
-; h100:inst15|R[20]~64                            ; 1       ;
-; h100:inst15|R[19]~63                            ; 1       ;
-; h100:inst15|R[19]~62                            ; 1       ;
-; h100:inst15|R[18]~61                            ; 1       ;
-; h100:inst15|R[18]~60                            ; 1       ;
-; h100:inst15|R[17]~59                            ; 1       ;
-; h100:inst15|R[17]~58                            ; 1       ;
-; h100:inst15|R[16]~57                            ; 1       ;
-; h100:inst15|R[16]~56                            ; 1       ;
-; h100:inst15|R[15]~55                            ; 1       ;
-; h100:inst15|R[15]~54                            ; 1       ;
-; h100:inst15|R[14]~53                            ; 1       ;
-; h100:inst15|R[14]~52                            ; 1       ;
-; h100:inst15|R[13]~51                            ; 1       ;
-; h100:inst15|R[13]~50                            ; 1       ;
-; h100:inst15|R[12]~49                            ; 1       ;
-; h100:inst15|R[12]~48                            ; 1       ;
-; h100:inst15|R[11]~47                            ; 1       ;
-; h100:inst15|R[11]~46                            ; 1       ;
-; h100:inst15|R[10]~45                            ; 1       ;
-; h100:inst15|R[10]~44                            ; 1       ;
-; h100:inst15|R[9]~43                             ; 1       ;
-; h100:inst15|R[9]~42                             ; 1       ;
-; h100:inst15|R[8]~41                             ; 1       ;
-; h100:inst15|R[8]~40                             ; 1       ;
-; h100:inst15|R[7]~39                             ; 1       ;
-; h100:inst15|R[7]~38                             ; 1       ;
-; h100:inst15|R[6]~37                             ; 1       ;
-; h100:inst15|R[6]~36                             ; 1       ;
-; h100:inst15|R[5]~35                             ; 1       ;
-; h100:inst15|R[5]~34                             ; 1       ;
-; h100:inst15|R[4]~33                             ; 1       ;
-; h100:inst15|R[4]~32                             ; 1       ;
-; h100:inst15|R[3]~31                             ; 1       ;
-; h100:inst15|R[3]~30                             ; 1       ;
-; h100:inst15|R[2]~29                             ; 1       ;
-; h100:inst15|R[2]~28                             ; 1       ;
-; h100:inst15|R[1]~27                             ; 1       ;
-; h100:inst15|R[1]~26                             ; 1       ;
-; h100:inst15|R[0]~25                             ; 1       ;
-; h100:inst15|R[0]~24                             ; 1       ;
-; hprog:inst1|Add0~14                             ; 1       ;
-; hprog:inst1|Add0~13                             ; 1       ;
-; hprog:inst1|Add0~12                             ; 1       ;
-; hprog:inst1|Add0~11                             ; 1       ;
-; hprog:inst1|Add0~10                             ; 1       ;
-; hprog:inst1|Add0~9                              ; 1       ;
-; hprog:inst1|Add0~8                              ; 1       ;
-; hprog:inst1|Add0~7                              ; 1       ;
-; hprog:inst1|Add0~6                              ; 1       ;
-; hprog:inst1|Add0~5                              ; 1       ;
-; hprog:inst1|Add0~4                              ; 1       ;
-; hprog:inst1|Add0~3                              ; 1       ;
-; hprog:inst1|Add0~2                              ; 1       ;
-; hprog:inst1|Add0~1                              ; 1       ;
-; hprog:inst1|Add0~0                              ; 1       ;
+; h100:inst16|Add0~44                             ; 1       ;
+; h100:inst16|Add0~43                             ; 1       ;
+; h100:inst16|Add0~42                             ; 1       ;
+; h100:inst16|Add0~41                             ; 1       ;
+; h100:inst16|Add0~40                             ; 1       ;
+; h100:inst16|Add0~39                             ; 1       ;
+; h100:inst16|Add0~38                             ; 1       ;
+; h100:inst16|Add0~37                             ; 1       ;
+; h100:inst16|Add0~36                             ; 1       ;
+; h100:inst16|Add0~35                             ; 1       ;
+; h100:inst16|Add0~34                             ; 1       ;
+; h100:inst16|Add0~33                             ; 1       ;
+; h100:inst16|Add0~32                             ; 1       ;
+; h100:inst16|Add0~31                             ; 1       ;
+; h100:inst16|Add0~30                             ; 1       ;
+; h100:inst16|Add0~29                             ; 1       ;
+; h100:inst16|Add0~28                             ; 1       ;
+; h100:inst16|Add0~27                             ; 1       ;
+; h100:inst16|Add0~26                             ; 1       ;
+; h100:inst16|Add0~25                             ; 1       ;
+; h100:inst16|Add0~24                             ; 1       ;
+; h100:inst16|Add0~23                             ; 1       ;
+; h100:inst16|Add0~22                             ; 1       ;
+; h100:inst16|Add0~21                             ; 1       ;
+; h100:inst16|Add0~20                             ; 1       ;
+; h100:inst16|Add0~19                             ; 1       ;
+; h100:inst16|Add0~18                             ; 1       ;
+; h100:inst16|Add0~17                             ; 1       ;
+; h100:inst16|Add0~16                             ; 1       ;
+; h100:inst16|Add0~15                             ; 1       ;
+; h100:inst16|Add0~14                             ; 1       ;
+; h100:inst16|Add0~13                             ; 1       ;
+; h100:inst16|Add0~12                             ; 1       ;
+; h100:inst16|Add0~11                             ; 1       ;
+; h100:inst16|Add0~10                             ; 1       ;
+; h100:inst16|Add0~9                              ; 1       ;
+; h100:inst16|Add0~8                              ; 1       ;
+; h100:inst16|Add0~7                              ; 1       ;
+; h100:inst16|Add0~6                              ; 1       ;
+; h100:inst16|Add0~5                              ; 1       ;
+; h100:inst16|Add0~4                              ; 1       ;
+; h100:inst16|Add0~3                              ; 1       ;
+; h100:inst16|Add0~2                              ; 1       ;
+; h100:inst16|Add0~1                              ; 1       ;
+; h100:inst16|Add0~0                              ; 1       ;
+; moduler:inst10|Add0~14                          ; 1       ;
+; moduler:inst10|Add0~13                          ; 1       ;
+; moduler:inst10|Add0~12                          ; 1       ;
+; moduler:inst10|Add0~11                          ; 1       ;
+; moduler:inst10|Add0~10                          ; 1       ;
+; moduler:inst10|Add0~9                           ; 1       ;
+; moduler:inst10|Add0~8                           ; 1       ;
+; moduler:inst10|Add0~7                           ; 1       ;
+; moduler:inst10|Add0~6                           ; 1       ;
+; moduler:inst10|Add0~5                           ; 1       ;
+; moduler:inst10|Add0~4                           ; 1       ;
+; moduler:inst10|Add0~3                           ; 1       ;
+; moduler:inst10|Add0~2                           ; 1       ;
+; moduler:inst10|Add0~1                           ; 1       ;
+; moduler:inst10|Add0~0                           ; 1       ;
 ; rs232out:inst6|R_baud[12]~37                    ; 1       ;
 ; rs232out:inst6|R_baud[11]~36                    ; 1       ;
 ; rs232out:inst6|R_baud[11]~35                    ; 1       ;
@@ -2158,160 +2121,163 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------------+------------------------+
 ; Other Routing Resource Type ; Usage                  ;
 +-----------------------------+------------------------+
-; Block interconnects         ; 613 / 94,460 ( < 1 % ) ;
-; C16 interconnects           ; 5 / 3,315 ( < 1 % )    ;
+; Block interconnects         ; 655 / 94,460 ( < 1 % ) ;
+; C16 interconnects           ; 3 / 3,315 ( < 1 % )    ;
 ; C4 interconnects            ; 241 / 60,840 ( < 1 % ) ;
-; Direct links                ; 173 / 94,460 ( < 1 % ) ;
+; Direct links                ; 211 / 94,460 ( < 1 % ) ;
 ; Global clocks               ; 1 / 16 ( 6 % )         ;
-; Local interconnects         ; 237 / 33,216 ( < 1 % ) ;
-; R24 interconnects           ; 6 / 3,091 ( < 1 % )    ;
-; R4 interconnects            ; 331 / 81,294 ( < 1 % ) ;
+; Local interconnects         ; 218 / 33,216 ( < 1 % ) ;
+; R24 interconnects           ; 7 / 3,091 ( < 1 % )    ;
+; R4 interconnects            ; 349 / 81,294 ( < 1 % ) ;
 +-----------------------------+------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 12.30) ; Number of LABs  (Total = 43) ;
+; Number of Logic Elements  (Average = 11.86) ; Number of LABs  (Total = 44) ;
 +---------------------------------------------+------------------------------+
-; 1                                           ; 2                            ;
-; 2                                           ; 3                            ;
-; 3                                           ; 1                            ;
-; 4                                           ; 1                            ;
-; 5                                           ; 0                            ;
-; 6                                           ; 1                            ;
+; 1                                           ; 0                            ;
+; 2                                           ; 2                            ;
+; 3                                           ; 2                            ;
+; 4                                           ; 0                            ;
+; 5                                           ; 2                            ;
+; 6                                           ; 4                            ;
 ; 7                                           ; 2                            ;
 ; 8                                           ; 1                            ;
 ; 9                                           ; 0                            ;
-; 10                                          ; 1                            ;
-; 11                                          ; 0                            ;
-; 12                                          ; 1                            ;
-; 13                                          ; 3                            ;
-; 14                                          ; 2                            ;
-; 15                                          ; 3                            ;
-; 16                                          ; 22                           ;
+; 10                                          ; 2                            ;
+; 11                                          ; 3                            ;
+; 12                                          ; 2                            ;
+; 13                                          ; 1                            ;
+; 14                                          ; 0                            ;
+; 15                                          ; 2                            ;
+; 16                                          ; 21                           ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 1.81) ; Number of LABs  (Total = 43) ;
+; LAB-wide Signals  (Average = 1.84) ; Number of LABs  (Total = 44) ;
 +------------------------------------+------------------------------+
 ; 1 Async. clear                     ; 6                            ;
-; 1 Clock                            ; 40                           ;
-; 1 Clock enable                     ; 15                           ;
-; 1 Sync. load                       ; 2                            ;
-; 2 Clock enables                    ; 15                           ;
+; 1 Clock                            ; 42                           ;
+; 1 Clock enable                     ; 13                           ;
+; 1 Sync. clear                      ; 1                            ;
+; 2 Clock enables                    ; 19                           ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 21.70) ; Number of LABs  (Total = 43) ;
+; Number of Signals Sourced  (Average = 19.98) ; Number of LABs  (Total = 44) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 3                            ;
+; 2                                            ; 0                            ;
 ; 3                                            ; 1                            ;
-; 4                                            ; 2                            ;
-; 5                                            ; 0                            ;
-; 6                                            ; 0                            ;
+; 4                                            ; 1                            ;
+; 5                                            ; 2                            ;
+; 6                                            ; 1                            ;
 ; 7                                            ; 0                            ;
-; 8                                            ; 1                            ;
+; 8                                            ; 0                            ;
 ; 9                                            ; 1                            ;
-; 10                                           ; 0                            ;
-; 11                                           ; 1                            ;
-; 12                                           ; 1                            ;
-; 13                                           ; 0                            ;
-; 14                                           ; 0                            ;
-; 15                                           ; 0                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 0                            ;
-; 18                                           ; 1                            ;
+; 10                                           ; 1                            ;
+; 11                                           ; 2                            ;
+; 12                                           ; 2                            ;
+; 13                                           ; 3                            ;
+; 14                                           ; 1                            ;
+; 15                                           ; 2                            ;
+; 16                                           ; 0                            ;
+; 17                                           ; 2                            ;
+; 18                                           ; 2                            ;
 ; 19                                           ; 0                            ;
 ; 20                                           ; 1                            ;
-; 21                                           ; 1                            ;
+; 21                                           ; 0                            ;
 ; 22                                           ; 1                            ;
-; 23                                           ; 2                            ;
+; 23                                           ; 1                            ;
 ; 24                                           ; 1                            ;
 ; 25                                           ; 1                            ;
-; 26                                           ; 1                            ;
-; 27                                           ; 1                            ;
-; 28                                           ; 5                            ;
-; 29                                           ; 1                            ;
-; 30                                           ; 6                            ;
-; 31                                           ; 6                            ;
-; 32                                           ; 2                            ;
+; 26                                           ; 2                            ;
+; 27                                           ; 4                            ;
+; 28                                           ; 1                            ;
+; 29                                           ; 2                            ;
+; 30                                           ; 4                            ;
+; 31                                           ; 2                            ;
+; 32                                           ; 3                            ;
 +----------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 9.21) ; Number of LABs  (Total = 43) ;
+; Number of Signals Sourced Out  (Average = 9.84) ; Number of LABs  (Total = 44) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 4                            ;
-; 2                                               ; 4                            ;
-; 3                                               ; 2                            ;
+; 1                                               ; 2                            ;
+; 2                                               ; 3                            ;
+; 3                                               ; 1                            ;
 ; 4                                               ; 0                            ;
-; 5                                               ; 2                            ;
-; 6                                               ; 2                            ;
+; 5                                               ; 4                            ;
+; 6                                               ; 4                            ;
 ; 7                                               ; 4                            ;
-; 8                                               ; 3                            ;
-; 9                                               ; 0                            ;
-; 10                                              ; 2                            ;
+; 8                                               ; 2                            ;
+; 9                                               ; 1                            ;
+; 10                                              ; 5                            ;
 ; 11                                              ; 2                            ;
-; 12                                              ; 5                            ;
-; 13                                              ; 4                            ;
-; 14                                              ; 2                            ;
-; 15                                              ; 2                            ;
-; 16                                              ; 1                            ;
+; 12                                              ; 2                            ;
+; 13                                              ; 1                            ;
+; 14                                              ; 3                            ;
+; 15                                              ; 3                            ;
+; 16                                              ; 3                            ;
 ; 17                                              ; 0                            ;
 ; 18                                              ; 1                            ;
-; 19                                              ; 2                            ;
+; 19                                              ; 0                            ;
 ; 20                                              ; 1                            ;
+; 21                                              ; 1                            ;
+; 22                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 13.42) ; Number of LABs  (Total = 43) ;
+; Number of Distinct Inputs  (Average = 14.48) ; Number of LABs  (Total = 44) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 3                            ;
-; 3                                            ; 3                            ;
+; 2                                            ; 1                            ;
+; 3                                            ; 2                            ;
 ; 4                                            ; 2                            ;
 ; 5                                            ; 2                            ;
-; 6                                            ; 0                            ;
-; 7                                            ; 0                            ;
-; 8                                            ; 0                            ;
-; 9                                            ; 1                            ;
-; 10                                           ; 0                            ;
+; 6                                            ; 2                            ;
+; 7                                            ; 1                            ;
+; 8                                            ; 1                            ;
+; 9                                            ; 4                            ;
+; 10                                           ; 1                            ;
 ; 11                                           ; 2                            ;
-; 12                                           ; 3                            ;
-; 13                                           ; 0                            ;
-; 14                                           ; 6                            ;
-; 15                                           ; 4                            ;
-; 16                                           ; 3                            ;
-; 17                                           ; 3                            ;
-; 18                                           ; 2                            ;
-; 19                                           ; 1                            ;
+; 12                                           ; 1                            ;
+; 13                                           ; 1                            ;
+; 14                                           ; 2                            ;
+; 15                                           ; 2                            ;
+; 16                                           ; 1                            ;
+; 17                                           ; 2                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 4                            ;
 ; 20                                           ; 2                            ;
 ; 21                                           ; 2                            ;
-; 22                                           ; 2                            ;
-; 23                                           ; 1                            ;
-; 24                                           ; 0                            ;
+; 22                                           ; 0                            ;
+; 23                                           ; 2                            ;
+; 24                                           ; 1                            ;
 ; 25                                           ; 0                            ;
-; 26                                           ; 0                            ;
-; 27                                           ; 0                            ;
+; 26                                           ; 2                            ;
+; 27                                           ; 2                            ;
 ; 28                                           ; 0                            ;
 ; 29                                           ; 0                            ;
-; 30                                           ; 1                            ;
+; 30                                           ; 0                            ;
+; 31                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -2349,38 +2315,38 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------+----------------------+-------------------+
 ; Source Clock(s) ; Destination Clock(s) ; Delay Added in ns ;
 +-----------------+----------------------+-------------------+
-; clk,reset,I/O   ; clk                  ; 7.4               ;
-; I/O             ; clk                  ; 5.9               ;
+; clk,reset,I/O   ; clk                  ; 6.5               ;
+; I/O             ; clk                  ; 5.1               ;
 +-----------------+----------------------+-------------------+
 Note: For more information on problematic transfers, consider running the Fitter again with the Optimize hold timing option (Settings Menu) turned off.
 This will disable optimization of problematic paths and expose them for further analysis using either the TimeQuest Timing Analyzer or the Classic Timing Analyzer.
 
 
-+-----------------------------------------------------------------------------+
-; Estimated Delay Added for Hold Timing Details                               ;
-+----------------------------+----------------------------+-------------------+
-; Source Register            ; Destination Register       ; Delay Added in ns ;
-+----------------------------+----------------------------+-------------------+
-; reset                      ; hprog:inst1|state          ; 1.564             ;
-; hprog:inst1|C[0]~17        ; hprog:inst1|state          ; 1.540             ;
-; hprog:inst1|C[0]~_emulated ; hprog:inst1|state          ; 1.540             ;
-; ivdf1                      ; hprog:inst1|state          ; 1.540             ;
-; ivdf0                      ; hprog:inst1|state          ; 1.540             ;
-; hprog:inst1|C[2]~_emulated ; hprog:inst1|state          ; 1.457             ;
-; ivdf2                      ; hprog:inst1|state          ; 1.457             ;
-; hprog:inst1|C[2]~9         ; hprog:inst1|state          ; 1.457             ;
-; hprog:inst1|C[4]~_emulated ; hprog:inst1|state          ; 1.117             ;
-; hprog:inst1|C[4]~1         ; hprog:inst1|state          ; 1.117             ;
-; hprog:inst1|C[3]~_emulated ; hprog:inst1|state          ; 1.095             ;
-; hprog:inst1|C[3]~5         ; hprog:inst1|state          ; 1.095             ;
-; hprog:inst1|C[1]~_emulated ; hprog:inst1|state          ; 0.989             ;
-; hprog:inst1|C[1]~13        ; hprog:inst1|state          ; 0.989             ;
-; dispacher:inst17|state     ; dispacher:inst17|R_Msg[20] ; 0.565             ;
-; hprog:inst1|C[7]           ; hprog:inst1|state          ; 0.494             ;
-; hprog:inst1|C[6]           ; hprog:inst1|state          ; 0.494             ;
-; hprog:inst1|C[5]           ; hprog:inst1|state          ; 0.494             ;
-; hprog:inst1|state          ; hprog:inst1|state          ; 0.494             ;
-+----------------------------+----------------------------+-------------------+
++-----------------------------------------------------------------------------------+
+; Estimated Delay Added for Hold Timing Details                                     ;
++------------------------------------+--------------------------+-------------------+
+; Source Register                    ; Destination Register     ; Delay Added in ns ;
++------------------------------------+--------------------------+-------------------+
+; moduler:inst10|C[0]~17             ; moduler:inst10|state     ; 1.317             ;
+; moduler:inst10|C[0]~_emulated      ; moduler:inst10|state     ; 1.317             ;
+; ivdf1                              ; moduler:inst10|state     ; 1.317             ;
+; ivdf0                              ; moduler:inst10|state     ; 1.317             ;
+; reset                              ; moduler:inst10|state     ; 1.317             ;
+; moduler:inst10|C[2]~_emulated      ; moduler:inst10|state     ; 1.237             ;
+; ivdf2                              ; moduler:inst10|state     ; 1.237             ;
+; moduler:inst10|C[2]~9              ; moduler:inst10|state     ; 1.237             ;
+; moduler:inst10|C[4]~_emulated      ; moduler:inst10|state     ; 1.131             ;
+; moduler:inst10|C[4]~1              ; moduler:inst10|state     ; 1.131             ;
+; moduler:inst10|C[1]~_emulated      ; moduler:inst10|state     ; 0.879             ;
+; moduler:inst10|C[1]~13             ; moduler:inst10|state     ; 0.879             ;
+; moduler:inst10|C[3]~_emulated      ; moduler:inst10|state     ; 0.829             ;
+; moduler:inst10|C[3]~5              ; moduler:inst10|state     ; 0.829             ;
+; moduler:inst10|C[7]                ; moduler:inst10|state     ; 0.417             ;
+; moduler:inst10|C[6]                ; moduler:inst10|state     ; 0.417             ;
+; moduler:inst10|C[5]                ; moduler:inst10|state     ; 0.417             ;
+; moduler:inst10|state               ; moduler:inst10|state     ; 0.417             ;
+; wrapper:inst17|state.ST_READ_BUSIN ; wrapper:inst17|R_tft[26] ; 0.248             ;
++------------------------------------+--------------------------+-------------------+
 Note: This table only shows the top 19 path(s) that have the largest delay added for hold.
 
 
@@ -2400,7 +2366,7 @@ Info (169124): Fitter converted 3 user pins into dedicated programming pins
     Info (169125): Pin ~ASDO~ is reserved at location E3
     Info (169125): Pin ~nCSO~ is reserved at location D3
     Info (169125): Pin ~LVDS150p/nCEO~ is reserved at location AE24
-Critical Warning (169085): No exact pin location assignment(s) for 2 pins of 15 total pins
+Critical Warning (169085): No exact pin location assignment(s) for 2 pins of 22 total pins
     Info (169086): Pin SEL1 not assigned to an exact location on the device
     Info (169086): Pin SEL2 not assigned to an exact location on the device
 Warning (335093): TimeQuest Timing Analyzer is analyzing 5 combinational loops as latches.
@@ -2424,30 +2390,22 @@ Info (176215): I/O bank details before I/O pin placement
         Info (176213): I/O bank number 5 does not use VREF pins and has 3.3V VCCIO pins. 5 total pin(s) used --  60 pins available
         Info (176213): I/O bank number 6 does not use VREF pins and has undetermined VCCIO pins. 2 total pin(s) used --  57 pins available
         Info (176213): I/O bank number 7 does not use VREF pins and has 3.3V VCCIO pins. 5 total pin(s) used --  53 pins available
-        Info (176213): I/O bank number 8 does not use VREF pins and has 3.3V VCCIO pins. 1 total pin(s) used --  55 pins available
-Warning (15705): Ignored locations or region assignments to the following nodes
-    Warning (15706): Node "pin_name1" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name2" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name3" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name4" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name5" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name6" is assigned to location or region, but does not exist in design
-    Warning (15706): Node "pin_name7" is assigned to location or region, but does not exist in design
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
+        Info (176213): I/O bank number 8 does not use VREF pins and has 3.3V VCCIO pins. 8 total pin(s) used --  48 pins available
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:02
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 0% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 3% of the available device resources in the region that extends from location X55_Y24 to location X65_Y36
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:02
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 1.62 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.93 seconds.
 Info (306004): Started post-fitting delay annotation
-Warning (306006): Found 7 output pins without output pin load capacitance assignment
+Warning (306006): Found 14 output pins without output pin load capacitance assignment
     Info (306007): Pin "tx" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info (306007): Pin "diode" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info (306007): Pin "diodeh10" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
@@ -2455,16 +2413,22 @@ Warning (306006): Found 7 output pins without output pin load capacitance assign
     Info (306007): Pin "dvdf1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info (306007): Pin "dvdf0" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info (306007): Pin "dvdf" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss0" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss2" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss3" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss4" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss5" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info (306007): Pin "ss6" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info (306005): Delay annotation completed successfully
 Info (306004): Started post-fitting delay annotation
 Info (306005): Delay annotation completed successfully
 Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
-Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169174): The Reserve All Unused Pins setting has not been specified, and will default to 'As output driving ground'.
-Info: Quartus II 64-Bit Fitter was successful. 0 errors, 16 warnings
-    Info: Peak virtual memory: 723 megabytes
-    Info: Processing ended: Fri Nov 23 10:26:01 2018
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:12
+Info: Quartus II 64-Bit Fitter was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 727 megabytes
+    Info: Processing ended: Mon Nov 26 12:49:13 2018
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:07
 
 

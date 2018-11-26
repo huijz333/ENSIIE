@@ -18,7 +18,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-ENTITY dispacher IS
+ENTITY dispatcher IS
 	PORT(
 			-- la master clock et le reset
 		    clk   : in  STD_LOGIC;
@@ -27,11 +27,8 @@ ENTITY dispacher IS
 			-- message en entrée
 			busmsg : in STD_LOGIC_VECTOR(23 downto 0);
 
-		   -- les 32 valeurs du 7 segments configurées (7 * 32 = 224)
-		   busSS : out STD_LOGIC_VECTOR(223 downto 0);
-
-		   -- N : nombre de valeurs configurées à interpréter
-		   busN : out STD_LOGIC_VECTOR(5 downto 0);
+		   -- les 32 valeurs du 7 segments configurées (7 * 32 = 224) + N sur 6 bits
+		   busSS : out STD_LOGIC_VECTOR(229 downto 0);
 
 		   -- N_clock : nombre de clock à attendre pour générer un tick
 		   busNClock : out STD_LOGIC_VECTOR(20 downto 0);
@@ -39,9 +36,9 @@ ENTITY dispacher IS
 			-- est à '1' si l'on doit envoyer un message au PC tous les 1000 ticks
 			busTICK1000 : out STD_LOGIC
 	    );
-END dispacher;
+END dispatcher;
 
-ARCHITECTURE montage OF dispacher IS
+ARCHITECTURE montage OF dispatcher IS
 
 	-------------------------------------------------------------------------------
 	--  Partie Opérative
@@ -60,11 +57,8 @@ ARCHITECTURE montage OF dispacher IS
 	-- tous les 1000 tickets de H100
 	signal R_TICK1000 : STD_LOGIC;
 
-	-- N : nombre de valeurs configurées à interpréter (2^5 = 32 ; 2^6 = 64)
-	signal R_N : STD_LOGIC_VECTOR(5 downto 0);
-
 	-- registre stockant les 32 valeurs du 7 segments configurées (7 * 32 = 224)
-	signal R_SS : STD_LOGIC_VECTOR(223 downto 0);
+	signal R_SS : STD_LOGIC_VECTOR(229 downto 0);
 
 	-- registre stockant V (nombre de master clock à attendre avant de générer un tick)
 	signal R_N_CLOCK : STD_LOGIC_VECTOR(20 downto 0);
@@ -88,12 +82,11 @@ BEGIN
 	BEGIN
 		-- si on reset
 		IF reset = '1' THEN
-			-- 100 ticks par seconde (500 est en kilo-clock)
+			-- 100 ticks par seconde
 			R_N_CLOCK <= STD_LOGIC_VECTOR(to_unsigned(5000, 21));
 
 			-- configure le serpentin pour qu'il soit vide
-			R_N  <= STD_LOGIC_VECTOR(to_unsigned(32, 6));
-			R_SS <= (others => '0');
+			R_SS <= (5 => '1', others => '0');
 
 			-- desactive le check TICK1000
 			R_TICK1000 <= '0';
@@ -128,12 +121,12 @@ BEGIN
 
 					-- clr(s)
 					WHEN "100" =>
-						R_N  <= STD_LOGIC_VECTOR(to_unsigned(32, 6));
-						R_SS <= (others => '0');
+						R_SS <= (5 => '1', others => '0');
+
 
 					-- si commande set-N(n)
 					WHEN "101" =>
-						R_N <= R_Msg(5 downto 0);
+						R_SS(5 downto 0) <= R_Msg(5 downto 0);
 
 					-- si commande set-val(i, v)
 					WHEN "110" =>
@@ -148,7 +141,6 @@ BEGIN
 	END PROCESS;
 
 	busSS       <= R_SS;
-	busN        <= R_N;
 	busNClock   <= R_N_CLOCK;
 	busTICK1000 <= R_TICK1000;
 
