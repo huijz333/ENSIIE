@@ -54,9 +54,7 @@ strace -e open ps```
 **=> 2166 appels systèmes**
 
 
-**1.4**
-
-(voir 'strace_1_4.txt')
+**1.4** (voir 'strace_1_4.txt')
 ```
 strace -c lsof
 ```
@@ -202,3 +200,15 @@ Dans le cas d'une pile trop petite, on peut aggrandir dynamiquement la taille de
 ```
 ulimit -s {TAILLE_EN_KBYTES}
 ```
+
+**3.1**
+```
+[romain.pereira@vm0 tp]$ l
+total 72
+drwxrwxr-x. 2 romain.pereira   174 26 nov.  16:38 .
+drwx------. 4 romain.pereira   137 26 nov.  16:36 ..
+-rwxrwxr-x. 1 romain.pereira  8552 26 nov.  16:37 binaire
+-rwxrwxr-x. 1 romain.pereira  9856 26 nov.  16:37 binaireg
+```
+
+Le binaire compilé avec le flag *-g* est plus volumineux que celui sans.
