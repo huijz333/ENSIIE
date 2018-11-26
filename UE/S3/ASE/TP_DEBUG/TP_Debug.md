@@ -62,3 +62,18 @@ virtual memory          (kbytes, -v) unlimited
 file locks                      (-x) unlimited
 ```
 La taille de la pile des processus est réglé sur 8192 kbytes
+
+Voici 2 programmes qui font un dépassement de pile:
+
+```C
+void main() {
+    char c[8192 * 1024];
+}
+```
+
+
+```C
+void main() {
+    main();
+}
+```
