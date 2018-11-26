@@ -40,10 +40,10 @@ The main reason of rights parties scores is mainly the economic situation
 
 IMO : nothing will change until then, and the predicted climate catastrophies will occure in some ways
 
+- Natural resources (oil, gaz, uranium) already are creating conflicts in middle-east countries
+=> Conflicts may increase as the resources stocks diminish
 
 - Future seems to be quite dark : if the European Union can't handle 2 milions of migrants,
 no way the world can find a solution to handle 100 times more
 => Risk of boosting extreme parties (can't neatly separate ‘refugees’ from ‘economic migrants’)
-=> History repeats, have to be vigilent
-
--
+=> History repeats, have to be vigilent : find transparent solutions for refugees
