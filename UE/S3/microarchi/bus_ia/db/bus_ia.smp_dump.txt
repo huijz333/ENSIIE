@@ -1,5 +1,5 @@
 
-State Machine - |bus_ia|h100:inst15|state
+State Machine - |bus_ia|h100:inst16|state
 Name state.ST_TICK state.ST_DECR state.ST_LOAD 
 state.ST_LOAD 0 0 0 
 state.ST_DECR 0 1 1 
@@ -25,11 +25,11 @@ state.ST_BUSIN_LOADED 0 0 1 0 0 0 1
 state.ST_EndLoop 0 1 0 0 0 0 1 
 state.ST_NDATA_WRITE 1 0 0 0 0 0 1 
 
-State Machine - |bus_ia|wrapper:inst11|state
-Name state.ST_WRITE_MSG state.ST_WRITE_OUT state.ST_READ_BUSIN 
+State Machine - |bus_ia|wrapper:inst17|state
+Name state.ST_LOAD_MSG state.ST_WRITE_OUT state.ST_READ_BUSIN 
 state.ST_READ_BUSIN 0 0 0 
 state.ST_WRITE_OUT 0 1 1 
-state.ST_WRITE_MSG 1 0 1 
+state.ST_LOAD_MSG 1 0 1 
 
 State Machine - |bus_ia|plus12:inst2|state
 Name state.ST_WRITE_SUM state.ST_COMPUTE state.ST_WRITE_TFT state.ST_READ 

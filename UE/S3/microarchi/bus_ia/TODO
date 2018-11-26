@@ -1,0 +1,4 @@
+Processeur 'wrapper' => 4 commandes
+Processeur 'check'   => 2 commandes (handshake)
+
+set-val (6 bits => 5 bits)

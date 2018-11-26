@@ -16,7 +16,7 @@ entity h100 is
 	port(
 		    clk : in STD_LOGIC;
 		    reset : in STD_LOGIC;
-		    E   : in  STD_LOGIC_VECTOR(20 downto 0);
+		    E   : in  STD_LOGIC_VECTOR(21 downto 0);
 		    T   : out STD_LOGIC
 	    );
 end h100;
@@ -30,7 +30,7 @@ architecture montage of h100 is
     -- la commande courante
 	signal CMD :  T_CMD; 
     -- le registre de stockage, compteur des clocks
-	signal R   :  unsigned (23 downto 0);
+	signal R   :  unsigned (22 downto 0);
 	 -- boolean vrai si R est à 0
 	signal R_IS_NULL:  STD_LOGIC;
 
@@ -38,8 +38,8 @@ architecture montage of h100 is
     -- Partie Contrôle
     -------------------------------------------------------------------------------
 	type STATE_TYPE is (
-	ST_LOAD, ST_DECR, ST_TICK
-);
+		ST_LOAD, ST_DECR, ST_TICK
+	);
 signal state : STATE_TYPE;
 
 begin
@@ -51,9 +51,9 @@ begin
 	process (clk)
 	begin if clk'event and clk = '1' then
 		IF CMD = LOAD THEN 
-			-- charges 'E' dans 'R' en kilo master cycle
-			R(23 downto 3) <= unsigned(E);
-			R(2  downto 0) <= to_unsigned(0, 3);
+			-- charges 'E' dans le compteur 'R', en multipliant par 2
+			R(22 downto 1) <= unsigned(E);
+			R(0)           <= '0';
 		ELSIF CMD = DECR THEN
 			R <= R - 1;
 		END IF;

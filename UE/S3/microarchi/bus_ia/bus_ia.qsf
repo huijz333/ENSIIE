@@ -72,12 +72,10 @@ set_location_assignment PIN_N25 -to ivdf0
 set_location_assignment PIN_N26 -to ivdf1
 set_location_assignment PIN_P25 -to ivdf2
 set_location_assignment PIN_AC22 -to dvdf
+set_global_assignment -name VHDL_FILE serpentinclignonant.vhd
+set_global_assignment -name VHDL_FILE moduler.vhd
 set_global_assignment -name VHDL_FILE wrapper.vhd
-set_global_assignment -name VHDL_FILE dispacher.vhd
-set_global_assignment -name VHDL_FILE serpentin.vhd
-set_global_assignment -name VHDL_FILE hprog.vhd
 set_global_assignment -name VHDL_FILE h100.vhd
-set_global_assignment -name VHDL_FILE sept.vhd
 set_global_assignment -name VHDL_FILE h10.vhd
 set_global_assignment -name VHDL_FILE terminateur.vhd
 set_global_assignment -name VHDL_FILE initiateur.vhd
