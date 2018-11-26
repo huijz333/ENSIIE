@@ -77,3 +77,19 @@ void main() {
     main();
 }
 ```
+
+Compilation puis execution, le programme plante
+```
+[romain.pereira@vm0 tp]$ gcc stackoverflow.c
+[romain.pereira@vm0 tp]$ ./a.out 
+Erreur de segmentation
+```
+=> Il y a eu un dépassement de pile
+
+*Correction:*
+Dans le cas d'une récursion infini : mettre une condition sortie dans la récursion
+
+Dans le cas d'une pile trop petite, on peut aggrandir dynamiquement la taille de la pile:
+```
+ulimit -s {TAILLE_EN_KBYTES}
+```
