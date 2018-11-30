@@ -6,16 +6,11 @@
 \contentsline {paragraph}{7.}{1}{section*.5}
 \contentsline {paragraph}{8.}{1}{section*.6}
 \contentsline {paragraph}{10.}{1}{section*.8}
-\contentsline {paragraph}{11.}{2}{section*.9}
-\contentsline {paragraph}{12.}{2}{section*.10}
 \contentsline {paragraph}{13.}{2}{section*.11}
-\contentsline {paragraph}{14.}{2}{section*.12}
-\contentsline {paragraph}{15.}{2}{section*.13}
 \contentsline {paragraph}{16.}{2}{section*.14}
 \contentsline {paragraph}{17.}{2}{section*.15}
-\contentsline {paragraph}{18.}{2}{section*.16}
-\contentsline {paragraph}{19.}{2}{section*.17}
-\contentsline {paragraph}{20.}{2}{section*.18}
-\contentsline {paragraph}{21.}{2}{section*.19}
-\contentsline {paragraph}{22.}{2}{section*.20}
-\contentsline {section}{\numberline {2}R\IeC {\'e}ponses aux questions XX \IeC {\`a} YY (bonus)}{2}{section.2}
+\contentsline {paragraph}{19.}{3}{section*.17}
+\contentsline {paragraph}{20.}{3}{section*.18}
+\contentsline {paragraph}{21.}{3}{section*.19}
+\contentsline {paragraph}{22.}{3}{section*.20}
+\contentsline {section}{\numberline {2}R\IeC {\'e}ponses aux questions XX \IeC {\`a} YY (bonus)}{3}{section.2}
