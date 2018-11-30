@@ -129,14 +129,13 @@ La connexion sur le compte \textit{bob} à partir de l'utilisateur \textit{root}
         
         En passant de \textbf{requisite} à \textbf{sufficient}, ...
         
+        \paragraph{11.} Alice n'a pas de mot de passe (cf '!!' et '*')
         
-        \paragraph{11.}
 \begin{lstlisting}[language=bash]
 > ssh alice@localhost
 Enter passphrase for key '/root/.ssh/id_rsa'
 \end{lstlisting}
 
-Alice n'a pas de mot de passe (cf '!!' et '*')
 Donc ssh utilise son propre système d'authentification, et non pas les PAM systèmes.
 La clef privé ssh (RSA) a été chiffré à l'aide d'un mot de passe (pour éviter le vol de clef)
 
@@ -148,13 +147,13 @@ sshd : Accepted publickey for alice from ::1 port 47410 ssh2: RSA SHA256:/JdhKRD
 sshd : pam_unix(sshd:session): session opened for user alice by (uid=0)
 \end{lstlisting}
 
-        \paragraph{12.}
+        \paragraph{12.} Protection '775' ('002' est le complément à 8 du masque octal)
+
 \begin{lstlisting}[language=bash]
 > drwxrwxr-x 2 bob 4096 19 nov. 15:22
 > umask
 '0002'
 \end{lstlisting}
-Protection '775' ('002' est le complément à 8 du masque octal)
 
         \paragraph{13.}
         
@@ -164,25 +163,24 @@ Oui on a le droit de créer, car on est sous root (root à le droit d'écrire pa
 \end{lstlisting}
 
 Ce ficher appartient à root
-Linux applique le masque octal (umask), mais par défaut, il est non executable par mesure de sécurité
+Linux applique le masque octal (umask), mais par défaut, il est non executable par mesure de sécurité.
 
-        
-        \paragraph{14.}
+\paragraph{14.} Le système notifie qu'on a pas les droits d'écriture sur le fichier (entant que 'bob')
+Mais le fichier a été supprimé, car 'bob' à le droit d'écriture dans le dossier
+
 \begin{lstlisting}[language=bash]
 > rm toto
 'rm : supprimer fichier vide (protégé en écriture) " toto " ? y
 \end{lstlisting}
-Le système notifie qu'on a pas les droits d'écriture sur le fichier (entant que 'bob')
-Mais le fichier a été supprimé, car 'bob' à le droit d'écriture dans le dossier
         
-        \paragraph{15.}
+        \paragraph{15.} Il suffit d'utiliser l'utilitaire 'chmod'
+        
 \begin{lstlisting}[language=bash]
 > chmod 1775 test
 > drwsr-sr-t. 1 bob    0 19 nov. 15:52 test
 \end{lstlisting}
 
-        \paragraph{16.}
-Oui, on a toujours le droit, et le fichier appartient à 'root'
+        \paragraph{16.} Oui, on a toujours le droit, et le fichier appartient à 'root'
 \begin{lstlisting}[language=bash]
 > -rw-r--r--. 1 root    0 19 nov. 15:52 toto
 \end{lstlisting}
@@ -190,7 +188,7 @@ Oui, on a toujours le droit, et le fichier appartient à 'root'
         \paragraph{17.}
         Oui on a toujours le droit.
         
-        \paragraph{18.}
+        \paragraph{18.} Il suffit d'utilliser l'utilitaire 'chown'
  \begin{lstlisting}[language=bash]
  > chown root test
  > drwsr-sr-t. 1 root    0 19 nov. 15:52 test
