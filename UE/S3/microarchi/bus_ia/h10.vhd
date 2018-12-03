@@ -1,4 +1,3 @@
-
 -------------------------------------------------------------------------------
 -- Ce module prends un fil en entrée, 1 si c'est un tick, 0 sinon
 -- Sa sortie vaut successivement 0 puis 1 tous les 10 ticks
@@ -61,24 +60,26 @@ begin
 			ELSIF CMD = COUNT AND T = '1' THEN
 				C <= C - 1;
 			END IF;
-		end if; end process;
+		end if;
+	end process;
 
-		C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
-		S <= R ;
+	C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
+	S <= R ;
 
-    -------------------------------------------------------------------------------
-    -- Partie Contrôle
-    -------------------------------------------------------------------------------
-    -- Inputs:  T
-    -- Outputs: S, CMD
-    -------------------------------------------------------------------------------
+   -------------------------------------------------------------------------------
+   -- Partie Contrôle
+   -------------------------------------------------------------------------------
+   -- Inputs:  T
+   -- Outputs: S, CMD
+   -------------------------------------------------------------------------------
 
-    -- fonction de transitition    
-		process (reset, clk)
+   -- fonction de transitition    
+	process (reset, clk)
 		begin
 			if reset = '1' then
 				state <= ST_INIT;
 			elsif clk'event and clk = '1' then
+			
 				case state is
 					when ST_INIT =>
 						state <= ST_COUNT ;
@@ -90,12 +91,13 @@ begin
 
 				end case;
 			end if;
-		end process;
+	end process;
 
-	 -- fonction de sortie
-		with state  select CMD <=
+	-- fonction de sortie
+	with state  select CMD <=
 		INIT    when   ST_INIT,
-		COUNT   when   ST_COUNT;
+		COUNT   when   ST_COUNT
+	;
 
-	end montage;
+end montage;
 

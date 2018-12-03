@@ -1,9 +1,15 @@
 
-State Machine - |bus_ia|serpentinprog:inst13|state
-Name state.ST_NEXT state.ST_WAIT state.ST_INIT 
+State Machine - |bus_ia|serpentinprog:inst15|state
+Name state.ST_WAIT state.ST_NEXT state.ST_INIT 
 state.ST_INIT 0 0 0 
-state.ST_WAIT 0 1 1 
-state.ST_NEXT 1 0 1 
+state.ST_NEXT 0 1 1 
+state.ST_WAIT 1 0 1 
+
+State Machine - |bus_ia|tickswitch:inst1|state
+Name state.ST_WAIT state.ST_SWITCH state.ST_INIT 
+state.ST_INIT 0 0 0 
+state.ST_SWITCH 0 1 1 
+state.ST_WAIT 1 0 1 
 
 State Machine - |bus_ia|h100:inst16|state
 Name state.ST_TICK state.ST_DECR state.ST_LOAD 

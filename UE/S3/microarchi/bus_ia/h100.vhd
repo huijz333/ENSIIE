@@ -1,11 +1,11 @@
-
 -------------------------------------------------------------------------------
 -- Entrée:
 --		clk, reset la clock et le reset
---		Entier E coddé sur 21 bits (nombre de kilo master cycle)
+--		Entier E coddé sur 21 bits
 --
 --	Sortie:
---		T , le tick : '1' tous les 'E' master cycle, sinon '0'
+--		T , le tick : '0' ou '1'
+--		T passe à '1' pendant un master clock, tous les 2 * 'E' master clock
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -14,11 +14,14 @@ use ieee.numeric_std.all;
 
 entity h100 is
 	port(
-		    clk : in STD_LOGIC;
-		    reset : in STD_LOGIC;
-		    E   : in  STD_LOGIC_VECTOR(21 downto 0);
-		    T   : out STD_LOGIC
-	    );
+		-- clock et reset
+		clk : in STD_LOGIC;
+		reset : in STD_LOGIC;
+		
+		-- entrée/sortie
+		E   : in  STD_LOGIC_VECTOR(21 downto 0);
+		T   : out STD_LOGIC
+	);
 end h100;
 
 architecture montage of h100 is
@@ -49,15 +52,16 @@ begin
     -------------------------------------------------------------------------------
 
 	process (clk)
-	begin if clk'event and clk = '1' then
-		IF CMD = LOAD THEN 
-			-- charges 'E' dans le compteur 'R', en multipliant par 2
-			R(22 downto 1) <= unsigned(E);
-			R(0)           <= '0';
-		ELSIF CMD = DECR THEN
-			R <= R - 1;
-		END IF;
-	end if; end process;
+		begin if clk'event and clk = '1' then
+			IF CMD = LOAD THEN 
+				-- charges 'E' dans le compteur 'R', en multipliant par 2
+				R(22 downto 1) <= unsigned(E);
+				R(0)           <= '0';
+			ELSIF CMD = DECR THEN
+				R <= R - 1;
+			END IF;
+		end if;
+	end process;
 
 	R_IS_NULL <= '1' WHEN R = 0 ELSE '0' ;
 
@@ -87,15 +91,17 @@ begin
 		end if;
 	end process;
 
-    -- fonction de sortie    
+	-- fonction de sortie    
 	with state  select T <=
-	'1'    when   ST_TICK,
-	'0'    when   others;
+		'1'    when   ST_TICK,
+		'0'    when   others
+	;
 
 	with state  select CMD <=
-	LOAD   when   ST_LOAD,
-	DECR   when   ST_DECR,
-	NOOP   when   ST_TICK;
+		LOAD   when   ST_LOAD,
+		DECR   when   ST_DECR,
+		NOOP   when   ST_TICK
+	;
 
 end montage;
 

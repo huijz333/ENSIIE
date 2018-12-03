@@ -28,27 +28,25 @@ ENTITY wrapper IS
 		       MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001010" -- 10
 	       );
 	PORT(
-		    clk          : in  STD_LOGIC;
-		    reset        : in  STD_LOGIC;
+		clk          : in  STD_LOGIC;
+		reset        : in  STD_LOGIC;
 
-		    -- interface busin
-		    busin        : in  STD_LOGIC_VECTOR(43 downto 0);
-		    busin_valid  : in  STD_LOGIC;
-		    busin_eated  : out STD_LOGIC; 
-			 
-		    -- interface busout
-		    busout       : out STD_LOGIC_VECTOR(43 downto 0);
-		    busout_valid : out STD_LOGIC;
-		    busout_eated : in  STD_LOGIC;
+		-- interface busin
+		busin        : in  STD_LOGIC_VECTOR(43 downto 0);
+		busin_valid  : in  STD_LOGIC;
+		busin_eated  : out STD_LOGIC; 
+		
+		-- interface busout
+		busout       : out STD_LOGIC_VECTOR(43 downto 0);
+		busout_valid : out STD_LOGIC;
+		busout_eated : in  STD_LOGIC;
 
-			-- les 32 valeurs du 7 segments configurées (7 * 32 = 224) + N sur 6 bits
-		    busSS : out STD_LOGIC_VECTOR(229 downto 0);
+		-- les 32 valeurs du 7 segments configurées (7 * 32 = 224) + N sur 6 bits
+		busSS : out STD_LOGIC_VECTOR(229 downto 0);
 
-		   -- N_clock : nombre de clock à attendre pour générer un tick
-		    busNClock : out STD_LOGIC_VECTOR(21 downto 0)
-			
-			
-	    );
+		-- N_clock : nombre de clock à attendre pour générer un tick
+		busNClock : out STD_LOGIC_VECTOR(21 downto 0)
+);
 END wrapper;
 
 ARCHITECTURE montage OF wrapper IS
@@ -176,21 +174,24 @@ BEGIN
 	END PROCESS;
 
     -- fonction de sortie    
-    with state  select busin_eated <=
-         '1'    when   ST_READ_BUSIN,
-         '0'    when   others; 
+   with state  select busin_eated <=
+		'1'    when   ST_READ_BUSIN,
+      '0'    when   others; 
 
-    with state  select busout_valid <=
-         '1'    when   ST_WRITE_OUT,
-         '0'    when   others; 
+   with state  select busout_valid <=
+      '1'    when   ST_WRITE_OUT,
+      '0'    when   others
+	; 
 
-    with state  select CMD_tft <=
-         INIT   when   ST_READ_BUSIN,
-         NOOP   when   others; 
+	with state  select CMD_tft <=
+      INIT   when   ST_READ_BUSIN,
+      NOOP   when   others
+	;
 			
-	 with state  select CMD_msg <=
-         LOAD   when   ST_LOAD_MSG,
-         NOOP   when   others;
+	with state  select CMD_msg <=
+      LOAD   when   ST_LOAD_MSG,
+      NOOP   when   others
+	;
 			
 end montage;
 
