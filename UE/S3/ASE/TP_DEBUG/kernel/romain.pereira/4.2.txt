@@ -1,0 +1,59 @@
+'perf.data' est un fichier binaire :
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# less perf.data
+"perf.data" may be a binary file.  See it anyway? y
+PERFILE2h^@^@^@^@^@^@^@<80>^@^@^@^@^@^@^@h^@^@^@^@^@^@^@<80>^@^@^@^@^@^@^@<E8>^@^@^@^@^@^@^@0<E6><85>^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@<FC>^?^Q^@^@^@^@^@^@^@^@^@
+^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@p^@^@^@^@^@^@^@^@^@^@^@<E8>^C^@^@^@^@^@^@/<B1>^@^@^@^@^@^@^@^@^@^@^@^@^@^@^C'<D6>^A^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@
+^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@<FF>^O<FF>^@^@^@^@^@^@ ^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@h^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@O^@^@^@^@^@ ^@^_^@^@^@^@^@^@^@o<CD>?:
+^@^@^@^@0^CL^M<FF><FF><FF><FF>^A^@^@^@^A^@P^@<FF><FF><FF><FF>^@^@^@^@^@^@`<92><FF><FF><FF><FF>^@<90><C6>-^@^@^@^@^@^@`<92><FF><FF><FF><FF>[kernel.kallsyms]_text^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<80>^@<FF><FF><FF><FF>^@^@^@^@^@<90>&<C0><FF><FF><FF><FF>^^d^E^@^@^@^@^@^@^@^@^@^@^@^@^@/lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/net/sunrpc/sunrpc.ko.xz^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<88>^@<FF><FF><FF><FF>^@^@^@^@^@^P,<C0><FF><FF><FF><FF><DA>X^@^@^@^@^@^@^@^@^@^@^@^@^@^@/lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/drivers/virtio/virtio_ring.ko.xz^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<88>^@<FF><FF><FF><FF>^@^@^@^@^@<C0>,<C0><FF><FF><FF><FF><96>Y^@^@^@^@^@^@^@^@^@^@^@^@^@^@/lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/drivers/virtio/virtio_pci.ko.xz^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<88>^@
+<FF><FF><FF><FF>^@^@^@^@^@0-<C0><FF><FF><FF><FF><9F>m^@^@^@^@^@^@^@^@^@^@^@^@^@^@/lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/drivers/net/virtio_net.ko.xz^@xz^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<90>^@<FF><FF><FF><FF>^@^@^@^@^@<B0>-<C0><FF><FF><FF><FF><A6>6^@^@^@^@^@^@^@^@^@^@^@^@^@^@/lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/arch/x86/crypto/glue_helper.ko.xz^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^A^@^@^@^A^@<88>^@<FF><FF><FF><FF>^@^@^@^@^@^@.<C0><FF><FF><FF><FF>o:^@^@^@^@^@^@^@
+^@^@^@^@^@^@^@/lib/modules/3.10.0
+[...]
+
+
+Pour le lire, je tape:
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# perf report
+Samples: 1K of event 'cycles', Event count (approx.): 2179144160                                                                                                          
+  Children      Self  Command  Shared Object     Symbol                                                                                                                   
+  +  100,00%     0,30%  crazy    crazy             [.] main
+  +   99,71%     0,00%  crazy    crazy             [.] _start
+  +   99,71%     0,00%  crazy    libc-2.17.so      [.] __libc_start_main
+  +   66,05%     9,75%  crazy    [kernel.vmlinux]  [k] ftrace_caller
+  +   63,89%     4,00%  crazy    [kernel.vmlinux]  [k] system_call
+  +   54,04%    41,00%  crazy    [kernel.vmlinux]  [k] function_trace_call
+  +   48,04%     0,40%  crazy    libc-2.17.so      [.] __GI___libc_open
+  +   43,07%     3,58%  crazy    [kernel.vmlinux]  [k] ftrace_pid_func
+  +   41,28%     0,00%  crazy    [kernel.vmlinux]  [k] sys_open
+  +   39,03%     0,31%  crazy    [kernel.vmlinux]  [k] do_sys_open
+  +   32,72%     0,00%  crazy    [kernel.vmlinux]  [k] do_filp_open
+  +   31,34%     0,91%  crazy    libc-2.17.so      [.] __close_nocancel
+  +   31,29%     0,00%  crazy    [kernel.vmlinux]  [k] path_openat
+  +   20,23%     0,10%  crazy    libc-2.17.so      [.] __GI___libc_read
+  +   19,74%     0,00%  crazy    [kernel.vmlinux]  [k] int_signal
+  +   18,95%     0,31%  crazy    [kernel.vmlinux]  [k] do_notify_resume
+  +   18,03%     0,31%  crazy    [kernel.vmlinux]  [k] task_work_run
+  +   17,41%     0,10%  crazy    [kernel.vmlinux]  [k] ____fput
+  +   15,71%     0,20%  crazy    [kernel.vmlinux]  [k] do_last
+  +   13,59%     0,10%  crazy    [kernel.vmlinux]  [k] __fput
+  +   12,88%     4,83%  crazy    [kernel.vmlinux]  [k] trace_function
+  +   12,77%     0,20%  crazy    [kernel.vmlinux]  [k] sys_read
+  +   10,42%     0,00%  crazy    [xfs]             [k] xfs_file_release
+  +   10,27%     0,30%  crazy    [kernel.vmlinux]  [k] vfs_read
+  +    8,18%     0,00%  crazy    [xfs]             [k] xfs_release
+  +    7,18%     7,18%  crazy    [kernel.vmlinux]  [k] trace_buffer_lock_reserve
+  +    7,00%     0,10%  crazy    [kernel.vmlinux]  [k] vfs_open
+  +    6,91%     0,20%  crazy    [kernel.vmlinux]  [k] do_sync_read
+  +    6,75%     0,10%  crazy    [kernel.vmlinux]  [k] inode_permission
+  +    6,61%     0,20%  crazy    [xfs]             [k] xfs_file_aio_read
+  +    6,55%     0,21%  crazy    [xfs]             [k] xfs_free_eofblocks
+  +    6,44%     0,20%  crazy    [kernel.vmlinux]  [k] link_path_walk
+  +    5,66%     0,00%  crazy    [kernel.vmlinux]  [k] sysret_audit
+  +    5,48%     0,00%  crazy    [xfs]             [k] xfs_file_buffered_aio_read
+  +    4,73%     0,82%  crazy    [kernel.vmlinux]  [k] do_dentry_open
+  +    4,72%     0,61%  crazy    [xfs]             [k] xfs_bmapi_read
+  +    4,48%     0,41%  crazy    [kernel.vmlinux]  [k] get_empty_filp
+  +    4,39%     0,20%  crazy    [kernel.vmlinux]  [k] __inode_permission
+  +    4,33%     0,00%  crazy    [kernel.vmlinux]  [k] sys_close
+  +    3,46%     0,11%  crazy    [kernel.vmlinux]  [k] may_open
+  +    3,42%     0,00%  crazy    [xfs]             [k] xfs_bmap_search_extents
+  +    3,21%     0,31%  crazy    [kernel.vmlinux]  [k] __close_fd

@@ -1,0 +1,12 @@
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# cat /sys/kernel/debug/tracing/trace
+# tracer: function
+#
+# entries-in-buffer/entries-written: 0/0   #P:2
+#
+#                              _-----=> irqs-off
+#                             / _----=> need-resched
+#                            | / _---=> hardirq/softirq
+#                            || / _--=> preempt-depth
+#                            ||| /     delay
+#           TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION
+#              | |       |   ||||       |         |

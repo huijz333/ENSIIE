@@ -1,0 +1,11 @@
+A partir du manuel : https://www.kernel.org/doc/Documentation/trace/ftrace.txt
+(voir 'tracing_on')
+
+vérifie l'état du tracing
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# cat < /sys/kernel/debug/tracing/tracing_on
+1
+
+le tracing est activé, on le désactive:
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# echo '0' > /sys/kernel/debug/tracing/tracing_on 
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# cat /sys/kernel/debug/tracing/tracing_on 
+0

@@ -1,0 +1,10 @@
+Les 2 appels systèmes les plus utilisés par 'crazy' sont 'open' et 'read',
+d'après la sortie obtenu par le 'perf report' précèdant
+
+   Children      Self  Command  Shared Object     Symbol
+
+[...]
++   41,28%     0,00%  crazy    [kernel.vmlinux]  [k] sys_open
+[...]
++   12,77%     0,20%  crazy    [kernel.vmlinux]  [k] sys_read
+[...]

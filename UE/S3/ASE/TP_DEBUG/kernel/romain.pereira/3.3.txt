@@ -1,0 +1,9 @@
+Toujours dans le manuel du module tracing de debugfs : https://www.kernel.org/doc/Documentation/trace/ftrace.txt
+('set_ftrace_pid')
+
+On récupère le PID du processus qui a lancé 'crazy', et on définit la liste des processus à tracer comme
+la liste contenant uniquement ce PID
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# ps aux | grep crazy | awk '{print $2}' | head -n 1 > /sys/kernel/debug/tracing/set_ftrace_pid 
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# cat /sys/kernel/debug/tracing/set_ftrace_pid 
+1185

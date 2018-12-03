@@ -1,0 +1,37 @@
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# less /sys/kernel/debug/tracing/trace
+
+# tracer: function
+#
+# entries-in-buffer/entries-written: 102522/7441697   #P:2
+#
+#                              _-----=> irqs-off
+#                             / _----=> need-resched
+#                            | / _---=> hardirq/softirq
+#                            || / _--=> preempt-depth
+#                            ||| /     delay
+#           TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION
+#              | |       |   ||||       |         |
+           crazy-1185  [001] ....  4083.615186: dnotify_flush <-filp_close
+           crazy-1185  [001] ....  4083.615186: locks_remove_posix <-filp_close
+           crazy-1185  [001] ....  4083.615186: fput <-filp_close
+           crazy-1185  [001] ....  4083.615187: task_work_add <-fput
+           crazy-1185  [001] ....  4083.615187: kick_process <-task_work_add
+           crazy-1185  [001] ....  4083.615187: __audit_syscall_exit <-sysret_audit
+           crazy-1185  [001] ....  4083.615187: path_put <-__audit_syscall_exit
+           crazy-1185  [001] ....  4083.615187: dput <-path_put
+           crazy-1185  [001] ....  4083.615187: mntput <-path_put
+           crazy-1185  [001] ....  4083.615187: unroll_tree_refs <-__audit_syscall_exit
+	   crazy-1185  [001] ....  4083.615187: kfree <-__audit_syscall_exit
+	   [...]
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# tail -f /sys/kernel/debug/tracing/trace
+	   crazy-1185  [000] ....  4083.653930: _cond_resched <-task_work_run
+	   crazy-1185  [000] ....  4083.653931: __audit_syscall_entry <-auditsys
+	   crazy-1185  [000] ....  4083.653931: current_kernel_time <-__audit_syscall_entry
+	   crazy-1185  [000] ....  4083.653931: SyS_open <-system_call_fastpath
+	   crazy-1185  [000] ....  4083.653931: do_sys_open <-SyS_open
+	   crazy-1185  [000] ....  4083.653931: getname <-do_sys_open
+	   crazy-1185  [000] ....  4083.653931: getname_flags <-getname
+	   crazy-1185  [000] ....  4083.653931: kmem_cache_alloc <-getname_flags
+	   crazy-1185  [000] ....  4083.653931: _cond_resched <-kmem_cache_alloc
+	   crazy-1185  [000] ....  4083.653932: get_unused_fd_flags <-do_sys_open

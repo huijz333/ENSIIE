@@ -1,0 +1,3 @@
+Pour activer le tracing pendant 1 seconde, on met '1' dans le fichier 'tracing_on', on attends 1 seconde, puis on met '0' dans le fichier
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# echo '1' > /sys/kernel/debug/tracing/tracing_on ; sleep 1 ; echo '0' > /sys/kernel/debug/tracing/tracing_on
