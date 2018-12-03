@@ -1,0 +1,9 @@
+Commandes tapées:
+
+> make cscope
+
+Sortie:
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# make cscope
+  GEN     cscope
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# 

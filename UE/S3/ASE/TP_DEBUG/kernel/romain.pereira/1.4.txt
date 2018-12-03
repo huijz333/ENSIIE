@@ -1,0 +1,42 @@
+A l'aide de 'cscope' :
+
+La structure 'cpu_hw_events' est définie dans le fichier 'perf_event.h' à la ligne 167 :
+
+167 struct cpu_hw_events {
+168	/*
+169	 * Generic x86 PMC bits
+170	 */
+171	struct perf_event *events[X86_PMC_IDX_MAX]; /* in counter order */
+	[...]
+241 };
+
+
+
+La fonction 'vfs_open' est définie dans le fichier 'fs/open.c' à la ligne 889 :
+
+883 /**
+884  * vfs_open - open the file at the given path
+885  * @path: path to open
+886  * @filp: newly allocated file with f_flag initialized
+887  * @cred: credentials to use
+888  */
+889  int vfs_open(const struct path *path, struct file *filp,
+890               const struct cred *cred)
+891  {
+892  	struct inode *inode = path->dentry->d_inode;
+	[...]
+
+
+
+La structre 'task_struct' est définie dans le fichier 'sched.h' à la ligne 1323 :
+
+1323 struct task_struct {
+1324     volatile long state;    /* -1 unrunnable, 0 runnable, >0 stopped */
+1325     void *stack;
+1326     atomic_t usage;
+1327     unsigned int flags;     /* per process flags, defined below */
+1328     unsigned int ptrace;
+1329
+1330    #ifdef CONFIG_SMP
+	[...]
+1821 };

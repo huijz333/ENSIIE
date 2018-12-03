@@ -1,0 +1,42 @@
+Commandes tapées:
+
+> sudo su
+> cd /root/linux-3.10.0-862.14.4.el7.x86_64
+> ls -l
+
+Sortie:
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# ls -l
+total 568
+drwxr-xr-x.  32 root root   4096 23 nov.  13:31 arch
+drwxr-xr-x.   3 root root   4096 23 nov.  13:31 block
+drwxr-xr-x.   2 root root     82 23 nov.  13:31 configs
+-rw-r--r--.   1 root root  18693 23 nov.  13:31 COPYING
+-rw-r--r--.   1 root root  95409 23 nov.  13:31 CREDITS
+drwxr-xr-x.   4 root root   4096 23 nov.  13:42 crypto
+drwxr-xr-x. 108 root root   8192 23 nov.  13:31 Documentation
+drwxr-xr-x. 120 root root   4096 23 nov.  13:31 drivers
+drwxr-xr-x.  36 root root   4096 23 nov.  13:31 firmware
+drwxr-xr-x.  75 root root   4096 23 nov.  13:31 fs
+drwxr-xr-x.  26 root root   4096 23 nov.  13:52 include
+drwxr-xr-x.   2 root root    254 23 nov.  13:31 init
+drwxr-xr-x.   2 root root    256 23 nov.  13:31 ipc
+-rw-r--r--.   1 root root   2536 23 nov.  13:31 Kbuild
+-rw-r--r--.   1 root root    505 23 nov.  13:31 Kconfig
+drwxr-xr-x.  12 root root   8192 23 nov.  13:31 kernel
+drwxr-xr-x.  10 root root   8192 23 nov.  13:31 lib
+-rw-r--r--.   1 root root 274130 23 nov.  13:31 MAINTAINERS
+-rw-r--r--.   1 root root  51186 23 nov.  13:31 Makefile
+-rw-r--r--.   1 root root   2305 23 nov.  13:31 Makefile.qlock
+drwxr-xr-x.   2 root root   4096 23 nov.  13:31 mm
+drwxr-xr-x.  60 root root   4096 23 nov.  13:31 net
+-rw-r--r--.   1 root root  18736 23 nov.  13:31 README
+-rw-r--r--.   1 root root   7485 23 nov.  13:31 REPORTING-BUGS
+drwxr-xr-x.  14 root root    220 23 nov.  13:31 samples
+drwxr-xr-x.  13 root root   4096 23 nov.  13:31 scripts
+drwxr-xr-x.   9 root root   4096 23 nov.  13:31 security
+drwxr-xr-x.  24 root root   4096 23 nov.  13:31 sound
+drwxr-xr-x.  21 root root    270 23 nov.  13:31 tools
+drwxr-xr-x.   2 root root     84 23 nov.  13:31 usr
+drwxr-xr-x.   4 root root     44 23 nov.  13:31 virt
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# 
