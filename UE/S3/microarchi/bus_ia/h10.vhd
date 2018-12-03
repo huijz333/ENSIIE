@@ -61,10 +61,11 @@ begin
 			ELSIF CMD = COUNT AND T = '1' THEN
 				C <= C - 1;
 			END IF;
-		end if; end process;
+		end if;
+	end process;
 
-		C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
-		S <= R ;
+	C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
+	S <= R ;
 
     -------------------------------------------------------------------------------
     -- Partie Contrôle

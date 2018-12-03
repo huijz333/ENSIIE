@@ -1,13 +1,6 @@
 
 -------------------------------------------------------------------------------
---	Entree:
---		clk, reset: la clock et le reset
---		T : un tick
---
--- Sortie:
---		Si : 	'1' ou '0' selon que le i-ème segment du 7-segment doit
---				etre allumé ou éteinds
---
+--	Sortie : la configuration d'un serpentin clignotant
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -16,6 +9,9 @@ use ieee.numeric_std.all;
 
 entity serpentinclignotant is
 	port(
+		-- la clock
+		 clk    : in STD_LOGIC;
+
 		-- sorties vers le 7-segment
 		 Config     : OUT STD_LOGIC_VECTOR(229 downto 0)
 	 );
@@ -25,12 +21,19 @@ architecture montage of serpentinclignotant is
 
 begin
 
-	-- boucle sur 2 frames
-	Config(229 downto 224) <= "000010";
-	
-	-- 2 frames, 1 allumé, 1 éteinte
-	Config(  6 downto  0) <= "1111111";
-	Config(223 downto  7) <= (others => '0');
-
+ -- fonction de transitition    
+	PROCESS (clk)
+	begin
+		IF clk'event and clk = '1' THEN
+			-- boucle sur 2 frames
+			Config(229 downto 224) <= "000010";
+			
+			-- 2 frames, 1 allumé, 1 éteinte
+			Config(  6 downto  0) <= "1111111";
+			Config( 13 downto  7) <= "0000001";
+			Config(223 downto 14) <= (others => '0');
+			
+		END IF;
+	END PROCESS;
 end montage;
 

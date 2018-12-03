@@ -32,7 +32,7 @@ architecture montage of moduler is
     -------------------------------------------------------------------------------
     --  Partie Opérative
     -------------------------------------------------------------------------------
-	type T_CMD is (INIT, COUNT, NOOP);
+	type T_CMD is (INIT, COUNT);
 
     -- la commande courante
 	signal CMD :  T_CMD; 
@@ -42,22 +42,19 @@ architecture montage of moduler is
 
 	 -- registre de stockage des 3 bits en un vecteur
 	signal E : STD_LOGIC_VECTOR(2 downto 0);
-
-	 -- valeur du tick
-	signal R : STD_LOGIC ;
-
-	 -- registre de comptagne V_E => V_E - 1 => ... 0 => V_E => ...
+	
+	-- registre de comptagne V_E => V_E - 1 => ... 0 => V_E => ...
 	signal C : unsigned(7 downto 0);
-
-	 -- boolean vaux 1 si C est à 0, 0 sinon
+	
+	-- boolean vaux 1 si C est à 0, 0 sinon
 	signal C_IS_ZERO:  STD_LOGIC;
 
     -------------------------------------------------------------------------------
     -- Partie Contrôle
     -------------------------------------------------------------------------------
 	type STATE_TYPE is (
-	ST_INIT, ST_COUNT
-);
+		ST_INIT, ST_COUNT
+	);
 signal state : STATE_TYPE;
 
 begin
@@ -66,26 +63,24 @@ begin
     --  Partie Opérative
     -------------------------------------------------------------------------------
 
-	process (reset, clk)
-	begin
-		IF reset = '1' THEN
-			C <= V_E;
-			R <= '1';
-		ELSIF clk'event and clk = '1' then
-			IF CMD = INIT THEN
+	process (reset, clk, V_E)
+		begin
+			IF reset = '1' THEN
 				C <= V_E;
-				R <= not(R);
-			ELSIF CMD = COUNT AND T = '1' THEN
-				C <= C - 1;
-			END IF;
-		end if; end process;
+			ELSIF clk'event and clk = '1' then
+				IF CMD = INIT THEN
+					C <= V_E;
+				ELSIF CMD = COUNT AND T = '1' THEN
+					C <= C - 1;
+				END IF;
+			end if;
+	end process;
 
-		C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
-		S <= R ;
+	C_IS_ZERO <= '1' WHEN C = 0  ELSE '0' ;
 
-		E(0) <= E0;
-		E(1) <= E1;
-		E(2) <= E2;
+	E(0) <= E0;
+	E(1) <= E1;
+	E(2) <= E2;
 
     -------------------------------------------------------------------------------
     -- Partie Contrôle
@@ -101,6 +96,7 @@ begin
 				state <= ST_INIT;
 			elsif clk'event and clk = '1' then
 				case state is
+				
 					when ST_INIT =>
 						state <= ST_COUNT ;
 
@@ -115,8 +111,9 @@ begin
 
 	 -- fonction de sortie
 		with state  select CMD <=
-		INIT    when   ST_INIT,
-		COUNT   when   ST_COUNT;
+			INIT    when   ST_INIT,
+			COUNT   when   ST_COUNT
+		;
 
 		with E select V_E <=
 			to_unsigned( 2, 8) when "000",
@@ -128,6 +125,8 @@ begin
 			to_unsigned(17, 8) when "110",
 			to_unsigned(20, 8) when "111"
 		;
+		
+		S <= C_IS_ZERO;
 
 	end montage;
 
