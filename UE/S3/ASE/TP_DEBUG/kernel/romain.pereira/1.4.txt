@@ -1,6 +1,7 @@
-A l'aide de 'cscope' :
+Les chemins de fichiers sont pris relativement à '/root/linux-3.10.0-862.14.4.el7.x86_64/'
+A l'aide de 'cscope', on obtient :
 
-La structure 'cpu_hw_events' est définie dans le fichier 'perf_event.h' à la ligne 167 :
+La structure 'cpu_hw_events' est définie dans le fichier 'arch/x86/events/perf_event.h' à la ligne 167 :
 
 167 struct cpu_hw_events {
 168	/*

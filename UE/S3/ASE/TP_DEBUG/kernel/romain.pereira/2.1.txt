@@ -1,0 +1,60 @@
+Le système de fichier 'debugfs' est monté sur '/sys/kernel/debug/'
+
+Pour activer les messages du fichier 'net/ipv4/ping.c' :
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# echo 'file net/ipv4/ping.c +p' > /sys/kernel/debug/dynamic_debug/control 
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# 
+
+
+
+Pour vérifier que les messages ont bien été activé:
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# dmesg
+[...]
+[  641.681504] nfs: server 127.0.0.1 not responding, timed out
+[  826.951546] nfs: server 127.0.0.1 not responding, timed out
+[  826.953987] nfs: server 127.0.0.1 not responding, timed out
+
+
+
+Puis, on utilise l'executable 'ping' pour executer ce code du noyau:
+
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# ping google.fr
+PING google.fr (216.58.209.227) 56(84) bytes of data.
+^C
+--- google.fr ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1000ms
+
+
+
+Finalement, l'affichage de 'dmesg' renvoie maintenant 1 ligne de plus:
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# dmesg
+[  641.681504] nfs: server 127.0.0.1 not responding, timed out
+[  826.951546] nfs: server 127.0.0.1 not responding, timed out
+[  826.953987] nfs: server 127.0.0.1 not responding, timed out
+[ 2485.581512] ping_v4_unhash(isk=ffff94fb86f01400,isk->num=0)
+
+
+
+Pour désactiver les messages de debug sur le fichier 'net/ipv4/ping.c', je tape:
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# echo 'file net/ipv4/ping.c -p' > /sys/kernel/debug/dynamic_debug/control 
+
+
+
+on peut alors vérifier que les messages ont bien été desactivé:
+
+en effectuant un ping:
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# ping google.fr
+PING google.fr (216.58.209.227) 56(84) bytes of data.
+^C
+--- google.fr ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 1000ms
+
+
+les messages de debug de 'ping' n'ont cette fois ci pas été loggé:
+(même sortie qu'avant la désactivation, malgré l'appel de 'ping')
+[root@vm0 linux-3.10.0-862.14.4.el7.x86_64]# dmesg
+[  641.681504] nfs: server 127.0.0.1 not responding, timed out
+[  826.951546] nfs: server 127.0.0.1 not responding, timed out
+[  826.953987] nfs: server 127.0.0.1 not responding, timed out
+[ 2485.581512] ping_v4_unhash(isk=ffff94fb86f01400,isk->num=0)
+
