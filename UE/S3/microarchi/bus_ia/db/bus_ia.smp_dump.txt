@@ -5,7 +5,7 @@ state.ST_INIT 0 0 0
 state.ST_NEXT 0 1 1 
 state.ST_WAIT 1 0 1 
 
-State Machine - |bus_ia|diodemod:inst20|state
+State Machine - |bus_ia|tickswitch:inst1|state
 Name state.ST_WAIT state.ST_SWITCH state.ST_INIT 
 state.ST_INIT 0 0 0 
 state.ST_SWITCH 0 1 1 

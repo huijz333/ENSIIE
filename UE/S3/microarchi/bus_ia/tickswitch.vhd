@@ -1,24 +1,22 @@
-
 -------------------------------------------------------------------------------
 -- Ce module prends un fil en entrée, 1 si c'est un tick, 0 sinon
--- Sa sortie passe '0' à '1' à chaque tick
+-- Sa sortie change entre '0' et '1' à chaque tick
 -------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- diode h10
-ENTITY diodemod IS
+ENTITY tickswitch IS
 	PORT(
 		    clk : in STD_LOGIC;
 		    reset : in STD_LOGIC;
 		    T   : in  STD_LOGIC;
 		    S   : out STD_LOGIC
 	    );
-END diodemod;
+END tickswitch;
 
-ARCHITECTURE montage OF diodemod IS
+ARCHITECTURE montage OF tickswitch IS
 
     -------------------------------------------------------------------------------
     --  Partie Opérative
@@ -59,17 +57,18 @@ begin
 		end if;
 	end process;
 
+	-- la sortie == le registre de stockage
 	S <= R ;
 
-    -------------------------------------------------------------------------------
-    -- Partie Contrôle
-    -------------------------------------------------------------------------------
-    -- Inputs:  T
-    -- Outputs: S, CMD
-    -------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------
+   -- Partie Contrôle
+   -------------------------------------------------------------------------------
+   -- Inputs:  T
+   -- Outputs: S, CMD
+   -------------------------------------------------------------------------------
 
-    -- fonction de transitition    
-		process (reset, clk)
+   -- fonction de transitition    
+	process (reset, clk)
 		begin
 			if reset = '1' then
 				state <= ST_INIT;
@@ -88,13 +87,13 @@ begin
 
 				end case;
 			end if;
-		end process;
+	end process;
 
-	 -- fonction de sortie
-		with state  select CMD <=
+	-- fonction de sortie
+	with state select CMD <=
 		INIT    when   ST_INIT,
 		SWITCH  when   ST_SWITCH,
-		NOOP    when   ST_WAIT;
+		NOOP    when   ST_WAIT
+	;
 
-	end montage;
-
+end montage;

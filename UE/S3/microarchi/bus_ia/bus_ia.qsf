@@ -79,9 +79,11 @@ set_location_assignment PIN_Y22 -to SSDEBUG[3]
 set_location_assignment PIN_AA24 -to SSDEBUG[2]
 set_location_assignment PIN_AA23 -to SSDEBUG[1]
 set_location_assignment PIN_AB24 -to SSDEBUG[0]
+set_location_assignment PIN_V1 -to SEL1
+set_location_assignment PIN_V2 -to SEL2
+set_global_assignment -name VHDL_FILE tickswitch.vhd
 set_global_assignment -name VHDL_FILE serpentinmux.vhd
 set_global_assignment -name VHDL_FILE serpentinantihoraire.vhd
-set_global_assignment -name VHDL_FILE diodemod.vhd
 set_global_assignment -name VHDL_FILE sept.vhd
 set_global_assignment -name VHDL_FILE serpentinhoraire.vhd
 set_global_assignment -name VHDL_FILE serpentinprog.vhd
@@ -97,6 +99,4 @@ set_global_assignment -name VHDL_FILE rs232in.vhd
 set_global_assignment -name VHDL_FILE plus12.vhd
 set_global_assignment -name VHDL_FILE rs232out.vhd
 set_global_assignment -name BDF_FILE bus_ia.bdf
-set_location_assignment PIN_V1 -to SEL1
-set_location_assignment PIN_V2 -to SEL2
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

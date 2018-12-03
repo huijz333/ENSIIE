@@ -1,14 +1,18 @@
-
 -------------------------------------------------------------------------------
--- Ce module prends un fil en entrée, 1 si c'est un tick, 0 sinon
--- Sa sortie vaut successivement 0 puis 1 tous les 10 ticks
+--	Ce bloc est un multiplexeur
+--
+--	Il selectionne une configuration de serpentin parmis les 4 en entrées,
+--	a partir des 2 interrupteurs en entrée
+--
+--	En sortie, on a la configuration selectionnée
+--
 -------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- diode h10
+-- multiplexeur serpentin
 ENTITY serpentinmux IS
 	PORT(
 		-- interrupteur de selection
@@ -42,8 +46,8 @@ ARCHITECTURE montage OF serpentinmux IS
 		-------------------------------------------------------------------------------
 		-- Partie Contrôle
 		-------------------------------------------------------------------------------
-		-- Inputs:  T
-		-- Outputs: S, CMD
+		-- Inputs:  E (interrupteur)
+		-- Outputs: SelectedConfig (la configuration selectionnée)
 		-------------------------------------------------------------------------------
 
 		-- fonction de sortie    
