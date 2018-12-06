@@ -41,7 +41,7 @@ ENTITY wrapper IS
 		busout_valid : out STD_LOGIC;
 		busout_eated : in  STD_LOGIC;
 
-		-- les 32 valeurs du 7 segments configurées (7 * 32 = 224) + N sur 6 bits
+		-- les 32 valeurs du 7 segments R_SSurées (7 * 32 = 224) + N sur 6 bits
 		busSS : out STD_LOGIC_VECTOR(229 downto 0);
 
 		-- N_clock : nombre de clock à attendre pour générer un tick
@@ -63,7 +63,7 @@ ARCHITECTURE montage OF wrapper IS
 	type T_CMD_msg is (LOAD, NOOP);
 	signal CMD_msg :  T_CMD_msg ; 
 	
-		-- registre stockant les 32 valeurs du 7 segments configurées (7 * 32 = 224)
+		-- registre stockant les 32 valeurs du 7 segments R_SSurées (7 * 32 = 224)
 	signal R_SS : STD_LOGIC_VECTOR(229 downto 0);
 
 	-- registre stockant V (nombre de master clock à attendre avant de générer un tick)
@@ -95,7 +95,7 @@ BEGIN
 			-- 5 000 000 / 2 = 2 500 000 = 0b1001100010010110100000
 			R_N_CLOCK <= "1001100010010110100000";
 			
-			-- configure le serpentin pour qu'il soit vide
+			-- R_SSure le serpentin pour qu'il soit vide
 			R_SS <= (5 => '1', others => '0');
 			
 		ELSIF clk'event AND clk = '1' THEN
@@ -125,6 +125,108 @@ BEGIN
 
 					-- si commande set-val(i, v)
 					WHEN "11" =>
+						-- switch l'id de la frame
+						CASE R_tft(5 downto 0) IS
+
+							WHEN to_unsigned(1, 6) =>
+								R_SS(  6 downto   0) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(2, 6) =>
+								R_SS(  13 downto   7) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(3, 6) =>
+								R_SS(  20 downto   14) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(4, 6) =>
+								R_SS(  27 downto   21) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(5, 6) =>
+								R_SS(  34 downto   28) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(6, 6) =>
+								R_SS(  41 downto   35) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(7, 6) =>
+								R_SS(  48 downto   42) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(8, 6) =>
+								R_SS(  55 downto   49) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(9, 6) =>
+								R_SS(  62 downto   56) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(10, 6) =>
+								R_SS(  69 downto   63) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(11, 6) =>
+								R_SS(  76 downto   70) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(12, 6) =>
+								R_SS(  83 downto   77) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(13, 6) =>
+								R_SS(  90 downto   84) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(14, 6) =>
+								R_SS(  97 downto   91) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(15, 6) =>
+								R_SS( 104 downto   98) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(16, 6) =>
+								R_SS( 111 downto   105) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(17, 6) =>
+								R_SS( 118 downto   112) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(18, 6) =>
+								R_SS( 125 downto   119) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(19, 6) =>
+								R_SS( 132 downto   126) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(20, 6) =>
+								R_SS( 139 downto   133) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(21, 6) =>
+								R_SS( 146 downto   140) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(22, 6) =>
+								R_SS( 153 downto   147) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(23, 6) =>
+								R_SS( 160 downto   154) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(24, 6) =>
+								R_SS( 167 downto   161) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(25, 6) =>
+								R_SS( 174 downto   168) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(26, 6) =>
+								R_SS( 181 downto   175) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(27, 6) =>
+								R_SS( 188 downto   182) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(28, 6) =>
+								R_SS( 195 downto   189) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(29, 6) =>
+								R_SS( 202 downto   196) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(30, 6) =>
+								R_SS( 209 downto   203) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(31, 6) =>
+								R_SS( 216 downto   208) <= R_tft(12 downto 6);
+
+							WHEN to_unsigned(32, 6) =>
+								R_SS( 223 downto  217) <= R_tft(12 downto 6);
+
+							WHEN others =>
+							;
+
 						-- TODO
 						-- R_SS((i + 1) * 7 - 1, i * 7) <= R_Msg(6 downto 0);
 						

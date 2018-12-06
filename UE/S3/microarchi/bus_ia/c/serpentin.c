@@ -41,8 +41,7 @@
 # define ADDR        10
 # define ADDR_SRC  ADDR
 # define ADDR_DEST ADDR
-# define ADDR_FREQ ADDR
-# define ADDR_PROG ADDR
+# define ADDR_WRPR ADDR
 # define ADDR_CHCK ADDR
 # define PROMPT "> "
 
@@ -86,11 +85,11 @@ static void wtest_read(int * adest, int * value) {
 						printf("  f # : set frequence to X (0 < # < 2^24)\n");
 						printf("  t # : enable/disable h1000 ticking (# in {0, 1})\n");
 						printf("  n # : set number of frames to be looped (# in [|1, 32|])\n");
-						printf("  s # @ : set the segments # for the frame @ (# in [|0b0000000, 0b0000001, ..., 0b1111111|] and @ in [|0, 31|])\n");
+						printf("  s # @ : set the segments @ for the frame for the frame # (# in [|1, 32|] and @ in [|0b0000000, 0b0000001, ..., 0b1111111|])\n");
 						break ;
 					case 'c':
-						*adest = ADDR_PROG;
-						*value = 0b000000000000000000000000;
+						*adest = ADDR_WRPR;
+						*value = 0b010000000000000000000000;
 						break ;
 					default:
 						goto cmd_error;
@@ -98,8 +97,8 @@ static void wtest_read(int * adest, int * value) {
 			case 2:
 				switch ( rw[0] ) {
 					case 'f':
-						*adest  = ADDR_FREQ;
-						*value = arg1;
+						*adest  = ADDR_WRPR;
+						*value = 0b000000000000000000000000 | (arg1 & 0b001111111111111111111111);
 						break ;
 					case 't':
 						*adest = ADDR_CHCK;
@@ -109,8 +108,8 @@ static void wtest_read(int * adest, int * value) {
 						if (arg1 < 1 || arg1 > 32) {
 							goto cmd_error;
 						}
-						*adest = ADDR_PROG;
-						*value = 0b010000000000000000000000 | arg1;
+						*adest = ADDR_WRPR;
+						*value = 0b100000000000000000000000 | arg1;
 						break ;
 					default:
 						goto cmd_error;
@@ -118,11 +117,11 @@ static void wtest_read(int * adest, int * value) {
 			case 3:
 				switch (rw[0]) {
 					case 's':
-						if (arg1 > 0b1111111 || arg2 >= 32) {
+						if (arg1 < 1 || arg1 > 32 || arg2 > 0b1111111) {
 							goto cmd_error;
 						}
-						*adest = ADDR_PROG;
-						*value  = 0b100000000000000000000000 | (arg1 & 0b111111100000) | arg2;
+						*adest = ADDR_WRPR;
+						*value  = 0b110000000000000000000000 | ((arg2 & 0b1111111) << 6) | arg1;
 						break ;
 					default:
 						goto cmd_error;
