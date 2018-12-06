@@ -35,7 +35,16 @@
 #define  HISPTORY_FILE "usb-test"
 #include "pretty_input.h"
 
-#define ADDR 10
+// ------------------------------------------------
+//#define BIT(n) (1<<(n))
+
+# define ADDR        10
+# define ADDR_SRC  ADDR
+# define ADDR_DEST ADDR
+# define ADDR_FREQ ADDR
+# define ADDR_PROG ADDR
+# define ADDR_CHCK ADDR
+# define PROMPT "> "
 
 #define SERP_CMD_SetFreq         0
 
@@ -52,45 +61,75 @@ static Tmdm_param serp_handler __automatic_start = {
     .rdwr_geom     = "100x15+0+160",
 };
 
-// ------------------------------------------------
-//#define BIT(n) (1<<(n))
 
-int ADDR_SRC  = ADDR;
-int ADDR_DEST = ADDR;
-int ADDR_FREQ = ADDR;
 
 static void wtest_read(int * adest, int * value) {
 	char* cmd;
 	char rw[100];
-	int arg1,arg2;
+	unsigned int arg1, arg2;
 
 	while (1) {
-		cmd=rl_gets("entrer h|f [val] > ");
+		cmd = rl_gets(PROMPT);
 		if ( cmd==0 ) {
 			printf("\n");
 			printf("EOF \n");
 			while (1) pause();
 		}
-		int status = sscanf(cmd, "%s%d%x", rw, &arg1, &arg2);
-		fprintf(stderr, "st=%d ;%s;%d;%x;\n", status, rw, arg1, arg2);
+		int status = sscanf(cmd, "%s%u%u", rw, &arg1, &arg2);
+		fprintf(stderr, "st=%d ;%s;%u;%u;\n", status, rw, arg1, arg2);
 		switch ( status ) {
 			case 1:
-				if ( rw[0]=='h' ) {
-					printf("  h   : help\n");
-					printf("  f # : set frequence to #\n");
-					break;
-				} else {
-					goto arg_error;
+				switch ( rw[0] ) {
+					case 'f':
+						printf("  h   : help\n");
+						printf("  c   : clear the programmable serpentin\n");
+						printf("  f # : set frequence to X (0 < # < 2^24)\n");
+						printf("  t # : enable/disable h1000 ticking (# in {0, 1})\n");
+						printf("  n # : set number of frames to be looped (# in [|1, 32|])\n");
+						printf("  s # @ : set the segments # for the frame @ (# in [|0b0000000, 0b0000001, ..., 0b1111111|] and @ in [|0, 31|])\n");
+						break ;
+					case 'c':
+						*adest = ADDR_PROG;
+						*value = 0b000000000000000000000000;
+						break ;
+					default:
+						goto cmd_error;
 				}
 			case 2:
-				if ( rw[0]=='f' ) {
-					*adest  = ADDR_FREQ;
-					*value = arg1;
-					break ;
+				switch ( rw[0] ) {
+					case 'f':
+						*adest  = ADDR_FREQ;
+						*value = arg1;
+						break ;
+					case 't':
+						*adest = ADDR_CHCK;
+						*value = arg1 ? 1 : 0;
+						break ;
+					case 'n':
+						if (arg1 < 1 || arg1 > 32) {
+							goto cmd_error;
+						}
+						*adest = ADDR_PROG;
+						*value = 0b010000000000000000000000 | arg1;
+						break ;
+					default:
+						goto cmd_error;
+				}
+			case 3:
+				switch (rw[0]) {
+					case 's':
+						if (arg1 > 0b1111111 || arg2 >= 32) {
+							goto cmd_error;
+						}
+						*adest = ADDR_PROG;
+						*value  = 0b100000000000000000000000 | (arg1 & 0b111111100000) | arg2;
+						break ;
+					default:
+						goto cmd_error;
 				}
 			default:
-arg_error:
-				fprintf(stderr,"invalid command\n");
+cmd_error:
+				fprintf(stderr,"Invalid command\n");
 
 		}
 	}
