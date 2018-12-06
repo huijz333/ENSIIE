@@ -113,6 +113,7 @@
         \paragraph{8.} Oui, on arrive à se connecter sur le compte de \textit{Bob} à partir du compte \textit{root}
         
         \paragraph{9.}
+        La connexion sur le compte \textit{bob} à partir de l'utilisateur \textit{root} (uid=0) est bien tracée dans les logs.
 
 \begin{lstlisting}[language=bash]
 > less /var/log/secure
@@ -122,13 +123,21 @@ pam_unix(sshd:session) : session opened for user bob by (uid=0)
 [...]
 \end{lstlisting}
 
-La connexion sur le compte \textit{bob} à partir de l'utilisateur \textit{root} (uid=0) est bien tracée dans les logs.
-
         \paragraph{10.}
-        En passant de \textbf{required} à \textbf{requisite}, rien ne va changer (dans les 2 cas, tous les modules utilisant ce contrôle doivent passer avec succès pour que la vérification soit accordée)
+        \textbf{requisite} et \textbf{required} rende obligatoire le succès de l'entrée PAM.
         
-        En passant de \textbf{requisite} à \textbf{sufficient}, ...
+        Avec \textbf{requisite}, le processus d'authentification continue quand même les instructions suivantes, même si l'authentification a échoué.
         
+        Avec \textbf{required}, le processus d'authentification s'arrête si l'instruction renvoie faux.
+        
+        Danns cet exemple, rien ne change en passant de \textbf{requisite} à \textbf{required} car dans tous les cas, l'authentification s'arrête au 'deny' qui suit.
+
+        En passant de \textbf{requisite} à \textbf{sufficient}, si la ligne 'pam\_succeed\_if.so' renvoie vrai, alors l'authentification est vérifié, renvoie vrai.
+        
+        Une entrée \textbf{sufficient} est 'suffisante' : sa validité seule permet de valider l'authentification.
+        
+        La ligne avec le 'deny' ne sera donc pas appelé si le test est passé : l'utilisateur pourra s'authentifier pourvu qu'il ait un \textbf{'uid' supérieur ou égal à 1000}.
+ 
         \paragraph{11.} Alice n'a pas de mot de passe (cf '!!' et '*')
         
 \begin{lstlisting}[language=bash]
@@ -236,6 +245,153 @@ Lors d'une connection sftp:
 Avec l'utilisateur \textbf{bob}, le chroot est '/', alors qu'avec \textbf{sftp}, le chroot avec '/home/stfp'
 
 
-    \section{Réponses aux questions XX à YY (bonus)}
+    \section{Réponses aux questions 23 à 32 (bonus)}
+    
+     \paragraph{23.} Oui, l'utilisateur root put prendre l'identité de n'importe quel utilisateur, \textbf{sans même} avoir à entrer un mot de passe (pas d'authentification requise).
 
+\begin{lstlisting}[language=bash]
+> su bob
+\end{lstlisting} 
+    
+    \textbf{``su bob''} change l'utilisateur courant, en gardant le même shell (et la plupart des variables d'environnement)
+    
+    \textbf{``su - bob''} change l'utilisateur courant et crée un nouveau shell, en redefinissant la plupart des variables d'environnement.
+    
+     \paragraph{24.} Oui, \textbf{bob} peut prendre l'identité de \textbf{root}, mais seulement s'il connait
+     le mot de passe de \textbf{root} : une authentification est demandée.
+     
+\begin{lstlisting}[language=bash]
+[bob@localhost ~] > su root
+Mot de passe:
+[root@localhost bob] > _
+\end{lstlisting}
+    
+    \paragraph{25.} La commande 'su' peut être desactivé pour tous les utilisateurs qui ne font pas parti du groupe 'wheel'. Il suffit de configurer les PAM, en éditant la configuration dans \textbf{/etc/pam.d/su}, et en décommentant la ligne 15 suivante :
+    
+\begin{lstlisting}[language=bash]
+  8 # Uncomment this to force users to be a member of group root
+  9 # before they can use `su'. You can also add "group=foo"
+ 10 # to the end of this line if you want to use a group other
+ 11 # than the default "root" (but this may have side effect of
+ 12 # denying "root" user, unless she's a member of "foo" or explicitly
+ 13 # permitted earlier by e.g. "sufficient pam_rootok.so").
+ 14 # (Replaces the `SU_WHEEL_ONLY' option from login.defs)
+ 15 auth       required   pam_wheel.so
+\end{lstlisting}
+
+    \paragraph{26.} Oui, \textbf{bob} peut passer \textbf{root} via ssh s'il connait le mot de passe.
+    
+    Pour l'en empêcher, on peut configurer \textbf{sshd} en éditant le fichier \textbf{/etc/ssh/sshd\_config}
+    
+    Il suffit de modifier la ligne 38:
+    
+\begin{lstlisting}[language=bash]
+[...]
+ 37 #LoginGraceTime 2m
+ 38 #PermitRootLogin yes
+ 39 #StrictModes yes
+[...]
+\end{lstlisting}
+
+    par:
+    
+\begin{lstlisting}[language=bash]
+[...]
+ 37 #LoginGraceTime 2m
+ 38 PermitRootLogin no
+ 39 #StrictModes yes
+[...]
+\end{lstlisting}
+
+Puis il faut redémarrer le serveur ssh pour que la configuration soit bien prise en compte
+\begin{lstlisting}[language=bash]
+[root@localhost ~]# /etc/init.d/sshd restart
+Stopping sshd: [ OK ]
+Starting sshd: [ OK ]
+\end{lstlisting}
+
+
+    \paragraph{27.} Non, \textbf{bob} n'est pas autorisé à utiliser la commande \textbf{sudo}
+    
+\begin{lstlisting}[language=bash]
+[bob@localhost ~]# sudo ls
+Mot de passe:
+bob n'apparaît pas dans la liste des sudoers. Cet évènement sera signalé.
+\end{lstlisting}
+
+Le fichier de configuration de la liste des 'sudoers' se situe dans '/etc/sudoers'
+
+On peut ajouter \textbf{bob} à la liste en ajoutant cette ligne au fichier de configuration:
+
+\begin{lstlisting}[language=bash]
+bob ALL=(ALL) ALL
+\end{lstlisting}
+
+Par défaut, la configuration '/etc/sudoers' autorise tous les membres du groupe 'sudo' à utiliser la commande \textbf{sudo}.
+
+On peut donc autoriser \textbf{bob} à utiliser 'sudo' en l'ajoutant au groupe 'sudo':
+
+\begin{lstlisting}[language=bash]
+[root@localhost ~]# sudo adduser bob sudo
+\end{lstlisting}
+
+    \paragraph{28.}
+    Oui, on peut autoriser \textbf{bob} à utiliser certaines commandes uniquement en tant que root.
+    
+    Il suffit d'éditer le fichier '/etc/sudoers' et d'y ajouter/modifier la ligne concernant \textbf{bob}.
+    
+    On peut aussi l'autoriser à éxecuter des commandes en tant que \textbf{root} sans qu'il n'ait à rentrer son mot de passe. Exemple:
+    
+\begin{lstlisting}[language=bash]
+bob ALL=(ALL) NOPASSWD: cat /var/log/secure
+\end{lstlisting}
+    
+    \paragraph{29.}
+    Pour récuperer le shell d'Alice, une façon de faire est de récupérer les informations d'Alice via \textbf{getent}.
+    La 7ème entrée correspond au shell.
+    
+\begin{lstlisting}[language=bash]
+[root@localhost ~]# getent passwd | grep alice | cut -d : -f 7
+/bin/bash
+\end{lstlisting}
+
+    \paragraph{30.}
+    Si l'on essaye de modifier le shell d'\textbf{alice} par '/bin/false', en tant qu'utilisateur (\textbf{alice} par exemple),
+    cela nous est refusé.
+\begin{lstlisting}[language=bash]
+[alice@localhost ~]# chsh -s /bin/false alice
+chsh: "/bin/false" n'apparait pas dans /etc/shells
+Utiliser chsh -l pour afficher la liste.
+\end{lstlisting}
+    
+    Par contre, si on essaye de changer le shell d'\textbf{alice} entant que \textbf{root}:
+    
+\begin{lstlisting}[language=bash]
+[root@localhost ~]# chsh -s /bin/false alice
+chsh: Avertissement, "/bin/false" n'apparait pas dans /etc/shells
+L'interpréteur a ete modifie.
+\end{lstlisting}
+
+Autrement dit, le shell a bien été changé, mais nous avons eu un message d'avertissement car le binaire '/bin/false' n'est pas enregistré en tant que shell valide sur le système.
+
+L'executable '/sbin/nologin' est un shell enregistré, on peut donc le définir en tant que shell sans avertissement.
+
+Le comportement final est le même: l'utilisateur n'a pas de shell.
+
+
+    \paragraph{31.}
+    Si l'on change le shell d'\textbf{alice} par '/bin/rbash', le shell par défaut d'\textbf{alice} sera un bash restreint.
+    Ce bash à l'utilisation restreinte ajoute une couche de sécurité.
+    
+    
+    \paragraph{32.}
+    '/bin/rbash' est un lien symbolique vers le binaire 'bash'.
+        
+\begin{lstlisting}[language=bash]
+[root@localhost ~]# ls -la /bin/rbash
+lrwxrwxrwx. 1 root root 9 5 nov. 2017 /bin/rbash -> /bin/bash
+\end{lstlisting}
+        
+    Autrement dit, le comportement du programme 'bash' varie en fonction de son nom (argv[0]).
+    
 \end{document}

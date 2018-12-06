@@ -5,17 +5,28 @@
 \contentsline {paragraph}{6.}{1}{section*.4}
 \contentsline {paragraph}{7.}{1}{section*.5}
 \contentsline {paragraph}{8.}{1}{section*.6}
-\contentsline {paragraph}{10.}{1}{section*.8}
+\contentsline {paragraph}{9.}{1}{section*.7}
+\contentsline {paragraph}{10.}{2}{section*.8}
 \contentsline {paragraph}{11.}{2}{section*.9}
 \contentsline {paragraph}{12.}{2}{section*.10}
 \contentsline {paragraph}{13.}{2}{section*.11}
 \contentsline {paragraph}{14.}{2}{section*.12}
 \contentsline {paragraph}{15.}{2}{section*.13}
-\contentsline {paragraph}{16.}{2}{section*.14}
-\contentsline {paragraph}{17.}{2}{section*.15}
-\contentsline {paragraph}{18.}{2}{section*.16}
+\contentsline {paragraph}{16.}{3}{section*.14}
+\contentsline {paragraph}{17.}{3}{section*.15}
+\contentsline {paragraph}{18.}{3}{section*.16}
 \contentsline {paragraph}{19.}{3}{section*.17}
 \contentsline {paragraph}{20.}{3}{section*.18}
 \contentsline {paragraph}{21.}{3}{section*.19}
 \contentsline {paragraph}{22.}{3}{section*.20}
-\contentsline {section}{\numberline {2}R\IeC {\'e}ponses aux questions XX \IeC {\`a} YY (bonus)}{3}{section.2}
+\contentsline {section}{\numberline {2}R\IeC {\'e}ponses aux questions 23 \IeC {\`a} 32 (bonus)}{3}{section.2}
+\contentsline {paragraph}{23.}{3}{section*.21}
+\contentsline {paragraph}{24.}{4}{section*.22}
+\contentsline {paragraph}{25.}{4}{section*.23}
+\contentsline {paragraph}{26.}{4}{section*.24}
+\contentsline {paragraph}{27.}{4}{section*.25}
+\contentsline {paragraph}{28.}{5}{section*.26}
+\contentsline {paragraph}{29.}{5}{section*.27}
+\contentsline {paragraph}{30.}{5}{section*.28}
+\contentsline {paragraph}{31.}{5}{section*.29}
+\contentsline {paragraph}{32.}{5}{section*.30}

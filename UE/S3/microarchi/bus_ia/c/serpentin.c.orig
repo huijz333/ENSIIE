@@ -1,11 +1,11 @@
 /*#########################################################################
 # $Software: busiac
 # $section : rs232-mux (driver)
-#       $Id: usb-ctl.c 330 2015-06-05 09:27:16Z ia $
+#       $Id: usb-ctl.c 330 2015-06-05 09:27:16Z ia $ 
 #  $HeadURL: svn://lunix120.ensiie.fr/ia/cours/archi/projet/busiac/c/usb-ctl.c $
 # $Author  : Ivan Auge (Email: auge@ensiie.fr)
 # #########################################################################
-#
+# 
 # This file is part of the BUSIAC software: Copyright (C) 2010 by I. Auge.
 #
 # This program is free software; you can redistribute it  and/or modify it
@@ -43,13 +43,13 @@ static void wtest();
 static void rtest();
 
 static Tmdm_param serp_handler __automatic_start = {
-    .name          = "serp wrapper",
-    .addrprocessor = ADDR,
-    .samewindow    = 0,
-    .rdwr          = rtest,
-    .wronly        = wtest,
-    .wronly_geom   = "100x10+0+0",
-    .rdwr_geom     = "100x15+0+160",
+	.name          = "serp wrapper",
+	.addrprocessor = ADDR,
+	.samewindow    = 0,
+	.rdwr          = rtest,
+	.wronly        = wtest,
+	.wronly_geom   = "100x10+0+0",
+	.rdwr_geom     = "100x15+0+160",
 };
 
 // ------------------------------------------------
@@ -59,39 +59,38 @@ int ADDR_SRC  = ADDR;
 int ADDR_DEST = ADDR;
 int ADDR_FREQ = ADDR;
 
-static void wtest_read(int * adest, int * value) {
+static void wtest_read(int*adest, int*value) {
 	char* cmd;
-	char rw[100];
-	int arg1,arg2;
+	char rw[100]; int arg1,arg2;
+	char prompt[100];
+	sprintf(prompt,"entrer h|f [val] > ");
 
 	while (1) {
-		cmd=rl_gets("entrer h|f [val] > ");
+		cmd=rl_gets(prompt);
 		if ( cmd==0 ) {
 			printf("\n");
 			printf("EOF \n");
 			while (1) pause();
 		}
-		int status = sscanf(cmd, "%s%d%x", rw, &arg1, &arg2);
-		fprintf(stderr, "st=%d ;%s;%d;%x;\n", status, rw, arg1, arg2);
+		int status=sscanf(cmd,"%s%d%x",rw,&arg1,&arg2);
+		fprintf(stderr,"st=%d ;%s;%d;%x;\n",status,rw,arg1,arg2);
 		switch ( status ) {
 			case 1:
 				if ( rw[0]=='h' ) {
 					printf("  h   : help\n");
 					printf("  f # : set frequence to #\n");
-					break;
-				} else {
-					goto arg_error;
-				}
+					continue;
+				} else
+					fprintf(stderr,"invalid command\n");
+				break;
 			case 2:
 				if ( rw[0]=='f' ) {
 					*adest  = ADDR_FREQ;
 					*value = arg1;
-					break ;
-				}
-			default:
-arg_error:
-				fprintf(stderr,"invalid command\n");
-
+					return;
+				} else
+					fprintf(stderr,"invalid command\n");
+				break;
 		}
 	}
 }
@@ -102,11 +101,11 @@ static void wtest() {
 	Tmessage mess;
 	int adest,value;
 	while (1) {
-		wtest_read(&adest, &value);
+		wtest_read(&adest,&value);
 		mess.ctl  = 0;
 		mess.asrc = ADDR;
 		mess.ades = adest;
-		mess.uval = value & 0xFFFFFF ;
+		mess.uval = value&0xFFFFFF ;
 		mess_send(&mess);
 	}
 }
