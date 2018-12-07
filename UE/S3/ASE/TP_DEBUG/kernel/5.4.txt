@@ -1,0 +1,205 @@
+PID: 1192   TASK: ffff8c0ef5205ee0  CPU: 1   COMMAND: "crazy"
+struct mm_struct {
+  mmap = 0xffff8c1148abc5e8, 
+  mm_rb = {
+    rb_node = 0xffff8c1148abc0f8
+  }, 
+  mmap_cache = 0xffff8c1149e9a870, 
+  get_unmapped_area = 0xffffffff8a030ea0, 
+  unmap_area = 0xffffffff8a1cfab0, 
+  mmap_base = 140655836147712, 
+  mmap_legacy_base = 46976834240512, 
+  task_size = 140737488351232, 
+  cached_hole_size = 0, 
+  free_area_cache = 140655836147712, 
+  highest_vm_end = 140735602077696, 
+  pgd = 0xffff8c0ef4664000, 
+  mm_users = {
+    counter = 1
+  }, 
+  mm_count = {
+    counter = 1
+  }, 
+  nr_ptes = {
+    counter = 6
+  }, 
+  map_count = 16, 
+  page_table_lock = {
+    {
+      rlock = {
+        raw_lock = {
+          val = {
+            counter = 0
+          }
+        }
+      }
+    }
+  }, 
+  mmap_sem = {
+    {
+      count = {
+        counter = 0
+      }, 
+      __UNIQUE_ID_rh_kabi_hide4 = {
+        count = 0
+      }, 
+      {<No data fields>}
+    }, 
+    wait_lock = {
+      raw_lock = {
+        val = {
+          counter = 0
+        }
+      }
+    }, 
+    osq = {
+      tail = {
+        counter = 0
+      }
+    }, 
+    wait_list = {
+      next = 0xffff8c11523ff748
+    }, 
+    owner = 0x1
+  }, 
+  mmlist = {
+    next = 0xffff8c11523ff758, 
+    prev = 0xffff8c11523ff758
+  }, 
+  hiwater_rss = 42, 
+  hiwater_vm = 1060, 
+  total_vm = 1052, 
+  locked_vm = 0, 
+  pinned_vm = 0, 
+  shared_vm = 1007, 
+  exec_vm = 486, 
+  stack_vm = 33, 
+  def_flags = 0, 
+  start_code = 4194304, 
+  end_code = 4196332, 
+  start_data = 6295056, 
+  end_data = 6295620, 
+  start_brk = 25726976, 
+  brk = 25726976, 
+  start_stack = 140735601293856, 
+  arg_start = 140735601295156, 
+  arg_end = 140735601295179, 
+  env_start = 140735601295179, 
+  env_end = 140735601295340, 
+  saved_auxv = {33, 140735602069504, 16, 260832255, 6, 4096, 17, 100, 3, 4194368, 4, 56, 5, 9, 7, 140655833903104, 8, 0, 9, 4195536, 11, 0, 12, 0, 13, 0, 14, 0, 23, 0, 25, 140735601294313, 26, 0, 31, 140735601295340, 15, 140735601294329, 0, 0, 0, 0, 0, 0}, 
+  rss_stat = {
+    count = {{
+        counter = 68
+      }, {
+        counter = 18
+      }, {
+        counter = 0
+      }}
+  }, 
+  binfmt = 0xffffffff8aca7840, 
+  cpu_vm_mask_var = 0xffff8c11523ffa08, 
+  context = {
+    ldt = 0x0, 
+    size = 0, 
+    ia32_compat = 0, 
+    lock = {
+      count = {
+        counter = 1
+      }, 
+      wait_lock = {
+        {
+          rlock = {
+            raw_lock = {
+              val = {
+                counter = 0
+              }
+            }
+          }
+        }
+      }, 
+      wait_list = {
+        next = 0xffff8c11523ff9a8, 
+        prev = 0xffff8c11523ff9a8
+      }, 
+      owner = 0x0, 
+      {
+        osq = {
+          tail = {
+            counter = 0
+          }
+        }, 
+        __UNIQUE_ID_rh_kabi_hide3 = {
+          spin_mlock = 0x0
+        }, 
+        {<No data fields>}
+      }
+    }, 
+    vdso = 0x7fff8f919000
+  }, 
+  flags = 205, 
+  core_state = 0x0, 
+  ioctx_lock = {
+    {
+      rlock = {
+        raw_lock = {
+          val = {
+            counter = 0
+          }
+        }
+      }
+    }
+  }, 
+  ioctx_list = {
+    first = 0x0
+  }, 
+  owner = 0xffff8c0ef5205ee0, 
+  exe_file = 0xffff8c114930d300, 
+  mmu_notifier_mm = 0x0, 
+  cpumask_allocation = {
+    bits = {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  }, 
+  numa_next_scan = 0, 
+  numa_scan_offset = 0, 
+  numa_scan_seq = 0, 
+  tlb_flush_pending = false, 
+  uprobes_state = {
+    xol_area = 0x0
+  }, 
+  rh_reserved1 = 0, 
+  rh_reserved2 = 0, 
+  {
+    bd_addr = 0xffffffffffffffff, 
+    __UNIQUE_ID_rh_kabi_hide8 = {
+      rh_reserved3 = 18446744073709551615
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    mm_shmempages = {
+      counter = 0
+    }, 
+    __UNIQUE_ID_rh_kabi_hide9 = {
+      rh_reserved4 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    hmm = 0x0, 
+    __UNIQUE_ID_rh_kabi_hide10 = {
+      rh_reserved5 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    {
+      pkey_allocation_map = 0, 
+      execute_only_pkey = 0
+    }, 
+    __UNIQUE_ID_rh_kabi_hide11 = {
+      rh_reserved6 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  rh_reserved7 = 0, 
+  rh_reserved8 = 0
+}
