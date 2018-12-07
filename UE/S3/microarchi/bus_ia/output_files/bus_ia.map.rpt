@@ -1,5 +1,5 @@
 Analysis & Synthesis report for bus_ia
-Mon Dec  3 15:38:35 2018
+Fri Dec  7 09:34:42 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -60,15 +60,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Dec  3 15:38:35 2018           ;
+; Analysis & Synthesis Status        ; Successful - Fri Dec  7 09:34:42 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; bus_ia                                          ;
 ; Top-level Entity Name              ; bus_ia                                          ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 604                                             ;
-;     Total combinational functions  ; 466                                             ;
-;     Dedicated logic registers      ; 402                                             ;
-; Total registers                    ; 402                                             ;
+; Total logic elements               ; 1,119                                           ;
+;     Total combinational functions  ; 771                                             ;
+;     Dedicated logic registers      ; 620                                             ;
+; Total registers                    ; 620                                             ;
 ; Total pins                         ; 29                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -204,28 +204,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 604   ;
+; Estimated Total logic elements              ; 1,119 ;
 ;                                             ;       ;
-; Total combinational functions               ; 466   ;
+; Total combinational functions               ; 771   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 151   ;
-;     -- 3 input functions                    ; 178   ;
-;     -- <=2 input functions                  ; 137   ;
+;     -- 4 input functions                    ; 375   ;
+;     -- 3 input functions                    ; 243   ;
+;     -- <=2 input functions                  ; 153   ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 407   ;
+;     -- normal mode                          ; 712   ;
 ;     -- arithmetic mode                      ; 59    ;
 ;                                             ;       ;
-; Total registers                             ; 402   ;
-;     -- Dedicated logic registers            ; 402   ;
+; Total registers                             ; 620   ;
+;     -- Dedicated logic registers            ; 620   ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 29    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
 ; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 402   ;
-; Total fan-out                               ; 2664  ;
-; Average fan-out                             ; 2.97  ;
+; Maximum fan-out                             ; 620   ;
+; Total fan-out                               ; 4663  ;
+; Average fan-out                             ; 3.28  ;
 +---------------------------------------------+-------+
 
 
@@ -234,21 +234,21 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
 ; Compilation Hierarchy Node  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name            ; Library Name ;
 +-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
-; |bus_ia                     ; 466 (1)           ; 402 (0)      ; 0           ; 0            ; 0       ; 0         ; 29   ; 0            ; |bus_ia                        ; work         ;
+; |bus_ia                     ; 771 (1)           ; 620 (0)      ; 0           ; 0            ; 0       ; 0         ; 29   ; 0            ; |bus_ia                        ; work         ;
 ;    |h100:inst16|            ; 56 (56)           ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|h100:inst16            ; work         ;
 ;    |h10:inst9|              ; 8 (8)             ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|h10:inst9              ; work         ;
 ;    |initiateur:inst|        ; 52 (52)           ; 85 (85)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|initiateur:inst        ; work         ;
-;    |moduler:inst10|         ; 33 (33)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|moduler:inst10         ; work         ;
+;    |moduler:inst10|         ; 35 (35)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|moduler:inst10         ; work         ;
 ;    |plus12:inst2|           ; 80 (80)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|plus12:inst2           ; work         ;
 ;    |rs232in:inst4|          ; 48 (48)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|rs232in:inst4          ; work         ;
 ;    |rs232out:inst6|         ; 39 (39)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|rs232out:inst6         ; work         ;
 ;    |sept:inst12|            ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|sept:inst12            ; work         ;
-;    |serpentinmux:inst28|    ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|serpentinmux:inst28    ; work         ;
-;    |serpentinprog:inst15|   ; 57 (57)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|serpentinprog:inst15   ; work         ;
+;    |serpentinmux:inst28|    ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|serpentinmux:inst28    ; work         ;
+;    |serpentinprog:inst15|   ; 286 (286)         ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|serpentinprog:inst15   ; work         ;
 ;    |terminateur:inst3|      ; 9 (9)             ; 38 (38)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|terminateur:inst3      ; work         ;
 ;    |terminateurSplit:inst5| ; 45 (45)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|terminateurSplit:inst5 ; work         ;
-;    |tickswitch:inst1|       ; 4 (4)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|tickswitch:inst1       ; work         ;
-;    |wrapper:inst17|         ; 25 (25)           ; 66 (66)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|wrapper:inst17         ; work         ;
+;    |tickswitch:inst1|       ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|tickswitch:inst1       ; work         ;
+;    |wrapper:inst17|         ; 102 (102)         ; 284 (284)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |bus_ia|wrapper:inst17         ; work         ;
 +-----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -384,42 +384,42 @@ Encoding Type:  One-Hot
 +----------------+--------------+--------------+--------------+----------------+
 
 
-+-------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                  ;
-+-----------------------------------------+-------------------------------------------+
-; Register name                           ; Reason for Removal                        ;
-+-----------------------------------------+-------------------------------------------+
-; initiateur:inst|R_tft[40]               ; Stuck at VCC due to stuck port data_in    ;
-; terminateurSplit:inst5|R[44..47]        ; Stuck at GND due to stuck port data_in    ;
-; initiateur:inst|R_tft[33..37]           ; Merged with initiateur:inst|R_tft[32]     ;
-; initiateur:inst|R_tft[39]               ; Merged with initiateur:inst|R_tft[38]     ;
-; initiateur:inst|R_tft[42,43]            ; Merged with initiateur:inst|R_tft[41]     ;
-; wrapper:inst17|R_SS[6..99,101..229]     ; Merged with wrapper:inst17|R_SS[100]      ;
-; wrapper:inst17|R_tft[42,43]             ; Merged with wrapper:inst17|R_tft[41]      ;
-; wrapper:inst17|R_tft[39]                ; Merged with wrapper:inst17|R_tft[38]      ;
-; wrapper:inst17|R_tft[33..37]            ; Merged with wrapper:inst17|R_tft[32]      ;
-; plus12:inst2|R_tft[33..37]              ; Merged with plus12:inst2|R_tft[32]        ;
-; plus12:inst2|R_tft[39]                  ; Merged with plus12:inst2|R_tft[38]        ;
-; plus12:inst2|R_tft[42,43]               ; Merged with plus12:inst2|R_tft[41]        ;
-; terminateur:inst3|R_tft[33..37]         ; Merged with terminateur:inst3|R_tft[32]   ;
-; terminateur:inst3|R_tft[39]             ; Merged with terminateur:inst3|R_tft[38]   ;
-; terminateur:inst3|R_tft[42,43]          ; Merged with terminateur:inst3|R_tft[41]   ;
-; terminateurSplit:inst5|R[34,35]         ; Merged with terminateurSplit:inst5|R[33]  ;
-; terminateurSplit:inst5|R[37]            ; Merged with terminateurSplit:inst5|R[36]  ;
-; terminateurSplit:inst5|R[39]            ; Merged with terminateurSplit:inst5|R[38]  ;
-; terminateurSplit:inst5|R[42,43]         ; Merged with terminateurSplit:inst5|R[41]  ;
-; wrapper:inst17|R_tft[41]                ; Stuck at GND due to stuck port data_in    ;
-; plus12:inst2|R_tft[41]                  ; Stuck at GND due to stuck port data_in    ;
-; terminateur:inst3|R_tft[41]             ; Stuck at GND due to stuck port data_in    ;
-; terminateurSplit:inst5|R[41]            ; Stuck at GND due to stuck port data_in    ;
-; initiateur:inst|R_tft[41]               ; Stuck at GND due to stuck port data_in    ;
-; terminateurSplit:inst5|R[36]            ; Merged with terminateurSplit:inst5|R[33]  ;
-; wrapper:inst17|R_SS[100]                ; Stuck at GND due to stuck port data_in    ;
-; tickswitch:inst1|state.ST_INIT          ; Merged with initiateur:inst|state.ST_INIT ;
-; serpentinprog:inst15|state.ST_WAIT      ; Merged with moduler:inst10|state          ;
-; tickswitch:inst1|state.ST_WAIT          ; Merged with moduler:inst10|state          ;
-; Total Number of Removed Registers = 276 ;                                           ;
-+-----------------------------------------+-------------------------------------------+
++------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                 ;
++----------------------------------------+-------------------------------------------+
+; Register name                          ; Reason for Removal                        ;
++----------------------------------------+-------------------------------------------+
+; initiateur:inst|R_tft[40]              ; Stuck at VCC due to stuck port data_in    ;
+; terminateurSplit:inst5|R[44..47]       ; Stuck at GND due to stuck port data_in    ;
+; initiateur:inst|R_tft[33..37]          ; Merged with initiateur:inst|R_tft[32]     ;
+; initiateur:inst|R_tft[39]              ; Merged with initiateur:inst|R_tft[38]     ;
+; initiateur:inst|R_tft[42,43]           ; Merged with initiateur:inst|R_tft[41]     ;
+; wrapper:inst17|R_SS[225..229]          ; Merged with wrapper:inst17|R_SS[224]      ;
+; wrapper:inst17|R_tft[42,43]            ; Merged with wrapper:inst17|R_tft[41]      ;
+; wrapper:inst17|R_tft[39]               ; Merged with wrapper:inst17|R_tft[38]      ;
+; wrapper:inst17|R_tft[33..37]           ; Merged with wrapper:inst17|R_tft[32]      ;
+; plus12:inst2|R_tft[33..37]             ; Merged with plus12:inst2|R_tft[32]        ;
+; plus12:inst2|R_tft[39]                 ; Merged with plus12:inst2|R_tft[38]        ;
+; plus12:inst2|R_tft[42,43]              ; Merged with plus12:inst2|R_tft[41]        ;
+; terminateur:inst3|R_tft[33..37]        ; Merged with terminateur:inst3|R_tft[32]   ;
+; terminateur:inst3|R_tft[39]            ; Merged with terminateur:inst3|R_tft[38]   ;
+; terminateur:inst3|R_tft[42,43]         ; Merged with terminateur:inst3|R_tft[41]   ;
+; terminateurSplit:inst5|R[34,35]        ; Merged with terminateurSplit:inst5|R[33]  ;
+; terminateurSplit:inst5|R[37]           ; Merged with terminateurSplit:inst5|R[36]  ;
+; terminateurSplit:inst5|R[39]           ; Merged with terminateurSplit:inst5|R[38]  ;
+; terminateurSplit:inst5|R[42,43]        ; Merged with terminateurSplit:inst5|R[41]  ;
+; wrapper:inst17|R_tft[41]               ; Stuck at GND due to stuck port data_in    ;
+; plus12:inst2|R_tft[41]                 ; Stuck at GND due to stuck port data_in    ;
+; terminateur:inst3|R_tft[41]            ; Stuck at GND due to stuck port data_in    ;
+; terminateurSplit:inst5|R[41]           ; Stuck at GND due to stuck port data_in    ;
+; initiateur:inst|R_tft[41]              ; Stuck at GND due to stuck port data_in    ;
+; terminateurSplit:inst5|R[36]           ; Merged with terminateurSplit:inst5|R[33]  ;
+; wrapper:inst17|R_SS[224]               ; Stuck at GND due to stuck port data_in    ;
+; tickswitch:inst1|state.ST_INIT         ; Merged with initiateur:inst|state.ST_INIT ;
+; serpentinprog:inst15|state.ST_WAIT     ; Merged with moduler:inst10|state          ;
+; tickswitch:inst1|state.ST_WAIT         ; Merged with moduler:inst10|state          ;
+; Total Number of Removed Registers = 58 ;                                           ;
++----------------------------------------+-------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
@@ -437,12 +437,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 402   ;
-; Number of registers using Synchronous Clear  ; 3     ;
+; Total registers                              ; 620   ;
+; Number of registers using Synchronous Clear  ; 8     ;
 ; Number of registers using Synchronous Load   ; 18    ;
-; Number of registers using Asynchronous Clear ; 88    ;
+; Number of registers using Asynchronous Clear ; 306   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 326   ;
+; Number of registers using Clock Enable       ; 543   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -454,7 +454,7 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 ; h10:inst9|R                             ; 2       ;
 ; tickswitch:inst1|R                      ; 2       ;
-; serpentinprog:inst15|I[0]               ; 25      ;
+; serpentinprog:inst15|I[0]               ; 104     ;
 ; wrapper:inst17|R_SS[5]                  ; 2       ;
 ; h10:inst9|C[1]                          ; 4       ;
 ; h10:inst9|C[3]                          ; 2       ;
@@ -475,30 +475,62 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|serpentinprog:inst15|I[3]        ;
-; 3:1                ; 22 bits   ; 44 LEs        ; 22 LEs               ; 22 LEs                 ; Yes        ; |bus_ia|h100:inst16|R[17]                ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|initiateur:inst|R_i[0]           ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R[33]     ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R_i[2]    ;
-; 3:1                ; 33 bits   ; 66 LEs        ; 33 LEs               ; 33 LEs                 ; Yes        ; |bus_ia|terminateurSplit:inst5|R[22]     ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_i[1]            ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_data[4]         ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|wrapper:inst17|R_SS[1]           ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |bus_ia|rs232in:inst4|R_baud[3]          ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|h10:inst9|C[2]                   ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|moduler:inst10|C[5]              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|h10:inst9|C[1]                   ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|moduler:inst10|C[2]              ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |bus_ia|serpentinprog:inst15|Mux0        ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|serpentinprog:inst15|I[4]        ;
+; 3:1                ; 22 bits   ; 44 LEs        ; 22 LEs               ; 22 LEs                 ; Yes        ; |bus_ia|h100:inst16|R[19]                ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|initiateur:inst|R_i[1]           ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R[38]     ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|terminateurSplit:inst5|R_i[1]    ;
+; 3:1                ; 33 bits   ; 66 LEs        ; 33 LEs               ; 33 LEs                 ; Yes        ; |bus_ia|terminateurSplit:inst5|R[5]      ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_i[2]            ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |bus_ia|rs232out:inst6|R_data[3]         ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; Yes        ; |bus_ia|rs232in:inst4|R_baud[2]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[221]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[210]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[208]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[200]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[189]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[183]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[177]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[168]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[167]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[158]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[148]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[140]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[139]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[132]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[124]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[117]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[105]         ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[98]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[92]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[90]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[83]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[70]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[63]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[56]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[49]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[42]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[35]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[28]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[21]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[14]          ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |bus_ia|wrapper:inst17|R_SS[7]           ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |bus_ia|wrapper:inst17|R_SS[0]           ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|h10:inst9|C[0]                   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |bus_ia|moduler:inst10|C[7]              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |bus_ia|h10:inst9|C[3]                   ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |bus_ia|moduler:inst10|C[3]              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |bus_ia|serpentinprog:inst15|state       ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |bus_ia|tickswitch:inst1|state           ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |bus_ia|plus12:inst2|Selector3           ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |bus_ia|plus12:inst2|Selector0           ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |bus_ia|terminateur:inst3|Selector2      ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |bus_ia|terminateurSplit:inst5|Selector1 ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |bus_ia|rs232out:inst6|Selector0         ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |bus_ia|plus12:inst2|Selector1           ;
-; 11:1               ; 3 bits    ; 21 LEs        ; 21 LEs               ; 0 LEs                  ; No         ; |bus_ia|serpentinprog:inst15|Mux5        ;
-; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |bus_ia|initiateur:inst|Selector0        ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |bus_ia|initiateur:inst|Selector4        ;
+; 102:1              ; 2 bits    ; 136 LEs       ; 90 LEs               ; 46 LEs                 ; No         ; |bus_ia|serpentinprog:inst15|Mux4        ;
+; 106:1              ; 2 bits    ; 140 LEs       ; 90 LEs               ; 50 LEs                 ; No         ; |bus_ia|serpentinprog:inst15|Mux0        ;
+; 108:1              ; 2 bits    ; 144 LEs       ; 100 LEs              ; 44 LEs                 ; No         ; |bus_ia|serpentinprog:inst15|Mux2        ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
 
 
@@ -559,7 +591,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -569,7 +601,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Dec  3 15:38:29 2018
+    Info: Processing started: Fri Dec  7 09:34:36 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off bus_ia -c bus_ia
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file tickswitch.vhd
@@ -657,14 +689,14 @@ Warning (13004): Presettable and clearable registers converted to equivalent cir
     Warning (13310): Register "moduler:inst10|C[0]" is converted into an equivalent circuit using register "moduler:inst10|C[0]~_emulated" and latch "moduler:inst10|C[0]~17"
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 652 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1175 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 21 output pins
-    Info (21061): Implemented 623 logic cells
+    Info (21061): Implemented 1146 logic cells
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 11 warnings
-    Info: Peak virtual memory: 625 megabytes
-    Info: Processing ended: Mon Dec  3 15:38:35 2018
+    Info: Peak virtual memory: 624 megabytes
+    Info: Processing ended: Fri Dec  7 09:34:42 2018
     Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Total CPU time (on all processors): 00:00:05
 
 

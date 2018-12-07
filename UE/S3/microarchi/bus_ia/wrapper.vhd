@@ -126,7 +126,7 @@ BEGIN
 					-- si commande set-val(i, v)
 					WHEN "11" =>
 						-- switch l'id de la frame
-						CASE R_tft(5 downto 0) IS
+						CASE unsigned(R_tft(5 downto 0)) IS
 
 							WHEN to_unsigned(1, 6) =>
 								R_SS(  6 downto   0) <= R_tft(12 downto 6);
@@ -219,17 +219,16 @@ BEGIN
 								R_SS( 209 downto   203) <= R_tft(12 downto 6);
 
 							WHEN to_unsigned(31, 6) =>
-								R_SS( 216 downto   208) <= R_tft(12 downto 6);
+								R_SS( 216 downto   210) <= R_tft(12 downto 6);
 
 							WHEN to_unsigned(32, 6) =>
 								R_SS( 223 downto  217) <= R_tft(12 downto 6);
 
 							WHEN others =>
-							;
 
 						-- TODO
 						-- R_SS((i + 1) * 7 - 1, i * 7) <= R_Msg(6 downto 0);
-						
+						END CASE;
 				END CASE;
 			END IF ;
 		END IF;
