@@ -1,3 +1,5 @@
+crash > vm -m
+
 PID: 1192   TASK: ffff8c0ef5205ee0  CPU: 1   COMMAND: "crazy"
 struct mm_struct {
   mmap = 0xffff8c1148abc5e8, 

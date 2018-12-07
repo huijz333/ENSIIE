@@ -1,0 +1,11 @@
+romain.pereira@pc253-16:~/ENSIIE/UE/S3/ASE/TP_DEBUG/kernel/romain.pereira$ cat 4.2.txt | grep xfs | less
+
++   10,42%     0,00%  crazy    [xfs]             [k] xfs_file_release
++    8,18%     0,00%  crazy    [xfs]             [k] xfs_release
++    6,61%     0,20%  crazy    [xfs]             [k] xfs_file_aio_read
++    6,55%     0,21%  crazy    [xfs]             [k] xfs_free_eofblocks
++    5,48%     0,00%  crazy    [xfs]             [k] xfs_file_buffered_aio_read
++    4,72%     0,61%  crazy    [xfs]             [k] xfs_bmapi_read
++    3,42%     0,00%  crazy    [xfs]             [k] xfs_bmap_search_extents
+
+Le processus 'crazy' accède au système de fichier 'xfs'

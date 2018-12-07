@@ -1,0 +1,62 @@
+Pour le processus 'python' : 
+
+crash> set 1193
+PID: 1193
+COMMAND: "python"
+TASK: ffff8c1151825ee0  [THREAD_INFO: ffff8c1149b40000]
+CPU: 0
+STATE: TASK_UNINTERRUPTIBLE|TASK_WAKEKILL 
+
+crash> bt
+PID: 1193   TASK: ffff8c1151825ee0  CPU: 0   COMMAND: "python"
+#0 [ffff8c1149b43b78] __schedule at ffffffff8a7188c4
+#1 [ffff8c1149b43c00] schedule at ffffffff8a718f39
+#2 [ffff8c1149b43c10] rpc_wait_bit_killable at ffffffffc027ec34 [sunrpc]
+#3 [ffff8c1149b43c30] __wait_on_bit at ffffffff8a7169f7
+#4 [ffff8c1149b43c70] out_of_line_wait_on_bit at ffffffff8a716b61
+#5 [ffff8c1149b43ce8] __rpc_wait_for_completion_task at ffffffffc027ec0d [sunrpc]
+#6 [ffff8c1149b43cf8] nfs4_do_close at ffffffffc0813739 [nfsv4]
+#7 [ffff8c1149b43da8] __nfs4_close at ffffffffc082442d [nfsv4]
+#8 [ffff8c1149b43de8] nfs4_close_sync at ffffffffc08254e8 [nfsv4]
+#9 [ffff8c1149b43df8] nfs4_close_context at ffffffffc080724d [nfsv4]
+#10 [ffff8c1149b43e08] __put_nfs_open_context at ffffffffc07cc27f [nfs]
+#11 [ffff8c1149b43e48] nfs_file_clear_open_context at ffffffffc07ce4b4 [nfs]
+#12 [ffff8c1149b43e78] nfs_file_release at ffffffffc07c9f9b [nfs]
+#13 [ffff8c1149b43e98] __fput at ffffffff8a2214fc
+#14 [ffff8c1149b43ee0] ____fput at ffffffff8a22175e
+#15 [ffff8c1149b43ef0] task_work_run at ffffffff8a0bab8b
+#16 [ffff8c1149b43f30] do_notify_resume at ffffffff8a02bc55
+#17 [ffff8c1149b43f50] int_signal at ffffffff8a725ae4
+RIP: 00007fec780fb320  RSP: 00007ffd449fbb08  RFLAGS: 00000216
+RAX: 0000000000000000  RBX: 0000000001119910  RCX: ffffffffffffffff
+RDX: 00007fec783cd858  RSI: 0000000000000001  RDI: 0000000000000003
+RBP: 00007fec783ce3a0   R8: 00000000011199f0   R9: 00007fec792dc740
+R10: 00007ffd449fb6a0  R11: 0000000000000216  R12: 0000000000000000
+R13: 0000000000000000  R14: 00000000010790a0  R15: 000000000000000d
+ORIG_RAX: 0000000000000003  CS: 0033  SS: 002b
+
+
+--------------------------------------------------------
+
+Pour le processus '[127.0.0.1-manag]':
+
+crash> set 1402
+PID: 1402
+COMMAND: "127.0.0.1-manag"
+TASK: ffff8c114970eeb0  [THREAD_INFO: ffff8c114561c000]
+CPU: 0
+STATE: TASK_UNINTERRUPTIBLE|TASK_WAKEKILL 
+
+crash> bt
+PID: 1402   TASK: ffff8c114970eeb0  CPU: 0   COMMAND: "127.0.0.1-manag"
+#0 [ffff8c114561fcb8] __schedule at ffffffff8a7188c4
+#1 [ffff8c114561fd48] schedule at ffffffff8a718f39
+#2 [ffff8c114561fd58] rpc_wait_bit_killable at ffffffffc027ec34 [sunrpc]
+#3 [ffff8c114561fd78] __wait_on_bit at ffffffff8a7169f7
+#4 [ffff8c114561fdb8] out_of_line_wait_on_bit at ffffffff8a716b61
+#5 [ffff8c114561fe30] __rpc_wait_for_completion_task at ffffffffc027ec0d [sunrpc]
+#6 [ffff8c114561fe40] nfs4_proc_sequence at ffffffffc080cb2b [nfsv4]
+#7 [ffff8c114561fe60] nfs4_state_manager at ffffffffc0824f76 [nfsv4]
+#8 [ffff8c114561feb0] nfs4_run_state_manager at ffffffffc082548f [nfsv4]
+#9 [ffff8c114561fec8] kthread at ffffffff8a0bdf21
+

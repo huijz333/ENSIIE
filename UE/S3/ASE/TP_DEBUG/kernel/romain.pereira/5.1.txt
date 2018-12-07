@@ -1,0 +1,4 @@
+Pour lancer 'crash' :
+
+[romain.pereira@vm0 ~]$ sudo su
+[root@vm0 romain.pereira]# crash

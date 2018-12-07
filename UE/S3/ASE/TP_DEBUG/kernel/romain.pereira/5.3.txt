@@ -1,3 +1,7 @@
+On récupère la task_struct du processus 'crazy' via 'crash' :
+
+
+crash> task
 PID: 1192   TASK: ffff8c0ef5205ee0  CPU: 0   COMMAND: "crazy"
 struct task_struct {
   state = 0, 
