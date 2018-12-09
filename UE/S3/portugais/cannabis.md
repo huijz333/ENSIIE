@@ -19,3 +19,19 @@ A possessão de drogas no Brasil para uso pessoal é punível com pena de prisã
 Ademas, envolve um aviso, serviço comunitário (travaux d'intêret général) um curso de educação sobre os efeitos do uso de drogas.
 
 Por outro lado, o uso de cannabis é permitido para uso médico e religioso
+
+## Estado atual em Mozambique
+
+A produção, venda e posse de qualquer forma de produtos de cannabis medicinal é ilegal em Moçambique
+
+No entanto, é amplamente consumido e cultivado no país
+
+Muitos agricultores cultivam cannabis porque é a única cultura que lhes permite ganhar dinheiro suficiente para sobreviver.
+
+Cannabis in Angola is illegal; the drug is locally referred to as diamba or liamba.
+
+A posse de cannabis é proibida. Os proprietários são enviados diretamente para a prisão
+
+## Sources
+https://www.cannabis.info/fr/blog/statut-legal-mozambique
+https://fr.wikipedia.org/w/index.php?title=L%C3%A9gislation_sur_le_cannabis&oldid=133928674#Approche_comparative
