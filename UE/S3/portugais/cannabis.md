@@ -1,8 +1,8 @@
 
 # Intro
-Eu vou falar sobre a legalização do cannabis em Portugal
+Eu vou falar sobre a legalização do cannabis em os países lusófonos
 
-## Estado atual
+## Estado atual em Portugal
 
 A lei de 29 de novembro de 2000 descriminalizou o consumo de narcóticos.
 Também descriminalizou sua aquisição e possessão para uso pessoal
