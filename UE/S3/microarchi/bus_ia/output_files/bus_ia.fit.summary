@@ -1,14 +1,14 @@
-Fitter Status : Successful - Fri Dec  7 09:34:55 2018
+Fitter Status : Successful - Mon Dec 10 11:11:32 2018
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : bus_ia
 Top-level Entity Name : bus_ia
 Family : Cyclone II
 Device : EP2C35F672C6
 Timing Models : Final
-Total logic elements : 933 / 33,216 ( 3 % )
-    Total combinational functions : 772 / 33,216 ( 2 % )
-    Dedicated logic registers : 620 / 33,216 ( 2 % )
-Total registers : 620
+Total logic elements : 958 / 33,216 ( 3 % )
+    Total combinational functions : 770 / 33,216 ( 2 % )
+    Dedicated logic registers : 667 / 33,216 ( 2 % )
+Total registers : 667
 Total pins : 29 / 475 ( 6 % )
 Total virtual pins : 0
 Total memory bits : 0 / 483,840 ( 0 % )

@@ -38,34 +38,50 @@
 // ------------------------------------------------
 //#define BIT(n) (1<<(n))
 
-# define ADDR        10
-# define ADDR_SRC  ADDR
-# define ADDR_DEST ADDR
-# define ADDR_WRPR ADDR
-# define ADDR_CHCK ADDR
-# define PROMPT "> "
-
-#define SERP_CMD_SetFreq         0
+# define ADDR_N     10
+# define ADDR_SS    11
+# define ADDR_CHCK  12
+# define PROMPT "Enter a command ('h' for help) > "
 
 static void wtest();
 static void rtest();
 
-static Tmdm_param serp_handler __automatic_start = {
-    .name          = "serp wrapper",
-    .addrprocessor = ADDR,
+static Tmdm_param n_handler __automatic_start = {
+    .name          = "N",
+    .addrprocessor = ADDR_N,
     .samewindow    = 0,
     .rdwr          = rtest,
     .wronly        = wtest,
-    .wronly_geom   = "100x10+0+0",
-    .rdwr_geom     = "100x15+0+160",
+    .wronly_geom   = "80x20+0+0",
+    .rdwr_geom     = "80x20+0+400",
 };
 
+static Tmdm_param ss_handler __automatic_start = {
+    .name          = "SS",
+    .addrprocessor = ADDR_SS,
+    .samewindow    = 0,
+    .rdwr          = rtest,
+    .wronly        = wtest,
+    .wronly_geom   = "80x20+600+0",
+    .rdwr_geom     = "80x20+600+400",
+};
+
+static Tmdm_param chck_handler __automatic_start = {
+    .name          = "CHCK",
+    .addrprocessor = ADDR_CHCK,
+    .samewindow    = 0,
+    .rdwr          = rtest,
+    .wronly        = wtest,
+    .wronly_geom   = "80x20+1200+0",
+    .rdwr_geom     = "80x20+1200+400",
+};
 
 
 static void wtest_read(int * adest, int * value) {
 	char* cmd;
 	char rw[100];
-	unsigned int arg1, arg2;
+	unsigned int arg1 = -1;
+	unsigned int arg2 = -1;
 
 	while (1) {
 		cmd = rl_gets(PROMPT);
@@ -75,42 +91,42 @@ static void wtest_read(int * adest, int * value) {
 			while (1) pause();
 		}
 		int status = sscanf(cmd, "%s%u%u", rw, &arg1, &arg2);
-		fprintf(stderr, "st=%d ;%s;%u;%u;\n", status, rw, arg1, arg2);
+		fprintf(stderr, "st=%d ; cmd=%s ; arg1=%u ; arg2=%u\n", status, rw, arg1, arg2);
 		switch ( status ) {
 			case 1:
 				switch ( rw[0] ) {
-					case 'f':
+					case 'h':
 						printf("  h   : help\n");
 						printf("  c   : clear the programmable serpentin\n");
 						printf("  f # : set frequence to X (0 < # < 2^24)\n");
 						printf("  t # : enable/disable h1000 ticking (# in {0, 1})\n");
 						printf("  n # : set number of frames to be looped (# in [|1, 32|])\n");
 						printf("  s # @ : set the segments @ for the frame for the frame # (# in [|1, 32|] and @ in [|0b0000000, 0b0000001, ..., 0b1111111|])\n");
-						break ;
+						continue ;
 					case 'c':
-						*adest = ADDR_WRPR;
-						*value = 0b010000000000000000000000;
-						break ;
+						*adest = ADDR_SS;
+						*value = 0b000000000000000000000000;
+						return ;
 					default:
 						goto cmd_error;
 				}
 			case 2:
 				switch ( rw[0] ) {
 					case 'f':
-						*adest  = ADDR_WRPR;
+						*adest  = ADDR_N;
 						*value = 0b000000000000000000000000 | (arg1 & 0b001111111111111111111111);
-						break ;
+						return ;
 					case 't':
 						*adest = ADDR_CHCK;
 						*value = arg1 ? 1 : 0;
-						break ;
+						return ;
 					case 'n':
 						if (arg1 < 1 || arg1 > 32) {
 							goto cmd_error;
 						}
-						*adest = ADDR_WRPR;
-						*value = 0b100000000000000000000000 | arg1;
-						break ;
+						*adest = ADDR_SS;
+						*value = 0b010000000000000000000000 | arg1;
+						return ;
 					default:
 						goto cmd_error;
 				}
@@ -120,15 +136,16 @@ static void wtest_read(int * adest, int * value) {
 						if (arg1 < 1 || arg1 > 32 || arg2 > 0b1111111) {
 							goto cmd_error;
 						}
-						*adest = ADDR_WRPR;
-						*value  = 0b110000000000000000000000 | ((arg2 & 0b1111111) << 6) | arg1;
-						break ;
+						*adest = ADDR_SS;
+						*value  = 0b100000000000000000000000 | ((arg2 & 0b1111111) << 6) | arg1;
+						return ;
 					default:
 						goto cmd_error;
 				}
 			default:
 cmd_error:
 				fprintf(stderr,"Invalid command\n");
+				continue ;
 
 		}
 	}
@@ -142,10 +159,12 @@ static void wtest() {
 	while (1) {
 		wtest_read(&adest, &value);
 		mess.ctl  = 0;
-		mess.asrc = ADDR;
+		mess.asrc = 255;
 		mess.ades = adest;
 		mess.uval = value & 0xFFFFFF ;
+		printf("sending msg ctl=%d ; asrc=%d ; ades=%d ; uval=%u\n", mess.ctl, mess.asrc, mess.ades, mess.uval);
 		mess_send(&mess);
+		printf("sent msg ctl=%d ; asrc=%d ; ades=%d ; uval=%u\n", mess.ctl, mess.asrc, mess.ades, mess.uval);
 	}
 }
 
