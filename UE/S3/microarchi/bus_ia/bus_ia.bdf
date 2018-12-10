@@ -1334,13 +1334,13 @@ applicable agreement for further details.
 	)
 	(parameter
 		"MYADDR"
-		"00001010"
+		"00001100"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 192 128))
 	)
-	(annotation_block (parameter)(rect 456 168 672 192))
+	(annotation_block (parameter)(rect 664 168 880 192))
 )
 (connector
 	(pt -512 272)
@@ -2047,10 +2047,6 @@ applicable agreement for further details.
 	(pt 96 248)
 )
 (connector
-	(pt -240 384)
-	(pt -240 312)
-)
-(connector
 	(pt -184 248)
 	(pt -160 248)
 )
@@ -2066,10 +2062,6 @@ applicable agreement for further details.
 (connector
 	(pt -208 296)
 	(pt -160 296)
-)
-(connector
-	(pt -240 312)
-	(pt -160 312)
 )
 (connector
 	(pt -512 80)
@@ -2158,10 +2150,6 @@ applicable agreement for further details.
 (connector
 	(pt 552 544)
 	(pt 552 720)
-)
-(connector
-	(pt -240 384)
-	(pt 400 384)
 )
 (connector
 	(pt 400 384)
@@ -2393,6 +2381,18 @@ applicable agreement for further details.
 (connector
 	(pt 680 256)
 	(pt 680 304)
+)
+(connector
+	(pt -184 384)
+	(pt -184 312)
+)
+(connector
+	(pt -160 312)
+	(pt -184 312)
+)
+(connector
+	(pt 400 384)
+	(pt -184 384)
 )
 (junction (pt 1400 80))
 (junction (pt -184 80))

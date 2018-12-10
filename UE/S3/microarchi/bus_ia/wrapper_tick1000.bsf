@@ -88,7 +88,7 @@ applicable agreement for further details.
 	)
 	(parameter
 		"MYADDR"
-		"00001010"
+		"00001100"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing

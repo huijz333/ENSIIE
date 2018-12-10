@@ -23,7 +23,7 @@ use ieee.numeric_std.all;
 
 ENTITY wrapper_tick1000 IS
 	GENERIC(
-		       MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001010" -- 10
+		       MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001100" -- 12
 	       );
 	PORT(
 		clk          : in  STD_LOGIC;
@@ -140,10 +140,10 @@ BEGIN
 			
 				WHEN ST_READ_BUSIN =>
 					IF busin_valid='1' THEN
-						IF busin_addrdest = MYADDR THEN
-							state <= ST_LOAD_CHCK;
-						ELSIF R_CHCK = '1' AND R_CNT = to_unsigned(1000, 10) THEN
+						IF R_CHCK = '1' AND R_CNT = to_unsigned(1000, 10) THEN
 							state <= ST_TICK;
+						ELSIF busin_addrdest = MYADDR THEN
+							state <= ST_LOAD_CHCK;
 						ELSE
 							state <= ST_WRITE_OUT ;
 						END IF ;
