@@ -1,0 +1,7 @@
+'= y' (yes) signifie 'devant être compilé avec le noyau'
+On s'en sert lorsque l'on veut qu'un composant du noyau soit compilé dans le noyau
+
+'= m' (module) signifie 'devant être compilé entant que module pouvant être chargé dans le noyau
+On s'en sert lorsque l'on veut qu'un composant du noyau soit compilé, mais non chargé par le noyau.
+Il pourra être chargé au besoin
+

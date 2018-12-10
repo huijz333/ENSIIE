@@ -1,0 +1,15 @@
+J'ouvre le graph produit dans firefox:
+
+[romain.pereira@pc233-15:~/ENSIIE/UE/S3/ASE/TP_DEBUG/optimisation/romain.pereira$ firefox perf-kernel.svg
+
+Interprétation:
+Le graph a été produit à partir d'une capture sur 6 secondes.
+
+Pendant cette capture, la fonction 'crazy' (qui appartient sans nulle doute au processus 'crazy')
+occupe 75% du temps total du CPU.
+
+Ce processus passe plupart de son temps à faire des appels au fonction 'read' et 'open' de la lib C
+
+On y voit tout le déroulement d'un appel système via la lib C. Par exemple, lorsque '__libc__open' est appelé,
+la lib C appelle prépare les paramètres, appelle 'syscall', et vérifie le retour
+'syscall' (qui est executé en mode noyau) appelle à son tour ses routines: 'sys_open', 'do_sys_open' etc...

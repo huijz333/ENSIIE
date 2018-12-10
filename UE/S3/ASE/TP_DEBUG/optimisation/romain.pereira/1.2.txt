@@ -1,0 +1,7 @@
+On récupère la version du noyau courant :
+
+[root@vm0 romain.pereira]# cat /proc/version
+Linux version 3.10.0-862.14.4.el7.x86_64 (mockbuild@kbuilder.bsys.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-28) (GCC) ) #1 SMP Wed Sep 26 15:12:11 UTC 2018
+
+Et on trouve la configuration dans le fichier '/boot/config-3.10.0-862.14.4.el7.x86_64'
+

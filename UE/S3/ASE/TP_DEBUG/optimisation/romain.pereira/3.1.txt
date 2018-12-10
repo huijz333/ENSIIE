@@ -1,0 +1,9 @@
+En me basant sur la documentation : http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html
+je génère un .svg à l'aide de FlameGraph:
+
+[root@vm0 FlameGraph]# perf record -F 99 -a -g -- sleep 6
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.258 MB perf.data (790 samples) ]
+[root@vm0 FlameGraph]# perf script | ./stackcollapse-perf.pl > out.perf-folded
+[root@vm0 FlameGraph]# ./flamegraph.pl out.perf-folded > perf-kernel.svg
+

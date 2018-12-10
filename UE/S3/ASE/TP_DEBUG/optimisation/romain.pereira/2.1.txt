@@ -1,0 +1,46 @@
+Commandes pour configurer la swapiness à 50:
+
+[root@vm0 romain.pereira]# sysctl -a | grep swap
+vm.swappiness = 30
+
+[root@vm0 romain.pereira]# sysctl vm.swappiness=50
+vm.swappiness = 50
+
+[root@vm0 romain.pereira]# sysctl -a | grep swap
+vm.swappiness = 50
+
+Cependant, la valeur par défaut sera rétabli après redémarrage.
+
+Pour définir la swappiness à 50 de façon permanente, j'ai ajouté un fichier
+de config dans '/etc/sysctl.d':
+
+[root@vm0 romain.pereira]# echo "vm.swappiness = 50" > /etc/sysctl.d/swappiness.conf 
+[root@vm0 romain.pereira]# cat /etc/sysctl.d/swappiness.conf 
+vm.swappiness = 50
+
+Puis j'ai rechargé la configuration:
+
+[root@vm0 romain.pereira]# sysctl --system
+* Applying /usr/lib/sysctl.d/00-system.conf ...
+* Applying /usr/lib/sysctl.d/10-default-yama-scope.conf ...
+kernel.yama.ptrace_scope = 0
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.sysrq = 16
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.promote_secondaries = 1
+net.ipv4.conf.all.promote_secondaries = 1
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/swappiness.conf ...
+vm.swappiness = 50
+* Applying /etc/sysctl.conf ...
+
+[root@vm0 romain.pereira]# sysctl -a | grep swap
+vm.swappiness = 50
+
+

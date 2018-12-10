@@ -1,0 +1,9 @@
+Je redémarre la VM:
+
+[root@vm0 romain.pereira]# reboot
+(pcocc/8830) [romain.pereira@hpc01 ~]$ pcocc reset vm0
+(pcocc/8830) [romain.pereira@hpc01 ~]$ pcocc ssh vm0
+[root@vm0 romain.pereira]# sysctl -a | grep swap
+vm.swappiness = 50
+
+La swappiness a bien été modifié de façon permanente

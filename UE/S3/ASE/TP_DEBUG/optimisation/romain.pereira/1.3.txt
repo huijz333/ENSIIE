@@ -1,0 +1,4 @@
+[root@vm0 romain.pereira]# cat /boot/config-3.10.0-862.14.4.el7.x86_64  | grep CONFIG_XFS_FS
+CONFIG_XFS_FS=m
+
+Le paramètre est bien activé
