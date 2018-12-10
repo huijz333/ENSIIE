@@ -81,6 +81,7 @@ set_location_assignment PIN_AA23 -to SSDEBUG[1]
 set_location_assignment PIN_AB24 -to SSDEBUG[0]
 set_location_assignment PIN_V1 -to SEL1
 set_location_assignment PIN_V2 -to SEL2
+set_global_assignment -name VHDL_FILE wrapper_tick1000.vhd
 set_global_assignment -name VHDL_FILE wrapper_hinit.vhd
 set_global_assignment -name VHDL_FILE wrapper_ss.vhd
 set_global_assignment -name VHDL_FILE tickswitch.vhd

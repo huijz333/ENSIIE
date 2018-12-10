@@ -40,7 +40,7 @@ ENTITY wrapper_tick1000 IS
 		-- interface busout
 		busout       : out STD_LOGIC_VECTOR(43 downto 0);
 		busout_valid : out STD_LOGIC;
-		busout_eated : in  STD_LOGIC;
+		busout_eated : in  STD_LOGIC
 );
 END wrapper_tick1000;
 
@@ -110,7 +110,7 @@ BEGIN
 				IF R_CNT = to_unsigned(1000, 10) THEN
 					R_CNT <= to_unsigned(0, 10);
 				ELSE
-					R_CNT = R_CNT + 1;
+					R_CNT <= R_CNT + 1;
 				END IF;
 			END IF;
 			
@@ -142,7 +142,7 @@ BEGIN
 					IF busin_valid='1' THEN
 						IF busin_addrdest = MYADDR THEN
 							state <= ST_LOAD_CHCK;
-						ELSE IF R_CHCK = '1' AND R_CNT = to_unsigned(0, 10) THEN
+						ELSIF R_CHCK = '1' AND R_CNT = to_unsigned(1000, 10) THEN
 							state <= ST_TICK;
 						ELSE
 							state <= ST_WRITE_OUT ;
@@ -166,7 +166,7 @@ BEGIN
 
     -- fonction de sortie    
    with state  select busin_eated <=
-	  '1'    when   ST_READ_BUSIN,
+	   '1'    when   ST_READ_BUSIN,
       '0'    when   others
 	; 
 
@@ -183,7 +183,7 @@ BEGIN
 	
 	with state SELECT busout <=
 		mess_resultat  WHEN   ST_TICK,
-		R_tft          WHEN   OTHERS;
+		R_tft          WHEN   OTHERS
 	;
 			
 	with state  select CMD_msg <=
