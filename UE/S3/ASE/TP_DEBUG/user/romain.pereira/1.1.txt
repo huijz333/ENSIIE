@@ -1,0 +1,51 @@
+Pour lister les processus de mon utilisateur, je tape:
+
+[romain.pereira@vm0 tp]$ top
+
+Sortie obtenue:
+
+top - 15:29:27 up 3 min,  1 user,  load average: 2,08, 1,09, 0,44
+Tasks: 113 total,   2 running, 111 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  9,7 us, 41,9 sy,  0,0 ni, 48,4 id,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem :  8531932 total,  8219756 free,   146600 used,   165576 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  8137336 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                               
+ 1191 root      20   0    4208    344    272 R 100,0  0,0   3:25.97 crazy                                                                                                 
+    1 root      20   0  127956   6568   4132 S   0,0  0,1   0:02.00 systemd                                                                                               
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kthreadd                                                                                              
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.20 ksoftirqd/0                                                                                           
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0                                                                                           
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0H                                                                                          
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u4:0                                                                                          
+    7 root      rt   0       0      0      0 S   0,0  0,0   0:00.00 migration/0                                                                                           
+    8 root      20   0       0      0      0 S   0,0  0,0   0:00.00 rcu_bh                                                                                                
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.64 rcu_sched                                                                                             
+   10 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 lru-add-drain                                                                                         
+   11 root      rt   0       0      0      0 S   0,0  0,0   0:00.00 watchdog/0                                                                                            
+   12 root      rt   0       0      0      0 S   0,0  0,0   0:00.00 watchdog/1                                                                                            
+   13 root      rt   0       0      0      0 S   0,0  0,0   0:00.00 migration/1                                                                                           
+   14 root      20   0       0      0      0 S   0,0  0,0   0:00.30 ksoftirqd/1                                                                                           
+   15 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/1:0                                                                                           
+   16 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/1:0H                                                                                          
+   18 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kdevtmpfs                                                                                             
+   19 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 netns                                                                                                 
+   20 root      20   0       0      0      0 S   0,0  0,0   0:00.00 khungtaskd                                                                                            
+   21 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 writeback                                                                                             
+   22 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kintegrityd                                                                                           
+   23 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 bioset                                                                                                
+   24 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 bioset                                                                                                
+   25 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 bioset                                                                                                
+   26 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kblockd                                                                                               
+   27 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 md                                                                                                    
+   28 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 edac-poller                                                                                           
+   29 root      20   0       0      0      0 S   0,0  0,0   0:00.11 kworker/0:1                                                                                           
+   30 root      20   0       0      0      0 S   0,0  0,0   0:00.02 kworker/1:1                                                                                           
+   35 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kswapd0                                                                                               
+   36 root      25   5       0      0      0 S   0,0  0,0   0:00.00 ksmd                                                                                                  
+   37 root      39  19       0      0      0 S   0,0  0,0   0:00.00 khugepaged                                                                                            
+   38 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 crypto                                                                                                
+   46 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kthrotld                                                                                              
+   47 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u4:1                                                                                          
+   48 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kmpath_rdacd                                                                                          
+   49 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kaluad    

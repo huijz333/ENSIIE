@@ -1,0 +1,40 @@
+Pour afficher le nombre d'appels systèmes effectués par la commande 'ps -elf', je tape:
+
+[romain.pereira@vm0 tp]$ strace -c ps -elf
+
+Sortie obtenue (soit 2260 appels systèmes):
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 35.22    0.004654           9       530           read
+ 22.34    0.002952           6       509        12 open
+ 20.22    0.002672           7       359         9 stat
+  9.92    0.001311           3       500           close
+  4.63    0.000612           5       114           write
+  2.75    0.000363         182         2         2 connect
+  1.19    0.000157          79         2           statfs
+  0.85    0.000112          56         2           getdents
+  0.72    0.000095           1        85           mmap
+  0.68    0.000090           5        17           munmap
+  0.34    0.000045           1        42           fstat
+  0.33    0.000044           2        24           rt_sigaction
+  0.24    0.000032          16         2           socket
+  0.23    0.000030           8         4         1 readlink
+  0.13    0.000017           0        47           mprotect
+  0.05    0.000006           2         3           lseek
+  0.05    0.000006           3         2           ioctl
+  0.04    0.000005           2         3         2 access
+  0.04    0.000005           5         1           openat
+  0.02    0.000002           2         1           uname
+  0.02    0.000002           2         1           geteuid
+  0.02    0.000002           2         1           futex
+  0.00    0.000000           0         3           brk
+  0.00    0.000000           0         1           rt_sigprocmask
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           getrlimit
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.013214                  2260        26 total
+

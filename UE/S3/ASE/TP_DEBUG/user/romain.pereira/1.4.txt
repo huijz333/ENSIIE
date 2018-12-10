@@ -1,0 +1,129 @@
+Pour lister et compter les appels systèmes effectués par 'lsof', je tape:
+
+[romain.pereira@vm0 ~]$ strace -c lsof
+
+Sortie obtenue:
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 27.15    0.001335           1      1033      1021 close
+ 26.80    0.001318           3       468           write
+ 21.64    0.001064           3       355           read
+ 11.35    0.000558           2       233           alarm
+  9.72    0.000478           2       235           rt_sigaction
+  1.06    0.000052          52         1           clone
+  1.04    0.000051           5        11           open
+  0.28    0.000014          14         1           lstat
+  0.20    0.000010           5         2           pipe
+  0.18    0.000009           0        20           mmap
+  0.14    0.000007           4         2           munmap
+  0.10    0.000005           1         8           fstat
+  0.08    0.000004           2         2           stat
+  0.04    0.000002           2         1           lseek
+  0.04    0.000002           2         1           umask
+  0.04    0.000002           2         1           getuid
+  0.04    0.000002           2         1           getgid
+  0.04    0.000002           2         1           geteuid
+  0.04    0.000002           2         1           getegid
+  0.00    0.000000           0        12           mprotect
+  0.00    0.000000           0         3           brk
+  0.00    0.000000           0         1           rt_sigprocmask
+  0.00    0.000000           0         2         1 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         2           getrlimit
+  0.00    0.000000           0         2           statfs
+  0.00    0.000000           0         1           arch_prctl
+  0.00    0.000000           0         1           set_tid_address
+  0.00    0.000000           0         1           set_robust_list
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.004917                  2403      1022 total
+
+----------------------------------------------------------
+
+Pour lister les fichiers ouverts par 'lsof', je tape:
+
+[romain.pereira@vm0 tp]$ strace -e open lsof
+
+Sortie obtenue:
+
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+open("/lib64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+open("/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+open("/lib64/libpcre.so.1", O_RDONLY|O_CLOEXEC) = 3
+open("/lib64/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+open("/lib64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+open("/dev/null", O_RDWR)               = 3
+open("/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+open("/", O_RDONLY)                     = 3
+open("/proc/1601/fdinfo/3", O_RDONLY)   = 4
+open("/proc/mounts", O_RDONLY)          = 3
+--- SIGALRM {si_signo=SIGALRM, si_code=SI_KERNEL} ---
+
+Les '.so' correspondent aux bibliothèques dynamiques chargées par le programme
+
+----------------------------------------------------------
+
+Pour lister et compter les appels aux bibliothèques externes:
+
+[romain.pereira@vm0 ~]$ ltrace -c lsof -e /mnt
+
+Sortie obtenue:
+
+% time     seconds  usecs/call     calls      function
+------ ----------- ----------- --------- --------------------
+ 69.59    7.141255     3570627         2 __libc_start_main
+  4.10    0.420334          98      4275 strlen
+  3.65    0.374757          98      3816 snprintf
+  3.07    0.314779         452       696 read
+  2.11    0.216418          99      2172 __snprintf_chk
+  1.99    0.203838          98      2078 __ctype_b_loc
+  1.88    0.193144         208       928 write
+  1.77    0.181623          97      1858 malloc
+  1.16    0.119393          99      1204 _IO_putc
+  1.12    0.114518         111      1025 close
+  1.11    0.113465          97      1160 strncpy
+  0.87    0.089395          98       912 mblen
+  0.80    0.082570          97       846 strtol
+  0.69    0.071295          97       728 __errno_location
+  0.68    0.070231         103       677 readdir64
+  0.60    0.061151         109       561 fgets
+  0.52    0.052885         113       464 alarm
+  0.51    0.052427         112       464 signal
+  0.47    0.048723          98       496 strerror
+  0.47    0.048585         118       411 readlink
+  0.35    0.035488         124       284 fopen64
+  0.28    0.028722         118       243 opendir
+  0.27    0.027975         118       236 fclose
+  0.24    0.024258          97       248 strtoull
+  0.22    0.022578          97       232 _setjmp
+  0.21    0.021050          98       214 setvbuf
+  0.20    0.020440         107       190 __printf_chk
+  0.18    0.018809          97       193 strcasecmp
+  0.13    0.013579         115       118 closedir
+  0.13    0.013084         115       113 __xstat64
+  0.12    0.012761          97       131 strrchr
+  0.04    0.003937          96        41 __ctype_get_mb_cur_max
+  0.03    0.003046          98        31 realloc
+  0.02    0.002527          97        26 strtoul
+  0.00    0.000393          98         4 free
+  0.00    0.000384         384         1 fork
+  0.00    0.000284         284         1 qsort
+  0.00    0.000238         119         2 open64
+  0.00    0.000234         117         2 pipe
+  0.00    0.000217         217         1 setlocale
+  0.00    0.000206         103         2 calloc
+  0.00    0.000124         124         1 __lxstat64
+  0.00    0.000120         120         1 getgid
+  0.00    0.000119         119         1 getuid
+  0.00    0.000117         117         1 getdtablesize
+  0.00    0.000114         114         1 getegid
+  0.00    0.000113         113         1 umask
+  0.00    0.000112         112         1 geteuid
+  0.00    0.000112         112         1 lseek64
+  0.00    0.000111         111         1 strncasecmp
+  0.00    0.000111         111         1 getpagesize
+  0.00    0.000104         104         1 is_selinux_enabled
+  0.00    0.000103         103         1 getpid
+
+=> La fonction la plus appelé est 'strlen()' qui calcul la longueur d'une chaîne de caractères
+
