@@ -5,8 +5,6 @@
 -- Ce module transfert tous les messages (????,addrsrc,addrdest,data) venant de
 -- busin.
 --
--- data est stocké dans un registre
---
 -- Si addrdest==MYADDR, data est transmis sur busv
 -- Sinon, tout le message est transféré sur busout
 --
@@ -16,7 +14,7 @@
 -- Du coté busout, il suit le protocole "poignée de main" (signaux: busout, 
 --   busout_valid, busout_eated).
 --
--- Du coté busmsg, la valeur du message est transmise
+-- Tous les 1000 ticks, ce bloc envoit un message au PC
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -60,12 +58,14 @@ ARCHITECTURE montage OF wrapper_tick1000 IS
 	type T_CMD_msg is (LOAD, NOOP);
 	signal CMD_msg :  T_CMD_msg ; 
 
-	-- registre comptant le nombre de tick
-	signal R_CHCK : unsigned(9 downto 0);
-	
-	-- message résulat
-	SIGNAL mess_resultat :  STD_LOGIC_VECTOR (43 DOWNTO 0);
+	-- registre indiquant qu'un message doit être envoyé tous les 1000 ticks ou non
+	signal R_CHCK : STD_LOGIC;
 
+	-- registre comptant le nombre de tick
+	signal R_CNT : unsigned(9 downto 0);
+	
+	-- message pingant le PC tous les 1000 ticks
+	SIGNAL mess_resultat :  STD_LOGIC_VECTOR (43 DOWNTO 0);
 
 	-------------------------------------------------------------------------------
 	-- Partie Contrôle
@@ -88,8 +88,8 @@ BEGIN
 	BEGIN
 		-- si on reset
 		IF reset = '1' THEN
-			-- 5 000 000 <=> 100 ticks par secondes
-			R_CHCK <= to_unsigned(0, 10);
+			-- on met le compteur à 0
+			R_CNT <= to_unsigned(0, 10);
 
 		ELSIF clk'event AND clk = '1' THEN
 	 
@@ -99,22 +99,29 @@ BEGIN
 			IF CMD_tft = INIT THEN 
 				R_tft <= busin ;
 			END IF;
-			
-			-- si l'on doit générer un signal TICK1000
-			IF CMD_tft = TICK THEN
-			
-			ELSE
-			--sinon, on transfert le message
-				busout <= R_tft;
-			END IF ;
-				
+
 			-- on charge la valeur de 'N'
 			IF CMD_msg = LOAD THEN
-				R_N <= R_tft(23 downto 0);
+				R_CHCK <= R_tft(0);
 			END IF ;
+
+			-- on compte le nombre de tick
+			IF T = '1' THEN
+				IF R_CNT = to_unsigned(1000, 10) THEN
+					R_CNT <= to_unsigned(0, 10);
+				ELSE
+					R_CNT = R_CNT + 1;
+				END IF;
+			END IF;
 			
 		END IF;
 	END PROCESS;
+
+	-- crée le message à envoyer au PC
+	mess_resultat(43 DOWNTO 40) <= "0000";
+	mess_resultat(39 DOWNTO 32) <= MYADDR;
+	mess_resultat(31 DOWNTO 24) <= R_tft(39 DOWNTO 32);
+	mess_resultat(23 DOWNTO 0)  <= "000000000000000000000001";
 
 	-------------------------------------------------------------------------------
 	-- Partie Contrôle
@@ -135,7 +142,7 @@ BEGIN
 					IF busin_valid='1' THEN
 						IF busin_addrdest = MYADDR THEN
 							state <= ST_LOAD_CHCK;
-						ELSE IF R_CHCK == to_unsigned(1000, 10) THEN
+						ELSE IF R_CHCK = '1' AND R_CNT = to_unsigned(0, 10) THEN
 							state <= ST_TICK;
 						ELSE
 							state <= ST_WRITE_OUT ;
@@ -159,13 +166,13 @@ BEGIN
 
     -- fonction de sortie    
    with state  select busin_eated <=
-		'1'    when   ST_READ_BUSIN,
+	  '1'    when   ST_READ_BUSIN,
       '0'    when   others
 	; 
 
    with state  select busout_valid <=
       '1'    when   ST_WRITE_OUT,
-		'1'    when   ST_TICK,
+	  '1'    when   ST_TICK,
       '0'    when   others
 	; 
 
@@ -175,7 +182,7 @@ BEGIN
 	;
 	
 	with state SELECT busout <=
-		mess_resultat  WHEN   ST_WRITE_SUM,
+		mess_resultat  WHEN   ST_TICK,
 		R_tft          WHEN   OTHERS;
 	;
 			
