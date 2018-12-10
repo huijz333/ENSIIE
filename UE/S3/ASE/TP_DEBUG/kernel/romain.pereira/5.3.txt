@@ -1,0 +1,729 @@
+On récupère la task_struct du processus 'crazy' via 'crash' :
+
+
+crash> task
+PID: 1192   TASK: ffff8c0ef5205ee0  CPU: 0   COMMAND: "crazy"
+struct task_struct {
+  state = 0, 
+  stack = 0xffff8c11467a0000, 
+  usage = {
+    counter = 2
+  }, 
+  flags = 4202496, 
+  ptrace = 0, 
+  wake_entry = {
+    next = 0x0
+  }, 
+  on_cpu = 1, 
+  last_wakee = 0xffff8c103bd78000, 
+  wakee_flips = 8, 
+  wakee_flip_decay_ts = 4295005738, 
+  wake_cpu = 0, 
+  on_rq = 1, 
+  prio = 120, 
+  static_prio = 120, 
+  normal_prio = 120, 
+  rt_priority = 0, 
+  sched_class = 0xffffffff8a81f0a0, 
+  se = {
+    load = {
+      weight = 1024, 
+      inv_weight = 4194304
+    }, 
+    run_node = {
+      __rb_parent_color = 1, 
+      rb_right = 0x0, 
+      rb_left = 0x0
+    }, 
+    group_node = {
+      next = 0xffff8c1160419478, 
+      prev = 0xffff8c1160419478
+    }, 
+    on_rq = 1, 
+    exec_start = 340199934113, 
+    sum_exec_runtime = 308390648710, 
+    vruntime = 285633351893, 
+    prev_sum_exec_runtime = 308368712500, 
+    nr_migrations = 650, 
+    parent = 0x0, 
+    cfs_rq = 0xffff8c1160418bc0, 
+    my_q = 0x0, 
+    avg = {
+      runnable_avg_sum = 46230, 
+      runnable_avg_period = 46230, 
+      last_runnable_update = 340199934113, 
+      decay_count = 0, 
+      load_avg_contrib = 1023
+    }, 
+    {
+      statistics = 0xffff8c0ef5206db8, 
+      __UNIQUE_ID_rh_kabi_hide13 = {
+        rh_reserved1 = 18446616594602814904
+      }, 
+      {<No data fields>}
+    }, 
+    rh_reserved2 = 0, 
+    rh_reserved3 = 0, 
+    rh_reserved4 = 0
+  }, 
+  rt = {
+    run_list = {
+      next = 0xffff8c0ef5206008, 
+      prev = 0xffff8c0ef5206008
+    }, 
+    timeout = 0, 
+    watchdog_stamp = 0, 
+    time_slice = 100, 
+    back = 0x0, 
+    parent = 0x0, 
+    rt_rq = 0xffff8c1160418ce0, 
+    my_q = 0x0
+  }, 
+  sched_task_group = 0xffffffff8b0ca040, 
+  preempt_notifiers = {
+    first = 0x0
+  }, 
+  fpu_counter = 126 '~', 
+  btrace_seq = 0, 
+  policy = 0, 
+  nr_cpus_allowed = 2, 
+  cpus_allowed = {
+    bits = {18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615, 18446744073709551615}
+  }, 
+  sched_info = {
+    pcount = 4990, 
+    run_delay = 864406432, 
+    last_arrival = 340249997903, 
+    last_queued = 0
+  }, 
+  tasks = {
+    next = 0xffff8c1151826310, 
+    prev = 0xffff8c0ef4b05340
+  }, 
+  pushable_tasks = {
+    prio = 140, 
+    prio_list = {
+      next = 0xffff8c0ef5206328, 
+      prev = 0xffff8c0ef5206328
+    }, 
+    node_list = {
+      next = 0xffff8c0ef5206338, 
+      prev = 0xffff8c0ef5206338
+    }
+  }, 
+  mm = 0xffff8c11523ff6c0, 
+  active_mm = 0xffff8c11523ff6c0, 
+  rss_stat = {
+    events = 15, 
+    count = {12, 3, 0}
+  }, 
+  exit_state = 0, 
+  exit_code = 0, 
+  exit_signal = 17, 
+  pdeath_signal = 0, 
+  jobctl = 0, 
+  personality = 0, 
+  did_exec = 1, 
+  in_execve = 0, 
+  in_iowait = 0, 
+  no_new_privs = 0, 
+  sched_reset_on_fork = 0, 
+  sched_contributes_to_load = 1, 
+  pid = 1192, 
+  tgid = 1192, 
+  stack_canary = 2952406754, 
+  real_parent = 0xffff8c0ef4b04f10, 
+  parent = 0xffff8c0ef4b04f10, 
+  children = {
+    next = 0xffff8c0ef52063a8, 
+    prev = 0xffff8c0ef52063a8
+  }, 
+  sibling = {
+    next = 0xffff8c0ef4b053d8, 
+    prev = 0xffff8c0ef4b053d8
+  }, 
+  group_leader = 0xffff8c0ef5205ee0, 
+  ptraced = {
+    next = 0xffff8c0ef52063d0, 
+    prev = 0xffff8c0ef52063d0
+  }, 
+  ptrace_entry = {
+    next = 0xffff8c0ef52063e0, 
+    prev = 0xffff8c0ef52063e0
+  }, 
+  pids = {{
+      node = {
+        next = 0x0, 
+        pprev = 0xffff8c1149793608
+      }, 
+      pid = 0xffff8c1149793600
+    }, {
+      node = {
+        next = 0x0, 
+        pprev = 0xffff8c1149793610
+      }, 
+      pid = 0xffff8c1149793600
+    }, {
+      node = {
+        next = 0x0, 
+        pprev = 0xffff8c1149793618
+      }, 
+      pid = 0xffff8c1149793600
+    }}, 
+  thread_group = {
+    next = 0xffff8c0ef5206438, 
+    prev = 0xffff8c0ef5206438
+  }, 
+  thread_node = {
+    next = 0xffff8c0ef465a410, 
+    prev = 0xffff8c0ef465a410
+  }, 
+  vfork_done = 0x0, 
+  set_child_tid = 0x7f903f028b10, 
+  clear_child_tid = 0x0, 
+  utime = 55462000000, 
+  stime = 252925000000, 
+  utimescaled = 55462000000, 
+  stimescaled = 252925000000, 
+  gtime = 0, 
+  rh_reserved_prev_cputime = {
+    utime = 0, 
+    stime = 0
+  }, 
+  vtime_seqlock = {
+    seqcount = {
+      sequence = 0
+    }, 
+    lock = {
+      {
+        rlock = {
+          raw_lock = {
+            val = {
+              counter = 0
+            }
+          }
+        }
+      }
+    }
+  }, 
+  vtime_snap = 0, 
+  vtime_snap_whence = VTIME_SLEEPING, 
+  nvcsw = 1, 
+  nivcsw = 4988, 
+  start_time = {
+    tv_sec = 29, 
+    tv_nsec = 499262587
+  }, 
+  real_start_time = {
+    tv_sec = 29, 
+    tv_nsec = 499262587
+  }, 
+  min_flt = 544, 
+  maj_flt = 0, 
+  cputime_expires = {
+    utime = 0, 
+    stime = 0, 
+    sum_exec_runtime = 0
+  }, 
+  cpu_timers = {{
+      next = 0xffff8c0ef5206518, 
+      prev = 0xffff8c0ef5206518
+    }, {
+      next = 0xffff8c0ef5206528, 
+      prev = 0xffff8c0ef5206528
+    }, {
+      next = 0xffff8c0ef5206538, 
+      prev = 0xffff8c0ef5206538
+    }}, 
+  real_cred = 0xffff8c0ef4518cc0, 
+  cred = 0xffff8c0ef4518cc0, 
+  comm = "crazy\000)\000\060\000\000\000\000\000\000", 
+  link_count = 0, 
+  total_link_count = 0, 
+  sysvsem = {
+    undo_list = 0x0
+  }, 
+  thread = {
+    tls_array = {{
+        {
+          {
+            a = 0, 
+            b = 0
+          }, 
+          {
+            limit0 = 0, 
+            base0 = 0, 
+            base1 = 0, 
+            type = 0, 
+            s = 0, 
+            dpl = 0, 
+            p = 0, 
+            limit = 0, 
+            avl = 0, 
+            l = 0, 
+            d = 0, 
+            g = 0, 
+            base2 = 0
+          }
+        }
+      }, {
+        {
+          {
+            a = 0, 
+            b = 0
+          }, 
+          {
+            limit0 = 0, 
+            base0 = 0, 
+            base1 = 0, 
+            type = 0, 
+            s = 0, 
+            dpl = 0, 
+            p = 0, 
+            limit = 0, 
+            avl = 0, 
+            l = 0, 
+            d = 0, 
+            g = 0, 
+            base2 = 0
+          }
+        }
+      }, {
+        {
+          {
+            a = 0, 
+            b = 0
+          }, 
+          {
+            limit0 = 0, 
+            base0 = 0, 
+            base1 = 0, 
+            type = 0, 
+            s = 0, 
+            dpl = 0, 
+            p = 0, 
+            limit = 0, 
+            avl = 0, 
+            l = 0, 
+            d = 0, 
+            g = 0, 
+            base2 = 0
+          }
+        }
+      }}, 
+    sp0 = 18446616604557590528, 
+    sp = 18446616604557590072, 
+    usersp = 140735601293592, 
+    es = 0, 
+    ds = 0, 
+    fsindex = 0, 
+    gsindex = 0, 
+    fs = 140655836088128, 
+    gs = 0, 
+    ptrace_bps = {0x0, 0x0, 0x0, 0x0}, 
+    debugreg6 = 0, 
+    ptrace_dr7 = 0, 
+    cr2 = 0, 
+    trap_nr = 0, 
+    error_code = 0, 
+    fpu = {
+      last_cpu = 0, 
+      has_fpu = 1, 
+      state = 0xffff8c11467763c0
+    }, 
+    io_bitmap_ptr = 0x0, 
+    iopl = 0, 
+    io_bitmap_max = 0
+  }, 
+  fs = 0xffff8c1146acafc0, 
+  files = 0xffff8c0ef51ff900, 
+  nsproxy = 0xffffffff8ac51f80, 
+  signal = 0xffff8c0ef465a400, 
+  sighand = 0xffff8c0ef4655280, 
+  blocked = {
+    sig = {0}
+  }, 
+  real_blocked = {
+    sig = {0}
+  }, 
+  saved_sigmask = {
+    sig = {0}
+  }, 
+  pending = {
+    list = {
+      next = 0xffff8c0ef5206670, 
+      prev = 0xffff8c0ef5206670
+    }, 
+    signal = {
+      sig = {0}
+    }
+  }, 
+  sas_ss_sp = 0, 
+  sas_ss_size = 0, 
+  notifier = 0x0, 
+  notifier_data = 0x0, 
+  notifier_mask = 0x0, 
+  task_works = 0x0, 
+  audit_context = 0xffff8c1147264800, 
+  loginuid = {
+    val = 0
+  }, 
+  sessionid = 2, 
+  seccomp = {
+    mode = 0, 
+    filter = 0x0
+  }, 
+  parent_exec_id = 3, 
+  self_exec_id = 5, 
+  alloc_lock = {
+    {
+      rlock = {
+        raw_lock = {
+          val = {
+            counter = 0
+          }
+        }
+      }
+    }
+  }, 
+  pi_lock = {
+    raw_lock = {
+      val = {
+        counter = 0
+      }
+    }
+  }, 
+  pi_waiters = {
+    rb_node = 0x0
+  }, 
+  pi_waiters_leftmost = 0x0, 
+  pi_blocked_on = 0x0, 
+  journal_info = 0x0, 
+  bio_list = 0x0, 
+  plug = 0x0, 
+  reclaim_state = 0x0, 
+  backing_dev_info = 0x0, 
+  io_context = 0xffff8c1151262c98, 
+  ptrace_message = 0, 
+  last_siginfo = 0x0, 
+  ioac = {
+    rchar = 123283977, 
+    wchar = 0, 
+    syscr = 123277280, 
+    syscw = 0, 
+    read_bytes = 12288, 
+    write_bytes = 0, 
+    cancelled_write_bytes = 0
+  }, 
+  acct_rss_mem1 = 25899782792, 
+  acct_vm_mem1 = 316845828280, 
+  acct_timexpd = 308387000000, 
+  mems_allowed = {
+    bits = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  }, 
+  mems_allowed_seq = {
+    sequence = 0
+  }, 
+  cpuset_mem_spread_rotor = -1, 
+  cpuset_slab_spread_rotor = -1, 
+  cgroups = 0xffff8c0ef45180c0, 
+  cg_list = {
+    next = 0xffff8c0ef4b05858, 
+    prev = 0xffff8c0ef45180d8
+  }, 
+  robust_list = 0x0, 
+  compat_robust_list = 0x0, 
+  pi_state_list = {
+    next = 0xffff8c0ef5206848, 
+    prev = 0xffff8c0ef5206848
+  }, 
+  pi_state_cache = 0x0, 
+  perf_event_ctxp = {0x0, 0x0}, 
+  perf_event_mutex = {
+    count = {
+      counter = 1
+    }, 
+    wait_lock = {
+      {
+        rlock = {
+          raw_lock = {
+            val = {
+              counter = 0
+            }
+          }
+        }
+      }
+    }, 
+    wait_list = {
+      next = 0xffff8c0ef5206878, 
+      prev = 0xffff8c0ef5206878
+    }, 
+    owner = 0x0, 
+    {
+      osq = {
+        tail = {
+          counter = 0
+        }
+      }, 
+      __UNIQUE_ID_rh_kabi_hide2 = {
+        spin_mlock = 0x0
+      }, 
+      {<No data fields>}
+    }
+  }, 
+  perf_event_list = {
+    next = 0xffff8c0ef5206898, 
+    prev = 0xffff8c0ef5206898
+  }, 
+  mempolicy = 0x0, 
+  il_next = 0, 
+  pref_node_fork = 0, 
+  numa_scan_seq = 0, 
+  numa_scan_period = 1000, 
+  numa_scan_period_max = 0, 
+  numa_preferred_nid = -1, 
+  numa_migrate_retry = 0, 
+  node_stamp = 0, 
+  last_task_numa_placement = 0, 
+  last_sum_exec_runtime = 0, 
+  numa_work = {
+    next = 0xffff8c0ef52068e8, 
+    func = 0x0
+  }, 
+  numa_entry = {
+    next = 0xffff8c0ef52068f8, 
+    prev = 0xffff8c0ef52068f8
+  }, 
+  numa_group = 0x0, 
+  numa_faults_memory = 0x0, 
+  total_numa_faults = 0, 
+  numa_faults_buffer_memory = 0x0, 
+  numa_faults_cpu = 0x0, 
+  numa_faults_buffer_cpu = 0x0, 
+  numa_faults_locality = {0, 0}, 
+  numa_pages_migrated = 0, 
+  rcu = {
+    next = 0x0, 
+    func = 0x0
+  }, 
+  splice_pipe = 0x0, 
+  task_frag = {
+    page = 0x0, 
+    offset = 0, 
+    size = 0
+  }, 
+  delays = 0xffff8c114eb595b0, 
+  nr_dirtied = 0, 
+  nr_dirtied_pause = 32, 
+  dirty_paused_when = 0, 
+  timer_slack_ns = 50000, 
+  default_timer_slack_ns = 50000, 
+  curr_ret_stack = -1, 
+  ret_stack = 0x0, 
+  ftrace_timestamp = 0, 
+  trace_overrun = {
+    counter = 0
+  }, 
+  tracing_graph_pause = {
+    counter = 0
+  }, 
+  trace = 0, 
+  trace_recursion = 0, 
+  memcg_batch = {
+    do_batch = 0, 
+    memcg = 0x0, 
+    nr_pages = 0, 
+    memsw_nr_pages = 0
+  }, 
+  memcg_kmem_skip_account = 0, 
+  ptrace_bp_refcnt = {
+    counter = 1
+  }, 
+  utask = 0x0, 
+  {
+    last_switch_count = 0, 
+    __UNIQUE_ID_rh_kabi_hide14 = {
+      rh_reserved1 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    atomic_flags = 0, 
+    __UNIQUE_ID_rh_kabi_hide15 = {
+      rh_reserved2 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  rh_reserved3 = 0, 
+  {
+    mm_shmempages = 0, 
+    __UNIQUE_ID_rh_kabi_hide16 = {
+      rh_reserved4 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    closid = 0, 
+    __UNIQUE_ID_rh_kabi_hide17 = {
+      rh_reserved5 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    patch_state = 0, 
+    __UNIQUE_ID_rh_kabi_hide18 = {
+      rh_reserved6 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  {
+    rmid = 0, 
+    __UNIQUE_ID_rh_kabi_hide19 = {
+      rh_reserved7 = 0
+    }, 
+    {<No data fields>}
+  }, 
+  rh_reserved8 = 0, 
+  memcg_oom = {
+    memcg = 0x0, 
+    gfp_mask = 0, 
+    order = 0, 
+    may_oom = 0
+  }, 
+  tlb_ubc = {
+    cpumask = {
+      bits = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    }, 
+    flush_required = false, 
+    writable = false
+  }, 
+  dl = {
+    rb_node = {
+      __rb_parent_color = 18446616594602814688, 
+      rb_right = 0x0, 
+      rb_left = 0x0
+    }, 
+    dl_runtime = 0, 
+    dl_deadline = 0, 
+    dl_period = 0, 
+    dl_bw = 0, 
+    dl_density = 0, 
+    runtime = 0, 
+    deadline = 0, 
+    flags = 0, 
+    dl_throttled = 0, 
+    dl_boosted = 0, 
+    dl_yielded = 0, 
+    dl_timer = {
+      node = {
+        node = {
+          __rb_parent_color = 18446616594602814784, 
+          rb_right = 0x0, 
+          rb_left = 0x0
+        }, 
+        expires = {
+          tv64 = 0
+        }
+      }, 
+      _softexpires = {
+        tv64 = 0
+      }, 
+      function = 0xffffffff8a0e5230, 
+      base = 0xffff8c1160413a20, 
+      state = 0, 
+      start_pid = -1, 
+      start_site = 0x0, 
+      start_comm = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+    }
+  }, 
+  pushable_dl_tasks = {
+    __rb_parent_color = 18446616594602814880, 
+    rb_right = 0x0, 
+    rb_left = 0x0
+  }, 
+  statistics = {
+    wait_start = 0, 
+    wait_max = 0, 
+    wait_count = 0, 
+    wait_sum = 0, 
+    iowait_count = 0, 
+    iowait_sum = 0, 
+    sleep_start = 0, 
+    sleep_max = 0, 
+    sum_sleep_runtime = 0, 
+    block_start = 0, 
+    block_max = 0, 
+    exec_max = 0, 
+    slice_max = 0, 
+    nr_migrations_cold = 0, 
+    nr_failed_migrations_affine = 0, 
+    nr_failed_migrations_running = 0, 
+    nr_failed_migrations_hot = 0, 
+    nr_forced_migrations = 0, 
+    nr_wakeups = 0, 
+    nr_wakeups_sync = 0, 
+    nr_wakeups_migrate = 0, 
+    nr_wakeups_local = 0, 
+    nr_wakeups_remote = 0, 
+    nr_wakeups_affine = 0, 
+    nr_wakeups_affine_attempts = 0, 
+    nr_wakeups_passive = 0, 
+    nr_wakeups_idle = 0
+  }, 
+  wake_q = {
+    next = 0x0
+  }, 
+  prev_cputime = {
+    utime = 0, 
+    stime = 0, 
+    lock = {
+      raw_lock = {
+        val = {
+          counter = 0
+        }
+      }
+    }
+  }
+}
+
+struct thread_info {
+  task = 0xffff8c0ef5205ee0, 
+  exec_domain = 0xffffffff8ac432e0, 
+  flags = 128, 
+  status = 0, 
+  cpu = 0, 
+  preempt_count = 0, 
+  addr_limit = {
+    seg = 140737488351232
+  }, 
+  restart_block = {
+    fn = 0xffffffff8a0ac050, 
+    {
+      futex = {
+        uaddr = 0x0, 
+        val = 0, 
+        flags = 0, 
+        bitset = 0, 
+        time = 0, 
+        uaddr2 = 0x0
+      }, 
+      nanosleep = {
+        clockid = 0, 
+        rmtp = 0x0, 
+        compat_rmtp = 0x0, 
+        expires = 0
+      }, 
+      poll = {
+        ufds = 0x0, 
+        nfds = 0, 
+        has_timeout = 0, 
+        tv_sec = 0, 
+        tv_nsec = 0
+      }
+    }
+  }, 
+  sysenter_return = 0x0, 
+  sig_on_uaccess_error = 0, 
+  uaccess_err = 0
+}
+

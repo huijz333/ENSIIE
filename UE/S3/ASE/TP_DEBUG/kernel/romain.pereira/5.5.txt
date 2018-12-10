@@ -1,0 +1,31 @@
+-----------------------------------------------------------
+
+Adresse du début de la pile:
+"""
+start_stack = 140735601293856
+"""
+
+-----------------------------------------------------------
+
+Adresse du code:
+"""
+start_code = 4194304
+"""
+
+-----------------------------------------------------------
+
+Adresse des arguments:
+"""
+arg_start = 140735601295156
+"""
+
+-----------------------------------------------------------
+
+Bonus: lecture des données à l'adresse des arguments
+
+crash> print (char *)140735601295156
+$46 = 0x7fff8f85bf34 <Address 0x7fff8f85bf34 out of bounds>
+
+crash> print *((char *)140735601295156)
+Cannot access memory at address 0x7fff8f85bf34
+gdb: gdb request failed: print *((char *)140735601295156)

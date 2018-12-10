@@ -1,5 +1,5 @@
 Flow report for bus_ia
-Mon Dec  3 15:39:00 2018
+Mon Dec 10 11:11:38 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,17 +40,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Mon Dec  3 15:38:57 2018           ;
+; Flow Status                        ; Successful - Mon Dec 10 11:11:35 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; bus_ia                                          ;
 ; Top-level Entity Name              ; bus_ia                                          ;
 ; Family                             ; Cyclone II                                      ;
 ; Device                             ; EP2C35F672C6                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 580 / 33,216 ( 2 % )                            ;
-;     Total combinational functions  ; 467 / 33,216 ( 1 % )                            ;
-;     Dedicated logic registers      ; 402 / 33,216 ( 1 % )                            ;
-; Total registers                    ; 402                                             ;
+; Total logic elements               ; 958 / 33,216 ( 3 % )                            ;
+;     Total combinational functions  ; 770 / 33,216 ( 2 % )                            ;
+;     Dedicated logic registers      ; 667 / 33,216 ( 2 % )                            ;
+; Total registers                    ; 667                                             ;
 ; Total pins                         ; 29 / 475 ( 6 % )                                ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0 / 483,840 ( 0 % )                             ;
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/03/2018 15:38:30 ;
+; Start date & time ; 12/10/2018 11:11:16 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; bus_ia              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 0.154384790903641                     ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 0.154443667605861                     ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
 ; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top        ;
@@ -92,11 +92,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:05     ; 1.0                     ; 602 MB              ; 00:00:04                           ;
-; Fitter                    ; 00:00:14     ; 1.0                     ; 724 MB              ; 00:00:13                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 556 MB              ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 503 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:24     ; --                      ; --                  ; 00:00:21                           ;
+; Analysis & Synthesis      ; 00:00:06     ; 1.0                     ; 602 MB              ; 00:00:05                           ;
+; Fitter                    ; 00:00:09     ; 1.0                     ; 728 MB              ; 00:00:09                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 550 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:01     ; 1.0                     ; 524 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:18     ; --                      ; --                  ; 00:00:17                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -105,10 +105,10 @@ applicable agreement for further details.
 +---------------------------+------------------+------------------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name          ; OS Version ; Processor type ;
 +---------------------------+------------------+------------------+------------+----------------+
-; Analysis & Synthesis      ; pc233-11         ; Debian GNU/Linux ; 9          ; x86_64         ;
-; Fitter                    ; pc233-11         ; Debian GNU/Linux ; 9          ; x86_64         ;
-; Assembler                 ; pc233-11         ; Debian GNU/Linux ; 9          ; x86_64         ;
-; TimeQuest Timing Analyzer ; pc233-11         ; Debian GNU/Linux ; 9          ; x86_64         ;
+; Analysis & Synthesis      ; pc225-25         ; Debian GNU/Linux ; 9          ; x86_64         ;
+; Fitter                    ; pc225-25         ; Debian GNU/Linux ; 9          ; x86_64         ;
+; Assembler                 ; pc225-25         ; Debian GNU/Linux ; 9          ; x86_64         ;
+; TimeQuest Timing Analyzer ; pc225-25         ; Debian GNU/Linux ; 9          ; x86_64         ;
 +---------------------------+------------------+------------------+------------+----------------+
 
 

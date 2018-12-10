@@ -1,0 +1,12 @@
+Pour lister les processus 'UNINTERRUPTIBLE', je tape:
+
+crash> ps | grep UN
+1193   1179   0  ffff8c1151825ee0  UN   0.0  136092   4808  python
+1402      2   0  ffff8c114970eeb0  UN   0.0       0      0  [127.0.0.1-manag]
+
+On peut aussi compter le nombre de processus dans cette état en entrant:
+
+crash> ps -S
+RU: 9
+IN: 120
+UN: 2

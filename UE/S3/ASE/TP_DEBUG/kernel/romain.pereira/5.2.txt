@@ -1,0 +1,8 @@
+On choisit le processus 'crazy' dans l'interpréteur 'crash':
+
+crash> set 1192
+PID: 1192
+COMMAND: "crazy"
+TASK: ffff8c0ef5205ee0  [THREAD_INFO: ffff8c11467a0000]
+CPU: 0
+STATE: TASK_RUNNING (ACTIVE)

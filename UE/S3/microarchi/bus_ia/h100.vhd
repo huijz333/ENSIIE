@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 -- Entrée:
 --		clk, reset la clock et le reset
---		Entier E coddé sur 21 bits
+--		Entier E coddé sur 24 bits
 --
 --	Sortie:
 --		T , le tick : '0' ou '1'
---		T passe à '1' pendant un master clock, tous les 2 * 'E' master clock
+--		T passe à '1' pendant un master clock, tous les 'E' master clock
 -------------------------------------------------------------------------------
 
 library IEEE;
@@ -19,7 +19,7 @@ entity h100 is
 		reset : in STD_LOGIC;
 		
 		-- entrée/sortie
-		E   : in  STD_LOGIC_VECTOR(21 downto 0);
+		E   : in  STD_LOGIC_VECTOR(23 downto 0);
 		T   : out STD_LOGIC
 	);
 end h100;
@@ -33,7 +33,7 @@ architecture montage of h100 is
     -- la commande courante
 	signal CMD :  T_CMD; 
     -- le registre de stockage, compteur des clocks
-	signal R   :  unsigned (22 downto 0);
+	signal R   :  unsigned (23 downto 0);
 	 -- boolean vrai si R est à 0
 	signal R_IS_NULL:  STD_LOGIC;
 
@@ -55,8 +55,7 @@ begin
 		begin if clk'event and clk = '1' then
 			IF CMD = LOAD THEN 
 				-- charges 'E' dans le compteur 'R', en multipliant par 2
-				R(22 downto 1) <= unsigned(E);
-				R(0)           <= '0';
+				R <= unsigned(E);
 			ELSIF CMD = DECR THEN
 				R <= R - 1;
 			END IF;

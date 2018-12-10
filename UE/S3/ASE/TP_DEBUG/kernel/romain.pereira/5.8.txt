@@ -1,0 +1,2 @@
+Les 2 processus sont bloqués dans le scheduler, en attente d'être débloqué
+(par une interruption, I/O typiquement)

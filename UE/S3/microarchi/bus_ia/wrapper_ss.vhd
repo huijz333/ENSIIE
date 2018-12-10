@@ -16,17 +16,17 @@
 -- Du coté busout, il suit le protocole "poignée de main" (signaux: busout, 
 --   busout_valid, busout_eated).
 --
--- Du coté busmsg, la valeur du message est transmise
+-- Du coté busSS, la configuration du 7-segment programmable est envoyé
 -------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-ENTITY wrapper IS
+ENTITY wrapper_ss IS
 	GENERIC(
-		       MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001010" -- 10
-	       );
+		MYADDR : STD_LOGIC_VECTOR(7 downto 0) :=  "00001011" -- 11
+	);
 	PORT(
 		clk          : in  STD_LOGIC;
 		reset        : in  STD_LOGIC;
@@ -42,14 +42,11 @@ ENTITY wrapper IS
 		busout_eated : in  STD_LOGIC;
 
 		-- les 32 valeurs du 7 segments R_SSurées (7 * 32 = 224) + N sur 6 bits
-		busSS : out STD_LOGIC_VECTOR(229 downto 0);
-
-		-- N_clock : nombre de clock à attendre pour générer un tick
-		busNClock : out STD_LOGIC_VECTOR(21 downto 0)
+		busSS : out STD_LOGIC_VECTOR(229 downto 0)
 );
-END wrapper;
+END wrapper_ss;
 
-ARCHITECTURE montage OF wrapper IS
+ARCHITECTURE montage OF wrapper_ss IS
 
 	-------------------------------------------------------------------------------
 	--  Partie Opérative
@@ -65,10 +62,6 @@ ARCHITECTURE montage OF wrapper IS
 	
 		-- registre stockant les 32 valeurs du 7 segments R_SSurées (7 * 32 = 224)
 	signal R_SS : STD_LOGIC_VECTOR(229 downto 0);
-
-	-- registre stockant V (nombre de master clock à attendre avant de générer un tick)
-	signal R_N_CLOCK : STD_LOGIC_VECTOR(21 downto 0);
-	
 
 	-------------------------------------------------------------------------------
 	-- Partie Contrôle
@@ -91,10 +84,6 @@ BEGIN
 	BEGIN
 		-- si on reset
 		IF reset = '1' THEN
-			-- 5 000 000 <=> 100 ticks par secondes
-			-- 5 000 000 / 2 = 2 500 000 = 0b1001100010010110100000
-			R_N_CLOCK <= "1001100010010110100000";
-			
 			-- R_SSure le serpentin pour qu'il soit vide
 			R_SS <= (5 => '1', others => '0');
 			
@@ -110,23 +99,19 @@ BEGIN
 			IF CMD_msg = LOAD THEN
 				-- switch l'id du message
 				CASE R_tft(23 downto 22) IS
-
-					-- hinit(n_clock)
-					WHEN "00" =>
-						R_N_CLOCK <= R_tft(21 downto 0);
-
+				
 					-- clr(s)
-					WHEN "01" =>
+					WHEN "00" =>
 						R_SS <= (5 => '1', others => '0');
 
 					-- si commande set-N(n)
-					WHEN "10" =>
-						R_SS(5 downto 0) <= R_tft(5 downto 0);
+					WHEN "01" =>
+						R_SS(229 downto 224) <= R_tft(5 downto 0);
 
 					-- si commande set-val(i, v)
-					WHEN "11" =>
+					WHEN "10" =>
 						-- switch l'id de la frame
-						CASE R_tft(5 downto 0) IS
+						CASE unsigned(R_tft(5 downto 0)) IS
 
 							WHEN to_unsigned(1, 6) =>
 								R_SS(  6 downto   0) <= R_tft(12 downto 6);
@@ -219,16 +204,19 @@ BEGIN
 								R_SS( 209 downto   203) <= R_tft(12 downto 6);
 
 							WHEN to_unsigned(31, 6) =>
-								R_SS( 216 downto   208) <= R_tft(12 downto 6);
+								R_SS( 216 downto   210) <= R_tft(12 downto 6);
 
 							WHEN to_unsigned(32, 6) =>
 								R_SS( 223 downto  217) <= R_tft(12 downto 6);
 
 							WHEN others =>
-							;
+							-- ne rien faire (erreur utilisateur)
+							-- TODO : envoyer un signal d'erreur
 
-						-- TODO
-						-- R_SS((i + 1) * 7 - 1, i * 7) <= R_Msg(6 downto 0);
+						END CASE;
+						
+						WHEN "11" =>
+							-- ne rien faire, la commande d'id 2 d'existe pas => erreur utilisateur
 						
 				END CASE;
 			END IF ;
@@ -236,7 +224,6 @@ BEGIN
 	END PROCESS;
 
 	-- sortie
-	busNClock <= R_N_CLOCK;
 	busSS     <= R_SS;
 	busout    <= R_tft;
 
