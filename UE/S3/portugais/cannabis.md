@@ -4,7 +4,7 @@ Eu vou falar sobre a legalização do cannabis em os países lusófonos
 
 ## Estado atual em Portugal
 
-A lei de 29 de novembro de 2000 descriminalizou o consumo de narcóticos.
+A lei de 29 de novembro de 2000 descriminalizou o consumo de narcóticos (stupéfiants)
 Também descriminalizou sua aquisição e possessão para uso pessoal
 (somente si a quantidade detida não exceda as necessidades de uma pessoa por dez dias).
 Essas ofensas são agora parte da ofensa administrativa e não mais criminosas.
@@ -22,7 +22,7 @@ Por outro lado, o uso de cannabis é permitido para uso médico e religioso
 
 ## Estado atual em Mozambique
 
-A produção, venda e posse de qualquer forma de produtos de cannabis medicinal é ilegal em Moçambique
+A produção, venda e possessão de qualquer forma de produtos de cannabis medicinal é ilegal em Moçambique
 
 No entanto, é amplamente consumido e cultivado no país
 
@@ -30,7 +30,13 @@ Muitos agricultores cultivam cannabis porque é a única cultura que lhes permit
 
 Cannabis in Angola is illegal; the drug is locally referred to as diamba or liamba.
 
-A posse de cannabis é proibida. Os proprietários são enviados diretamente para a prisão
+A possessão de cannabis é proibida. Os proprietários são enviados diretamente para a prisão
+
+## Estado actual em Angola
+A produção, venda e possessão de qualquer forma de produtos de cannabis medicinal é ilegal em Angola.
+
+A cannabis é a droga ilícita mais comum em Angola.
+E cultivada em quase todas as províncias do país.
 
 ## Sources
 https://www.cannabis.info/fr/blog/statut-legal-mozambique
