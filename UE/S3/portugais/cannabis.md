@@ -48,3 +48,4 @@ https://www.cannabis.info/fr/blog/statut-legal-mozambique
 https://fr.wikipedia.org/w/index.php?title=L%C3%A9gislation_sur_le_cannabis&oldid=133928674#Approche_comparative
 https://www.cannabis.info/fr/blog/statut-legal-angola
 http://base.d-p-h.info/fr/fiches/premierdph/fiche-premierdph-2015.html
+https://www.francetvinfo.fr/sante/drogue-addictions/cannabis/au-portugal-la-depenalisation-des-drogues-est-un-succes_2511975.html
