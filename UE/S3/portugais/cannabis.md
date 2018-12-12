@@ -51,7 +51,7 @@ A cannabis é a droga ilícita mais comum em Angola.
 
 E cultivada em quase todas as províncias do país.
 
-O principal ponto de entrada e saída de drogas em Angola é o Aeroporto Internacional de Luanda, capital do país.
+O principal ponto de entrada e saída de drogas em Angola é o Aeroporto Internacional de Luanda, em a capital do país.
 
 ## Otros paises
 Em outros países menores, ela foi consumida para sempre, muito antes da colonização.
