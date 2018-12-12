@@ -41,15 +41,17 @@ No entanto, é amplamente consumido e cultivado no país
 
 Muitos agricultores cultivam cannabis porque é a única cultura que lhes permite ganhar dinheiro suficiente para sobreviver.
 
+## Estado actual em Angola
+
 Cannabis em Angola é ilegal; a droga é referida localmente como diamba ou liamba.
 
 A possessão de cannabis é proibida. Os proprietários são enviados diretamente para a prisão
 
-## Estado actual em Angola
-A produção, venda e possessão de qualquer forma de produtos de cannabis medicinal é ilegal em Angola.
-
 A cannabis é a droga ilícita mais comum em Angola.
+
 E cultivada em quase todas as províncias do país.
+
+O principal ponto de entrada e saída de drogas em Angola é o Aeroporto Internacional de Luanda, capital do país.
 
 ## Otros paises
 Em outros países menores, ela foi consumida para sempre, muito antes da colonização.
