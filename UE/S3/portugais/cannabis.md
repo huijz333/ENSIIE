@@ -11,9 +11,11 @@ Também descriminalizou sua aquisição e possessão para uso pessoal
 
 Essas ofensas são agora parte da ofensa administrativa e não mais criminosas.
 
-De fato, essa lei visa mais curar os consumidores do que puni-los.
-
 Em princípio, a penalidade é uma multa. Para os usuários de cannabis, é entre vinte e cinco e cento e cinquenta euros.
+
+Português pode usar drogas em lojas especializadas.
+
+De fato, essa lei visa mais curar os consumidores do que puni-los.
 
 Viciados em drogas são considerados doentes (como os asmáticos, por exemplo) e eles devem ser tratados
 
@@ -39,7 +41,7 @@ No entanto, é amplamente consumido e cultivado no país
 
 Muitos agricultores cultivam cannabis porque é a única cultura que lhes permite ganhar dinheiro suficiente para sobreviver.
 
-Cannabis in Angola is illegal; the drug is locally referred to as diamba or liamba.
+Cannabis em Angola é ilegal; a droga é referida localmente como diamba ou liamba.
 
 A possessão de cannabis é proibida. Os proprietários são enviados diretamente para a prisão
 
