@@ -38,6 +38,13 @@ A produção, venda e possessão de qualquer forma de produtos de cannabis medic
 A cannabis é a droga ilícita mais comum em Angola.
 E cultivada em quase todas as províncias do país.
 
+## Otros paises
+Em outros países menores, ela foi consumida para sempre, muito antes da colonização.
+
+A cannabis não tem legislação real nesses países
+
 ## Sources
 https://www.cannabis.info/fr/blog/statut-legal-mozambique
 https://fr.wikipedia.org/w/index.php?title=L%C3%A9gislation_sur_le_cannabis&oldid=133928674#Approche_comparative
+https://www.cannabis.info/fr/blog/statut-legal-angola
+http://base.d-p-h.info/fr/fiches/premierdph/fiche-premierdph-2015.html
