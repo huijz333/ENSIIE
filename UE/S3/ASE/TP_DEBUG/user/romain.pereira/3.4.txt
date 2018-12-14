@@ -1,0 +1,64 @@
+Récupération du PID du processus 'crazy':
+
+[romain.pereira@vm0 ~]$ ps -aux | grep crazy
+root      1194 99.7  0.0   4208   344 ?        Rs   08:53  22:19 /root/crazy /etc/fstab
+
+
+Lancement et attachement de gdb sur le processus 'crazy':
+
+[romain.pereira@vm0 ~]$ sudo su
+[root@vm0 romain.pereira]# gdb -p 1194 -q
+Attaching to process 1194
+Reading symbols from /root/crazy...done.
+Reading symbols from /lib64/libc.so.6...(no debugging symbols found)...done.
+Loaded symbols for /lib64/libc.so.6
+Reading symbols from /lib64/ld-linux-x86-64.so.2...(no debugging symbols found)...done.
+Loaded symbols for /lib64/ld-linux-x86-64.so.2
+0x00007f7987dfc320 in __close_nocancel () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.el7.x86_64
+
+
+Affichage du code source:
+(gdb) set listsize 0
+(gdb) list
+warning: Source file is more recent than executable.
+1       #include <unistd.h>
+2       #include <sys/types.h>
+3       #include <sys/stat.h>
+4       #include <fcntl.h>
+5
+6       int main(int argc, char **argv){
+7               char buff;
+8               int fd, count=1;
+9               while(count){
+10                      fd = open(argv[0], O_RDONLY);
+11                      count = read(fd, &buff, 1);
+12                      close(fd);
+13              }
+14          return 0;
+15      }
+
+
+Continue le programme:
+(gdb) continue
+Continuing.
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe698) at crazy.c:12
+12                      close(fd);
+
+
+Affichage de la pile d'appel:
+(gdb) info stack
+#0  main (argc=1, argv=0x7fffffffe698) at crazy.c:12
+
+
+Affichage de la variable 'count':
+(gdb) print count
+$1 = 1
+
+
+Modification de 'count' pour que le programme finisse:
+(gdb) set count=0
+(gdb) continue
+Continuing.
+[Inferior 1 (process 1560) exited normally]

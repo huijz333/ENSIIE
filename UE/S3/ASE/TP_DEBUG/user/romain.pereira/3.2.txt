@@ -1,0 +1,57 @@
+Lancement de GDB + affichage des sources
+
+[romain.pereira@vm0 ~]$ gdb -q
+(gdb) file a.out
+Reading symbols from /home/romain.pereira/a.out...done.
+(gdb) set listsize 0
+(gdb) list main
+1       # include <stdlib.h>
+2       # include <stdlib.h>
+3
+4       int check(char cond) {
+5               return(cond == 0);
+6       }
+7
+8       void loop(void) {
+9               int a = 0;
+10
+11              while (check(a)) {
+12                      usleep(1000);
+13              }
+14      }
+15
+16      int main(void) {
+17              loop();
+18              exit(0);
+19      }
+20
+
+
+
+Lancement de l'éxecution:
+(gdb) run
+Starting program: /home/romain.pereira/a.out 
+
+
+
+Interruption + affichage de la pile d'appel
+^C
+Program received signal SIGINT, Interrupt.
+0x00007ffff7ad3550 in __nanosleep_nocancel () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.el7.x86_64
+(gdb) info stack
+#0  0x00007ffff7ad3550 in __nanosleep_nocancel () from /lib64/libc.so.6
+#1  0x00007ffff7b04404 in usleep () from /lib64/libc.so.6
+#2  0x0000000000400592 in loop () at main.c:12
+#3  0x00000000004005ae in main () at main.c:17
+
+
+
+Fermeture de gdb:
+
+(gdb) quit
+A debugging session is active.
+
+        Inferior 1 [process 1429] will be killed.
+
+	Quit anyway? (y or n) y
