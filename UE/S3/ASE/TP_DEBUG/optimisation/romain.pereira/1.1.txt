@@ -1,0 +1,3 @@
+Le fichier '/proc/config.bz' n'existe pas
+
+Cependant, on trouve le fichier de configuration fournit dans le package de la distribution dans '/boot/config-*'

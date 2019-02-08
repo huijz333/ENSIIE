@@ -1,0 +1,46 @@
+Pour récupérer la tarball sur la vm:
+[romain.pereira@hpc01 ~]$ pcocc scp /tmp/TP_DEBUG/FlameGraph.tar.gz vm0:/home/romain.pereira/.
+[romain.pereira@hpc01 ~]$ pcocc ssh vmo
+[romain.pereira@vm0 ~]$ tar -xf FlameGraph.tar.gz
+[romain.pereira@vm0 ~]$ cd FlameGraph
+[romain.pereira@vm0 FlameGraph]$ ls -la
+total 2192
+drwxr-xr-x. 7 romain.pereira    4096 17 déc.   2017 .
+drwx------. 4 romain.pereira     138 10 déc.  15:46 ..
+-rwxr-xr-x. 1 romain.pereira     638 17 déc.   2017 aix-perf.pl
+drwxr-xr-x. 2 romain.pereira    4096 17 déc.   2017 demos
+drwxr-xr-x. 2 romain.pereira     143 17 déc.   2017 dev
+-rwxr-xr-x. 1 romain.pereira    3640 17 déc.   2017 difffolded.pl
+drwxr-xr-x. 2 romain.pereira      23 17 déc.   2017 docs
+-rw-r--r--. 1 romain.pereira 1382457 17 déc.   2017 example-dtrace-stacks.txt
+-rw-r--r--. 1 romain.pereira  155251 17 déc.   2017 example-dtrace.svg
+-rw-r--r--. 1 romain.pereira  110532 17 déc.   2017 example-perf-stacks.txt.gz
+-rw-r--r--. 1 romain.pereira  404484 17 déc.   2017 example-perf.svg
+-rwxr-xr-x. 1 romain.pereira    1293 17 déc.   2017 files.pl
+-rwxr-xr-x. 1 romain.pereira   34109 17 déc.   2017 flamegraph.pl
+drwxr-xr-x. 8 romain.pereira     163 17 déc.   2017 .git
+-rwxr-xr-x. 1 romain.pereira    2798 17 déc.   2017 jmaps
+-rwxr-xr-x. 1 romain.pereira    2710 17 déc.   2017 pkgsplit-perf.pl
+-rwxr-xr-x. 1 romain.pereira    4517 17 déc.   2017 range-perf.pl
+-rw-r--r--. 1 romain.pereira    8439 17 déc.   2017 README.md
+-rwxr-xr-x. 1 romain.pereira     669 17 déc.   2017 record-test.sh
+-rwxr-xr-x. 1 romain.pereira    1185 17 déc.   2017 stackcollapse-aix.pl
+-rwxr-xr-x. 1 romain.pereira    2304 17 déc.   2017 stackcollapse-elfutils.pl
+-rwxr-xr-x. 1 romain.pereira    1816 17 déc.   2017 stackcollapse-gdb.pl
+-rwxr-xr-x. 1 romain.pereira    3632 17 déc.   2017 stackcollapse-go.pl
+-rwxr-xr-x. 1 romain.pereira     514 17 déc.   2017 stackcollapse-instruments.pl
+-rwxr-xr-x. 1 romain.pereira    5159 17 déc.   2017 stackcollapse-jstack.pl
+-rwxr-xr-x. 1 romain.pereira    1859 17 déc.   2017 stackcollapse-ljp.awk
+-rwxr-xr-x. 1 romain.pereira   10309 17 déc.   2017 stackcollapse-perf.pl
+-rwxr-xr-x. 1 romain.pereira    6527 17 déc.   2017 stackcollapse-perf-sched.awk
+-rwxr-xr-x. 1 romain.pereira    2862 17 déc.   2017 stackcollapse.pl
+-rwxr-xr-x. 1 romain.pereira    2663 17 déc.   2017 stackcollapse-pmc.pl
+-rwxr-xr-x. 1 romain.pereira    1569 17 déc.   2017 stackcollapse-recursive.pl
+-rwxr-xr-x. 1 romain.pereira    7871 17 déc.   2017 stackcollapse-sample.awk
+-rwxr-xr-x. 1 romain.pereira    2310 17 déc.   2017 stackcollapse-stap.pl
+-rwxr-xr-x. 1 romain.pereira    2983 17 déc.   2017 stackcollapse-vsprof.pl
+-rw-r--r--. 1 romain.pereira    2613 17 déc.   2017 stackcollapse-vtune.pl
+drwxr-xr-x. 3 romain.pereira    4096 17 déc.   2017 test
+-rwxr-xr-x. 1 romain.pereira     861 17 déc.   2017 test.sh
+-rw-r--r--. 1 romain.pereira     208 17 déc.   2017 .travis.yml
+

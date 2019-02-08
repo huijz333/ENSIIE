@@ -11,11 +11,11 @@ state.ST_INIT 0 0 0
 state.ST_SWITCH 0 1 1 
 state.ST_WAIT 1 0 1 
 
-State Machine - |bus_ia|h100:inst20|state
-Name state.ST_TICK state.ST_DECR state.ST_LOAD 
-state.ST_LOAD 0 0 0 
-state.ST_DECR 0 1 1 
-state.ST_TICK 1 0 1 
+State Machine - |bus_ia|wrapper_ss:inst14|state
+Name state.ST_LOAD_MSG state.ST_WRITE_OUT state.ST_READ_BUSIN 
+state.ST_READ_BUSIN 0 0 0 
+state.ST_WRITE_OUT 0 1 1 
+state.ST_LOAD_MSG 1 0 1 
 
 State Machine - |bus_ia|rs232in:inst4|state
 Name state.WAIT_FIN state.GEN_PULSE state.WAIT_1B state.ECRIRE state.MainLoop state.WAIT_1P5B state.WAIT_StartBit 
@@ -43,11 +43,18 @@ state.ST_READ_BUSIN 0 0 0
 state.ST_WRITE_OUT 0 1 1 
 state.ST_LOAD_N 1 0 1 
 
-State Machine - |bus_ia|wrapper_ss:inst14|state
-Name state.ST_LOAD_MSG state.ST_WRITE_OUT state.ST_READ_BUSIN 
-state.ST_READ_BUSIN 0 0 0 
-state.ST_WRITE_OUT 0 1 1 
-state.ST_LOAD_MSG 1 0 1 
+State Machine - |bus_ia|h100:inst20|state
+Name state.ST_TICK state.ST_DECR state.ST_LOAD 
+state.ST_LOAD 0 0 0 
+state.ST_DECR 0 1 1 
+state.ST_TICK 1 0 1 
+
+State Machine - |bus_ia|wrapper_tick1000:inst16|state
+Name state.ST_TICK state.ST_LOAD_CHCK state.ST_WRITE_OUT state.ST_READ_BUSIN 
+state.ST_READ_BUSIN 0 0 0 0 
+state.ST_WRITE_OUT 0 0 1 1 
+state.ST_LOAD_CHCK 0 1 0 1 
+state.ST_TICK 1 0 0 1 
 
 State Machine - |bus_ia|plus12:inst2|state
 Name state.ST_WRITE_SUM state.ST_COMPUTE state.ST_WRITE_TFT state.ST_READ 

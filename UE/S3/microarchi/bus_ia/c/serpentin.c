@@ -162,9 +162,7 @@ static void wtest() {
 		mess.asrc = 255;
 		mess.ades = adest;
 		mess.uval = value & 0xFFFFFF ;
-		printf("sending msg ctl=%d ; asrc=%d ; ades=%d ; uval=%u\n", mess.ctl, mess.asrc, mess.ades, mess.uval);
 		mess_send(&mess);
-		printf("sent msg ctl=%d ; asrc=%d ; ades=%d ; uval=%u\n", mess.ctl, mess.asrc, mess.ades, mess.uval);
 	}
 }
 
