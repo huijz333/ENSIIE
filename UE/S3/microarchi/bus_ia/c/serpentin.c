@@ -101,7 +101,7 @@ static void wtest_read(int * adest, int * value) {
 						printf("  f # : set frequence to X (0 < # < 2^24)\n");
 						printf("  t # : enable/disable h1000 ticking (# in {0, 1})\n");
 						printf("  n # : set number of frames to be looped (# in [|1, 32|])\n");
-						printf("  s # @ : set the segments @ for the frame for the frame # (# in [|1, 32|] and @ in [|0b0000000, 0b0000001, ..., 0b1111111|])\n");
+						printf("  s # @ : set the @-segment frame to # (# in [|1, 32|] and @ in [|0b0000000, 0b0000001, ..., 0b1111111|])\n");
 						continue ;
 					case 'c':
 						*adest = ADDR_SS;
