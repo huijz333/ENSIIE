@@ -4,6 +4,9 @@
 extern "C"
 {
 #endif
+
+# define MTHREAD_MUTEX_INITIALIZER {0, 0, NULL}
+
   /* Types */
   typedef  volatile unsigned int mthread_tst_t;
 

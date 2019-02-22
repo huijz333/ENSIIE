@@ -335,23 +335,18 @@ mthread_create (mthread_t * __threadp,
 
   if(__attr == NULL){
     struct mthread_s * mctx;
-    char* stack;
 
     mctx = mthread_remove_first(&(joined_list));
     if(mctx == NULL){
       mctx = (struct mthread_s *)safe_malloc(sizeof(struct mthread_s));
-    }
-    if(mctx->stack == NULL){
-      stack = (char*)safe_malloc(MTHREAD_DEFAULT_STACK);
-    } else {
-      stack = mctx->stack;
-    }
-
-    mthread_init_thread(mctx); 
-    mthread_log("THREAD INIT","Create thread %p\n",mctx);
-    mctx->arg = __arg;
-    mctx->__start_routine = __start_routine;
-    mthread_mctx_set(mctx,mthread_start_thread,stack,MTHREAD_DEFAULT_STACK,mctx);   
+      mctx->stack = (char*)safe_malloc(MTHREAD_DEFAULT_STACK); 		/** AJOUT */
+    }																/** MODIF */
+    mthread_init_thread(mctx); 										/** MODIF */
+    mthread_log("THREAD INIT","Create thread %p\n",mctx); 			/** MODIF */
+    mctx->arg = __arg; 												/** MODIF */
+    mctx->__start_routine = __start_routine;						/** MODIF */
+    mthread_mctx_set(mctx,mthread_start_thread,(char *)mctx->stack,	/** MODIF */
+    		MTHREAD_DEFAULT_STACK,mctx);							/** MODIF */
     mthread_insert_last(mctx,&(vp->ready_list));
     *__threadp = mctx;
   } else {
@@ -401,11 +396,13 @@ mthread_join (mthread_t __th, void **__thread_return)
 {
   mthread_log("THREAD END","Join thread %p\n",__th);
 
-  while(__th->status != ZOMBIE){
+  while(__th->status != ZOMBIE) {
     mthread_yield();
   }
 
-  *__thread_return = (void*)__th->res;
+  if (__thread_return) {
+  	  *__thread_return = (void*)__th->res;
+  }
   mthread_log("THREAD END","Thread %p joined\n",__th);
   mthread_insert_last(__th,&(joined_list));
 

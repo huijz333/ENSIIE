@@ -1,0 +1,20 @@
+[LWP 01 Thread 0x7f68140208d0 SCHEDULER       INFO:] Virtual processor 1 started
+[LWP 00 Thread 0x55f506826640 GENERAL         INFO:] MThread library started
+[LWP 00 Thread 0x55f506826640 THREAD INIT     INFO:] Create thread 0x55f506826d90
+[LWP 01 Thread 0x7f68140208d0 LOAD BALANCE    INFO:] Work 0x55f506826d90 from 0 to 1
+[LWP 01 Thread 0x7f68140208d0 SCHEDULER       INFO:] Swap from 0x7f68140208d0 to 0x55f506826d90
+[LWP 03 Thread 0x7f68040208d0 SCHEDULER       INFO:] Virtual processor 3 started
+[LWP 02 Thread 0x7f680c0208d0 SCHEDULER       INFO:] Virtual processor 2 started
+[LWP 00 Thread 0x55f506826640 THREAD END      INFO:] Join thread 0x55f506826d90
+[LWP 00 Thread 0x55f506826640 THREAD YIELD    INFO:] Thread 0x55f506826640 yield
+[LWP 00 Thread 0x55f506826640 SCHEDULER       INFO:] Swap from 0x55f506826640 to 0x55f506826250
+[LWP 00 Thread 0x55f506826250 SCHEDULER       INFO:] Virtual processor 0 started
+[LWP 01 Thread 0x55f506826d90 THREAD INIT     INFO:] Thread 0x55f506826d90 started
+[LWP 01 Thread 0x55f506826d90 SCHEDULER       INFO:] Swap from 0x55f506826d90 to 0x7f68140208d0
+[LWP 01 Thread 0x7f68140208d0 SCHEDULER       INFO:] Insert 0x55f506826d90 in ready list of 1
+[LWP 01 Thread 0x7f68140208d0 SCHEDULER       INFO:] Swap from 0x7f68140208d0 to 0x55f506826d90
+[LWP 00 Thread 0x55f506826250 SCHEDULER       INFO:] Insert 0x55f506826640 in ready list of 0
+[LWP 03 Thread 0x7f68040208d0 LOAD BALANCE    INFO:] Work 0x55f506826640 from 0 to 3
+[LWP 03 Thread 0x7f68040208d0 SCHEDULER       INFO:] Swap from 0x7f68040208d0 to 0x55f506826640
+[LWP 03 Thread 0x55f506826640 THREAD END      INFO:] Thread 0x55f506826d90 joined
+[LWP 01 Thread 0x55f506826d90 THREAD END      INFO:] Thread 0x55f506826d90 ended (1)

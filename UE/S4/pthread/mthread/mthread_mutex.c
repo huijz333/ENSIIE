@@ -1,8 +1,6 @@
 #include <errno.h>
 #include "mthread_internal.h"
 
-
-
   /* Functions for mutex handling.  */
 
   /* Initialize MUTEX using attributes in *MUTEX_ATTR, or use the
@@ -13,16 +11,10 @@ mthread_mutex_init (mthread_mutex_t * __mutex,
 {
     if (__mutex_attr != NULL) 
         not_implemented ();
-
-    __mutex->list = malloc(sizeof(mthread_list_t));
-    if (__mutex->list == NULL) {
-        perror("malloc");
-        exit(errno);
-    }
-
-    __mutex->list->first = NULL;
-    __mutex->list->last  = NULL;
-    __mutex->nb_thread   = 0;
+																	/** MODIF */
+    __mutex->list 		= NULL;										/** MODIF */
+    __mutex->lock 		= 0;										/** MODIF */
+    __mutex->nb_thread  = 0;										/** MODIF */
 
     fprintf(stderr, "[MUTEX_INIT] MUTEX initialized\n");
 
@@ -73,6 +65,18 @@ mthread_mutex_lock (mthread_mutex_t * __mutex)
         mthread_spinlock_unlock(&__mutex->lock);
     } else {
         self = mthread_self();
+
+        /** si la liste des threads bloqués est NULL, on l'initialise */
+        if (__mutex->list == NULL) {							/** AJOUT */
+            __mutex->list = malloc(sizeof(mthread_list_t));		/** AJOUT */
+            if (__mutex->list == NULL) {						/** AJOUT */
+    			perror("malloc");								/** AJOUT */
+    			exit(errno);									/** AJOUT */
+            }													/** AJOUT */
+            __mutex->list->first = NULL;						/** AJOUT */
+            __mutex->list->last  = NULL;						/** AJOUT */
+        }														/** AJOUT */
+
         mthread_insert_last(self,__mutex->list);
         self->status = BLOCKED;
         vp = mthread_get_vp();
@@ -97,13 +101,17 @@ mthread_mutex_unlock (mthread_mutex_t * __mutex)
         return retval;
 
     mthread_spinlock_lock(&__mutex->lock);
-    if (__mutex->list->first != NULL) {
+    if (__mutex->list && __mutex->list->first != NULL) {		/** MODIF */
         first = mthread_remove_first(__mutex->list);
         vp = mthread_get_vp();
         first->status = RUNNING;
         mthread_insert_last(first,&(vp->ready_list));
     } else {
         __mutex->nb_thread = 0;
+
+        /** la liste des threads bloqués est vide, elle peut être dé-alloué */
+        free(__mutex->list);									/** AJOUT */
+        __mutex->list = NULL;									/** AJOUT */
     }
 
 
