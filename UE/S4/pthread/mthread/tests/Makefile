@@ -8,7 +8,9 @@ bold=$(shell (tput bold))
 normal=$(shell (tput sgr0))
 
 # liste des tests
-TESTS = thread mutex_init mutex_lock mutex_unlock mutex_destroy mutex mutex_initializer
+TESTS = thread \
+	mutex_init mutex_lock mutex_unlock mutex_destroy mutex mutex_trylock mutex_initializer \
+	sem_init sem_wait
 
 # compile tous les tests
 all: mthread $(TESTS)
@@ -20,7 +22,7 @@ mthread:
 # lance tous les tests
 test: all
 	@ for test in $(TESTS) ; do \
-	  	echo "Lancement du test $(bold)$$test$(normal)" ; ./$$test ; \
+	  	echo "Lancement du test $(bold)$$test$(normal)" ; ./$$test || (echo "Echec du test $(bold)$$test$(normal)" && exit 1); \
 	  done
 %: %.c
 	@echo "Compilation de $(bold)$^$(normal) vers $(bold)$@$(normal)"

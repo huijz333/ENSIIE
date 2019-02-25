@@ -19,11 +19,11 @@ extern "C"
 
 #include "mthread.h"
 
-/*typedef*/ struct mthread_list_s {
+typedef struct mthread_list_s {
   volatile struct mthread_s* first;
   volatile struct mthread_s* last;  
   mthread_tst_t lock;
-}; /*mthread_list_t;*/
+} mthread_list_t;
 
 typedef struct {
   struct mthread_s* idle;
@@ -65,6 +65,7 @@ struct mthread_s{
   extern void mthread_insert_first(struct mthread_s* item, mthread_list_t* list);
   extern void mthread_insert_last(struct mthread_s* item, mthread_list_t* list);
   extern struct mthread_s* mthread_remove_first(mthread_list_t* list);
+  extern int mthread_is_empty(mthread_list_t * list);
 
   extern void __mthread_yield(mthread_virtual_processor_t* vp);
   extern mthread_virtual_processor_t* mthread_get_vp();

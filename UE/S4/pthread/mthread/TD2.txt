@@ -25,7 +25,8 @@ Fonctionnement de 'mthread_yield':
 Alors, la main est donné au thread 'next' : on change le contexte du thread utilisateur courant par l'appel de la fonction lib C 'swapcontext'.
 Avant l'appel 'mthread_mctx_swap(current, next)', le thread 'current' s'éxécute ;
 après l'appel, c'est le thread 'next' qui s'éxécute.
-8 - 
+8 - finalement, on récupère le processeur virtuel courant : si un mutex avait
+enregistré un spinlock devant être deverouillé, c'est à ce moment que le spinlock est deverouillé
 
 
 **2.3**
@@ -65,6 +66,10 @@ Les lignes modifiés dans la bibliothèque sont commentées '/** MODIF */'
 Les lignes ajoutés dans la biliothèque sont commentées '/** AJOUT */'
 
 Liste des modifications (ajout noté '+', modification noté '~'):
+~ mthread_mutex_trylock:88-120 : implémentation de 'mthread_mutex_trylock'
+~ mthread_mutex_unlock:88-120 : réimplémentation de 'mthread_mutex_unlock' pour avoir les bons codes de retours (+ simplifié le code)
+~ mthread_mutex_lock:88-120 : réimplémentation de 'mthread_mutex_lock' pour avoir les bons codes de retours (+ simplifié le code)
++ mthread.c:360 : 'mthread_self' renvoie maintenant 'NULL' si aucun thread n'a été crée (au lieu de faire une erreur de segmentation)
 + mthread_mutex.c:26 : initialisation du spinlock à l'état 'deverouillé'
 + mthread.c:402 : vérification que le pointeur de stockage de retour pour 'mthread_join()' est non NULL
 ~ mthread.c:339-347 : initialisation de l'attribut 'stack' de la structure 'mthread_t' après son allocation
@@ -81,10 +86,18 @@ Chaque fonction est testé dans son fichier respectif:
 - mutex_destroy
 
 **3.5 Bonus**
-**3.9 Ajout de MTHREAD_MUTEX_INITIALIZER**
-Pour implémenter cette macro, la logique de l'attribut 'list' de la structure 'mthread_mutex_t' a été modifié.
+**3.7 Implémentation de trylock **
+(au regard du lock)
+
+**3.8 Ajout de MTHREAD_MUTEX_INITIALIZER**
+Pour implémenter cette macro, la logique d'allocation l'attribut 'list' de la structure 'mthread_mutex_t' a été modifié.
 La liste est 'NULL' si aucun thread n'est bloqué.
-Elle est alloué lorsqu'un thread se bloque, et dé-alloué lorsqu'un thread se debloque.
+Elle est alloué (donc non-NULL) au besoin lorsqu'un thread se bloque,
+et dé-alloué lorsque tous les threads sont débloqués.
+(avant, elle était alloué dés la création d'un mutex)
 (voir fichier 'mthread_mutex.c')
 
-Le test est disponible dans le fichier 'mutex_initializer'.
+**3.9**
+Le test est disponible dans le fichier 'mutex_trylock' et 'mutex_initializer'
+
+
