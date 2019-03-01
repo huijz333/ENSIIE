@@ -10,11 +10,15 @@ void*affichage(void*name) {
 	int i, j;
 	for (i = 0; i < 20; i++) {
 		sem_wait(&sem); /*prologue*/
-		for (j = 0; j < 5; j++)
+		for (j = 0; j < 5; j++) {
 			printf("%s ", (char*) name);
+			fflush(stdout);
+		}
 		sched_yield(); /*pour etre sur d’avoir des problemes*/
-		for (j = 0; j < 5; j++)
+		for (j = 0; j < 5; j++) {
 			printf("%s ", (char*) name);
+			fflush(stdout);
+		}
 		printf("\n");
 		fflush(stdout);
 		sem_post(&sem); /*epilogue*/

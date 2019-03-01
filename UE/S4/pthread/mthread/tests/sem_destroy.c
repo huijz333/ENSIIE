@@ -1,13 +1,8 @@
-/**
- * 1 - Crée un thread qui lance une routine qui termine immédiatement
- * 2 - Initialise un mutex
- */
-
 #include <stdio.h>
 #include <mthread.h>
 
 static void * run(void * unused) {
-	puts("Thread crée");
+	puts("Thread created");
 	return NULL;
 }
 
@@ -15,12 +10,13 @@ int main(void) {
 	mthread_t thrd;
 	mthread_create(&thrd, NULL, run, NULL);
 
-	mthread_mutex_t mutex;
-	puts("Initializing mutex...");
-	mthread_mutex_init(&mutex, NULL);
+	mthread_sem_t sem;
+	puts("Initializing semaphore...");
+	mthread_sem_init(&sem, 4);
 	puts("Done");
 	puts("Joining threads");
 	mthread_join(thrd, NULL);
+	mthread_sem_destroy(&sem);
 	puts("Success");
 	return 0;
 }

@@ -1,31 +1,29 @@
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
-# include <stdlib.h>
 
-# define NB_THREADS 		16
-# define INC_PER_THREAD 	1000
-# define DEFAULT_SEM_VALUE 	1
+# define NB_THREADS 16
+# define INC_PER_THREAD 1000
 
 int i = 0;
 mthread_sem_t sem;
 
 static void * run(void * arg) {
-	printf("[THREAD %ld] tente de passer le verrou (%u)\n", (long)arg, sem.value); fflush(stdout);
+	printf("[(sem.value=%d) THREAD %ld] tente de passer le verrou\n", sem.value, (long)arg); fflush(stdout);
 	mthread_sem_wait(&sem);
-	printf("[THREAD %ld] a passé le verrou (%u)\n", (long)arg, sem.value); fflush(stdout);
+	printf("[(sem.value=%d) THREAD %ld] a passé le verrou\n", sem.value, (long)arg); fflush(stdout);
 	int j;
 	for (j = 0 ; j < INC_PER_THREAD ; j++) {
-		++i;
+		i++;
 	}
 	mthread_sem_post(&sem);
-	printf("[THREAD %ld] a libéré le verrou (%u)\n", (long)arg, sem.value); fflush(stdout);
+	printf("[(sem.value=%d) THREAD %ld] a libéré le verrou\n", sem.value, (long)arg); fflush(stdout);
 	return NULL;
 }
 
 int main(int argc, char ** argv) {
 	mthread_t threads[NB_THREADS];
-	mthread_sem_init(&sem, DEFAULT_SEM_VALUE);
+	mthread_sem_init(&sem, 1);
 
 	int j;
 	for (j = 0 ; j < NB_THREADS ; j++) {

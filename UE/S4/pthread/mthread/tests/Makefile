@@ -8,9 +8,7 @@ bold=$(shell (tput bold))
 normal=$(shell (tput sgr0))
 
 # liste des tests
-TESTS = thread \
-	mutex_init mutex_lock mutex_unlock mutex_destroy mutex mutex_trylock mutex_initializer \
-	sem_init sem_wait
+TESTS = $(basename $(shell find . -name "*.c" -type f))
 
 # compile tous les tests
 all: mthread $(TESTS)
@@ -31,4 +29,5 @@ test: all
 clean:
 	rm -rf $(TESTS)
 
+# force la recompile des tests
 .PHONY: $(TESTS:=.c)

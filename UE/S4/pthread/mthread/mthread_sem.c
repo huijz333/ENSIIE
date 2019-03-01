@@ -34,7 +34,7 @@ int mthread_sem_wait(mthread_sem_t * sem) {
             sem->list->last  = NULL;
         }
 
-        /** insere le thread courant dans la liste des threads sur le mutex */
+        /** insere le thread courant dans la liste des threads en attente */
     	mthread_t self = mthread_self();
         mthread_insert_last(self, sem->list);
 
@@ -73,9 +73,6 @@ int mthread_sem_post(mthread_sem_t * sem) {
     /** prends le spinlock */
     mthread_spinlock_lock(&sem->lock);
 
-    /** increment la valeur du semaphore */
-	++sem->value;
-
     /** s'il y a un thread en attente sur le semaphore */
 	if (sem->list) {
 		/** on le retire de la liste */
@@ -93,6 +90,9 @@ int mthread_sem_post(mthread_sem_t * sem) {
 		/** ce thread devient prêt à l'execution */
 		mthread_virtual_processor_t * vp = mthread_get_vp();
 		mthread_insert_last(thrd, &(vp->ready_list));
+	} else {
+	    /** increment la valeur du semaphore */
+		++sem->value;
 	}
 
     mthread_spinlock_unlock(&sem->lock);
@@ -103,18 +103,43 @@ int mthread_sem_post(mthread_sem_t * sem) {
 
 }
 
-int mthread_sem_getvalue(mthread_sem_t * sem, int *sval) {
+int mthread_sem_getvalue(mthread_sem_t * sem, unsigned int * sval) {
 	*sval = sem->value;
 	return 0;
 }
 
 int mthread_sem_trywait(mthread_sem_t * sem) {
-	not_implemented ();
+
+	/** semaphore NULL => invalid argument */
+    if (sem == NULL) {
+        mthread_log("SEM_WAIT","SEM NULL\n");
+        return -1;
+    }
+
+    /** prends le verrou */
+    mthread_spinlock_lock(&sem->lock);
+
+	/** si le semaphore ne peut plus accueillir de thread */
+	if (sem->value == 0) {
+
+        mthread_spinlock_unlock(&sem->lock);
+        mthread_log("SEM_TRYLOCK","SEM already locked\n");
+    	return -1;
+	}
+
+	/** sinon, si le semaphore peut encore accueillir de threads */
+	--sem->value;
+	mthread_spinlock_unlock(&sem->lock);
+	mthread_log("SEM_WAIT","SEM acquired\n");
+
 	return 0;
 }
 
 /* undo sem_init() */
 int mthread_sem_destroy(mthread_sem_t * sem) {
-	not_implemented ();
+	/* libère la liste des threads en attente si elle est alloué */
+	if (sem->list && mthread_is_empty(sem->list)) {
+		free(sem->list);
+	}
 	return 0;
 }

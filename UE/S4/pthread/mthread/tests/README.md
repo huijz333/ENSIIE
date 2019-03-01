@@ -1,10 +1,16 @@
+Chaque test évalue une fonctionnalité de la bibliothèque.
+Le test est expliqué en haut du fichier correspondant.
+
 Pour compiler tous les tests
 > make
 
-Puis lancer les tests 1 par 1:
+Pour compiler/recompiler un seul test:
+> make [nom]
+
+exemple:
+> make thread
+
+Puis lancer les tests un par un:
 > ./thread
 > ./mutex
 [...]
-
-Ou, pour lancer tous les tests d'un coup:
-> make test

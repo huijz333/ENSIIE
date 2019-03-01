@@ -1,3 +1,8 @@
+/**
+ * 1 - Crée un thread qui lance une routine qui termine immédiatement
+ * 2 - Initialise un sémaphore
+ */
+
 #include <stdio.h>
 #include <mthread.h>
 

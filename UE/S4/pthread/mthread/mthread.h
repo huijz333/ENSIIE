@@ -28,7 +28,16 @@ typedef struct mthread_mutex_s mthread_mutex_t;
 struct mthread_mutexattr_s;
 typedef struct mthread_mutexattr_s mthread_mutexattr_t;
 
-struct mthread_cond_s;
+struct mthread_cond_s {
+	/* nombre de threads qui ont appelé 'mthread_cond_wait'  */
+	volatile int nb_thread;
+
+	/* un spinlock */
+	mthread_tst_t lock;
+
+	/* les threads qui sont en attente (bloqué sur 'mthread_cond_wait') */
+	mthread_list_t *list;
+};
 typedef struct mthread_cond_s mthread_cond_t;
 
 struct mthread_condattr_s;
@@ -151,7 +160,7 @@ extern int mthread_sem_init(mthread_sem_t * sem, unsigned int value);
 extern int mthread_sem_wait(mthread_sem_t * sem); /* P(sem), wait(sem) */
 extern int mthread_sem_post(mthread_sem_t * sem); /* V(sem), signal(sem) */
 
-extern int mthread_sem_getvalue(mthread_sem_t * sem, int *sval);
+extern int mthread_sem_getvalue(mthread_sem_t * sem, unsigned int *sval);
 extern int mthread_sem_trywait(mthread_sem_t * sem);
 
 extern int mthread_sem_destroy(mthread_sem_t * sem); /* undo sem_init() */

@@ -1,6 +1,6 @@
 /**
  * 1 - Crée un thread qui lance une routine qui termine immédiatement
- * 2 - Initialise un mutex
+ * 2 - Initialise une condition
  */
 
 #include <stdio.h>
@@ -15,9 +15,9 @@ int main(void) {
 	mthread_t thrd;
 	mthread_create(&thrd, NULL, run, NULL);
 
-	mthread_mutex_t mutex;
-	puts("Initializing mutex...");
-	mthread_mutex_init(&mutex, NULL);
+	mthread_cond_t cond;
+	puts("Initializing cond...");
+	mthread_cond_init(&cond, NULL);
 	puts("Done");
 	puts("Joining threads");
 	mthread_join(thrd, NULL);
