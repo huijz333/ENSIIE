@@ -1,0 +1,103 @@
+# TD2
+
+**2.1** : mthread.c
+ligne 126 : __mthread_yield
+
+**2.2**
+L'ordonnanceur utilisateur possède 'MTHREAD_MAX_VIRTUAL_PROCESSORS' (= 64) processeurs virtuels.
+
+L'ordonnanceur possède un thread 'idle', qui est placé en execution sur les processeurs lorsqu'aucun autre thread ne peut prendre la main.
+La routine du thread 'idle' est disponible ligne 174 de mthread.c, elle suit l'algorithme suivant:
+1 - Initialisation synchrone de tous les processeurs virtuels.
+2 - Bouclé pour toujours en appelle 'mthread_yield()'.
+	C'est à dire, regarder si un autre thread souhaite reprendre son execution.
+
+Fonctionnement de 'mthread_yield':
+1 - Récupères le processeur virtuel courant.
+2 - Récupères le thread qui s'execute couramment sur le processeur virtuel ('current')
+3 - Récupères le prochain thread qui doit s'executer sur le processeur virtuel ('next').
+4 - Si un processus avait été marqué comme devant être ré-ordonnancé, il est ajouté maintenant à la fin de la file du processeur virtuel.
+5 - Si le processus courant n'est pas le processus 'idle',
+	5.a - on vérifie son état: si il est dans l'état 'RUNNING', on le marque comme devant être ré-ordonnancé.
+	5.b - s'il n'y a pas de thread suivant ('next' vaut NULL), alors le thread suivant devient le thread 'idle' ('next := idle')
+6 - Ici 'next' peut valoir 'NULL' si 'current' vaut 'idle', alors, le thread 'idle' garde la main.
+7 - Sinon, si 'current' est différent de 'idle', 'next' est non 'NULL' (soit 'next' vaut 'idle', soit 'next' est un thread qui peut prendre la main).
+Alors, la main est donné au thread 'next' : on change le contexte du thread utilisateur courant par l'appel de la fonction lib C 'swapcontext'.
+Avant l'appel 'mthread_mctx_swap(current, next)', le thread 'current' s'éxécute ;
+après l'appel, c'est le thread 'next' qui s'éxécute.
+8 - finalement, on récupère le processeur virtuel courant : si un mutex avait
+enregistré un spinlock devant être deverouillé, c'est à ce moment que le spinlock est deverouillé
+
+
+**2.3**
+Ligne **23** : 'mthread_list_init'
+Ligne **34** : 'mthread_insert_first'
+Ligne **47** : 'mthread_insert_last'
+Ligne **61** : 'mthread_remove_first'
+
+**2.4**
+Pour insérer un thread dans la liste des threads prêts de l’ordonnanceur,
+il suffit d'ajouter la structure du thread dans la liste 'ready_list' d'un processeur virtuel, code simplifié:
+
+```
+struct mthread_s * thread = [...];
+mthread_virtual_processor_t * vp = mthread_get_vp();
+mthread_insert_last(thread, &(vp->ready_list)); 
+```
+
+**2.5**
+Pour bloquer un thread, il suffit de passer son status dans 'BLOCKED', code simplifié:
+```
+struct mthread_s * thread = [...];
+thread->status = BLOCKED;
+```
+
+**3.1**
+TODO : mettre schéma au propre
+
+**3.2**
+man pthread_mutex
+
+**3.3**
+Les fonctions étaient déjà implémentées.
+J'ai cependant effectué quelques modifications à la bibliothèque pour corriger des erreurs de segmentation:
+
+Les lignes modifiés dans la bibliothèque sont commentées '/** MODIF */'
+Les lignes ajoutés dans la biliothèque sont commentées '/** AJOUT */'
+
+Liste des modifications (ajout noté '+', modification noté '~'):
+~ mthread_mutex_trylock:88-120 : implémentation de 'mthread_mutex_trylock'
+~ mthread_mutex_unlock:88-120 : réimplémentation de 'mthread_mutex_unlock' pour avoir les bons codes de retours (+ simplifié le code)
+~ mthread_mutex_lock:88-120 : réimplémentation de 'mthread_mutex_lock' pour avoir les bons codes de retours (+ simplifié le code)
++ mthread.c:360 : 'mthread_self' renvoie maintenant 'NULL' si aucun thread n'a été crée (au lieu de faire une erreur de segmentation)
++ mthread_mutex.c:26 : initialisation du spinlock à l'état 'deverouillé'
++ mthread.c:402 : vérification que le pointeur de stockage de retour pour 'mthread_join()' est non NULL
+~ mthread.c:339-347 : initialisation de l'attribut 'stack' de la structure 'mthread_t' après son allocation
+
+**3.4**
+Pour compiler et lancer les tests:
+> cd tests
+> make test
+
+Chaque fonction est testé dans son fichier respectif:
+- mutex_init
+- mutex_lock
+- mutex_unlock
+- mutex_destroy
+
+**3.5 Bonus**
+**3.7 Implémentation de trylock **
+(au regard du lock)
+
+**3.8 Ajout de MTHREAD_MUTEX_INITIALIZER**
+Pour implémenter cette macro, la logique d'allocation l'attribut 'list' de la structure 'mthread_mutex_t' a été modifié.
+La liste est 'NULL' si aucun thread n'est bloqué.
+Elle est alloué (donc non-NULL) au besoin lorsqu'un thread se bloque,
+et dé-alloué lorsque tous les threads sont débloqués.
+(avant, elle était alloué dés la création d'un mutex)
+(voir fichier 'mthread_mutex.c')
+
+**3.9**
+Le test est disponible dans le fichier 'mutex_trylock' et 'mutex_initializer'
+
+

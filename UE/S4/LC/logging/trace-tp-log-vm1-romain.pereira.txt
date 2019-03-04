@@ -1,0 +1,757 @@
+Le script a débuté sur dim. 17 févr. 2019 21:54:25 CET
+]0;romain.pereira@hpc01:~[?1034h[romain.pereira@hpc01 ~]$ pcocc ssh vm1
+]0;romain.pereira@vm1:~[?1034h[romain.pereira@vm1 21:54:31]$ sudo -s
+]0;root@vm1:/home/romain.pereira[?1034h[root@vm1 21:54:33]# man rsyslog.conf
+[?1049h[?1h=RSYSLOG.CONF(5)                                                                    Linux System Administration                                                                    RSYSLOG.CONF(5)[m
+[m
+[1mNAME[0m[m
+       rsyslog.conf - rsyslogd(8) configuration file[m
+[m
+[1mDESCRIPTION[0m[m
+       The [4mrsyslog.conf[24m file is the main configuration file for the [1mrsyslogd[0m(8) which logs system messages on *nix systems.  This file specifies rules for logging.  For special features see the[m
+       [1mrsyslogd[0m(8) manpage. Rsyslog.conf is backward-compatible with sysklogd's syslog.conf file. So if you migrate from sysklogd you can rename it and it should work.[m
+[m
+       [1mNote[0m [1mthat[0m [1mthis[0m [1mversion[0m [1mof[0m [1mrsyslog[0m [1mships[0m [1mwith[0m [1mextensive[0m [1mdocumentation[0m [1min[0m [1mhtml[0m [1mformat.[0m  This is provided in the ./doc subdirectory and probably in a separate package if you installed rsys‐[m
+       log via a packaging system.  To use rsyslog's advanced features, you [1mneed[0m to look at the html documentation, because the man pages only cover basic aspects of operation.[m
+[m
+[1mMODULES[0m[m
+       Rsyslog has a modular design. Consequently, there is a growing number of modules. See the html documentation for their full description.[m
+[m
+       [4momsnmp[24m SNMP trap output module[m
+[m
+       [4momgssapi[24m[m
+              Output module for GSS-enabled syslog[m
+[m
+       [4mommysql[24m[m
+              Output module for MySQL[m
+[m
+[7m Manual page rsyslog.conf(5) line 1 (press h for help or q to quit)[27m[K[K/[Krr[Kee[Kmm[Koo[Ktt[Kee[K  [Kmm[Kaa[Kcc[K[1;1HRSYSLOG.CONF(5)                                                                    Linux System Administration                                                                    RSYSLOG.CONF(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       rsyslog.conf - rsyslogd(8) configuration file[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The [4mrsyslog.conf[24m file is the main configuration file for the [1mrsyslogd[0m(8) which logs system messages on *nix systems.  This file specifies rules for logging.  For special features see the[m
+[8;1H       [1mrsyslogd[0m(8) manpage. Rsyslog.conf is backward-compatible with sysklogd's syslog.conf file. So if you migrate from sysklogd you can rename it and it should work.[m
+[9;1H[m
+[10;1H       [1mNote[0m [1mthat[0m [1mthis[0m [1mversion[0m [1mof[0m [1mrsyslog[0m [1mships[0m [1mwith[0m [1mextensive[0m [1mdocumentation[0m [1min[0m [1mhtml[0m [1mformat.[0m  This is provided in the ./doc subdirectory and probably in a separate package if you installed rsys‐[m
+[11;1H       log via a packaging system.  To use rsyslog's advanced features, you [1mneed[0m to look at the html documentation, because the man pages only cover basic aspects of operation.[m
+[12;1H[m
+[13;1H[1mMODULES[0m[m
+[14;1H       Rsyslog has a modular design. Consequently, there is a growing number of modules. See the html documentation for their full description.[m
+[15;1H[m
+[16;1H       [4momsnmp[24m SNMP trap output module[m
+[17;1H[m
+[18;1H       [4momgssapi[24m[m
+[19;1H              Output module for GSS-enabled syslog[m
+[20;1H[m
+[21;1H       [4mommysql[24m[m
+[22;1H              Output module for MySQL[m
+[23;1H[m
+[24;1H[1;1HRSYSLOG.CONF(5)                                                                    Linux System Administration                                                                    RSYSLOG.CONF(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       rsyslog.conf - rsyslogd(8) configuration file[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The [4mrsyslog.conf[24m file is the main configuration file for the [1mrsyslogd[0m(8) which logs system messages on *nix systems.  This file specifies rules for logging.  For special features see the[m
+[8;1H       [1mrsyslogd[0m(8) manpage. Rsyslog.conf is backward-compatible with sysklogd's syslog.conf file. So if you migrate from sysklogd you can rename it and it should work.[m
+[9;1H[m
+[10;1H       [1mNote[0m [1mthat[0m [1mthis[0m [1mversion[0m [1mof[0m [1mrsyslog[0m [1mships[0m [1mwith[0m [1mextensive[0m [1mdocumentation[0m [1min[0m [1mhtml[0m [1mformat.[0m  This is provided in the ./doc subdirectory and probably in a separate package if you installed rsys‐[m
+[11;1H       log via a packaging system.  To use rsyslog's advanced features, you [1mneed[0m to look at the html documentation, because the man pages only cover basic aspects of operation.[m
+[12;1H[m
+[13;1H[1mMODULES[0m[m
+[14;1H       Rsyslog has a modular design. Consequently, there is a growing number of modules. See the html documentation for their full description.[m
+[15;1H[m
+[16;1H       [4momsnmp[24m SNMP trap output module[m
+[17;1H[m
+[18;1H       [4momgssapi[24m[m
+[19;1H              Output module for GSS-enabled syslog[m
+[20;1H[m
+[21;1H       [4mommysql[24m[m
+[22;1H              Output module for MySQL[m
+[23;1H[m
+[24;1H...skipping...
+   [1m[7mRemote[27m[0m[7m [27m[1m[7mmac[27m[0m[1mhine[0m[m
+       There are three ways to forward message: the traditional UDP transport, which is extremely lossy but standard, the plain TCP based transport which loses messages only during  cer‐[m
+       tain situations but is widely available and the RELP transport which does not lose messages but is currently available only as part of rsyslogd 3.15.0 and above.[m
+[m
+       To  forward  messages to another host via UDP, prepend the hostname with the at sign ("@").  To forward it via plain tcp, prepend two at signs ("@@"). To forward via RELP, prepend[m
+       the string ":omrelp:" in front of the hostname.[m
+[m
+       [1mExample:[0m[m
+              *.* @192.168.0.1[m
+[m
+       In the example above, messages are forwarded via UDP to the machine 192.168.0.1, the destination port defaults to 514. Due to the nature of UDP, you will probably lose  some  mes‐[m
+       sages  in  transit.  If you expect high traffic volume, you can expect to lose a quite noticeable number of messages (the higher the traffic, the more likely and severe is message[m
+       loss).[m
+[m
+       [1mIf[0m [1myou[0m [1mwould[0m [1mlike[0m [1mto[0m [1mprevent[0m [1mmessage[0m [1mloss,[0m [1muse[0m [1mRELP:[0m[m
+              *.* :omrelp:192.168.0.1:2514[m
+[m
+       Note that a port number was given as there is no standard port for relp.[m
+[m
+       Keep in mind that you need to load the correct input and output plugins (see "Modules" above).[m
+[m
+       Please note that rsyslogd offers a variety of options in regarding to remote forwarding. For full details, please see the html documentation.[m
+[m
+[7m Manual page rsyslog.conf(5) line 169 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K   [1mList[0m [1mof[0m [1musers[0m[m
+[7m Manual page rsyslog.conf(5) line 170 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K       Usually critical messages are also directed to ``root'' on that machine. You can specify a list of users that shall get the message by simply writing ":omusrmsg:" followed by  the[m
+[7m Manual page rsyslog.conf(5) line 171 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K       login name. You may specify more than one user by separating them with commas (','). If they're logged in they get the message (for example: ":omusrmsg:root,user1,user2").[m
+[7m Manual page rsyslog.conf(5) line 172 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K[m
+[7m Manual page rsyslog.conf(5) line 173 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K   [1mEveryone[0m [1mlogged[0m [1mon[0m[m
+[7m Manual page rsyslog.conf(5) line 174 (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KBB[K       Emergency messages often go to all users currently online to notify them that something strange is happening with the system. To specify this wall(1)-feature use an ":omusrmsg:*".[m
+[7m Manual page rsyslog.conf(5) line 175 (press h for help or q to quit)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 21:56:29]# >         & stop
+bash: Erreur de syntaxe près du symbole inattendu « & »
+]0;root@vm1:/home/romain.pereira[root@vm1 21:59:13]# -bash: Erreur de syntaxe près du symbole inattendu « & »
+[1] 1546
+bash: $'\302\273' : commande introuvable
+]0;root@vm1:/home/romain.pereirabash: -bash: : commande introuvable
+[root@vm1 21:59:13]# [romain.pereira@hpc01 ~]$ }^C
+bash: [romain.pereira@hpc01 : commande introuvable
+[1]+  Termine 127             -bash: Erreur de syntaxe près du symbole inattendu «
+]0;root@vm1:/home/romain.pereira[root@vm1 21:59:13]# ^C
+]0;root@vm1:/home/romain.pereira[root@vm1 21:59:14]# vim /etc/
+Display all 184 possibilities? (y or n)
+[root@vm1 21:59:14]# vim /etc/[K[Kc/rsyslog.o[Kconf 
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.conf" 91L, 3232C[>c[1;1H[34m# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.[m
+$ModLoad imuxsock [34m# provides support for local system logging (e.g. via logger command)[m
+$ModLoad imjournal [34m# provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####[m[24;181H1,1[10CHaut[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[24;181H2,0-1[2;1H[?12l[?25h[?25l[24;181H3,1  [3;1H[?12l[?25h[?25l[27m[m[H[2J[2;1H[34m#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files[m
+$WorkDirectory /var/lib/rsyslog
+
+[34m# Use default timestamp format[m
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+[34m# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/[m
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+[34m# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.[m
+$OmitLocalLogging on
+
+[34m# File to store the position in the journal[m
+$IMJournalStateFile imjournal.state[24;181H22,0-1[8C30%[1;1H[?12l[?25h[?25l[27m[m[H[2J[1;1H$IMJournalStateFile imjournal.state
+
+
+[34m#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages![m
+*.info;mail.none;authpriv.none;cron.none[16C/var/log/messages
+
+[34m# The authpriv file has restricted access.[m
+authpriv.*[46C/var/log/secure
+
+[34m# Log all the mail messages in one place.[m
+mail.*[50C-/var/log/maillog
+
+
+[34m# Log cron stuff[m
+cron.*[50C/var/log/cron[24;181H43,1[10C61%[1;1H[?12l[?25h[?25l[24;181H[K[24;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[24;1H[K[24;1H[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:03:54]# vim /etc/rsyslog.conf [K[K[K[K[Kd/
+21-cloudinit.conf  listen.conf        
+[root@vm1 22:03:54]# vim /etc/rsyslog.d/listen.conf 
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.d/listen.conf" 1L, 49C[>c[1;1H$SystemLogSocketName /run/systemd/journal/syslog
+[94m~                                                                                                                                                                                                     [3;1H~                                                                                                                                                                                                     [4;1H~                                                                                                                                                                                                     [5;1H~                                                                                                                                                                                                     [6;1H~                                                                                                                                                                                                     [7;1H~                                                                                                                                                                                                     [8;1H~                                                                                                                                                                                                     [9;1H~                                                                                                                                                                                                     [10;1H~                                                                                                                                                                                                     [11;1H~                                                                                                                                                                                                     [12;1H~                                                                                                                                                                                                     [13;1H~                                                                                                                                                                                                     [14;1H~                                                                                                                                                                                                     [15;1H~                                                                                                                                                                                                     [16;1H~                                                                                                                                                                                                     [17;1H~                                                                                                                                                                                                     [18;1H~                                                                                                                                                                                                     [19;1H~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;181H1,1[10CTout[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[24;1H[K[24;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[24;1H[K[24;1H[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:04:01]# vim /etc/rsyslog.d/listen.conf [K[K[K[K[K[K[K[K[K[K[K[Ksend.conf
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.d/send.conf" [Nouveau fichier][>c[2;1H[94m~                                                                                                                                                                                                     [3;1H~                                                                                                                                                                                                     [4;1H~                                                                                                                                                                                                     [5;1H~                                                                                                                                                                                                     [6;1H~                                                                                                                                                                                                     [7;1H~                                                                                                                                                                                                     [8;1H~                                                                                                                                                                                                     [9;1H~                                                                                                                                                                                                     [10;1H~                                                                                                                                                                                                     [11;1H~                                                                                                                                                                                                     [12;1H~                                                                                                                                                                                                     [13;1H~                                                                                                                                                                                                     [14;1H~                                                                                                                                                                                                     [15;1H~                                                                                                                                                                                                     [16;1H~                                                                                                                                                                                                     [17;1H~                                                                                                                                                                                                     [18;1H~                                                                                                                                                                                                     [19;1H~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;181H0,0-1[8CTout[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[24;1H[1m-- INSERTION --[m[24;16H[K[24;181H0,1[10CTout[1;1H[?12l[?25h[24;1H[K[1;1H[?25l[24;181H0,0-1[8CTout[1;1H[?12l[?25h[?25l[24;181H[K[24;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[24;1H[K[24;1H[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:04:04]# vim /etc/rsyslog.d/send.conf[K[K[K[K[K.conf
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.d/send.conf" [Nouveau fichier][>c[2;1H[94m~                                                                                                                                                                                                     [3;1H~                                                                                                                                                                                                     [4;1H~                                                                                                                                                                                                     [5;1H~                                                                                                                                                                                                     [6;1H~                                                                                                                                                                                                     [7;1H~                                                                                                                                                                                                     [8;1H~                                                                                                                                                                                                     [9;1H~                                                                                                                                                                                                     [10;1H~                                                                                                                                                                                                     [11;1H~                                                                                                                                                                                                     [12;1H~                                                                                                                                                                                                     [13;1H~                                                                                                                                                                                                     [14;1H~                                                                                                                                                                                                     [15;1H~                                                                                                                                                                                                     [16;1H~                                                                                                                                                                                                     [17;1H~                                                                                                                                                                                                     [18;1H~                                                                                                                                                                                                     [19;1H~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;181H0,0-1[8CTout[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[24;1H[1m-- INSERTION --[m[24;16H[K[24;181H0,1[10CTout[1;1H[?12l[?25h[?25l*[24;181H1,2[1;2H[?12l[?25h[?25l.[24;183H3[1;3H[?12l[?25h[?25l*[24;183H4[1;4H[?12l[?25h[27m[m[H[2J[?25l[1;1H*.*
+[94m~                                                                                                 [3;1H~                                                                                                 [4;1H~                                                                                                 [5;1H~                                                                                                 [6;1H~                                                                                                 [7;1H~                                                                                                 [8;1H~                                                                                                 [9;1H~                                                                                                 [10;1H~                                                                                                 [11;1H~                                                                                                 [12;1H~                                                                                                 [13;1H~                                                                                                 [14;1H~                                                                                                 [15;1H~                                                                                                 [16;1H~                                                                                                 [17;1H~                                                                                                 [18;1H~                                                                                                 [19;1H~                                                                                                 [20;1H~                                                                                                 [21;1H~                                                                                                 [22;1H~                                                                                                 [23;1H~                                                                                                 [m[24;1H[1m-- INSERTION --[m[65C1,4[10CTout[1;4H[?12l[?25h[?25l[24;83H5[1;5H[?12l[?25h[?25l@[24;83H6[1;6H[?12l[?25h[?25l@[24;83H7[1;7H[?12l[?25h[?25l10.251.0.1/16[24;83H20[1;20H[?12l[?25h[?25l[1;19H[K[24;83H19[1;19H[?12l[?25h[?25l[1;18H[K[24;84H8[1;18H[?12l[?25h[?25l[1;17H[K[24;84H7[1;17H[?12l[?25h[27m[m[H[2J[?25l[1;1H*.* @@10.251.0.1
+[94m~                                                                                                                                                                                                     [3;1H~                                                                                                                                                                                                     [4;1H~                                                                                                                                                                                                     [5;1H~                                                                                                                                                                                                     [6;1H~                                                                                                                                                                                                     [7;1H~                                                                                                                                                                                                     [8;1H~                                                                                                                                                                                                     [9;1H~                                                                                                                                                                                                     [10;1H~                                                                                                                                                                                                     [11;1H~                                                                                                                                                                                                     [12;1H~                                                                                                                                                                                                     [13;1H~                                                                                                                                                                                                     [14;1H~                                                                                                                                                                                                     [15;1H~                                                                                                                                                                                                     [16;1H~                                                                                                                                                                                                     [17;1H~                                                                                                                                                                                                     [18;1H~                                                                                                                                                                                                     [19;1H~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;1H[1m-- INSERTION --[m[165C1,17[9CTout[1;17H[?12l[?25h[24;1H[K[1;16H[?25l[24;181H1,16[9CTout[1;16H[?12l[?25h[?25l[24;181H[K[24;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"/etc/rsyslog.d/send.conf" [Nouveau] 1L, 17C écrit(s)
+[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:05:02]# vim /etc/rsyslog.d/send.conflisten.conf [9P[C[C[C[C[C
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.conf" 91L, 3232C[>c[1;1H[34m# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/[m
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+[34m# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.[m
+$OmitLocalLogging on
+
+[34m# File to store the position in the journal[m
+$IMJournalStateFile imjournal.state
+
+
+[34m#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages![m
+*.info;mail.none;authpriv.none;cron.none[16C/var/log/messages[24;181H43,1[10C45%[12;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[27m[m[H[2J[1;1H[34m# Don't log private authentication messages![m
+*.info;mail.none;authpriv.none;cron.none[16C/var/log/messages
+
+[34m# The authpriv file has restricted access.[m
+authpriv.*[46C/var/log/secure
+
+[34m# Log all the mail messages in one place.[m
+mail.*[50C-/var/log/maillog
+
+
+[34m# Log cron stuff[m
+cron.*[50C/var/log/cron
+
+[34m# Everybody gets emergency messages[m
+*.emerg[49C:omusrmsg:*
+
+[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log[24;181H53,1[10C76%[1;1H[?12l[?25h[?25l[27m[m[H[2J[3;1H[34m# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+# ### end of the forwarding rule ###[m
+[94m~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;181H74,0-1[8CBas[1;1H[?12l[?25h[?25l[27m[m[H[2J[1;1H[34m# Don't log private authentication messages![m
+*.info;mail.none;authpriv.none;cron.none[16C/var/log/messages
+
+[34m# The authpriv file has restricted access.[m
+authpriv.*[46C/var/log/secure
+
+[34m# Log all the mail messages in one place.[m
+mail.*[50C-/var/log/maillog
+
+
+[34m# Log cron stuff[m
+cron.*[50C/var/log/cron
+
+[34m# Everybody gets emergency messages[m
+*.emerg[49C:omusrmsg:*
+
+[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log[24;181H75,0-1[8C76%[23;1H[?12l[?25h[?25l[24;181H[K[24;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[24;1H[K[24;1H[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:05:14]# vim /etc/rsyslog.conf ^C
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:19]# [1@(reverse-i-search)`':[C[23@s': vim /etc/rsyslog.confe': vim /etc/rsyslog.d/send.conf^C
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:21]# service rsyslog restart
+Redirecting to /bin/systemctl restart rsyslog.service
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:24]# pidof rsyslogd
+1588
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:32]# 10.251.0.1/16^C
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:40]# lsof -p 1588 -P
+bash: lsof : commande introuvable
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:45]# lsof -p 1588 -P^C
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:48]# yum install lsof
+Résolution des dépendances
+--> Lancement de la transaction de test
+---> Le paquet lsof.x86_64 0:4.87-6.el7 sera installé
+--> Résolution des dépendances terminée
+
+Dépendances résolues
+
+======================================================================================================================================================================================================
+ Package                                      Architecture                                   Version                                               Dépôt                                        Taille
+======================================================================================================================================================================================================
+Installation :
+ lsof                                         x86_64                                         4.87-6.el7                                            base                                         331 k
+
+Résumé de la transaction
+======================================================================================================================================================================================================
+Installation   1 Paquet
+
+Taille totale des téléchargements : 331 k
+Taille d'installation : 927 k
+Is this ok [y/d/N]: y
+Downloading packages:
+lsof-4.87-6.el7.x86_64.rpm                                                                                                                                                     | 331 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installation : lsof-4.87-6.el7.x86_64 [                                                                                                                                                       ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#########                                                                                                                                              ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###################                                                                                                                                    ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [########################                                                                                                                               ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#########################                                                                                                                              ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [##############################                                                                                                                         ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [########################################                                                                                                               ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###################################################                                                                                                    ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#########################################################                                                                                              ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###################################################################                                                                                    ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [##############################################################################                                                                         ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#########################################################################################                                                              ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###################################################################################################                                                    ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###########################################################################################################                                            ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [############################################################################################################                                           ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#######################################################################################################################                                ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#############################################################################################################################                          ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [######################################################################################################################################                 ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [############################################################################################################################################           ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [###############################################################################################################################################        ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [################################################################################################################################################       ] 1/1  Installation : lsof-4.87-6.el7.x86_64 [#####################################################################################################################################################  ] 1/1  Installation : lsof-4.87-6.el7.x86_64                                                                                                                                                           1/1 
+  Vérification : lsof-4.87-6.el7.x86_64                                                                                                                                                           1/1 
+
+Installé :
+  lsof.x86_64 0:4.87-6.el7                                                                                                                                                                            
+
+Terminé !
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:55]# yum install lsof[1Plsof -p 1588 -P
+COMMAND   PID USER   FD      TYPE             DEVICE SIZE/OFF    NODE NAME
+rsyslogd 1588 root  cwd       DIR              253,1      244      64 /
+rsyslogd 1588 root  rtd       DIR              253,1      244      64 /
+rsyslogd 1588 root  txt       REG              253,1   663864  812706 /usr/sbin/rsyslogd
+rsyslogd 1588 root  mem       REG              253,1    26152 4490711 /usr/lib64/rsyslog/lmnsd_ptcp.so
+rsyslogd 1588 root  mem       REG               0,19  8388608    9285 /run/log/journal/66d183adaa0a486eba418148d5946b85/system.journal
+rsyslogd 1588 root  mem       REG               0,19  8388608    9990 /run/log/journal/609bbd29e32a4898e604f49bff82a88c/system.journal
+rsyslogd 1588 root  mem       REG              253,1    11320 4490714 /usr/lib64/rsyslog/lmtcpclt.so
+rsyslogd 1588 root  mem       REG              253,1    22000 4490710 /usr/lib64/rsyslog/lmnetstrms.so
+rsyslogd 1588 root  mem       REG              253,1    68192   90505 /usr/lib64/libbz2.so.1.0.6
+rsyslogd 1588 root  mem       REG              253,1    99944   90600 /usr/lib64/libelf-0.168.so
+rsyslogd 1588 root  mem       REG              253,1   402384  297758 /usr/lib64/libpcre.so.1.2.0
+rsyslogd 1588 root  mem       REG              253,1    19888   90673 /usr/lib64/libattr.so.1.1.0
+rsyslogd 1588 root  mem       REG              253,1   297328   99712 /usr/lib64/libdw-0.168.so
+rsyslogd 1588 root  mem       REG              253,1   111080  297683 /usr/lib64/libresolv-2.17.so
+rsyslogd 1588 root  mem       REG              253,1    19384   90653 /usr/lib64/libgpg-error.so.0.10.0
+rsyslogd 1588 root  mem       REG              253,1   535064   90691 /usr/lib64/libgcrypt.so.11.8.2
+rsyslogd 1588 root  mem       REG              253,1   157424   90481 /usr/lib64/liblzma.so.5.2.2
+rsyslogd 1588 root  mem       REG              253,1   155744   90475 /usr/lib64/libselinux.so.1
+rsyslogd 1588 root  mem       REG              253,1  1139680  297663 /usr/lib64/libm-2.17.so
+rsyslogd 1588 root  mem       REG              253,1    20032   90677 /usr/lib64/libcap.so.2.22
+rsyslogd 1588 root  mem       REG              253,1    24936 4490701 /usr/lib64/rsyslog/imjournal.so
+rsyslogd 1588 root  mem       REG              253,1    38032 4490708 /usr/lib64/rsyslog/imuxsock.so
+rsyslogd 1588 root  mem       REG              253,1    24416 4490709 /usr/lib64/rsyslog/lmnet.so
+rsyslogd 1588 root  mem       REG              253,1  2127336  297655 /usr/lib64/libc-2.17.so
+rsyslogd 1588 root  mem       REG              253,1    88720     107 /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+rsyslogd 1588 root  mem       REG              253,1    20040   90592 /usr/lib64/libuuid.so.1.3.0
+rsyslogd 1588 root  mem       REG              253,1    40824  575282 /usr/lib64/libfastjson.so.4.0.0
+rsyslogd 1588 root  mem       REG              253,1    15424  575272 /usr/lib64/libestr.so.0.0.0
+rsyslogd 1588 root  mem       REG              253,1    44448  297685 /usr/lib64/librt-2.17.so
+rsyslogd 1588 root  mem       REG              253,1    19776  297661 /usr/lib64/libdl-2.17.so
+rsyslogd 1588 root  mem       REG              253,1   144792  297681 /usr/lib64/libpthread-2.17.so
+rsyslogd 1588 root  mem       REG              253,1    90664   90478 /usr/lib64/libz.so.1.2.7
+rsyslogd 1588 root  mem       REG              253,1   164112  297648 /usr/lib64/ld-2.17.so
+rsyslogd 1588 root  mem       REG              253,1   162560  197424 /usr/lib64/libsystemd.so.0.6.0
+rsyslogd 1588 root    0r      CHR                1,3      0t0    1028 /dev/null
+rsyslogd 1588 root    1w      CHR                1,3      0t0    1028 /dev/null
+rsyslogd 1588 root    2w      CHR                1,3      0t0    1028 /dev/null
+rsyslogd 1588 root    3u     unix 0xffff88039afc2400      0t0   20751 socket
+rsyslogd 1588 root    4u     IPv4              26753      0t0     TCP vm1-eth0:51398->vm0-eth0:514 (ESTABLISHED)
+rsyslogd 1588 root    5r      REG               0,19  8388608    9990 /run/log/journal/609bbd29e32a4898e604f49bff82a88c/system.journal
+rsyslogd 1588 root    6r      REG               0,19  8388608    9285 /run/log/journal/66d183adaa0a486eba418148d5946b85/system.journal
+rsyslogd 1588 root    7r  a_inode                0,9        0    5892 inotify
+rsyslogd 1588 root    8w      REG              253,1   188972 8768623 /var/log/messages
+rsyslogd 1588 root    9w      REG              253,1     3141 8768624 /var/log/secure
+]0;root@vm1:/home/romain.pereira[root@vm1 22:05:56]# lsof -p 1588 -P | grep -i tcp
+rsyslogd 1588 root  mem       REG              253,1    26152 4490711 /usr/lib64/rsyslog/lmnsd_p[01;31m[Ktcp[m[K.so
+rsyslogd 1588 root  mem       REG              253,1    11320 4490714 /usr/lib64/rsyslog/lm[01;31m[Ktcp[m[Kclt.so
+rsyslogd 1588 root    4u     IPv4              26753      0t0     [01;31m[KTCP[m[K vm1-eth0:51398->vm0-eth0:514 (ESTABLISHED)
+]0;root@vm1:/home/romain.pereira[root@vm1 22:06:00]# vim /etc/rsyslog.conf 
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.conf" 91L, 3232C[>c[1;1Hcron.*[50C/var/log/cron
+
+[34m# Everybody gets emergency messages[m
+*.emerg[49C:omusrmsg:*
+
+[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log
+
+
+[34m# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown[m[24;181H75,0-1[8C92%[12;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[24;1H[K[24;1H/[?12l[?25hT[?25l[?12l[?25hC[?25l[?12l[?25hP[?25l[?12l[?25h[?25l[17;26H[34m[103mTCP[m[24;181H80,26[9C92%[17;26H[?12l[?25h[?25l[24;181H[K[24;1H[31mLa recherche a atteint le BAS, et continue en HAUT[27m[m[H[2J[2;1H[34m# The imjournal module bellow is now used as a message source instead of imuxsock.[m
+$ModLoad imuxsock [34m# provides support for local system logging (e.g. via logger command)[m
+$ModLoad imjournal [34m# provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides [m[34m[103mTCP[m[34m syslog reception
+#$ModLoad imtcp
+#$Input[m[34m[103mTCP[m[34mServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files[m
+$WorkDirectory /var/lib/rsyslog
+
+[34m# Use default timestamp format[m
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat[24;181H18,12[10C8%[31mLa recherche a atteint le BAS, et continue en HAUT[m[24;181H[K[24;181H18,12[10C8%[12;12H[?12l[?25h[?25l[24;182H9[13;12H[?12l[?25h[?25l[1;23r[1;1H[6L[1;24r[1;1H[34m# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####[m[24;1H[K[24;181H8,1[10CHaut[8;1H[?12l[?25h[?25l[24;1H/TCP[24;181H[K[24;1H[180C18,12[8CHaut[18;12H[?12l[?25h[?25l[24;182H7,0-1[17;1H[?12l[?25h[?25l[24;182H8,12 [18;12H[?12l[?25h[?25l[24;182H9[19;12H[?12l[?25h[?25l[24;181H[K[24;1H[180C20,8[9CHaut[20;8H[?12l[?25h[?25l[24;181H[K[24;1H[27m[m[H[2J[1;1H[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log
+
+
+[34m# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use [m[34m[103mTCP[m[34m for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+# ### end of the forwarding rule ###[m[24;181H80,26[9CBas[12;26H[?12l[?25h[?25l[24;182H1,1 [13;1H[?12l[?25h[?25l[24;182H2,26[14;26H[?12l[?25h[?25l[24;182H3[15;26H[?12l[?25h[?25l[24;182H4[16;26H[?12l[?25h[?25l[24;182H5[17;26H[?12l[?25h[?25l[24;182H6[18;26H[?12l[?25h[?25l[24;182H7[19;26H[?12l[?25h[?25l[24;182H8[20;26H[?12l[?25h[?25l[24;182H9[21;26H[?12l[?25h[?25l[24;181H90,22[22;22H[?12l[?25h[?25l[24;182H1,26[23;26H[?12l[?25h[?25l[24;185H7[23;27H[?12l[?25h[?25l[24;185H6[23;26H[?12l[?25h[?25l[24;185H5[23;25H[?12l[?25h[?25l[24;185H4[23;24H[?12l[?25h[?25l[24;185H3[23;23H[?12l[?25h[?25l[24;185H2[23;22H[?12l[?25h[?25l[24;185H1[23;21H[?12l[?25h[?25l[24;185H0[23;20H[?12l[?25h[?25l[24;184H19[23;19H[?12l[?25h[?25l[24;185H8[23;18H[?12l[?25h[?25l[24;185H7[23;17H[?12l[?25h[?25l[24;185H6[23;16H[?12l[?25h[?25l[24;185H5[23;15H[?12l[?25h[?25l[24;185H4[23;14H[?12l[?25h[?25l[24;185H3[23;13H[?12l[?25h[?25l[24;185H2[23;12H[?12l[?25h[?25l[24;185H1[23;11H[?12l[?25h[?25l[24;185H0[23;10H[?12l[?25h[?25l[24;184H9 [23;9H[?12l[?25h[?25l[24;184H8[23;8H[?12l[?25h[?25l[24;184H7[23;7H[?12l[?25h[?25l[24;184H6[23;6H[?12l[?25h[?25l[24;184H5[23;5H[?12l[?25h[?25l[24;184H4[23;4H[?12l[?25h[?25l[24;184H3[23;3H[?12l[?25h[?25l[24;184H2[23;2H[?12l[?25h[?25l[24;184H1[23;1H[?12l[?25h[?25l[24;182H0[22;1H[?12l[?25h[?25l[24;181H89[21;1H[?12l[?25h[?25l[24;182H8[20;1H[?12l[?25h[?25l[24;182H7[19;1H[?12l[?25h[?25l[24;182H6[18;1H[?12l[?25h[?25l[24;182H5[17;1H[?12l[?25h[?25l[24;182H4[16;1H[?12l[?25h[?25l[24;182H3[15;1H[?12l[?25h[?25l[24;182H2[14;1H[?12l[?25h[?25l[24;182H1[13;1H[?12l[?25h[?25l[24;182H0[12;1H[?12l[?25h[?25l[24;181H79[11;1H[?12l[?25h[?25l[24;182H8[10;1H[?12l[?25h[?25l[24;182H9[11;1H[?12l[?25h[?25l[24;181H80[12;1H[?12l[?25h[?25l[24;182H1[13;1H[?12l[?25h[?25l[24;182H2[14;1H[?12l[?25h[?25l[24;182H3[15;1H[?12l[?25h[?25l[24;182H4[16;1H[?12l[?25h[?25l[24;184H2[16;2H[?12l[?25h[?25l[24;184H3[16;3H[?12l[?25h[?25l[24;184H4[16;4H[?12l[?25h[?25l[24;184H5[16;5H[?12l[?25h[?25l[24;184H6[16;6H[?12l[?25h[?25l[24;184H7[16;7H[?12l[?25h[?25l[24;184H8[16;8H[?12l[?25h[?25l[24;184H9[16;9H[?12l[?25h[?25l[24;184H10[16;10H[?12l[?25h[?25l[24;185H1[16;11H[?12l[?25h[?25l[24;185H2[16;12H[?12l[?25h[?25l[24;185H3[16;13H[?12l[?25h[?25l[24;185H4[16;14H[?12l[?25h[?25l[24;185H5[16;15H[?12l[?25h[?25l[24;185H6[16;16H[?12l[?25h[?25l[24;185H7[16;17H[?12l[?25h[?25l[24;185H8[16;18H[?12l[?25h[?25l[24;185H9[16;19H[?12l[?25h[?25l[24;184H20[16;20H[?12l[?25h[?25l[24;185H1[16;21H[?12l[?25h[?25l[24;185H2[16;22H[?12l[?25h[?25l[24;185H3[16;23H[?12l[?25h[?25l[24;185H4[16;24H[?12l[?25h[?25l[24;185H5[16;25H[?12l[?25h[?25l[24;185H6[16;26H[?12l[?25h[?25l[24;185H7[16;27H[?12l[?25h[?25l[24;185H8[16;28H[?12l[?25h[?25l[24;185H9[16;29H[?12l[?25h[?25l[24;184H30[16;30H[?12l[?25h[?25l[24;185H1[16;31H[?12l[?25h[?25l[24;185H2[16;32H[?12l[?25h[?25l[24;185H3[16;33H[?12l[?25h[?25l[24;185H4[16;34H[?12l[?25h[?25l[24;185H5[16;35H[?12l[?25h[?25l[24;185H6[16;36H[?12l[?25h[?25l[24;185H7[16;37H[?12l[?25h[?25l[24;185H8[16;38H[?12l[?25h[?25l[24;185H9[16;39H[?12l[?25h[?25l[24;184H40[16;40H[?12l[?25h[?25l[24;185H1[16;41H[?12l[?25h[?25l[24;185H2[16;42H[?12l[?25h[?25l[24;185H3[16;43H[?12l[?25h[?25l[24;185H4[16;44H[?12l[?25h[?25l[24;185H5[16;45H[?12l[?25h[?25l[24;185H6[16;46H[?12l[?25h[?25l[24;185H7[16;47H[?12l[?25h[?25l[24;185H8[16;48H[?12l[?25h[?25l[24;185H9[16;49H[?12l[?25h[?25l[24;184H50[16;50H[?12l[?25h[?25l[24;185H1[16;51H[?12l[?25h[?25l[24;185H0[16;50H[?12l[?25h[?25l[24;184H49[16;49H[?12l[?25h[?25l[24;185H8[16;48H[?12l[?25h[?25l[24;185H7[16;47H[?12l[?25h[?25l[24;185H6[16;46H[?12l[?25h[?25l[24;185H5[16;45H[?12l[?25h[?25l[24;185H4[16;44H[?12l[?25h[?25l[24;185H3[16;43H[?12l[?25h[?25l[24;185H2[16;42H[?12l[?25h[?25l[24;185H1[16;41H[?12l[?25h[?25l[24;185H0[16;40H[?12l[?25h[?25l[24;184H39[16;39H[?12l[?25h[?25l[24;185H8[16;38H[?12l[?25h[?25l[24;185H7[16;37H[?12l[?25h[?25l[24;185H6[16;36H[?12l[?25h[?25l[24;185H5[16;35H[?12l[?25h[?25l[24;185H4[16;34H[?12l[?25h[?25l[24;185H3[16;33H[?12l[?25h[?25l[24;185H2[16;32H[?12l[?25h[?25l[24;185H1[16;31H[?12l[?25h[?25l[24;185H0[16;30H[?12l[?25h[?25l[24;184H29[16;29H[?12l[?25h[?25l[24;185H8[16;28H[?12l[?25h[?25l[24;185H7[16;27H[?12l[?25h[?25l[24;185H6[16;26H[?12l[?25h[?25l[24;185H5[16;25H[?12l[?25h[?25l[24;185H4[16;24H[?12l[?25h[?25l[24;185H3[16;23H[?12l[?25h[?25l[24;185H2[16;22H[?12l[?25h[?25l[24;185H1[16;21H[?12l[?25h[?25l[24;185H0[16;20H[?12l[?25h[?25l[24;184H19[16;19H[?12l[?25h[?25l[24;185H8[16;18H[?12l[?25h[?25l[24;185H7[16;17H[?12l[?25h[?25l[24;185H6[16;16H[?12l[?25h[?25l[24;185H5[16;15H[?12l[?25h[?25l[24;185H4[16;14H[?12l[?25h[?25l[24;185H3[16;13H[?12l[?25h[?25l[24;185H2[16;12H[?12l[?25h[?25l[24;185H1[16;11H[?12l[?25h[?25l[24;185H0[16;10H[?12l[?25h[?25l[24;184H9 [16;9H[?12l[?25h[?25l[24;184H8[16;8H[?12l[?25h[?25l[24;184H7[16;7H[?12l[?25h[?25l[24;184H6[16;6H[?12l[?25h[?25l[24;184H5[16;5H[?12l[?25h[?25l[24;184H4[16;4H[?12l[?25h[?25l[24;184H3[16;3H[?12l[?25h[?25l[24;184H2[16;2H[?12l[?25h[?25l[24;184H1[16;1H[?12l[?25h[?25l[24;182H3[15;1H[?12l[?25h[?25l[24;184H2[15;2H[?12l[?25h[?25l[24;184H3[15;3H[?12l[?25h[?25l[24;184H4[15;4H[?12l[?25h[?25l[24;184H5[15;5H[?12l[?25h[?25l[24;184H6[15;6H[?12l[?25h[?25l[24;184H7[15;7H[?12l[?25h[?25l[24;184H8[15;8H[?12l[?25h[?25l[24;184H9[15;9H[?12l[?25h[?25l[24;184H10[15;10H[?12l[?25h[?25l[24;185H1[15;11H[?12l[?25h[?25l[24;185H2[15;12H[?12l[?25h[?25l[24;185H3[15;13H[?12l[?25h[?25l[24;185H4[15;14H[?12l[?25h[?25l[24;185H5[15;15H[?12l[?25h[?25l[24;185H6[15;16H[?12l[?25h[?25l[24;185H7[15;17H[?12l[?25h[?25l[24;185H8[15;18H[?12l[?25h[?25l[24;185H9[15;19H[?12l[?25h[?25l[24;184H20[15;20H[?12l[?25h[?25l[24;185H1[15;21H[?12l[?25h[?25l[24;185H2[15;22H[?12l[?25h[?25l[24;185H3[15;23H[?12l[?25h[?25l[24;185H4[15;24H[?12l[?25h[?25l[24;185H5[15;25H[?12l[?25h[?25l[24;185H6[15;26H[?12l[?25h[?25l[24;185H7[15;27H[?12l[?25h[?25l[24;185H8[15;28H[?12l[?25h[?25l[24;185H9[15;29H[?12l[?25h[?25l[24;184H30[15;30H[?12l[?25h[?25l[24;185H1[15;31H[?12l[?25h[?25l[24;185H2[15;32H[?12l[?25h[?25l[24;185H3[15;33H[?12l[?25h[?25l[24;185H4[15;34H[?12l[?25h[?25l[24;185H5[15;35H[?12l[?25h[?25l[24;185H6[15;36H[?12l[?25h[?25l[24;185H7[15;37H[?12l[?25h[?25l[24;185H8[15;38H[?12l[?25h[?25l[24;185H9[15;39H[?12l[?25h[?25l[24;184H40[15;40H[?12l[?25h[?25l[24;185H1[15;41H[?12l[?25h[?25l[24;185H2[15;42H[?12l[?25h[?25l[24;185H3[15;43H[?12l[?25h[?25l[24;185H4[15;44H[?12l[?25h[?25l[24;185H5[15;45H[?12l[?25h[?25l[24;185H6[15;46H[?12l[?25h[?25l[24;185H7[15;47H[?12l[?25h[?25l[24;185H8[15;48H[?12l[?25h[?25l[24;185H9[15;49H[?12l[?25h[?25l[24;184H50[15;50H[?12l[?25h[?25l[24;185H1[15;51H[?12l[?25h[?25l[24;185H2[15;52H[?12l[?25h[?25l[24;185H3[15;53H[?12l[?25h[?25l[24;185H4[15;54H[?12l[?25h[?25l[24;185H5[15;55H[?12l[?25h[?25l[24;185H6[15;56H[?12l[?25h[?25l[24;185H7[15;57H[?12l[?25h[?25l[24;185H8[15;58H[?12l[?25h[?25l[24;185H9[15;59H[?12l[?25h[?25l[24;184H60[15;60H[?12l[?25h[?25l[24;185H1[15;61H[?12l[?25h[?25l[24;185H2[15;62H[?12l[?25h[?25l[24;185H3[15;63H[?12l[?25h[?25l[24;185H4[15;64H[?12l[?25h[?25l[24;185H5[15;65H[?12l[?25h[?25l[24;185H6[15;66H[?12l[?25h[?25l[24;182H2[14;66H[?12l[?25h[?25l[24;182H3[15;66H[?12l[?25h[?25l[24;185H5[15;65H[?12l[?25h[?25l[24;185H4[15;64H[?12l[?25h[?25l[24;185H3[15;63H[?12l[?25h[?25l[24;185H2[15;62H[?12l[?25h[?25l[24;185H1[15;61H[?12l[?25h[?25l[24;185H0[15;60H[?12l[?25h[?25l[24;184H59[15;59H[?12l[?25h[?25l[24;185H8[15;58H[?12l[?25h[?25l[24;185H7[15;57H[?12l[?25h[?25l[24;185H6[15;56H[?12l[?25h[?25l[24;185H5[15;55H[?12l[?25h[?25l[24;185H4[15;54H[?12l[?25h[?25l[24;185H3[15;53H[?12l[?25h[?25l[24;185H2[15;52H[?12l[?25h[?25l[24;185H1[15;51H[?12l[?25h[?25l[24;185H0[15;50H[?12l[?25h[?25l[24;184H49[15;49H[?12l[?25h[?25l[24;185H8[15;48H[?12l[?25h[?25l[24;185H7[15;47H[?12l[?25h[?25l[24;185H6[15;46H[?12l[?25h[?25l[24;185H5[15;45H[?12l[?25h[?25l[24;185H4[15;44H[?12l[?25h[?25l[24;185H3[15;43H[?12l[?25h[?25l[24;185H2[15;42H[?12l[?25h[?25l[24;185H1[15;41H[?12l[?25h[?25l[24;185H0[15;40H[?12l[?25h[?25l[24;184H39[15;39H[?12l[?25h[?25l[24;185H8[15;38H[?12l[?25h[?25l[24;185H7[15;37H[?12l[?25h[?25l[24;185H6[15;36H[?12l[?25h[?25l[24;185H5[15;35H[?12l[?25h[?25l[24;185H4[15;34H[?12l[?25h[?25l[24;185H3[15;33H[?12l[?25h[?25l[24;185H2[15;32H[?12l[?25h[?25l[24;185H1[15;31H[?12l[?25h[?25l[24;185H0[15;30H[?12l[?25h[?25l[24;184H29[15;29H[?12l[?25h[?25l[24;185H8[15;28H[?12l[?25h[?25l[24;185H7[15;27H[?12l[?25h[?25l[24;185H6[15;26H[?12l[?25h[?25l[24;185H5[15;25H[?12l[?25h[?25l[24;185H4[15;24H[?12l[?25h[?25l[24;185H3[15;23H[?12l[?25h[?25l[24;185H2[15;22H[?12l[?25h[?25l[24;185H1[15;21H[?12l[?25h[?25l[24;185H0[15;20H[?12l[?25h[?25l[24;184H19[15;19H[?12l[?25h[?25l[24;185H8[15;18H[?12l[?25h[?25l[24;185H7[15;17H[?12l[?25h[?25l[24;185H6[15;16H[?12l[?25h[?25l[24;185H5[15;15H[?12l[?25h[?25l[24;185H4[15;14H[?12l[?25h[?25l[24;185H3[15;13H[?12l[?25h[?25l[24;185H2[15;12H[?12l[?25h[?25l[24;185H1[15;11H[?12l[?25h[?25l[24;185H0[15;10H[?12l[?25h[?25l[24;184H9 [15;9H[?12l[?25h[?25l[24;184H8[15;8H[?12l[?25h[?25l[24;184H7[15;7H[?12l[?25h[?25l[24;184H6[15;6H[?12l[?25h[?25l[24;184H5[15;5H[?12l[?25h[?25l[24;184H4[15;4H[?12l[?25h[?25l[24;184H3[15;3H[?12l[?25h[?25l[24;184H2[15;2H[?12l[?25h[?25l[24;184H1[15;1H[?12l[?25h[?25l[24;182H4[16;1H[?12l[?25h[?25l[24;184H2[16;2H[?12l[?25h[?25l[24;184H3[16;3H[?12l[?25h[?25l[24;184H4[16;4H[?12l[?25h[?25l[24;184H5[16;5H[?12l[?25h[?25l[24;184H6[16;6H[?12l[?25h[?25l[24;184H7[16;7H[?12l[?25h[?25l[24;184H8[16;8H[?12l[?25h[?25l[24;184H9[16;9H[?12l[?25h[?25l[24;184H10[16;10H[?12l[?25h[?25l[24;185H1[16;11H[?12l[?25h[?25l[24;185H2[16;12H[?12l[?25h[?25l[24;185H3[16;13H[?12l[?25h[?25l[24;185H4[16;14H[?12l[?25h[?25l[24;185H5[16;15H[?12l[?25h[?25l[24;185H6[16;16H[?12l[?25h[?25l[24;185H7[16;17H[?12l[?25h[?25l[24;185H8[16;18H[?12l[?25h[?25l[24;185H9[16;19H[?12l[?25h[?25l[24;184H20[16;20H[?12l[?25h[?25l[24;185H1[16;21H[?12l[?25h[?25l[24;185H2[16;22H[?12l[?25h[?25l[24;185H3[16;23H[?12l[?25h[?25l[24;185H4[16;24H[?12l[?25h[?25l[24;185H5[16;25H[?12l[?25h[?25l[24;185H6[16;26H[?12l[?25h[?25l[24;185H7[16;27H[?12l[?25h[?25l[24;185H8[16;28H[?12l[?25h[?25l[24;185H9[16;29H[?12l[?25h[?25l[24;184H30[16;30H[?12l[?25h[?25l[24;185H1[16;31H[?12l[?25h[?25l[24;185H2[16;32H[?12l[?25h[?25l[24;185H3[16;33H[?12l[?25h[?25l[24;185H4[16;34H[?12l[?25h[?25l[24;185H5[16;35H[?12l[?25h[?25l[24;185H6[16;36H[?12l[?25h[?25l[24;185H7[16;37H[?12l[?25h[?25l[24;185H8[16;38H[?12l[?25h[?25l[24;185H9[16;39H[?12l[?25h[?25l[24;184H40[16;40H[?12l[?25h[?25l[24;185H1[16;41H[?12l[?25h[?25l[24;185H2[16;42H[?12l[?25h[?25l[24;185H3[16;43H[?12l[?25h[?25l[24;185H4[16;44H[?12l[?25h[?25l[24;185H5[16;45H[?12l[?25h[?25l[24;185H6[16;46H[?12l[?25h[?25l[24;185H7[16;47H[?12l[?25h[?25l[24;185H8[16;48H[?12l[?25h[?25l[24;185H9[16;49H[?12l[?25h[?25l[24;184H50[16;50H[?12l[?25h[?25l[24;185H1[16;51H[?12l[?25h[?25l[24;185H2[16;52H[?12l[?25h[?25l[24;185H3[16;53H[?12l[?25h[?25l[24;185H4[16;54H[?12l[?25h[?25l[24;185H5[16;55H[?12l[?25h[?25l[24;185H6[16;56H[?12l[?25h[?25l[24;185H7[16;57H[?12l[?25h[?25l[24;185H8[16;58H[?12l[?25h[?25l[24;185H9[16;59H[?12l[?25h[?25l[24;184H60[16;60H[?12l[?25h[?25l[24;185H1[16;61H[?12l[?25h[?25l[24;185H2[16;62H[?12l[?25h[?25l[24;185H1[16;61H[?12l[?25h[?25l[24;185H0[16;60H[?12l[?25h[?25l[24;184H59[16;59H[?12l[?25h[?25l[24;185H8[16;58H[?12l[?25h[?25l[24;185H7[16;57H[?12l[?25h[?25l[24;185H6[16;56H[?12l[?25h[?25l[24;185H5[16;55H[?12l[?25h[?25l[24;185H4[16;54H[?12l[?25h[?25l[24;185H3[16;53H[?12l[?25h[?25l[24;185H2[16;52H[?12l[?25h[?25l[24;185H1[16;51H[?12l[?25h[?25l[24;185H0[16;50H[?12l[?25h[?25l[24;184H49[16;49H[?12l[?25h[?25l[24;185H8[16;48H[?12l[?25h[?25l[24;185H7[16;47H[?12l[?25h[?25l[24;185H6[16;46H[?12l[?25h[?25l[24;185H5[16;45H[?12l[?25h[?25l[24;185H4[16;44H[?12l[?25h[?25l[24;185H3[16;43H[?12l[?25h[?25l[24;185H2[16;42H[?12l[?25h[?25l[24;185H1[16;41H[?12l[?25h[?25l[24;185H0[16;40H[?12l[?25h[?25l[24;184H39[16;39H[?12l[?25h[?25l[24;185H8[16;38H[?12l[?25h[?25l[24;185H7[16;37H[?12l[?25h[?25l[24;185H6[16;36H[?12l[?25h[?25l[24;185H5[16;35H[?12l[?25h[?25l[24;185H4[16;34H[?12l[?25h[?25l[24;185H3[16;33H[?12l[?25h[?25l[24;185H2[16;32H[?12l[?25h[?25l[24;185H1[16;31H[?12l[?25h[?25l[24;185H0[16;30H[?12l[?25h[?25l[24;184H29[16;29H[?12l[?25h[?25l[24;185H8[16;28H[?12l[?25h[?25l[24;185H7[16;27H[?12l[?25h[?25l[24;185H6[16;26H[?12l[?25h[?25l[24;185H5[16;25H[?12l[?25h[?25l[24;185H4[16;24H[?12l[?25h[?25l[24;185H3[16;23H[?12l[?25h[?25l[24;185H2[16;22H[?12l[?25h[?25l[24;185H1[16;21H[?12l[?25h[?25l[24;185H0[16;20H[?12l[?25h[?25l[24;184H19[16;19H[?12l[?25h[?25l[24;185H8[16;18H[?12l[?25h[?25l[24;185H7[16;17H[?12l[?25h[?25l[24;185H6[16;16H[?12l[?25h[?25l[24;185H5[16;15H[?12l[?25h[?25l[24;185H4[16;14H[?12l[?25h[?25l[24;185H3[16;13H[?12l[?25h[?25l[24;185H2[16;12H[?12l[?25h[?25l[24;185H1[16;11H[?12l[?25h[?25l[24;185H0[16;10H[?12l[?25h[?25l[24;184H9 [16;9H[?12l[?25h[?25l[24;184H8[16;8H[?12l[?25h[?25l[24;184H7[16;7H[?12l[?25h[?25l[24;184H6[16;6H[?12l[?25h[?25l[24;184H5[16;5H[?12l[?25h[?25l[24;184H4[16;4H[?12l[?25h[?25l[24;184H3[16;3H[?12l[?25h[?25l[24;184H2[16;2H[?12l[?25h[?25l[24;184H1[16;1H[?12l[?25h[?25l$ActionQueueFileName fwdRule1 [34m# unique name prefix for spool files[m[16;67H[K[16;1H[?12l[?25h[?25l[24;182H5[17;1H[?12l[?25h[?25l$ActionQueueMaxDiskSpace 1g   [34m# 1gb space limit (use as much as possible)[m[17;74H[K[17;1H[?12l[?25h[?25l[24;182H6[18;1H[?12l[?25h[?25l$ActionQueueSaveOnShutdown on [34m# save messages to disk on shutdown[m[18;66H[K[18;1H[?12l[?25h[?25l[24;182H7[19;1H[?12l[?25h[?25l$ActionQueueType LinkedList   [34m# run asynchronously[m[19;51H[K[19;1H[?12l[?25h[?25l[24;182H8[20;1H[?12l[?25h[?25l$ActionResumeRetryCount -1    [34m# infinite retries if host is down[m[20;65H[K[20;1H[?12l[?25h[?25l[24;182H9[21;1H[?12l[?25h[?25l remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional[21;67H[K[21;1H[?12l[?25h[?25l
+
+
+1 modification ; avant #6 ; il y a 2 secondes[24;181H[K[21;1H[34m# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional[m[24;181H89,1[10CBas[21;1H[?12l[?25h[?25l[24;181H90[22;1H[?12l[?25h[?25l*.* @@remote-host:514[22;22H[K[22;1H[?12l[?25h[?25l[24;182H1[23;1H[?12l[?25h[?25l[24;182H0[22;1H[?12l[?25h[?25l[24;1H[K[24;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"/etc/rsyslog.conf" 91L, 3226C écrit(s)
+[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:07:21]# vim /etc/rsyslog.conf lsof -p 1588 -P | grep -i tcp[Kyum install lsof[1Plsof -p 1588 -P[1Ppidof rsyslogdservice rsyslog restart[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pvim /etc/rsyslog.conf [1P[1P[1P[1@c[1@a[1@t
+# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imjournal # provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files
+$WorkDirectory /var/lib/rsyslog
+
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.
+$OmitLocalLogging on
+
+# File to store the position in the journal
+$IMJournalStateFile imjournal.state
+
+
+#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+# The authpriv file has restricted access.
+authpriv.*                                              /var/log/secure
+
+# Log all the mail messages in one place.
+mail.*                                                  -/var/log/maillog
+
+
+# Log cron stuff
+cron.*                                                  /var/log/cron
+
+# Everybody gets emergency messages
+*.emerg                                                 :omusrmsg:*
+
+# Save news errors of level crit and higher in a special file.
+uucp,news.crit                                          /var/log/spooler
+
+# Save boot messages also to boot.log
+local7.*                                                /var/log/boot.log
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+$ActionQueueType LinkedList   # run asynchronously
+$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+*.* @@remote-host:514
+# ### end of the forwarding rule ###
+]0;root@vm1:/home/romain.pereira[root@vm1 22:07:28]# cat /etc/rss[Ky
+rsyncd.conf   rsyslog.conf  rsyslog.d/    
+[root@vm1 22:07:28]# cat /etc/rsyslog.d/re[K[Ksend.conf 
+*.* @@10.251.0.1
+]0;root@vm1:/home/romain.pereira[root@vm1 22:07:37]# cat /etc/rsyslog.d/send.conf [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1@r[1@m
+rm : supprimer fichier « /etc/rsyslog.d/send.conf » ? y
+]0;root@vm1:/home/romain.pereira[root@vm1 22:07:41]# fg
+bash: fg: courant : tâche inexistante
+]0;root@vm1:/home/romain.pereira[root@vm1 22:07:44]# vim /etc/rss[Kt[Ky
+rsyncd.conf   rsyslog.conf  rsyslog.d/    
+[root@vm1 22:07:44]# vim /etc/rsyslog.conf 
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"/etc/rsyslog.conf" 91L, 3226C[>c[1;1H[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log
+
+
+[34m# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use [m[34m[103mTCP[m[34m for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.[m
+$ActionQueueFileName fwdRule1 [34m# unique name prefix for spool files[m
+$ActionQueueMaxDiskSpace 1g   [34m# 1gb space limit (use as much as possible)[m
+$ActionQueueSaveOnShutdown on [34m# save messages to disk on shutdown[m
+$ActionQueueType LinkedList   [34m# run asynchronously[m
+$ActionResumeRetryCount -1    [34m# infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional[m
+*.* @@remote-host:514
+[34m# ### end of the forwarding rule ###[m[24;181H90,1[10CBas[22;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[27m[m[H[2J[1;1H[34m# ### end of the forwarding rule ###[m
+[94m~                                                                                                                                                                                                     [3;1H~                                                                                                                                                                                                     [4;1H~                                                                                                                                                                                                     [5;1H~                                                                                                                                                                                                     [6;1H~                                                                                                                                                                                                     [7;1H~                                                                                                                                                                                                     [8;1H~                                                                                                                                                                                                     [9;1H~                                                                                                                                                                                                     [10;1H~                                                                                                                                                                                                     [11;1H~                                                                                                                                                                                                     [12;1H~                                                                                                                                                                                                     [13;1H~                                                                                                                                                                                                     [14;1H~                                                                                                                                                                                                     [15;1H~                                                                                                                                                                                                     [16;1H~                                                                                                                                                                                                     [17;1H~                                                                                                                                                                                                     [18;1H~                                                                                                                                                                                                     [19;1H~                                                                                                                                                                                                     [20;1H~                                                                                                                                                                                                     [21;1H~                                                                                                                                                                                                     [22;1H~                                                                                                                                                                                                     [23;1H~                                                                                                                                                                                                     [m[24;181H91,1[10CBas[1;1H[?12l[?25h[?25l[?12l[?25h[?25l[27m[m[H[2J[2;1H[34m# Save news errors of level crit and higher in a special file.[m
+uucp,news.crit[42C/var/log/spooler
+
+[34m# Save boot messages also to boot.log[m
+local7.*[48C/var/log/boot.log
+
+
+[34m# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use [m[34m[103mTCP[m[34m for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.[m
+$ActionQueueFileName fwdRule1 [34m# unique name prefix for spool files[m
+$ActionQueueMaxDiskSpace 1g   [34m# 1gb space limit (use as much as possible)[m
+$ActionQueueSaveOnShutdown on [34m# save messages to disk on shutdown[m
+$ActionQueueType LinkedList   [34m# run asynchronously[m
+$ActionResumeRetryCount -1    [34m# infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional[m
+*.* @@remote-host:514[24;181H90,1[10C98%[23;1H[?12l[?25h[?25l[24;181H89[22;1H[?12l[?25h[?25l[24;182H8[21;1H[?12l[?25h[?25l[24;182H9[22;1H[?12l[?25h[?25l[24;181H90[23;1H[?12l[?25h[?25l[1;23r[23;1H
+[1;24r[23;1H[34m# ### end of the forwarding rule ###[m[24;181H[K[24;181H91,1[10CBas[23;1H[?12l[?25h[?25l[24;182H0[22;1H[?12l[?25h[?25l[24;184H21[22;21H[?12l[?25h[?25l
+
+[1m-- INSERTION --[m[24;181H[K[24;181H90,21[9CBas[22;21H[?12l[?25h[?25l[24;185H2[22;22H[?12l[?25h[?25l[23;1H[K[24;182H1,1 [9C98%[23;1H[?12l[?25h[?25l*.* @@10.251.0.1[24;185H7[23;17H[?12l[?25h[?25l[1;23r[23;1H
+[1;24r[23;1H[34m# ### end of the forwarding rule ###[m[24;181H[K[24;181H92,17[9CBas[23;17H[?12l[?25h[?25l[24;182H1[22;17H[?12l[?25h[?25l[24;182H0[21;17H[?12l[?25h[?25l[24;182H1[22;17H[?12l[?25h[?25l:[24;185H8[22;18H[?12l[?25h[?25l5[24;185H9[22;19H[?12l[?25h[?25l1[24;184H20[22;20H[?12l[?25h[?25l4[24;185H1[22;21H[?12l[?25h[?25l[24;182H0[21;21H[?12l[?25h[24;1H[K[21;20H[?25l[24;181H90,20[9CBas[21;20H[?12l[?25h[?25l[21;7H10.251.0.1:514[21;21H[K[22;1H[34m# ### end of the forwarding rule ###[m
+[94m~                                                                                                                                                                                                     [m[24;184H1 [21;1H[?12l[?25h[?25l[24;181H[K[24;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"/etc/rsyslog.conf" 91L, 3225C écrit(s)
+[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:08:02]# vim /etc/rsyslog.conf [1P[1P[1P[1@c[1@a[1@t
+# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imjournal # provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files
+$WorkDirectory /var/lib/rsyslog
+
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.
+$OmitLocalLogging on
+
+# File to store the position in the journal
+$IMJournalStateFile imjournal.state
+
+
+#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+# The authpriv file has restricted access.
+authpriv.*                                              /var/log/secure
+
+# Log all the mail messages in one place.
+mail.*                                                  -/var/log/maillog
+
+
+# Log cron stuff
+cron.*                                                  /var/log/cron
+
+# Everybody gets emergency messages
+*.emerg                                                 :omusrmsg:*
+
+# Save news errors of level crit and higher in a special file.
+uucp,news.crit                                          /var/log/spooler
+
+# Save boot messages also to boot.log
+local7.*                                                /var/log/boot.log
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+$ActionQueueType LinkedList   # run asynchronously
+$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+*.* @@10.251.0.1:514
+# ### end of the forwarding rule ###
+]0;root@vm1:/home/romain.pereira[root@vm1 22:08:03]# [1@(reverse-i-search)`':[C[23@r': cat /etc/rsyslog.confe': lsof -p 1588 -P | grep -i tcp[5Ps': service rsyslog restart[1@t[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@a[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@r[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@t[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8P[root@vm1 22:08:03]#[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Redirecting to /bin/systemctl restart rsyslog.service
+]0;root@vm1:/home/romain.pereira[root@vm1 22:08:15]# [1@(reverse-i-search)`':[C[1P[root@vm1 22:08:15]#[Cservice rsyslog restart[K[K[K[K[K[K[Kstatus
+Redirecting to /bin/systemctl status rsyslog.service
+[1;32m●[0m rsyslog.service - System Logging Service
+   Loaded: loaded (/usr/lib/systemd/system/rsyslog.service; enabled; vendor preset: enabled)
+   Active: [1;32mactive (running)[0m since dim. 2019-02-17 22:08:15 CET; 4s ago
+     Docs: man:rsyslogd(8)
+           http://www.rsyslog.com/doc/
+ Main PID: 10930 (rsyslogd)
+   CGroup: /system.slice/rsyslog.service
+           └─10930 /usr/sbin/rsyslogd -n
+
+févr. 17 22:08:15 vm1.pcocc systemd[1]: Starting System Logging Service...
+févr. 17 22:08:15 vm1.pcocc rsyslogd[10930]:  [origin software="rsyslogd" swVersion="8.24.0" x-pid="10930" x-info="http://www.rsyslog.com"] start
+févr. 17 22:08:15 vm1.pcocc systemd[1]: Started System Logging Service.
+]0;root@vm1:/home/romain.pereira[root@vm1 22:08:20]# service rsyslog statusrestart[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pcat /etc/rsyslog.conf vim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfg[Krm /etc/rsyslog.d/send.conf [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@cat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7P[C[C[C[C[Cvim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsof -p 1588 -P | grep -i tcp[Kyum install lsof[1Plsof -p 1588 -P[1Ppidof rsyslogdlsof -p 1588 -P[1Ppidof rsyslogd
+10930
+]0;root@vm1:/home/romain.pereira[root@vm1 22:08:27]# pidof rsyslogdservice rsyslog statusrestart[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pcat /etc/rsyslog.conf vim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cfg[Krm /etc/rsyslog.d/send.conf [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@cat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7P[C[C[C[C[Cvim[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsof -p 1588 -P | grep -i tcp[1P[1P[C[1P[1P[1@1[1@0[1@9[1@3[1@0
+rsyslogd 10930 root  mem       REG              253,1    26152 4490711 /usr/lib64/rsyslog/lmnsd_p[01;31m[Ktcp[m[K.so
+rsyslogd 10930 root  mem       REG              253,1    11320 4490714 /usr/lib64/rsyslog/lm[01;31m[Ktcp[m[Kclt.so
+rsyslogd 10930 root    7u     IPv4              35131      0t0     [01;31m[KTCP[m[K vm1-eth0:51402->vm0-eth0:514 (ESTABLISHED)
+]0;root@vm1:/home/romain.pereira[root@vm1 22:08:36]# [root@vm1 22:08:27]# lsof -p 10930 -P | grep -i tcp
+bash: [root@vm1 : commande introuvable
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:41]# rsyslogd 10930 root  mem       REG              253,1    26152 4490711 /usr/lib64/rsyslog/lmnsd_ptcp.so
+usage: rsyslogd [options]
+use "man rsyslogd" for details. To run rsyslog interactively, use "rsyslogd -n"to run it in debug mode use "rsyslogd -dn"
+For further information see http://www.rsyslog.com/doc
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:41]# rsyslogd 10930 root  mem       REG              253,1    11320 4490714 /usr/lib64/rsyslog/lmtcpclt.so
+usage: rsyslogd [options]
+use "man rsyslogd" for details. To run rsyslog interactively, use "rsyslogd -n"to run it in debug mode use "rsyslogd -dn"
+For further information see http://www.rsyslog.com/doc
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:41]# rsyslogd 10930 root    7u     IPv4              35131      0t0     TCP vm1-eth0:51402->vm0-eth0:514 (ESTABLISHED)
+bash: Erreur de syntaxe près du symbole inattendu « ( »
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:41]# lsof -p <pid> -P ^C
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:47]# logger -i -t qux hello i am your sister vm
+]0;root@vm1:/home/romain.pereira[root@vm1 22:10:52]# logger -i -t qux hello i am your sister vm[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kx [K "bonjour"
+]0;root@vm1:/home/romain.pereira[root@vm1 22:11:14]# logger -i -t qux "bonjour"[1P"[1P"[1P"[1P"[1P"[1P"[1P"o" "c"a" "f"o"[1P"[1P"[1P"[1P"[1P"[1P"k" "f"a" "c"o"n"t"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P" "c"a" "f"o"n"c"t"i"o"n"n"e"
+]0;root@vm1:/home/romain.pereira[root@vm1 22:11:21]# man de pré-réception
+Aucune entrée de manuel pour de
+Aucune entrée de manuel pour pré-réception
+]0;root@vm1:/home/romain.pereira[root@vm1 22:33:16]# man logrotate
+[?1049h[?1h=LOGROTATE(8)                                                                      System Administrator's Manual                                                                      LOGROTATE(8)[m
+[m
+[1mNAME[0m[m
+       logrotate ‐ rotates, compresses, and mails system logs[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mlogrotate[0m [[1m-dv[0m] [[1m-f[0m|[1m--force[0m] [[1m-s[0m|[1m--state[0m [4mfile[24m] [4mconfig_file[24m ..[m
+[m
+[1mDESCRIPTION[0m[m
+       [1mlogrotate[0m is designed to ease administration of systems that generate large numbers of log files.  It allows automatic rotation, compression, removal, and mailing of log files.  Each log[m
+       file may be handled daily, weekly, monthly, or when it grows too large.[m
+[m
+       Normally, [1mlogrotate[0m is run as a daily cron job.  It will not modify a log multiple times in one day unless the criterion for that log is based on the log's size and  [1mlogrotate[0m  is  being[m
+       run multiple times each day, or unless the [1m-f[0m or [1m--force[0m option is used.[m
+[m
+       Any  number  of  config  files  may be given on the command line. Later config files may override the options given in earlier files, so the order in which the [1mlogrotate[0m config files are[m
+       listed is important.  Normally, a single config file which includes any other config files which are needed should be used.  See below for more information on  how  to  use  the  [1minclude[0m[m
+       directive to accomplish this.  If a directory is given on the command line, every file in that directory is used as a config file.[m
+[m
+       If no command line arguments are given, [1mlogrotate[0m will print version and copyright information, along with a short usage summary.  If any errors occur while rotating logs, [1mlogrotate[0m will[m
+       exit with non-zero status.[m
+[m
+[1mOPTIONS[0m[m
+[7m Manual page logrotate(8) line 1 (press h for help or q to quit)[27m[K[K[7mCannot edit standard input  (press RETURN)[27m[24;1H[K[K[7m Manual page logrotate(8) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 22:36:09]# service logrotate status
+Redirecting to /bin/systemctl status logrotate.service
+Unit logrotate.service could not be found.
+]0;root@vm1:/home/romain.pereira[root@vm1 22:50:55]# /var/lib/logrotate.status
+bash: /var/lib/logrotate.status: Aucun fichier ou dossier de ce type
+]0;root@vm1:/home/romain.pereira[root@vm1 22:56:57]# exit
+]0;romain.pereira@vm1:~[romain.pereira@vm1 22:58:52]$ déconnexion
+Connection to hpc04 closed.
+]0;romain.pereira@hpc01:~[romain.pereira@hpc01 ~]$ d[Kexit
+
+Script terminé sur dim. 17 févr. 2019 22:58:56 CET

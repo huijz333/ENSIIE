@@ -1,0 +1,13 @@
+En executant le programme plusieurs fois, on constate que la valeur finale de 'count' n'est jamais la même.
+Elle varie approximativement entre 20000 et 40000 (n'atteignant donc pas 100 000 = NUM_THREAD * COUNT_PER_THREAD)
+
+Ceci est dû au fait que les threads travaillent en parallèle, et écrivent de façon concurrente dans la même case mémoire.
+Ceci rends le programme "faux"
+
+Le mot clef "volatile" indique au compilateur de ne pas faire d'optimisation sur cette variable.
+Sans ce mot clef, le compilateur optimise le code en supprimant les allers/retours entre la pile/les registres : il supprime des instructions "mov"
+Avec ce mot clef, la variable sera rappatrié en registre avant chaque opération sur celle ci.
+L'ajout de ce mot clef n'est pas suffisant pour rendre le programme correct.
+
+On peut résoudre le programme en ajoutant un vérrou de type mutex sur la variable "count", voir exemple_fixed.c.
+Les 4 lignes ajoutés sont commentés par "/* ajout */"
