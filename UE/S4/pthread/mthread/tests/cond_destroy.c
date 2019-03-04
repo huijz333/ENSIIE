@@ -1,6 +1,7 @@
 /**
  * 1 - Crée un thread qui lance une routine qui termine immédiatement
  * 2 - Initialise une condition
+ * 3 - Détruit une condition
  *
  * Résultat attendu :
  * > [...]
@@ -25,6 +26,7 @@ int main(void) {
 	puts("Done");
 	puts("Joining threads");
 	mthread_join(thrd, NULL);
+	mthread_cond_destroy(&cond);
 	puts("Success");
 	return 0;
 }

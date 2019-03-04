@@ -64,7 +64,7 @@ int mthread_sem_wait(mthread_sem_t * sem) {
 /* V(sem), signal(sem) */
 int mthread_sem_post(mthread_sem_t * sem) {
 
-	/** si mutex NULL, retourne 'invalid argument' */
+	/** si sem NULL, retourne 'invalid argument' */
     if (sem == NULL) {
         mthread_log("SEM_POST","SEM NULL\n");
         return -1;
