@@ -47,6 +47,18 @@ struct mthread_s{
   int not_migrable;
   mthread_virtual_processor_t *vp;
   void* stack;
+
+  /* ajout pour gérer les clefs */
+  /* tableau de valeurs */
+  struct mthread_s_key {
+	  void * value;
+	  void (*destr_f)(void *);
+  } * keys;
+  /* taille du tableau */
+  unsigned int nb_keys;
+  /* index de la prochaine clef libre dans le tableau */
+  unsigned int next_key;
+
 };
 
 #define MTHREAD_LIST_INIT {NULL,NULL,0}

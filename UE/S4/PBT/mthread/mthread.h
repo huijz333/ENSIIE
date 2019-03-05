@@ -130,17 +130,16 @@ extern int mthread_cond_wait(mthread_cond_t * __cond,
  associated to that key when the key is destroyed.
  DESTR_FUNCTION is not called if the value associated is NULL when
  the key is destroyed.  */
-extern int mthread_key_create(mthread_key_t * __key,
-		void (*__destr_function)(void *));
+extern int mthread_key_create(mthread_key_t * key, void (*destr_f)(void *));
 
 /* Destroy KEY.  */
-extern int mthread_key_delete(mthread_key_t __key);
+extern int mthread_key_delete(mthread_key_t key);
 
 /* Store POINTER in the thread-specific data slot identified by KEY. */
-extern int mthread_setspecific(mthread_key_t __key, const void *__pointer);
+extern int mthread_setspecific(mthread_key_t key, const void * ptr);
 
 /* Return current value of the thread-specific data slot identified by KEY.  */
-extern void *mthread_getspecific(mthread_key_t __key);
+extern void *mthread_getspecific(mthread_key_t key);
 
 /* Functions for handling initialization.  */
 

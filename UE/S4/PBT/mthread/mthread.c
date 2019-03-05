@@ -345,14 +345,18 @@ int mthread_create(mthread_t * __threadp, const mthread_attr_t * __attr,
 		mctx = mthread_remove_first(&(joined_list));
 		if (mctx == NULL) {
 			mctx = (struct mthread_s *) safe_malloc(sizeof(struct mthread_s));
-			mctx->stack = (char*) safe_malloc(MTHREAD_DEFAULT_STACK); /** AJOUT */
-		} /** MODIF */
-		mthread_init_thread(mctx); /** MODIF */
-		mthread_log("THREAD INIT", "Create thread %p\n", mctx); /** MODIF */
-		mctx->arg = __arg; /** MODIF */
-		mctx->__start_routine = __start_routine; /** MODIF */
-		mthread_mctx_set(mctx, mthread_start_thread, (char *) mctx->stack, /** MODIF */
-		MTHREAD_DEFAULT_STACK, mctx); /** MODIF */
+			mctx->stack = (char*) safe_malloc(MTHREAD_DEFAULT_STACK); 		/** AJOUT */
+		} 																	/** MODIF */
+		mthread_init_thread(mctx); 											/** MODIF */
+		mthread_log("THREAD INIT", "Create thread %p\n", mctx); 			/** MODIF */
+		mctx->arg = __arg; 													/** MODIF */
+		mctx->__start_routine = __start_routine; 							/** MODIF */
+		mthread_mctx_set(mctx, mthread_start_thread, (char *) mctx->stack,	/** MODIF */
+							MTHREAD_DEFAULT_STACK, mctx);					/** MODIF */
+		mctx->nb_keys = 0;													/** AJOUT */
+		mctx->next_key = 0;													/** AJOUT */
+		mctx->keys = NULL;													/** AJOUT */
+
 		mthread_insert_last(mctx, &(vp->ready_list));
 		*__threadp = mctx;
 	} else {
@@ -364,8 +368,8 @@ int mthread_create(mthread_t * __threadp, const mthread_attr_t * __attr,
 
 /* Obtain the identifier of the current thread.  */
 mthread_t mthread_self(void) {
-	mthread_virtual_processor_t * vp = mthread_get_vp(); /** MODIF */
-	return vp ? (mthread_t) vp->current : NULL; /** MODIF */
+	mthread_virtual_processor_t * vp = mthread_get_vp(); 	/** MODIF */
+	return vp ? (mthread_t) vp->current : NULL; 			/** MODIF */
 }
 
 /* Compare two thread identifiers.  */
@@ -400,6 +404,19 @@ int mthread_join(mthread_t __th, void **__thread_return) {
 	if (__thread_return) {
 		*__thread_return = (void*) __th->res;
 	}
+
+	/* libères les clefs */
+	if (__th->keys) {
+		int i;												/* AJOUT */
+		for (i = 0 ; i < __th->nb_keys ; i++) {				/* AJOUT */
+			struct mthread_s_key * key = __th->keys + i;	/* AJOUT */
+			if (key->destr_f) {								/* AJOUT */
+				key->destr_f(key->value);					/* AJOUT */
+			}												/* AJOUT */
+		}													/* AJOUT */
+		free(__th->keys);									/* AJOUT */
+	}
+
 	mthread_log("THREAD END", "Thread %p joined\n", __th);
 	mthread_insert_last(__th, &(joined_list));
 
