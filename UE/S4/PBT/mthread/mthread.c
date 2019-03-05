@@ -148,12 +148,9 @@ void __mthread_yield(mthread_virtual_processor_t* vp) {
     }
 
     if (current != vp->idle) {
-        if ((current->status != BLOCKED) && (current->status != ZOMBIE)) {
-            if (current->status == RUNNING) {
-                vp->resched = current;
-            } else
-                not_implemented();
-        }
+		if (current->status == RUNNING) {			/** MODIF : suppresion des checks d'état */
+			vp->resched = current;					/** MODIF : pour simplifier la lecture du code */
+		}											/** MODIF */
 
         if (next == NULL) {
             next = vp->idle;
@@ -352,7 +349,7 @@ int mthread_create(mthread_t * __threadp, const mthread_attr_t * __attr,
         mctx->arg = __arg; 													/** MODIF */
         mctx->__start_routine = __start_routine; 							/** MODIF */
         mthread_mctx_set(mctx, mthread_start_thread, (char *) mctx->stack,	/** MODIF */
-                         MTHREAD_DEFAULT_STACK, mctx);					/** MODIF */
+                         MTHREAD_DEFAULT_STACK, mctx);						/** MODIF */
         mctx->nb_keys = 0;													/** AJOUT */
         mctx->next_key = 0;													/** AJOUT */
         mctx->keys = NULL;													/** AJOUT */
