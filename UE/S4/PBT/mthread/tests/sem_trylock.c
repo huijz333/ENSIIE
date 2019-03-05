@@ -12,31 +12,34 @@ mthread_sem_t sem;
 
 static void * run(void * arg) {
 
-	printf("[(sem.value=%d) THREAD %ld] tente de passer le semaphore\n", sem.value, (long)arg); fflush(stdout);
-	mthread_sem_wait(&sem);
-	printf("[(sem.value=%d) THREAD %ld] a passé le semaphore\n", sem.value, (long)arg); fflush(stdout);
+    printf("[(sem.value=%d) THREAD %ld] tente de passer le semaphore\n", sem.value, (long)arg);
+    fflush(stdout);
+    mthread_sem_wait(&sem);
+    printf("[(sem.value=%d) THREAD %ld] a passé le semaphore\n", sem.value, (long)arg);
+    fflush(stdout);
 
-	usleep(200);
+    usleep(200);
 
-	mthread_sem_post(&sem);
-	printf("[(sem.value=%d) THREAD %ld] a libéré le semaphore\n", sem.value, (long)arg); fflush(stdout);
-	return NULL;
+    mthread_sem_post(&sem);
+    printf("[(sem.value=%d) THREAD %ld] a libéré le semaphore\n", sem.value, (long)arg);
+    fflush(stdout);
+    return NULL;
 }
 
 int main(int argc, char ** argv) {
-	mthread_t threads[NB_THREADS];
-	mthread_sem_init(&sem, THREAD_PER_SEM);
+    mthread_t threads[NB_THREADS];
+    mthread_sem_init(&sem, THREAD_PER_SEM);
 
-	int j;
-	for (j = 0 ; j < NB_THREADS ; j++) {
-		mthread_create(threads + j, NULL, run, (void *)((long)(j + 1)));
-	}
+    int j;
+    for (j = 0 ; j < NB_THREADS ; j++) {
+        mthread_create(threads + j, NULL, run, (void *)((long)(j + 1)));
+    }
 
-	for (j = 0 ; j < NB_THREADS ; j++) {
-		mthread_join(threads[j], NULL);
-	}
+    for (j = 0 ; j < NB_THREADS ; j++) {
+        mthread_join(threads[j], NULL);
+    }
 
-	printf("Success");
+    printf("Success");
 
-	return 0;
+    return 0;
 }

@@ -32,6 +32,8 @@ $(DEPS): dep/%.d : %.c
 $(OBJS):obj/%.o : dep/%.d
 	@echo "Generate $@"
 	@$(CC) $(CFLAGS) -I. -c $(patsubst obj/%.o,%.c,$@) -o $@
+astyle:
+	astyle --style=google $(shell find . -name '*.cpp' -o -name '*.hpp' -o -name '*.c' -o -name '*.h') -n
 
 clean:
 	@echo "Cleanning"

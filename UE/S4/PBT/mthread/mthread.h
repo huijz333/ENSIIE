@@ -1,10 +1,12 @@
 #ifndef __MTHREAD_MTHREAD_H__
 #define __MTHREAD_MTHREAD_H__
-#ifdef __cplusplus  
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-# define MTHREAD_MUTEX_INITIALIZER {0, 0, NULL}
+/** AJOUT */
+# define MTHREAD_MUTEX_INITIALIZER	{0, 0, NULL}
+# define MTHREAD_COND_INITIALIZER	{0, 0, NULL}
 
 /* Types */
 typedef volatile unsigned int mthread_tst_t;
@@ -19,9 +21,9 @@ struct mthread_attr_s;
 typedef struct mthread_attr_s mthread_attr_t;
 
 struct mthread_mutex_s {
-	volatile int nb_thread;
-	mthread_tst_t lock;
-	mthread_list_t *list; /* lock management already handled */
+    volatile int nb_thread;
+    mthread_tst_t lock;
+    mthread_list_t *list; /* lock management already handled */
 };
 typedef struct mthread_mutex_s mthread_mutex_t;
 
@@ -29,14 +31,14 @@ struct mthread_mutexattr_s;
 typedef struct mthread_mutexattr_s mthread_mutexattr_t;
 
 struct mthread_cond_s {
-	/* nombre de threads qui ont appelé 'mthread_cond_wait'  */
-	volatile int nb_thread;
+    /* nombre de threads qui ont appelé 'mthread_cond_wait'  */
+    volatile int nb_thread;
 
-	/* un spinlock */
-	mthread_tst_t lock;
+    /* un spinlock */
+    mthread_tst_t lock;
 
-	/* les threads qui sont en attente (bloqué sur 'mthread_cond_wait') */
-	mthread_list_t *list;
+    /* les threads qui sont en attente (bloqué sur 'mthread_cond_wait') */
+    mthread_list_t *list;
 };
 typedef struct mthread_cond_s mthread_cond_t;
 
@@ -49,14 +51,14 @@ struct mthread_once_s;
 typedef struct mthread_once_s mthread_once_t;
 
 struct mthread_sem_s {
-	/** value of the semaphore (increment or decrement when calling (wait or post) */
-	unsigned int value;
+    /** value of the semaphore (increment or decrement when calling (wait or post) */
+    unsigned int value;
 
-	/** spinlock */
-	mthread_tst_t lock;
+    /** spinlock */
+    mthread_tst_t lock;
 
-	/* lock management already handled */
-	mthread_list_t *list;
+    /* lock management already handled */
+    mthread_list_t *list;
 };
 typedef struct mthread_sem_s mthread_sem_t;
 
@@ -66,7 +68,7 @@ typedef struct mthread_sem_s mthread_sem_t;
  if ATTR is NULL), and call function START_ROUTINE with given
  arguments ARG.  */
 extern int mthread_create(mthread_t * __threadp, const mthread_attr_t * __attr,
-		void *(*__start_routine)(void *), void *__arg);
+                          void *(*__start_routine)(void *), void *__arg);
 
 /* Obtain the identifier of the current thread.  */
 extern mthread_t mthread_self(void);
@@ -87,7 +89,7 @@ extern int mthread_join(mthread_t __th, void **__thread_return);
 /* Initialize MUTEX using attributes in *MUTEX_ATTR, or use the
  default values if later is NULL.  */
 extern int mthread_mutex_init(mthread_mutex_t * __mutex,
-		const mthread_mutexattr_t * __mutex_attr);
+                              const mthread_mutexattr_t * __mutex_attr);
 
 /* Destroy MUTEX.  */
 extern int mthread_mutex_destroy(mthread_mutex_t * __mutex);
@@ -106,7 +108,7 @@ extern int mthread_mutex_unlock(mthread_mutex_t * __mutex);
 /* Initialize condition variable COND using attributes ATTR, or use
  the default values if later is NULL.  */
 extern int mthread_cond_init(mthread_cond_t * __cond,
-		const mthread_condattr_t * __cond_attr);
+                             const mthread_condattr_t * __cond_attr);
 
 /* Destroy condition variable COND.  */
 extern int mthread_cond_destroy(mthread_cond_t * __cond);
@@ -120,7 +122,7 @@ extern int mthread_cond_broadcast(mthread_cond_t * __cond);
 /* Wait for condition variable COND to be signaled or broadcast.
  MUTEX is assumed to be locked before.  */
 extern int mthread_cond_wait(mthread_cond_t * __cond,
-		mthread_mutex_t * __mutex);
+                             mthread_mutex_t * __mutex);
 
 /* Functions for handling thread-specific data.  */
 
@@ -151,7 +153,7 @@ extern void *mthread_getspecific(mthread_key_t key);
  The initialization functions might throw exception which is why
  this function is not marked with .  */
 extern int mthread_once(mthread_once_t * __once_control,
-		void (*__init_routine)(void));
+                        void (*__init_routine)(void));
 
 /* Functions for handling semaphore.  */
 

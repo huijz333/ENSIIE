@@ -36,40 +36,40 @@ unsigned int waiting = 0;
 mthread_cond_t barrier;
 
 static void * work(void * i) {
-	/* si on est le maitre */
-	long id = (long)i;
-	mthread_mutex_lock(&mutex);
-	++waiting;
-	if (waiting < N) {
-		printf("[%ld] WAITING\n", id);
-		mthread_cond_wait(&barrier, &mutex);
-		printf("[%ld] PASSED\n", id);
-	} else {
-		printf("[%ld] BROADCASTING\n", id);
-		mthread_cond_broadcast(&barrier);
-	}
-	mthread_mutex_unlock(&mutex);
+    /* si on est le maitre */
+    long id = (long)i;
+    mthread_mutex_lock(&mutex);
+    ++waiting;
+    if (waiting < N) {
+        printf("[%ld] WAITING\n", id);
+        mthread_cond_wait(&barrier, &mutex);
+        printf("[%ld] PASSED\n", id);
+    } else {
+        printf("[%ld] BROADCASTING\n", id);
+        mthread_cond_broadcast(&barrier);
+    }
+    mthread_mutex_unlock(&mutex);
 
-	return NULL;
+    return NULL;
 }
 
 int main(void) {
-	/* initialisation du mutex et des barrieres */
-	mthread_cond_init(&barrier, NULL);
+    /* initialisation du mutex et des barrieres */
+    mthread_cond_init(&barrier, NULL);
 
-	/* création des threads */
-	mthread_t threads[N];
-	long i;
-	for (i = 0 ; i < N ; i++) {
-		mthread_create(threads + i, NULL, work, (void *)i);
-	}
+    /* création des threads */
+    mthread_t threads[N];
+    long i;
+    for (i = 0 ; i < N ; i++) {
+        mthread_create(threads + i, NULL, work, (void *)i);
+    }
 
-	for (i = 0 ; i < N ; i++) {
-		mthread_join(threads[i], NULL);
-	}
+    for (i = 0 ; i < N ; i++) {
+        mthread_join(threads[i], NULL);
+    }
 
-	puts("Success");
+    puts("Success");
 
-	return 0;
+    return 0;
 }
 

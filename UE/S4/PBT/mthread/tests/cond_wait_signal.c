@@ -29,36 +29,36 @@ mthread_mutex_t mutex;
 volatile int can_start = 0;
 
 static void debug(char * s) {
-	fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "%s\n", s);
 }
 
 static void * ping(void * unused) {
 
-	/* 1. initialisation, attends 'PONG' soit en attente de signal */
-	debug("[PING] starting");
-	while(!can_start);
-	debug("[PING] started");
+    /* 1. initialisation, attends 'PONG' soit en attente de signal */
+    debug("[PING] starting");
+    while(!can_start);
+    debug("[PING] started");
 
-	/** 2. affiche 'PING' puis le signale */
-	debug("[PING] taking mutex");
+    /** 2. affiche 'PING' puis le signale */
+    debug("[PING] taking mutex");
     mthread_mutex_lock(&mutex);
     debug("[PING] took mutex");
 
     /* nombre de PING affiché */
     unsigned int count = 0;
-	while (1) {
-		printf("PING (n°%d)\n", count);
-		debug("[PING] sending signal");
-		mthread_cond_signal(&cond);
-		debug("[PING] waiting condition");
-		mthread_cond_wait(&cond, &mutex);
-		debug("[PING] passed condition");
-		++count;
-	}
+    while (1) {
+        printf("PING (n°%d)\n", count);
+        debug("[PING] sending signal");
+        mthread_cond_signal(&cond);
+        debug("[PING] waiting condition");
+        mthread_cond_wait(&cond, &mutex);
+        debug("[PING] passed condition");
+        ++count;
+    }
 
     mthread_mutex_unlock(&mutex);
 
-	return NULL;
+    return NULL;
 }
 
 static void * pong(void * unused) {
@@ -66,45 +66,45 @@ static void * pong(void * unused) {
     /** 1. initialisation : force 'PONG' a attendre en 1er */
     mthread_mutex_lock(&mutex);
     debug("[PONG] ping can start");
-	can_start = 1;
+    can_start = 1;
 
-	/** 2. affiche 'PONG' puis le signale */
+    /** 2. affiche 'PONG' puis le signale */
 
     /* nombre de PONG affiché */
-	unsigned int count = 0;
-	while (1) {
-		debug("[PONG] waiting condition");
-		mthread_cond_wait(&cond, &mutex);
-		debug("[PONG] passed condition");
-		printf("PONG (n°%d)\n", count);
-		debug("[PONG] sending signal");
-		mthread_cond_signal(&cond);
-		++count;
-	}
+    unsigned int count = 0;
+    while (1) {
+        debug("[PONG] waiting condition");
+        mthread_cond_wait(&cond, &mutex);
+        debug("[PONG] passed condition");
+        printf("PONG (n°%d)\n", count);
+        debug("[PONG] sending signal");
+        mthread_cond_signal(&cond);
+        ++count;
+    }
 
     mthread_mutex_unlock(&mutex);
 
-	return NULL;
+    return NULL;
 }
 
 int main(void) {
 
-	debug("Initializing cond...");
-	mthread_cond_init(&cond, NULL);
-	mthread_mutex_init(&mutex, NULL);
+    debug("Initializing cond...");
+    mthread_cond_init(&cond, NULL);
+    mthread_mutex_init(&mutex, NULL);
 
-	debug("Initializing threads...");
-	mthread_t thrd_ping;
-	mthread_create(&thrd_ping, NULL, ping, NULL);
+    debug("Initializing threads...");
+    mthread_t thrd_ping;
+    mthread_create(&thrd_ping, NULL, ping, NULL);
 
-	mthread_t thrd_pong;
-	mthread_create(&thrd_pong, NULL, pong, NULL);
+    mthread_t thrd_pong;
+    mthread_create(&thrd_pong, NULL, pong, NULL);
 
-	debug("Joining threads");
-	mthread_join(thrd_ping, NULL);
-	mthread_join(thrd_pong, NULL);
+    debug("Joining threads");
+    mthread_join(thrd_ping, NULL);
+    mthread_join(thrd_pong, NULL);
 
-	debug("Success");
-	return 0;
+    debug("Success");
+    return 0;
 }
 

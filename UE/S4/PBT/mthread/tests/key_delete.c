@@ -11,29 +11,29 @@
 # include <unistd.h>
 
 static void destr(void * unused) {
-	puts("Key value destroyed");
+    puts("Key value destroyed");
 }
 
 static void * run(void * unused) {
-	puts("Thread crée");
-	return NULL;
+    puts("Thread crée");
+    return NULL;
 }
 
 int main(void) {
-	pthread_t thrd;
-	pthread_create(&thrd, NULL, run, NULL);
+    pthread_t thrd;
+    pthread_create(&thrd, NULL, run, NULL);
 
-	pthread_key_t key;
-	puts("Initializing key...");
-	pthread_key_create(&key, destr);
-	pthread_key_delete(key);
+    pthread_key_t key;
+    puts("Initializing key...");
+    pthread_key_create(&key, destr);
+    pthread_key_delete(key);
 
-	puts("Done");
-	puts("Joining threads");
-	pthread_join(thrd, NULL);
+    puts("Done");
+    puts("Joining threads");
+    pthread_join(thrd, NULL);
 
-	usleep(10000);
-	puts("Success");
-	return 0;
+    usleep(10000);
+    puts("Success");
+    return 0;
 }
 
