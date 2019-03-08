@@ -20,9 +20,7 @@ int mthread_cond_init(mthread_cond_t * cond,
 
 /* Destroy condition variable COND.  */
 int mthread_cond_destroy(mthread_cond_t * cond) {
-    if (cond->list) {
-        free(cond->list);
-    }
+    free(cond->list);
     return 0;
 }
 
@@ -38,32 +36,30 @@ int mthread_cond_signal(mthread_cond_t * cond) {
     /** prends le spinlock */
     mthread_spinlock_lock(&(cond->lock));
 
-    /** s'il n'y a aucun thread en attente sur la condition */
-    if (cond->list == NULL) {
-        mthread_spinlock_unlock(&(cond->lock));
-        return 0;
+    /** s'il y a au moins un thread en attente sur la condition */
+    if (cond->list) {
+
+		/** on le retire de la liste (FIFO) */
+		mthread_t first = mthread_remove_first(cond->list);
+
+		/** si on a debloqué le dernier thread, on libère la liste en mémoire */
+		if (mthread_is_empty(cond->list)) {
+			free(cond->list);
+			cond->list = NULL;
+		}
+
+		/** on le debloque */
+		first->status = RUNNING;
+
+		/** ce thread devient prêt à l'execution */
+		mthread_virtual_processor_t * vp = mthread_get_vp();
+		mthread_insert_last(first, &(vp->ready_list));
     }
 
-    /** sinon, on retire le 1er thread de la liste (FIFO) */
-    mthread_t first = mthread_remove_first(cond->list);
-
-    /** si on a debloqué le dernier thread, on libère la liste en mémoire */
-    if (mthread_is_empty(cond->list)) {
-        free(cond->list);
-        cond->list = NULL;
-    }
-
-    /** on le debloque */
-    first->status = RUNNING;
-
-    /** ce thread devient prêt à l'execution */
-    mthread_virtual_processor_t * vp = mthread_get_vp();
-    mthread_insert_last(first, &(vp->ready_list));
-
+    /** libère le spinlock et succès */
     mthread_spinlock_unlock(&cond->lock);
 
     return 0;
-
 }
 
 /* Wake up all threads waiting for condition variables COND.  */
@@ -78,29 +74,26 @@ int mthread_cond_broadcast(mthread_cond_t * cond) {
     /** prends le spinlock */
     mthread_spinlock_lock(&(cond->lock));
 
-    /** s'il n'y a aucun thread en attente sur la condition */
-    if (cond->list == NULL) {
-        mthread_spinlock_unlock(&(cond->lock));
-        return 0;
+    /** s'il y a au moins un thread en attente sur la condition */
+    if (cond->list) {
+
+		/** pour chaque thread en attente sur la condition */
+		while (!mthread_is_empty(cond->list)) {
+			/** on le retire de la liste */
+			mthread_t thrd = mthread_remove_first(cond->list);
+
+			/** on le debloque */
+			thrd->status = RUNNING;
+
+			/** ce thread devient prêt à l'execution */
+			mthread_virtual_processor_t * vp = mthread_get_vp();
+			mthread_insert_last(thrd, &(vp->ready_list));
+		}
+
+		/** finalement, on peut supprimer la liste des threads en attente */
+		free(cond->list);
+		cond->list = NULL;
     }
-
-    /** pour chaque thread en attente sur la condition */
-    while (!mthread_is_empty(cond->list)) {
-        /** on le retire de la liste */
-        mthread_t thrd = mthread_remove_first(cond->list);
-
-        /** on le debloque */
-        thrd->status = RUNNING;
-
-        /** ce thread devient prêt à l'execution */
-        mthread_virtual_processor_t * vp = mthread_get_vp();
-        mthread_insert_last(thrd, &(vp->ready_list));
-    }
-
-
-    /** finalement, on peut supprimer la liste des threads en attente */
-    free(cond->list);
-    cond->list = NULL;
 
     /** libère le spinlock */
     mthread_spinlock_unlock(&cond->lock);

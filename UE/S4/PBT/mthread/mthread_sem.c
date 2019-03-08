@@ -99,8 +99,6 @@ int mthread_sem_post(mthread_sem_t * sem) {
 
     mthread_log("SEM_POST","SEM posted\n");
     return 0;
-
-
 }
 
 int mthread_sem_getvalue(mthread_sem_t * sem, unsigned int * sval) {
@@ -137,9 +135,18 @@ int mthread_sem_trywait(mthread_sem_t * sem) {
 
 /* undo sem_init() */
 int mthread_sem_destroy(mthread_sem_t * sem) {
+    mthread_spinlock_lock(&sem->lock);
+
+	if (!mthread_is_empty(sem->list)) {
+	    mthread_spinlock_unlock(&sem->lock);
+        return EBUSY;
+	}
+
     /* libère la liste des threads en attente si elle est alloué */
-    if (sem->list && mthread_is_empty(sem->list)) {
-        free(sem->list);
-    }
+	free(sem->list);
+    mthread_spinlock_unlock(&sem->lock);
+
+    mthread_log("SEM_DESTROY","SEM destroyed\n");
+
     return 0;
 }

@@ -18,7 +18,10 @@ CC=gcc
 
 DEPENDS=$(DEPS)
 
-all:lib/libmthread.a
+all: init lib/libmthread.a
+
+init:
+	@mkdir -p obj dep lib
 
 lib/libmthread.a:$(OBJS)
 	@echo "Generate $@"

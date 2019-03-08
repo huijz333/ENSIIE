@@ -11,9 +11,9 @@ mthread_mutex_init (mthread_mutex_t * mutex,
     if (mutex_attr != NULL)
         not_implemented ();
 
-    mutex->list 		= NULL;										/** MODIF */
-    mutex->lock 		= 0;										/** MODIF */
-    mutex->nb_thread  = 0;										/** MODIF */
+    mutex->list			= NULL;				/** MODIF */
+    mutex->lock			= 0;				/** MODIF */
+    mutex->nb_thread  	= 0;				/** MODIF */
 
     return 0;
 }
@@ -28,12 +28,10 @@ mthread_mutex_destroy (mthread_mutex_t * mutex) {
     mthread_spinlock_lock(&mutex->lock);
 
     if (mutex->nb_thread != 0) {
+        mthread_spinlock_unlock(&mutex->lock);	/** AJOUT */
         return EBUSY;
     }
-    if (mutex->list) {
-        free(mutex->list);
-        mutex->list = NULL;
-    }
+	free(mutex->list);
 
     mthread_spinlock_unlock(&mutex->lock);
 
