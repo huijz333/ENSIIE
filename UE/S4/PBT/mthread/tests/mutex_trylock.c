@@ -6,9 +6,7 @@ mthread_mutex_t mutex;
 
 static void * run(void * arg) {
     printf("[THREAD %ld] tente de passer le verrou\n", (long)arg);
-    int r = mthread_mutex_trylock(&mutex);
-    printf("[THREAD %ld] trylock err = %d\n", (long)arg, r);
-    if (r == 0) {
+    if (mthread_mutex_trylock(&mutex) == 0) {
         printf("[THREAD %ld] a pris le verrou\n", (long)arg);
         sleep(1);
         printf("[THREAD %ld] libere le verrou\n", (long)arg);

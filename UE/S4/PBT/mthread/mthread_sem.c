@@ -1,3 +1,4 @@
+#include <errno.h>
 #include "mthread_internal.h"
 
 /* Functions for handling semaphore.  */
@@ -119,7 +120,6 @@ int mthread_sem_trywait(mthread_sem_t * sem) {
 
     /** si le semaphore ne peut plus accueillir de thread */
     if (sem->value == 0) {
-
         mthread_spinlock_unlock(&sem->lock);
         mthread_log("SEM_TRYLOCK","SEM already locked\n");
         return -1;
