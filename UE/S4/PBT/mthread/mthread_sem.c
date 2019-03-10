@@ -137,7 +137,7 @@ int mthread_sem_trywait(mthread_sem_t * sem) {
 int mthread_sem_destroy(mthread_sem_t * sem) {
     mthread_spinlock_lock(&sem->lock);
 
-	if (!mthread_is_empty(sem->list)) {
+	if (sem->list && !mthread_is_empty(sem->list)) {
 	    mthread_spinlock_unlock(&sem->lock);
         return EBUSY;
 	}

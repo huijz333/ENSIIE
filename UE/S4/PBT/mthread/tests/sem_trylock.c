@@ -1,9 +1,18 @@
+/**
+ * Test du 'sem_trylock()'
+ *
+ * 1 - Crée 16 threads, et un semaphore avec une valeur de 4
+ * 2 - Chaque threads tente de prendre le semaphore, et fait un job
+ *
+ * Sortie attendu: jusqu'a 4 threads peuvent prendre le sémaphore simultanément
+ */
+
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
 
 /* nombre total de thread */
-# define NB_THREADS 	128
+# define NB_THREADS 	16
 
 /* nombre de thread pouvant entrer dans le semaphore en parallèle */
 # define THREAD_PER_SEM	4
@@ -18,7 +27,8 @@ static void * run(void * arg) {
     printf("[(sem.value=%d) THREAD %ld] a passé le semaphore\n", sem.value, (long)arg);
     fflush(stdout);
 
-    usleep(200);
+    int i;
+    for (i = 0 ; i < 100000000 ; i++);
 
     mthread_sem_post(&sem);
     printf("[(sem.value=%d) THREAD %ld] a libéré le semaphore\n", sem.value, (long)arg);
@@ -39,7 +49,7 @@ int main(int argc, char ** argv) {
         mthread_join(threads[j], NULL);
     }
 
-    printf("Success");
+    puts("Success");
 
     return 0;
 }

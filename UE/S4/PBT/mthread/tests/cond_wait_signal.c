@@ -1,5 +1,5 @@
 /**
- * Un ping-pong à l'aide d'un condition
+ * Test cond_wait et cond_signal, à l'aide d'un ping-pong entre 2 threads
  *
  * 1 - Création de 2 threads ('ping' et 'pong')
  * 2 - Initialisation : 'ping' attends que 'pong' soit prêt pour afficher son 1er 'ping', et envoyer son 1er signal
@@ -8,20 +8,21 @@
  *
  * Résultat attendu:
  *  > [...]
- * 	> PING (n°5787)
+ * 	> PING (n°999)
  *	> [PING] sending signal
  *  > [PING] waiting condition
  *  > [PONG] passed condition
- *  > PONG (n°5787)
+ *  > PONG (n°999)
  *  > [PONG] sending signal
  *  > [PONG] waiting condition
  *  > [PING] passed condition
- *  > [...]
  */
 
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
+
+# define MAX_PING	500
 
 /** la condition et le mutex associé */
 mthread_cond_t cond;
@@ -54,6 +55,9 @@ static void * ping(void * unused) {
         mthread_cond_wait(&cond, &mutex);
         debug("[PING] passed condition");
         ++count;
+        if (count == MAX_PING) {
+        	break ;
+        }
     }
 
     mthread_mutex_unlock(&mutex);
@@ -80,6 +84,9 @@ static void * pong(void * unused) {
         debug("[PONG] sending signal");
         mthread_cond_signal(&cond);
         ++count;
+        if (count == MAX_PING) {
+        	break ;
+        }
     }
 
     mthread_mutex_unlock(&mutex);

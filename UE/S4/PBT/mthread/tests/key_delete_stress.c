@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <mthread.h>
 # include <unistd.h>
+# include <assert.h>
 
 /* nombre de threads qui crée et supprime des clefs */
 # define N_THREADS 		1

@@ -1,5 +1,22 @@
+
+/**
+ * 1 - Crée 2 threads et un sémaphore avec une valeur de 1
+ * 2 - Chacun des 2 threads prennent successivement le sémaphore
+ * 3 - Chaque thread vérifie les valeurs successives du sémaphore
+ *
+ * Sortie attendu:
+
+	Initializing semaphore...
+	Done
+	Joining threads
+	Success
+
+
+ */
+
 #include <stdio.h>
 #include <mthread.h>
+#include <assert.h>
 
 mthread_sem_t sem;
 
@@ -7,17 +24,17 @@ static void * run(void * unused) {
     unsigned int value;
 
     mthread_sem_getvalue(&sem, &value);
-    printf("sem.value = %u (expected 1)\n", value);
+    assert(value == 1);
 
     mthread_sem_wait(&sem);
 
     mthread_sem_getvalue(&sem, &value);
-    printf("sem.value = %u (expected 0)\n", value);
+    assert(value == 0);
 
     mthread_sem_post(&sem);
 
     mthread_sem_getvalue(&sem, &value);
-    printf("sem.value = %u (expected 1)\n", value);
+    assert(value == 1);
 
     return NULL;
 }

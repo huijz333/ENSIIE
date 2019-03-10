@@ -11,6 +11,7 @@
 # include <unistd.h>
 
 static void destr(void * unused) {
+	/** jamais appelé, car la clef est déjà supprimé avant la terminaison */
     puts("Key value destroyed");
 }
 
@@ -32,7 +33,6 @@ int main(void) {
     puts("Joining threads");
     pthread_join(thrd, NULL);
 
-    usleep(10000);
     puts("Success");
     return 0;
 }

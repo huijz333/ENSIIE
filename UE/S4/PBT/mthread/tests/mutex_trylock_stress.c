@@ -10,7 +10,7 @@
 #include <mthread.h>
 #include <stdio.h>
 
-# define NB_THREADS	32
+# define NB_THREADS	4
 
 volatile int exclusion_var = 0;
 mthread_mutex_t mutex;
@@ -20,7 +20,7 @@ void* trylock_routine(void* arg) {
 		printf("Got the mutex !\n");
 		exclusion_var++;
 		/** attends un peu histoire que les autres threads try lock */
-		sleep(2);
+		sleep(1);
 		puts("Unlocking");
 		mthread_mutex_unlock(&mutex);
 		puts("Unlocked");

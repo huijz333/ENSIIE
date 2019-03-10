@@ -1,3 +1,18 @@
+/**
+ *
+ * Test que les mutex fonctionnent bien avec un grand nombre de thread
+ *
+ * 1 - Crée 512 thread qui incrémente un entier partagé en mémoire (dans le segment data)
+ * 2 - L'incrément est effectué dans un semaphore (valeur de 1 <=> mutex)
+ * 3 - On vérifie que tous les incréments ont bien eu lieu sans erreur
+ *
+ * Résultat attendu :
+ * > [...]
+ * > Résultat attendu : 512000
+ * > Résultat obtenu  : 512000
+ * > Success
+ */
+
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
