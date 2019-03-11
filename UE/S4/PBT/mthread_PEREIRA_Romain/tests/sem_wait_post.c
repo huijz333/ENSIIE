@@ -1,6 +1,23 @@
+/**
+ *
+ * Test que les fonctions sem_wait et sem_post fonctionnent bien
+ *
+ *
+ * 1 - Crée 16 thread qui incrémente un entier partagé en mémoire (dans le segment data)
+ * 2 - L'incrément est effectué dans un semaphore (valeur de 1 <=> mutex)
+ * 3 - On vérifie que tous les incréments ont bien eu lieu sans erreur
+ *
+ * Résultat attendu :
+ * > [...]
+ * > Résultat attendu : 16000
+ * > Résultat obtenu  : 16000
+ * > Success
+ */
+
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
+# include <assert.h>
 
 # define NB_THREADS 16
 # define INC_PER_THREAD 1000
@@ -40,6 +57,7 @@ int main(int argc, char ** argv) {
     printf("Résultat attendu : %d\n", NB_THREADS * INC_PER_THREAD);
     printf("Résultat obtenu  : %d\n", i);
     printf("%s\n", NB_THREADS * INC_PER_THREAD == i ? "Success" : "Error");
+    assert(i == NB_THREADS * INC_PER_THREAD);
 
     return NB_THREADS * INC_PER_THREAD == i ? 0 : 1;
 }

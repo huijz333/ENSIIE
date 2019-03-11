@@ -1,5 +1,14 @@
+/**
+ * 1 - Crée 16 threads et 1 mutex à partir de la macro d'initilisation
+ * 2 - Chaque thread incrémente une variable partagé en mémoire (pour vérifier que le mutex fonctionne)
+ *
+ * Résultat attendu :
+ * > Success
+ */
+
 #include <stdio.h>
 #include <mthread.h>
+#include <assert.h>
 
 # define NB_THREADS 16
 
@@ -25,7 +34,7 @@ int main(int argc, char ** argv) {
         mthread_join(threads[j], NULL);
     }
 
-    printf("%d\n", i);
+    assert(i == 16);
     puts("Success");
 
     return 0;

@@ -19,7 +19,6 @@
 		[...]
 	 > [3] PASSED
 	 > Success
- *
  */
 
 #include <stdio.h>

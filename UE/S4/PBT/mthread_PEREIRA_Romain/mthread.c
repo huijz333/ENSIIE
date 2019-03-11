@@ -12,9 +12,9 @@
 #endif
 
 #define MTHREAD_DEFAULT_STACK 128*1024 /*128 kO*/
-#define MTHREAD_MAX_VIRUTAL_PROCESSORS 256
+#define MTHREAD_MAX_VIRTUAL_PROCESSORS 256
 
-static mthread_virtual_processor_t virtual_processors[MTHREAD_MAX_VIRUTAL_PROCESSORS];
+static mthread_virtual_processor_t virtual_processors[MTHREAD_MAX_VIRTUAL_PROCESSORS];
 static mthread_list_t joined_list;
 
 #define MTHREAD_LIST_INIT {NULL,NULL,0}

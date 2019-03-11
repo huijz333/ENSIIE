@@ -1,8 +1,23 @@
+/**
+ *
+ * Test que les mutex fonctionnent bien avec un grand nombre de thread
+ *
+ * 1 - Crée 512 thread qui incrémente un entier partagé en mémoire (dans le segment data)
+ * 2 - L'incrément est effectué dans un semaphore (valeur de 1 <=> mutex)
+ * 3 - On vérifie que tous les incréments ont bien eu lieu sans erreur
+ *
+ * Résultat attendu :
+ * > [...]
+ * > Résultat attendu : 512000
+ * > Résultat obtenu  : 512000
+ * > Success
+ */
+
 # include <stdio.h>
 # include <mthread.h>
 # include <unistd.h>
 
-# define NB_THREADS 16
+# define NB_THREADS 512
 # define INC_PER_THREAD 1000
 
 int i = 0;
@@ -18,7 +33,7 @@ static void * run(void * arg) {
     for (j = 0 ; j < INC_PER_THREAD ; j++) {
         i++;
     }
-    usleep(20);
+    usleep(10);
     mthread_mutex_unlock(&mutex);
     printf("[THREAD %ld] a libéré le verrou\n", (long)arg);
     fflush(stdout);

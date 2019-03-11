@@ -1,3 +1,15 @@
+/**
+ *
+ * Test que l'instanciation et la terminaison d'un thread se fait sans problème
+ *
+ * 1 - Crée un thread
+ * 2 - Attends la fin du thread
+ * 3 - Affiche 'Success'
+ *
+ * Résultat attendu :
+ * > Success
+ */
+
 #include <stdio.h>
 #include <mthread.h>
 

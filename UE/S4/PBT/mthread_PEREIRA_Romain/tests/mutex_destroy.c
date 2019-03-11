@@ -1,3 +1,10 @@
+/**
+ * Crée un thread et un mutex, puis détruit le mutex
+ *
+ * Résultat attendu :
+ * > Success
+ */
+
 #include <stdio.h>
 #include <mthread.h>
 
