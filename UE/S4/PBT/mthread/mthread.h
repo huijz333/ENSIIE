@@ -20,6 +20,39 @@ typedef struct mthread_s* mthread_t;
 struct mthread_attr_s;
 typedef struct mthread_attr_s mthread_attr_t;
 
+
+/** contexte d'une tâche "parallel for" */
+typedef struct {
+	/* numéro du thread qui execute la routine (<=> omp_get_thread_num()) */
+	unsigned int thread_id;
+
+	/* valeur de l'iterateur pour le passage dans la boucle */
+	int iterator;
+
+} mthread_pf_context_t;
+
+/** les ordonnancements possibles ('schedule') pour un 'parallel for' */
+enum mthread_parallel_for_schedule {
+	MTHREAD_PARALLEL_FOR_STATIC
+};
+
+/** configuration pour le lancement d'un "parallel for" */
+typedef struct {
+	/* nombre de threads sur lequel la parallélisation est effectué */
+	unsigned int num_threads;
+
+	/* ordonnancement ('schedule') à utiliser */
+	enum mthread_parallel_for_schedule schedule;
+
+	/* début de la boucle for */
+	int bgn;
+
+	/* fin de la boucle for */
+	int end;
+
+
+} mthread_pf_t;
+
 struct mthread_mutex_s {
     volatile int nb_thread;
     mthread_tst_t lock;
@@ -167,6 +200,10 @@ extern int mthread_sem_trywait(mthread_sem_t * sem);
 extern int mthread_sem_destroy(mthread_sem_t * sem); /* undo sem_init() */
 
 extern void mthread_yield();
+
+/** la fonction du parallel for */
+extern int mthread_parallel_for(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *));
+
 
 #ifdef __cplusplus
 }

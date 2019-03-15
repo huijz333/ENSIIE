@@ -19,6 +19,33 @@ extern "C"
 
 #include "mthread.h"
 
+/** un job qui doit être executé dans un 'parallel for' */
+typedef struct {
+
+	/* routine utilisateur qui est parallélisé */
+	void (* run)(mthread_pf_context_t *);
+
+	/* début de l'itérateur */
+	int bgn;
+
+	/* fin de l'itérateur */
+	int end;
+
+} mthread_pf_job_t;
+
+/** un thread capable de travailler dans un 'parallel for' */
+typedef struct {
+	/* le thread attaché à ce travailleur */
+	mthread_t thread;
+
+	/* le job que doit executer le travailleur */
+	mthread_pf_job_t * job;
+
+	/* le context du travailleur (dans la tâche qu'il est entrain d'executer) */
+	mthread_pf_context_t ctx;
+
+} mthread_pf_worker_t;
+
 typedef struct mthread_list_s {
     volatile struct mthread_s* first;
     volatile struct mthread_s* last;

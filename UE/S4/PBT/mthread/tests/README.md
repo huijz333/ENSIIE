@@ -14,6 +14,6 @@ exemple:
 > make thread
 
 Puis lancer les tests un par un:
-> ./thread
-> ./mutex
+> ./thread/thread
+> ./mutex/init
 [...]
