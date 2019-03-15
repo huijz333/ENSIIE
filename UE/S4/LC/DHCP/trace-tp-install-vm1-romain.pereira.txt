@@ -1,0 +1,2090 @@
+Le script a débuté sur ven. 15 mars 2019 11:14:10 CET
+]0;romain.pereira@hpc01:~[?1034h[romain.pereira@hpc01 ~]$ pcocc ssh vm1
+Last login: Fri Mar 15 11:13:20 2019 from hpc01.c-hpc.pedago.ensiie.fr
+]0;romain.pereira@vm1:~[?1034h[romain.pereira@vm1 11:14:18]$ 
+]0;romain.pereira@vm1:~[romain.pereira@vm1 11:14:18]$ ip addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:00:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.251.0.2/16 brd 10.251.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN qlen 1000
+    link/ether 52:54:0a:00:00:01 brd ff:ff:ff:ff:ff:ff
+]0;romain.pereira@vm1:~[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ [K[romain.pereira@vm1 11:14:23]$ ip addr showrm trace-tp-install-vm1-romain.pereira.txt [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cip addr show[K^C
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:04:01]$ ip addr showrm trace-tp-install-vm1-romain.pereira.txt [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K[Kscript trace-tp-install-vm1-$(id -un).txt^C
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ [K[romain.pereira@vm1 12:04:05]$ cp /etc/
+Display all 184 possibilities? (y or n)
+[romain.pereira@vm1 12:04:05]$ cp /etc/sysconfig/network-scripts/ifcfg-
+ifcfg-eth0  ifcfg-lo    
+[romain.pereira@vm1 12:04:05]$ cp /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cv /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[36;1H"/etc/sysconfig/network-scripts/ifcfg-eth1" [Nouveau fichier][>c[2;1H[1m[34m~                                                                                                                       [3;1H~                                                                                                                       [4;1H~                                                                                                                       [5;1H~                                                                                                                       [6;1H~                                                                                                                       [7;1H~                                                                                                                       [8;1H~                                                                                                                       [9;1H~                                                                                                                       [10;1H~                                                                                                                       [11;1H~                                                                                                                       [12;1H~                                                                                                                       [13;1H~                                                                                                                       [14;1H~                                                                                                                       [15;1H~                                                                                                                       [16;1H~                                                                                                                       [17;1H~                                                                                                                       [18;1H~                                                                                                                       [19;1H~                                                                                                                       [20;1H~                                                                                                                       [21;1H~                                                                                                                       [22;1H~                                                                                                                       [23;1H~                                                                                                                       [24;1H~                                                                                                                       [25;1H~                                                                                                                       [26;1H~                                                                                                                       [27;1H~                                                                                                                       [28;1H~                                                                                                                       [29;1H~                                                                                                                       [30;1H~                                                                                                                       [31;1H~                                                                                                                       [32;1H~                                                                                                                       [33;1H~                                                                                                                       [34;1H~                                                                                                                       [35;1H~                                                                                                                       [m[36;103H0,0-1[8CTout[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[36;1H[1m-- INSERTION --[m[36;16H[K[36;103H0,1[10CTout[1;1H[?12l[?25h[?25lN[36;103H1,2[1;2H[?12l[?25h[?25lA[36;105H3[1;3H[?12l[?25h[?25lM[36;105H4[1;4H[?12l[?25h[?25lE[36;105H5[1;5H[?12l[?25h[?25l=[36;105H6[1;6H[?12l[?25h[?25l"[36;105H7[1;7H[?12l[?25h[?25lD[36;105H8[1;8H[?12l[?25h[?25lH[36;105H9[1;9H[?12l[?25h[?25lC[36;105H10[1;10H[?12l[?25h[?25lP[36;106H1[1;11H[?12l[?25h[?25l[36;106H2[1;12H[?12l[?25h[?25lC[36;106H3[1;13H[?12l[?25h[?25ll[36;106H4[1;14H[?12l[?25h[?25li[36;106H5[1;15H[?12l[?25h[?25le[36;106H6[1;16H[?12l[?25h[?25ln[36;106H7[1;17H[?12l[?25h[?25lt[36;106H8[1;18H[?12l[?25h[?25l[36;106H9[1;19H[?12l[?25h[?25l([36;103H[K[36;103H1,20[9CTout[1;20H[?12l[?25h[?25le[36;106H1[1;21H[?12l[?25h[?25lt[36;106H2[1;22H[?12l[?25h[?25lh[36;106H3[1;23H[?12l[?25h[?25l1[36;106H4[1;24H[?12l[?25h[?25l"[36;106H5[1;25H[?12l[?25h[?25l[1;24H[K[36;106H4[1;24H[?12l[?25h[?25l[46m([meth1[46m)[m[36;103H[K[36;103H1,25[9CTout[1;25H[?12l[?25h[?25l(eth1)"[36;106H6[1;26H[?12l[?25h[?25l[2;1H[K[36;103H2,1 [2;1H[?12l[?25h[?25lD[36;105H2[2;2H[?12l[?25h[?25lE[36;105H3[2;3H[?12l[?25h[?25lV[36;105H4[2;4H[?12l[?25h[?25lI[36;105H5[2;5H[?12l[?25h[?25lC[36;105H6[2;6H[?12l[?25h[?25lE[36;105H7[2;7H[?12l[?25h[?25l[36;105H8[2;8H[?12l[?25h[?25lE[36;105H9[2;9H[?12l[?25h[?25lT[36;105H10[2;10H[?12l[?25h[?25lH[36;106H1[2;11H[?12l[?25h[?25l1[36;106H2[2;12H[?12l[?25h[?25l[2;11H[K[36;106H1[2;11H[?12l[?25h[?25l[2;10H[K[36;106H0[2;10H[?12l[?25h[?25l[2;9H[K[36;105H9 [2;9H[?12l[?25h[?25l[2;8H[K[36;105H8[2;8H[?12l[?25h[?25le[36;105H9[2;9H[?12l[?25h[?25lt[36;105H10[2;10H[?12l[?25h[?25lh[36;106H1[2;11H[?12l[?25h[?25l1[36;106H2[2;12H[?12l[?25h[?25l[3;1H[K[36;103H3,1 [3;1H[?12l[?25h[?25lH[36;105H2[3;2H[?12l[?25h[?25lW[36;105H3[3;3H[?12l[?25h[?25lA[36;105H4[3;4H[?12l[?25h[?25lD[36;105H5[3;5H[?12l[?25h[?25lD[36;105H6[3;6H[?12l[?25h[?25lR[36;105H7[3;7H[?12l[?25h[?25l=[36;105H8[3;8H[?12l[?25h[?25l[4;1H[K[36;103H4,1[4;1H[?12l[?25h[?25l[5;1H[K[36;103H5[5;1H[?12l[?25h[?25lO[36;105H2[5;2H[?12l[?25h[?25lN[36;105H3[5;3H[?12l[?25h[?25lB[36;105H4[5;4H[?12l[?25h[?25lO[36;105H5[5;5H[?12l[?25h[?25lO[36;105H6[5;6H[?12l[?25h[?25lT[36;105H7[5;7H[?12l[?25h[?25l=[36;105H8[5;8H[?12l[?25h[?25lY[36;105H9[5;9H[?12l[?25h[?25lE[36;105H10[5;10H[?12l[?25h[?25lS[36;106H1[5;11H[?12l[?25h[?25l[5;10H[K[36;106H0[5;10H[?12l[?25h[?25l[5;9H[K[36;105H9 [5;9H[?12l[?25h[?25l[5;8H[K[36;105H8[5;8H[?12l[?25h[?25ly[36;105H9[5;9H[?12l[?25h[?25le[36;105H10[5;10H[?12l[?25h[?25ls[36;106H1[5;11H[?12l[?25h[?25l[36;103H4,1 [4;1H[?12l[?25h[?25l[36;103H3,8[3;8H[?12l[?25h[?25l[36;103H2,11[2;11H[?12l[?25h[?25l[36;106H0[2;10H[?12l[?25h[?25l[36;105H9 [2;9H[?12l[?25h[?25l[36;105H8[2;8H[?12l[?25h[?25leth1[2;11H[K[36;105H7[2;7H[?12l[?25h[?25l=eth1[36;105H8[2;8H[?12l[?25h[?25l[36;103H3[3;8H[?12l[?25h[?25l[36;103H4,1[4;1H[?12l[?25h[?25l[36;103H5,8[5;8H[?12l[?25h[?25l[36;105H11[5;11H[?12l[?25h[?25l[5;10H[K[36;106H0[5;10H[?12l[?25h[?25l[5;9H[K[36;105H9 [5;9H[?12l[?25h[?25l[5;8H[K[36;105H8[5;8H[?12l[?25h[?25l[5;7H[K[36;105H7[5;7H[?12l[?25h[?25l=[36;105H8[5;8H[?12l[?25h[?25ln[36;105H9[5;9H[?12l[?25h[?25lo[36;105H10[5;10H[?12l[?25h[?25l[6;1H[K[36;103H6,1 [6;1H[?12l[?25h[?25l[7;1H[K[36;103H7[7;1H[?12l[?25h[?25lT[36;105H2[7;2H[?12l[?25h[?25lY[36;105H3[7;3H[?12l[?25h[?25lP[36;105H4[7;4H[?12l[?25h[?25lE[36;105H5[7;5H[?12l[?25h[?25l=[36;105H6[7;6H[?12l[?25h[?25lE[36;105H7[7;7H[?12l[?25h[?25lt[36;105H8[7;8H[?12l[?25h[?25lh[36;105H9[7;9H[?12l[?25h[?25le[36;105H10[7;10H[?12l[?25h[?25lr[36;106H1[7;11H[?12l[?25h[?25ln[36;106H2[7;12H[?12l[?25h[?25le[36;106H3[7;13H[?12l[?25h[?25lt[36;106H4[7;14H[?12l[?25h[?25l[8;1H[K[36;103H8,1 [8;1H[?12l[?25h[?25lB[36;105H2[8;2H[?12l[?25h[?25lO[36;105H3[8;3H[?12l[?25h[?25lO[36;105H4[8;4H[?12l[?25h[?25lT[36;105H5[8;5H[?12l[?25h[?25lP[36;105H6[8;6H[?12l[?25h[?25lR[36;105H7[8;7H[?12l[?25h[?25lO[36;105H8[8;8H[?12l[?25h[?25lT[36;105H9[8;9H[?12l[?25h[?25lO[36;105H10[8;10H[?12l[?25h[?25l=[36;106H1[8;11H[?12l[?25h[?25lh[36;106H2[8;12H[?12l[?25h[?25ld[36;106H3[8;13H[?12l[?25h[?25l[8;12H[K[36;106H2[8;12H[?12l[?25h[?25l[8;11H[K[36;106H1[8;11H[?12l[?25h[?25ld[36;106H2[8;12H[?12l[?25h[?25lh[36;106H3[8;13H[?12l[?25h[?25lc[36;106H4[8;14H[?12l[?25h[?25lp[36;106H5[8;15H[?12l[?25h[36;1H[K[8;14H[?25l[36;103H8,14[9CTout[8;14H[?12l[?25h[36;1H
+[?1l>[?1049l
+[1]+  Stoppé                 vim /etc/sysconfig/network-scripts/ifcfg-eth1
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:16:05]$ ip addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:00:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.251.0.2/16 brd 10.251.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN qlen 1000
+    link/ether 52:54:0a:00:00:01 brd ff:ff:ff:ff:ff:ff
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:16:07]$ fg
+vim /etc/sysconfig/network-scripts/ifcfg-eth1
+[?1049h[?1h=[?12;25h[?12l[?25h[27m[m[H[2J[?25l[1;1HNAME="DHCP Client (eth1)"
+DEVICE=eth1
+HWADDR=
+
+ONBOOT=no
+
+TYPE=Ethernet
+BOOTPROTO=dhcp
+[1m[34m~                                                                                                                       [10;1H~                                                                                                                       [11;1H~                                                                                                                       [12;1H~                                                                                                                       [13;1H~                                                                                                                       [14;1H~                                                                                                                       [15;1H~                                                                                                                       [16;1H~                                                                                                                       [17;1H~                                                                                                                       [18;1H~                                                                                                                       [19;1H~                                                                                                                       [20;1H~                                                                                                                       [21;1H~                                                                                                                       [22;1H~                                                                                                                       [23;1H~                                                                                                                       [24;1H~                                                                                                                       [25;1H~                                                                                                                       [26;1H~                                                                                                                       [27;1H~                                                                                                                       [28;1H~                                                                                                                       [29;1H~                                                                                                                       [30;1H~                                                                                                                       [31;1H~                                                                                                                       [32;1H~                                                                                                                       [33;1H~                                                                                                                       [34;1H~                                                                                                                       [35;1H~                                                                                                                       [m[36;103H8,14[9CTout[8;14H[?12l[?25h[?25l[36;103H7,13[7;13H[?12l[?25h[?25l[36;103H6,0-1[6;1H[?12l[?25h[?25l[36;103H5,9  [5;9H[?12l[?25h[?25l[36;103H4,0-1[4;1H[?12l[?25h[?25l[36;103H3,7  [3;7H[?12l[?25h[?25l[36;1H[1m-- INSERTION --[m[36;103H[K[36;103H3,7[10CTout[3;7H[?12l[?25h[?25l[36;105H8[3;8H[?12l[?25h[?25l52:54:0a:00:00:0[36;105H24[3;24H[?12l[?25h[?25l1[36;106H5[3;25H[?12l[?25h[36;1H[K[3;24H[?25l[36;103H3,24[9CTout[3;24H[?12l[?25h[?25l[36;103H[K[36;1H:[?12l[?25hw[?25l[?12l[?25h[?25l"/etc/sysconfig/network-scripts/ifcfg-eth1"
+[1m[37m[41m"/etc/sysconfig/network-scripts/ifcfg-eth1" E212: Impossible d'ouvrir le fichier pour y écrire[m
+[32mAppuyez sur ENTRÉE ou tapez une commande pour continuer[?12l[?25h[m[1;1H[2L[?25l[1;1HNAME="DHCP Client (eth1)"
+DEVICE=eth1[36;1H[K[36;103H3,24[9CTout[3;24H[?12l[?25h[?25l[36;103H[K[36;1H:[?12l[?25hw[?25l[?12l[?25h![?25l[?12l[?25h![?25l[?12l[?25h[?25l[102C3,24[9CTout[3;24H[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hw[?25l[?12l[?25h![?25l[?12l[?25h[?25l"/etc/sysconfig/network-scripts/ifcfg-eth1"
+[1m[37m[41m"/etc/sysconfig/network-scripts/ifcfg-eth1" E212: Impossible d'ouvrir le fichier pour y écrire[m
+[32mAppuyez sur ENTRÉE ou tapez une commande pour continuer[?12l[?25h[m[1;1H[2L[?25l[1;1HNAME="DHCP Client (eth1)"
+DEVICE=eth1[36;1H[K[36;103H3,24[9CTout[3;24H[?12l[?25h[?25l[36;103H[K[36;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[36;1H[K[36;1H[?1l>[?12l[?25h[?1049l]0;romain.pereira@vm1:~[romain.pereira@vm1 12:16:24]$ fg^C
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:16:25]$ sudo su
+]0;root@vm1:/home/romain.pereira[?1034h[root@vm1 12:16:26]# vim /etc/sysconfig/network-scripts/ifcfg-eth1
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[36;1H"/etc/sysconfig/network-scripts/ifcfg-eth1" [Nouveau fichier][>c[2;1H[1m[34m~                                                                                                                       [3;1H~                                                                                                                       [4;1H~                                                                                                                       [5;1H~                                                                                                                       [6;1H~                                                                                                                       [7;1H~                                                                                                                       [8;1H~                                                                                                                       [9;1H~                                                                                                                       [10;1H~                                                                                                                       [11;1H~                                                                                                                       [12;1H~                                                                                                                       [13;1H~                                                                                                                       [14;1H~                                                                                                                       [15;1H~                                                                                                                       [16;1H~                                                                                                                       [17;1H~                                                                                                                       [18;1H~                                                                                                                       [19;1H~                                                                                                                       [20;1H~                                                                                                                       [21;1H~                                                                                                                       [22;1H~                                                                                                                       [23;1H~                                                                                                                       [24;1H~                                                                                                                       [25;1H~                                                                                                                       [26;1H~                                                                                                                       [27;1H~                                                                                                                       [28;1H~                                                                                                                       [29;1H~                                                                                                                       [30;1H~                                                                                                                       [31;1H~                                                                                                                       [32;1H~                                                                                                                       [33;1H~                                                                                                                       [34;1H~                                                                                                                       [35;1H~                                                                                                                       [m[36;103H0,0-1[8CTout[1;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[36;1H[1m-- INSERTION --[m[36;16H[K[36;103H0,1[10CTout[1;1H[?12l[?25h[?25lNAME="DHCP Client (eth1)"
+DEVICE=eth1[2;12H[K[3;1HHWADDR=52:54:0a:00:00:01[3;25H[K[4;1H[K[5;1HONBOOT=no[5;10H[K[6;1H[K[7;1HTYPE=Ethernet[7;14H[K[8;1HBOOTPROTO=dhcp[8;15H[K[36;103H8,15[8;15H[?12l[?25h[36;1H[K[8;14H[?25l[36;103H8,14[9CTout[8;14H[?12l[?25h[?25l[36;103H[K[36;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"/etc/sysconfig/network-scripts/ifcfg-eth1" [Nouveau] 8L, 104C écrit(s)
+[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:16:37]# vim /etc/sysconfig/network-scripts/ifcfg-eth1[K
+ifcfg-eth0  ifcfg-eth1  
+[root@vm1 12:16:37]# vim /etc/sysconfig/network-scripts/ifcfg-eth1
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[36;1H"/etc/sysconfig/network-scripts/ifcfg-eth1" 8L, 104C[>c[1;1HNAME="DHCP Client (eth1)"
+DEVICE=eth1
+HWADDR=52:54:0a:00:00:01
+
+ONBOOT=no
+
+TYPE=Ethernet
+BOOTPROTO=dhcp
+[1m[34m~                                                                                                                       [10;1H~                                                                                                                       [11;1H~                                                                                                                       [12;1H~                                                                                                                       [13;1H~                                                                                                                       [14;1H~                                                                                                                       [15;1H~                                                                                                                       [16;1H~                                                                                                                       [17;1H~                                                                                                                       [18;1H~                                                                                                                       [19;1H~                                                                                                                       [20;1H~                                                                                                                       [21;1H~                                                                                                                       [22;1H~                                                                                                                       [23;1H~                                                                                                                       [24;1H~                                                                                                                       [25;1H~                                                                                                                       [26;1H~                                                                                                                       [27;1H~                                                                                                                       [28;1H~                                                                                                                       [29;1H~                                                                                                                       [30;1H~                                                                                                                       [31;1H~                                                                                                                       [32;1H~                                                                                                                       [33;1H~                                                                                                                       [34;1H~                                                                                                                       [35;1H~                                                                                                                       [m[36;103H8,1[10CTout[8;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[36;1H[K[36;1H:[?12l[?25hw[?25l[?12l[?25hq[?25l[?12l[?25h[?25l"/etc/sysconfig/network-scripts/ifcfg-eth1" 8L, 104C écrit(s)
+[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:16:44]# ifup s[Keth1
+
+Définition des informations IP pour eth1.ip     fait.
+]0;root@vm1:/home/romain.pereira[root@vm1 12:16:52]# ipa
+bash: ipa : commande introuvable
+]0;root@vm1:/home/romain.pereira[root@vm1 12:16:54]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:00:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.251.0.2/16 brd 10.251.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:0a:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.252.0.100/16 brd 10.252.255.255 scope global dynamic eth1
+       valid_lft 1798sec preferred_lft 1798sec
+    inet6 fe80::5054:aff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+]0;root@vm1:/home/romain.pereira[root@vm1 12:16:55]# ip a[1Pafup eth1vim /etc/sysconfig/network-scripts/ifcfg-eth1
+[?1049h[?1h=[2;1H▽[6n[1;1H  [1;1H[1;36r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[36;1H"/etc/sysconfig/network-scripts/ifcfg-eth1" 8L, 104C[>c[1;1HNAME="DHCP Client (eth1)"
+DEVICE=eth1
+HWADDR=52:54:0a:00:00:01
+
+ONBOOT=no
+
+TYPE=Ethernet
+BOOTPROTO=dhcp
+[1m[34m~                                                                                                                       [10;1H~                                                                                                                       [11;1H~                                                                                                                       [12;1H~                                                                                                                       [13;1H~                                                                                                                       [14;1H~                                                                                                                       [15;1H~                                                                                                                       [16;1H~                                                                                                                       [17;1H~                                                                                                                       [18;1H~                                                                                                                       [19;1H~                                                                                                                       [20;1H~                                                                                                                       [21;1H~                                                                                                                       [22;1H~                                                                                                                       [23;1H~                                                                                                                       [24;1H~                                                                                                                       [25;1H~                                                                                                                       [26;1H~                                                                                                                       [27;1H~                                                                                                                       [28;1H~                                                                                                                       [29;1H~                                                                                                                       [30;1H~                                                                                                                       [31;1H~                                                                                                                       [32;1H~                                                                                                                       [33;1H~                                                                                                                       [34;1H~                                                                                                                       [35;1H~                                                                                                                       [m[36;103H8,1[10CTout[8;1H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[36;103H7[7;1H[?12l[?25h[?25l[36;103H6,0-1[6;1H[?12l[?25h[?25l[36;103H5,1  [5;1H[?12l[?25h[?25l[36;103H4,0-1[4;1H[?12l[?25h[?25l[36;103H3,1  [3;1H[?12l[?25h[?25l[36;103H2[2;1H[?12l[?25h[?25l[36;103H1[1;1H[?12l[?25h[?25l[36;103H2[2;1H[?12l[?25h[?25l[36;103H3[3;1H[?12l[?25h[?25l[36;1H[K[36;1H:[?12l[?25hq[?25l[?12l[?25h![?25l[?12l[?25h[?25l[36;1H[K[36;1H[?1l>[?12l[?25h[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:17:23]# pgrep dhcp
+]0;root@vm1:/home/romain.pereira[root@vm1 12:17:44]# pgrep dhcpd
+]0;root@vm1:/home/romain.pereira[root@vm1 12:17:45]# pgrep dhcpd[K[K[Kclient
+814
+1515
+]0;root@vm1:/home/romain.pereira[root@vm1 12:17:51]# ps -aux 
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0 190708  3772 ?        Ss   11:09   0:02 /usr/lib/systemd/systemd --switched-root --system --des
+root         2  0.0  0.0      0     0 ?        S    11:09   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/0]
+root         5  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:0H]
+root         7  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/0]
+root         8  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_bh]
+root         9  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_sched]
+root        10  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/0]
+root        11  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/1]
+root        12  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/1]
+root        13  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/1]
+root        15  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:0H]
+root        16  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/2]
+root        17  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/2]
+root        18  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/2]
+root        20  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:0H]
+root        22  0.0  0.0      0     0 ?        S    11:09   0:00 [kdevtmpfs]
+root        23  0.0  0.0      0     0 ?        S<   11:09   0:00 [netns]
+root        24  0.0  0.0      0     0 ?        S    11:09   0:00 [khungtaskd]
+root        25  0.0  0.0      0     0 ?        S<   11:09   0:00 [writeback]
+root        26  0.0  0.0      0     0 ?        S<   11:09   0:00 [kintegrityd]
+root        27  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+root        28  0.0  0.0      0     0 ?        S<   11:09   0:00 [kblockd]
+root        29  0.0  0.0      0     0 ?        S<   11:09   0:00 [md]
+root        30  0.0  0.0      0     0 ?        R    11:09   0:00 [kworker/0:1]
+root        35  0.0  0.0      0     0 ?        S    11:09   0:00 [kswapd0]
+root        36  0.0  0.0      0     0 ?        SN   11:09   0:00 [ksmd]
+root        37  0.0  0.0      0     0 ?        SN   11:09   0:00 [khugepaged]
+root        38  0.0  0.0      0     0 ?        S<   11:09   0:00 [crypto]
+root        46  0.0  0.0      0     0 ?        S<   11:09   0:00 [kthrotld]
+root        48  0.0  0.0      0     0 ?        S<   11:09   0:00 [kmpath_rdacd]
+root        49  0.0  0.0      0     0 ?        S<   11:09   0:00 [kpsmoused]
+root        50  0.0  0.0      0     0 ?        S<   11:09   0:00 [ipv6_addrconf]
+root        51  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/1:1]
+root        70  0.0  0.0      0     0 ?        S<   11:09   0:00 [deferwq]
+root       114  0.0  0.0      0     0 ?        S    11:09   0:00 [kauditd]
+root       188  0.0  0.0      0     0 ?        S<   11:09   0:00 [rpciod]
+root       189  0.0  0.0      0     0 ?        S<   11:09   0:00 [xprtiod]
+root       256  0.0  0.0      0     0 ?        S<   11:09   0:00 [ata_sff]
+root       267  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_0]
+root       268  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_0]
+root       269  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_1]
+root       270  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_1]
+root       271  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_2]
+root       272  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_2]
+root       273  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_3]
+root       274  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_3]
+root       275  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_4]
+root       276  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_4]
+root       277  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_5]
+root       278  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_5]
+root       280  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/u6:3]
+root       282  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/u6:5]
+root       297  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:1H]
+root       304  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+root       305  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfsalloc]
+root       306  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs_mru_cache]
+root       307  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-buf/vda1]
+root       308  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-data/vda1]
+root       309  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-conv/vda1]
+root       310  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-cil/vda1]
+root       311  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-reclaim/vda]
+root       312  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-log/vda1]
+root       313  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-eofblocks/v]
+root       314  0.0  0.0      0     0 ?        S    11:09   0:00 [xfsaild/vda1]
+root       392  0.0  0.0  36832  4096 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-journald
+root       430  0.0  0.0  43132  1876 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-udevd
+root       479  0.0  0.0      0     0 ?        S    11:09   0:00 [hwrng]
+root       518  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:1H]
+root       519  0.0  0.0      0     0 ?        S<   11:09   0:00 [ttm_swap]
+root       520  0.0  0.0  55452   880 ?        S<sl 11:09   0:00 /sbin/auditd
+root       524  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:1H]
+root       537  0.0  0.0      0     0 ?        S<   11:09   0:00 [kvm-irqfd-clean]
+root       538  0.0  0.0      0     0 ?        S<   11:09   0:00 [edac-poller]
+dbus       577  0.0  0.0  24388  1672 ?        Ss   11:09   0:00 /bin/dbus-daemon --system --address=systemd: --nofork -
+root       578  0.0  0.0 195040  1228 ?        Ssl  11:09   0:00 /usr/sbin/gssproxy -D
+polkitd    579  0.0  0.1 534132 13032 ?        Ssl  11:09   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root       585  0.0  0.0  21608  1228 ?        Ss   11:09   0:00 /usr/sbin/irqbalance --foreground
+root       588  0.0  0.0  24204  1664 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-logind
+root       591  0.0  0.0 220312  3336 ?        Ssl  11:09   0:00 /usr/sbin/rsyslogd -n
+root       593  0.0  0.0  24788  1780 ?        Ss   11:09   0:01 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/vir
+chrony     616  0.0  0.0 115640  1712 ?        S    11:09   0:00 /usr/sbin/chronyd
+root       814  0.0  0.0 113372 12848 ?        Ss   11:10   0:00 /sbin/dhclient -1 -q -lf /var/lib/dhclient/dhclient--et
+root       873  0.0  0.1 562392 16636 ?        Ssl  11:10   0:00 /usr/bin/python -Es /usr/sbin/tuned -l -P
+root       981  0.0  0.0  89544  2056 ?        Ss   11:10   0:00 /usr/libexec/postfix/master -w
+postfix    982  0.0  0.0  89648  3988 ?        S    11:10   0:00 pickup -l -t unix -u
+postfix    983  0.0  0.0  89716  4000 ?        S    11:10   0:00 qmgr -l -t unix -u
+root      1041  0.0  0.0 110044   820 tty1     Ss+  11:10   0:00 /sbin/agetty --noclear tty1 linux
+root      1042  0.0  0.0 110044   836 ttyS0    Ss+  11:10   0:00 /sbin/agetty --keep-baud 115200 38400 9600 ttyS0 vt220
+root      1043  0.0  0.0 126236  1568 ?        Ss   11:10   0:00 /usr/sbin/crond -n
+root      1181  0.0  0.0 105996  4076 ?        Ss   11:10   0:00 /usr/sbin/sshd -D
+root      1334  0.0  0.0 147764  5392 ?        Ss   11:14   0:00 sshd: romain.pereira [priv]
+romain.+  1336  0.0  0.0 147764  2324 ?        R    11:14   0:00 sshd: romain.pereira@pts/0
+romain.+  1337  0.0  0.0 115528  2156 pts/0    Ss   11:14   0:00 -bash
+root      1373  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/0:0]
+root      1374  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/1:0]
+root      1383  0.0  0.0      0     0 ?        S    11:48   0:00 [kworker/2:0]
+root      1396  0.0  0.0      0     0 ?        S    12:00   0:00 [kworker/2:1]
+root      1407  0.0  0.0 123208   736 ?        Ss   12:01   0:00 /usr/sbin/anacron -s
+root      1415  0.0  0.0      0     0 ?        R    12:10   0:00 [kworker/2:2]
+root      1418  0.0  0.0 197688  2924 pts/0    S    12:16   0:00 sudo su
+root      1419  0.0  0.0 189592  2344 pts/0    S    12:16   0:00 su
+root      1420  0.0  0.0 115392  2084 pts/0    S    12:16   0:00 bash
+root      1515  0.0  0.0 113372 12792 ?        Ss   12:16   0:00 /sbin/dhclient -1 -q -lf /var/lib/dhclient/dhclient--et
+root      1569  0.0  0.0 151064  1824 pts/0    R+   12:18   0:00 ps -aux
+]0;root@vm1:/home/romain.pereira[root@vm1 12:18:20]# /dhclient
+bash: /dhclient: Aucun fichier ou dossier de ce type
+]0;root@vm1:/home/romain.pereira[root@vm1 12:18:22]# /dhclient[1Pps -aux | less[K[K[K[K[K[K>t[K tmp
+]0;root@vm1:/home/romain.pereira[root@vm1 12:18:28]# less tmp
+[?1049h[?1h=USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0 190708  3772 ?        Ss   11:09   0:02 /usr/lib/systemd/systemd --switched-root --system --des erialize 20
+root         2  0.0  0.0      0     0 ?        S    11:09   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/0]
+root         5  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:0H]
+root         7  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/0]
+root         8  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_bh]
+root         9  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_sched]
+root        10  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/0]
+root        11  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/1]
+root        12  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/1]
+root        13  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/1]
+root        15  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:0H]
+root        16  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/2]
+root        17  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/2]
+root        18  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/2]
+root        20  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:0H]
+root        22  0.0  0.0      0     0 ?        S    11:09   0:00 [kdevtmpfs]
+root        23  0.0  0.0      0     0 ?        S<   11:09   0:00 [netns]
+root        24  0.0  0.0      0     0 ?        S    11:09   0:00 [khungtaskd]
+root        25  0.0  0.0      0     0 ?        S<   11:09   0:00 [writeback]
+root        26  0.0  0.0      0     0 ?        S<   11:09   0:00 [kintegrityd]
+root        27  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+root        28  0.0  0.0      0     0 ?        S<   11:09   0:00 [kblockd]
+root        29  0.0  0.0      0     0 ?        S<   11:09   0:00 [md]
+root        30  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/0:1]
+root        35  0.0  0.0      0     0 ?        S    11:09   0:00 [kswapd0]
+root        36  0.0  0.0      0     0 ?        SN   11:09   0:00 [ksmd]
+root        37  0.0  0.0      0     0 ?        SN   11:09   0:00 [khugepaged]
+root        38  0.0  0.0      0     0 ?        S<   11:09   0:00 [crypto]
+root        46  0.0  0.0      0     0 ?        S<   11:09   0:00 [kthrotld]
+root        48  0.0  0.0      0     0 ?        S<   11:09   0:00 [kmpath_rdacd]
+root        49  0.0  0.0      0     0 ?        S<   11:09   0:00 [kpsmoused]
+root        50  0.0  0.0      0     0 ?        S<   11:09   0:00 [ipv6_addrconf]
+[7mtmp[27m[K[K/[Kdd[Khh[Kcc[Kll[Kii[Kee[Knn[Ktt[K[1;1HUSER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+[2;1Hroot         1  0.0  0.0 190708  3772 ?        Ss   11:09   0:02 /usr/lib/systemd/systemd --switched-root --system --des [3;1Herialize 20
+[4;1Hroot         2  0.0  0.0      0     0 ?        S    11:09   0:00 [kthreadd]
+[5;1Hroot         3  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/0]
+[6;1Hroot         5  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:0H]
+[7;1Hroot         7  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/0]
+[8;1Hroot         8  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_bh]
+[9;1Hroot         9  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_sched]
+[10;1Hroot        10  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/0]
+[11;1Hroot        11  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/1]
+[12;1Hroot        12  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/1]
+[13;1Hroot        13  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/1]
+[14;1Hroot        15  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:0H]
+[15;1Hroot        16  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/2]
+[16;1Hroot        17  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/2]
+[17;1Hroot        18  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/2]
+[18;1Hroot        20  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:0H]
+[19;1Hroot        22  0.0  0.0      0     0 ?        S    11:09   0:00 [kdevtmpfs]
+[20;1Hroot        23  0.0  0.0      0     0 ?        S<   11:09   0:00 [netns]
+[21;1Hroot        24  0.0  0.0      0     0 ?        S    11:09   0:00 [khungtaskd]
+[22;1Hroot        25  0.0  0.0      0     0 ?        S<   11:09   0:00 [writeback]
+[23;1Hroot        26  0.0  0.0      0     0 ?        S<   11:09   0:00 [kintegrityd]
+[24;1Hroot        27  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+[25;1Hroot        28  0.0  0.0      0     0 ?        S<   11:09   0:00 [kblockd]
+[26;1Hroot        29  0.0  0.0      0     0 ?        S<   11:09   0:00 [md]
+[27;1Hroot        30  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/0:1]
+[28;1Hroot        35  0.0  0.0      0     0 ?        S    11:09   0:00 [kswapd0]
+[29;1Hroot        36  0.0  0.0      0     0 ?        SN   11:09   0:00 [ksmd]
+[30;1Hroot        37  0.0  0.0      0     0 ?        SN   11:09   0:00 [khugepaged]
+[31;1Hroot        38  0.0  0.0      0     0 ?        S<   11:09   0:00 [crypto]
+[32;1Hroot        46  0.0  0.0      0     0 ?        S<   11:09   0:00 [kthrotld]
+[33;1Hroot        48  0.0  0.0      0     0 ?        S<   11:09   0:00 [kmpath_rdacd]
+[34;1Hroot        49  0.0  0.0      0     0 ?        S<   11:09   0:00 [kpsmoused]
+[35;1Hroot        50  0.0  0.0      0     0 ?        S<   11:09   0:00 [ipv6_addrconf]
+[36;1H[1;1HUSER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+[2;1Hroot         1  0.0  0.0 190708  3772 ?        Ss   11:09   0:02 /usr/lib/systemd/systemd --switched-root --system --des [3;1Herialize 20
+[4;1Hroot         2  0.0  0.0      0     0 ?        S    11:09   0:00 [kthreadd]
+[5;1Hroot         3  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/0]
+[6;1Hroot         5  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:0H]
+[7;1Hroot         7  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/0]
+[8;1Hroot         8  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_bh]
+[9;1Hroot         9  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_sched]
+[10;1Hroot        10  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/0]
+[11;1Hroot        11  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/1]
+[12;1Hroot        12  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/1]
+[13;1Hroot        13  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/1]
+[14;1Hroot        15  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:0H]
+[15;1Hroot        16  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/2]
+[16;1Hroot        17  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/2]
+[17;1Hroot        18  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/2]
+[18;1Hroot        20  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:0H]
+[19;1Hroot        22  0.0  0.0      0     0 ?        S    11:09   0:00 [kdevtmpfs]
+[20;1Hroot        23  0.0  0.0      0     0 ?        S<   11:09   0:00 [netns]
+[21;1Hroot        24  0.0  0.0      0     0 ?        S    11:09   0:00 [khungtaskd]
+[22;1Hroot        25  0.0  0.0      0     0 ?        S<   11:09   0:00 [writeback]
+[23;1Hroot        26  0.0  0.0      0     0 ?        S<   11:09   0:00 [kintegrityd]
+[24;1Hroot        27  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+[25;1Hroot        28  0.0  0.0      0     0 ?        S<   11:09   0:00 [kblockd]
+[26;1Hroot        29  0.0  0.0      0     0 ?        S<   11:09   0:00 [md]
+[27;1Hroot        30  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/0:1]
+[28;1Hroot        35  0.0  0.0      0     0 ?        S    11:09   0:00 [kswapd0]
+[29;1Hroot        36  0.0  0.0      0     0 ?        SN   11:09   0:00 [ksmd]
+[30;1Hroot        37  0.0  0.0      0     0 ?        SN   11:09   0:00 [khugepaged]
+[31;1Hroot        38  0.0  0.0      0     0 ?        S<   11:09   0:00 [crypto]
+[32;1Hroot        46  0.0  0.0      0     0 ?        S<   11:09   0:00 [kthrotld]
+[33;1Hroot        48  0.0  0.0      0     0 ?        S<   11:09   0:00 [kmpath_rdacd]
+[34;1Hroot        49  0.0  0.0      0     0 ?        S<   11:09   0:00 [kpsmoused]
+[35;1Hroot        50  0.0  0.0      0     0 ?        S<   11:09   0:00 [ipv6_addrconf]
+[36;1H...skipping...
+root       814  0.0  0.0 113372 12848 ?        Ss   11:10   0:00 /sbin/[7mdhclient[27m -1 -q -lf /var/lib/[7mdhclient[27m/[7mdhclient[27m--et h0.lease -pf /var/run/[7mdhclient[27m-eth0.pid -H vm0 eth0
+root       873  0.0  0.1 562392 16636 ?        Ssl  11:10   0:00 /usr/bin/python -Es /usr/sbin/tuned -l -P
+root       981  0.0  0.0  89544  2056 ?        Ss   11:10   0:00 /usr/libexec/postfix/master -w
+postfix    982  0.0  0.0  89648  3988 ?        S    11:10   0:00 pickup -l -t unix -u
+postfix    983  0.0  0.0  89716  4000 ?        S    11:10   0:00 qmgr -l -t unix -u
+root      1041  0.0  0.0 110044   820 tty1     Ss+  11:10   0:00 /sbin/agetty --noclear tty1 linux
+root      1042  0.0  0.0 110044   836 ttyS0    Ss+  11:10   0:00 /sbin/agetty --keep-baud 115200 38400 9600 ttyS0 vt220
+root      1043  0.0  0.0 126236  1568 ?        Ss   11:10   0:00 /usr/sbin/crond -n
+root      1181  0.0  0.0 105996  4076 ?        Ss   11:10   0:00 /usr/sbin/sshd -D
+root      1334  0.0  0.0 147764  5392 ?        Ss   11:14   0:00 sshd: romain.pereira [priv]
+romain.+  1336  0.0  0.0 147764  2324 ?        S    11:14   0:00 sshd: romain.pereira@pts/0
+romain.+  1337  0.0  0.0 115528  2156 pts/0    Ss   11:14   0:00 -bash
+root      1373  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/0:0]
+root      1374  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/1:0]
+root      1383  0.0  0.0      0     0 ?        S    11:48   0:00 [kworker/2:0]
+root      1396  0.0  0.0      0     0 ?        S    12:00   0:00 [kworker/2:1]
+root      1407  0.0  0.0 123208   736 ?        Ss   12:01   0:00 /usr/sbin/anacron -s
+root      1415  0.0  0.0      0     0 ?        S    12:10   0:00 [kworker/2:2]
+root      1418  0.0  0.0 197688  2924 pts/0    S    12:16   0:00 sudo su
+root      1419  0.0  0.0 189592  2344 pts/0    S    12:16   0:00 su
+root      1420  0.0  0.0 115392  2084 pts/0    S    12:16   0:00 bash
+root      1515  0.0  0.0 113372 12792 ?        Ss   12:16   0:00 /sbin/[7mdhclient[27m -1 -q -lf /var/lib/[7mdhclient[27m/[7mdhclient[27m--et h1.lease -pf /var/run/[7mdhclient[27m-eth1.pid -H vm1 eth1
+root      1571  0.0  0.0 151064  1820 pts/0    R+   12:18   0:00 ps -aux
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[7m(END)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:18:53]# sort /etc/sysconfig/network-scripts/ifcfg-XXXX[K[K[K[Keth1
+
+
+BOOTPROTO=dhcp
+DEVICE=eth1
+HWADDR=52:54:0a:00:00:01
+NAME="DHCP Client (eth1)"
+ONBOOT=no
+TYPE=Ethernet
+]0;root@vm1:/home/romain.pereira[root@vm1 12:18:57]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:00:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.251.0.2/16 brd 10.251.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 52:54:0a:00:00:01 brd ff:ff:ff:ff:ff:ff
+    inet 10.252.0.100/16 brd 10.252.255.255 scope global dynamic eth1
+       valid_lft 1663sec preferred_lft 1663sec
+    inet6 fe80::5054:aff:fe00:1/64 scope link 
+       valid_lft forever preferred_lft forever
+]0;root@vm1:/home/romain.pereira[root@vm1 12:19:10]# ip asort /etc/sysconfig/network-scripts/ifcfg-eth1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cless tmp[K
+[?1049h[?1h=USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0 190708  3772 ?        Ss   11:09   0:02 /usr/lib/systemd/systemd --switched-root --system --des erialize 20
+root         2  0.0  0.0      0     0 ?        S    11:09   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/0]
+root         5  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:0H]
+root         7  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/0]
+root         8  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_bh]
+root         9  0.0  0.0      0     0 ?        S    11:09   0:00 [rcu_sched]
+root        10  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/0]
+root        11  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/1]
+root        12  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/1]
+root        13  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/1]
+root        15  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:0H]
+root        16  0.0  0.0      0     0 ?        S    11:09   0:00 [watchdog/2]
+root        17  0.0  0.0      0     0 ?        S    11:09   0:00 [migration/2]
+root        18  0.0  0.0      0     0 ?        S    11:09   0:00 [ksoftirqd/2]
+root        20  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:0H]
+root        22  0.0  0.0      0     0 ?        S    11:09   0:00 [kdevtmpfs]
+root        23  0.0  0.0      0     0 ?        S<   11:09   0:00 [netns]
+root        24  0.0  0.0      0     0 ?        S    11:09   0:00 [khungtaskd]
+root        25  0.0  0.0      0     0 ?        S<   11:09   0:00 [writeback]
+root        26  0.0  0.0      0     0 ?        S<   11:09   0:00 [kintegrityd]
+root        27  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+root        28  0.0  0.0      0     0 ?        S<   11:09   0:00 [kblockd]
+root        29  0.0  0.0      0     0 ?        S<   11:09   0:00 [md]
+root        30  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/0:1]
+root        35  0.0  0.0      0     0 ?        S    11:09   0:00 [kswapd0]
+root        36  0.0  0.0      0     0 ?        SN   11:09   0:00 [ksmd]
+root        37  0.0  0.0      0     0 ?        SN   11:09   0:00 [khugepaged]
+root        38  0.0  0.0      0     0 ?        S<   11:09   0:00 [crypto]
+root        46  0.0  0.0      0     0 ?        S<   11:09   0:00 [kthrotld]
+root        48  0.0  0.0      0     0 ?        S<   11:09   0:00 [kmpath_rdacd]
+root        49  0.0  0.0      0     0 ?        S<   11:09   0:00 [kpsmoused]
+root        50  0.0  0.0      0     0 ?        S<   11:09   0:00 [ipv6_addrconf]
+[7mtmp[27m[K[K [KESCESC[K[[[K66[K~~[Kroot        51  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/1:1]
+root        70  0.0  0.0      0     0 ?        S<   11:09   0:00 [deferwq]
+root       114  0.0  0.0      0     0 ?        S    11:09   0:00 [kauditd]
+root       188  0.0  0.0      0     0 ?        S<   11:09   0:00 [rpciod]
+root       189  0.0  0.0      0     0 ?        S<   11:09   0:00 [xprtiod]
+root       256  0.0  0.0      0     0 ?        S<   11:09   0:00 [ata_sff]
+root       267  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_0]
+root       268  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_0]
+root       269  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_1]
+root       270  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_1]
+root       271  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_2]
+root       272  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_2]
+root       273  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_3]
+root       274  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_3]
+root       275  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_4]
+root       276  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_4]
+root       277  0.0  0.0      0     0 ?        S    11:09   0:00 [scsi_eh_5]
+root       278  0.0  0.0      0     0 ?        S<   11:09   0:00 [scsi_tmf_5]
+root       280  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/u6:3]
+root       282  0.0  0.0      0     0 ?        S    11:09   0:00 [kworker/u6:5]
+root       297  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/2:1H]
+root       304  0.0  0.0      0     0 ?        S<   11:09   0:00 [bioset]
+root       305  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfsalloc]
+root       306  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs_mru_cache]
+root       307  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-buf/vda1]
+root       308  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-data/vda1]
+root       309  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-conv/vda1]
+root       310  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-cil/vda1]
+root       311  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-reclaim/vda]
+root       312  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-log/vda1]
+root       313  0.0  0.0      0     0 ?        S<   11:09   0:00 [xfs-eofblocks/v]
+root       314  0.0  0.0      0     0 ?        S    11:09   0:00 [xfsaild/vda1]
+root       392  0.0  0.0  36832  4096 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-journald
+root       430  0.0  0.0  43132  1876 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-udevd
+root       479  0.0  0.0      0     0 ?        S    11:09   0:00 [hwrng]
+:[K[K [KESCESC[K[[[K66[K~~[Kroot       518  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/1:1H]
+root       519  0.0  0.0      0     0 ?        S<   11:09   0:00 [ttm_swap]
+root       520  0.0  0.0  55452   880 ?        S<sl 11:09   0:00 /sbin/auditd
+root       524  0.0  0.0      0     0 ?        S<   11:09   0:00 [kworker/0:1H]
+root       537  0.0  0.0      0     0 ?        S<   11:09   0:00 [kvm-irqfd-clean]
+root       538  0.0  0.0      0     0 ?        S<   11:09   0:00 [edac-poller]
+dbus       577  0.0  0.0  24388  1672 ?        Ss   11:09   0:00 /bin/dbus-daemon --system --address=systemd: --nofork - -nopidfile --systemd-activation
+root       578  0.0  0.0 195040  1228 ?        Ssl  11:09   0:00 /usr/sbin/gssproxy -D
+polkitd    579  0.0  0.1 534132 13032 ?        Ssl  11:09   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root       585  0.0  0.0  21608  1228 ?        Ss   11:09   0:00 /usr/sbin/irqbalance --foreground
+root       588  0.0  0.0  24204  1664 ?        Ss   11:09   0:00 /usr/lib/systemd/systemd-logind
+root       591  0.0  0.0 220312  3336 ?        Ssl  11:09   0:00 /usr/sbin/rsyslogd -n
+root       593  0.0  0.0  24788  1780 ?        Ss   11:09   0:01 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/vir tio-ports/org.qemu.guest_agent.0 --blacklist=guest-file-open,guest-file-close,guest-file-read,guest-file-write,guest-fil e-seek,guest-file-flush,guest-exec,guest-exec-status -F/etc/qemu-ga/fsfreeze-hook
+chrony     616  0.0  0.0 115640  1712 ?        S    11:09   0:00 /usr/sbin/chronyd
+root       814  0.0  0.0 113372 12848 ?        Ss   11:10   0:00 /sbin/dhclient -1 -q -lf /var/lib/dhclient/dhclient--et h0.lease -pf /var/run/dhclient-eth0.pid -H vm0 eth0
+root       873  0.0  0.1 562392 16636 ?        Ssl  11:10   0:00 /usr/bin/python -Es /usr/sbin/tuned -l -P
+root       981  0.0  0.0  89544  2056 ?        Ss   11:10   0:00 /usr/libexec/postfix/master -w
+postfix    982  0.0  0.0  89648  3988 ?        S    11:10   0:00 pickup -l -t unix -u
+postfix    983  0.0  0.0  89716  4000 ?        S    11:10   0:00 qmgr -l -t unix -u
+root      1041  0.0  0.0 110044   820 tty1     Ss+  11:10   0:00 /sbin/agetty --noclear tty1 linux
+root      1042  0.0  0.0 110044   836 ttyS0    Ss+  11:10   0:00 /sbin/agetty --keep-baud 115200 38400 9600 ttyS0 vt220
+root      1043  0.0  0.0 126236  1568 ?        Ss   11:10   0:00 /usr/sbin/crond -n
+root      1181  0.0  0.0 105996  4076 ?        Ss   11:10   0:00 /usr/sbin/sshd -D
+root      1334  0.0  0.0 147764  5392 ?        Ss   11:14   0:00 sshd: romain.pereira [priv]
+romain.+  1336  0.0  0.0 147764  2324 ?        S    11:14   0:00 sshd: romain.pereira@pts/0
+romain.+  1337  0.0  0.0 115528  2156 pts/0    Ss   11:14   0:00 -bash
+root      1373  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/0:0]
+root      1374  0.0  0.0      0     0 ?        S    11:30   0:00 [kworker/1:0]
+root      1383  0.0  0.0      0     0 ?        S    11:48   0:00 [kworker/2:0]
+root      1396  0.0  0.0      0     0 ?        S    12:00   0:00 [kworker/2:1]
+root      1407  0.0  0.0 123208   736 ?        Ss   12:01   0:00 /usr/sbin/anacron -s
+:[K[K [KESCESC[K[[[K66[K~~[Kroot      1415  0.0  0.0      0     0 ?        S    12:10   0:00 [kworker/2:2]
+root      1418  0.0  0.0 197688  2924 pts/0    S    12:16   0:00 sudo su
+root      1419  0.0  0.0 189592  2344 pts/0    S    12:16   0:00 su
+root      1420  0.0  0.0 115392  2084 pts/0    S    12:16   0:00 bash
+root      1515  0.0  0.0 113372 12792 ?        Ss   12:16   0:00 /sbin/dhclient -1 -q -lf /var/lib/dhclient/dhclient--et h1.lease -pf /var/run/dhclient-eth1.pid -H vm1 eth1
+root      1571  0.0  0.0 151064  1820 pts/0    R+   12:18   0:00 ps -aux
+[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:19:46]# less /var/lib/dhclient/dhclient--eth1.lease
+[?1049h[?1h=lease {
+  interface "eth1";
+  fixed-address 10.252.0.100;
+  option subnet-mask 255.255.0.0;
+  option dhcp-lease-time 1800;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.252.0.1;
+  option domain-name "mgnt.pcocc";
+  renew 5 2019/03/15 11:28:54;
+  rebind 5 2019/03/15 11:43:05;
+  expire 5 2019/03/15 11:46:50;
+}
+[7m/var/lib/dhclient/dhclient--eth1.lease (END)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:20:09]# man dhclient.leases
+[?1049h[?1h=dhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[m
+[1mNAME[0m[m
+       dhclient.leases - DHCP client lease database[m
+[m
+[1mDESCRIPTION[0m[m
+       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+       as a log, so this is not an unusual occurrence.[m
+[m
+       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[m
+[1mFILES[0m[m
+       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[m
+[1mSEE[0m [1mALSO[0m[m
+       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[m
+[1mAUTHOR[0m[m
+       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+       [1mhttps://www.isc.org.[0m[m
+[m
+                                                                                                   dhclient.leases(5)[m
+[7m Manual page dhclient.leases(5) line 1/29 (END) (press h for help or q to quit)[27m[K[K/[Krr[Kee[Knn[Kee[Kww[K...skipping...
+dhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[m
+[1mNAME[0m[m
+       dhclient.leases - DHCP client lease database[m
+[m
+[1mDESCRIPTION[0m[m
+       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+       as a log, so this is not an unusual occurrence.[m
+[m
+       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[m
+[1mFILES[0m[m
+       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[m
+[1mSEE[0m [1mALSO[0m[m
+       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[m
+[1mAUTHOR[0m[m
+       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+       [1mhttps://www.isc.org.[0m[m
+[m
+                                                                                                   dhclient.leases(5)[m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1m~[0m
+[1;1Hdhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       dhclient.leases - DHCP client lease database[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+[8;1H       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+[9;1H       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+[10;1H       as a log, so this is not an unusual occurrence.[m
+[11;1H[m
+[12;1H       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[13;1H[m
+[14;1H[1mFILES[0m[m
+[15;1H       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[16;1H[m
+[17;1H[1mSEE[0m [1mALSO[0m[m
+[18;1H       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[19;1H[m
+[20;1H[1mAUTHOR[0m[m
+[21;1H       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+[22;1H       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+[23;1H       [1mhttps://www.isc.org.[0m[m
+[24;1H[m
+[25;1H                                                                                                   dhclient.leases(5)[m
+[26;1H[1m~[0m
+[36;1H[1;1Hdhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       dhclient.leases - DHCP client lease database[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+[8;1H       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+[9;1H       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+[10;1H       as a log, so this is not an unusual occurrence.[m
+[11;1H[m
+[12;1H       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[13;1H[m
+[14;1H[1mFILES[0m[m
+[15;1H       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[16;1H[m
+[17;1H[1mSEE[0m [1mALSO[0m[m
+[18;1H       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[19;1H[m
+[20;1H[1mAUTHOR[0m[m
+[21;1H       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+[22;1H       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+[23;1H       [1mhttps://www.isc.org.[0m[m
+[24;1H[m
+[25;1H                                                                                                   dhclient.leases(5)[m
+[26;1H[1m~[0m
+[36;1H[K[7mPattern not found  (press RETURN)[27m[36;1H[K[K/[Kbb[Kii[Knn[Kdd[K[1;1Hdhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       dhclient.leases - DHCP client lease database[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+[8;1H       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+[9;1H       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+[10;1H       as a log, so this is not an unusual occurrence.[m
+[11;1H[m
+[12;1H       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[13;1H[m
+[14;1H[1mFILES[0m[m
+[15;1H       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[16;1H[m
+[17;1H[1mSEE[0m [1mALSO[0m[m
+[18;1H       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[19;1H[m
+[20;1H[1mAUTHOR[0m[m
+[21;1H       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+[22;1H       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+[23;1H       [1mhttps://www.isc.org.[0m[m
+[24;1H[m
+[25;1H                                                                                                   dhclient.leases(5)[m
+[26;1H[1m~[0m
+[36;1H[1;1Hdhclient.leases(5)                               File Formats Manual                               dhclient.leases(5)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       dhclient.leases - DHCP client lease database[m
+[5;1H[m
+[6;1H[1mDESCRIPTION[0m[m
+[7;1H       The  Internet  Systems  Consortium DHCP client keeps a persistent database of leases that it has acquired that[m
+[8;1H       are still valid.   The database is a free-form ASCII file containing one valid  declaration  per  lease.    If[m
+[9;1H       more  than  one declaration appears for a given lease, the last one in the file is used.   The file is written[m
+[10;1H       as a log, so this is not an unusual occurrence.[m
+[11;1H[m
+[12;1H       The format of the lease declarations is described in [1mdhclient.conf(5).[0m[m
+[13;1H[m
+[14;1H[1mFILES[0m[m
+[15;1H       [1m/var/lib/dhclient/dhclient.leases[0m[m
+[16;1H[m
+[17;1H[1mSEE[0m [1mALSO[0m[m
+[18;1H       dhclient(8), dhcp-options(5), dhclient.conf(5), dhcpd(8), dhcpd.conf(5), RFC2132, RFC2131.[m
+[19;1H[m
+[20;1H[1mAUTHOR[0m[m
+[21;1H       [1mdhclient(8)[0m was written by Ted Lemon under a contract with Vixie Labs.   Funding for this project was provided[m
+[22;1H       by   Internet   Systems   Consortium.    Information  about  Internet  Systems  Consortium  can  be  found  at[m
+[23;1H       [1mhttps://www.isc.org.[0m[m
+[24;1H[m
+[25;1H                                                                                                   dhclient.leases(5)[m
+[26;1H[1m~[0m
+[36;1H[K[7mPattern not found  (press RETURN)[27m[36;1H[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:21:40]# man dhclient.leasesless /var/lib/dhclient/dhclient--eth1.lease
+[?1049h[?1h=lease {
+  interface "eth1";
+  fixed-address 10.252.0.100;
+  option subnet-mask 255.255.0.0;
+  option dhcp-lease-time 1800;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.252.0.1;
+  option domain-name "mgnt.pcocc";
+  renew 5 2019/03/15 11:28:54;
+  rebind 5 2019/03/15 11:43:05;
+  expire 5 2019/03/15 11:46:50;
+}
+[7m/var/lib/dhclient/dhclient--eth1.lease (END)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:28:37]# 55.0.0 (<=> 10.252.0.100/16)^C
+]0;root@vm1:/home/romain.pereira[root@vm1 12:30:38]# journalctld[K
+[?1h=-- Logs begin at ven. 2019-03-15 11:09:32 CET, end at ven. 2019-03-15 12:30:01 CET. --[m
+mars 15 11:09:32 localhost systemd-journal[102]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuset[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpu[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuacct[m
+mars 15 11:09:32 localhost kernel: [1;39mLinux version 3.10.0-693.11.6.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc versi[m
+mars 15 11:09:32 localhost kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-693.11.6.el7.x86_64 root=UUID=e64899eb-[m
+mars 15 11:09:32 localhost kernel: e820: BIOS-provided physical RAM map:[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffdcfff] usable[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000007ffdd000-0x000000007fffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000100000000-0x00000003b0bfffff] usable[m
+mars 15 11:09:32 localhost kernel: NX (Execute Disable) protection: active[m
+mars 15 11:09:32 localhost kernel: SMBIOS 2.8 present.[m
+mars 15 11:09:32 localhost kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-pr[m
+mars 15 11:09:32 localhost kernel: Hypervisor detected: KVM[m
+mars 15 11:09:32 localhost kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved[m
+mars 15 11:09:32 localhost kernel: e820: remove [mem 0x000a0000-0x000fffff] usable[m
+mars 15 11:09:32 localhost kernel: e820: last_pfn = 0x3b0c00 max_arch_pfn = 0x400000000[m
+mars 15 11:09:32 localhost kernel: MTRR default type: write-back[m
+mars 15 11:09:32 localhost kernel: MTRR fixed ranges enabled:[m
+mars 15 11:09:32 localhost kernel:   00000-9FFFF write-back[m
+mars 15 11:09:32 localhost kernel:   A0000-BFFFF uncachable[m
+mars 15 11:09:32 localhost kernel:   C0000-FFFFF write-protect[m
+mars 15 11:09:32 localhost kernel: MTRR variable ranges enabled:[m
+mars 15 11:09:32 localhost kernel:   0 base 00C0000000 mask FFC0000000 uncachable[m
+mars 15 11:09:32 localhost kernel:   1 disabled[m
+mars 15 11:09:32 localhost kernel:   2 disabled[m
+mars 15 11:09:32 localhost kernel:   3 disabled[m
+[7mlines 1-35[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel:   4 disabled[m
+mars 15 11:09:32 localhost kernel:   5 disabled[m
+mars 15 11:09:32 localhost kernel:   6 disabled[m
+mars 15 11:09:32 localhost kernel:   7 disabled[m
+mars 15 11:09:32 localhost kernel: x86 PAT enabled: cpu 0, old 0x7040600070406, new 0x7010600070106[m
+mars 15 11:09:32 localhost kernel: e820: last_pfn = 0x7ffdd max_arch_pfn = 0x400000000[m
+mars 15 11:09:32 localhost kernel: found SMP MP-table at [mem 0x000f6a60-0x000f6a6f] mapped at [ffff8800000f6a60][m
+mars 15 11:09:32 localhost kernel: Base memory trampoline at [ffff880000099000] 99000 size 24576[m
+mars 15 11:09:32 localhost kernel: Using GB pages for direct mapping[m
+mars 15 11:09:32 localhost kernel: BRK [0x01ffb000, 0x01ffbfff] PGTABLE[m
+mars 15 11:09:32 localhost kernel: BRK [0x01ffc000, 0x01ffcfff] PGTABLE[m
+mars 15 11:09:32 localhost kernel: BRK [0x01ffd000, 0x01ffdfff] PGTABLE[m
+mars 15 11:09:32 localhost kernel: BRK [0x01ffe000, 0x01ffefff] PGTABLE[m
+mars 15 11:09:32 localhost kernel: RAMDISK: [mem 0x33206000-0x358fafff][m
+mars 15 11:09:32 localhost kernel: Early table checksum verification disabled[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: RSDP 00000000000f67d0 00014 (v00 BOCHS )[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: RSDT 000000007ffe25da 00038 (v01 BOCHS  BXPCRSDT 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: FACP 000000007ffe2392 00074 (v01 BOCHS  BXPCFACP 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: DSDT 000000007ffe0040 02352 (v01 BOCHS  BXPCDSDT 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: FACS 000000007ffe0000 00040[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: APIC 000000007ffe2406 00088 (v01 BOCHS  BXPCAPIC 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: HPET 000000007ffe248e 00038 (v01 BOCHS  BXPCHPET 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: SRAT 000000007ffe24c6 000D8 (v01 BOCHS  BXPCSRAT 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: MCFG 000000007ffe259e 0003C (v01 BOCHS  BXPCMCFG 00000001 BXPC 00000001)[0m[m
+mars 15 11:09:32 localhost kernel: ACPI: Local APIC address 0xfee00000[m
+mars 15 11:09:32 localhost kernel: SRAT: PXM 0 -> APIC 0x00 -> Node 0[m
+mars 15 11:09:32 localhost kernel: SRAT: PXM 0 -> APIC 0x01 -> Node 0[m
+mars 15 11:09:32 localhost kernel: SRAT: PXM 0 -> APIC 0x02 -> Node 0[m
+mars 15 11:09:32 localhost kernel: SRAT: Node 0 PXM 0 [mem 0x00000000-0x0009ffff][m
+mars 15 11:09:32 localhost kernel: SRAT: Node 0 PXM 0 [mem 0x00100000-0x7fffffff][m
+mars 15 11:09:32 localhost kernel: SRAT: Node 0 PXM 0 [mem 0x100000000-0x3b0bfffff][m
+mars 15 11:09:32 localhost kernel: NUMA: Node 0 [mem 0x00000000-0x0009ffff] + [mem 0x00100000-0x7fffffff] -> [mem 0x0000[m
+mars 15 11:09:32 localhost kernel: NUMA: Node 0 [mem 0x00000000-0x7fffffff] + [mem 0x100000000-0x3b0bfffff] -> [mem 0x00[m
+mars 15 11:09:32 localhost kernel: NODE_DATA(0) allocated [mem 0x3b0bd7000-0x3b0bfdfff][m
+mars 15 11:09:32 localhost kernel: Reserving 161MB of memory at 656MB for crashkernel (System RAM: 13067MB)[m
+[7mlines 36-70[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: kvm-clock: Using msrs 4b564d01 and 4b564d00[m
+mars 15 11:09:32 localhost kernel: kvm-clock: cpu 0, msr 3:b0b87001, primary cpu clock[m
+mars 15 11:09:32 localhost kernel: kvm-clock: using sched offset of 2308515272 cycles[m
+mars 15 11:09:32 localhost kernel: [1;39mZone ranges:[0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  DMA      [mem 0x00001000-0x00ffffff][0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  DMA32    [mem 0x01000000-0xffffffff][0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  Normal   [mem 0x100000000-0x3b0bfffff][0m[m
+mars 15 11:09:32 localhost kernel: [1;39mMovable zone start for each node[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mEarly memory node ranges[0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  node   0: [mem 0x00001000-0x0009efff][0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  node   0: [mem 0x00100000-0x7ffdcfff][0m[m
+mars 15 11:09:32 localhost kernel: [1;39m  node   0: [mem 0x100000000-0x3b0bfffff][0m[m
+mars 15 11:09:32 localhost kernel: Initmem setup node 0 [mem 0x00001000-0x3b0bfffff][m
+mars 15 11:09:32 localhost kernel: On node 0 totalpages: 3345275[m
+mars 15 11:09:32 localhost kernel:   DMA zone: 64 pages used for memmap[m
+mars 15 11:09:32 localhost kernel:   DMA zone: 21 pages reserved[m
+mars 15 11:09:32 localhost kernel:   DMA zone: 3998 pages, LIFO batch:0[m
+mars 15 11:09:32 localhost kernel:   DMA32 zone: 8128 pages used for memmap[m
+mars 15 11:09:32 localhost kernel:   DMA32 zone: 520157 pages, LIFO batch:31[m
+mars 15 11:09:32 localhost kernel:   Normal zone: 44080 pages used for memmap[m
+mars 15 11:09:32 localhost kernel:   Normal zone: 2821120 pages, LIFO batch:31[m
+mars 15 11:09:32 localhost kernel: ACPI: PM-Timer IO Port: 0x608[m
+mars 15 11:09:32 localhost kernel: ACPI: Local APIC address 0xfee00000[m
+mars 15 11:09:32 localhost kernel: ACPI: LAPIC (acpi_id[0x00] lapic_id[0x00] enabled)[m
+mars 15 11:09:32 localhost kernel: ACPI: LAPIC (acpi_id[0x01] lapic_id[0x01] enabled)[m
+mars 15 11:09:32 localhost kernel: ACPI: LAPIC (acpi_id[0x02] lapic_id[0x02] enabled)[m
+mars 15 11:09:32 localhost kernel: ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])[m
+mars 15 11:09:32 localhost kernel: ACPI: IOAPIC (id[0x00] address[0xfec00000] gsi_base[0])[m
+mars 15 11:09:32 localhost kernel: IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23[m
+mars 15 11:09:32 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)[m
+mars 15 11:09:32 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)[m
+mars 15 11:09:32 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)[m
+mars 15 11:09:32 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)[m
+mars 15 11:09:32 localhost kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)[m
+mars 15 11:09:32 localhost kernel: ACPI: IRQ0 used by override.[m
+[7mlines 71-105[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: ACPI: IRQ5 used by override.[m
+mars 15 11:09:32 localhost kernel: ACPI: IRQ9 used by override.[m
+mars 15 11:09:32 localhost kernel: ACPI: IRQ10 used by override.[m
+mars 15 11:09:32 localhost kernel: ACPI: IRQ11 used by override.[m
+mars 15 11:09:32 localhost kernel: Using ACPI (MADT) for SMP configuration information[m
+mars 15 11:09:32 localhost kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000[m
+mars 15 11:09:32 localhost kernel: smpboot: Allowing 3 CPUs, 0 hotplug CPUs[m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0x0009f000-0x0009ffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0x000a0000-0x000effff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0x000f0000-0x000fffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0x7ffdd000-0x7fffffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0x80000000-0xafffffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xb0000000-0xbfffffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xc0000000-0xfed1bfff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xfed1c000-0xfed1ffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xfed20000-0xfeffbfff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xfeffc000-0xfeffffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xff000000-0xfffbffff][m
+mars 15 11:09:32 localhost kernel: PM: Registered nosave memory: [mem 0xfffc0000-0xffffffff][m
+mars 15 11:09:32 localhost kernel: e820: [mem 0xc0000000-0xfed1bfff] available for PCI devices[m
+mars 15 11:09:32 localhost kernel: Booting paravirtualized kernel on KVM[m
+mars 15 11:09:32 localhost kernel: setup_percpu: NR_CPUS:5120 nr_cpumask_bits:3 nr_cpu_ids:3 nr_node_ids:1[m
+mars 15 11:09:32 localhost kernel: PERCPU: Embedded 35 pages/cpu @ffff8803b0800000 s104536 r8192 d30632 u524288[m
+mars 15 11:09:32 localhost kernel: pcpu-alloc: s104536 r8192 d30632 u524288 alloc=1*2097152[m
+mars 15 11:09:32 localhost kernel: pcpu-alloc: [0] 0 1 2 - [m
+mars 15 11:09:32 localhost kernel: KVM setup async PF for cpu 0[m
+mars 15 11:09:32 localhost kernel: kvm-stealtime: cpu 0, msr 3b0813440[m
+mars 15 11:09:32 localhost kernel: PV qspinlock hash table entries: 256 (order: 0, 4096 bytes)[m
+mars 15 11:09:32 localhost kernel: [1;39mBuilt 1 zonelists in Zone order, mobility grouping on.  Total pages: 3292982[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mPolicy zone: Normal[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mKernel command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-693.11.6.el7.x86_64 root=UUID=e6[m
+mars 15 11:09:32 localhost kernel: PID hash table entries: 4096 (order: 3, 32768 bytes)[m
+mars 15 11:09:32 localhost kernel: x86/fpu: xstate_offset[2]: 0240, xstate_sizes[2]: 0100[m
+mars 15 11:09:32 localhost kernel: xsave: enabled xstate_bv 0x7, cntxt size 0x340 using standard form[m
+mars 15 11:09:32 localhost kernel: Memory: 3906952k/15478784k available (6916k kernel code, 2097684k absent, 499408k res[m
+[7mlines 106-140[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=3, Nodes=1[m
+mars 15 11:09:32 localhost kernel: x86/pti: Unmapping kernel while in userspace[m
+mars 15 11:09:32 localhost kernel: Hierarchical RCU implementation.[m
+mars 15 11:09:32 localhost kernel:         RCU restricting CPUs from NR_CPUS=5120 to nr_cpu_ids=3.[m
+mars 15 11:09:32 localhost kernel: NR_IRQS:327936 nr_irqs:448 0[m
+mars 15 11:09:32 localhost kernel: Console: colour VGA+ 80x25[m
+mars 15 11:09:32 localhost kernel: console [tty0] enabled[m
+mars 15 11:09:32 localhost kernel: console [ttyS0] enabled[m
+mars 15 11:09:32 localhost kernel: allocated 54001664 bytes of page_cgroup[m
+mars 15 11:09:32 localhost kernel: please try 'cgroup_disable=memory' option if you don't want memory cgroups[m
+mars 15 11:09:32 localhost kernel: hpet clockevent registered[m
+mars 15 11:09:32 localhost kernel: tsc: Detected 2197.454 MHz processor[m
+mars 15 11:09:32 localhost kernel: Calibrating delay loop (skipped) preset value.. 4394.90 BogoMIPS (lpj=2197454)[m
+mars 15 11:09:32 localhost kernel: pid_max: default: 32768 minimum: 301[m
+mars 15 11:09:32 localhost kernel: Security Framework initialized[m
+mars 15 11:09:32 localhost kernel: SELinux:  Initializing.[m
+mars 15 11:09:32 localhost kernel: SELinux:  Starting in permissive mode[m
+mars 15 11:09:32 localhost kernel: Yama: becoming mindful.[m
+mars 15 11:09:32 localhost kernel: Dentry cache hash table entries: 2097152 (order: 12, 16777216 bytes)[m
+mars 15 11:09:32 localhost kernel: Inode-cache hash table entries: 1048576 (order: 11, 8388608 bytes)[m
+mars 15 11:09:32 localhost kernel: Mount-cache hash table entries: 32768 (order: 6, 262144 bytes)[m
+mars 15 11:09:32 localhost kernel: Mountpoint-cache hash table entries: 32768 (order: 6, 262144 bytes)[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys memory[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys devices[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys freezer[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys net_cls[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys blkio[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys perf_event[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys hugetlb[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys pids[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys net_prio[m
+mars 15 11:09:32 localhost kernel: CPU: Physical Processor ID: 0[m
+mars 15 11:09:32 localhost kernel: FEATURE SPEC_CTRL Not Present[m
+mars 15 11:09:32 localhost kernel: FEATURE IBPB_SUPPORT Not Present[m
+mars 15 11:09:32 localhost kernel: mce: CPU supports 10 MCE banks[m
+[7mlines 141-175[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0[m
+mars 15 11:09:32 localhost kernel: Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0[m
+mars 15 11:09:32 localhost kernel: tlb_flushall_shift: 6[m
+mars 15 11:09:32 localhost kernel: Freeing SMP alternatives: 24k freed[m
+mars 15 11:09:32 localhost kernel: ACPI: Core revision 20130517[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: All ACPI Tables successfully acquired[0m[m
+mars 15 11:09:32 localhost kernel: ftrace: allocating 26616 entries in 104 pages[m
+mars 15 11:09:32 localhost kernel: smpboot: Max logical packages: 3[m
+mars 15 11:09:32 localhost kernel: Enabling x2apic[m
+mars 15 11:09:32 localhost kernel: Enabled x2apic[m
+mars 15 11:09:32 localhost kernel: Switched APIC routing to physical x2apic.[m
+mars 15 11:09:32 localhost kernel: ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1[m
+mars 15 11:09:32 localhost kernel: smpboot: CPU0: Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz (fam: 06, model: 4f, steppin[m
+mars 15 11:09:32 localhost kernel: TSC deadline timer enabled[m
+mars 15 11:09:32 localhost kernel: Performance Events: 16-deep LBR, Broadwell events, Intel PMU driver.[m
+mars 15 11:09:32 localhost kernel: ... version:                2[m
+mars 15 11:09:32 localhost kernel: ... bit width:              48[m
+mars 15 11:09:32 localhost kernel: ... generic registers:      4[m
+mars 15 11:09:32 localhost kernel: ... value mask:             0000ffffffffffff[m
+mars 15 11:09:32 localhost kernel: ... max period:             000000007fffffff[m
+mars 15 11:09:32 localhost kernel: ... fixed-purpose events:   3[m
+mars 15 11:09:32 localhost kernel: ... event mask:             000000070000000f[m
+mars 15 11:09:32 localhost kernel: KVM setup paravirtual spinlock[m
+mars 15 11:09:32 localhost kernel: kvm-clock: cpu 1, msr 3:b0b87041, secondary cpu clock[m
+mars 15 11:09:32 localhost kernel: KVM setup async PF for cpu 1[m
+mars 15 11:09:32 localhost kernel: smpboot: Booting Node   0, Processors  #1 #2 OK[m
+mars 15 11:09:32 localhost kernel: kvm-clock: cpu 2, msr 3:b0b87081, secondary cpu clock[m
+mars 15 11:09:32 localhost kernel: kvm-stealtime: cpu 1, msr 3b0893440[m
+mars 15 11:09:32 localhost kernel: Brought up 3 CPUs[m
+mars 15 11:09:32 localhost kernel: KVM setup async PF for cpu 2[m
+mars 15 11:09:32 localhost kernel: kvm-stealtime: cpu 2, msr 3b0913440[m
+mars 15 11:09:32 localhost kernel: smpboot: Total of 3 processors activated (13184.72 BogoMIPS)[m
+mars 15 11:09:32 localhost kernel: node 0 initialised, 2243685 pages in 55ms[m
+mars 15 11:09:32 localhost kernel: devtmpfs: initialized[m
+mars 15 11:09:32 localhost kernel: EVM: security.selinux[m
+[7mlines 176-210[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: EVM: security.ima[m
+mars 15 11:09:32 localhost kernel: EVM: security.capability[m
+mars 15 11:09:32 localhost kernel: atomic64 test passed for x86-64 platform with CX8 and with SSE[m
+mars 15 11:09:32 localhost kernel: pinctrl core: initialized pinctrl subsystem[m
+mars 15 11:09:32 localhost kernel: RTC time: 10:09:30, date: 03/15/19[m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 16[m
+mars 15 11:09:32 localhost kernel: ACPI: bus type PCI registered[m
+mars 15 11:09:32 localhost kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5[m
+mars 15 11:09:32 localhost kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xb0000000-0xbfffffff] (base 0xb000[m
+mars 15 11:09:32 localhost kernel: PCI: MMCONFIG at [mem 0xb0000000-0xbfffffff] reserved in E820[m
+mars 15 11:09:32 localhost kernel: PCI: Using configuration type 1 for base access[m
+mars 15 11:09:32 localhost kernel: ACPI: Added _OSI(Module Device)[m
+mars 15 11:09:32 localhost kernel: ACPI: Added _OSI(Processor Device)[m
+mars 15 11:09:32 localhost kernel: ACPI: Added _OSI(3.0 _SCP Extensions)[m
+mars 15 11:09:32 localhost kernel: ACPI: Added _OSI(Processor Aggregator Device)[m
+mars 15 11:09:32 localhost kernel: ACPI: EC: Look up EC in DSDT[m
+mars 15 11:09:32 localhost kernel: ACPI: Interpreter enabled[m
+mars 15 11:09:32 localhost kernel: ACPI: (supports S0 S3 S4 S5)[m
+mars 15 11:09:32 localhost kernel: ACPI: Using IOAPIC for interrupt routing[m
+mars 15 11:09:32 localhost kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a [m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])[m
+mars 15 11:09:32 localhost kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI][m
+mars 15 11:09:32 localhost kernel: acpi PNP0A08:00: _OSC: OS now controls [PCIeHotplug PME AER PCIeCapability][m
+mars 15 11:09:32 localhost kernel: PCI host bridge to bus 0000:00[m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: root bus resource [bus 00-ff][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: [1b36:0100] type 00 class 0x030000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: reg 0x10: [mem 0xf4000000-0xf7ffffff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: reg 0x14: [mem 0xf8000000-0xfbffffff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: reg 0x18: [mem 0xfc090000-0xfc091fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: reg 0x1c: [io  0xc0c0-0xc0df][m
+[7mlines 211-245[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: pci 0000:00:01.0: reg 0x30: [mem 0xfc080000-0xfc08ffff pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:02.0: [1af4:1000] type 00 class 0x020000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:02.0: reg 0x10: [io  0xc0e0-0xc0ff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:02.0: reg 0x14: [mem 0xfc092000-0xfc092fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:02.0: reg 0x20: [mem 0xfebec000-0xfebeffff 64bit pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:02.0: reg 0x30: [mem 0xfc000000-0xfc03ffff pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:03.0: [1af4:1000] type 00 class 0x020000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:03.0: reg 0x10: [io  0xc100-0xc11f][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:03.0: reg 0x14: [mem 0xfc093000-0xfc093fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:03.0: reg 0x20: [mem 0xfebf0000-0xfebf3fff 64bit pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:03.0: reg 0x30: [mem 0xfc040000-0xfc07ffff pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:04.0: [1af4:1003] type 00 class 0x078000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:04.0: reg 0x10: [io  0xc000-0xc03f][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:04.0: reg 0x14: [mem 0xfc094000-0xfc094fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:04.0: reg 0x20: [mem 0xfebf4000-0xfebf7fff 64bit pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:05.0: [1af4:1005] type 00 class 0x00ff00[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:05.0: reg 0x10: [io  0xc120-0xc13f][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:05.0: reg 0x20: [mem 0xfebf8000-0xfebfbfff 64bit pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:06.0: [1af4:1001] type 00 class 0x010000[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:06.0: reg 0x10: [io  0xc040-0xc07f][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:06.0: reg 0x14: [mem 0xfc095000-0xfc095fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:06.0: reg 0x20: [mem 0xfebfc000-0xfebfffff 64bit pref][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.2: reg 0x20: [io  0xc140-0xc15f][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.2: reg 0x24: [mem 0xfc096000-0xfc096fff][m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:1f.3: reg 0x20: [io  0x0700-0x073f][m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKA] (IRQs 5 *10 11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKD] (IRQs 5 10 *11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKE] (IRQs 5 *10 11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKF] (IRQs 5 *10 11)[m
+[7mlines 246-280[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKG] (IRQs 5 10 *11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [LNKH] (IRQs 5 10 *11)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIA] (IRQs *16)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIB] (IRQs *17)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIC] (IRQs *18)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSID] (IRQs *19)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIE] (IRQs *20)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIF] (IRQs *21)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIG] (IRQs *22)[m
+mars 15 11:09:32 localhost kernel: ACPI: PCI Interrupt Link [GSIH] (IRQs *23)[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: Enabled 2 GPEs in block 00 to 3F[0m[m
+mars 15 11:09:32 localhost kernel: vgaarb: device added: PCI:0000:00:01.0,decodes=io+mem,owns=io+mem,locks=none[m
+mars 15 11:09:32 localhost kernel: vgaarb: loaded[m
+mars 15 11:09:32 localhost kernel: vgaarb: bridge control possible 0000:00:01.0[m
+mars 15 11:09:32 localhost kernel: [1;39mSCSI subsystem initialized[0m[m
+mars 15 11:09:32 localhost kernel: ACPI: bus type USB registered[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new interface driver usbfs[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new interface driver hub[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new device driver usb[m
+mars 15 11:09:32 localhost kernel: PCI: Using ACPI for IRQ routing[m
+mars 15 11:09:32 localhost kernel: PCI: pci_cache_line_size set to 64 bytes[m
+mars 15 11:09:32 localhost kernel: e820: reserve RAM buffer [mem 0x0009fc00-0x0009ffff][m
+mars 15 11:09:32 localhost kernel: e820: reserve RAM buffer [mem 0x7ffdd000-0x7fffffff][m
+mars 15 11:09:32 localhost kernel: e820: reserve RAM buffer [mem 0x3b0c00000-0x3b3ffffff][m
+mars 15 11:09:32 localhost kernel: NetLabel: Initializing[m
+mars 15 11:09:32 localhost kernel: NetLabel:  domain hash size = 128[m
+mars 15 11:09:32 localhost kernel: NetLabel:  protocols = UNLABELED CIPSOv4[m
+mars 15 11:09:32 localhost kernel: NetLabel:  unlabeled traffic allowed by default[m
+mars 15 11:09:32 localhost kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0[m
+mars 15 11:09:32 localhost kernel: hpet0: 3 comparators, 64-bit 100.000000 MHz counter[m
+mars 15 11:09:32 localhost kernel: [1;39mamd_nb: Cannot enumerate AMD northbridges[0m[m
+mars 15 11:09:32 localhost kernel: Switched to clocksource kvm-clock[m
+mars 15 11:09:32 localhost kernel: pnp: PnP ACPI init[m
+mars 15 11:09:32 localhost kernel: ACPI: bus type PNP registered[m
+mars 15 11:09:32 localhost kernel: pnp 00:00: Plug and Play ACPI device, IDs PNP0b00 (active)[m
+[7mlines 281-315[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: pnp 00:01: Plug and Play ACPI device, IDs PNP0303 (active)[m
+mars 15 11:09:32 localhost kernel: pnp 00:02: Plug and Play ACPI device, IDs PNP0f13 (active)[m
+mars 15 11:09:32 localhost kernel: pnp 00:03: Plug and Play ACPI device, IDs PNP0400 (active)[m
+mars 15 11:09:32 localhost kernel: pnp 00:04: Plug and Play ACPI device, IDs PNP0501 (active)[m
+mars 15 11:09:32 localhost kernel: pnp: PnP ACPI: found 5 devices[m
+mars 15 11:09:32 localhost kernel: ACPI: bus type PNP unregistered[m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window][m
+mars 15 11:09:32 localhost kernel: pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window][m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 2[m
+mars 15 11:09:32 localhost kernel: TCP established hash table entries: 131072 (order: 8, 1048576 bytes)[m
+mars 15 11:09:32 localhost kernel: TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)[m
+mars 15 11:09:32 localhost kernel: TCP: Hash tables configured (established 131072 bind 65536)[m
+mars 15 11:09:32 localhost kernel: TCP: reno registered[m
+mars 15 11:09:32 localhost kernel: UDP hash table entries: 8192 (order: 6, 262144 bytes)[m
+mars 15 11:09:32 localhost kernel: UDP-Lite hash table entries: 8192 (order: 6, 262144 bytes)[m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 1[m
+mars 15 11:09:32 localhost kernel: pci 0000:00:01.0: Boot video device[m
+mars 15 11:09:32 localhost kernel: PCI: CLS 0 bytes, default 64[m
+mars 15 11:09:32 localhost kernel: Unpacking initramfs...[m
+mars 15 11:09:32 localhost kernel: Freeing initrd memory: 39892k freed[m
+mars 15 11:09:32 localhost kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)[m
+mars 15 11:09:32 localhost kernel: software IO TLB [mem 0x7bfdd000-0x7ffdd000] (64MB) mapped at [ffff88007bfdd000-ffff88[m
+mars 15 11:09:32 localhost kernel: sha1_ssse3: Using AVX optimized SHA-1 implementation[m
+mars 15 11:09:32 localhost kernel: sha256_ssse3: Using AVX2 optimized SHA-256 implementation[m
+mars 15 11:09:32 localhost kernel: futex hash table entries: 1024 (order: 4, 65536 bytes)[m
+mars 15 11:09:32 localhost kernel: [1;39mInitialise system trusted keyring[0m[m
+mars 15 11:09:32 localhost kernel: audit: initializing netlink socket (disabled)[m
+mars 15 11:09:32 localhost kernel: [1;39mtype=2000 audit(1552644572.335:1): initialized[0m[m
+mars 15 11:09:32 localhost kernel: HugeTLB registered 1 GB page size, pre-allocated 0 pages[m
+mars 15 11:09:32 localhost kernel: HugeTLB registered 2 MB page size, pre-allocated 0 pages[m
+mars 15 11:09:32 localhost kernel: zpool: loaded[m
+mars 15 11:09:32 localhost kernel: zbud: loaded[m
+mars 15 11:09:32 localhost kernel: [1;39mVFS: Disk quotas dquot_6.5.2[0m[m
+[7mlines 316-350[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: [1;39mDquot-cache hash table entries: 512 (order 0, 4096 bytes)[0m[m
+mars 15 11:09:32 localhost kernel: msgmni has been set to 25237[m
+mars 15 11:09:32 localhost kernel: [1;39mKey type big_key registered[0m[m
+mars 15 11:09:32 localhost kernel: SELinux:  Registering netfilter hooks[m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 38[m
+mars 15 11:09:32 localhost kernel: [1;39mKey type asymmetric registered[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mAsymmetric key parser 'x509' registered[0m[m
+mars 15 11:09:32 localhost kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 250)[m
+mars 15 11:09:32 localhost kernel: io scheduler noop registered[m
+mars 15 11:09:32 localhost kernel: io scheduler deadline registered (default)[m
+mars 15 11:09:32 localhost kernel: io scheduler cfq registered[m
+mars 15 11:09:32 localhost kernel: pci_hotplug: PCI Hot Plug PCI Core version: 0.5[m
+mars 15 11:09:32 localhost kernel: pciehp: PCI Express Hot Plug Controller Driver version: 0.4[m
+mars 15 11:09:32 localhost kernel: intel_idle: does not run on family 6 model 79[m
+mars 15 11:09:32 localhost kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0[m
+mars 15 11:09:32 localhost kernel: ACPI: Power Button [PWRF][m
+mars 15 11:09:32 localhost kernel: GHES: HEST is not enabled![m
+mars 15 11:09:32 localhost kernel: Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled[m
+mars 15 11:09:32 localhost kernel: 00:04: ttyS0 at I/O 0x3f8 (irq = 4) is a 16550A[m
+mars 15 11:09:32 localhost kernel: Non-volatile memory driver v1.3[m
+mars 15 11:09:32 localhost kernel: Linux agpgart interface v0.103[m
+mars 15 11:09:32 localhost kernel: crash memory driver: version 1.1[m
+mars 15 11:09:32 localhost kernel: rdac: device handler registered[m
+mars 15 11:09:32 localhost kernel: hp_sw: device handler registered[m
+mars 15 11:09:32 localhost kernel: emc: device handler registered[m
+mars 15 11:09:32 localhost kernel: alua: device handler registered[m
+mars 15 11:09:32 localhost kernel: libphy: Fixed MDIO Bus: probed[m
+mars 15 11:09:32 localhost kernel: ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver[m
+mars 15 11:09:32 localhost kernel: ehci-pci: EHCI PCI platform driver[m
+mars 15 11:09:32 localhost kernel: ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver[m
+mars 15 11:09:32 localhost kernel: ohci-pci: OHCI PCI platform driver[m
+mars 15 11:09:32 localhost kernel: uhci_hcd: USB Universal Host Controller Interface driver[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new interface driver usbserial[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new interface driver usbserial_generic[m
+mars 15 11:09:32 localhost kernel: usbserial: USB Serial support registered for generic[m
+[7mlines 351-385[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12[m
+mars 15 11:09:32 localhost kernel: serio: i8042 KBD port at 0x60,0x64 irq 1[m
+mars 15 11:09:32 localhost kernel: serio: i8042 AUX port at 0x60,0x64 irq 12[m
+mars 15 11:09:32 localhost kernel: mousedev: PS/2 mouse device common for all mice[m
+mars 15 11:09:32 localhost kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1[m
+mars 15 11:09:32 localhost kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input2[m
+mars 15 11:09:32 localhost kernel: rtc_cmos 00:00: RTC can wake from S4[m
+mars 15 11:09:32 localhost kernel: rtc_cmos 00:00: rtc core: registered rtc_cmos as rtc0[m
+mars 15 11:09:32 localhost kernel: input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input3[m
+mars 15 11:09:32 localhost kernel: rtc_cmos 00:00: alarms up to one day, y3k, 114 bytes nvram, hpet irqs[m
+mars 15 11:09:32 localhost kernel: cpuidle: using governor menu[m
+mars 15 11:09:32 localhost kernel: hidraw: raw HID events driver (C) Jiri Kosina[m
+mars 15 11:09:32 localhost kernel: usbcore: registered new interface driver usbhid[m
+mars 15 11:09:32 localhost kernel: usbhid: USB HID core driver[m
+mars 15 11:09:32 localhost kernel: drop_monitor: Initializing network drop monitor service[m
+mars 15 11:09:32 localhost kernel: TCP: cubic registered[m
+mars 15 11:09:32 localhost kernel: Initializing XFRM netlink socket[m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 10[m
+mars 15 11:09:32 localhost kernel: NET: Registered protocol family 17[m
+mars 15 11:09:32 localhost kernel: microcode: CPU0 sig=0x406f1, pf=0x1, revision=0x1[m
+mars 15 11:09:32 localhost kernel: microcode: CPU1 sig=0x406f1, pf=0x1, revision=0x1[m
+mars 15 11:09:32 localhost kernel: microcode: CPU2 sig=0x406f1, pf=0x1, revision=0x1[m
+mars 15 11:09:32 localhost kernel: microcode: Microcode Update Driver: v2.01 <tigran@aivazian.fsnet.co.uk>, Peter Oruba[m
+mars 15 11:09:32 localhost kernel: PM: Hibernation image not present or could not be loaded.[m
+mars 15 11:09:32 localhost kernel: [1;39mLoading compiled-in X.509 certificates[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mLoaded X.509 cert 'CentOS Linux kpatch signing key: ea0413152cde1d98ebdca3fe6f0230904[m
+mars 15 11:09:32 localhost kernel: [1;39mLoaded X.509 cert 'CentOS Linux Driver update signing key: 7f421ee0ab69461574bb358861[m
+mars 15 11:09:32 localhost kernel: [1;39mLoaded X.509 cert 'CentOS Linux kernel signing key: 2cbc9870546343ca3ae120c2bceb98440[m
+mars 15 11:09:32 localhost kernel: registered taskstats version 1[m
+mars 15 11:09:32 localhost kernel: [1;39mKey type trusted registered[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mKey type encrypted registered[0m[m
+mars 15 11:09:32 localhost kernel: IMA: No TPM chip found, activating TPM-bypass![m
+mars 15 11:09:32 localhost kernel:   Magic number: 11:782:173[m
+mars 15 11:09:32 localhost kernel: rtc_cmos 00:00: setting system clock to 2019-03-15 10:09:32 UTC (1552644572)[m
+mars 15 11:09:32 localhost kernel: Freeing unused kernel memory: 1800k freed[m
+[7mlines 386-420[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost systemd[1]: systemd 219 running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +[m
+mars 15 11:09:32 localhost systemd[1]: Detected virtualization kvm.[m
+mars 15 11:09:32 localhost systemd[1]: Detected architecture x86-64.[m
+mars 15 11:09:32 localhost systemd[1]: Running in initial RAM disk.[m
+mars 15 11:09:32 localhost systemd[1]: No hostname configured.[m
+mars 15 11:09:32 localhost systemd[1]: Set hostname to <localhost>.[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost systemd[1]: Initializing machine ID from random generator.[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: systemd: uninitialized urandom read (16 bytes read)[0m[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Local File Systems.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Local File Systems.[m
+mars 15 11:09:32 localhost systemd[1]: Created slice Root Slice.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Root Slice.[m
+mars 15 11:09:32 localhost systemd[1]: Listening on udev Control Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Starting udev Control Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Swap.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Swap.[m
+mars 15 11:09:32 localhost systemd[1]: Created slice System Slice.[m
+mars 15 11:09:32 localhost systemd[1]: Starting System Slice.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Timers.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Timers.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Slices.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Slices.[m
+mars 15 11:09:32 localhost systemd[1]: Listening on Journal Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Journal Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Create list of required static device nodes for the current kernel...[m
+mars 15 11:09:32 localhost systemd[1]: Starting Apply Kernel Variables...[m
+[7mlines 421-455[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost systemd[1]: Starting dracut cmdline hook...[m
+mars 15 11:09:32 localhost systemd[1]: Starting Journal Service...[m
+mars 15 11:09:32 localhost systemd[1]: Listening on udev Kernel Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Starting udev Kernel Socket.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Sockets.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Sockets.[m
+mars 15 11:09:32 localhost systemd[1]: Started Dispatch Password Requests to Console Directory Watch.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Dispatch Password Requests to Console Directory Watch.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Paths.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Paths.[m
+mars 15 11:09:32 localhost systemd[1]: Started Create list of required static device nodes for the current kernel.[m
+mars 15 11:09:32 localhost systemd-journal[102]: Journal started[m
+mars 15 11:09:32 localhost systemd[1]: Started Apply Kernel Variables.[m
+mars 15 11:09:32 localhost systemd[1]: Started Journal Service.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Create Static Device Nodes in /dev...[m
+mars 15 11:09:32 localhost systemd[1]: Started Create Static Device Nodes in /dev.[m
+mars 15 11:09:32 localhost systemd[1]: Started dracut cmdline hook.[m
+mars 15 11:09:32 localhost systemd[1]: Starting dracut pre-udev hook...[m
+mars 15 11:09:32 localhost kernel: RPC: Registered named UNIX socket transport module.[m
+mars 15 11:09:32 localhost kernel: RPC: Registered udp transport module.[m
+mars 15 11:09:32 localhost kernel: RPC: Registered tcp transport module.[m
+mars 15 11:09:32 localhost kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.[m
+mars 15 11:09:32 localhost rpc.statd[198]: [1;39mVersion 1.3.0 starting[0m[m
+mars 15 11:09:32 localhost rpc.statd[198]: [1;39mInitializing NSM state[0m[m
+mars 15 11:09:32 localhost rpc.statd[198]: [1;39mRunning as root.  chown /var/lib/nfs/statd to choose different user[0m[m
+mars 15 11:09:32 localhost systemd[1]: Started dracut pre-udev hook.[m
+mars 15 11:09:32 localhost systemd[1]: Starting udev Kernel Device Manager...[m
+mars 15 11:09:32 localhost systemd-udevd[225]: starting version 219[m
+mars 15 11:09:32 localhost kernel: [1;39mrandom: fast init done[0m[m
+mars 15 11:09:32 localhost systemd[1]: Started udev Kernel Device Manager.[m
+mars 15 11:09:32 localhost systemd[1]: Starting dracut pre-trigger hook...[m
+mars 15 11:09:32 localhost systemd[1]: Started dracut pre-trigger hook.[m
+mars 15 11:09:32 localhost systemd[1]: Starting udev Coldplug all Devices...[m
+mars 15 11:09:32 localhost systemd[1]: Mounting Configuration File System...[m
+mars 15 11:09:32 localhost systemd[1]: Mounted Configuration File System.[m
+[7mlines 456-490[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:32 localhost kernel: [1;39mACPI: PCI Interrupt Link [GSIG] enabled at IRQ 22[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: PCI Interrupt Link [GSIH] enabled at IRQ 23[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: PCI Interrupt Link [GSIE] enabled at IRQ 20[0m[m
+mars 15 11:09:32 localhost kernel: [1;39mACPI: PCI Interrupt Link [GSIF] enabled at IRQ 21[0m[m
+mars 15 11:09:32 localhost systemd[1]: Started udev Coldplug all Devices.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target System Initialization.[m
+mars 15 11:09:32 localhost systemd[1]: Starting System Initialization.[m
+mars 15 11:09:32 localhost systemd[1]: Reached target Basic System.[m
+mars 15 11:09:32 localhost systemd[1]: Starting Basic System.[m
+mars 15 11:09:32 localhost systemd[1]: Starting dracut initqueue hook...[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:02.0: irq 24 for MSI/MSI-X[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:02.0: irq 25 for MSI/MSI-X[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:02.0: irq 26 for MSI/MSI-X[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:03.0: irq 27 for MSI/MSI-X[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:03.0: irq 28 for MSI/MSI-X[m
+mars 15 11:09:32 localhost kernel: virtio-pci 0000:00:03.0: irq 29 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel: virtio-pci 0000:00:04.0: irq 30 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel: virtio-pci 0000:00:04.0: irq 31 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel: libata version 3.00 loaded.[m
+mars 15 11:09:33 localhost kernel: ahci 0000:00:1f.2: version 3.0[m
+mars 15 11:09:33 localhost kernel: [1;39mACPI: PCI Interrupt Link [GSIA] enabled at IRQ 16[0m[m
+mars 15 11:09:33 localhost kernel: ahci 0000:00:1f.2: irq 32 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel: ahci 0000:00:1f.2: AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode[m
+mars 15 11:09:33 localhost kernel: ahci 0000:00:1f.2: flags: 64bit ncq only [m
+mars 15 11:09:33 localhost kernel: virtio-pci 0000:00:06.0: irq 33 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel: virtio-pci 0000:00:06.0: irq 34 for MSI/MSI-X[m
+mars 15 11:09:33 localhost kernel:  vda: vda1[m
+mars 15 11:09:33 localhost kernel: scsi host0: ahci[m
+mars 15 11:09:33 localhost kernel: scsi host1: ahci[m
+mars 15 11:09:33 localhost kernel: scsi host2: ahci[m
+mars 15 11:09:33 localhost kernel: scsi host3: ahci[m
+mars 15 11:09:33 localhost kernel: scsi host4: ahci[m
+mars 15 11:09:33 localhost kernel: scsi host5: ahci[m
+mars 15 11:09:33 localhost kernel: ata1: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096100 irq 32[m
+mars 15 11:09:33 localhost kernel: ata2: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096180 irq 32[m
+[7mlines 491-525[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:33 localhost kernel: ata3: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096200 irq 32[m
+mars 15 11:09:33 localhost kernel: ata4: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096280 irq 32[m
+mars 15 11:09:33 localhost kernel: ata5: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096300 irq 32[m
+mars 15 11:09:33 localhost kernel: ata6: SATA max UDMA/133 abar m4096@0xfc096000 port 0xfc096380 irq 32[m
+mars 15 11:09:33 localhost systemd[1]: Found device /dev/disk/by-uuid/e64899eb-665e-41a9-b7da-ed5781a8b3aa.[m
+mars 15 11:09:33 localhost systemd[1]: Starting File System Check on /dev/disk/by-uuid/e64899eb-665e-41a9-b7da-ed5781a8b[m
+mars 15 11:09:33 localhost systemd-fsck[285]: /sbin/fsck.xfs: XFS file system.[m
+mars 15 11:09:33 localhost systemd[1]: Started File System Check on /dev/disk/by-uuid/e64899eb-665e-41a9-b7da-ed5781a8b3[m
+mars 15 11:09:33 localhost kernel: tsc: Refined TSC clocksource calibration: 2197.427 MHz[m
+mars 15 11:09:33 localhost kernel: ata1: SATA link down (SStatus 0 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata5: SATA link down (SStatus 0 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata6: SATA link down (SStatus 0 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata4: SATA link up 1.5 Gbps (SStatus 113 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata3: SATA link up 1.5 Gbps (SStatus 113 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata2: SATA link down (SStatus 0 SControl 300)[m
+mars 15 11:09:33 localhost kernel: ata3.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100[m
+mars 15 11:09:33 localhost kernel: ata3.00: applying bridge limits[m
+mars 15 11:09:33 localhost kernel: ata3.00: configured for UDMA/100[m
+mars 15 11:09:33 localhost kernel: ata4.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100[m
+mars 15 11:09:33 localhost kernel: ata4.00: applying bridge limits[m
+mars 15 11:09:33 localhost kernel: [1;39mscsi 2:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5[0m[m
+mars 15 11:09:33 localhost kernel: ata4.00: configured for UDMA/100[m
+mars 15 11:09:33 localhost kernel: [1;39mscsi 3:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5[0m[m
+mars 15 11:09:33 localhost kernel: sr 2:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray[m
+mars 15 11:09:33 localhost kernel: cdrom: Uniform CD-ROM driver Revision: 3.20[m
+mars 15 11:09:33 localhost kernel: sr 2:0:0:0: Attached scsi CD-ROM sr0[m
+mars 15 11:09:33 localhost kernel: sr 3:0:0:0: [sr1] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray[m
+mars 15 11:09:33 localhost kernel: sr 3:0:0:0: Attached scsi CD-ROM sr1[m
+mars 15 11:09:33 localhost systemd[1]: Started dracut initqueue hook.[m
+mars 15 11:09:33 localhost systemd[1]: Mounting /sysroot...[m
+mars 15 11:09:33 localhost systemd[1]: Reached target Remote File Systems (Pre).[m
+mars 15 11:09:33 localhost systemd[1]: Starting Remote File Systems (Pre).[m
+mars 15 11:09:33 localhost systemd[1]: Reached target Remote File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Remote File Systems.[m
+mars 15 11:09:33 localhost kernel: SGI XFS with ACLs, security attributes, no debug enabled[m
+[7mlines 526-560[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:33 localhost kernel: [1;39mXFS (vda1): Mounting V5 Filesystem[0m[m
+mars 15 11:09:33 localhost kernel: [1;39mXFS (vda1): Starting recovery (logdev: internal)[0m[m
+mars 15 11:09:33 localhost kernel: [1;39mXFS (vda1): Ending recovery (logdev: internal)[0m[m
+mars 15 11:09:33 localhost systemd[1]: Mounted /sysroot.[m
+mars 15 11:09:33 localhost systemd[1]: Reached target Initrd Root File System.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Initrd Root File System.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Reload Configuration from the Real Root...[m
+mars 15 11:09:33 localhost systemd[1]: Reloading.[m
+mars 15 11:09:33 localhost systemd[1]: Started Reload Configuration from the Real Root.[m
+mars 15 11:09:33 localhost systemd[1]: Reached target Initrd File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Initrd File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Reached target Initrd Default Target.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Initrd Default Target.[m
+mars 15 11:09:33 localhost systemd[1]: Starting dracut pre-pivot and cleanup hook...[m
+mars 15 11:09:33 localhost rpcbind[194]: [1;31mcannot open file = /run/rpcbind/rpcbind.xdr for writing[0m[m
+mars 15 11:09:33 localhost rpcbind[194]: [1;31mcannot save any registration[0m[m
+mars 15 11:09:33 localhost rpcbind[194]: [1;31mcannot open file = /run/rpcbind/portmap.xdr for writing[0m[m
+mars 15 11:09:33 localhost rpcbind[194]: [1;31mcannot save any registration[0m[m
+mars 15 11:09:33 localhost systemd[1]: Started dracut pre-pivot and cleanup hook.[m
+mars 15 11:09:33 localhost systemd[1]: Starting Cleaning Up and Shutting Down Daemons...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Timers.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Timers.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped Cleaning Up and Shutting Down Daemons.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped dracut pre-pivot and cleanup hook.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping dracut pre-pivot and cleanup hook...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Remote File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Remote File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Remote File Systems (Pre).[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Remote File Systems (Pre).[m
+mars 15 11:09:33 localhost systemd[1]: Stopped dracut initqueue hook.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping dracut initqueue hook...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Initrd Default Target.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Initrd Default Target.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Basic System.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Basic System.[m
+[7mlines 561-595[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:33 localhost systemd[1]: Stopped target Paths.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Paths.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped Dispatch Password Requests to Console Directory Watch.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Dispatch Password Requests to Console Directory Watch.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Sockets.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Sockets.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target System Initialization.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping System Initialization.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped Apply Kernel Variables.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Apply Kernel Variables...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Local File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Local File Systems.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped udev Coldplug all Devices.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping udev Coldplug all Devices...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped dracut pre-trigger hook.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping dracut pre-trigger hook...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Swap.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Swap.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping udev Kernel Device Manager...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped target Slices.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Slices.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped udev Kernel Device Manager.[m
+mars 15 11:09:33 localhost systemd[1]: Stopped Create Static Device Nodes in /dev.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Create Static Device Nodes in /dev...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped Create list of required static device nodes for the current kernel.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping Create list of required static device nodes for the current kernel...[m
+mars 15 11:09:33 localhost systemd[1]: Stopped dracut pre-udev hook.[m
+mars 15 11:09:33 localhost systemd[1]: Stopping dracut pre-udev hook...[m
+mars 15 11:09:34 localhost systemd[1]: Stopped dracut cmdline hook.[m
+mars 15 11:09:34 localhost systemd[1]: Stopping dracut cmdline hook...[m
+mars 15 11:09:34 localhost systemd[1]: Closed udev Control Socket.[m
+mars 15 11:09:34 localhost systemd[1]: Stopping udev Control Socket.[m
+mars 15 11:09:34 localhost systemd[1]: Closed udev Kernel Socket.[m
+mars 15 11:09:34 localhost systemd[1]: Stopping udev Kernel Socket.[m
+mars 15 11:09:34 localhost systemd[1]: Starting Cleanup udevd DB...[m
+[7mlines 596-630[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:34 localhost systemd[1]: Started Cleanup udevd DB.[m
+mars 15 11:09:34 localhost systemd[1]: Reached target Switch Root.[m
+mars 15 11:09:34 localhost systemd[1]: Starting Switch Root.[m
+mars 15 11:09:34 localhost systemd[1]: Starting Switch Root...[m
+mars 15 11:09:34 localhost systemd[1]: [1;39mSwitching root.[0m[m
+mars 15 11:09:34 localhost unknown[102]: Journal stopped[m
+mars 15 11:09:35 vm0.pcocc systemd-journal[392]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+mars 15 11:09:35 vm0.pcocc systemd-journal[392]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+mars 15 11:09:35 vm0.pcocc systemd-journald[102]: Received SIGTERM from PID 1 (systemd).[m
+mars 15 11:09:35 vm0.pcocc kernel: SELinux:  Disabled at runtime.[m
+mars 15 11:09:35 vm0.pcocc kernel: SELinux:  Unregistering netfilter hooks[m
+mars 15 11:09:35 vm0.pcocc kernel: [1;39mtype=1404 audit(1552644574.298:2): selinux=0 auid=4294967295 ses=4294967295[0m[m
+mars 15 11:09:35 vm0.pcocc kernel: ip_tables: (C) 2000-2006 Netfilter Core Team[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Inserted module 'ip_tables'[m
+mars 15 11:09:35 vm0.pcocc systemd-journal[392]: Journal started[m
+mars 15 11:09:34 vm0.pcocc systemd[1]: systemd 219 running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +[m
+mars 15 11:09:34 vm0.pcocc systemd[1]: Detected virtualization kvm.[m
+mars 15 11:09:34 vm0.pcocc systemd[1]: Detected architecture x86-64.[m
+mars 15 11:09:34 vm0.pcocc systemd[1]: Set hostname to <vm0.pcocc>.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Mounted Debug File System.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Mounted POSIX Message Queue File System.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Mounted Huge Pages File System.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Remount Root and Kernel File Systems.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Apply Kernel Variables.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Load/Save Random Seed...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting udev Coldplug all Devices...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Configure read-only root support...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Flush Journal to Persistent Storage...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Initial cloud-init job (pre-networking)...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Create list of required static device nodes for the current kernel.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Load/Save Random Seed.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Create Static Device Nodes in /dev...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started udev Coldplug all Devices.[m
+mars 15 11:09:35 vm0.pcocc systemd-journal[392]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Flush Journal to Persistent Storage.[m
+[7mlines 631-665[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:35 vm0.pcocc systemd[1]: Started Create Static Device Nodes in /dev.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Reached target Local File Systems (Pre).[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Local File Systems (Pre).[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting udev Kernel Device Manager...[m
+mars 15 11:09:35 vm0.pcocc systemd-udevd[430]: starting version 219[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Setup Virtual Console.[m
+mars 15 11:09:35 vm0.pcocc kernel: Installing knfsd (copyright (C) 1996 okir@monad.swb.de).[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Mounted NFSD configuration filesystem.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Configure read-only root support.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Reached target Local File Systems.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Local File Systems.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Mark the need to relabel after reboot...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Import network configuration from initramfs...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Preprocess NFS configuration...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started udev Kernel Device Manager.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Mark the need to relabel after reboot.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Import network configuration from initramfs.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Create Volatile Files and Directories...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Preprocess NFS configuration.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Started Create Volatile Files and Directories.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Starting Security Auditing Service...[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Found device /dev/vport2p4.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Found device /sys/devices/pci0000:00/0000:00:04.0/virtio2/virtio-ports/vport2p4.[m
+mars 15 11:09:35 vm0.pcocc systemd[1]: Found device /dev/ttyS0.[m
+mars 15 11:09:36 vm0.pcocc kernel: [1;39mlpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized[0m[m
+mars 15 11:09:36 vm0.pcocc kernel: [1;39mrandom: crng init done[0m[m
+mars 15 11:09:36 vm0.pcocc kernel: input: PC Speaker as /devices/platform/pcspkr/input/input4[m
+mars 15 11:09:36 vm0.pcocc kernel: parport_pc 00:03: reported by Plug and Play ACPI[m
+mars 15 11:09:36 vm0.pcocc kernel: iTCO_vendor_support: vendor-support=0[m
+mars 15 11:09:36 vm0.pcocc kernel: parport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE][m
+mars 15 11:09:36 vm0.pcocc kernel: AES CTR mode by8 optimization enabled[m
+mars 15 11:09:36 vm0.pcocc kernel: i801_smbus 0000:00:1f.3: SMBus using PCI interrupt[m
+mars 15 11:09:36 vm0.pcocc kernel: ppdev: user-space parallel port driver[m
+mars 15 11:09:36 vm0.pcocc kernel: iTCO_wdt: Intel TCO WatchDog Timer Driver v1.11[m
+mars 15 11:09:36 vm0.pcocc kernel: [1;39msr 2:0:0:0: Attached scsi generic sg0 type 5[0m[m
+[7mlines 666-700[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:36 vm0.pcocc kernel: iTCO_wdt: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)[m
+mars 15 11:09:36 vm0.pcocc kernel: iTCO_wdt: initialized. heartbeat=30 sec (nowayout=0)[m
+mars 15 11:09:36 vm0.pcocc kernel: alg: No test for __gcm-aes-aesni (__driver-gcm-aes-aesni)[m
+mars 15 11:09:36 vm0.pcocc kernel: [1;39msr 3:0:0:0: Attached scsi generic sg1 type 5[0m[m
+mars 15 11:09:36 vm0.pcocc kernel: alg: No test for crc32 (crc32-pclmul)[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Initialized[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Device Version 0.0[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Compression level 0 log level 0[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Currently using mode #0, list at 0x488[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] 12286 io pages at offset 0x1000000[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] 16777216 byte draw area at offset 0x0[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] RAM header offset: 0x3ffe000[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] rom modes offset 0x488 for 128 modes[m
+mars 15 11:09:36 vm0.pcocc kernel: [TTM] Zone  kernel: Available graphics memory: 6461704 kiB[m
+mars 15 11:09:36 vm0.pcocc kernel: [TTM] Zone   dma32: Available graphics memory: 2097152 kiB[m
+mars 15 11:09:36 vm0.pcocc kernel: [TTM] Initializing pool allocator[m
+mars 15 11:09:36 vm0.pcocc kernel: [TTM] Initializing DMA pool allocator[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] qxl: 16M of VRAM memory size[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] qxl: 63M of IO pages memory ready (VRAM domain)[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] qxl: 64M of Surface memory size[m
+mars 15 11:09:36 vm0.pcocc auditd[520]: Started dispatcher: /sbin/audispd pid: 522[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] main mem slot 1 [f4000000,3ffe000][m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] surface mem slot 2 [f8000000,4000000][m
+mars 15 11:09:36 vm0.pcocc kernel: [1;39mtype=1305 audit(1552644576.388:3): audit_pid=520 old=0 auid=4294967295 ses=4294967295[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] No driver support for vblank timestamp query.[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] fb mappable at 0xF4000000, size 3145728[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] fb: depth 24, pitch 4096, width 1024, height 768[m
+mars 15 11:09:36 vm0.pcocc kernel: fbcon: qxldrmfb (fb0) is primary device[m
+mars 15 11:09:36 vm0.pcocc kernel: Console: switching to colour frame buffer device 128x48[m
+mars 15 11:09:36 vm0.pcocc kernel: qxl 0000:00:01.0: fb0: qxldrmfb frame buffer device[m
+mars 15 11:09:36 vm0.pcocc kernel: [drm] Initialized qxl 0.1.0 20120117 for 0000:00:01.0 on minor 0[m
+mars 15 11:09:36 vm0.pcocc auditd[520]: [1;39mInit complete, auditd 2.7.6 listening for events (startup state enable)[0m[m
+mars 15 11:09:36 vm0.pcocc audispd[522]: priority_boost_parser called with: 4[m
+mars 15 11:09:36 vm0.pcocc audispd[522]: max_restarts_parser called with: 10[m
+[7mlines 701-735[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:36 vm0.pcocc audispd[522]: [1;39mNo plugins found, exiting[0m[m
+mars 15 11:09:36 vm0.pcocc auditd[520]: dispatcher 522 reaped[m
+mars 15 11:09:36 vm0.pcocc kernel: EDAC MC: Ver: 3.0.0[m
+mars 15 11:09:36 vm0.pcocc kernel: EDAC sbridge: Seeking for: PCI ID 8086:6fa0[m
+mars 15 11:09:36 vm0.pcocc kernel: EDAC sbridge:  Ver: 1.1.1 [m
+mars 15 11:09:36 vm0.pcocc kernel: [1;31mError: Driver 'pcspkr' is already registered, aborting...[0m[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: /sbin/augenrules: No change[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: No rules[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: enabled 1[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: failure 1[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: pid 520[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: rate_limit 0[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: backlog_limit 8192[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: lost 0[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: backlog 0[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: enabled 1[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: failure 1[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: pid 520[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: rate_limit 0[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: backlog_limit 8192[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: lost 0[m
+mars 15 11:09:36 vm0.pcocc augenrules[530]: backlog 0[m
+mars 15 11:09:36 vm0.pcocc systemd[1]: Started Security Auditing Service.[m
+mars 15 11:09:36 vm0.pcocc systemd[1]: Starting Update UTMP about System Boot/Shutdown...[m
+mars 15 11:09:36 vm0.pcocc systemd[1]: Started Update UTMP about System Boot/Shutdown.[m
+mars 15 11:09:37 vm0.pcocc cloud-init[417]: Cloud-init v. 0.7.9 running 'init-local' at Fri, 15 Mar 2019 10:09:37 +0000.[m
+mars 15 11:09:38 vm0.pcocc kernel: ISO 9660 Extensions: Microsoft Joliet Level 3[m
+mars 15 11:09:38 vm0.pcocc kernel: ISO 9660 Extensions: RRIP_1991A[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Initial cloud-init job (pre-networking).[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target System Initialization.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting System Initialization.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Listening on D-Bus System Message Bus Socket.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting D-Bus System Message Bus Socket.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Daily Cleanup of Temporary Directories.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Daily Cleanup of Temporary Directories.[m
+[7mlines 736-770[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Timers.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Timers.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Flexible branding.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Flexible branding.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Paths.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Paths.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Listening on RPCbind Server Activation Socket.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting RPCbind Server Activation Socket.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Sockets.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Sockets.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Basic System.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Basic System.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting GSSAPI Proxy Daemon...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started D-Bus System Message Bus.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting D-Bus System Message Bus...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Authorization Manager...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started irqbalance daemon.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting irqbalance daemon...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting NTP client/server...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Resets System Activity Logs...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Login Service...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Dump dmesg to /var/log/dmesg...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting System Logging Service...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started QEMU Guest Agent.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting QEMU Guest Agent...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Network (Pre).[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Network (Pre).[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting LSB: Bring up/down networking...[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started GSSAPI Proxy Daemon.[m
+mars 15 11:09:38 vm0.pcocc systemd-logind[588]: New seat seat0.[m
+mars 15 11:09:38 vm0.pcocc systemd-logind[588]: Watching system buttons on /dev/input/event0 (Power Button)[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target NFS client services.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting NFS client services.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Remote File Systems (Pre).[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Remote File Systems (Pre).[m
+[7mlines 771-805[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:09:38 vm0.pcocc systemd[1]: Reached target Remote File Systems.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Starting Remote File Systems.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Login Service.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Resets System Activity Logs.[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Dump dmesg to /var/log/dmesg.[m
+mars 15 11:09:38 vm0.pcocc chronyd[616]: chronyd version 3.1 starting (+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started NTP client/server.[m
+mars 15 11:09:38 vm0.pcocc rsyslogd[591]:  [origin software="rsyslogd" swVersion="8.24.0" x-pid="591" x-info="http://www[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started System Logging Service.[m
+mars 15 11:09:38 vm0.pcocc polkitd[579]: Started polkitd version 0.112[m
+mars 15 11:09:38 vm0.pcocc polkitd[579]: [1;39mLoading rules from directory /etc/polkit-1/rules.d[0m[m
+mars 15 11:09:38 vm0.pcocc polkitd[579]: [1;39mLoading rules from directory /usr/share/polkit-1/rules.d[0m[m
+mars 15 11:09:38 vm0.pcocc polkitd[579]: [1;39mFinished loading, compiling and executing 2 rules[0m[m
+mars 15 11:09:38 vm0.pcocc polkitd[579]: [1;39mAcquired the name org.freedesktop.PolicyKit1 on the system bus[0m[m
+mars 15 11:09:38 vm0.pcocc systemd[1]: Started Authorization Manager.[m
+mars 15 11:09:39 vm0.pcocc network[595]: Bringing up loopback interface:  [  OK  ][m
+mars 15 11:09:39 vm0.pcocc network[595]: Bringing up interface eth0:[m
+mars 15 11:09:39 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x10ece5da)[m
+mars 15 11:09:47 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x10ece5da)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 4 (xid=0x451d8373)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x451d8373)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPOFFER from 10.251.255.253[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPACK from 10.251.255.253 (xid=0x451d8373)[m
+mars 15 11:10:10 vm0.pcocc NET[807]: [1;39m/usr/sbin/dhclient-script : updated /etc/resolv.conf[0m[m
+mars 15 11:10:10 vm0.pcocc dhclient[748]: bound to 10.251.0.2 -- renewal in 2147483646 seconds.[m
+mars 15 11:10:10 vm0.pcocc network[595]: Determining IP information for eth0... done.[m
+mars 15 11:10:10 vm0.pcocc network[595]: [  OK  ][m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Started LSB: Bring up/down networking.[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Starting Initial cloud-init job (metadata service crawler)...[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Reached target Network.[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Starting Network.[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Starting Dynamic System Tuning Daemon...[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Starting Postfix Mail Transport Agent...[m
+mars 15 11:10:10 vm0.pcocc systemd[1]: Started Dynamic System Tuning Daemon.[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: Cloud-init v. 0.7.9 running 'init' at Fri, 15 Mar 2019 10:10:10 +0000. Up 39[m
+[7mlines 806-840[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +++++++++++++++++++++++++++++Net device info+++++++++++++++++++++++[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +--------+-------+------------+-------------+-------+--------------[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: | Device |   Up  |  Address   |     Mask    | Scope |     Hw-Addres[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +--------+-------+------------+-------------+-------+--------------[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: |  lo:   |  True | 127.0.0.1  |  255.0.0.0  |   .   |         .    [m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: |  lo:   |  True |     .      |      .      |   d   |         .    [m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: | eth1:  | False |     .      |      .      |   .   | 52:54:0a:00:0[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: | eth0:  |  True | 10.251.0.2 | 255.255.0.0 |   .   | 52:54:00:00:0[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: | eth0:  |  True |     .      |      .      |   d   | 52:54:00:00:0[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +--------+-------+------------+-------------+-------+--------------[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +++++++++++++++++++++++++++++Route IPv4 info+++++++++++++++++++++++[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +-------+-------------+----------------+-------------+-----------+-[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: | Route | Destination |    Gateway     |   Genmask   | Interface | [m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +-------+-------------+----------------+-------------+-----------+-[m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: |   0   |   0.0.0.0   | 10.251.255.254 |   0.0.0.0   |    eth0   | [m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: |   1   |  10.251.0.0 |    0.0.0.0     | 255.255.0.0 |    eth0   | [m
+mars 15 11:10:10 vm0.pcocc cloud-init[872]: ci-info: +-------+-------------+----------------+-------------+-----------+-[m
+mars 15 11:10:11 vm0.pcocc postfix/postfix-script[979]: starting the Postfix mail system[m
+mars 15 11:10:11 vm0.pcocc postfix/master[981]: daemon started -- version 2.10.1, configuration /etc/postfix[m
+mars 15 11:10:11 vm0.pcocc systemd[1]: Started Postfix Mail Transport Agent.[m
+mars 15 11:10:11 vm0.pcocc dbus[577]: [1;39m[system] Activating via systemd: service name='org.freedesktop.hostname1' unit='db[m
+mars 15 11:10:11 vm0.pcocc dbus-daemon[577]: dbus[577]: [system] Activating via systemd: service name='org.freedesktop.h[m
+mars 15 11:10:11 vm0.pcocc systemd[1]: Starting Hostname Service...[m
+mars 15 11:10:11 vm0.pcocc dbus[577]: [1;39m[system] Successfully activated service 'org.freedesktop.hostname1'[0m[m
+mars 15 11:10:11 vm0.pcocc dbus-daemon[577]: dbus[577]: [system] Successfully activated service 'org.freedesktop.hostnam[m
+mars 15 11:10:11 vm1.pcocc systemd-hostnamed[1021]: Changed static host name to 'vm1.pcocc'[m
+mars 15 11:10:11 vm1.pcocc systemd-hostnamed[1021]: Changed host name to 'vm1.pcocc'[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Hostname Service.[m
+mars 15 11:10:11 vm1.pcocc useradd[1026]: new group: name=romain.pereira, GID=1001[m
+mars 15 11:10:11 vm1.pcocc useradd[1026]: new user: name=romain.pereira, UID=1001, GID=1001, home=/home/romain.pereira, [m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Initial cloud-init job (metadata service crawler).[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Reached target Network is Online.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Network is Online.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Notify NFS peers of a restart...[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Crash recovery kernel arming...[m
+[7mlines 841-875[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:10:11 vm1.pcocc systemd[1]: Starting Permit User Sessions...[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Reached target Cloud-config availability.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Cloud-config availability.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Apply the settings specified in cloud-config...[m
+mars 15 11:10:11 vm1.pcocc sm-notify[1033]: [1;39mVersion 1.3.0 starting[0m[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting OpenSSH server daemon...[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Notify NFS peers of a restart.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Permit User Sessions.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Getty on tty1.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Getty on tty1...[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Serial Getty on ttyS0.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Serial Getty on ttyS0...[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Reached target Login Prompts.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Login Prompts.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started Command Scheduler.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting Command Scheduler...[m
+mars 15 11:10:11 vm1.pcocc sshd[1038]: Server listening on 0.0.0.0 port 22.[m
+mars 15 11:10:11 vm1.pcocc sshd[1038]: Server listening on :: port 22.[m
+mars 15 11:10:11 vm1.pcocc crond[1043]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 3% if used.)[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started OpenSSH server daemon.[m
+mars 15 11:10:11 vm1.pcocc crond[1043]: (CRON) INFO (running with inotify support)[m
+mars 15 11:10:11 vm1.pcocc cloud-init[1036]: Cloud-init v. 0.7.9 running 'modules:config' at Fri, 15 Mar 2019 10:10:11 +[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Stopping OpenSSH server daemon...[m
+mars 15 11:10:11 vm1.pcocc sshd[1038]: Received signal 15; terminating.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Starting OpenSSH server daemon...[m
+mars 15 11:10:11 vm1.pcocc sshd[1181]: Server listening on 0.0.0.0 port 22.[m
+mars 15 11:10:11 vm1.pcocc sshd[1181]: Server listening on :: port 22.[m
+mars 15 11:10:11 vm1.pcocc systemd[1]: Started OpenSSH server daemon.[m
+mars 15 11:10:11 vm1.pcocc cloud-init[1036]: Metadata Cache Created[m
+mars 15 11:10:12 vm1.pcocc kdumpctl[1034]: kexec: loaded kdump kernel[m
+mars 15 11:10:12 vm1.pcocc kdumpctl[1034]: Starting kdump: [OK][m
+mars 15 11:10:12 vm1.pcocc systemd[1]: Started Crash recovery kernel arming.[m
+mars 15 11:10:19 vm1.pcocc cloud-init[1036]: Package 10:qemu-guest-agent-2.12.0-2.el7.x86_64 already installed and lates[m
+mars 15 11:10:19 vm1.pcocc cloud-init[1036]: Package 2:vim-enhanced-7.4.160-5.el7.x86_64 already installed and latest ve[m
+mars 15 11:10:19 vm1.pcocc cloud-init[1036]: Package lsof-4.87-6.el7.x86_64 already installed and latest version[m
+[7mlines 876-910[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:10:20 vm1.pcocc cloud-init[1036]: Package yum-utils-1.1.31-50.el7.noarch already installed and latest version[m
+mars 15 11:10:20 vm1.pcocc cloud-init[1036]: Package strace-4.12-9.el7.x86_64 already installed and latest version[m
+mars 15 11:10:20 vm1.pcocc cloud-init[1036]: Package sysstat-10.1.5-17.el7.x86_64 already installed and latest version[m
+mars 15 11:10:20 vm1.pcocc cloud-init[1036]: Nothing to do[m
+mars 15 11:10:20 vm1.pcocc systemd[1]: Started Apply the settings specified in cloud-config.[m
+mars 15 11:10:20 vm1.pcocc systemd[1]: Starting Execute cloud user/final scripts...[m
+mars 15 11:10:20 vm1.pcocc cloud-init[1243]: Cloud-init v. 0.7.9 running 'modules:final' at Fri, 15 Mar 2019 10:10:20 +0[m
+mars 15 11:10:20 vm1.pcocc dbus[577]: [1;39m[system] Activating via systemd: service name='org.freedesktop.timedate1' unit='db[m
+mars 15 11:10:20 vm1.pcocc dbus-daemon[577]: dbus[577]: [system] Activating via systemd: service name='org.freedesktop.t[m
+mars 15 11:10:20 vm1.pcocc systemd[1]: Starting Time & Date Service...[m
+mars 15 11:10:21 vm1.pcocc dbus[577]: [1;39m[system] Successfully activated service 'org.freedesktop.timedate1'[0m[m
+mars 15 11:10:21 vm1.pcocc dbus-daemon[577]: dbus[577]: [system] Successfully activated service 'org.freedesktop.timedat[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Started Time & Date Service.[m
+mars 15 11:10:21 vm1.pcocc cloud-init[1243]: Failed to stop firewalld.service: Unit firewalld.service not loaded.[m
+mars 15 11:10:21 vm1.pcocc cloud-init[1243]: Failed to execute operation: No such file or directory[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: [m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: #############################################################[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: -----BEGIN SSH HOST KEY FINGERPRINTS-----[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: 256 SHA256:Lw0Da6N0H+FJ+OzkUq7SdSA7viAPY7mJpB/C+pEjiKw no comment (ECDSA)[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: 256 SHA256:nV9NCEpUyPWTDK2kYn3WHhVlWv6UinoL1H5EQk7SpEg no comment (ED25519)[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: 2048 SHA256:Nn2bEZb9aKGOPQ9z4TnSqNVbVYRh/qeGdAY2C0MtHnU no comment (RSA)[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: -----END SSH HOST KEY FINGERPRINTS-----[m
+mars 15 11:10:21 vm1.pcocc ec2[1263]: #############################################################[m
+mars 15 11:10:21 vm1.pcocc cloud-init[1243]: Cloud-init v. 0.7.9 finished at Fri, 15 Mar 2019 10:10:21 +0000. Datasource[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Started Execute cloud user/final scripts.[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Reached target Multi-User System.[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Starting Multi-User System.[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Starting Update UTMP about System Runlevel Changes...[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Started Update UTMP about System Runlevel Changes.[m
+mars 15 11:10:21 vm1.pcocc systemd[1]: Startup finished in 1.085s (kernel) + 1.745s (initrd) + 46.842s (userspace) = 49.[m
+mars 15 11:13:20 vm1.pcocc sshd[1285]: Accepted publickey for romain.pereira from 192.168.1.21 port 52234 ssh2: RSA SHA2[m
+mars 15 11:13:20 vm1.pcocc systemd[1]: Created slice User Slice of romain.pereira.[m
+mars 15 11:13:20 vm1.pcocc systemd[1]: Starting User Slice of romain.pereira.[m
+mars 15 11:13:20 vm1.pcocc systemd-logind[588]: New session 1 of user romain.pereira.[m
+mars 15 11:13:20 vm1.pcocc systemd[1]: Started Session 1 of user romain.pereira.[m
+[7mlines 911-945[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:13:20 vm1.pcocc systemd[1]: Starting Session 1 of user romain.pereira.[m
+mars 15 11:13:20 vm1.pcocc sshd[1285]: pam_unix(sshd:session): session opened for user romain.pereira by (uid=0)[m
+mars 15 11:13:25 vm1.pcocc chronyd[616]: Source 82.64.45.50 replaced with 80.67.184.129[m
+mars 15 11:13:56 vm1.pcocc sshd[1287]: Received disconnect from 192.168.1.21 port 52234:11: disconnected by user[m
+mars 15 11:13:56 vm1.pcocc sshd[1287]: Disconnected from 192.168.1.21 port 52234[m
+mars 15 11:13:56 vm1.pcocc sshd[1285]: pam_unix(sshd:session): session closed for user romain.pereira[m
+mars 15 11:13:56 vm1.pcocc systemd-logind[588]: Removed session 1.[m
+mars 15 11:13:56 vm1.pcocc systemd[1]: Removed slice User Slice of romain.pereira.[m
+mars 15 11:13:56 vm1.pcocc systemd[1]: Stopping User Slice of romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc sshd[1334]: Accepted publickey for romain.pereira from 192.168.1.21 port 52374 ssh2: RSA SHA2[m
+mars 15 11:14:17 vm1.pcocc systemd[1]: Created slice User Slice of romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc systemd[1]: Starting User Slice of romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc systemd[1]: Started Session 2 of user romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc systemd-logind[588]: New session 2 of user romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc systemd[1]: Starting Session 2 of user romain.pereira.[m
+mars 15 11:14:17 vm1.pcocc sshd[1334]: pam_unix(sshd:session): session opened for user romain.pereira by (uid=0)[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Started Session 3 of user root.[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Starting Session 3 of user root.[m
+mars 15 11:20:01 vm1.pcocc CROND[1359]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Removed slice User Slice of root.[m
+mars 15 11:20:01 vm1.pcocc systemd[1]: Stopping User Slice of root.[m
+mars 15 11:24:41 vm1.pcocc systemd[1]: Starting Cleanup of Temporary Directories...[m
+mars 15 11:24:41 vm1.pcocc systemd[1]: Started Cleanup of Temporary Directories.[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Started Session 4 of user root.[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Starting Session 4 of user root.[m
+mars 15 11:30:01 vm1.pcocc CROND[1368]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Removed slice User Slice of root.[m
+mars 15 11:30:01 vm1.pcocc systemd[1]: Stopping User Slice of root.[m
+mars 15 11:40:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 11:40:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 11:40:01 vm1.pcocc systemd[1]: Started Session 5 of user root.[m
+[7mlines 946-980[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 11:40:01 vm1.pcocc systemd[1]: Starting Session 5 of user root.[m
+mars 15 11:40:01 vm1.pcocc CROND[1376]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 11:40:01 vm1.pcocc systemd[1]: Removed slice User Slice of root.[m
+mars 15 11:40:01 vm1.pcocc systemd[1]: Stopping User Slice of root.[m
+mars 15 11:47:53 vm1.pcocc chronyd[616]: Source 37.187.104.44 replaced with 188.165.236.162[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Started Session 6 of user root.[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Starting Session 6 of user root.[m
+mars 15 11:50:01 vm1.pcocc CROND[1385]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Removed slice User Slice of root.[m
+mars 15 11:50:01 vm1.pcocc systemd[1]: Stopping User Slice of root.[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Started Session 7 of user root.[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Starting Session 7 of user root.[m
+mars 15 12:00:01 vm1.pcocc CROND[1391]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Removed slice User Slice of root.[m
+mars 15 12:00:01 vm1.pcocc systemd[1]: Stopping User Slice of root.[m
+mars 15 12:01:01 vm1.pcocc systemd[1]: Created slice User Slice of root.[m
+mars 15 12:01:01 vm1.pcocc systemd[1]: Starting User Slice of root.[m
+mars 15 12:01:01 vm1.pcocc systemd[1]: Started Session 8 of user root.[m
+mars 15 12:01:01 vm1.pcocc systemd[1]: Starting Session 8 of user root.[m
+mars 15 12:01:01 vm1.pcocc CROND[1398]: (root) CMD (run-parts /etc/cron.hourly)[m
+mars 15 12:01:01 vm1.pcocc run-parts(/etc/cron.hourly)[1401]: [1;39mstarting 0anacron[0m[m
+mars 15 12:01:01 vm1.pcocc anacron[1407]: [1;39mAnacron started on 2019-03-15[0m[m
+mars 15 12:01:01 vm1.pcocc anacron[1407]: [1;39mWill run job `cron.daily' in 43 min.[0m[m
+mars 15 12:01:01 vm1.pcocc anacron[1407]: [1;39mWill run job `cron.weekly' in 63 min.[0m[m
+mars 15 12:01:01 vm1.pcocc anacron[1407]: [1;39mWill run job `cron.monthly' in 83 min.[0m[m
+mars 15 12:01:01 vm1.pcocc anacron[1407]: [1;39mJobs will be executed sequentially[0m[m
+mars 15 12:01:01 vm1.pcocc run-parts(/etc/cron.hourly)[1409]: [1;39mfinished 0anacron[0m[m
+mars 15 12:10:01 vm1.pcocc systemd[1]: Started Session 9 of user root.[m
+mars 15 12:10:01 vm1.pcocc systemd[1]: Starting Session 9 of user root.[m
+mars 15 12:10:01 vm1.pcocc CROND[1411]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 12:16:26 vm1.pcocc sudo[1418]: [1;39mromain.pereira : TTY=pts/0 ; PWD=/home/romain.pereira ; USER=root ; COMMAND=/bin/[m
+[7mlines 981-1015[27m[K[K [KESCESC[K[[[K66[K~~[Kmars 15 12:16:26 vm1.pcocc su[1419]: [1;39m(to root) romain.pereira on pts/0[0m[m
+mars 15 12:16:26 vm1.pcocc su[1419]: pam_unix(su:session): session opened for user root by romain.pereira(uid=0)[m
+mars 15 12:16:49 vm1.pcocc dhclient[1461]: DHCPDISCOVER on eth1 to 255.255.255.255 port 67 interval 3 (xid=0x236d0dd5)[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPREQUEST on eth1 to 255.255.255.255 port 67 (xid=0x236d0dd5)[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPOFFER from 10.252.0.1[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPACK from 10.252.0.1 (xid=0x236d0dd5)[m
+mars 15 12:16:52 vm1.pcocc NET[1507]: [1;39m/usr/sbin/dhclient-script : updated /etc/resolv.conf[0m[m
+mars 15 12:16:52 vm1.pcocc dhclient[1461]: bound to 10.252.0.100 -- renewal in 722 seconds.[m
+mars 15 12:20:01 vm1.pcocc systemd[1]: Started Session 10 of user root.[m
+mars 15 12:20:01 vm1.pcocc systemd[1]: Starting Session 10 of user root.[m
+mars 15 12:20:01 vm1.pcocc CROND[1584]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+mars 15 12:22:36 vm1.pcocc chronyd[616]: Source 92.243.6.5 replaced with 91.121.7.182[m
+mars 15 12:28:54 vm1.pcocc dhclient[1515]: DHCPREQUEST on eth1 to 10.252.0.1 port 67 (xid=0x236d0dd5)[m
+mars 15 12:28:54 vm1.pcocc dhclient[1515]: DHCPACK from 10.252.0.1 (xid=0x236d0dd5)[m
+mars 15 12:28:56 vm1.pcocc dhclient[1515]: bound to 10.252.0.100 -- renewal in 833 seconds.[m
+mars 15 12:30:01 vm1.pcocc systemd[1]: Started Session 11 of user root.[m
+mars 15 12:30:01 vm1.pcocc systemd[1]: Starting Session 11 of user root.[m
+mars 15 12:30:01 vm1.pcocc CROND[1634]: (root) CMD (/usr/lib64/sa/sa1 1 1)[m
+[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7mlines 999-1033/1033 (END)[27m[K[K[?1l>]0;root@vm1:/home/romain.pereira[root@vm1 12:30:50]# man journ[K[K[K[K[K[K[K[K[Kjournalctl
+[?1h=-- Logs begin at ven. 2019-03-15 11:09:32 CET, end at ven. 2019-03-15 12:30:01 CET. --[m
+mars 15 11:09:32 localhost systemd-journal[102]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuset[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpu[m
+mars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuacct[m
+mars 15 11:09:32 localhost kernel: [1;39mLinux version 3.10.0-693.11.6.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc versi[m
+mars 15 11:09:32 localhost kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-693.11.6.el7.x86_64 root=UUID=e64899eb-[m
+mars 15 11:09:32 localhost kernel: e820: BIOS-provided physical RAM map:[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffdcfff] usable[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000007ffdd000-0x000000007fffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved[m
+mars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000100000000-0x00000003b0bfffff] usable[m
+mars 15 11:09:32 localhost kernel: NX (Execute Disable) protection: active[m
+mars 15 11:09:32 localhost kernel: SMBIOS 2.8 present.[m
+mars 15 11:09:32 localhost kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-pr[m
+mars 15 11:09:32 localhost kernel: Hypervisor detected: KVM[m
+mars 15 11:09:32 localhost kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved[m
+mars 15 11:09:32 localhost kernel: e820: remove [mem 0x000a0000-0x000fffff] usable[m
+mars 15 11:09:32 localhost kernel: e820: last_pfn = 0x3b0c00 max_arch_pfn = 0x400000000[m
+mars 15 11:09:32 localhost kernel: MTRR default type: write-back[m
+mars 15 11:09:32 localhost kernel: MTRR fixed ranges enabled:[m
+mars 15 11:09:32 localhost kernel:   00000-9FFFF write-back[m
+mars 15 11:09:32 localhost kernel:   A0000-BFFFF uncachable[m
+mars 15 11:09:32 localhost kernel:   C0000-FFFFF write-protect[m
+mars 15 11:09:32 localhost kernel: MTRR variable ranges enabled:[m
+mars 15 11:09:32 localhost kernel:   0 base 00C0000000 mask FFC0000000 uncachable[m
+mars 15 11:09:32 localhost kernel:   1 disabled[m
+mars 15 11:09:32 localhost kernel:   2 disabled[m
+mars 15 11:09:32 localhost kernel:   3 disabled[m
+[7mlines 1-35[27m[K[K/[Kdd[Khh[Kcc[Kpp[Kdd[K[1;1H-- Logs begin at ven. 2019-03-15 11:09:32 CET, end at ven. 2019-03-15 12:30:01 CET. --[m
+[2;1Hmars 15 11:09:32 localhost systemd-journal[102]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+[3;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuset[m
+[4;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpu[m
+[5;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuacct[m
+[6;1Hmars 15 11:09:32 localhost kernel: [1;39mLinux version 3.10.0-693.11.6.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc versi[m
+[7;1Hmars 15 11:09:32 localhost kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-693.11.6.el7.x86_64 root=UUID=e64899eb-[m
+[8;1Hmars 15 11:09:32 localhost kernel: e820: BIOS-provided physical RAM map:[m
+[9;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable[m
+[10;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved[m
+[11;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved[m
+[12;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffdcfff] usable[m
+[13;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000007ffdd000-0x000000007fffffff] reserved[m
+[14;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved[m
+[15;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved[m
+[16;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved[m
+[17;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved[m
+[18;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000100000000-0x00000003b0bfffff] usable[m
+[19;1Hmars 15 11:09:32 localhost kernel: NX (Execute Disable) protection: active[m
+[20;1Hmars 15 11:09:32 localhost kernel: SMBIOS 2.8 present.[m
+[21;1Hmars 15 11:09:32 localhost kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-pr[m
+[22;1Hmars 15 11:09:32 localhost kernel: Hypervisor detected: KVM[m
+[23;1Hmars 15 11:09:32 localhost kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved[m
+[24;1Hmars 15 11:09:32 localhost kernel: e820: remove [mem 0x000a0000-0x000fffff] usable[m
+[25;1Hmars 15 11:09:32 localhost kernel: e820: last_pfn = 0x3b0c00 max_arch_pfn = 0x400000000[m
+[26;1Hmars 15 11:09:32 localhost kernel: MTRR default type: write-back[m
+[27;1Hmars 15 11:09:32 localhost kernel: MTRR fixed ranges enabled:[m
+[28;1Hmars 15 11:09:32 localhost kernel:   00000-9FFFF write-back[m
+[29;1Hmars 15 11:09:32 localhost kernel:   A0000-BFFFF uncachable[m
+[30;1Hmars 15 11:09:32 localhost kernel:   C0000-FFFFF write-protect[m
+[31;1Hmars 15 11:09:32 localhost kernel: MTRR variable ranges enabled:[m
+[32;1Hmars 15 11:09:32 localhost kernel:   0 base 00C0000000 mask FFC0000000 uncachable[m
+[33;1Hmars 15 11:09:32 localhost kernel:   1 disabled[m
+[34;1Hmars 15 11:09:32 localhost kernel:   2 disabled[m
+[35;1Hmars 15 11:09:32 localhost kernel:   3 disabled[m
+[36;1H[1;1H-- Logs begin at ven. 2019-03-15 11:09:32 CET, end at ven. 2019-03-15 12:30:01 CET. --[m
+[2;1Hmars 15 11:09:32 localhost systemd-journal[102]: Runtime journal is using 8.0M (max allowed 631.0M, trying to leave 946.[m
+[3;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuset[m
+[4;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpu[m
+[5;1Hmars 15 11:09:32 localhost kernel: Initializing cgroup subsys cpuacct[m
+[6;1Hmars 15 11:09:32 localhost kernel: [1;39mLinux version 3.10.0-693.11.6.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc versi[m
+[7;1Hmars 15 11:09:32 localhost kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-693.11.6.el7.x86_64 root=UUID=e64899eb-[m
+[8;1Hmars 15 11:09:32 localhost kernel: e820: BIOS-provided physical RAM map:[m
+[9;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable[m
+[10;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved[m
+[11;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved[m
+[12;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffdcfff] usable[m
+[13;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x000000007ffdd000-0x000000007fffffff] reserved[m
+[14;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved[m
+[15;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved[m
+[16;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved[m
+[17;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved[m
+[18;1Hmars 15 11:09:32 localhost kernel: BIOS-e820: [mem 0x0000000100000000-0x00000003b0bfffff] usable[m
+[19;1Hmars 15 11:09:32 localhost kernel: NX (Execute Disable) protection: active[m
+[20;1Hmars 15 11:09:32 localhost kernel: SMBIOS 2.8 present.[m
+[21;1Hmars 15 11:09:32 localhost kernel: DMI: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.10.2-0-g5f4c7b1-prebuilt.qemu-pr[m
+[22;1Hmars 15 11:09:32 localhost kernel: Hypervisor detected: KVM[m
+[23;1Hmars 15 11:09:32 localhost kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved[m
+[24;1Hmars 15 11:09:32 localhost kernel: e820: remove [mem 0x000a0000-0x000fffff] usable[m
+[25;1Hmars 15 11:09:32 localhost kernel: e820: last_pfn = 0x3b0c00 max_arch_pfn = 0x400000000[m
+[26;1Hmars 15 11:09:32 localhost kernel: MTRR default type: write-back[m
+[27;1Hmars 15 11:09:32 localhost kernel: MTRR fixed ranges enabled:[m
+[28;1Hmars 15 11:09:32 localhost kernel:   00000-9FFFF write-back[m
+[29;1Hmars 15 11:09:32 localhost kernel:   A0000-BFFFF uncachable[m
+[30;1Hmars 15 11:09:32 localhost kernel:   C0000-FFFFF write-protect[m
+[31;1Hmars 15 11:09:32 localhost kernel: MTRR variable ranges enabled:[m
+[32;1Hmars 15 11:09:32 localhost kernel:   0 base 00C0000000 mask FFC0000000 uncachable[m
+[33;1Hmars 15 11:09:32 localhost kernel:   1 disabled[m
+[34;1Hmars 15 11:09:32 localhost kernel:   2 disabled[m
+[35;1Hmars 15 11:09:32 localhost kernel:   3 disabled[m
+[36;1H[K[7mPattern not found  (press RETURN)[27m[36;1H[K[K[?1l>]0;root@vm1:/home/romain.pereira[root@vm1 12:30:59]# man journalctl
+[?1049h[?1h=JOURNALCTL(1)                                         journalctl                                        JOURNALCTL(1)[m
+[m
+[1mNAME[0m[m
+       journalctl - Query the systemd journal[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mjournalctl[0m [OPTIONS...] [MATCHES...][m
+[m
+[1mDESCRIPTION[0m[m
+       [1mjournalctl[0m may be used to query the contents of the [1msystemd[0m(1) journal as written by [1msystemd-[0m[m
+       [1mjournald.service[0m(8).[m
+[m
+       If called without parameters, it will show the full contents of the journal, starting with the oldest entry[m
+       collected.[m
+[m
+       If one or more match arguments are passed, the output is filtered accordingly. A match is in the format[m
+       "FIELD=VALUE", e.g.  "_SYSTEMD_UNIT=httpd.service", referring to the components of a structured journal entry.[m
+       See [1msystemd.journal-fields[0m(7) for a list of well-known fields. If multiple matches are specified matching[m
+       different fields, the log entries are filtered by both, i.e. the resulting output will show only entries[m
+       matching all the specified matches of this kind. If two matches apply to the same field, then they are[m
+       automatically matched as alternatives, i.e. the resulting output will show entries matching any of the[m
+       specified matches for the same field. Finally, the character "+" may appears as a separate word between other[m
+       terms on the command line. This causes all matches before and after to be combined in a disjunction (i.e.[m
+       logical OR).[m
+[m
+       As shortcuts for a few types of field/value matches, file paths may be specified. If a file path refers to an[m
+       executable file, this is equivalent to an "_EXE=" match for the canonicalized binary path. Similarly, if a[m
+       path refers to a device node then match is added for the kernel name of the device ("_KERNEL_DEVICE="). Also,[m
+       matches for the kernel names of all the parent devices are added automatically. Device node paths are not[m
+       stable across reboots, therefore match for the current boot id ("_BOOT_ID=") is always added as well. Note[m
+       that only the log entries for the existing device nodes maybe queried by providing path to the device node.[m
+[m
+       Additional constraints may be added using options [1m--boot[0m, [1m--unit=[0m, etc, to further limit what entries will be[m
+       shown (logical AND).[m
+[m
+[7m Manual page journalctl(1) line 1 (press h for help or q to quit)[27m[K[K/[Kdd[Kaa[Kee[Kmm[Koo[Knn[K[1;1HJOURNALCTL(1)                                         journalctl                                        JOURNALCTL(1)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       journalctl - Query the systemd journal[m
+[5;1H[m
+[6;1H[1mSYNOPSIS[0m[m
+[7;1H       [1mjournalctl[0m [OPTIONS...] [MATCHES...][m
+[8;1H[m
+[9;1H[1mDESCRIPTION[0m[m
+[10;1H       [1mjournalctl[0m may be used to query the contents of the [1msystemd[0m(1) journal as written by [1msystemd-[0m[m
+[11;1H       [1mjournald.service[0m(8).[m
+[12;1H[m
+[13;1H       If called without parameters, it will show the full contents of the journal, starting with the oldest entry[m
+[14;1H       collected.[m
+[15;1H[m
+[16;1H       If one or more match arguments are passed, the output is filtered accordingly. A match is in the format[m
+[17;1H       "FIELD=VALUE", e.g.  "_SYSTEMD_UNIT=httpd.service", referring to the components of a structured journal entry.[m
+[18;1H       See [1msystemd.journal-fields[0m(7) for a list of well-known fields. If multiple matches are specified matching[m
+[19;1H       different fields, the log entries are filtered by both, i.e. the resulting output will show only entries[m
+[20;1H       matching all the specified matches of this kind. If two matches apply to the same field, then they are[m
+[21;1H       automatically matched as alternatives, i.e. the resulting output will show entries matching any of the[m
+[22;1H       specified matches for the same field. Finally, the character "+" may appears as a separate word between other[m
+[23;1H       terms on the command line. This causes all matches before and after to be combined in a disjunction (i.e.[m
+[24;1H       logical OR).[m
+[25;1H[m
+[26;1H       As shortcuts for a few types of field/value matches, file paths may be specified. If a file path refers to an[m
+[27;1H       executable file, this is equivalent to an "_EXE=" match for the canonicalized binary path. Similarly, if a[m
+[28;1H       path refers to a device node then match is added for the kernel name of the device ("_KERNEL_DEVICE="). Also,[m
+[29;1H       matches for the kernel names of all the parent devices are added automatically. Device node paths are not[m
+[30;1H       stable across reboots, therefore match for the current boot id ("_BOOT_ID=") is always added as well. Note[m
+[31;1H       that only the log entries for the existing device nodes maybe queried by providing path to the device node.[m
+[32;1H[m
+[33;1H       Additional constraints may be added using options [1m--boot[0m, [1m--unit=[0m, etc, to further limit what entries will be[m
+[34;1H       shown (logical AND).[m
+[35;1H[m
+[36;1H[1;1HJOURNALCTL(1)                                         journalctl                                        JOURNALCTL(1)[m
+[2;1H[m
+[3;1H[1mNAME[0m[m
+[4;1H       journalctl - Query the systemd journal[m
+[5;1H[m
+[6;1H[1mSYNOPSIS[0m[m
+[7;1H       [1mjournalctl[0m [OPTIONS...] [MATCHES...][m
+[8;1H[m
+[9;1H[1mDESCRIPTION[0m[m
+[10;1H       [1mjournalctl[0m may be used to query the contents of the [1msystemd[0m(1) journal as written by [1msystemd-[0m[m
+[11;1H       [1mjournald.service[0m(8).[m
+[12;1H[m
+[13;1H       If called without parameters, it will show the full contents of the journal, starting with the oldest entry[m
+[14;1H       collected.[m
+[15;1H[m
+[16;1H       If one or more match arguments are passed, the output is filtered accordingly. A match is in the format[m
+[17;1H       "FIELD=VALUE", e.g.  "_SYSTEMD_UNIT=httpd.service", referring to the components of a structured journal entry.[m
+[18;1H       See [1msystemd.journal-fields[0m(7) for a list of well-known fields. If multiple matches are specified matching[m
+[19;1H       different fields, the log entries are filtered by both, i.e. the resulting output will show only entries[m
+[20;1H       matching all the specified matches of this kind. If two matches apply to the same field, then they are[m
+[21;1H       automatically matched as alternatives, i.e. the resulting output will show entries matching any of the[m
+[22;1H       specified matches for the same field. Finally, the character "+" may appears as a separate word between other[m
+[23;1H       terms on the command line. This causes all matches before and after to be combined in a disjunction (i.e.[m
+[24;1H       logical OR).[m
+[25;1H[m
+[26;1H       As shortcuts for a few types of field/value matches, file paths may be specified. If a file path refers to an[m
+[27;1H       executable file, this is equivalent to an "_EXE=" match for the canonicalized binary path. Similarly, if a[m
+[28;1H       path refers to a device node then match is added for the kernel name of the device ("_KERNEL_DEVICE="). Also,[m
+[29;1H       matches for the kernel names of all the parent devices are added automatically. Device node paths are not[m
+[30;1H       stable across reboots, therefore match for the current boot id ("_BOOT_ID=") is always added as well. Note[m
+[31;1H       that only the log entries for the existing device nodes maybe queried by providing path to the device node.[m
+[32;1H[m
+[33;1H       Additional constraints may be added using options [1m--boot[0m, [1m--unit=[0m, etc, to further limit what entries will be[m
+[34;1H       shown (logical AND).[m
+[35;1H[m
+[36;1H...skipping...
+           Asks the Journal [7mdaemon[27m to flush any log data stored in /run/log/journal into /var/log/journal, if[m
+           persistent storage is enabled. This call does not return until the operation is complete.[m
+[m
+       [1m-h[0m, [1m--help[0m[m
+           Print a short help text and exit.[m
+[m
+       [1m--version[0m[m
+           Print a short version string and exit.[m
+[m
+       [1m--no-pager[0m[m
+           Do not pipe output into a pager.[m
+[m
+[1mEXIT[0m [1mSTATUS[0m[m
+       On success, 0 is returned; otherwise, a non-zero failure code is returned.[m
+[m
+[1mENVIRONMENT[0m[m
+       [4m$SYSTEMD_PAGER[24m[m
+           Pager to use when [1m--no-pager[0m is not given; overrides [4m$PAGER[24m. Setting this to an empty string or the value[m
+           "cat" is equivalent to passing [1m--no-pager[0m.[m
+[m
+       [4m$SYSTEMD_LESS[24m[m
+           Override the default options passed to [1mless[0m ("FRSXMK").[m
+[m
+[1mEXAMPLES[0m[m
+       Without arguments, all collected logs are shown unfiltered:[m
+[m
+           journalctl[m
+[m
+       With one match specified, all entries with a field matching the expression are shown:[m
+[m
+           journalctl _SYSTEMD_UNIT=avahi-[7mdaemon[27m.service[m
+[m
+       If two different fields are matched, only entries matching both expressions at the same time are shown:[m
+[m
+           journalctl _SYSTEMD_UNIT=avahi-[7mdaemon[27m.service _PID=28097[m
+[7m Manual page journalctl(1) line 305/382 92% (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KAA[K[HM       [1m--flush[0m[m
+[36;1H[K[7m Manual page journalctl(1) line 304/382 92% (press h for help or q to quit)[27m[K[K [KESCESC[KOO[KAA[K[HM[m
+[36;1H[K[7m Manual page journalctl(1) line 303/382 92% (press h for help or q to quit)[27m[K[K/[K[m
+           journalctl _SYSTEMD_UNIT=avahi-[7mdaemon[27m.service _PID=28097[m
+[7m Manual page journalctl(1) line 305/382 92% (press h for help or q to quit)[27m[K[K/[K[m
+       If two matches refer to the same field, all entries matching either expression are shown:[m
+[m
+           journalctl _SYSTEMD_UNIT=avahi-[7mdaemon[27m.service _SYSTEMD_UNIT=dbus.service[m
+[m
+       If the separator "+" is used, two expressions may be combined in a logical OR. The following will show all[m
+       messages from the Avahi service process with the PID 28097 plus all messages from the D-Bus service (from any[m
+       of its processes):[m
+[m
+           journalctl _SYSTEMD_UNIT=avahi-[7mdaemon[27m.service _PID=28097 + _SYSTEMD_UNIT=dbus.service[m
+[m
+       Show all logs generated by the D-Bus executable:[m
+[m
+           journalctl /usr/bin/dbus-[7mdaemon[27m[m
+[m
+       Show all kernel logs from previous boot:[m
+[m
+           journalctl -k -b -1[m
+[m
+       Show a live log display from a system service apache.service:[m
+[m
+           journalctl -f -u apache[m
+[m
+[1mSEE[0m [1mALSO[0m[m
+       [1msystemd[0m(1), [1msystemd-journald.service[0m(8), [1msystemctl[0m(1), [1mcoredumpctl[0m(1), [1msystemd.journal-fields[0m(7),[m
+       [1mjournald.conf[0m(5)[m
+[m
+[1mNOTES[0m[m
+        1. Journal Export Format[m
+           http://www.freedesktop.org/wiki/Software/systemd/export[m
+[7m Manual page journalctl(1) line 335/382 98% (press h for help or q to quit)[27m[K[K/[K[m
+        2. Journal JSON Format[m
+           http://www.freedesktop.org/wiki/Software/systemd/json[m
+[m
+[7m Manual page journalctl(1) line 339/382 98% (press h for help or q to quit)[27m[K[K/[K        3. Server-Sent Events[m
+           https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events[m
+[m
+        4. Message Catalog Developer Documentation[m
+[7m Manual page journalctl(1) line 343/382 99% (press h for help or q to quit)[27m[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:31:31]# journalctl dhcpd
+Failed to add match 'dhcpd': Argument invalide
+Failed to add filters: Argument invalide
+]0;root@vm1:/home/romain.pereira[root@vm1 12:31:36]# journalctl dhcpd[K[K[Kclient
+Failed to add match 'dhclient': Argument invalide
+Failed to add filters: Argument invalide
+]0;root@vm1:/home/romain.pereira[root@vm1 12:31:40]# man dhc[K[K[K^C
+]0;root@vm1:/home/romain.pereira[root@vm1 12:31:53]# ps -aux | grep dhcp
+root      1662  0.0  0.0 112680   972 pts/0    S+   12:31   0:00 grep --color=auto [01;31m[Kdhcp[m[K
+]0;root@vm1:/home/romain.pereira[root@vm1 12:31:57]# ps -aux | grep dhcp[K[Kclient
+root       814  0.0  0.0 113372 12848 ?        Ss   11:10   0:00 /sbin/[01;31m[Kdhclient[m[K -1 -q -lf /var/lib/[01;31m[Kdhclient[m[K/[01;31m[Kdhclient[m[K--eth0.lease -pf /var/run/[01;31m[Kdhclient[m[K-eth0.pid -H vm0 eth0
+root      1515  0.0  0.1 113372 13196 ?        Ss   12:16   0:00 /sbin/[01;31m[Kdhclient[m[K -1 -q -lf /var/lib/[01;31m[Kdhclient[m[K/[01;31m[Kdhclient[m[K--eth1.lease -pf /var/run/[01;31m[Kdhclient[m[K-eth1.pid -H vm1 eth1
+root      1664  0.0  0.0 112684   968 pts/0    S+   12:31   0:00 grep --color=auto [01;31m[Kdhclient[m[K
+]0;root@vm1:/home/romain.pereira[root@vm1 12:32:00]# q[Kjournalctl /sbin/c[Kdhclient
+[?1h=-- Logs begin at ven. 2019-03-15 11:09:32 CET, end at ven. 2019-03-15 12:30:01 CET. --[m
+mars 15 11:09:39 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x10ece5da)[m
+mars 15 11:09:47 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x10ece5da)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 4 (xid=0x451d8373)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x451d8373)[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPOFFER from 10.251.255.253[m
+mars 15 11:10:08 vm0.pcocc dhclient[748]: DHCPACK from 10.251.255.253 (xid=0x451d8373)[m
+mars 15 11:10:10 vm0.pcocc dhclient[748]: bound to 10.251.0.2 -- renewal in 2147483646 seconds.[m
+mars 15 12:16:49 vm1.pcocc dhclient[1461]: DHCPDISCOVER on eth1 to 255.255.255.255 port 67 interval 3 (xid=0x236d0dd5)[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPREQUEST on eth1 to 255.255.255.255 port 67 (xid=0x236d0dd5)[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPOFFER from 10.252.0.1[m
+mars 15 12:16:50 vm1.pcocc dhclient[1461]: DHCPACK from 10.252.0.1 (xid=0x236d0dd5)[m
+mars 15 12:16:52 vm1.pcocc dhclient[1461]: bound to 10.252.0.100 -- renewal in 722 seconds.[m
+mars 15 12:28:54 vm1.pcocc dhclient[1515]: DHCPREQUEST on eth1 to 10.252.0.1 port 67 (xid=0x236d0dd5)[m
+mars 15 12:28:54 vm1.pcocc dhclient[1515]: DHCPACK from 10.252.0.1 (xid=0x236d0dd5)[m
+mars 15 12:28:56 vm1.pcocc dhclient[1515]: bound to 10.252.0.100 -- renewal in 833 seconds.[m
+[K[?1l>]0;root@vm1:/home/romain.pereira[root@vm1 12:32:11]# less /var/lib/dhclient/dhclient--eth
+dhclient--eth0.lease  dhclient--eth1.lease  
+[root@vm1 12:32:11]# less /var/lib/dhclient/dhclient--eth1.lease 
+[?1049h[?1h=lease {
+  interface "eth1";
+  fixed-address 10.252.0.100;
+  option subnet-mask 255.255.0.0;
+  option dhcp-lease-time 1800;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.252.0.1;
+  option domain-name "mgnt.pcocc";
+  renew 5 2019/03/15 11:28:54;
+  rebind 5 2019/03/15 11:43:05;
+  expire 5 2019/03/15 11:46:50;
+}
+lease {
+  interface "eth1";
+  fixed-address 10.252.0.100;
+  option subnet-mask 255.255.0.0;
+  option dhcp-lease-time 1800;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.252.0.1;
+  option domain-name "mgnt.pcocc";
+  renew 5 2019/03/15 11:42:49;
+  rebind 5 2019/03/15 11:55:09;
+  expire 5 2019/03/15 11:58:54;
+}
+lease {
+  interface "eth1";
+  fixed-address 10.252.0.100;
+  option subnet-mask 255.255.0.0;
+  option dhcp-lease-time 1800;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.252.0.1;
+  option domain-name "mgnt.pcocc";
+  renew 5 2019/03/15 11:54:57;
+  rebind 5 2019/03/15 12:09:04;
+  expire 5 2019/03/15 12:12:49;
+[7m/var/lib/dhclient/dhclient--eth1.lease[27m[K[K [KESCESC[K[[[K66[K~~[K}
+[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K66[K~~[K[K[7m(END)[27m[K[K [KESCESC[K[[[K55[K~~[K[HMlease {
+[36;1H[K:[K[K[?1l>[?1049l]0;root@vm1:/home/romain.pereira[root@vm1 12:46:54]# exit
+]0;romain.pereira@vm1:~[romain.pereira@vm1 12:47:16]$ déconnexion
+Connection to hpc06 closed.
+]0;romain.pereira@hpc01:~[romain.pereira@hpc01 ~]$ exit
+
+Script terminé sur ven. 15 mars 2019 12:47:54 CET
