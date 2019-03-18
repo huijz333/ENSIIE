@@ -1,11 +1,13 @@
 /**
  *
  * Parallélisation d'une simple boucle 'for'
- * qui affiche 4 entiers à l'aide de 4 threads (1 entier par thread)
+ * qui affiche 20 entiers à partir de 4 threads
+ * (donc 5 entiers par thread)
+ * La boucle est partagé uniformément entre les threads
  *
  * ----------------------------------------------------------
  *
- * équivalent en code non parallélisé:
+ * équivalent en code OMP:
  *
  * ----------------------------------------------------------
  *
@@ -14,7 +16,7 @@
  * 		omp_set_num_threads(4);
  *
  * 		# pragma omp parallel for schedule(static)
- * 		for (i = 0 ; i < 4 ; i++) {
+ * 		for (i = 0 ; i < 16 ; i++) {
  * 			printf("Hello world (%d)\n", i);
  * 		}
  * 		return 0;
@@ -26,7 +28,7 @@
 #include <mthread.h>
 
 static void run(mthread_pf_context_t * ctx) {
-    printf("Hello world (%d)\n", ctx->thread_id);
+    printf("Hello world (thread: %d, iterator: %d)\n", ctx->thread_id, ctx->iterator);
 }
 
 int main(void) {
@@ -40,7 +42,7 @@ int main(void) {
 	conf.num_threads	= 4;
 	conf.schedule		= MTHREAD_PARALLEL_FOR_STATIC;
 	conf.bgn			= 0;
-	conf.end			= 4;
+	conf.end			= 20;
 
 	/** appel */
 	mthread_pf(&conf, run);
