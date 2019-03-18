@@ -1,7 +1,9 @@
 /**
  *
  * Parallélisation d'une simple boucle 'for'
- * qui affiche 16 entiers à partir de 4 threads
+ * qui affiche 20 entiers à partir de 4 threads
+ * (donc 5 entiers par thread)
+ * Chaque thread doit affiché 2 entiers consécutifs (chunk_size à 2)
  *
  * ----------------------------------------------------------
  *
@@ -13,7 +15,7 @@
  * 		int i;
  * 		omp_set_num_threads(4);
  *
- * 		# pragma omp parallel for schedule(static)
+ * 		# pragma omp parallel for schedule(dynamic, 2)
  * 		for (i = 0 ; i < 16 ; i++) {
  * 			printf("Hello world (%d)\n", i);
  * 		}
@@ -26,19 +28,25 @@
 #include <mthread.h>
 
 static void run(mthread_pf_context_t * ctx) {
-    printf("Hello world (%d)\n", ctx->thread_id);
+    printf("Hello world (thread: %d, iterator: %d)\n", ctx->thread_id, ctx->iterator);
 }
 
 int main(void) {
 	/** création de la configuration du parallel for */
 	mthread_pf_t conf;
-	conf.num_threads = 4;
-	conf.schedule = MTHREAD_PARALLEL_FOR_STATIC;
-	conf.bgn = 0;
-	conf.end = 16;
+
+	/* recupere la conf par défuat */
+	mthread_pf_default_conf(&conf);
+
+	/* modifie les paramètres */
+	conf.num_threads	= 4;
+	conf.schedule		= MTHREAD_PARALLEL_FOR_DYNAMIC;
+	conf.chunk_size		= 2;
+	conf.bgn			= 0;
+	conf.end			= 20;
 
 	/** appel */
-	mthread_parallel_for(&conf, run);
+	mthread_pf(&conf, run);
 
     return 0;
 }

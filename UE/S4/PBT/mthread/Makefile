@@ -12,7 +12,7 @@ ifeq ($(ARCH),unknown)
 ARCH=$(shell arch)
 endif
 
-CFLAGS=-Wall -D$(ARCH)_ARCH -D_REENTRANT -g -pipe
+CFLAGS=-Wall -D$(ARCH)_ARCH -D_REENTRANT -g -pipe -DMTHREAD_NO_LOG
 
 CC=gcc
 

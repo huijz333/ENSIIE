@@ -24,17 +24,25 @@ void *safe_malloc(size_t size) {
 #ifdef TWO_LEVEL
 static pthread_mutex_t mthread_fprintf_lock = PTHREAD_MUTEX_INITIALIZER;
 #endif
+
+#ifndef MTHREAD_NO_LOG
 static char* mthread_output_log_name = "mthread_log";
 static FILE* mthread_output_log = NULL;
+#endif
 
 int mthread_log_init() {
+#ifndef MTHREAD_NO_LOG
     mthread_output_log = fopen(mthread_output_log_name,"w");
+#endif
     return 0;
 }
 
 #define MTHREAD_LOG_PART 15
 
 int mthread_log(char* part, const char *format, ...) {
+#ifdef MTHREAD_NO_LOG
+	return 0;
+#else
     char msg[4096];
     char part2[MTHREAD_LOG_PART +1];
     va_list ap;
@@ -65,7 +73,7 @@ int mthread_log(char* part, const char *format, ...) {
     pthread_mutex_unlock(&mthread_fprintf_lock);
 #endif
     return res;
-
+#endif
 }
 
 int fprintf(FILE *stream, const char *format, ...) {

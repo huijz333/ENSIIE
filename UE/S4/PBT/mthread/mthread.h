@@ -33,7 +33,8 @@ typedef struct {
 
 /** les ordonnancements possibles ('schedule') pour un 'parallel for' */
 enum mthread_parallel_for_schedule {
-	MTHREAD_PARALLEL_FOR_STATIC
+	MTHREAD_PARALLEL_FOR_STATIC,
+	MTHREAD_PARALLEL_FOR_DYNAMIC
 };
 
 /** configuration pour le lancement d'un "parallel for" */
@@ -43,6 +44,7 @@ typedef struct {
 
 	/* ordonnancement ('schedule') à utiliser */
 	enum mthread_parallel_for_schedule schedule;
+	unsigned int chunk_size;
 
 	/* début de la boucle for */
 	int bgn;
@@ -202,8 +204,8 @@ extern int mthread_sem_destroy(mthread_sem_t * sem); /* undo sem_init() */
 extern void mthread_yield();
 
 /** la fonction du parallel for */
-extern int mthread_parallel_for(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *));
-
+extern void mthread_pf_default_conf(mthread_pf_t * conf);
+extern int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *));
 
 #ifdef __cplusplus
 }
