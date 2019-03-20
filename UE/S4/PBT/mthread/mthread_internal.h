@@ -39,12 +39,33 @@ typedef struct {
 	mthread_t thread;
 
 	/* le job que doit executer le travailleur */
-	mthread_pf_job_t * job;
+	mthread_pf_job_t job;
 
 	/* le context du travailleur (dans la tâche qu'il est entrain d'executer) */
 	mthread_pf_context_t ctx;
 
 } mthread_pf_worker_t;
+
+/** le contexte dynamique (partagé par tous les threads dans un contexte dynamique) */
+typedef struct {
+	/** la configuration */
+	mthread_pf_t * conf;
+
+	/** la valeur de l'iterateur */
+	unsigned int iterator;
+
+	/** mutex pour l'iterateur */
+	mthread_mutex_t mutex;
+} mthread_pf_dyn_t;
+
+/** un worker capable de travailler dynamiquement sur un 'parallel for' */
+typedef struct {
+	/** le worker (héritage 'à la C') */
+	mthread_pf_worker_t worker;
+
+	/** le context dynamique */
+	mthread_pf_dyn_t * dyn;
+} mthread_pf_dyn_worker_t;
 
 typedef struct mthread_list_s {
     volatile struct mthread_s* first;

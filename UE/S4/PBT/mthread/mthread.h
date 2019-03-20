@@ -34,7 +34,8 @@ typedef struct {
 /** les ordonnancements possibles ('schedule') pour un 'parallel for' */
 enum mthread_parallel_for_schedule {
 	MTHREAD_PARALLEL_FOR_STATIC,
-	MTHREAD_PARALLEL_FOR_DYNAMIC
+	MTHREAD_PARALLEL_FOR_DYNAMIC,
+	MTHREAD_PARALLEL_FOR_RUNTIME
 };
 
 /** configuration pour le lancement d'un "parallel for" */
