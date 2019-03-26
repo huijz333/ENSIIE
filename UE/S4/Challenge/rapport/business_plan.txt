@@ -1,0 +1,34 @@
+#### Modélisation financière : Kerplan (moodle)
+
+**2 Questions**
+
+Comment chifrer son plan de développement?
+
+Elaborer et optimiser son budget?
+
+----------------
+
+Synchroniser financement (levée de fond, subvention) avec les opérations commerciales ou techniques de l'entreprise
+
+---------------
+
+Dans les 5 pages du rendus, mettre les éléments intéressants de:
+
+- Compte de résultats prévisionnels (3 à 5 ans)
+- Plan de financement (3 à 5 ans)
+- Tableau de trésorerie prévisionelle : (12 à 36 mois)
+
++ afficher les hypothèses principales (les justifier amplement!!!)
++ du story telling, verbatim (du terrain, de la cohérence)
+
+----------------
+
+- Cout acquisition d'un client
+- apport moyen par client
+
+-----------------
+
+Kerplan:
+
+Ajouter un onglet avec les hypothèses clefs pour remplir les tableaux après
+

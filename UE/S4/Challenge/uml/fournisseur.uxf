@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>232</x>
+      <y>232</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Selectionne un bien
+à fournir</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>264</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+Envoi le justificatif</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;18.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>720</x>
+      <y>192</y>
+      <w>168</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>En attente de validation
+par l'acheteur
+
+Mis en relation acheteur
+et fournisseur
+(numéro de téléphone,
+chat intégré)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>264</x>
+      <y>120</y>
+      <w>88</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Fournisseur</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>168</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+se rend sur l'application</panel_attributes>
+    <additional_attributes>20.0;10.0;18.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>328</y>
+      <w>120</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+l'achat est validé</panel_attributes>
+    <additional_attributes>10.0;10.0;12.0;68.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>728</x>
+      <y>384</y>
+      <w>152</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>En attente d'envoi
+du colis</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>72</x>
+      <y>144</y>
+      <w>368</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+
+- le fournisseur est payé
+- le fournisseur est évalué par l'acheteur
+- le fournisseur évalue l'acheteur</panel_attributes>
+    <additional_attributes>440.0;530.0;10.0;530.0;10.0;20.0;210.0;18.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>424</x>
+      <y>536</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Le colis a été réceptionné
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>488</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+le colis est receptionné</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;58.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>432</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+le colis est envoyé</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;18.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>368</x>
+      <y>272</y>
+      <w>112</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+achète
+le bien</panel_attributes>
+    <additional_attributes>10.0;20.0;118.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>176</y>
+      <w>112</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+n'achète pas le
+bien sous 48h</panel_attributes>
+    <additional_attributes>90.0;140.0;10.0;110.0;10.0;40.0;118.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>456</x>
+      <y>232</y>
+      <w>144</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Justifie l'achat du bien
+- photo
+- ticket de caisse
+- message</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>136</y>
+      <w>792</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+le colis n'est pas envoyé
+sous 15 jours
+=&gt; l'acheteur peut demander
+un remboursement et annuler
+la livraison</panel_attributes>
+    <additional_attributes>650.0;380.0;760.0;380.0;760.0;20.0;10.0;18.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>456</x>
+      <y>392</y>
+      <w>152</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>En attente de reception
+du colis</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>480</y>
+      <w>320</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+le colis est fourni
+en main propre</panel_attributes>
+    <additional_attributes>260.0;10.0;260.0;110.0;10.0;108.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>432</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+le colis n'est pas livré
+</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;18.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>184</x>
+      <y>424</y>
+      <w>152</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Cas de litige :
+les 2 acteurs
+résouent le problème
+entre eux</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
