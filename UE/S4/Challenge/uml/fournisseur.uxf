@@ -144,13 +144,13 @@ le colis est envoyé</panel_attributes>
     <coordinates>
       <x>368</x>
       <y>272</y>
-      <w>112</w>
+      <w>104</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-achète
+récupères
 le bien</panel_attributes>
-    <additional_attributes>10.0;20.0;118.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;108.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -173,9 +173,9 @@ bien sous 48h</panel_attributes>
       <w>144</w>
       <h>104</h>
     </coordinates>
-    <panel_attributes>Justifie l'achat du bien
-- photo
-- ticket de caisse
+    <panel_attributes>- Justifie la
+récupération du bien
+- photo, ticket de caisse
 - message</panel_attributes>
     <additional_attributes/>
   </element>
