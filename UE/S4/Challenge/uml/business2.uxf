@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
-  <zoom_level>11</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>110</x>
-      <y>176</y>
-      <w>88</w>
-      <h>110</h>
+      <x>140</x>
+      <y>200</y>
+      <w>80</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Acheteur</panel_attributes>
     <additional_attributes/>
@@ -14,27 +14,26 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>66</x>
-      <y>308</y>
-      <w>176</w>
-      <h>165</h>
+      <x>110</x>
+      <y>320</y>
+      <w>160</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Produit: P
 Commission: C
 Frais de livraison: L
-**Premium: X**
 
-P, C, L, X en €
-C &gt;= 2</panel_attributes>
+P, C, L en €
+C &gt;= 2.50€</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>231</x>
-      <y>374</y>
-      <w>132</w>
-      <h>55</h>
+      <x>260</x>
+      <y>380</y>
+      <w>120</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 Enregistre
@@ -44,23 +43,23 @@ son offre</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>341</x>
-      <y>264</y>
-      <w>286</w>
-      <h>264</h>
+      <x>360</x>
+      <y>280</y>
+      <w>260</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>Les offres
 --
 
-Produit 1 : P1, C1, L1, X1
+Produit 1 : P1, C1, L1
 
 --
 
-Produit 2 : P2, C2, L2, X2
+Produit 2 : P2, C2, L2
 
 --
 
-Produit 3 : P3, C3, L3, X3
+Produit 3 : P3, C3, L3
 
 --
 
@@ -70,23 +69,38 @@ Produit 3 : P3, C3, L3, X3
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
-      <y>374</y>
-      <w>484</w>
-      <h>55</h>
+      <x>610</x>
+      <y>380</y>
+      <w>440</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;
-Achète une offre au prix Y,
-et empoche Z à la livraison</panel_attributes>
+Achète une offre
+au prix Y, et empoche
+**Z**</panel_attributes>
     <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>290</y>
+      <w>370</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+**C &lt; 14€ =&gt; (Y = 2.50€) et (Z = C - 2.50€)**
+
+**C &gt; 14€ =&gt; (Y = 0.15C &gt; 2.50€) et (Z = 0.85C)   **</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>1045</x>
-      <y>341</y>
-      <w>110</w>
-      <h>110</h>
+      <x>990</x>
+      <y>350</y>
+      <w>100</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Fournisseur</panel_attributes>
     <additional_attributes/>
@@ -94,10 +108,10 @@ et empoche Z à la livraison</panel_attributes>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>693</x>
-      <y>550</y>
-      <w>66</w>
-      <h>110</h>
+      <x>680</x>
+      <y>530</y>
+      <w>60</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Dealoo</panel_attributes>
     <additional_attributes/>
@@ -105,25 +119,22 @@ et empoche Z à la livraison</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>715</x>
-      <y>385</y>
-      <w>99</w>
-      <h>187</h>
+      <x>700</x>
+      <y>390</y>
+      <w>110</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
-Empoche
-**      X**
-      +
-      Y</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+Empoche Y</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>143</x>
-      <y>264</y>
-      <w>33</w>
-      <h>66</h>
+      <x>180</x>
+      <y>280</y>
+      <w>30</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
@@ -131,41 +142,15 @@ Empoche
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1419</x>
-      <y>341</y>
-      <w>154</w>
-      <h>77</h>
-    </coordinates>
-    <panel_attributes>Note..
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>660</x>
-      <y>275</y>
-      <w>374</w>
-      <h>88</h>
-    </coordinates>
-    <panel_attributes>
-C &lt; 14€ =&gt; (Y = 2€) et (Z = C - 2€)
-
-C &gt; 14€ =&gt; (Y = 0.15C &gt; 2€) et (Z = 0.85C)   </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>451</x>
-      <y>132</y>
-      <w>308</w>
-      <h>88</h>
+      <x>480</x>
+      <y>140</y>
+      <w>280</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Business model
 
-A partir de Janvier 2021
-bg=pink</panel_attributes>
+Janvier 2020 - Décembre 2020
+bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

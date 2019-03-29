@@ -128,6 +128,7 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 				worker->job.run = run;
 
 				/* initialisation du contexte */
+				worker->ctx.arg = conf->arg;
 				worker->ctx.thread_id = thread_id;
 
 				/* et on execute la tâche */
@@ -168,6 +169,7 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 				/* initialise le thread */
 				mthread_pf_dyn_worker_t * dw = workers + thread_id;
 				dw->dyn = &dyn;
+				dw->worker.ctx.arg = conf->arg;
 				dw->worker.ctx.thread_id = thread_id;
 				dw->worker.job.run = run;
 			    mthread_create(&(dw->worker.thread), NULL, (void *(*)(void *))mthread_pf_dynamic_work, (void *)dw);

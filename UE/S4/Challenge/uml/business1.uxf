@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>370</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Enregistre
+son offre</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>100</x>
+      <y>310</y>
+      <w>160</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Produit: P
+Commission: C
+Frais de livraison: L
+
+P, C, L, X en €
+C &gt;= 2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>130</x>
+      <y>190</y>
+      <w>80</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Acheteur</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>270</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>270</y>
+      <w>260</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Les offres
+--
+
+Produit 1 : P1, C1, L1
+
+--
+
+Produit 2 : P2, C2, L2
+
+--
+
+Produit 3 : P3, C3, L3
+
+--
+
+...</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>310</y>
+      <w>330</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>
+Y = 2€
+   </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>370</y>
+      <w>440</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+Achète une offre au prix Y,
+et empoche C à la livraison</panel_attributes>
+    <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>380</y>
+      <w>130</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+Empoche Y=2€</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>980</x>
+      <y>340</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Fournisseur</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>670</x>
+      <y>520</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Dealoo</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>520</x>
+      <y>150</y>
+      <w>280</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Business model
+
+Juillet 2019 - Décembre 2019
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

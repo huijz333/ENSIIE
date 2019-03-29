@@ -23,6 +23,9 @@ typedef struct mthread_attr_s mthread_attr_t;
 
 /** contexte d'une tâche "parallel for" */
 typedef struct {
+	/* argument passé par l'utilisateur */
+	void * arg;
+
 	/* numéro du thread qui execute la routine (<=> omp_get_thread_num()) */
 	unsigned int thread_id;
 
@@ -40,6 +43,9 @@ enum mthread_parallel_for_schedule {
 
 /** configuration pour le lancement d'un "parallel for" */
 typedef struct {
+	/* paramètre utilisateur */
+	void * arg;
+
 	/* nombre de threads sur lequel la parallélisation est effectué */
 	unsigned int num_threads;
 
