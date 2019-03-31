@@ -22,6 +22,9 @@ void mthread_pf_default_conf(mthread_pf_t * conf) {
 	/* taille des chunks (nombre d'iteration par job) */
 	conf->chunk_size = 1;
 
+	/* nombre de reduction */
+	conf->n_reductions = 0;
+
 	/**
 	 *  Non initialisé volontairement
 	 *
@@ -83,19 +86,32 @@ static void * mthread_pf_dynamic_work(mthread_pf_dyn_worker_t * dw) {
 }
 
 /**
+ *	L'implémentation du 'parallel for'
  *
+ *	@param conf : la configuration de la boucle
+ *	@param run  : une fonction qui sera appelé par chaque thread, avec son contexte d'execution
  */
 int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 
 	/* selection du mode d'ordonnancement des tâches */
 	enum mthread_parallel_for_schedule schedule;
 	switch (conf->schedule) {
+		/* si configuré au runtime */
 		case MTHREAD_PARALLEL_FOR_RUNTIME:
 		{
 			char * mode = getenv("MTHREAD_PARALLEL_FOR_SCHEDULE");
-			schedule = mode && strcmp(mode, "dynamic") ? MTHREAD_PARALLEL_FOR_DYNAMIC : MTHREAD_PARALLEL_FOR_STATIC;
+			schedule = MTHREAD_PARALLEL_FOR_STATIC;
+			if (mode) {
+				if (strcmp(mode, "dynamic") == 0) {
+					schedule = MTHREAD_PARALLEL_FOR_DYNAMIC;
+				} else if (strcmp(mode, "guided") == 0) {
+					schedule = MTHREAD_PARALLEL_FOR_GUIDED;
+				}
+			}
+			break ;
 		}
 
+		/* sinon on recupere la config */
 		default:
 		{
 			schedule = conf->schedule;
@@ -103,7 +119,17 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 		}
 	}
 
-	/* selectionne le mode dans lequel le 'for' est lancé */
+	/* s'il y a des reductions a effectué, on alloue les mutexes */
+	mthread_mutex_t * reduction_mutexes = NULL;
+	if (conf->n_reductions) {
+		reduction_mutexes = (mthread_mutex_t *) safe_malloc(sizeof(mthread_mutex_t) * conf->n_reductions);
+		unsigned int i;
+		for (i = 0 ; i < conf->n_reductions ; i++) {
+			mthread_mutex_init(reduction_mutexes + i, NULL);
+		}
+	}
+
+	/* execution selon le mode dans lequel le 'for' est lancé */
 	switch(schedule) {
 
 		/* dans le cas static : 1 tâche par thread */
@@ -130,6 +156,7 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 				/* initialisation du contexte */
 				worker->ctx.arg = conf->arg;
 				worker->ctx.thread_id = thread_id;
+				worker->ctx.mutexes = reduction_mutexes;
 
 				/* et on execute la tâche */
 			    mthread_create(&(worker->thread), NULL, (void *(*)(void *))mthread_pf_work, (void *)worker);
@@ -171,6 +198,8 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 				dw->dyn = &dyn;
 				dw->worker.ctx.arg = conf->arg;
 				dw->worker.ctx.thread_id = thread_id;
+				dw->worker.ctx.mutexes = reduction_mutexes;
+
 				dw->worker.job.run = run;
 			    mthread_create(&(dw->worker.thread), NULL, (void *(*)(void *))mthread_pf_dynamic_work, (void *)dw);
 			}
@@ -187,10 +216,16 @@ int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *)) {
 		}
 
 		/* le mode d'ordonnancement des tâches GUIDED n'est pas implémenté */
+		case MTHREAD_PARALLEL_FOR_GUIDED:
+
 		default:
 	        not_implemented ();
 	}
 
+	/* libère la mémoire */
+	if (reduction_mutexes) {
+		free(reduction_mutexes);
+	}
 
 	/* succès */
 	return 0;

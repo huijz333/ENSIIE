@@ -25,21 +25,24 @@
 #include <stdio.h>
 #include <mthread.h>
 
+/**
+ * paramètre utilisateur, effectuant 3 sommes
+ */
 typedef struct {
-	mthread_mutex_t mutex;
-	int sum;
+	int S1;
+	int S2;
 }	t_arg;
 
 static void run(mthread_pf_context_t * ctx) {
-	t_arg * arg = (t_arg *) (ctx->arg);
-	mthread_mutex_lock(&(arg->mutex));
-	arg->sum += ctx->iterator;
-	mthread_mutex_unlock(&(arg->mutex));
+	t_arg * arg = (t_arg *)ctx->arg;
+	MTHREAD_PF_REDUCTION(ctx, 0, arg->S1 += ctx->iterator);
+	MTHREAD_PF_REDUCTION(ctx, 1, arg->S2 -= ctx->iterator);
 }
 
 int main(void) {
-	/* création de l'argument utilisateur */
-	t_arg arg = {MTHREAD_MUTEX_INITIALIZER, 0};
+
+	/** l'entier dans lequelle on effectue le reduction */
+	t_arg arg = {0, 0};
 
 	/** création de la configuration du parallel for */
 	mthread_pf_t conf;
@@ -51,14 +54,16 @@ int main(void) {
 	conf.num_threads	= 4;
 	conf.schedule		= MTHREAD_PARALLEL_FOR_STATIC;
 	conf.bgn			= 0;
-	conf.end			= 20;
+	conf.end			= 200;
 	conf.arg			= &arg;
+	conf.n_reductions	= 2; /* on effectue 2 reductions */
 
 	/* appel */
 	mthread_pf(&conf, run);
 
 	/* affichage du résultat */
-	printf("1 + 2 + ... + 19 = %d\n", arg.sum);
+	printf("S1 = 0 + 1 + 2 + ... + %d = %d\n", conf.end, arg.S1);
+	printf("S2 = 0 - 1 - 2 + ... - %d = %d\n", conf.end, arg.S2);
 
     return 0;
 }

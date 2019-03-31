@@ -19,6 +19,7 @@ extern "C"
 
 #include "mthread.h"
 
+
 /** un job qui doit être executé dans un 'parallel for' */
 typedef struct {
 

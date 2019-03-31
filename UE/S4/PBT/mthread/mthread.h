@@ -20,48 +20,6 @@ typedef struct mthread_s* mthread_t;
 struct mthread_attr_s;
 typedef struct mthread_attr_s mthread_attr_t;
 
-
-/** contexte d'une tâche "parallel for" */
-typedef struct {
-	/* argument passé par l'utilisateur */
-	void * arg;
-
-	/* numéro du thread qui execute la routine (<=> omp_get_thread_num()) */
-	unsigned int thread_id;
-
-	/* valeur de l'iterateur pour le passage dans la boucle */
-	int iterator;
-
-} mthread_pf_context_t;
-
-/** les ordonnancements possibles ('schedule') pour un 'parallel for' */
-enum mthread_parallel_for_schedule {
-	MTHREAD_PARALLEL_FOR_STATIC,
-	MTHREAD_PARALLEL_FOR_DYNAMIC,
-	MTHREAD_PARALLEL_FOR_RUNTIME
-};
-
-/** configuration pour le lancement d'un "parallel for" */
-typedef struct {
-	/* paramètre utilisateur */
-	void * arg;
-
-	/* nombre de threads sur lequel la parallélisation est effectué */
-	unsigned int num_threads;
-
-	/* ordonnancement ('schedule') à utiliser */
-	enum mthread_parallel_for_schedule schedule;
-	unsigned int chunk_size;
-
-	/* début de la boucle for */
-	int bgn;
-
-	/* fin de la boucle for */
-	int end;
-
-
-} mthread_pf_t;
-
 struct mthread_mutex_s {
     volatile int nb_thread;
     mthread_tst_t lock;
@@ -103,6 +61,82 @@ struct mthread_sem_s {
     mthread_list_t *list;
 };
 typedef struct mthread_sem_s mthread_sem_t;
+
+
+/** PARALLEL FOR DEBUT */
+
+/**
+ * une reduction, exemple:
+ * MTHREAD_PF_REDUCTION(context, 0, ++sum)
+ * MTHREAD_PF_REDUCTION(context, 0, f(sum))
+ * MTHREAD_PF_REDUCTION(context, 0, sum /= 42)
+ * MTHREAD_PF_REDUCTION(context, 1, x += 1)
+ * MTHREAD_PF_REDUCTION(context, 1, x += 2)
+ *
+ * @param CTX le context d'execution du thread
+ * @param I l'indice de la reduction (chaque reduction est indexé de 0 à N, où
+ * N est le nombre de réduction maximum configuré dans la configuration du parallel for)
+ * @param EXPR l'expression qui fait la reduction
+ */
+# define MTHREAD_PF_REDUCTION(CTX, I, EXPR)	mthread_mutex_lock(CTX->mutexes + I); \
+											EXPR; \
+											mthread_mutex_unlock(CTX->mutexes + I)
+
+/** contexte d'une tâche "parallel for" */
+typedef struct {
+	/* argument passé par l'utilisateur */
+	void * arg;
+
+	/* les mutexs pour les parallel for */
+	mthread_mutex_t * mutexes;
+
+	/* numéro du thread qui execute la routine (<=> omp_get_thread_num()) */
+	unsigned int thread_id;
+
+	/* valeur de l'iterateur pour le passage dans la boucle */
+	int iterator;
+
+} mthread_pf_context_t;
+
+/** les ordonnancements possibles ('schedule') pour un 'parallel for' */
+enum mthread_parallel_for_schedule {
+	MTHREAD_PARALLEL_FOR_STATIC,
+	MTHREAD_PARALLEL_FOR_DYNAMIC,
+	MTHREAD_PARALLEL_FOR_GUIDED,
+	MTHREAD_PARALLEL_FOR_RUNTIME
+};
+
+/** configuration pour le lancement d'un "parallel for" */
+typedef struct {
+	/* paramètre utilisateur */
+	void * arg;
+
+	/* nombre de threads sur lequel la parallélisation est effectué */
+	unsigned int num_threads;
+
+	/* nombre maximum de reductions */
+	unsigned int n_reductions;
+
+	/* ordonnancement ('schedule') à utiliser */
+	enum mthread_parallel_for_schedule schedule;
+	unsigned int chunk_size;
+
+	/* début de la boucle for */
+	int bgn;
+
+	/* fin de la boucle for */
+	int end;
+
+
+} mthread_pf_t;
+
+
+/** la fonction du parallel for */
+extern void mthread_pf_default_conf(mthread_pf_t * conf);
+extern int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *));
+
+/** PARALLEL FOR FIN */
+
 
 /* Function for handling threads.  */
 
@@ -209,10 +243,6 @@ extern int mthread_sem_trywait(mthread_sem_t * sem);
 extern int mthread_sem_destroy(mthread_sem_t * sem); /* undo sem_init() */
 
 extern void mthread_yield();
-
-/** la fonction du parallel for */
-extern void mthread_pf_default_conf(mthread_pf_t * conf);
-extern int mthread_pf(mthread_pf_t * conf, void (* run)(mthread_pf_context_t *));
 
 #ifdef __cplusplus
 }
